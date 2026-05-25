@@ -1,0 +1,107 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  siteName: string;
+  logoSub?: string;
+  ogImage?: string;
+  faqJsonLd?: string;
+  ctaPhone?: string;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  siteName,
+  logoSub = '費用・業者を正直に比較',
+  ogImage = 'https://local-support.jp/og-default.svg',
+  faqJsonLd,
+  ctaPhone = '0120-XXX-XXX',
+} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url"         content={canonical} />
+  <meta property="og:image"       content={ogImage} />
+  <meta property="og:locale"      content="ja_JP" />
+  <meta property="og:site_name"   content={siteName} />
+  <meta name="twitter:card"       content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+
+  <!-- GA4（ID差し替え） -->
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
+  {faqJsonLd && (
+    <Fragment set:html={`<script type="application/ld+json">${faqJsonLd}</script>`} />
+  )}
+</head>
+<body>
+
+<!-- ══ HEADER ══════════════════════════════════════════════════ -->
+<header class="sd-header">
+  <div class="sd-header-inner">
+    <a href="/" class="sd-logo">
+      <div class="sd-logo-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="sd-logo-wrap">
+        <span>{siteName}</span>
+        <span class="sd-logo-sub">{logoSub}</span>
+      </div>
+    </a>
+    <a href="#contact" class="sd-header-cta" data-scroll-to="#contact" data-track="header_contact">
+      無料で相談する ›
+    </a>
+  </div>
+</header>
+
+<slot />
+
+<!-- ══ FOOTER ════════════════════════════════════════════════ -->
+<footer class="sd-footer">
+  <div class="sd-footer-inner">
+    <div class="sd-footer-logo">{siteName}</div>
+    <p class="sd-footer-desc">
+      施設管理・設備メンテナンスの費用相場・業者比較・法定義務に関する情報を提供するメディアサイトです。
+      掲載情報は公開時点のものです。最新の法令・費用は各機関・業者の公式情報をご確認ください。
+    </p>
+    <div class="sd-footer-links">
+      <a href="/operator/">運営者情報</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/disclosure/">広告掲載ポリシー</a>
+    </div>
+    <p class="sd-footer-copy">© 2025 {siteName}. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- ══ Sticky CTA（スマホ） ════════════════════════════════════ -->
+<div class="sticky-cta">
+  <a href="#contact" class="sticky-btn-primary" data-scroll-to="#contact" data-track="sticky_form">無料で相談する</a>
+  <a href={`tel:${ctaPhone}`} class="sticky-btn-secondary" data-track="sticky_tel">電話する</a>
+</div>
+
+<script is:inline src="/app.js"></script>
+</body>
+</html>
