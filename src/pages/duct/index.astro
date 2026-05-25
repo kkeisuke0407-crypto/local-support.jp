@@ -1,0 +1,467 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const PAGE_TITLE = "ダクト清掃の費用と業者を比較｜ダクト清掃ナビ";
+const PAGE_DESC  = "厨房排気ダクト・空調ダクトの清掃費用相場、法定義務の範囲、業者の選び方を解説。火災予防・空気環境改善のため、地元の登録業者を無料でご紹介します。";
+const CANONICAL  = "https://local-support.jp/duct/";
+const SITE_NAME  = "ダクト清掃ナビ";
+
+const faqItems = [
+  {
+    q: "ダクト清掃の頻度はどれくらいですか？",
+    a: "厨房排気ダクトは消防法上の防火管理の観点から、一般的に年1〜2回の清掃が推奨されています。使用頻度・調理内容・ダクトの汚れ具合によって異なります。特定建築物の空調ダクトは建築物衛生法に基づく定期検査の対象です。業種・規模に応じた頻度を業者と相談することをおすすめします。"
+  },
+  {
+    q: "ダクト清掃の費用の目安はどのくらいですか？",
+    a: "厨房排気ダクトは50,000〜300,000円（レンジフードの台数・ダクト延長による）、空調ダクトは1系統あたり30,000〜150,000円が目安です。排煙ダクトは構造・規模によって大きく異なるため現地調査が必要です。正確な費用は現地確認後のお見積もりとなります。"
+  },
+  {
+    q: "ダクト清掃を怠ると本当に火災になりますか？",
+    a: "はい、リスクがあります。厨房排気ダクト内に蓄積した油脂分（グリース）は引火しやすく、調理中の火花や熱が引火源となってダクト火災を引き起こすことがあります。ダクト火災は消火が難しく、建物全体への延焼リスクもあります。定期清掃は最も効果的な予防策です。"
+  },
+  {
+    q: "清掃中も営業できますか？",
+    a: "厨房排気ダクトの清掃は、作業スペースと臭気・汚れが発生するため、清掃中の調理作業は困難です。多くの場合、閉店後・定休日・早朝などに実施します。空調ダクトの清掃は系統ごとに順次対応することで、一部の営業継続が可能な場合もあります。事前に業者と調整してください。"
+  },
+  {
+    q: "ダクト清掃業者に必要な資格はありますか？",
+    a: "ダクト清掃業者に特定の国家資格は必要ありませんが、特定建築物の空調設備点検では「建築物環境衛生管理技術者（ビル管理技術者）」や登録業者であることが求められる場合があります。消防設備との関連作業では「消防設備士」の資格が必要なケースもあります。業者の実績・保険加入状況を確認することをおすすめします。"
+  },
+  {
+    q: "清掃後の確認方法はありますか？",
+    a: "信頼できる業者は清掃前後の写真記録を提供します。ダクト内部の状態を確認できる記録（内視鏡写真など）があると安心です。また、清掃作業報告書の発行を求め、清掃範囲・使用薬剤・廃棄物処理方法が記載されているか確認してください。"
+  }
+];
+
+const faqJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(f => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": { "@type": "Answer", "text": f.a }
+  }))
+});
+---
+<BaseLayout
+  title={PAGE_TITLE}
+  description={PAGE_DESC}
+  canonical={CANONICAL}
+  siteName={SITE_NAME}
+  logoSub="費用・業者を正直に比較"
+  faqJsonLd={faqJsonLd}
+>
+
+<!-- ══ HERO ════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="sd-container hero-inner">
+    <div class="hero-eyebrow">飲食店・商業施設・ビル管理担当者向け</div>
+    <h1>ダクト清掃、<em>火災予防と法定義務</em>の<br/>両面から考える</h1>
+    <p class="hero-sub">
+      厨房排気ダクトの清掃を怠ると<strong>火災リスクが高まり、消防法違反になる場合</strong>があります。<br/>
+      清掃頻度・費用相場・業者選びまで、担当者の疑問をまとめて解決します。
+    </p>
+    <div class="hero-badges">
+      <div class="hero-badge-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <span>消防法対応</span>
+      </div>
+      <div class="hero-badge-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>
+        <span>相談・見積もり無料</span>
+      </div>
+      <div class="hero-badge-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>全国対応</span>
+      </div>
+    </div>
+    <a href="#contact" class="hero-cta" data-scroll-to="#contact" data-track="hero_contact">
+      <span class="hero-cta-free">無料</span>
+      地元業者に見積もりを依頼する
+      <span>›</span>
+    </a>
+    <p class="hero-note">営業時間内（平日 9:00〜18:00）にご連絡します</p>
+  </div>
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#f5f6f8"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ══ 法定義務 ════════════════════════════════════════════════ -->
+<section class="sd-section gimu-section" id="gimu">
+  <div class="sd-container">
+    <div class="section-head">
+      <span class="kicker">LEGAL OBLIGATION</span>
+      <h2>ダクト清掃と法定義務</h2>
+      <p>消防法・建築物衛生法の両面から義務の範囲を確認しましょう</p>
+    </div>
+    <div class="gimu-alert">
+      <div class="gimu-alert-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      <div>
+        <div class="gimu-alert-title">厨房排気ダクトの清掃を怠ると火災リスクが高まり、消防法違反になる場合があります</div>
+        <div class="gimu-alert-body">
+          消防法上の防火管理義務により、厨房設備・排気ダクトは定期的な点検・清掃が求められます。
+          特定建築物（延べ面積3,000m²以上等）の空調設備は<strong>建築物衛生法による定期点検が義務</strong>です。
+        </div>
+      </div>
+    </div>
+    <div class="gimu-cards">
+      <div class="gimu-card">
+        <div class="gimu-card-head">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          対象施設
+        </div>
+        <p>厨房設備を持つ飲食店・ホテル・病院・学校・オフィスビルなどが対象です。特定建築物は建築物衛生法に基づく定期点検が必要です。</p>
+        <div class="tag-list">
+          <span class="tag-item">飲食店・ホテル</span>
+          <span class="tag-item">病院・学校</span>
+          <span class="tag-item">オフィスビル</span>
+          <span class="tag-item">商業施設</span>
+        </div>
+      </div>
+      <div class="gimu-card">
+        <div class="gimu-card-head">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          清掃頻度の目安
+        </div>
+        <p>厨房排気ダクトは年1〜2回（使用頻度・油脂量による）、空調ダクトは年1〜2回が推奨されます。消防設備の定期点検と合わせて計画的に実施することをおすすめします。</p>
+        <div class="tag-list">
+          <span class="tag-item">厨房排気：年1〜2回</span>
+          <span class="tag-item">空調：年1〜2回</span>
+          <span class="tag-item">記録の保管</span>
+        </div>
+      </div>
+      <div class="gimu-card">
+        <div class="gimu-card-head">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          業者要件
+        </div>
+        <p>特定建築物の空調設備保守は「建築物環境衛生管理技術者」の選任が必要です。消防設備に関連する作業では「消防設備士」の資格が求められる場合があります。</p>
+        <div class="tag-list">
+          <span class="tag-item">ビル管理技術者</span>
+          <span class="tag-item">消防設備士</span>
+          <span class="tag-item">実績・保険の確認</span>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:.8rem;color:var(--gray-500);margin-top:12px;">根拠法令：消防法（防火管理）、建築物衛生法（特定建築物）</p>
+  </div>
+</section>
+
+<!-- ══ 放置リスク ════════════════════════════════════════════════ -->
+<div class="divider"></div>
+<section class="sd-section" id="risk">
+  <div class="sd-container">
+    <div class="risk-label">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      清掃を先送りにするリスク
+    </div>
+    <div class="section-head" style="text-align:left;margin-bottom:1.25rem;">
+      <h2>ダクト清掃を怠ると起きる4つのリスク</h2>
+      <p>火災・衛生・法的・コストの観点から、リスクを確認しましょう。</p>
+    </div>
+    <div class="risk-cards">
+      <div class="risk-card">
+        <div class="risk-card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+          ダクト火災
+        </div>
+        <p>蓄積した油脂分（グリース）が熱や火花に引火し、ダクト内部で火災が発生する危険があります。ダクト火災は消火が困難で、建物全体への延焼リスクもあります。</p>
+      </div>
+      <div class="risk-card">
+        <div class="risk-card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          空気環境悪化
+        </div>
+        <p>汚れたダクトは空気の流れを妨げ、換気効率を低下させます。厨房の臭気・煙が店内に流れ込んだり、ウイルス・カビの飛散リスクが高まったりする可能性があります。</p>
+      </div>
+      <div class="risk-card">
+        <div class="risk-card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3z"/></svg>
+          消防検査不合格
+        </div>
+        <p>消防署の立ち入り検査でダクトの汚れが指摘された場合、改善指導・是正命令の対象となります。飲食店の営業に必要な許可への影響が生じるリスクがあります。</p>
+      </div>
+      <div class="risk-card">
+        <div class="risk-card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          臭気・害虫問題
+        </div>
+        <p>油脂が蓄積したダクトは異臭の原因となり、ゴキブリ・ネズミなどの害虫・害獣を呼び込みやすくなります。食品衛生上の問題や、近隣・テナントとのトラブルに発展するケースもあります。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 費用の目安 ═══════════════════════════════════════════════ -->
+<div class="divider"></div>
+<section class="sd-section section-white" id="cost">
+  <div class="sd-container">
+    <div class="section-head">
+      <span class="kicker">COST GUIDE</span>
+      <h2>ダクト清掃・費用の目安</h2>
+      <p>以下はあくまで参考相場です。実際の費用は現地確認後の見積もりで確定します</p>
+    </div>
+    <div class="cost-grid">
+      <div class="cost-card">
+        <div class="cost-card-head">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+          厨房排気ダクト
+        </div>
+        <div class="cost-card-body">
+          <div class="cost-range">50,000 〜 300,000円<small>（税込・目安）</small></div>
+          <div class="cost-note-list">
+            <div class="cost-note-item">レンジフードの台数・ダクト延長による</div>
+            <div class="cost-note-item">グリスフィルター・ファン清掃を含む</div>
+            <div class="cost-note-item">高所作業・狭所作業は追加費用あり</div>
+          </div>
+        </div>
+      </div>
+      <div class="cost-card">
+        <div class="cost-card-head">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12h.01"/></svg>
+          空調ダクト
+        </div>
+        <div class="cost-card-body">
+          <div class="cost-range">30,000 〜 150,000円<small>（1系統あたり）</small></div>
+          <div class="cost-note-list">
+            <div class="cost-note-item">系統数・ダクト延長・アクセス性による</div>
+            <div class="cost-note-item">フィルター清掃・交換を含む場合あり</div>
+            <div class="cost-note-item">清掃後の空気環境測定は別途</div>
+          </div>
+        </div>
+      </div>
+      <div class="cost-card">
+        <div class="cost-card-head">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3z"/></svg>
+          排煙ダクト
+        </div>
+        <div class="cost-card-body">
+          <div class="cost-range">別途現地調査<small>（規模・構造による）</small></div>
+          <div class="cost-note-list">
+            <div class="cost-note-item">建物規模・ダクト構造により大きく変動</div>
+            <div class="cost-note-item">消防設備点検と連携が必要</div>
+            <div class="cost-note-item">現地調査の上で見積もりを提示</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cost-factors">
+      <div class="cost-factors-title">費用が変わる主な要因</div>
+      <div class="cost-factors-grid">
+        <div class="cost-factor"><div class="cost-factor-num">1</div><span>ダクトの種類・延長・汚れの程度</span></div>
+        <div class="cost-factor"><div class="cost-factor-num">2</div><span>レンジフードの台数・ファン・フィルター数</span></div>
+        <div class="cost-factor"><div class="cost-factor-num">3</div><span>高所作業・狭所作業の有無</span></div>
+        <div class="cost-factor"><div class="cost-factor-num">4</div><span>年間定期契約か、スポット依頼か</span></div>
+      </div>
+    </div>
+    <div class="cost-note-box">
+      <strong>料金の確認について：</strong>上記はあくまで参考相場です。ダクトの種類・規模・汚れ具合によって金額は大きく変わります。必ず現地調査後の見積もりで確認してください。
+    </div>
+    <div class="inline-cta" style="margin-top:28px;">
+      <div class="inline-cta-text">
+        <h4>施設のダクト清掃費用を確認したい方へ</h4>
+        <p>施設の種類・規模をお知らせいただければ、対応可能な地元業者をご紹介します</p>
+      </div>
+      <a href="#contact" class="inline-cta-btn" data-scroll-to="#contact" data-track="cost_contact">無料で相談する ›</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ダクト種別 ════════════════════════════════════════════════ -->
+<div class="divider"></div>
+<section class="sd-section" id="duchtype">
+  <div class="sd-container">
+    <div class="section-head">
+      <span class="kicker">BY DUCT TYPE</span>
+      <h2>ダクト種別ごとの特徴と注意点</h2>
+      <p>ダクトの種類によって清掃方法・頻度・必要な対応が異なります</p>
+    </div>
+    <div class="gyoshu-grid">
+      <div class="gyoshu-card">
+        <div class="gyoshu-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div>
+        <h3>厨房排気ダクト</h3>
+        <p>最も清掃頻度が高く、油脂（グリース）の蓄積が火災の直接原因になります。レンジフード・グリスフィルター・ファン・ダクト内壁の油脂除去が作業の中心です。使用頻度の高い施設は年2回以上を推奨します。</p>
+        <span class="gyoshu-tag">飲食店・ホテル・病院厨房向け</span>
+      </div>
+      <div class="gyoshu-card">
+        <div class="gyoshu-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12h.01"/><path d="M17 12h.01"/><path d="M7 12h.01"/></svg></div>
+        <h3>空調（AC）ダクト</h3>
+        <p>ほこり・カビ・細菌が繁殖しやすく、空調から汚染空気が供給されると健康被害につながります。特定建築物は定期点検・清掃が法定義務です。フィルター清掃と合わせた定期メンテナンスを推奨します。</p>
+        <span class="gyoshu-tag">オフィス・商業施設・ホテル向け</span>
+      </div>
+      <div class="gyoshu-card">
+        <div class="gyoshu-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3z"/></svg></div>
+        <h3>排煙ダクト</h3>
+        <p>火災時に煙を排出する重要な設備です。内部の汚れ・腐食が機能を低下させる場合があります。消防設備の定期点検と連携して清掃・点検を実施することを推奨します。消防設備士が関与する作業もあります。</p>
+        <span class="gyoshu-tag">防火管理が必要な施設向け</span>
+      </div>
+      <div class="gyoshu-card">
+        <div class="gyoshu-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12m0 0V2m0 10H2m10 0h10"/></svg></div>
+        <h3>換気ダクト</h3>
+        <p>トイレ・浴室・駐車場などの換気ダクトは、臭気・結露・カビの温床になりやすい箇所です。清掃頻度は低めですが、定期的な点検と汚れ状況に応じた清掃を行うことで、換気効率を維持できます。</p>
+        <span class="gyoshu-tag">共用部・駐車場・水回り向け</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 業者の選び方 ══════════════════════════════════════════════ -->
+<div class="divider"></div>
+<section class="sd-section section-white" id="howto">
+  <div class="sd-container">
+    <div class="section-head">
+      <span class="kicker">HOW TO SELECT</span>
+      <h2>業者選びで確認すべき4つのポイント</h2>
+      <p>安さだけで選ぶと後から問題が起きやすい領域です</p>
+    </div>
+    <div class="howto-grid">
+      <div class="howto-card"><div class="howto-num">CHECK 01</div><h3>消防設備士の有無</h3><p>排煙ダクトや消防設備に関連する作業では「消防設備士」の資格が必要です。特定建築物の保守では「建築物環境衛生管理技術者」の関与も確認してください。</p></div>
+      <div class="howto-card"><div class="howto-num">CHECK 02</div><h3>高所・狭所作業への対応</h3><p>ダクトは建物の天井裏・壁内など高所・狭所に配置されています。安全対策・保険加入状況・専用機材の有無を確認してください。</p></div>
+      <div class="howto-card"><div class="howto-num">CHECK 03</div><h3>清掃前後の写真記録</h3><p>清掃前後のダクト内部写真（内視鏡写真等）を提供する業者を選んでください。作業範囲・清掃効果の確認と、記録の保管（消防検査対応）に役立ちます。</p></div>
+      <div class="howto-card"><div class="howto-num">CHECK 04</div><h3>定期契約・年間管理</h3><p>定期清掃契約を結ぶと、スケジュール管理が楽になり費用を抑えられるケースがあります。契約内容・作業範囲・緊急対応の有無を確認してください。</p></div>
+    </div>
+    <div class="inline-cta" style="margin-top:32px;">
+      <div class="inline-cta-text">
+        <h4>ダクト清掃業者をお探しの担当者様へ</h4>
+        <p>施設の種類・規模をお知らせいただければ、対応可能な地元業者をご紹介します</p>
+      </div>
+      <a href="#contact" class="inline-cta-btn" data-scroll-to="#contact" data-track="howto_contact">まとめて依頼する ›</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ════════════════════════════════════════════════════ -->
+<section class="cta-section" id="cta">
+  <div class="sd-container">
+    <div class="cta-inner">
+      <h2>まず費用の目安を<br/>確認してみませんか？</h2>
+      <p>施設の種類・規模・所在地をお知らせいただくだけで、地元の登録業者から無料で見積もりを取れます。<br/>相談・見積もりに費用は一切かかりません。</p>
+      <div class="cta-buttons">
+        <a href="#contact" class="cta-btn-primary" data-scroll-to="#contact" data-track="cta_form">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          フォームで無料相談する
+        </a>
+        <a href="tel:0120-XXX-XXX" class="cta-btn-secondary" data-track="cta_tel">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.1 19.79 19.79 0 0 1 1.61 4.5a2 2 0 0 1 1.99-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          電話で相談する（平日9〜18時）
+        </a>
+      </div>
+      <p class="cta-note">相談無料・見積もり無料・しつこい営業はしません</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 問い合わせフォーム ══════════════════════════════════════ -->
+<section class="sd-section form-section" id="contact">
+  <div class="sd-container">
+    <div class="section-head">
+      <span class="kicker">CONTACT</span>
+      <h2>無料相談・見積もり依頼</h2>
+      <p>施設情報をお知らせください。地元の登録業者をご紹介します</p>
+    </div>
+    <div class="form-wrap">
+      <h3>ダクト清掃の無料相談</h3>
+      <p class="form-sub">営業時間内（平日9:00〜18:00）にご連絡します。土日祝は翌営業日の対応となります。</p>
+      <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
+        <input type="hidden" name="subject" value="【ダクト清掃】無料相談の申し込み" />
+        <input type="hidden" name="redirected_from" value="duct" />
+        <div class="form-group">
+          <label for="company">会社名・施設名 <span class="required">必須</span></label>
+          <input type="text" id="company" name="company" placeholder="例：〇〇レストラン" required />
+        </div>
+        <div class="form-group">
+          <label for="name">担当者名 <span class="required">必須</span></label>
+          <input type="text" id="name" name="name" placeholder="例：山田 太郎" required />
+        </div>
+        <div class="form-group">
+          <label for="tel">電話番号 <span class="required">必須</span></label>
+          <input type="tel" id="tel" name="tel" placeholder="例：03-0000-0000" required />
+        </div>
+        <div class="form-group">
+          <label for="prefecture">都道府県 <span class="required">必須</span></label>
+          <select id="prefecture" name="prefecture" required>
+            <option value="">選択してください</option>
+            <option>北海道</option><option>青森県</option><option>岩手県</option><option>宮城県</option>
+            <option>秋田県</option><option>山形県</option><option>福島県</option><option>茨城県</option>
+            <option>栃木県</option><option>群馬県</option><option>埼玉県</option><option>千葉県</option>
+            <option>東京都</option><option>神奈川県</option><option>新潟県</option><option>富山県</option>
+            <option>石川県</option><option>福井県</option><option>山梨県</option><option>長野県</option>
+            <option>岐阜県</option><option>静岡県</option><option>愛知県</option><option>三重県</option>
+            <option>滋賀県</option><option>京都府</option><option>大阪府</option><option>兵庫県</option>
+            <option>奈良県</option><option>和歌山県</option><option>鳥取県</option><option>島根県</option>
+            <option>岡山県</option><option>広島県</option><option>山口県</option><option>徳島県</option>
+            <option>香川県</option><option>愛媛県</option><option>高知県</option><option>福岡県</option>
+            <option>佐賀県</option><option>長崎県</option><option>熊本県</option><option>大分県</option>
+            <option>宮崎県</option><option>鹿児島県</option><option>沖縄県</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="duct_type">ダクト種別</label>
+          <select id="duct_type" name="duct_type">
+            <option value="">選択してください</option>
+            <option>厨房排気ダクト</option>
+            <option>空調（AC）ダクト</option>
+            <option>排煙ダクト</option>
+            <option>換気ダクト</option>
+            <option>複数・わからない</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">その他・ご要望</label>
+          <textarea id="message" name="message" placeholder="施設の種類、最後の清掃からの経過年数、希望日程などをご記入ください"></textarea>
+        </div>
+        <button type="submit" class="form-submit" data-track="form_submit">無料で相談する →</button>
+        <p class="form-note">個人情報は業者紹介のみに使用し、第三者への販売・提供は行いません。</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ════════════════════════════════════════════════════ -->
+<div class="divider"></div>
+<section class="sd-section section-white" id="faq">
+  <div class="sd-container">
+    <div class="section-head">
+      <span class="kicker">FAQ</span>
+      <h2>よくある質問</h2>
+      <p>ダクト清掃に関してよく寄せられる質問をまとめました</p>
+    </div>
+    <div class="faq-list">
+      {faqItems.map(item => (
+        <div class="faq-item">
+          <div class="faq-q"><span class="faq-q-badge">Q</span>{item.q}</div>
+          <div class="faq-a"><span class="faq-a-badge">A</span>{item.a}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ══ 関連サービス ════════════════════════════════════════════ -->
+<div class="divider"></div>
+<section class="sd-section region-section" id="related">
+  <div class="sd-container">
+    <div class="section-head">
+      <span class="kicker">RELATED SERVICES</span>
+      <h2>関連サービス</h2>
+      <p>施設管理に関する他のサービスもご相談ください</p>
+    </div>
+    <div class="region-head">施設管理の専門業者紹介</div>
+    <div class="region-grid">
+      <a href="/jusuisou-seisou/" class="region-link">受水槽清掃</a>
+      <a href="/asbestos/" class="region-link">アスベスト調査・除去</a>
+      <a href="/shutter/" class="region-link">シャッター点検・修理</a>
+    </div>
+    <p style="font-size:.8rem;color:var(--gray-500);margin-top:16px;">
+      受水槽清掃（水道法・年1回義務）、アスベスト調査（2022年法改正対応）、シャッター点検（建築基準法第12条）など、施設管理に必要な各種サービスの専門業者をご紹介しています。
+    </p>
+  </div>
+</section>
+
+</BaseLayout>

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#1e3a5f"/>
+
+  <!-- Subtle grid pattern overlay -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  </pattern>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <!-- Accent bar top -->
+  <rect x="0" y="0" width="1200" height="8" fill="#f59e0b"/>
+
+  <!-- Left content area -->
+  <!-- Site name -->
+  <text x="80" y="160" font-family="'Helvetica Neue', Arial, sans-serif" font-size="56" font-weight="900" fill="#ffffff" letter-spacing="-1">local-support.jp</text>
+
+  <!-- Accent underline -->
+  <rect x="80" y="175" width="480" height="4" fill="#f59e0b" rx="2"/>
+
+  <!-- Japanese subtitle -->
+  <text x="80" y="250" font-family="'Helvetica Neue', Arial, sans-serif" font-size="36" font-weight="700" fill="#93c5fd">施設管理の専門業者比較</text>
+
+  <!-- Description line -->
+  <text x="80" y="320" font-family="'Helvetica Neue', Arial, sans-serif" font-size="22" fill="rgba(255,255,255,0.7)">法定義務対応・費用相場・業者選びをサポート</text>
+
+  <!-- Service tags -->
+  <!-- Tag 1 -->
+  <rect x="80" y="380" width="180" height="44" rx="22" fill="rgba(245,158,11,0.2)" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="170" y="407" font-family="'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#f59e0b" text-anchor="middle">受水槽清掃</text>
+
+  <!-- Tag 2 -->
+  <rect x="274" y="380" width="220" height="44" rx="22" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+  <text x="384" y="407" font-family="'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="rgba(255,255,255,0.85)" text-anchor="middle">アスベスト調査・除去</text>
+
+  <!-- Tag 3 -->
+  <rect x="508" y="380" width="160" height="44" rx="22" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+  <text x="588" y="407" font-family="'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="rgba(255,255,255,0.85)" text-anchor="middle">ダクト清掃</text>
+
+  <!-- Tag 4 -->
+  <rect x="682" y="380" width="210" height="44" rx="22" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+  <text x="787" y="407" font-family="'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="rgba(255,255,255,0.85)" text-anchor="middle">シャッター点検・修理</text>
+
+  <!-- Bottom tagline -->
+  <text x="80" y="520" font-family="'Helvetica Neue', Arial, sans-serif" font-size="18" fill="rgba(255,255,255,0.5)">相談・見積もり無料 ｜ 全国対応 ｜ 登録業者のみ紹介</text>
+
+  <!-- Right side: Shield/Building icon -->
+  <!-- Building silhouette -->
+  <g transform="translate(900, 120)" opacity="0.15">
+    <rect x="60" y="200" width="180" height="220" fill="white"/>
+    <rect x="20" y="270" width="80" height="150" fill="white"/>
+    <rect x="200" y="250" width="100" height="170" fill="white"/>
+    <!-- windows -->
+    <rect x="80" y="220" width="30" height="30" fill="#1e3a5f"/>
+    <rect x="120" y="220" width="30" height="30" fill="#1e3a5f"/>
+    <rect x="160" y="220" width="30" height="30" fill="#1e3a5f"/>
+    <rect x="80" y="265" width="30" height="30" fill="#1e3a5f"/>
+    <rect x="120" y="265" width="30" height="30" fill="#1e3a5f"/>
+    <rect x="160" y="265" width="30" height="30" fill="#1e3a5f"/>
+    <rect x="80" y="310" width="30" height="30" fill="#1e3a5f"/>
+    <rect x="120" y="310" width="30" height="30" fill="#1e3a5f"/>
+    <rect x="160" y="310" width="30" height="30" fill="#1e3a5f"/>
+  </g>
+
+  <!-- Shield icon (more prominent) -->
+  <g transform="translate(990, 200)">
+    <path d="M75 10 L140 35 L140 80 C140 115 75 140 75 140 C75 140 10 115 10 80 L10 35 Z" fill="none" stroke="#f59e0b" stroke-width="4" opacity="0.6"/>
+    <path d="M75 30 L120 50 L120 82 C120 106 75 122 75 122 C75 122 30 106 30 82 L30 50 Z" fill="rgba(245,158,11,0.15)"/>
+    <!-- checkmark inside shield -->
+    <path d="M52 77 L67 92 L98 62" stroke="#f59e0b" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+</svg>
