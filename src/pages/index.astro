@@ -1,0 +1,575 @@
+---
+const PAGE_TITLE = "受水槽・貯水槽清掃の費用と業者を比較｜受水槽清掃ナビ";
+const PAGE_DESC  = "受水槽・貯水槽清掃の費用相場、法定義務の範囲、業者の選び方を解説。マンション・ビル・工場・病院などの担当者向けに、見積もり比較から業者選びまでをサポートします。";
+const CANONICAL  = "https://local-support.jp";
+const OGP_IMAGE  = "https://local-support.jp/og-default.svg";
+const SITE_NAME  = "受水槽清掃ナビ";
+
+const faqItems = [
+  {
+    q: "受水槽・貯水槽の清掃は法律で義務ですか？",
+    a: "はい。水道法第34条の2および建築物衛生法により、一定規模の貯水槽を持つ建物は「年1回以上」の清掃・水質検査が義務付けられています。対象は「簡易専用水道」（有効容量10m³超）が主ですが、地方自治体によって小規模施設にも条例が適用される場合があります。最新の義務範囲は管轄の保健所または水道局にご確認ください。"
+  },
+  {
+    q: "清掃の頻度はどれくらいですか？",
+    a: "法定では「年1回以上」が基本です。ただし、施設の用途（病院・食品工場等）や水の使用量、設備の状態によって年2回以上を推奨される場合もあります。定期契約を組むと管理の手間が減り、コストも抑えられるケースがあります。"
+  },
+  {
+    q: "清掃を怠った場合のペナルティは？",
+    a: "簡易専用水道の管理基準に違反した場合、水道法に基づき都道府県知事等から改善命令が出る場合があります。悪質な場合は罰則（100万円以下の罰金等）の対象になる可能性もあります。また、万が一水質事故が発生した際に管理義務を怠っていたことが判明すると、損害賠償リスクも生じます。"
+  },
+  {
+    q: "清掃中は断水になりますか？",
+    a: "多くの場合、清掃中は一時的に断水が発生します。事前に入居者・利用者への告知が必要です。断水時間の目安は規模によりますが数時間〜半日程度が一般的です。業者によっては仮設給水設備を手配できる場合もあるため、事前に確認してください。"
+  },
+  {
+    q: "業者選びで何を確認すればよいですか？",
+    a: "①厚生労働大臣または都道府県知事登録の「建築物飲料水貯水槽清掃業」の登録があるか、②作業後に水質検査を実施するか、③清掃報告書を発行するか、④見積書が作業内容ごとに明細化されているか、を確認してください。報告書は行政への提出書類として保管が必要です。"
+  },
+  {
+    q: "費用の見積もりはどこに頼めばよいですか？",
+    a: "本サイトの問い合わせフォームまたはお電話にてご相談ください。施設規模・所在地・希望日程をお伝えいただくと、対応可能な地元業者を無料でご紹介します。複数社の見積もりを取ることで、費用の適正性を確認できます。"
+  },
+  {
+    q: "マンション管理会社ですが、複数棟まとめて依頼できますか？",
+    a: "はい、対応可能な業者を紹介しています。複数棟の年間管理契約をまとめることで、スケールメリットにより費用を抑えられるケースがあります。棟数・所在地・現在の管理状況をお知らせください。"
+  }
+];
+
+const faqJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(f => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": { "@type": "Answer", "text": f.a }
+  }))
+});
+---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{PAGE_TITLE}</title>
+  <meta name="description" content={PAGE_DESC} />
+  <link rel="canonical" href={CANONICAL} />
+
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content={PAGE_TITLE} />
+  <meta property="og:description" content={PAGE_DESC} />
+  <meta property="og:url"         content={CANONICAL} />
+  <meta property="og:image"       content={OGP_IMAGE} />
+  <meta property="og:locale"      content="ja_JP" />
+  <meta property="og:site_name"   content={SITE_NAME} />
+  <meta name="twitter:card"       content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+
+  <!-- GA4（ID差し替え） -->
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
+  <Fragment set:html={`<script type="application/ld+json">${faqJsonLd}</script>`} />
+</head>
+<body>
+
+<!-- ══ HEADER ══════════════════════════════════════════════════ -->
+<header class="sd-header">
+  <div class="sd-header-inner">
+    <a href="/" class="sd-logo">
+      <div class="sd-logo-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="sd-logo-wrap">
+        <span>{SITE_NAME}</span>
+        <span class="sd-logo-sub">費用・業者を正直に比較</span>
+      </div>
+    </a>
+    <a href="#contact" class="sd-header-cta" data-scroll-to="#contact" data-track="header_contact">
+      無料で相談する ›
+    </a>
+  </div>
+</header>
+
+<!-- ══ HERO ════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="sd-container hero-inner">
+    <div class="hero-eyebrow">マンション・ビル・工場・病院の担当者向け</div>
+    <h1>受水槽清掃、<em>義務の範囲と費用</em>を<br/>まず整理しましょう</h1>
+    <p class="hero-sub">
+      受水槽・貯水槽の清掃は<strong>水道法で年1回以上が義務</strong>です。<br/>
+      費用の相場・業者の選び方・見積もり比較まで、担当者の疑問をまとめて解決します。
+    </p>
+    <div class="hero-badges">
+      <div class="hero-badge-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>
+        <span>相談・見積もり無料</span>
+      </div>
+      <div class="hero-badge-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>登録業者のみ紹介</span>
+      </div>
+      <div class="hero-badge-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>全国対応</span>
+      </div>
+    </div>
+    <a href="#contact" class="hero-cta" data-scroll-to="#contact" data-track="hero_contact">
+      <span class="hero-cta-free">無料</span>
+      地元業者に見積もりを依頼する
+      <span>›</span>
+    </a>
+    <p class="hero-note">営業時間内（平日 9:00〜18:00）にご連絡します</p>
+  </div>
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#f5f6f8"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ══ 法定義務 ════════════════════════════════════════════════ -->
+<section class="sd-section gimu-section" id="gimu">
+  <div class="sd-container">
+    <div class="section-head">
+      <span class="kicker">LEGAL OBLIGATION</span>
+      <h2>受水槽清掃は「法律上の義務」です</h2>
+      <p>担当者が最低限知っておくべき義務の範囲をまとめました</p>
+    </div>
+    <div class="gimu-alert">
+      <div class="gimu-alert-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      <div>
+        <div class="gimu-alert-title">清掃を1年以上実施していない場合、法令違反になる可能性があります</div>
+        <div class="gimu-alert-body">
+          水道法・建築物衛生法により、対象施設は<strong>年1回以上の清掃</strong>が義務付けられています。
+          違反した場合は行政指導・改善命令の対象となり、<strong>最悪の場合、罰則（100万円以下の罰金等）</strong>が科せられることがあります。
+        </div>
+      </div>
+    </div>
+    <div class="gimu-cards">
+      <div class="gimu-card">
+        <div class="gimu-card-head">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          対象となる施設
+        </div>
+        <p>有効容量10m³超の貯水槽（簡易専用水道）が主な対象です。マンション・オフィスビル・工場・病院・学校など幅広い施設が該当します。</p>
+        <div class="tag-list">
+          <span class="tag-item">マンション</span>
+          <span class="tag-item">オフィスビル</span>
+          <span class="tag-item">工場・倉庫</span>
+          <span class="tag-item">病院・福祉施設</span>
+          <span class="tag-item">学校</span>
+          <span class="tag-item">商業施設</span>
+        </div>
+      </div>
+      <div class="gimu-card">
+        <div class="gimu-card-head">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          清掃の頻度・義務内容
+        </div>
+        <p>年1回以上の清掃と水質検査が必要です。清掃後には「水質検査報告書」を作成・保管する義務があり、行政の立ち入り検査時に提示を求められます。</p>
+        <div class="tag-list">
+          <span class="tag-item">年1回以上の清掃</span>
+          <span class="tag-item">水質検査実施</span>
+          <span class="tag-item">報告書の保管</span>
+        </div>
+      </div>
+      <div class="gimu-card">
+        <div class="gimu-card-head">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          業者の登録要件
+        </div>
+        <p>清掃を行う業者は「建築物飲料水貯水槽清掃業」の登録（都道府県知事等）が必要です。未登録業者への発注は管理者責任を問われるリスクがあります。</p>
+        <div class="tag-list">
+          <span class="tag-item">登録業者への発注が原則</span>
+          <span class="tag-item">資格確認が重要</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 放置リスク ════════════════════════════════════════════════ -->
+<div class="divider"></div>
+<section class="sd-section" id="risk">
+  <div class="sd-container">
+    <div class="risk-label">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      清掃を先送りにするリスク
+    </div>
+    <div class="section-head" style="text-align:left;margin-bottom:1.25rem;">
+      <h2>「来年でいいか」が招く4つのリスク</h2>
+      <p>受水槽の管理を怠ると、費用・衛生・法的リスクが重なります。</p>
+    </div>
+    <div class="risk-cards">
+      <div class="risk-card">
+        <div class="risk-card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          水質汚染・健康被害
+        </div>
+        <p>放置した貯水槽は藻・赤錆・スライム・レジオネラ菌などが繁殖しやすくなります。特にレジオネラ症は高齢者・免疫低下者に重篤な肺炎を引き起こすことがあります。</p>
+      </div>
+      <div class="risk-card">
+        <div class="risk-card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          法的責任・損害賠償
+        </div>
+        <p>清掃義務を怠っていた状態で水質事故が発生した場合、入居者・利用者への損害賠償責任を問われる可能性があります。管理組合・オーナー・管理会社いずれも対象になりえます。</p>
+      </div>
+      <div class="risk-card">
+        <div class="risk-card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          設備の劣化・修繕費増加
+        </div>
+        <p>清掃を怠ると槽内の腐食・亀裂が進み、最終的にはタンク本体の交換が必要になるケースがあります。定期清掃は設備を長持ちさせる投資でもあります。</p>
+      </div>
+      <div class="risk-card">
+        <div class="risk-card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          行政指導・ブランド毀損
+        </div>
+        <p>保健所の立ち入り検査で清掃記録の不備が発覚した場合、改善命令・公表のリスクがあります。医療・介護・飲食施設では衛生管理がブランド・許認可に直結します。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 費用の目安 ═══════════════════════════════════════════════ -->
+<div class="divider"></div>
+<section class="sd-section section-white" id="cost">
+  <div class="sd-container">
+    <div class="section-head">
+      <span class="kicker">COST GUIDE</span>
+      <h2>受水槽清掃・費用の目安</h2>
+      <p>以下はあくまで参考相場です。実際の費用は現地確認後の見積もりで確定します</p>
+    </div>
+    <div class="cost-grid">
+      <div class="cost-card">
+        <div class="cost-card-head">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          小規模（10〜20m³）
+        </div>
+        <div class="cost-card-body">
+          <div class="cost-range">30,000 〜 80,000円<small>（税込・目安）</small></div>
+          <div class="cost-note-list">
+            <div class="cost-note-item">小規模マンション・小型ビル等</div>
+            <div class="cost-note-item">作業人数2〜3名・半日程度</div>
+            <div class="cost-note-item">水質検査費用は別途（1〜2万円目安）</div>
+          </div>
+        </div>
+      </div>
+      <div class="cost-card">
+        <div class="cost-card-head">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+          中規模（20〜100m³）
+        </div>
+        <div class="cost-card-body">
+          <div class="cost-range">80,000 〜 300,000円<small>（税込・目安）</small></div>
+          <div class="cost-note-list">
+            <div class="cost-note-item">中規模マンション・オフィスビル等</div>
+            <div class="cost-note-item">作業人数3〜5名・1日程度</div>
+            <div class="cost-note-item">高所作業・仮設足場が必要な場合は追加</div>
+          </div>
+        </div>
+      </div>
+      <div class="cost-card">
+        <div class="cost-card-head">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
+          大規模（100m³超）
+        </div>
+        <div class="cost-card-body">
+          <div class="cost-range">300,000円〜<small>（税込・目安）</small></div>
+          <div class="cost-note-list">
+            <div class="cost-note-item">大型マンション・病院・工場等</div>
+            <div class="cost-note-item">複数タンク・高圧洗浄・消毒を含む</div>
+            <div class="cost-note-item">年間契約でコストを抑えられるケースあり</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cost-factors">
+      <div class="cost-factors-title">費用が変わる主な要因</div>
+      <div class="cost-factors-grid">
+        <div class="cost-factor"><div class="cost-factor-num">1</div><span>受水槽の有効容量・形状（角型/丸型）</span></div>
+        <div class="cost-factor"><div class="cost-factor-num">2</div><span>高架水槽・地下貯水槽など設置場所の難易度</span></div>
+        <div class="cost-factor"><div class="cost-factor-num">3</div><span>水質検査・消毒・報告書発行の有無</span></div>
+        <div class="cost-factor"><div class="cost-factor-num">4</div><span>年間管理契約か、スポット依頼か</span></div>
+      </div>
+    </div>
+    <div class="cost-note-box">
+      <strong>料金の確認について：</strong>上記はあくまで参考相場です。業者・地域・設備状況によって金額は大きく変わります。必ず複数社から見積もりを取り、作業内容ごとの内訳明細で比較してください。
+    </div>
+    <div class="inline-cta" style="margin-top:28px;">
+      <div class="inline-cta-text">
+        <h4>あなたの施設の費用を確認したい方へ</h4>
+        <p>規模・地域をお知らせいただければ、対応可能な地元業者をご紹介します</p>
+      </div>
+      <a href="#contact" class="inline-cta-btn" data-scroll-to="#contact" data-track="cost_contact">無料で相談する ›</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 業種別 ════════════════════════════════════════════════════ -->
+<div class="divider"></div>
+<section class="sd-section" id="gyoshu">
+  <div class="sd-container">
+    <div class="section-head">
+      <span class="kicker">BY INDUSTRY</span>
+      <h2>施設・業種別の注意点</h2>
+      <p>用途によって対応内容・頻度・費用が異なります</p>
+    </div>
+    <div class="gyoshu-grid">
+      <div class="gyoshu-card">
+        <div class="gyoshu-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></div>
+        <h3>マンション・集合住宅</h3>
+        <p>管理組合または管理会社が清掃義務を負います。断水告知・理事会承認フローの整備が必要です。複数棟を管理する場合は年間契約でまとめると管理コストを抑えられます。</p>
+        <span class="gyoshu-tag">管理組合・管理会社向け</span>
+      </div>
+      <div class="gyoshu-card">
+        <div class="gyoshu-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg></div>
+        <h3>オフィスビル・商業施設</h3>
+        <p>テナントへの断水告知と業務への影響を最小化するスケジュール調整が必要です。ビル全体の設備管理と連動した年間計画の策定をおすすめします。</p>
+        <span class="gyoshu-tag">ビルオーナー・管理会社向け</span>
+      </div>
+      <div class="gyoshu-card">
+        <div class="gyoshu-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M4 20V8l8-6 8 6v12"/><path d="M10 20v-6h4v6"/></svg></div>
+        <h3>工場・倉庫</h3>
+        <p>製造工程に使用する水の場合、清掃頻度を上げる必要があるケースがあります。食品・医薬品工場は特に衛生基準が厳しく、専門業者の選定が重要です。</p>
+        <span class="gyoshu-tag">工場管理者向け</span>
+      </div>
+      <div class="gyoshu-card">
+        <div class="gyoshu-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+        <h3>病院・介護・福祉施設</h3>
+        <p>免疫力の低い患者・入居者がいるため、レジオネラ菌対策が特に重要です。清掃後の水質検査（レジオネラ属菌検査を含む）が強く推奨されます。</p>
+        <span class="gyoshu-tag">医療・介護施設向け</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 業者の選び方 ══════════════════════════════════════════════ -->
+<div class="divider"></div>
+<section class="sd-section section-white" id="howto">
+  <div class="sd-container">
+    <div class="section-head">
+      <span class="kicker">HOW TO SELECT</span>
+      <h2>業者選びで確認すべき4つのポイント</h2>
+      <p>安さだけで選ぶと後から問題が起きやすい領域です</p>
+    </div>
+    <div class="howto-grid">
+      <div class="howto-card"><div class="howto-num">CHECK 01</div><h3>登録・資格の確認</h3><p>「建築物飲料水貯水槽清掃業」の都道府県知事登録があるか確認します。未登録業者への発注は管理者側の責任問題に発展するリスクがあります。</p></div>
+      <div class="howto-card"><div class="howto-num">CHECK 02</div><h3>水質検査・報告書の発行</h3><p>清掃後に水質検査を実施し、結果報告書を発行する業者を選んでください。報告書は行政の立ち入り検査時に必要で、義務の履行証明になります。</p></div>
+      <div class="howto-card"><div class="howto-num">CHECK 03</div><h3>見積もり内訳の明確さ</h3><p>「一式〇〇万円」だけの見積もりは要注意。清掃・消毒・水質検査・報告書発行など作業項目ごとに明細が出る業者が信頼できます。</p></div>
+      <div class="howto-card"><div class="howto-num">CHECK 04</div><h3>複数社での比較</h3><p>同じ作業でも業者によって費用は大きく異なります。最低でも2〜3社から見積もりを取ることで適正価格の確認と過剰請求の防止になります。</p></div>
+    </div>
+    <div class="inline-cta" style="margin-top:32px;">
+      <div class="inline-cta-text">
+        <h4>複数業者への見積もり依頼が手間な担当者様へ</h4>
+        <p>施設情報を一度お知らせいただくだけで、地元の登録業者に一括でご案内します</p>
+      </div>
+      <a href="#contact" class="inline-cta-btn" data-scroll-to="#contact" data-track="howto_contact">まとめて依頼する ›</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ════════════════════════════════════════════════════ -->
+<section class="cta-section" id="cta">
+  <div class="sd-container">
+    <div class="cta-inner">
+      <h2>まず費用の目安を<br/>確認してみませんか？</h2>
+      <p>施設の規模・所在地をお知らせいただくだけで、地元の登録業者から無料で見積もりを取れます。<br/>相談・見積もりに費用は一切かかりません。</p>
+      <div class="cta-buttons">
+        <a href="#contact" class="cta-btn-primary" data-scroll-to="#contact" data-track="cta_form">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          フォームで無料相談する
+        </a>
+        <a href="tel:0120-XXX-XXX" class="cta-btn-secondary" data-track="cta_tel">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.1 19.79 19.79 0 0 1 1.61 4.5a2 2 0 0 1 1.99-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          電話で相談する（平日9〜18時）
+        </a>
+      </div>
+      <p class="cta-note">相談無料・見積もり無料・しつこい営業はしません</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 問い合わせフォーム ══════════════════════════════════════ -->
+<section class="sd-section form-section" id="contact">
+  <div class="sd-container">
+    <div class="section-head">
+      <span class="kicker">CONTACT</span>
+      <h2>無料相談・見積もり依頼</h2>
+      <p>施設情報をお知らせください。地元の登録業者をご紹介します</p>
+    </div>
+    <div class="form-wrap">
+      <h3>受水槽清掃の無料相談</h3>
+      <p class="form-sub">営業時間内（平日9:00〜18:00）にご連絡します。土日祝は翌営業日の対応となります。</p>
+      <form id="contact-form" action="/api/contact" method="POST" novalidate>
+        <input type="hidden" name="form-name" value="suido-contact" />
+        <div class="form-group">
+          <label for="company">会社名・施設名 <span class="required">必須</span></label>
+          <input type="text" id="company" name="company" placeholder="例：〇〇マンション管理組合" required />
+        </div>
+        <div class="form-group">
+          <label for="name">担当者名 <span class="required">必須</span></label>
+          <input type="text" id="name" name="name" placeholder="例：山田 太郎" required />
+        </div>
+        <div class="form-group">
+          <label for="tel">電話番号 <span class="required">必須</span></label>
+          <input type="tel" id="tel" name="tel" placeholder="例：03-0000-0000" required />
+        </div>
+        <div class="form-group">
+          <label for="prefecture">都道府県 <span class="required">必須</span></label>
+          <select id="prefecture" name="prefecture" required>
+            <option value="">選択してください</option>
+            <option>北海道</option><option>青森県</option><option>岩手県</option><option>宮城県</option>
+            <option>秋田県</option><option>山形県</option><option>福島県</option><option>茨城県</option>
+            <option>栃木県</option><option>群馬県</option><option>埼玉県</option><option>千葉県</option>
+            <option>東京都</option><option>神奈川県</option><option>新潟県</option><option>富山県</option>
+            <option>石川県</option><option>福井県</option><option>山梨県</option><option>長野県</option>
+            <option>岐阜県</option><option>静岡県</option><option>愛知県</option><option>三重県</option>
+            <option>滋賀県</option><option>京都府</option><option>大阪府</option><option>兵庫県</option>
+            <option>奈良県</option><option>和歌山県</option><option>鳥取県</option><option>島根県</option>
+            <option>岡山県</option><option>広島県</option><option>山口県</option><option>徳島県</option>
+            <option>香川県</option><option>愛媛県</option><option>高知県</option><option>福岡県</option>
+            <option>佐賀県</option><option>長崎県</option><option>熊本県</option><option>大分県</option>
+            <option>宮崎県</option><option>鹿児島県</option><option>沖縄県</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="facility_type">施設の種類</label>
+          <select id="facility_type" name="facility_type">
+            <option value="">選択してください</option>
+            <option>マンション・集合住宅</option>
+            <option>オフィスビル</option>
+            <option>商業施設・テナントビル</option>
+            <option>工場・倉庫</option>
+            <option>病院・診療所</option>
+            <option>介護・福祉施設</option>
+            <option>学校・教育施設</option>
+            <option>ホテル・宿泊施設</option>
+            <option>その他</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="tank_size">受水槽の有効容量（わかる範囲で）</label>
+          <select id="tank_size" name="tank_size">
+            <option value="">わからない / 未確認</option>
+            <option>10m³以下</option>
+            <option>10〜20m³</option>
+            <option>20〜50m³</option>
+            <option>50〜100m³</option>
+            <option>100m³超</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">その他・ご要望</label>
+          <textarea id="message" name="message" placeholder="最後の清掃からの経過年数、希望日程、複数棟まとめての依頼など、自由にご記入ください"></textarea>
+        </div>
+        <button type="submit" class="form-submit" data-track="form_submit">無料で相談する →</button>
+        <p class="form-note">個人情報は業者紹介のみに使用し、第三者への販売・提供は行いません。</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ════════════════════════════════════════════════════ -->
+<div class="divider"></div>
+<section class="sd-section section-white" id="faq">
+  <div class="sd-container">
+    <div class="section-head">
+      <span class="kicker">FAQ</span>
+      <h2>よくある質問</h2>
+      <p>受水槽清掃に関する担当者からよく寄せられる質問をまとめました</p>
+    </div>
+    <div class="faq-list">
+      {faqItems.map(item => (
+        <div class="faq-item">
+          <div class="faq-q"><span class="faq-q-badge">Q</span>{item.q}</div>
+          <div class="faq-a"><span class="faq-a-badge">A</span>{item.a}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ══ 地域別ページ ════════════════════════════════════════════ -->
+<div class="divider"></div>
+<section class="sd-section region-section" id="region">
+  <div class="sd-container">
+    <div class="section-head">
+      <span class="kicker">REGION</span>
+      <h2>地域別の受水槽清掃情報</h2>
+      <p>お住まいの地域を選ぶと、地域別の費用相場・業者情報を確認できます</p>
+    </div>
+    <div class="region-head">関東</div>
+    <div class="region-grid">
+      <a href="/tokyo" class="region-link">東京都</a>
+      <a href="/kanagawa" class="region-link">神奈川県</a>
+      <a href="/saitama" class="region-link">埼玉県</a>
+      <a href="/chiba" class="region-link">千葉県</a>
+      <a href="/ibaraki" class="region-link">茨城県</a>
+      <a href="/tochigi" class="region-link">栃木県</a>
+      <a href="/gunma" class="region-link">群馬県</a>
+    </div>
+    <div class="region-head">近畿・東海</div>
+    <div class="region-grid">
+      <a href="/osaka" class="region-link">大阪府</a>
+      <a href="/hyogo" class="region-link">兵庫県</a>
+      <a href="/kyoto" class="region-link">京都府</a>
+      <a href="/aichi" class="region-link">愛知県</a>
+      <a href="/shiga" class="region-link">滋賀県</a>
+      <a href="/nara" class="region-link">奈良県</a>
+    </div>
+    <div class="region-head">その他</div>
+    <div class="region-grid">
+      <a href="/hokkaido" class="region-link">北海道</a>
+      <a href="/miyagi" class="region-link">宮城県</a>
+      <a href="/fukuoka" class="region-link">福岡県</a>
+      <a href="/hiroshima" class="region-link">広島県</a>
+      <a href="/shizuoka" class="region-link">静岡県</a>
+      <a href="/niigata" class="region-link">新潟県</a>
+    </div>
+    <p style="font-size:.8rem;color:var(--gray-500);margin-top:16px;text-align:center;">
+      ※ 地域ページは順次公開予定です。準備中の地域はトップページのフォームよりお問い合わせください。
+    </p>
+  </div>
+</section>
+
+<!-- ══ FOOTER ════════════════════════════════════════════════ -->
+<footer class="sd-footer">
+  <div class="sd-footer-inner">
+    <div class="sd-footer-logo">{SITE_NAME}</div>
+    <p class="sd-footer-desc">
+      受水槽・貯水槽清掃の費用相場・業者比較・法定義務に関する情報を提供するメディアサイトです。
+      掲載情報は公開時点のものです。最新の法令・費用は各機関・業者の公式情報をご確認ください。
+    </p>
+    <div class="sd-footer-links">
+      <a href="/operator">運営者情報</a>
+      <a href="/privacy">プライバシーポリシー</a>
+      <a href="/disclosure">広告掲載ポリシー</a>
+    </div>
+    <p class="sd-footer-copy">© 2025 {SITE_NAME}. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- ══ Sticky CTA（スマホ） ════════════════════════════════════ -->
+<div class="sticky-cta">
+  <a href="#contact" class="sticky-btn-primary" data-scroll-to="#contact" data-track="sticky_form">無料で相談する</a>
+  <a href="tel:0120-XXX-XXX" class="sticky-btn-secondary" data-track="sticky_tel">電話する</a>
+</div>
+
+<script is:inline src="/app.js"></script>
+</body>
+</html>
