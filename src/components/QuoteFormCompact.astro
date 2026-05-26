@@ -10,9 +10,10 @@ const { data } = Astro.props;
     <h3>30秒で無料見積もり依頼</h3>
     <p>最大3社の{data.serviceName}業者をご紹介します</p>
   </div>
-  {/* TODO: バックエンド未接続 — JS側で /thanks/ にリダイレクトのみ */}
-  <form class="qf qf--compact" action="#" method="POST" data-service={data.slug} data-redirect={`/thanks/?service=${data.slug}`} novalidate>
+  {/* バックエンド：functions/api/quote.ts (Cloudflare Pages Functions) */}
+  <form class="qf qf--compact" action="/api/quote" method="POST" data-service={data.slug} data-redirect={`/thanks/?service=${data.slug}`} novalidate>
     <input type="hidden" name="service" value={data.serviceName} />
+    <input type="text" name="website" tabindex="-1" autocomplete="off" class="qf-honeypot" aria-hidden="true" />
     <div class="qf-row">
       <label for="cf-company">会社名・施設名 <span class="qf-req">必須</span></label>
       <input id="cf-company" name="company" type="text" required placeholder="例：◯◯ビル管理組合" />

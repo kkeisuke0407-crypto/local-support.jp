@@ -18,9 +18,10 @@ const { data } = Astro.props;
         <li class="qf-progress-item" data-step="3"><span class="qf-progress-num">3</span><span class="qf-progress-label">連絡先</span></li>
       </ol>
 
-      {/* TODO: バックエンド未接続 — 送信時は /thanks/ にリダイレクトのみ */}
-      <form class="qf qf--full" id="quote-form-full" action="#" method="POST" data-service={data.slug} data-redirect={`/thanks/?service=${data.slug}`} novalidate>
+      {/* バックエンド：functions/api/quote.ts (Cloudflare Pages Functions) */}
+      <form class="qf qf--full" id="quote-form-full" action="/api/quote" method="POST" data-service={data.slug} data-redirect={`/thanks/?service=${data.slug}`} novalidate>
         <input type="hidden" name="service" value={data.serviceName} />
+        <input type="text" name="website" tabindex="-1" autocomplete="off" class="qf-honeypot" aria-hidden="true" />
 
         {/* Step 1 */}
         <fieldset class="qf-step is-active" data-step="1">
