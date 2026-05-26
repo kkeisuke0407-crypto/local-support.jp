@@ -258,6 +258,23 @@ const data: ServiceData = {
   ],
 
   relatedServiceSlugs: ['duct', 'grease-trap', 'jusuisou-seisou'],
+
+  relatedColumns: [
+    {
+      href: '/column/pest-control-hiyo-sohba/',
+      category: '費用相場',
+      title: '業務用害虫駆除（PCO）の費用相場2026｜業種別・契約形態別の料金ガイド',
+      excerpt: '飲食店月8,000〜30,000円・ホテル30,000〜80,000円・食品工場50,000〜300,000円の業種別月額。トコジラミ・スポット駆除・HACCP対応報告書の料金まで解説。',
+      date: '2026-05-26',
+    },
+    {
+      href: '/column/pest-control-haccp/',
+      category: '法令・義務',
+      title: 'HACCP制度化で必須になった害虫対策ガイド2026｜飲食・食品事業者の防除記録の作り方',
+      excerpt: '2021年6月のHACCP制度化で必須となった「そ族・昆虫対策」の位置づけ、月次モニタリング記録の作り方、IPMアプローチ、保健所立入対応まで整理。',
+      date: '2026-05-26',
+    },
+  ],
 };
 
 export default data;
