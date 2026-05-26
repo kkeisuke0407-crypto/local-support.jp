@@ -260,6 +260,23 @@ const data: ServiceData = {
   ],
 
   relatedServiceSlugs: ['shutter', 'shobo-setsubi', 'duct'],
+
+  relatedColumns: [
+    {
+      href: '/column/signboard-inspection-hiyo-sohba/',
+      category: '費用相場',
+      title: '看板点検の費用相場2026｜サイズ別・高所作業車込みの料金と補修工事の単価',
+      excerpt: '小型壁面3,000〜10,000円・屋上広告塔15,000〜150,000円／基。高所作業車30,000〜80,000円／日、電飾点検追加、補修工事の単価まで透明化して解説。',
+      date: '2026-05-26',
+    },
+    {
+      href: '/column/signboard-inspection-horei-gimu/',
+      category: '法令・義務',
+      title: '看板の安全点検は法的義務？2026年版｜屋外広告物条例と落下事故の管理者責任',
+      excerpt: '屋外広告物法と自治体条例（東京・大阪・福岡市等で有資格者点検義務化）の整理、許可期間3年と更新時の点検報告、民法717条の工作物責任（無過失）まで解説。',
+      date: '2026-05-26',
+    },
+  ],
 };
 
 export default data;

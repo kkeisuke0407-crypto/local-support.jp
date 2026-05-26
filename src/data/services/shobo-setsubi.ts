@@ -258,6 +258,23 @@ const data: ServiceData = {
   ],
 
   relatedServiceSlugs: ['jusuisou-seisou', 'duct', 'shutter'],
+
+  relatedColumns: [
+    {
+      href: '/column/shobo-setsubi-hiyo-sohba/',
+      category: '費用相場',
+      title: '消防設備点検の費用相場2026｜建物規模・契約形態・是正工事の単価をまるごと解説',
+      excerpt: '共同住宅3〜8万円・中規模商業ビル10〜30万円・ホテル30〜80万円の規模別年間費用と、是正工事の単価・複数物件契約の割引・安価業者の注意点まで解説。',
+      date: '2026-05-26',
+    },
+    {
+      href: '/column/shobo-setsubi-horei-gimu/',
+      category: '法令・義務',
+      title: '消防設備点検の法定義務ガイド2026｜機器点検・総合点検の頻度と罰則をまるごと解説',
+      excerpt: '消防法第17条の3の3に基づく義務内容、機器点検（半年）・総合点検（年1）の違い、所轄消防署への報告サイクル、有資格者要件、30万円以下の罰則まで整理。',
+      date: '2026-05-26',
+    },
+  ],
 };
 
 export default data;

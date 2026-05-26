@@ -258,6 +258,23 @@ const data: ServiceData = {
   ],
 
   relatedServiceSlugs: ['duct', 'jusuisou-seisou', 'shobo-setsubi'],
+
+  relatedColumns: [
+    {
+      href: '/column/grease-trap-hiyo-sohba/',
+      category: '費用相場',
+      title: 'グリストラップ清掃の費用相場2026｜店舗規模別・頻度別の料金ガイドと追加コストの見抜き方',
+      excerpt: '小規模飲食店月8,000〜15,000円・中規模15,000〜30,000円・ホテル50,000円〜の規模別月額。バスケット／全槽／配管洗浄の内訳と産廃処分費の透明化まで解説。',
+      date: '2026-05-26',
+    },
+    {
+      href: '/column/grease-trap-horei-gimu/',
+      category: '法令・義務',
+      title: 'グリストラップ清掃の法的義務ガイド2026｜下水道法・建築基準法・廃棄物処理法の要点',
+      excerpt: '下水道法（n-Hex 30mg/L）・建築基準法（阻集器の機能維持）・廃掃法（産廃マニフェスト）の3層を整理。違反時の罰則と業界標準の清掃頻度まで解説。',
+      date: '2026-05-26',
+    },
+  ],
 };
 
 export default data;
