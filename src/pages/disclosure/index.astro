@@ -2,8 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { site } from '../../data/site';
 
-const title = '広告掲載ポリシー｜local-support.jp';
-const description = 'local-support.jp の広告掲載・業者紹介ポリシーです。';
+const title = '掲載業者について｜local-support.jp';
+const description = 'local-support.jp の掲載業者の選定基準・紹介プロセス・利用者保護の取り組みについて説明します。';
 const canonical = `${site.domain}/disclosure/`;
 
 const breadcrumbLd = JSON.stringify({
@@ -11,43 +11,57 @@ const breadcrumbLd = JSON.stringify({
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
-    { '@type': 'ListItem', position: 2, name: '広告掲載ポリシー', item: canonical },
+    { '@type': 'ListItem', position: 2, name: '掲載業者について', item: canonical },
   ],
 });
 ---
 <BaseLayout title={title} description={description} canonical={canonical} siteName={site.name} jsonLdBlocks={[breadcrumbLd]}>
   <section class="hero hero--simple">
     <div class="sd-container">
-      <h1 class="hero-h1">広告掲載ポリシー</h1>
+      <h1 class="hero-h1">掲載業者について</h1>
+      <p class="hero-sub-simple">安心してご利用いただくため、業者の選定基準・紹介プロセス・利用者保護の取り組みを公開しています。</p>
     </div>
   </section>
 
   <section class="sd-section section-white">
     <div class="sd-container policy-body">
-      <p>local-support.jp は、施設管理・設備メンテナンスの業者紹介サービスです。本ページでは、業者掲載・紹介に関する方針を説明します。</p>
 
-      <h2>1. 業者紹介の仕組み</h2>
-      <p>本サービスは、お客様からの見積もり依頼を受け付け、対応可能な登録業者をご紹介します。紹介は有償で行っており、登録業者から紹介手数料を受け取ることがあります。ただし、この手数料はお客様への費用には転嫁されません。お客様のご利用は完全無料です。</p>
-
-      <h2>2. 登録業者の審査</h2>
-      <p>登録業者は、以下の基準を満たすことを確認のうえ掲載しています。</p>
+      <h2>1. 掲載業者の選定基準</h2>
+      <p>登録業者は、以下の基準をすべて満たすことを確認のうえ掲載しています。掲載費の支払いの有無で順位・露出が変わることはありません。</p>
       <ul>
-        <li>各サービスに必要な法定資格・許認可を保有していること</li>
-        <li>過去のトラブル・行政処分歴がないこと</li>
-        <li>しつこい営業・不当な勧誘を行わないこと</li>
+        <li><strong>法定資格・許認可の保有</strong>：各サービスに必要な国家資格・建設業許可・登録番号などを確認</li>
+        <li><strong>事業実績</strong>：原則3年以上の事業継続実績、または十分な施工実績を確認</li>
+        <li><strong>損害賠償保険の加入</strong>：万一の事故に備えた請負業者賠償責任保険などへの加入を確認</li>
+        <li><strong>コンプライアンス</strong>：直近3年以内に重大な行政処分・刑事処分歴がないこと</li>
+        <li><strong>営業姿勢</strong>：しつこい営業・不当な勧誘・契約強要を行わないこと</li>
       </ul>
-      <p>ただし、全ての業者の品質を完全に保証するものではありません。最終的な業者の選定・契約はお客様ご自身の判断で行ってください。</p>
+      <p>掲載後も、ご利用者様からのフィードバックを定期的に確認し、基準を満たさなくなった業者は掲載を停止します。</p>
 
-      <h2>3. 紹介件数について</h2>
-      <p>「最大3社」は、お客様の施設所在地・要件に対応可能な登録業者数によって変動します。対応業者が少ない地域では、1〜2社のご紹介にとどまる場合があります。</p>
+      <h2>2. 業者紹介のプロセス</h2>
+      <p>お客様の見積もり依頼内容（所在地・施設種別・緊急度など）をもとに、以下の順で対応可能な業者を最大3社ご紹介します。</p>
+      <ol>
+        <li>所在地の対応エリア内であること</li>
+        <li>依頼内容に必要な資格・対応能力があること</li>
+        <li>過去の紹介実績・対応の早さ・お客様評価</li>
+      </ol>
+      <p>対応業者が少ない地域では、1〜2社のご紹介にとどまる場合があります。「最大3社」の保証ではありません。</p>
 
-      <h2>4. 掲載内容の正確性</h2>
-      <p>本サービス上の費用相場・法的情報は公開時点の情報に基づきます。法改正・市場変化により内容が変わる場合があります。最新情報は各業者・行政窓口にご確認ください。</p>
+      <h2>3. ご利用者の個人情報の取扱い</h2>
+      <p>お客様からお預かりした情報は、業者紹介の目的でのみ使用し、ご紹介する業者以外の第三者に提供することはありません。詳しくは<a href="/privacy/">プライバシーポリシー</a>をご確認ください。</p>
 
-      <h2>5. お問い合わせ</h2>
-      <p>業者紹介に関するご意見・ご不満は、各サービスページのフォームよりご連絡ください。問題のある業者については登録停止を含めた対応を検討します。</p>
+      <h2>4. 利用者保護への取り組み</h2>
+      <p>業者とのやり取り・契約内容に関するご相談、不適切な対応の報告は、各サービスページのフォームまたは運営者宛にご連絡ください。事実確認のうえ、必要に応じて以下の対応を行います。</p>
+      <ul>
+        <li>業者への注意喚起・改善要請</li>
+        <li>事実関係に基づく掲載停止</li>
+        <li>関係機関・消費者センターへのご案内</li>
+      </ul>
 
-      <p class="policy-date">制定日：2025年5月26日</p>
+      <h2>5. ご利用にあたっての注意事項</h2>
+      <p>掲載業者の品質を完全に保証するものではありません。お見積もり内容・契約条件をご確認のうえ、最終的な業者の選定・契約はお客様ご自身の判断で行ってください。</p>
+      <p>本サービス上の費用相場・法的情報は公開時点の情報に基づきます。法改正・市場変化により内容が変わる場合がありますので、最新情報は各業者・行政窓口にもご確認ください。</p>
+
+      <p class="policy-date">最終更新：2025年5月26日</p>
     </div>
   </section>
 </BaseLayout>
@@ -55,8 +69,9 @@ const breadcrumbLd = JSON.stringify({
 <style>
 .policy-body { max-width: 800px; }
 .policy-body h2 { font-size: 1.1rem; font-weight: 700; margin: 32px 0 8px; color: var(--blue-dark); }
-.policy-body p, .policy-body ul { font-size: .95rem; line-height: 1.8; margin-bottom: 12px; }
-.policy-body ul { padding-left: 1.5rem; }
+.policy-body p, .policy-body ul, .policy-body ol { font-size: .95rem; line-height: 1.8; margin-bottom: 12px; }
+.policy-body ul, .policy-body ol { padding-left: 1.5rem; }
 .policy-body li { margin-bottom: 4px; }
+.policy-body a { color: var(--blue); text-decoration: underline; }
 .policy-date { margin-top: 40px; color: var(--gray-500); font-size: .85rem; }
 </style>
