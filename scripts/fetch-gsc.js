@@ -32,6 +32,7 @@
  *    npm run fetch-gsc -- --start 2025-05-01 --end 2025-05-31
  */
 
+import 'dotenv/config';
 import { google } from 'googleapis';
 import { createServer } from 'http';
 import { readFileSync, writeFileSync, existsSync } from 'fs';
