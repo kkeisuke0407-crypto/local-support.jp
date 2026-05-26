@@ -1,6 +1,9 @@
 /* local-support.jp – app.js */
 
+console.log('[local-support] app.js loaded');
+
 document.addEventListener('DOMContentLoaded', function () {
+  console.log('[local-support] DOMContentLoaded');
 
   /* ── FAQ accordion ── */
   document.querySelectorAll('.faq-q').forEach(function (q) {
