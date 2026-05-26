@@ -27,8 +27,7 @@ const data: ServiceData = {
   },
 
   trustStats: [
-    { label: '累計相談件数', value: '2,200+' },
-    { label: '登録業者数', value: '280社' },
+    { label: '紹介可能業者数', value: '280社' },
     { label: '対応エリア', value: '全国47都道府県' },
     { label: '平均紹介社数', value: '最大3社' },
   ],
