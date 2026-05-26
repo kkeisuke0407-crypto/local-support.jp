@@ -12,12 +12,7 @@ export const site = {
     { label: '平均紹介社数', value: '最大3社' },
   ],
   org: {
-    legalName: '株式会社ローカルサポート',
-    foundedYear: '2024',
-    address: {
-      country: 'JP',
-      region: '東京都',
-    },
+    legalName: 'ローカル情報局',
   },
 } as const;
 

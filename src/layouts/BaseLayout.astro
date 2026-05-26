@@ -30,12 +30,7 @@ const baseLdBlocks = [
     alternateName: site.name,
     url: site.domain,
     logo: `${site.domain}/og-default.svg`,
-    foundingDate: site.org.foundedYear,
-    address: {
-      '@type': 'PostalAddress',
-      addressCountry: site.org.address.country,
-      addressRegion: site.org.address.region,
-    },
+    areaServed: 'JP',
   }),
   JSON.stringify({
     '@context': 'https://schema.org',

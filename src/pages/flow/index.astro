@@ -1,10 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ProcessSteps from '../../components/ProcessSteps.astro';
 import { site } from '../../data/site';
 
-const title = 'ご利用の流れ｜local-support.jp 一括見積比較';
-const description = '一括見積依頼から業者紹介・契約までの3ステップをご案内します。完全無料・最大3社を厳選紹介。';
+const title = 'ご利用の流れ｜local-support.jp';
+const description = '一括見積依頼から業者紹介・契約までの流れを詳しくご案内します。完全無料・最大3社を厳選紹介。';
 const canonical = `${site.domain}/flow/`;
 
 const breadcrumbLd = JSON.stringify({
@@ -15,45 +14,186 @@ const breadcrumbLd = JSON.stringify({
     { '@type': 'ListItem', position: 2, name: 'ご利用の流れ', item: canonical },
   ],
 });
+
+const steps = [
+  {
+    num: '01',
+    title: 'フォームで依頼を送信',
+    body: '施設情報・ご要件・連絡先を入力するだけ。所要時間は約1分です。難しい操作は一切不要で、3ステップのフォームに沿って入力するだけで完了します。',
+    note: '所要時間：約1分',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
+  },
+  {
+    num: '02',
+    title: 'こちらで業者を厳選',
+    body: '頂いた情報をもとに、登録資格・実績・対応エリアを確認のうえ、最適な登録業者を最大3社選定します。通常1営業日以内にご案内します。',
+    note: '目安：1営業日以内',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+  },
+  {
+    num: '03',
+    title: '業者から直接ご連絡',
+    body: '厳選した業者から直接メールにてご連絡が届きます。条件・スケジュール・詳細要件についてのヒアリングが行われます。',
+    note: '業者から直接連絡',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`,
+  },
+  {
+    num: '04',
+    title: '見積もりを比較',
+    body: '複数業者から届いた見積もりを比較します。費用・対応範囲・実績・スケジュールなどを総合的に確認してください。当サイトへの手数料は一切かかりません。',
+    note: '完全無料',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>`,
+  },
+  {
+    num: '05',
+    title: 'ご契約・施工',
+    body: '納得いただける業者とご契約のうえ施工を実施します。施工後のアフターフォローについても業者に直接ご確認ください。',
+    note: '業者と直接ご契約',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>`,
+  },
+];
 ---
-<BaseLayout
-  title={title}
-  description={description}
-  canonical={canonical}
-  siteName={site.name}
-  jsonLdBlocks={[breadcrumbLd]}
->
+<BaseLayout title={title} description={description} canonical={canonical} siteName={site.name} jsonLdBlocks={[breadcrumbLd]}>
+
   <section class="hero hero--simple">
     <div class="sd-container">
       <h1 class="hero-h1">ご利用の流れ</h1>
-      <p class="hero-sub-simple">一括見積依頼から業者ご紹介まで、3ステップで完結します</p>
+      <p class="hero-sub-simple">一括見積依頼から業者ご紹介まで、5ステップで完結します。完全無料でご利用いただけます。</p>
     </div>
   </section>
 
-  <ProcessSteps />
-
-  <section class="sd-section">
+  <section class="sd-section section-white">
     <div class="sd-container">
-      <div class="section-head">
-        <span class="kicker">DETAIL</span>
-        <h2>詳細フロー</h2>
-        <p>お見積もり依頼から業者ご紹介までの流れを詳しくご案内します</p>
-      </div>
-      <dl class="flow-dl">
-        <dt>1. フォーム送信</dt>
-        <dd>必要な情報（施設情報・要件・連絡先）をフォームから送信ください。所要時間は約1分。</dd>
-        <dt>2. 内容確認・業者選定（通常1営業日以内）</dt>
-        <dd>こちらで内容を確認のうえ、対応エリア・実績・資格を踏まえ最大3社を厳選します。</dd>
-        <dt>3. 業者からのご連絡</dt>
-        <dd>厳選された業者から直接メールでご連絡が入ります。条件・スケジュールをご相談ください。</dd>
-        <dt>4. お見積もり比較</dt>
-        <dd>複数業者の見積もり内容を比較。費用・対応範囲・実績・スケジュールを総合的に確認してください。</dd>
-        <dt>5. ご契約・施工</dt>
-        <dd>納得いただける業者とご契約のうえ、施工を実施。当サイトへの手数料は一切かかりません。</dd>
-      </dl>
-      <div class="cta-buttons" style="justify-content:center;margin-top:32px;">
-        <a class="cta-btn-primary" href="/">トップから見積依頼する →</a>
+      <ol class="flow-steps">
+        {steps.map((s) => (
+          <li class="flow-step">
+            <div class="flow-step-left">
+              <span class="flow-step-num">{s.num}</span>
+              <div class="flow-step-line" aria-hidden="true"></div>
+            </div>
+            <div class="flow-step-body">
+              <div class="flow-step-icon" aria-hidden="true">
+                <Fragment set:html={s.icon} />
+              </div>
+              <div class="flow-step-content">
+                <h2>{s.title}</h2>
+                <p>{s.body}</p>
+                <span class="flow-step-note">{s.note}</span>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <div class="flow-cta">
+        <p>まずはサービスを選んで、無料で一括見積もりを依頼してください。</p>
+        <a class="cta-btn-primary" href="/">サービス一覧から依頼する →</a>
       </div>
     </div>
   </section>
+
 </BaseLayout>
+
+<style>
+.flow-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 48px;
+  max-width: 760px;
+}
+.flow-step {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 0;
+}
+.flow-step-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+.flow-step-num {
+  width: 48px;
+  height: 48px;
+  background: var(--blue);
+  color: #fff;
+  font-size: .75rem;
+  font-weight: 900;
+  letter-spacing: .04em;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.flow-step-line {
+  width: 2px;
+  flex: 1;
+  background: var(--blue-light);
+  margin: 6px 0;
+  min-height: 32px;
+}
+.flow-step:last-child .flow-step-line { display: none; }
+
+.flow-step-body {
+  display: flex;
+  gap: 20px;
+  padding-bottom: 36px;
+  flex: 1;
+}
+.flow-step:last-child .flow-step-body { padding-bottom: 0; }
+
+.flow-step-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--blue-light);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.flow-step-icon svg {
+  width: 24px;
+  height: 24px;
+  color: var(--blue);
+}
+.flow-step-content h2 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--gray-900);
+  margin-bottom: 6px;
+}
+.flow-step-content p {
+  font-size: .9rem;
+  color: var(--gray-700);
+  line-height: 1.7;
+  margin-bottom: 8px;
+}
+.flow-step-note {
+  display: inline-block;
+  font-size: .75rem;
+  font-weight: 700;
+  color: var(--blue);
+  background: var(--blue-light);
+  padding: 3px 10px;
+  border-radius: 99px;
+}
+.flow-cta {
+  text-align: center;
+  padding: 40px;
+  background: var(--gray-100);
+  border-radius: var(--radius);
+}
+.flow-cta p {
+  font-size: .95rem;
+  color: var(--gray-700);
+  margin-bottom: 20px;
+}
+
+@media (max-width: 600px) {
+  .flow-step-body { flex-direction: column; gap: 12px; }
+  .flow-step-icon { width: 40px; height: 40px; }
+  .flow-step-icon svg { width: 20px; height: 20px; }
+}
+</style>
