@@ -1,5 +1,6 @@
 ---
 import { site } from '../data/site';
+import '../styles/global.css';
 
 interface Props {
   title: string;
@@ -68,7 +69,6 @@ const allLdBlocks = [...baseLdBlocks, ...jsonLdBlocks];
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css" />
 
   <!-- GA4 -->
   <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
