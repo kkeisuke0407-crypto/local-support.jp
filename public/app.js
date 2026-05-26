@@ -120,6 +120,26 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  /* ── Cookie consent banner ── */
+  var banner = document.getElementById('cookie-banner');
+  if (banner) {
+    var stored = null;
+    try { stored = localStorage.getItem('ls_consent'); } catch (e) {}
+    if (!stored) {
+      banner.hidden = false;
+    }
+    banner.querySelectorAll('[data-consent]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var value = btn.getAttribute('data-consent');
+        try { localStorage.setItem('ls_consent', value); } catch (e) {}
+        if (typeof gtag === 'function') {
+          gtag('consent', 'update', { analytics_storage: value });
+        }
+        banner.hidden = true;
+      });
+    });
+  }
+
   /* ── Hide sticky CTA over footer ── */
   var stickyCta = document.querySelector('.sticky-cta');
   if (stickyCta) {
