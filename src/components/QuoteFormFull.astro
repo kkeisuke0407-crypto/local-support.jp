@@ -104,8 +104,8 @@ const { data } = Astro.props;
               <input id="qf-email" name="email" type="email" required placeholder="例：info@example.com" />
             </div>
             <div class="qf-row qf-row--wide">
-              <label for="qf-tel">連絡先電話（任意）</label>
-              <input id="qf-tel" name="tel" type="tel" placeholder="例：03-0000-0000（任意）" />
+              <label for="qf-tel">連絡先電話 <span class="qf-req">必須</span></label>
+              <input id="qf-tel" name="tel" type="tel" required placeholder="例：03-0000-0000" />
             </div>
           </div>
           <label class="qf-agree">
