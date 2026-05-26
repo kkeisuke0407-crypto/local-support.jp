@@ -1,0 +1,301 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { site } from '../../../data/site';
+
+const title = '消防設備点検の費用相場2025｜建物規模・契約形態・是正工事の単価をまるごと解説';
+const description = '消防設備点検の費用相場を共同住宅・オフィス・商業施設・ホテル・工場の建物規模別に整理。機器点検・総合点検・所轄消防署への報告までの年間契約料金、是正工事の単価、複数物件契約での割引、安価業者に注意すべき理由まで施設管理担当者向けに解説します。';
+const canonical = `${site.domain}/column/shobo-setsubi-hiyo-sohba/`;
+const published = '2025-05-26';
+const modified = '2025-05-26';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '消防設備点検の費用相場ガイド', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'Article',
+  headline: title, description, datePublished: published, dateModified: modified,
+  inLanguage: 'ja-JP', url: canonical, mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  author: { '@type': 'Organization', name: site.org.legalName, url: site.domain },
+  publisher: { '@type': 'Organization', name: site.org.legalName, url: site.domain, logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.svg` } },
+  about: { '@type': 'Service', name: '消防設備点検' },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: '消防設備点検の年間費用はどのくらい？', acceptedAnswer: { '@type': 'Answer', text: '建物規模で大きく異なります。共同住宅（〜30戸）で年額3〜8万円、小規模オフィスで4〜10万円、中規模商業ビルで10〜30万円、ホテル・病院などの特定防火対象物では30万円〜80万円程度が目安。年間契約・複数物件契約で割引されるケースが一般的です。' } },
+    { '@type': 'Question', name: '年間契約と単発依頼、どちらが得？', acceptedAnswer: { '@type': 'Answer', text: 'ほとんどの場合、年間契約のほうが割安です。機器点検2回・総合点検1回・所轄消防署への報告までセットで割引されることが多く、緊急対応の優先権がつくケースもあります。単発はスポット見積で割高になりがちです。' } },
+    { '@type': 'Question', name: '点検後の是正工事は別料金ですか？', acceptedAnswer: { '@type': 'Answer', text: 'はい、点検と是正工事は別契約・別料金が原則です。点検費用にはほとんどの場合「不良箇所の指摘」までが含まれ、その修繕は別途見積となります。点検業者と是正工事業者を分けることでコスト比較が可能になります。' } },
+    { '@type': 'Question', name: '安すぎる業者は何が問題？', acceptedAnswer: { '@type': 'Answer', text: '無資格者による形式的な点検、所轄消防署への報告書未提出、点検後の高額是正工事への誘導等のリスクがあります。1物件あたり数千円台の極端に安い見積は、必要な項目を省略している可能性が高いため避けるべきです。' } },
+    { '@type': 'Question', name: '複数物件まとめての契約割引は？', acceptedAnswer: { '@type': 'Answer', text: '多店舗チェーン・複数棟保有事業者向けに、本部一括契約で10〜30%程度の割引が一般的です。物件数・エリアの集中度・契約期間で割引率が変動します。見積依頼時に「他物件も検討中」と伝えると好条件が出やすい傾向があります。' } },
+    { '@type': 'Question', name: '点検費用は経費にできますか？', acceptedAnswer: { '@type': 'Answer', text: 'はい、法令義務に基づく費用なので全額損金算入可能です。マンション管理組合の場合も、共用部の管理費から支出する形で会計処理されます。領収書・点検記録は5年保管しておきましょう。' } },
+  ],
+});
+---
+<BaseLayout title={title} description={description} canonical={canonical} siteName={site.name} logoSub="施設管理の一括見積比較" jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}>
+  <article class="cl-article">
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>消防設備点検の費用相場ガイド</span>
+        </nav>
+        <span class="cl-cat">費用相場</span>
+        <h1 class="cl-title">消防設備点検の費用相場2025｜建物規模・契約形態・是正工事の単価をまるごと解説</h1>
+        <p class="cl-lead">
+          消防設備点検の費用は、<strong>建物規模・用途・設置設備の種類・契約形態</strong>で大きく変動します。「相場を知らずに見積を取ると判断できない」「安すぎる業者には何かある」「年間契約のほうがお得らしいが本当か」といった疑問に答えるべく、本記事では共同住宅・オフィス・商業施設・ホテル・工場の規模別費用、機器点検・総合点検・所轄消防署への報告までの内訳、点検後の是正工事の単価、複数物件契約の割引まで、実態に即して整理しました。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2025年5月26日</time>
+          <span>最終更新：2025年5月26日</span>
+          <span>執筆：{site.org.legalName}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#base-cost">建物規模別の年間費用相場</a></li>
+          <li><a href="#breakdown">費用の内訳（機器点検・総合点検・報告）</a></li>
+          <li><a href="#factors">費用を左右する要因</a></li>
+          <li><a href="#zesei">点検後の是正工事の単価</a></li>
+          <li><a href="#contract">年間契約 vs 単発の比較</a></li>
+          <li><a href="#multi">複数物件・チェーン店契約の割引</a></li>
+          <li><a href="#cheap">安すぎる業者の注意点</a></li>
+          <li><a href="#tips">見積比較のコツ</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>年間費用目安</strong>：共同住宅3〜8万円、中規模商業ビル10〜30万円、ホテル・病院30〜80万円</li>
+            <li><strong>契約形態</strong>：年間契約（機器点検2回＋総合点検1回＋報告書提出）でまとめると単発より15〜30%割安</li>
+            <li><strong>注意点</strong>：極端に安い業者は無資格点検・報告漏れ・是正工事の高額提案のリスク。資格者在籍・報告書範囲を必ず確認</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="base-cost" class="cl-section">
+        <h2>建物規模別の年間費用相場</h2>
+        <p>消防設備点検の年間費用は、建物の延べ面積と用途（特定／非特定）、設置設備の種類で決まります。以下は一般的な相場の目安です。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>建物規模・用途別の年間費用相場（税込目安）</caption>
+            <thead><tr><th scope="col">建物種別</th><th scope="col">想定規模</th><th scope="col">年間費用目安</th><th scope="col">主な点検対象</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">共同住宅（小）</th><td>〜30戸</td><td>30,000〜80,000円</td><td>消火器・自火報・誘導灯</td></tr>
+              <tr><th scope="row">共同住宅（中）</th><td>30〜100戸</td><td>50,000〜150,000円</td><td>＋連結送水管・避難器具</td></tr>
+              <tr><th scope="row">共同住宅（大）</th><td>100戸〜</td><td>150,000〜400,000円</td><td>＋屋内消火栓・スプリンクラー</td></tr>
+              <tr><th scope="row">小規模オフィス</th><td>〜500㎡</td><td>40,000〜100,000円</td><td>誘導灯・消火器・自火報</td></tr>
+              <tr><th scope="row">中規模商業ビル</th><td>〜2,000㎡</td><td>100,000〜300,000円</td><td>＋屋内消火栓・スプリンクラー</td></tr>
+              <tr><th scope="row">飲食店（路面店）</th><td>〜200㎡</td><td>30,000〜80,000円</td><td>消火器・自火報（特定対象物）</td></tr>
+              <tr><th scope="row">ホテル・旅館</th><td>中規模</td><td>300,000〜800,000円</td><td>網羅的設備＋年1回報告</td></tr>
+              <tr><th scope="row">病院・福祉施設</th><td>中規模</td><td>300,000〜800,000円</td><td>SPなど設備が多い＋年1報告</td></tr>
+              <tr><th scope="row">工場・倉庫</th><td>〜5,000㎡</td><td>150,000〜500,000円</td><td>泡・粉末等特殊設備含む</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="cl-note">上記は2025年時点の一般的な相場目安です。物件特性（築年・設備構成・テナント数）で大きく変動します。実際の金額は複数業者の見積で必ず確認してください。</p>
+      </section>
+
+      <section id="breakdown" class="cl-section">
+        <h2>費用の内訳（機器点検・総合点検・報告）</h2>
+        <p>年間費用の内訳は、機器点検（半年に1回、年2回実施）と総合点検（年1回）、所轄消防署への報告書作成・提出で構成されます。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>費用内訳の典型例（中規模商業ビルの場合）</caption>
+            <thead><tr><th scope="col">区分</th><th scope="col">頻度</th><th scope="col">費用比率</th><th scope="col">補足</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">機器点検</th><td>半年に1回（年2回）</td><td>40%</td><td>外観・配置・機能の概要確認</td></tr>
+              <tr><th scope="row">総合点検</th><td>年1回</td><td>45%</td><td>放水・作動試験等の総合確認</td></tr>
+              <tr><th scope="row">報告書作成・提出</th><td>年1回（特定）／3年1回（非特定）</td><td>10%</td><td>所轄消防署への提出代行</td></tr>
+              <tr><th scope="row">交通費・諸経費</th><td>—</td><td>5%</td><td>遠隔地・夜間作業で増減</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>「点検のみ」「点検＋報告書作成」「点検＋報告書提出代行」で価格が変わるため、見積比較時は範囲を揃えることが必須です。</p>
+      </section>
+
+      <section id="factors" class="cl-section">
+        <h2>費用を左右する要因</h2>
+        <ul>
+          <li><strong>延べ面積・階数</strong>：規模が大きいほど点検時間が長くなる</li>
+          <li><strong>設置設備の種類と数</strong>：スプリンクラー・屋内消火栓・特殊消火設備（泡・粉末・不活性ガス）等が多いほど高額</li>
+          <li><strong>特定／非特定の区分</strong>：特定防火対象物は報告が年1回必要で工数増</li>
+          <li><strong>テナント数・営業時間</strong>：営業時間外作業や立会が多いと費用増</li>
+          <li><strong>所在地</strong>：都市部は競合多く割安、地方・離島は出張費加算</li>
+          <li><strong>夜間・休日対応</strong>：通常時間外の点検は25〜50%増</li>
+          <li><strong>是正工事の有無</strong>：点検費用とは別、後述</li>
+        </ul>
+      </section>
+
+      <section id="zesei" class="cl-section">
+        <h2>点検後の是正工事の単価</h2>
+        <p>点検で「不良」と判定された設備は、別途見積で是正工事を依頼します。是正工事は点検費用とは別契約となるのが一般的です。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>是正工事の代表的な単価（税込目安）</caption>
+            <thead><tr><th scope="col">作業内容</th><th scope="col">費用目安</th><th scope="col">備考</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">消火器交換（10型）</th><td>5,000〜15,000円／本</td><td>本体代＋取付・廃棄</td></tr>
+              <tr><th scope="row">感知器交換（差動式）</th><td>3,000〜8,000円／個</td><td>個別交換・配線工事別</td></tr>
+              <tr><th scope="row">受信機リチウム電池交換</th><td>10,000〜30,000円</td><td>機種で変動</td></tr>
+              <tr><th scope="row">誘導灯バッテリー交換</th><td>3,000〜10,000円／台</td><td>4〜5年に1回必要</td></tr>
+              <tr><th scope="row">スプリンクラー部品交換</th><td>10,000円〜</td><td>ヘッド・配管・継手等</td></tr>
+              <tr><th scope="row">屋内消火栓ホース更新</th><td>15,000〜30,000円／本</td><td>耐用年数あり</td></tr>
+              <tr><th scope="row">自動火災報知設備の改修</th><td>50,000円〜数十万円</td><td>規模・台数で大きく変動</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="cl-callout cl-callout--warn">
+          <h3 class="cl-callout-h">是正工事の見積比較</h3>
+          <p>是正工事は点検業者から提案されることが多いですが、その業者で発注する義務はありません。10万円超の是正工事は別業者の相見積を取ることでコストが半分近くになるケースもあります。「点検は安いが補修見積が高い」業者は特に注意が必要です。</p>
+        </div>
+      </section>
+
+      <section id="contract" class="cl-section">
+        <h2>年間契約 vs 単発の比較</h2>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>年間契約と単発依頼の比較</caption>
+            <thead><tr><th scope="col">項目</th><th scope="col">年間契約</th><th scope="col">単発依頼</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">価格</th><td>15〜30%割安</td><td>定価</td></tr>
+              <tr><th scope="row">スケジュール</th><td>業者主導で自動的に管理</td><td>都度調整必要</td></tr>
+              <tr><th scope="row">報告書提出</th><td>提出代行が標準</td><td>別オプションで追加料金</td></tr>
+              <tr><th scope="row">緊急対応</th><td>優先対応が一般的</td><td>都度交渉</td></tr>
+              <tr><th scope="row">解約自由度</th><td>1年縛りが多い</td><td>都度終了</td></tr>
+              <tr><th scope="row">向いている事業者</th><td>継続的に管理したい</td><td>1回だけ試したい</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>定期的に点検が必要な以上、年間契約のメリットが大きいケースが多いです。ただし業者品質が合わなかった場合の出口（解約条件）は契約時に必ず確認してください。</p>
+      </section>
+
+      <section id="multi" class="cl-section">
+        <h2>複数物件・チェーン店契約の割引</h2>
+        <p>多店舗チェーン・複数棟保有事業者向けに、本部一括契約での割引が一般的です。</p>
+        <ul>
+          <li><strong>2〜5物件</strong>：5〜15%程度の割引</li>
+          <li><strong>5〜20物件</strong>：15〜25%程度の割引</li>
+          <li><strong>20物件以上</strong>：25〜35%程度の割引</li>
+        </ul>
+        <p>エリア集中度（同一都道府県内に集まっているか）でも割引率が変わります。点検業者は移動コストを削減できるため、エリア集中度が高い場合の割引が出やすい構造です。</p>
+      </section>
+
+      <section id="cheap" class="cl-section">
+        <h2>安すぎる業者の注意点</h2>
+        <p>1物件あたり年間2〜3万円を大幅に下回る業者は、以下のリスクがあります。</p>
+        <ul>
+          <li><strong>無資格者点検</strong>：延べ1,000㎡超の特定防火対象物は有資格者が必須。違反すると報告書が無効に</li>
+          <li><strong>報告書未提出</strong>：所轄消防署への提出を「別料金」とし、結果的に点検義務違反となる</li>
+          <li><strong>形式的な点検</strong>：写真・測定値の記録なし、後日トラブル時の根拠が薄弱</li>
+          <li><strong>是正工事の押し売り</strong>：点検は安く、不良判定を多めに出して高額是正工事を提案</li>
+          <li><strong>消防設備士の登録要件未充足</strong>：そもそも点検実施者として法的要件を満たしていない</li>
+        </ul>
+      </section>
+
+      <section id="tips" class="cl-section">
+        <h2>見積比較のコツ</h2>
+        <ol>
+          <li><strong>範囲を揃える</strong>：「機器2回＋総合1回＋所轄消防署への提出」をセットで見積依頼</li>
+          <li><strong>有資格者の在籍数・資格区分を確認</strong>：1〜7類のうち自社建物に必要な類をカバーしているか</li>
+          <li><strong>是正工事の単価表を事前取得</strong>：点検費用が同じでも是正単価で総コストが変わる</li>
+          <li><strong>緊急対応の有無</strong>：警報発報時の駆けつけ目安時間、夜間休日対応の費用</li>
+          <li><strong>解約条件・更新条項</strong>：合わなければ解約できるか、自動更新条項の有無</li>
+        </ol>
+      </section>
+
+      <div class="cl-cta">
+        <h2>消防設備点検の見積比較なら</h2>
+        <p>有資格業者から最大3社の見積もりを<br/>完全無料・約1分で取得できます</p>
+        <a class="cta-btn-primary" href="/shobo-setsubi/">無料で一括見積もりを依頼する →</a>
+      </div>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          <div class="cl-faq-item"><dt>共同住宅の点検費用は誰が負担？</dt><dd>共用部の点検費用は管理組合が共益費（管理費）から支出するのが一般的です。専有部内の設備（住戸内の感知器等）の点検は管理組合または住戸所有者の負担が標準ですが、管理規約で異なるため要確認です。</dd></div>
+          <div class="cl-faq-item"><dt>テナントビルでテナントが点検費用を負担することはある？</dt><dd>賃貸借契約・管理規約により異なります。共用部はビル所有者・管理組合が、テナント専有部の追加設備はテナント負担となるのが一般的です。契約時に明確化することが推奨されます。</dd></div>
+          <div class="cl-faq-item"><dt>消費税は別ですか？</dt><dd>業者により表記が異なります。見積比較時は税込・税抜を統一して比較しましょう。本記事の金額はすべて税込目安です。</dd></div>
+          <div class="cl-faq-item"><dt>年度途中で契約開始することは可能？</dt><dd>はい、可能です。前任業者の最終点検から自社契約の初回点検までの間隔が空きすぎないようスケジュール調整するのが望ましいです。前任業者の点検結果・報告履歴を引き継ぐと、新業者が状況を把握しやすくなります。</dd></div>
+          <div class="cl-faq-item"><dt>緊急対応料金はどのくらい？</dt><dd>警報発報時の駆けつけは1回あたり10,000〜30,000円程度（夜間休日は割増）。年間契約に含まれているケース、別途従量制のケースがあります。</dd></div>
+          <div class="cl-faq-item"><dt>是正工事の見積根拠を写真付きで欲しいです</dt><dd>正当な要求です。業者により「写真・測定値・該当法令」付きの是正提案書を発行します。これを断る業者は避けるべきです。</dd></div>
+        </dl>
+      </section>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連サービス・コラム</h2>
+        <ul>
+          <li><a href="/shobo-setsubi/">消防設備点検の業者を一括見積比較</a></li>
+          <li><a href="/column/shobo-setsubi-horei-gimu/">消防設備点検の法定義務ガイド</a></li>
+          <li><a href="/shutter/">シャッター点検の業者を比較</a></li>
+          <li><a href="/flow/">ご利用の流れ・3ステップで業者紹介</a></li>
+        </ul>
+      </aside>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-note { font-size: .82rem; color: var(--gray-500); font-style: italic; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-callout li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+@media (max-width: 600px) { .cl-header { padding: 32px 0 28px; } .cl-body { padding: 28px 16px 48px; } .cl-section h2 { font-size: 1.15rem; } }
+</style>

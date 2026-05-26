@@ -1,0 +1,293 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { site } from '../../../data/site';
+
+const title = 'グリストラップ清掃の費用相場2025｜店舗規模別・頻度別の料金ガイドと追加コストの見抜き方';
+const description = 'グリストラップ清掃の費用相場を店舗規模別・清掃頻度別に整理。バスケット清掃・スカム除去・全槽清掃・配管高圧洗浄の単価、汚泥産廃処分費の内訳、月間契約と単発のコスト差、ホテル・食品工場の大型設備費用まで施設運営者向けに解説します。';
+const canonical = `${site.domain}/column/grease-trap-hiyo-sohba/`;
+const published = '2025-05-26';
+const modified = '2025-05-26';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: 'グリストラップ清掃の費用相場ガイド', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'Article',
+  headline: title, description, datePublished: published, dateModified: modified,
+  inLanguage: 'ja-JP', url: canonical, mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  author: { '@type': 'Organization', name: site.org.legalName, url: site.domain },
+  publisher: { '@type': 'Organization', name: site.org.legalName, url: site.domain, logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.svg` } },
+  about: { '@type': 'Service', name: 'グリストラップ清掃' },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: 'グリストラップ清掃の月額費用はどのくらい？', acceptedAnswer: { '@type': 'Answer', text: '小規模飲食店のバスケット清掃契約で月8,000〜15,000円、中規模店で月15,000〜30,000円、ホテル・大型施設で月50,000円〜が目安です。全槽清掃の頻度・配管高圧洗浄の有無・夜間対応の必要性で大きく変動します。' } },
+    { '@type': 'Question', name: '単発清掃と継続契約、どちらが得？', acceptedAnswer: { '@type': 'Answer', text: 'ほとんどの場合、継続契約の方が割安です。月次契約で20〜30%安くなる傾向、年間契約でさらに割引というケースもあります。単発はスポット料金で割高（緊急対応で1回30,000〜50,000円）になりがちです。' } },
+    { '@type': 'Question', name: '産廃処分費は別ですか？', acceptedAnswer: { '@type': 'Answer', text: '通常の月次契約料金には産廃処分費が含まれているケースが多いですが、大型施設・大量排出の場合は別途従量制になることがあります。見積書で「産廃処分費込み」を必ず確認しましょう。' } },
+    { '@type': 'Question', name: '配管高圧洗浄もセットでお願いすべき？', acceptedAnswer: { '@type': 'Answer', text: 'はい、配管詰まり予防には半年〜年1回の配管高圧洗浄が推奨されます。グリストラップ清掃とセットで実施すると効率的（20,000〜80,000円程度の追加）。詰まり発生時の緊急対応は10万円以上になるケースもあるため、予防が経済的です。' } },
+    { '@type': 'Question', name: '深夜・早朝対応の料金はどのくらい増?', acceptedAnswer: { '@type': 'Answer', text: '通常時間帯（昼間）に比べて25〜50%程度の割増が一般的です。22時以降の深夜は50%以上の割増になるケースもあります。営業時間外作業の必要性は事前に伝えて見積比較しましょう。' } },
+    { '@type': 'Question', name: 'チェーン店一括契約での割引は？', acceptedAnswer: { '@type': 'Answer', text: '5店舗以上の一括契約で10〜25%程度の割引が一般的です。エリア集中度（同一都市内に集まっているか）で割引率が変動します。本部一括発注は、店舗ごとの管理工数削減のメリットも大きいです。' } },
+  ],
+});
+---
+<BaseLayout title={title} description={description} canonical={canonical} siteName={site.name} logoSub="施設管理の一括見積比較" jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}>
+  <article class="cl-article">
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>グリストラップ清掃の費用相場ガイド</span>
+        </nav>
+        <span class="cl-cat">費用相場</span>
+        <h1 class="cl-title">グリストラップ清掃の費用相場2025｜店舗規模別・頻度別の料金ガイドと追加コストの見抜き方</h1>
+        <p class="cl-lead">
+          グリストラップ清掃の費用は、<strong>店舗規模・清掃区分（バスケット／スカム／全槽／配管）・頻度・営業時間外対応</strong>の組み合わせで大きく変わります。「月いくらが妥当か」「単発と契約のどちらが得か」「産廃処分費は別請求になるのか」といった疑問にお答えするため、本記事では小規模飲食店からホテル・食品工場まで、店舗規模別の月額・年額の目安、配管高圧洗浄の追加費用、深夜対応の割増、チェーン店一括契約の割引まで実態に即して整理しました。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2025年5月26日</time>
+          <span>最終更新：2025年5月26日</span>
+          <span>執筆：{site.org.legalName}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#base-cost">店舗規模別の月額・年額相場</a></li>
+          <li><a href="#breakdown">清掃区分別の単価</a></li>
+          <li><a href="#factors">費用を左右する要因</a></li>
+          <li><a href="#piping">配管高圧洗浄のセット推奨</a></li>
+          <li><a href="#emergency">緊急清掃・配管詰まり対応の料金</a></li>
+          <li><a href="#contract">単発 vs 月次契約 vs 年間契約</a></li>
+          <li><a href="#multi">チェーン店・複数店舗の一括契約</a></li>
+          <li><a href="#tips">見積比較のコツ</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>月額目安</strong>：小規模飲食店8,000〜15,000円、中規模15,000〜30,000円、ホテル・食品工場50,000円〜</li>
+            <li><strong>契約形態</strong>：月次契約は単発比で20〜30%割安、5店舗以上の一括契約はさらに10〜25%割引</li>
+            <li><strong>注意点</strong>：産廃処分費の込み・別、配管高圧洗浄の有無、夜間対応の割増は事前確認必須</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="base-cost" class="cl-section">
+        <h2>店舗規模別の月額・年額相場</h2>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>店舗規模・業態別の月額契約費用相場（税込目安）</caption>
+            <thead><tr><th scope="col">業態・規模</th><th scope="col">月額目安</th><th scope="col">年額目安</th><th scope="col">主な内容</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">個人経営の飲食店（〜30席）</th><td>8,000〜15,000円</td><td>10〜18万円</td><td>バスケット清掃月1〜2回＋全槽3か月毎</td></tr>
+              <tr><th scope="row">中規模飲食店（30〜100席）</th><td>15,000〜30,000円</td><td>18〜36万円</td><td>バスケット月2回＋全槽2か月毎</td></tr>
+              <tr><th scope="row">居酒屋・焼肉店（油脂多め）</th><td>20,000〜40,000円</td><td>24〜48万円</td><td>頻度高め＋配管対策</td></tr>
+              <tr><th scope="row">ファストフード・ファミレス</th><td>20,000〜50,000円</td><td>24〜60万円</td><td>長時間営業対応</td></tr>
+              <tr><th scope="row">ホテル・旅館厨房</th><td>30,000〜80,000円</td><td>36〜96万円</td><td>夜間・早朝対応含む</td></tr>
+              <tr><th scope="row">食品工場・セントラルキッチン</th><td>50,000〜200,000円</td><td>60〜240万円</td><td>大型槽・産廃量多</td></tr>
+              <tr><th scope="row">社員食堂・給食センター</th><td>20,000〜60,000円</td><td>24〜72万円</td><td>提供食数に応じ変動</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="cl-note">上記は2025年時点の一般的な相場目安です。槽容量・地下／屋外設置・配管長・夜間対応の必要性で大きく変動します。</p>
+      </section>
+
+      <section id="breakdown" class="cl-section">
+        <h2>清掃区分別の単価</h2>
+        <p>グリストラップ清掃には複数の作業区分があり、それぞれに単価設定があります。月次契約はこれらを組み合わせて構成されます。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>清掃区分別の単価相場（税込目安）</caption>
+            <thead><tr><th scope="col">清掃区分</th><th scope="col">1回あたり費用</th><th scope="col">推奨頻度</th><th scope="col">作業内容</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">バスケット清掃</th><td>3,000〜10,000円</td><td>週1〜月1回</td><td>残渣回収・簡易清掃</td></tr>
+              <tr><th scope="row">スカム除去</th><td>5,000〜15,000円</td><td>週1〜月1回</td><td>浮上油脂層回収</td></tr>
+              <tr><th scope="row">全槽清掃（小規模）</th><td>15,000〜30,000円</td><td>2〜3か月に1回</td><td>汚泥全量回収・産廃処理</td></tr>
+              <tr><th scope="row">全槽清掃（中規模）</th><td>20,000〜50,000円</td><td>2〜3か月に1回</td><td>大型槽・複数槽</td></tr>
+              <tr><th scope="row">全槽清掃（大規模）</th><td>50,000〜200,000円</td><td>1〜2か月に1回</td><td>ホテル・食品工場規模</td></tr>
+              <tr><th scope="row">配管高圧洗浄</th><td>20,000〜80,000円</td><td>半年〜年1回</td><td>配管内油脂除去</td></tr>
+              <tr><th scope="row">緊急配管詰まり対応</th><td>30,000〜100,000円</td><td>—</td><td>店舗浸水時の駆けつけ</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="factors" class="cl-section">
+        <h2>費用を左右する要因</h2>
+        <ul>
+          <li><strong>グリストラップの槽容量・基数</strong>：複数槽・大型槽は作業時間・産廃量で費用増</li>
+          <li><strong>設置場所</strong>：地下設置・狭い場所・搬出経路の悪さで作業時間が伸びる</li>
+          <li><strong>営業形態（油脂量）</strong>：揚げ物・中華・焼肉等は頻度を上げる必要</li>
+          <li><strong>清掃頻度</strong>：高頻度ほど1回あたり単価は下がる傾向</li>
+          <li><strong>営業時間外作業</strong>：深夜・早朝は25〜50%増</li>
+          <li><strong>産廃の運搬距離</strong>：処分場まで遠いと運搬費上昇</li>
+          <li><strong>マニフェスト電子化対応</strong>：JWNET対応業者は若干高い場合も</li>
+        </ul>
+      </section>
+
+      <section id="piping" class="cl-section">
+        <h2>配管高圧洗浄のセット推奨</h2>
+        <p>グリストラップ清掃と配管高圧洗浄はセットで実施するのが推奨です。グリストラップで取り切れなかった油脂が配管内に蓄積し、配管詰まりの原因になるためです。</p>
+        <ul>
+          <li><strong>予防</strong>：配管高圧洗浄を半年〜年1回（20,000〜80,000円）</li>
+          <li><strong>事後</strong>：詰まり発生時の緊急対応（30,000〜100,000円＋店舗浸水時の損失）</li>
+        </ul>
+        <p>店舗浸水の損失は、休業1日あたり数万〜数十万円の売上損失＋テナント間賠償の可能性を含めると、配管予防のコストの数十倍に達するケースもあります。</p>
+        <div class="cl-callout">
+          <h3 class="cl-callout-h">高油脂業態は配管洗浄の頻度を上げる</h3>
+          <p>揚げ物中心の店舗（とんかつ・天ぷら・唐揚げ等）、中華料理、焼肉店は、配管内油脂蓄積が早いため、3〜6か月に1回の配管洗浄が安全です。年間契約に組み込んでルーチン化するのが現実的です。</p>
+        </div>
+      </section>
+
+      <section id="emergency" class="cl-section">
+        <h2>緊急清掃・配管詰まり対応の料金</h2>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>緊急対応料金の目安（税込）</caption>
+            <thead><tr><th scope="col">状況</th><th scope="col">費用目安</th><th scope="col">追加発生コスト</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">配管詰まり（軽度）</th><td>30,000〜60,000円</td><td>休業時間の売上損失</td></tr>
+              <tr><th scope="row">配管詰まり（重度・溢水）</th><td>50,000〜100,000円</td><td>清掃・修繕・テナント賠償</td></tr>
+              <tr><th scope="row">深夜・休日対応</th><td>+50%</td><td>—</td></tr>
+              <tr><th scope="row">他テナントへの被害</th><td>—</td><td>10万円〜数十万円の賠償</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>年間契約に「緊急対応の優先枠」が含まれていると、土日深夜でも当日対応してもらえるケースが多く、緊急時のリスクヘッジになります。</p>
+      </section>
+
+      <section id="contract" class="cl-section">
+        <h2>単発 vs 月次契約 vs 年間契約</h2>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>契約形態別の費用比較</caption>
+            <thead><tr><th scope="col">項目</th><th scope="col">単発</th><th scope="col">月次契約</th><th scope="col">年間契約</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">価格</th><td>定価</td><td>10〜20%割安</td><td>20〜30%割安</td></tr>
+              <tr><th scope="row">スケジュール</th><td>都度調整</td><td>業者主導</td><td>業者主導＋年間計画化</td></tr>
+              <tr><th scope="row">緊急対応</th><td>都度交渉</td><td>応相談</td><td>優先枠あり</td></tr>
+              <tr><th scope="row">マニフェスト管理</th><td>都度</td><td>月次集計</td><td>年間で電子管理</td></tr>
+              <tr><th scope="row">解約</th><td>自由</td><td>1〜3か月前通知</td><td>1年縛り</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="multi" class="cl-section">
+        <h2>チェーン店・複数店舗の一括契約</h2>
+        <ul>
+          <li><strong>2〜5店舗</strong>：5〜15%割引</li>
+          <li><strong>5〜20店舗</strong>：15〜25%割引</li>
+          <li><strong>20店舗以上</strong>：25〜35%割引、専用窓口設置</li>
+        </ul>
+        <p>本部一括契約のメリットは、価格割引だけでなく、店舗別の管理工数削減、マニフェスト集中管理（電子マニフェスト推奨）、品質均一化です。多店舗運営事業者は本部発注を強く推奨します。</p>
+      </section>
+
+      <section id="tips" class="cl-section">
+        <h2>見積比較のコツ</h2>
+        <ol>
+          <li><strong>清掃区分を揃える</strong>：「バスケット2回＋全槽1回＋配管半年1回」など範囲を統一</li>
+          <li><strong>産廃処分費の込み・別</strong>を明確化</li>
+          <li><strong>マニフェスト発行・電子化対応</strong>の有無</li>
+          <li><strong>許可番号・有効期限</strong>を見積書に明記させる</li>
+          <li><strong>夜間対応の割増率</strong>を事前に書面化</li>
+          <li><strong>緊急対応の枠</strong>と単価</li>
+        </ol>
+      </section>
+
+      <div class="cl-cta">
+        <h2>グリストラップ清掃の見積比較なら</h2>
+        <p>許可確認済みの業者から最大3社の見積もりを<br/>完全無料・約1分で取得できます</p>
+        <a class="cta-btn-primary" href="/grease-trap/">無料で一括見積もりを依頼する →</a>
+      </div>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          <div class="cl-faq-item"><dt>清掃頻度を下げて費用を抑えるのは可能？</dt><dd>業態によりますが、油脂排出が多い業種で頻度を下げると配管詰まり・基準超過・害虫発生のリスクが急上昇します。むしろ高頻度・小回り清掃のほうが結果的に安全＋低コストになるケースが多いです。</dd></div>
+          <div class="cl-faq-item"><dt>業者交代時の前任業者の引き継ぎは？</dt><dd>マニフェスト記録・清掃履歴の引き継ぎを新業者に依頼することが望ましいです。前任が電子マニフェスト（JWNET）利用なら自動的に履歴が残っているため、引き継ぎが容易です。</dd></div>
+          <div class="cl-faq-item"><dt>清掃費用は経費計上できる？</dt><dd>はい、全額損金算入可能です。マニフェスト・領収書を5年保管しておけば税務上も問題ありません。</dd></div>
+          <div class="cl-faq-item"><dt>「全槽清掃」と書いてあっても安心できない理由は？</dt><dd>業者により「全槽清掃」の定義が異なります。汚泥を全量引き抜く本来の全槽清掃と、スカムだけ除去して全槽と称するケースが混在しています。マニフェスト発行・汚泥重量の記録を必須条件にしましょう。</dd></div>
+          <div class="cl-faq-item"><dt>テナントとビルオーナー、どちらが費用負担？</dt><dd>厨房を使うテナント側が一次的に負担するのが一般的ですが、賃貸契約・管理規約で異なります。契約時に「グリストラップ清掃費用負担」を明示することが推奨されます。</dd></div>
+          <div class="cl-faq-item"><dt>見積に書かれている産廃処分費は妥当か判断できない</dt><dd>1回の全槽清掃で発生する汚泥は数十kg〜数百kg。産廃処分費は1kgあたり数十〜数百円が目安で、運搬距離・処分場の受入価格で変動します。「処分費〇円／kg」と単価表示してもらうと比較しやすくなります。</dd></div>
+        </dl>
+      </section>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連サービス・コラム</h2>
+        <ul>
+          <li><a href="/grease-trap/">グリストラップ清掃の業者を一括見積比較</a></li>
+          <li><a href="/column/grease-trap-horei-gimu/">グリストラップ清掃の法的義務ガイド</a></li>
+          <li><a href="/duct/">厨房ダクト清掃の業者を比較</a></li>
+          <li><a href="/flow/">ご利用の流れ・3ステップで業者紹介</a></li>
+        </ul>
+      </aside>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-note { font-size: .82rem; color: var(--gray-500); font-style: italic; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-callout li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+@media (max-width: 600px) { .cl-header { padding: 32px 0 28px; } .cl-body { padding: 28px 16px 48px; } .cl-section h2 { font-size: 1.15rem; } }
+</style>
