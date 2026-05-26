@@ -21,7 +21,7 @@ local-support.jp はマンション・ビル・工場・病院など、施設管
 - [ご利用の流れ](https://local-support.jp/flow/): 一括見積依頼から契約までの3ステップ
 - [運営者情報](https://local-support.jp/operator/)
 - [プライバシーポリシー](https://local-support.jp/privacy/)
-- [広告掲載ポリシー](https://local-support.jp/disclosure/)
+- [ご紹介業者について](https://local-support.jp/disclosure/)
 
 ## サイト運営者
 
