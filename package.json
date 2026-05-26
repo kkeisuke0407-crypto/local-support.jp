@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "fetch-gsc": "node scripts/fetch-gsc.js",
-    "fetch-gsc:dry": "node scripts/fetch-gsc.js --dry-run"
+    "fetch-gsc:dry": "node scripts/fetch-gsc.js --dry-run",
+    "fetch-gsc:auth": "node scripts/fetch-gsc.js --manual --dry-run"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.0.0",

@@ -21,10 +21,17 @@
  *    GOOGLE_CLIENT_SECRET=GOCSPX-xxxx
  *    GSC_SITE_URL=https://local-support.jp/
  *
- * ■ 初回認証
+ * ■ 初回認証（ローカルマシンで実行する場合）
  *    npm run fetch-gsc
- *    → ブラウザが開く → Google アカウントでログイン → 許可
+ *    → ブラウザが自動で開く → Google アカウントでログイン → 許可
  *    → トークンが .gsc-token.json に保存される（以降は自動）
+ *
+ * ■ 初回認証（クラウド環境・ブラウザが開けない場合）
+ *    npm run fetch-gsc:auth
+ *    → 認証URLが表示される → 自分のブラウザで開く → 許可
+ *    → リダイレクト後の URL に含まれる code= の値をターミナルに貼り付け
+ *    ※ Google Cloud Console の「承認済みのリダイレクトURI」に
+ *       http://localhost を追加しておくこと
  *
  * ■ 通常実行
  *    npm run fetch-gsc              # 前月データで CSV 更新
@@ -42,19 +49,22 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
 
-// ─── 設定 ──────────────────────────────────────────────────────
-const SITE_URL    = process.env.GSC_SITE_URL    || 'https://local-support.jp/';
-const CLIENT_ID   = process.env.GOOGLE_CLIENT_ID;
-const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
-const TOKEN_PATH  = resolve(ROOT, '.gsc-token.json');
-const CSV_PATH    = resolve(ROOT, 'docs/seo-scoring-template.csv');
-const REDIRECT_PORT = 4242;
-const REDIRECT_URI = `http://localhost:${REDIRECT_PORT}/callback`;
-const SCOPES = ['https://www.googleapis.com/auth/webmasters.readonly'];
-
 // ─── CLI 引数パース ─────────────────────────────────────────────
-const args = process.argv.slice(2);
+const args   = process.argv.slice(2);
 const DRY_RUN = args.includes('--dry-run');
+const MANUAL  = args.includes('--manual');
+
+// ─── 設定 ──────────────────────────────────────────────────────
+const SITE_URL      = process.env.GSC_SITE_URL    || 'https://local-support.jp/';
+const CLIENT_ID     = process.env.GOOGLE_CLIENT_ID;
+const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+const TOKEN_PATH    = resolve(ROOT, '.gsc-token.json');
+const CSV_PATH      = resolve(ROOT, 'docs/seo-scoring-template.csv');
+const REDIRECT_PORT       = 4242;
+const REDIRECT_URI_AUTO   = `http://localhost:${REDIRECT_PORT}/callback`;
+const REDIRECT_URI_MANUAL = 'http://localhost';
+const REDIRECT_URI  = MANUAL ? REDIRECT_URI_MANUAL : REDIRECT_URI_AUTO;
+const SCOPES = ['https://www.googleapis.com/auth/webmasters.readonly'];
 
 function getArg(name) {
   const idx = args.indexOf(name);
@@ -160,11 +170,42 @@ async function authorizeViaBrowser(oauth2) {
   console.log('✅ 認証完了！トークンを保存しました。\n');
 }
 
+async function authorizeManual(oauth2) {
+  const authUrl = oauth2.generateAuthUrl({
+    access_type: 'offline',
+    scope: SCOPES,
+    prompt: 'consent',
+  });
+
+  console.log('─────────────────────────────────────────────────');
+  console.log('🌐 【手順1】ブラウザで以下のURLを開いてください:');
+  console.log('');
+  console.log(`   ${authUrl}`);
+  console.log('');
+  console.log('【手順2】Google アカウントでログインして「許可」をクリック');
+  console.log('【手順3】リダイレクト先（接続できないページ）のURLから');
+  console.log('        「code=」の値をコピーしてください');
+  console.log('');
+  console.log('  例: http://localhost/?code=4/0AX4XfW...&scope=...');
+  console.log('                              ↑ ここからコピー');
+  console.log('─────────────────────────────────────────────────');
+  process.stdout.write('\n認証コードを貼り付けてください: ');
+
+  const code = await new Promise((resolve) => {
+    process.stdin.setEncoding('utf8');
+    process.stdin.once('data', (d) => resolve(d.trim()));
+  });
+
+  const { tokens } = await oauth2.getToken(code);
+  oauth2.setCredentials(tokens);
+  saveToken(oauth2);
+  console.log('\n✅ 認証完了！トークンを保存しました。\n');
+}
+
 async function getAuthenticatedClient() {
   const oauth2 = buildOAuth2Client();
 
   if (loadSavedToken(oauth2)) {
-    // トークンが期限切れなら自動リフレッシュ
     oauth2.on('tokens', (tokens) => {
       if (tokens.refresh_token) oauth2.credentials.refresh_token ??= tokens.refresh_token;
       oauth2.credentials = { ...oauth2.credentials, ...tokens };
@@ -173,7 +214,11 @@ async function getAuthenticatedClient() {
     return oauth2;
   }
 
-  await authorizeViaBrowser(oauth2);
+  if (MANUAL) {
+    await authorizeManual(oauth2);
+  } else {
+    await authorizeViaBrowser(oauth2);
+  }
   return oauth2;
 }
 
