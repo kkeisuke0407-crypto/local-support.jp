@@ -89,10 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /* ── Form submission (compact + full) ──
-     TODO: バックエンド未接続。送信時は /thanks/ にリダイレクトするだけ。
-     後でAPIエンドポイントを実装したらここを差し替える。
-  */
+  /* ── Form submission (compact + full) ── */
   document.querySelectorAll('form.qf').forEach(function (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -100,23 +97,48 @@ document.addEventListener('DOMContentLoaded', function () {
         form.reportValidity();
         return;
       }
-      track('quote_form_submit');
+      var honey = form.querySelector('input[name="website"]');
+      if (honey && honey.value) {
+        return;
+      }
       var submitBtn = form.querySelector('button[type="submit"]');
+      var originalLabel = submitBtn ? submitBtn.textContent : '';
       if (submitBtn) {
         submitBtn.disabled = true;
         submitBtn.textContent = '送信中...';
       }
       var redirect = form.getAttribute('data-redirect') || '/thanks/';
-      // Show inline success briefly, then redirect
-      try {
-        var wrap = document.createElement('div');
-        wrap.className = 'qf-success';
-        wrap.innerHTML = '<p><strong>送信を受け付けました。</strong>確認ページに移動します...</p>';
-        form.replaceWith(wrap);
-      } catch (err) { /* noop */ }
-      setTimeout(function () {
-        window.location.href = redirect;
-      }, 400);
+
+      fetch('/api/quote', {
+        method: 'POST',
+        body: new FormData(form),
+      }).then(function (resp) {
+        return resp.json().catch(function () { return { ok: resp.ok }; });
+      }).then(function (result) {
+        if (!result || !result.ok) {
+          throw new Error((result && result.error) || '送信に失敗しました');
+        }
+        track('quote_form_submit');
+        try {
+          var wrap = document.createElement('div');
+          wrap.className = 'qf-success';
+          wrap.innerHTML = '<p><strong>送信を受け付けました。</strong>確認ページに移動します...</p>';
+          form.replaceWith(wrap);
+        } catch (err) { /* noop */ }
+        setTimeout(function () { window.location.href = redirect; }, 400);
+      }).catch(function (err) {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalLabel || '送信する';
+        }
+        var existingErr = form.querySelector('.qf-error');
+        if (existingErr) existingErr.remove();
+        var errBox = document.createElement('div');
+        errBox.className = 'qf-error';
+        errBox.setAttribute('role', 'alert');
+        errBox.textContent = '送信に失敗しました。時間をおいて再度お試しいただくか、別の方法でお問い合わせください。';
+        form.appendChild(errBox);
+      });
     });
   });
 

@@ -1209,6 +1209,24 @@ a { color: inherit; text-decoration: none; }
   text-align: center;
   color: #065f46;
 }
+.qf-honeypot {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+.qf-error {
+  margin-top: 14px;
+  padding: 12px 16px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  color: #991b1b;
+  font-size: .9rem;
+  line-height: 1.5;
+}
 
 /* =====================================================
    Trust badges
