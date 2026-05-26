@@ -1,0 +1,651 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { site } from '../../../data/site';
+
+const title = '受水槽清掃の費用相場2025｜規模別の料金・追加費用・業者選びの完全ガイド';
+const description = '受水槽清掃の費用相場を2025年最新の実勢価格で解説。小規模3〜8万円・中規模8〜30万円・大規模30万円〜の規模別料金と水質検査・排水処理・高所作業などの追加費用、自治体別の運用差、業者選びで失敗しないチェックポイントまでをまとめた施設管理担当者向け完全ガイド。';
+const canonical = `${site.domain}/column/jusuisou-seisou-hiyo-sohba/`;
+const published = '2025-05-26';
+const modified = '2025-05-26';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '受水槽清掃の費用相場', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: '受水槽清掃の費用相場2025｜規模別の料金・追加費用・業者選びの完全ガイド',
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  author: { '@type': 'Organization', name: site.org.legalName, url: site.domain },
+  publisher: {
+    '@type': 'Organization',
+    name: site.org.legalName,
+    url: site.domain,
+    logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.svg` },
+  },
+  about: { '@type': 'Service', name: '受水槽清掃', serviceType: '建築物飲料水貯水槽清掃' },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: '受水槽清掃の費用相場はいくらですか？', acceptedAnswer: { '@type': 'Answer', text: '受水槽の容量により大きく異なり、小規模（10〜20m³）で3〜8万円、中規模（20〜100m³）で8〜30万円、大規模（100m³超）で30万円〜が一般的な相場です。これに別途、水質検査費が1〜2.5万円程度かかります。' } },
+    { '@type': 'Question', name: '受水槽清掃は法律で義務ですか？', acceptedAnswer: { '@type': 'Answer', text: '有効容量10m³超の貯水槽（簡易専用水道）は、水道法第34条の2により年1回以上の清掃と水質検査が義務付けられています。違反した場合は改善命令・100万円以下の罰金等の対象になることがあります。' } },
+    { '@type': 'Question', name: '受水槽清掃の費用が業者によって違うのはなぜですか？', acceptedAnswer: { '@type': 'Answer', text: '受水槽の容量・形状・設置場所の難易度、付帯する水質検査の項目数、排水処理方法、夜間作業の有無、追加作業（パッキン交換・補修）の見積もりへの含め方が業者ごとに異なるためです。同条件で複数社の見積もりを取り、作業内容ごとの内訳で比較することが重要です。' } },
+    { '@type': 'Question', name: '受水槽清掃の見積もりで確認すべきポイントは？', acceptedAnswer: { '@type': 'Answer', text: '①建築物飲料水貯水槽清掃業の都道府県知事登録番号、②清掃・水質検査・消毒・報告書発行が含まれているか、③排水処理方法とコスト、④追加費用発生条件と上限、⑤断水時間と仮設給水の有無、の5点を必ず見積書に明記してもらってください。' } },
+  ],
+});
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a>
+          <span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a>
+          <span aria-hidden="true">›</span>
+          <span>受水槽清掃の費用相場</span>
+        </nav>
+        <span class="cl-cat">受水槽清掃</span>
+        <h1 class="cl-title">受水槽清掃の費用相場2025｜規模別の料金・追加費用・業者選びの完全ガイド</h1>
+        <p class="cl-lead">
+          受水槽清掃の費用は、<strong>規模別に3万円〜30万円超</strong>と幅広く、業者によって2倍以上の差が出ることもあります。本記事では、2025年時点の実勢価格と、見積もりに含まれるべき項目、追加費用の発生条件、業者選びで失敗しないチェックポイントまでを、施設管理担当者向けに整理しました。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2025年5月26日</time>
+          <span>最終更新：2025年5月26日</span>
+          <span>執筆：{site.org.legalName}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#scale">規模別の費用相場（小・中・大）</a></li>
+          <li><a href="#factors">費用が変動する6つの要因</a></li>
+          <li><a href="#add-cost">付帯費用の内訳と落とし穴</a></li>
+          <li><a href="#region">地域・自治体による費用差</a></li>
+          <li><a href="#law">法定義務と違反時のペナルティ</a></li>
+          <li><a href="#select">業者選びで確認すべき5つのポイント</a></li>
+          <li><a href="#mistakes">よくある失敗パターン</a></li>
+          <li><a href="#compare">見積もり比較の進め方</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>費用相場</strong>：小規模3〜8万円／中規模8〜30万円／大規模30万円〜（別途水質検査1〜2.5万円）</li>
+            <li><strong>法的根拠</strong>：水道法第34条の2、建築物衛生法による年1回以上の清掃義務（10m³超の貯水槽）</li>
+            <li><strong>結論</strong>：必ず3社以上から相見積もりを取り、登録番号・内訳明細・報告書発行の有無を契約前に確認する</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="scale" class="cl-section">
+        <h2>規模別の費用相場（小・中・大）</h2>
+        <p>受水槽清掃の費用は、受水槽の有効容量で大きく変わります。容量に比例して作業人員と作業時間が増えるため、おおまかな単価レンジが業界内で形成されています。</p>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>受水槽清掃 規模別の費用相場（2025年5月時点・税込目安）</caption>
+            <thead>
+              <tr>
+                <th scope="col">規模</th>
+                <th scope="col">有効容量</th>
+                <th scope="col">費用目安</th>
+                <th scope="col">作業時間</th>
+                <th scope="col">代表的な施設</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">小規模</th>
+                <td>10〜20m³</td>
+                <td>30,000〜80,000円</td>
+                <td>半日（2〜3名）</td>
+                <td>小規模マンション・小型ビル</td>
+              </tr>
+              <tr>
+                <th scope="row">中規模</th>
+                <td>20〜100m³</td>
+                <td>80,000〜300,000円</td>
+                <td>1日（3〜5名）</td>
+                <td>中規模マンション・オフィスビル・学校</td>
+              </tr>
+              <tr>
+                <th scope="row">大規模</th>
+                <td>100m³超</td>
+                <td>300,000円〜</td>
+                <td>1〜2日（5名以上）</td>
+                <td>大型マンション・病院・工場・商業施設</td>
+              </tr>
+              <tr>
+                <th scope="row">水質検査</th>
+                <td>項目11以上</td>
+                <td>10,000〜25,000円</td>
+                <td>サンプリング当日／結果は数日後</td>
+                <td>全施設で実施が必要</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>注意したいのは、<strong>上記は「清掃のみ」の費用</strong>であり、多くの場合、水質検査・消毒・報告書発行・残水処分などが別費用で加算される点です。トータル費用は「清掃 + 水質検査 + 各種付帯」で算出する必要があります。</p>
+
+        <p>また、同じ規模でも以下のようなケースでは費用が上振れします：</p>
+        <ul class="cl-list">
+          <li>高架水槽がセットでついている（地下＋屋上の2槽清掃）</li>
+          <li>マンホール周辺・配管周辺が極端に狭く、特殊器具が必要</li>
+          <li>長期間清掃されておらず、スケール・赤錆・スライムが堆積</li>
+          <li>レジオネラ属菌検査を含めるなど水質検査項目を拡張</li>
+        </ul>
+      </section>
+
+      <section id="factors" class="cl-section">
+        <h2>費用が変動する6つの要因</h2>
+        <p>見積もり額の差は「業者の利益率」だけでなく、以下の物理的・契約的な条件で説明できることがほとんどです。</p>
+
+        <h3>1. 受水槽の形状と材質</h3>
+        <p>角型FRP・パネル式・ステンレス製・コンクリート製で清掃手順と所要時間が変わります。古いコンクリート製は内壁の状態確認に時間がかかり、補修判断が必要になるケースもあります。</p>
+
+        <h3>2. 設置場所の難易度</h3>
+        <p>屋上・地下・屋外・機械室内など、設置場所によって機材搬入経路と作業安全確保のコストが変わります。屋上設置で仮設足場が必要な場合は別途5〜15万円の足場代が乗ることがあります。</p>
+
+        <h3>3. 水質検査の項目数</h3>
+        <p>法定の簡易検査（11項目）か、レジオネラ属菌を含めた拡張検査か、給水栓水質検査も含むかで費用が変わります。病院・介護施設はレジオネラ検査を強く推奨します。</p>
+
+        <h3>4. 消毒方法</h3>
+        <p>次亜塩素酸ナトリウムによる槽内消毒が一般的ですが、設備状況により消毒回数や濃度が変わります。仕様の差で1〜3万円程度の変動があります。</p>
+
+        <h3>5. 年間契約 vs スポット依頼</h3>
+        <p>年間契約や複数棟一括契約は、1棟あたりの単価を10〜20%抑えられるケースがあります。管理組合・管理会社は複数棟まとめての見積依頼が有効です。</p>
+
+        <h3>6. 作業時間帯</h3>
+        <p>居住者・利用者への影響を避けるため、早朝・夜間・休日の作業を依頼すると割増（10〜30%）が加算されます。商業施設・病院・ホテルでは時間帯の制約が大きく、これがコスト要因になります。</p>
+      </section>
+
+      <section id="add-cost" class="cl-section">
+        <h2>付帯費用の内訳と落とし穴</h2>
+        <p>「清掃費30万円」という見積もりでも、付帯費用が別計上だと最終支払額が大きく変わります。<strong>見積比較は必ず「総額」で行う</strong>のが鉄則です。</p>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>受水槽清掃の付帯費用（参考相場）</caption>
+            <thead>
+              <tr>
+                <th scope="col">付帯項目</th>
+                <th scope="col">費用目安</th>
+                <th scope="col">注意点</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">水質検査（簡易11項目）</th>
+                <td>10,000〜18,000円</td>
+                <td>清掃後の必須項目</td>
+              </tr>
+              <tr>
+                <th scope="row">レジオネラ属菌検査</th>
+                <td>8,000〜15,000円／検体</td>
+                <td>医療・介護・浴場系で強く推奨</td>
+              </tr>
+              <tr>
+                <th scope="row">排水処理（下水放流）</th>
+                <td>5,000〜30,000円</td>
+                <td>自治体への事前通報手続きが必要な場合あり</td>
+              </tr>
+              <tr>
+                <th scope="row">仮設給水・給水車手配</th>
+                <td>30,000〜80,000円</td>
+                <td>断水時間を短くしたい施設向け</td>
+              </tr>
+              <tr>
+                <th scope="row">高所作業・足場仮設</th>
+                <td>50,000〜150,000円</td>
+                <td>屋上設置の高架水槽など</td>
+              </tr>
+              <tr>
+                <th scope="row">パッキン・部品交換</th>
+                <td>5,000〜30,000円／箇所</td>
+                <td>清掃時に劣化発覚するケース多い</td>
+              </tr>
+              <tr>
+                <th scope="row">報告書・写真記録の追加発行</th>
+                <td>0〜10,000円</td>
+                <td>原則は清掃費に含まれるべき項目</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>特に注意したいのが「<strong>当日追加請求</strong>」のリスクです。見積時に「内部点検後に追加作業が発生する可能性がある」と書かれていながら、当日になって「サビ落としが必要だった」「予想以上に汚れていた」と数万円〜十数万円の追加請求が来るケースが少なくありません。</p>
+
+        <p>このリスクを下げるには、<strong>追加費用が発生する条件と上限</strong>を見積書に明記してもらい、「事前承諾なき追加作業は支払い不要」とする条項を付すのが有効です。</p>
+      </section>
+
+      <section id="region" class="cl-section">
+        <h2>地域・自治体による費用差</h2>
+        <p>受水槽清掃の費用は、地域による人件費差と業者数の競争原理によって、同じ規模でも10〜30%程度の差が生じます。</p>
+
+        <h3>都市部（東京・大阪・名古屋・福岡）</h3>
+        <p>業者数が多く競争原理が働く一方、人件費・搬出費が高く、結果として相場は<strong>全国平均の1.0〜1.3倍</strong>になる傾向があります。深夜・夜間対応や緊急対応の選択肢が豊富という強みもあります。</p>
+
+        <h3>地方都市</h3>
+        <p>業者数が限られ、競争が少ない一方で、人件費は都市部より低く、相場は<strong>全国平均の0.8〜1.0倍</strong>になることが多いです。ただし、対応可能な業者が地理的に遠い場合、出張費が加算されます。</p>
+
+        <h3>離島・山間部</h3>
+        <p>対応業者が少なく、出張費・宿泊費・船賃が加算されることがあります。年間契約で複数施設を一括依頼することでスケールメリットを得る方法が一般的です。</p>
+
+        <h3>自治体ごとの運用差</h3>
+        <p>水道法・建築物衛生法の運用は基本的に全国共通ですが、自治体ごとに条例で<strong>10m³以下の小規模貯水槽にも清掃義務を定めている</strong>ケースがあります（東京都・大阪市・神戸市など）。詳細は管轄の保健所または水道局にご確認ください。</p>
+
+        <p>地域別の業者情報は<a href="/jusuisou-seisou/">受水槽清掃のサービストップ</a>の都道府県一覧からご確認いただけます。</p>
+      </section>
+
+      <section id="law" class="cl-section">
+        <h2>法定義務と違反時のペナルティ</h2>
+        <p>受水槽清掃は単なるメンテナンスではなく、<strong>法律で義務付けられた管理行為</strong>です。違反した場合のリスクを正しく理解することが、適正な費用判断にもつながります。</p>
+
+        <h3>根拠法令</h3>
+        <ul class="cl-list">
+          <li><strong>水道法 第34条の2</strong>：簡易専用水道（有効容量10m³超）の設置者は、毎年1回以上、清掃と水質検査を行わなければならない</li>
+          <li><strong>建築物における衛生的環境の確保に関する法律</strong>（建築物衛生法）：特定建築物（延床面積3,000m²以上の事務所、店舗、ホテル、学校など）の貯水槽は同様の管理基準が適用される</li>
+          <li><strong>地方自治体の条例</strong>：自治体により、10m³以下の小規模貯水槽にも清掃義務を課している場合がある</li>
+        </ul>
+
+        <h3>違反時のペナルティ</h3>
+        <ul class="cl-list">
+          <li>都道府県知事等による<strong>改善命令</strong></li>
+          <li>悪質な場合は<strong>100万円以下の罰金</strong>等</li>
+          <li>水質事故発生時の<strong>損害賠償責任</strong>（入居者・利用者への賠償）</li>
+          <li>保健所の<strong>立入検査・公表</strong>による信頼失墜</li>
+        </ul>
+
+        <h3>清掃を委託する業者の要件</h3>
+        <p>清掃業者は「<strong>建築物飲料水貯水槽清掃業</strong>」の登録（都道府県知事等）が必要です。未登録業者への発注は管理者側の責任問題に発展するリスクがあるため、見積もり段階で必ず登録番号を確認してください。</p>
+
+        <p>登録要件・技術基準の詳細は<a href="/jusuisou-seisou/#legal">受水槽清掃の法定義務</a>のセクションでも解説しています。</p>
+      </section>
+
+      <section id="select" class="cl-section">
+        <h2>業者選びで確認すべき5つのポイント</h2>
+        <p>適正な費用で安心して清掃を依頼するために、見積もりを取る前と契約前に、必ず以下の5点を確認してください。</p>
+
+        <h3>① 都道府県知事の登録番号</h3>
+        <p>「建築物飲料水貯水槽清掃業」の登録番号は都道府県別に発行されます。業者のホームページだけでなく<strong>見積書にも登録番号を記載させる</strong>ことで、業者の身元と技術基準遵守の意思を確認できます。記載がない業者は除外しましょう。</p>
+
+        <h3>② 見積書の内訳明細</h3>
+        <p>「一式◯◯万円」だけの見積もりは要注意です。<strong>清掃／水質検査／消毒／報告書発行／排水処理</strong>など、作業項目ごとに単価と費用が明記された見積もりを取ってください。一式表記は当日追加請求の温床になります。</p>
+
+        <h3>③ 水質検査の範囲と報告書発行</h3>
+        <p>清掃後の水質検査が含まれているか、結果報告書が発行されるかは、行政の立入検査時に絶対に必要な情報です。<strong>報告書は3年間以上保管が必要</strong>であり、発行されない業者への発注は法令遵守の観点でリスクがあります。</p>
+
+        <h3>④ 追加費用の発生条件と上限</h3>
+        <p>当日になって追加請求されるリスクを回避するため、<strong>追加費用の発生条件と上限額</strong>を見積書に明記してもらいましょう。「事前承諾なき追加作業は支払い不要」の条項を付け加えると、より安全です。</p>
+
+        <h3>⑤ 賠償保険・施工実績</h3>
+        <p>水質事故・施工不備が発生した場合の<strong>賠償責任保険への加入</strong>を確認します。また、同規模・同種の施設での施工実績（マンション・病院・学校など）が豊富な業者を優先することで、想定外のトラブルを減らせます。</p>
+
+        <div class="cl-callout cl-callout--blue">
+          <p><strong>業者選びチェックリスト（保存版）</strong></p>
+          <ol>
+            <li>登録番号が見積書に記載されているか</li>
+            <li>清掃・水質検査・消毒・報告書・排水処理が内訳に明記されているか</li>
+            <li>追加費用の発生条件と上限が記載されているか</li>
+            <li>過去の同種施設の施工実績が示されているか</li>
+            <li>賠償責任保険に加入しているか</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="mistakes" class="cl-section">
+        <h2>よくある失敗パターン</h2>
+        <p>過去のご相談から多かったトラブルパターンを4つ紹介します。同じ失敗を避けるためのチェックポイントもセットで整理しました。</p>
+
+        <h3>失敗1：価格だけで選び、無登録業者で水質基準未達</h3>
+        <p><strong>起きたこと</strong>：清掃後の水質検査で大腸菌群陽性。保健所から再清掃と原因報告を求められ、再施工費と住民周知の手間が発生。</p>
+        <p><strong>原因</strong>：相場の半額で発注した業者が「建築物飲料水貯水槽清掃業」の都道府県知事登録を持たない無登録業者だった。技術基準に従わない清掃で雑菌が残存。</p>
+        <p><strong>対策</strong>：見積時点で<strong>登録番号を必ず確認</strong>。ホームページに記載がない業者は除外する。</p>
+
+        <h3>失敗2：清掃証明書が発行されず保健所立入検査で指摘</h3>
+        <p><strong>起きたこと</strong>：保健所の立入検査時に清掃記録の提示を求められたが、業者から証明書類が発行されておらず、3年保存義務を満たせない状態に。</p>
+        <p><strong>原因</strong>：見積時に清掃証明書の発行有無を確認していなかった。口頭報告のみで作業完了とされていた。</p>
+        <p><strong>対策</strong>：「清掃証明書・写真付き作業報告書の発行」を<strong>契約条件に書面で明記</strong>する。</p>
+
+        <h3>失敗3：居住者通知漏れで当日クレーム多発</h3>
+        <p><strong>起きたこと</strong>：清掃当日の断水通知が一部の居住者に届いておらず、洗濯・調理中の世帯から苦情。管理組合に電話が集中。</p>
+        <p><strong>原因</strong>：業者任せで掲示物の事前確認を怠り、投函漏れの戸別チェックがなかった。</p>
+        <p><strong>対策</strong>：掲示物と日程は管理者側で事前確認。<strong>エレベーター内・各階・郵便受けの3か所掲示</strong>を業者と取り決める。</p>
+
+        <h3>失敗4：当日追加請求で5万円超の上振れ</h3>
+        <p><strong>起きたこと</strong>：見積もり額に対し、当日「サビ落とし追加」「特殊洗浄剤」などの名目で5万円超の追加請求が発生。</p>
+        <p><strong>原因</strong>：見積時に「内部点検後に追加が発生する可能性」の有無を確認していなかった。固定額か変動かの条件が曖昧。</p>
+        <p><strong>対策</strong>：追加費用が発生する条件と上限を見積書に明記してもらい、<strong>「事前承諾なき追加作業は支払い不要」</strong>の条項を付ける。</p>
+      </section>
+
+      <section id="compare" class="cl-section">
+        <h2>見積もり比較の進め方</h2>
+        <p>適正価格で発注するためには、<strong>同条件で3社以上から見積もりを取る</strong>のが基本です。比較が形式的にならないよう、以下の手順で進めてください。</p>
+
+        <h3>ステップ1：依頼条件を明確化する</h3>
+        <p>受水槽の容量・形状・設置場所、付帯設備（高架水槽の有無）、希望する水質検査の範囲、希望日程と作業時間帯（昼間／早朝／夜間）、断水可能時間を整理します。</p>
+
+        <h3>ステップ2：同じ条件で複数社に同時依頼</h3>
+        <p>条件を変えずに依頼することで、純粋に費用と作業内容を比較できます。本サイトの<a href="/jusuisou-seisou/">受水槽清掃 一括見積フォーム</a>を使えば、一度の入力で最大3社に同時依頼できます。</p>
+
+        <h3>ステップ3：価格以外の項目で比較</h3>
+        <p>最安が必ずしも適正とは限りません。以下の項目を含めて総合判断してください。</p>
+        <ul class="cl-list">
+          <li>都道府県知事の登録番号</li>
+          <li>水質検査・報告書発行の有無</li>
+          <li>賠償責任保険への加入</li>
+          <li>過去の同種施設での施工実績</li>
+          <li>追加費用発生条件の明確さ</li>
+          <li>担当者の対応の丁寧さ・回答の的確さ</li>
+        </ul>
+
+        <h3>ステップ4：契約前の最終確認</h3>
+        <p>見積書・契約書には、作業範囲・付帯費用・追加費用条件・キャンセル料・賠償保険・支払いタイミングが明記されているか必ず確認してください。口頭で言われた条件はすべて書面化することがトラブル予防の鉄則です。</p>
+      </section>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問（FAQ）</h2>
+
+        <h3>Q1. 受水槽清掃の費用相場はいくらですか？</h3>
+        <p>受水槽の容量により大きく異なり、小規模（10〜20m³）で3〜8万円、中規模（20〜100m³）で8〜30万円、大規模（100m³超）で30万円〜が一般的な相場です。これに別途、水質検査費が1〜2.5万円程度かかります。</p>
+
+        <h3>Q2. 受水槽清掃は法律で義務ですか？</h3>
+        <p>はい。有効容量10m³超の貯水槽（簡易専用水道）は、水道法第34条の2により<strong>年1回以上の清掃と水質検査が義務</strong>付けられています。違反した場合は改善命令・100万円以下の罰金等の対象になることがあります。</p>
+
+        <h3>Q3. 費用が業者によって違うのはなぜですか？</h3>
+        <p>受水槽の容量・形状・設置場所の難易度、付帯する水質検査の項目数、排水処理方法、夜間作業の有無、追加作業の見積もりへの含め方が業者ごとに異なるためです。<strong>同条件で複数社の見積もりを取り、作業内容ごとの内訳で比較</strong>することが重要です。</p>
+
+        <h3>Q4. 見積もりで確認すべきポイントは？</h3>
+        <p>①建築物飲料水貯水槽清掃業の都道府県知事登録番号、②清掃・水質検査・消毒・報告書発行が含まれているか、③排水処理方法とコスト、④追加費用発生条件と上限、⑤断水時間と仮設給水の有無、の5点を必ず見積書に明記してもらってください。</p>
+
+        <h3>Q5. 清掃中は断水になりますか？</h3>
+        <p>多くの場合、清掃中は一時的に断水が発生します。事前に入居者・利用者への告知が必要です。<strong>断水時間の目安は数時間〜半日程度</strong>が一般的です。業者によっては仮設給水設備を手配できる場合もあるため、事前に確認してください。</p>
+
+        <h3>Q6. 清掃の頻度はどれくらいですか？</h3>
+        <p>法定では年1回以上が基本です。ただし、施設用途（病院・食品工場等）や水の使用量、設備の状態によって<strong>年2回以上を推奨される場合</strong>もあります。定期契約を組むと管理の手間が減り、コストも抑えられるケースがあります。</p>
+      </section>
+
+      <section class="cl-cta">
+        <h2>受水槽清掃の業者選びでお困りなら</h2>
+        <p>local-support.jp では、建築物飲料水貯水槽清掃業の登録を確認済みの業者の中から、ご依頼内容に応じて最大3社を厳選してご紹介します。<strong>お見積もり依頼は1分・完全無料</strong>です。</p>
+        <a href="/jusuisou-seisou/" class="cta-btn-primary">無料で一括見積もりを依頼する →</a>
+      </section>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連する詳細情報</h2>
+        <ul>
+          <li><a href="/jusuisou-seisou/#legal">受水槽清掃の法的義務とは？（水道法・建築物衛生法）</a></li>
+          <li><a href="/jusuisou-seisou/#cost">受水槽清掃 費用相場の詳細表</a></li>
+          <li><a href="/jusuisou-seisou/#select">業者選びで確認すべき4つのポイント</a></li>
+          <li><a href="/flow/">一括見積依頼から契約までの流れ</a></li>
+          <li><a href="/operator/">運営者情報・ご紹介業者の審査基準</a></li>
+        </ul>
+      </aside>
+
+      <p class="cl-note">
+        ※ 本記事に掲載した費用相場・法令情報は2025年5月時点のものです。法令は改正されること、費用は地域・業者・施設状況により変動することがあります。最終的な判断は管轄行政（保健所・水道局）の最新情報と、複数の業者見積もりに基づいて行ってください。
+      </p>
+
+    </div>
+
+  </article>
+</BaseLayout>
+
+<style>
+.cl-article { color: var(--gray-900); }
+.cl-header {
+  background: linear-gradient(135deg, #0f2742 0%, #1a56db 100%);
+  color: #fff;
+  padding: 48px 0 56px;
+}
+.cl-crumbs {
+  font-size: .78rem;
+  color: #bfdbfe;
+  margin-bottom: 18px;
+}
+.cl-crumbs a { color: #bfdbfe; text-decoration: underline; }
+.cl-crumbs span { margin: 0 6px; opacity: .6; }
+.cl-cat {
+  display: inline-block;
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.3);
+  color: #e0f2fe;
+  font-size: .76rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 99px;
+  margin-bottom: 14px;
+  letter-spacing: .04em;
+}
+.cl-title {
+  font-size: clamp(1.4rem, 2.6vw, 2.1rem);
+  font-weight: 900;
+  line-height: 1.4;
+  color: #fff;
+  margin-bottom: 18px;
+  letter-spacing: -.01em;
+}
+.cl-lead {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: #e0f2fe;
+  margin-bottom: 18px;
+  max-width: 820px;
+}
+.cl-lead strong { color: #fde68a; }
+.cl-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  font-size: .78rem;
+  color: rgba(255,255,255,.65);
+}
+
+.cl-body { padding: 48px 0 80px; max-width: 880px; }
+.cl-toc {
+  background: var(--gray-100);
+  border-left: 4px solid var(--blue);
+  border-radius: 8px;
+  padding: 24px 28px;
+  margin-bottom: 48px;
+}
+.cl-toc-h {
+  font-size: .9rem;
+  font-weight: 800;
+  color: var(--gray-900);
+  margin-bottom: 12px;
+}
+.cl-toc ol {
+  padding-left: 20px;
+  font-size: .9rem;
+  line-height: 1.95;
+  color: var(--gray-700);
+}
+.cl-toc a { color: var(--blue); text-decoration: underline; }
+
+.cl-section { margin-bottom: 44px; }
+.cl-section h2 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--gray-900);
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--blue);
+}
+.cl-section h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin: 28px 0 12px;
+}
+.cl-section p {
+  font-size: .95rem;
+  line-height: 1.95;
+  color: var(--gray-700);
+  margin-bottom: 16px;
+}
+.cl-section p strong { color: var(--gray-900); }
+.cl-section a { color: var(--blue); text-decoration: underline; }
+
+.cl-list {
+  font-size: .92rem;
+  line-height: 1.95;
+  color: var(--gray-700);
+  padding-left: 22px;
+  margin-bottom: 16px;
+}
+.cl-list li { margin-bottom: 6px; }
+.cl-list li strong { color: var(--gray-900); }
+
+.cl-table-wrap { overflow-x: auto; margin-bottom: 20px; }
+.cl-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .9rem;
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.cl-table caption {
+  text-align: left;
+  font-size: .85rem;
+  color: var(--gray-500);
+  padding-bottom: 8px;
+  caption-side: top;
+}
+.cl-table th, .cl-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--gray-200);
+  text-align: left;
+  vertical-align: top;
+}
+.cl-table thead { background: var(--blue-light); }
+.cl-table thead th { color: var(--blue-dark); font-weight: 800; }
+.cl-table tbody th { font-weight: 700; color: var(--gray-900); white-space: nowrap; }
+.cl-table td { color: var(--gray-700); }
+.cl-table tbody tr:last-child th, .cl-table tbody tr:last-child td { border-bottom: none; }
+
+.cl-callout {
+  background: var(--gray-100);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  padding: 24px 28px;
+  margin-bottom: 32px;
+}
+.cl-callout--blue { border-left-color: var(--blue); }
+.cl-callout-h {
+  font-size: .95rem;
+  font-weight: 800;
+  color: var(--gray-900);
+  margin-bottom: 10px;
+  padding: 0;
+  border: none;
+}
+.cl-callout ul, .cl-callout ol {
+  font-size: .92rem;
+  line-height: 1.95;
+  color: var(--gray-700);
+  padding-left: 22px;
+  margin: 0;
+}
+.cl-callout li { margin-bottom: 4px; }
+.cl-callout li strong { color: var(--gray-900); }
+.cl-callout p { margin-bottom: 10px; }
+
+.cl-cta {
+  background: linear-gradient(135deg, #0f2742 0%, #1a56db 100%);
+  color: #fff;
+  text-align: center;
+  border-radius: 14px;
+  padding: 40px 28px;
+  margin: 48px 0;
+}
+.cl-cta h2 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 12px;
+  border: none;
+  padding: 0;
+}
+.cl-cta p {
+  font-size: .92rem;
+  color: #bfdbfe;
+  margin-bottom: 22px;
+  line-height: 1.8;
+}
+.cl-cta p strong { color: #fde68a; }
+.cl-cta .cta-btn-primary { display: inline-block; }
+
+.cl-related {
+  background: var(--gray-100);
+  border-radius: 10px;
+  padding: 24px 28px;
+  margin-bottom: 32px;
+}
+.cl-related-h {
+  font-size: .95rem;
+  font-weight: 800;
+  color: var(--gray-900);
+  margin-bottom: 12px;
+}
+.cl-related ul {
+  list-style: none;
+  padding: 0;
+  font-size: .9rem;
+  line-height: 2;
+}
+.cl-related a { color: var(--blue); text-decoration: underline; }
+
+.cl-note {
+  font-size: .78rem;
+  color: var(--gray-500);
+  line-height: 1.8;
+  border-top: 1px solid var(--gray-200);
+  padding-top: 20px;
+  margin-top: 24px;
+}
+
+@media (max-width: 720px) {
+  .cl-header { padding: 36px 0 40px; }
+  .cl-body { padding: 32px 0 60px; }
+  .cl-toc, .cl-callout, .cl-related, .cl-cta { padding: 18px 20px; }
+  .cl-table { font-size: .82rem; }
+  .cl-table th, .cl-table td { padding: 10px 8px; }
+}
+</style>

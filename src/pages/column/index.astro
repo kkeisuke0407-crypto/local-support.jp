@@ -1,0 +1,147 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../data/site';
+
+const title = 'コラム｜施設管理・設備メンテナンスの実務情報｜local-support.jp';
+const description = '受水槽清掃・アスベスト調査・ダクト清掃・シャッター点検など、施設管理に関わる費用相場・法定義務・業者選びの実務情報をまとめたコラムです。施設管理担当者向け。';
+const canonical = `${site.domain}/column/`;
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: canonical },
+  ],
+});
+
+interface ColumnItem {
+  href: string;
+  category: string;
+  title: string;
+  excerpt: string;
+  date: string;
+}
+
+const columns: ColumnItem[] = [
+  {
+    href: '/column/jusuisou-seisou-hiyo-sohba/',
+    category: '受水槽清掃',
+    title: '受水槽清掃の費用相場2025｜規模別の料金・追加費用・業者選びの完全ガイド',
+    excerpt: '受水槽清掃の費用相場を規模別に解説。水質検査・排水処理・高所作業などの付帯費用、自治体別の運用差、業者選びのチェックポイントまでをまとめた施設管理担当者向け完全ガイド。',
+    date: '2025-05-26',
+  },
+];
+
+const itemListLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'local-support.jp コラム一覧',
+  itemListElement: columns.map((c, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    url: `${site.domain}${c.href}`,
+    name: c.title,
+  })),
+});
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理・設備メンテナンスの実務情報"
+  jsonLdBlocks={[breadcrumbLd, itemListLd]}
+>
+  <section class="hero hero--simple">
+    <div class="sd-container">
+      <h1 class="hero-h1">コラム</h1>
+      <p class="hero-sub-simple">施設管理・設備メンテナンスに関わる費用相場・法定義務・業者選びの実務情報</p>
+    </div>
+  </section>
+
+  <section class="sd-section section-white">
+    <div class="sd-container">
+      <ul class="col-list">
+        {columns.map((c) => (
+          <li class="col-item">
+            <a href={c.href} class="col-link">
+              <div class="col-meta">
+                <span class="col-cat">{c.category}</span>
+                <time datetime={c.date} class="col-date">{c.date.replaceAll('-', '/')}</time>
+              </div>
+              <h2 class="col-title">{c.title}</h2>
+              <p class="col-excerpt">{c.excerpt}</p>
+              <span class="col-arrow">続きを読む →</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.col-list {
+  list-style: none;
+  padding: 0;
+  max-width: 880px;
+  margin: 0 auto;
+  display: grid;
+  gap: 20px;
+}
+.col-item {
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: box-shadow .2s, transform .2s;
+}
+.col-item:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.col-link {
+  display: block;
+  padding: 24px 28px;
+  color: inherit;
+}
+.col-meta {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.col-cat {
+  background: var(--blue-light);
+  color: var(--blue-dark);
+  font-size: .72rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 99px;
+  letter-spacing: .04em;
+}
+.col-date {
+  font-size: .78rem;
+  color: var(--gray-500);
+}
+.col-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--gray-900);
+  line-height: 1.55;
+  margin-bottom: 10px;
+}
+.col-excerpt {
+  font-size: .88rem;
+  color: var(--gray-700);
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+.col-arrow {
+  font-size: .85rem;
+  font-weight: 700;
+  color: var(--blue);
+}
+@media (max-width: 600px) {
+  .col-link { padding: 18px 20px; }
+  .col-title { font-size: .98rem; }
+}
+</style>
