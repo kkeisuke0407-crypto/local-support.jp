@@ -155,6 +155,6 @@ const allLdBlocks = [...baseLdBlocks, ...jsonLdBlocks];
   </div>
 </div>
 
-<script is:inline src="/app.js"></script>
+<script is:inline src={`/app.js?v=${import.meta.env.BUILD_ID || Date.now()}`}></script>
 </body>
 </html>
