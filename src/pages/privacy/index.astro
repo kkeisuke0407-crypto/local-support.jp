@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../data/site';
+
+const title = 'プライバシーポリシー｜local-support.jp';
+const description = 'local-support.jp のプライバシーポリシーです。';
+const canonical = `${site.domain}/privacy/`;
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'プライバシーポリシー', item: canonical },
+  ],
+});
+---
+<BaseLayout title={title} description={description} canonical={canonical} siteName={site.name} jsonLdBlocks={[breadcrumbLd]}>
+  <section class="hero hero--simple">
+    <div class="sd-container">
+      <h1 class="hero-h1">プライバシーポリシー</h1>
+    </div>
+  </section>
+
+  <section class="sd-section section-white">
+    <div class="sd-container policy-body">
+      <p>{site.org.legalName}（以下「当社」）は、local-support.jp（以下「本サービス」）において取得する個人情報の取り扱いについて、以下のとおり定めます。</p>
+
+      <h2>1. 取得する情報</h2>
+      <p>本サービスの見積もり依頼フォームにて、会社名・施設名、担当者名、連絡先メールアドレス、施設所在地（都道府県）、その他お客様が任意に入力した情報を取得します。</p>
+
+      <h2>2. 利用目的</h2>
+      <p>取得した個人情報は、以下の目的に限り使用します。</p>
+      <ul>
+        <li>対応可能な登録業者のご紹介</li>
+        <li>見積もり依頼に関するご連絡</li>
+        <li>サービス改善のための統計分析（個人を特定しない形式）</li>
+      </ul>
+
+      <h2>3. 第三者への提供</h2>
+      <p>お客様からお預かりした個人情報は、業者紹介の目的でのみ登録業者へ提供します。それ以外の第三者への販売・提供は行いません。</p>
+
+      <h2>4. 情報の管理</h2>
+      <p>個人情報への不正アクセス・紛失・破損・改ざん・漏洩を防止するため、適切な安全管理措置を講じます。</p>
+
+      <h2>5. Cookie・アクセス解析</h2>
+      <p>本サービスでは、Google Analytics 4（GA4）を使用してアクセス状況を分析しています。GA4はCookieを使用しますが、個人を特定する情報は収集しません。Cookieの使用を拒否する場合はブラウザの設定で無効化できます。</p>
+
+      <h2>6. お問い合わせ</h2>
+      <p>個人情報の取り扱いに関するお問い合わせは、各サービスページのフォームよりご連絡ください。</p>
+
+      <h2>7. 改定</h2>
+      <p>本ポリシーは必要に応じて改定することがあります。重要な変更がある場合はサイト上でお知らせします。</p>
+
+      <p class="policy-date">制定日：2025年5月26日</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.policy-body { max-width: 800px; }
+.policy-body h2 { font-size: 1.1rem; font-weight: 700; margin: 32px 0 8px; color: var(--blue-dark); }
+.policy-body p, .policy-body ul { font-size: .95rem; line-height: 1.8; margin-bottom: 12px; }
+.policy-body ul { padding-left: 1.5rem; }
+.policy-body li { margin-bottom: 4px; }
+.policy-date { margin-top: 40px; color: var(--gray-500); font-size: .85rem; }
+</style>

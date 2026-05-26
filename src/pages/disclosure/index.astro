@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../data/site';
+
+const title = '広告掲載ポリシー｜local-support.jp';
+const description = 'local-support.jp の広告掲載・業者紹介ポリシーです。';
+const canonical = `${site.domain}/disclosure/`;
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: '広告掲載ポリシー', item: canonical },
+  ],
+});
+---
+<BaseLayout title={title} description={description} canonical={canonical} siteName={site.name} jsonLdBlocks={[breadcrumbLd]}>
+  <section class="hero hero--simple">
+    <div class="sd-container">
+      <h1 class="hero-h1">広告掲載ポリシー</h1>
+    </div>
+  </section>
+
+  <section class="sd-section section-white">
+    <div class="sd-container policy-body">
+      <p>local-support.jp は、施設管理・設備メンテナンスの業者紹介サービスです。本ページでは、業者掲載・紹介に関する方針を説明します。</p>
+
+      <h2>1. 業者紹介の仕組み</h2>
+      <p>本サービスは、お客様からの見積もり依頼を受け付け、対応可能な登録業者をご紹介します。紹介は有償で行っており、登録業者から紹介手数料を受け取ることがあります。ただし、この手数料はお客様への費用には転嫁されません。お客様のご利用は完全無料です。</p>
+
+      <h2>2. 登録業者の審査</h2>
+      <p>登録業者は、以下の基準を満たすことを確認のうえ掲載しています。</p>
+      <ul>
+        <li>各サービスに必要な法定資格・許認可を保有していること</li>
+        <li>過去のトラブル・行政処分歴がないこと</li>
+        <li>しつこい営業・不当な勧誘を行わないこと</li>
+      </ul>
+      <p>ただし、全ての業者の品質を完全に保証するものではありません。最終的な業者の選定・契約はお客様ご自身の判断で行ってください。</p>
+
+      <h2>3. 紹介件数について</h2>
+      <p>「最大3社」は、お客様の施設所在地・要件に対応可能な登録業者数によって変動します。対応業者が少ない地域では、1〜2社のご紹介にとどまる場合があります。</p>
+
+      <h2>4. 掲載内容の正確性</h2>
+      <p>本サービス上の費用相場・法的情報は公開時点の情報に基づきます。法改正・市場変化により内容が変わる場合があります。最新情報は各業者・行政窓口にご確認ください。</p>
+
+      <h2>5. お問い合わせ</h2>
+      <p>業者紹介に関するご意見・ご不満は、各サービスページのフォームよりご連絡ください。問題のある業者については登録停止を含めた対応を検討します。</p>
+
+      <p class="policy-date">制定日：2025年5月26日</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.policy-body { max-width: 800px; }
+.policy-body h2 { font-size: 1.1rem; font-weight: 700; margin: 32px 0 8px; color: var(--blue-dark); }
+.policy-body p, .policy-body ul { font-size: .95rem; line-height: 1.8; margin-bottom: 12px; }
+.policy-body ul { padding-left: 1.5rem; }
+.policy-body li { margin-bottom: 4px; }
+.policy-date { margin-top: 40px; color: var(--gray-500); font-size: .85rem; }
+</style>
