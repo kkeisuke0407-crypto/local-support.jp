@@ -1,0 +1,17 @@
+---
+import PrefectureServiceLP from '../../../layouts/PrefectureServiceLP.astro';
+import { allServices } from '../../../data/services';
+import { prefecturesData } from '../../../data/prefectures';
+
+export async function getStaticPaths() {
+  return allServices.flatMap((service) =>
+    prefecturesData.map((prefecture) => ({
+      params: { service: service.slug, prefecture: prefecture.slug },
+      props: { service, prefecture },
+    }))
+  );
+}
+
+const { service, prefecture } = Astro.props;
+---
+<PrefectureServiceLP data={service} prefecture={prefecture} />
