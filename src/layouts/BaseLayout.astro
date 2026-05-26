@@ -1,25 +1,56 @@
 ---
+import { site } from '../data/site';
+
 interface Props {
   title: string;
   description: string;
   canonical: string;
-  siteName: string;
+  siteName?: string;
   logoSub?: string;
   ogImage?: string;
-  faqJsonLd?: string;
-  ctaPhone?: string;
+  jsonLdBlocks?: string[];
 }
 
 const {
   title,
   description,
   canonical,
-  siteName,
-  logoSub = '費用・業者を正直に比較',
+  siteName = site.name,
+  logoSub = '施設管理の一括見積比較',
   ogImage = 'https://local-support.jp/og-default.svg',
-  faqJsonLd,
-  ctaPhone = '0120-XXX-XXX',
+  jsonLdBlocks = [],
 } = Astro.props;
+
+// Always include Organization + WebSite JSON-LD
+const baseLdBlocks = [
+  JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: site.org.legalName,
+    alternateName: site.name,
+    url: site.domain,
+    logo: `${site.domain}/og-default.svg`,
+    foundingDate: site.org.foundedYear,
+    address: {
+      '@type': 'PostalAddress',
+      addressCountry: site.org.address.country,
+      addressRegion: site.org.address.region,
+    },
+  }),
+  JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: site.name,
+    url: site.domain,
+    inLanguage: 'ja-JP',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: `${site.domain}/?q={search_term_string}`,
+      'query-input': 'required name=search_term_string',
+    },
+  }),
+];
+const allLdBlocks = [...baseLdBlocks, ...jsonLdBlocks];
 ---
 <!DOCTYPE html>
 <html lang="ja">
@@ -44,7 +75,7 @@ const {
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
 
-  <!-- GA4（ID差し替え） -->
+  <!-- GA4 -->
   <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script is:inline>
     window.dataLayer = window.dataLayer || [];
@@ -53,9 +84,9 @@ const {
     gtag('config', 'G-XXXXXXXXXX');
   </script>
 
-  {faqJsonLd && (
-    <Fragment set:html={`<script type="application/ld+json">${faqJsonLd}</script>`} />
-  )}
+  {allLdBlocks.map((block) => (
+    <Fragment set:html={`<script type="application/ld+json">${block}</script>`} />
+  ))}
 </head>
 <body>
 
@@ -64,7 +95,7 @@ const {
   <div class="sd-header-inner">
     <a href="/" class="sd-logo">
       <div class="sd-logo-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
       </div>
       <div class="sd-logo-wrap">
         <span>{siteName}</span>
@@ -72,7 +103,7 @@ const {
       </div>
     </a>
     <a href="#contact" class="sd-header-cta" data-scroll-to="#contact" data-track="header_contact">
-      無料で相談する ›
+      無料で一括見積 ›
     </a>
   </div>
 </header>
@@ -84,10 +115,16 @@ const {
   <div class="sd-footer-inner">
     <div class="sd-footer-logo">{siteName}</div>
     <p class="sd-footer-desc">
-      施設管理・設備メンテナンスの費用相場・業者比較・法定義務に関する情報を提供するメディアサイトです。
+      施設管理・設備メンテナンスの一括見積比較サイト。受水槽清掃・アスベスト調査・ダクト清掃・シャッター点検など、登録業者から最大3社を無料でご紹介します。
       掲載情報は公開時点のものです。最新の法令・費用は各機関・業者の公式情報をご確認ください。
     </p>
     <div class="sd-footer-links">
+      <a href="/">トップ</a>
+      <a href="/jusuisou-seisou/">受水槽清掃</a>
+      <a href="/asbestos/">アスベスト調査・除去</a>
+      <a href="/duct/">ダクト清掃</a>
+      <a href="/shutter/">シャッター点検・修理</a>
+      <a href="/flow/">ご利用の流れ</a>
       <a href="/operator/">運営者情報</a>
       <a href="/privacy/">プライバシーポリシー</a>
       <a href="/disclosure/">広告掲載ポリシー</a>
@@ -98,8 +135,7 @@ const {
 
 <!-- ══ Sticky CTA（スマホ） ════════════════════════════════════ -->
 <div class="sticky-cta">
-  <a href="#contact" class="sticky-btn-primary" data-scroll-to="#contact" data-track="sticky_form">無料で相談する</a>
-  <a href={`tel:${ctaPhone}`} class="sticky-btn-secondary" data-track="sticky_tel">電話する</a>
+  <a href="#contact" class="sticky-btn-primary" data-scroll-to="#contact" data-track="sticky_form">無料で一括見積もり依頼 →</a>
 </div>
 
 <script is:inline src="/app.js"></script>

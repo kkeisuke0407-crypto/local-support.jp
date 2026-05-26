@@ -1,0 +1,46 @@
+---
+import type { ServiceData } from '../data/services/_types';
+interface Props { costGuide: ServiceData['costGuide']; serviceName: string; lastUpdated: string; }
+const { costGuide, serviceName, lastUpdated } = Astro.props;
+const updatedJa = new Date(lastUpdated).toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+<section class="sd-section section-white" id="cost">
+  <div class="sd-container">
+    <div class="section-head">
+      <span class="kicker">COST</span>
+      <h2>{serviceName}の費用はどのくらいかかる？</h2>
+      <p>{costGuide.intro}</p>
+    </div>
+    <div class="cost-table-wrap">
+      <table class="cost-table" aria-describedby="cost-table-caption">
+        <caption id="cost-table-caption">
+          {costGuide.table.caption}
+          <small class="cost-table-updated"><time datetime={lastUpdated}>（{updatedJa} 時点）</time></small>
+        </caption>
+        <thead>
+          <tr>
+            {costGuide.table.headers.map((h) => (<th scope="col">{h}</th>))}
+          </tr>
+        </thead>
+        <tbody>
+          {costGuide.table.rows.map((row) => (
+            <tr>
+              {row.map((cell, i) => (
+                i === 0
+                  ? <th scope="row">{cell}</th>
+                  : <td>{cell}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <div class="cost-aside">
+      <h3>費用が変動する主な要因</h3>
+      <ul class="cost-factor-list">
+        {costGuide.factors.map((f) => (<li>{f}</li>))}
+      </ul>
+      <p class="cost-note-box"><strong>料金の確認について：</strong>{costGuide.note}</p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,39 @@
+---
+import type { ServiceData } from '../data/services/_types';
+import QuoteFormCompact from './QuoteFormCompact.astro';
+interface Props { data: ServiceData; }
+const { data } = Astro.props;
+const updatedJa = new Date(data.meta.lastUpdated).toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+<section class="hero hero--b2b">
+  <div class="sd-container-wide hero-grid">
+    <div class="hero-copy">
+      <div class="hero-eyebrow">{data.hero.eyebrow}</div>
+      <h1 class="hero-h1">{data.hero.headline}</h1>
+      <h2 class="hero-h2">{data.hero.subheadline}</h2>
+      <ul class="hero-bullets">
+        {data.hero.bullets.map((b) => (
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>{b}</span>
+          </li>
+        ))}
+      </ul>
+      <dl class="hero-stats">
+        {data.trustStats.map((s) => (
+          <div class="hero-stat">
+            <dt>{s.label}</dt>
+            <dd>{s.value}</dd>
+          </div>
+        ))}
+      </dl>
+      <p class="hero-meta">
+        <time datetime={data.meta.lastUpdated}>最終更新：{updatedJa}</time>
+        ／ 運営：local-support.jp
+      </p>
+    </div>
+    <div class="hero-form">
+      <QuoteFormCompact data={data} />
+    </div>
+  </div>
+</section>

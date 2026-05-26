@@ -1,0 +1,23 @@
+---
+import type { ServiceData } from '../data/services/_types';
+interface Props { criteria: ServiceData['selectionCriteria']; serviceName: string; }
+const { criteria, serviceName } = Astro.props;
+---
+<section class="sd-section" id="select">
+  <div class="sd-container">
+    <div class="section-head">
+      <span class="kicker">HOW TO SELECT</span>
+      <h2>{serviceName}の業者選びで確認すべき4つのポイント</h2>
+      <p>安さだけで選ぶと後から問題が起きやすい領域です</p>
+    </div>
+    <div class="howto-grid">
+      {criteria.map((c) => (
+        <article class="howto-card">
+          <div class="howto-num">{c.number}</div>
+          <h3>{c.title}</h3>
+          <p>{c.body}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

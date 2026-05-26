@@ -1,0 +1,25 @@
+---
+import type { ServiceData } from '../data/services/_types';
+interface Props { risks: ServiceData['risks']; serviceName: string; }
+const { risks, serviceName } = Astro.props;
+---
+<section class="sd-section" id="risk">
+  <div class="sd-container">
+    <div class="section-head">
+      <span class="kicker">RISK</span>
+      <h2>{serviceName}を放置するとどうなる？</h2>
+      <p>「来年でいいか」で起きる4つのリスクを整理しました</p>
+    </div>
+    <div class="risk-cards">
+      {risks.map((r) => (
+        <article class="risk-card">
+          <div class="risk-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <h3>{r.title}</h3>
+          </div>
+          <p>{r.body}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

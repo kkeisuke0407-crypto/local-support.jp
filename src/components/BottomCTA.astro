@@ -1,0 +1,18 @@
+---
+interface Props { serviceName?: string; }
+const { serviceName = '施設管理' } = Astro.props;
+---
+<section class="cta-section">
+  <div class="sd-container">
+    <div class="cta-inner">
+      <h2>{serviceName}の業者探し、<br/>ここでまるごと完結します</h2>
+      <p>所要時間は約1分。登録業者から最大3社を厳選してご紹介します。<br/>相談・見積もりは完全無料。しつこい営業はありません。</p>
+      <div class="cta-buttons">
+        <a href="#contact" class="cta-btn-primary" data-scroll-to="#contact" data-track="bottom_cta_form">
+          無料で見積もりを依頼する →
+        </a>
+      </div>
+      <p class="cta-note">完全無料／最大3社を厳選紹介／全国47都道府県対応</p>
+    </div>
+  </div>
+</section>

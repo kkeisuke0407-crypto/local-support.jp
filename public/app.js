@@ -1,19 +1,20 @@
-/* 受水槽清掃ナビ – app.js */
+/* local-support.jp – app.js */
 
 document.addEventListener('DOMContentLoaded', function () {
 
-  /* ── FAQ アコーディオン ── */
+  /* ── FAQ accordion ── */
   document.querySelectorAll('.faq-q').forEach(function (q) {
     q.addEventListener('click', function () {
       var item = q.closest('.faq-item');
-      item.classList.toggle('open');
+      if (item) item.classList.toggle('open');
     });
   });
 
-  /* ── スムーズスクロール ── */
+  /* ── Smooth scroll ── */
   document.querySelectorAll('[data-scroll-to]').forEach(function (el) {
     el.addEventListener('click', function (e) {
-      var target = document.querySelector(el.getAttribute('data-scroll-to'));
+      var sel = el.getAttribute('data-scroll-to');
+      var target = sel && document.querySelector(sel);
       if (target) {
         e.preventDefault();
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -21,64 +22,114 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  /* ── GA4 トラッキング ── */
+  /* ── GA4 tracking ── */
   function track(name) {
-    if (typeof gtag === 'function') {
-      gtag('event', name, { event_category: 'cta' });
-    }
-    if (window.dataLayer) {
-      window.dataLayer.push({ event: name });
-    }
+    try {
+      if (typeof gtag === 'function') {
+        gtag('event', name, { event_category: 'cta' });
+      }
+      if (window.dataLayer) {
+        window.dataLayer.push({ event: name });
+      }
+    } catch (err) { /* noop */ }
   }
-
   document.querySelectorAll('[data-track]').forEach(function (el) {
     el.addEventListener('click', function () {
       track(el.getAttribute('data-track'));
     });
   });
 
-  /* ── 問い合わせフォーム送信 ── */
-  var form = document.getElementById('contact-form');
-  if (form) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      track('form_submit');
-      var btn = form.querySelector('.form-submit');
-      btn.textContent = '送信中...';
-      btn.disabled = true;
+  /* ── Multi-step QuoteFormFull ── */
+  var fullForm = document.getElementById('quote-form-full');
+  if (fullForm) {
+    var steps = fullForm.querySelectorAll('.qf-step');
+    var progressItems = document.querySelectorAll('.qf-progress-item');
 
-      /* Google Forms に POST するか Netlify Forms に飛ばす実装に差し替える */
-      var formData = new FormData(form);
-      fetch(form.action, {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      })
-        .then(function (res) {
-          if (res.ok) {
-            form.innerHTML = '<div style="text-align:center;padding:32px 0;"><p style="font-size:1.1rem;font-weight:700;color:#059669;margin-bottom:8px;">お問い合わせを受け付けました</p><p style="font-size:.88rem;color:#6b7280;">営業時間内（平日9:00〜18:00）に担当者よりご連絡します。</p></div>';
-          } else {
-            btn.textContent = '無料で相談する';
-            btn.disabled = false;
-            alert('送信に失敗しました。お手数ですがお電話にてご連絡ください。');
-          }
-        })
-        .catch(function () {
-          btn.textContent = '無料で相談する';
-          btn.disabled = false;
-          alert('送信に失敗しました。お手数ですがお電話にてご連絡ください。');
-        });
+    function showStep(n) {
+      steps.forEach(function (step) {
+        var s = Number(step.getAttribute('data-step'));
+        step.classList.toggle('is-active', s === n);
+      });
+      progressItems.forEach(function (p) {
+        var s = Number(p.getAttribute('data-step'));
+        p.classList.toggle('is-current', s === n);
+        p.classList.toggle('is-done', s < n);
+      });
+      // Scroll progress into view
+      var progress = document.querySelector('.qf-progress');
+      if (progress) progress.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function validateStep(n) {
+      var step = fullForm.querySelector('.qf-step[data-step="' + n + '"]');
+      if (!step) return true;
+      var inputs = step.querySelectorAll('input, select, textarea');
+      var ok = true;
+      inputs.forEach(function (el) {
+        if (!el.checkValidity()) {
+          el.classList.add('is-invalid');
+          if (ok) el.reportValidity();
+          ok = false;
+        } else {
+          el.classList.remove('is-invalid');
+        }
+      });
+      return ok;
+    }
+
+    fullForm.querySelectorAll('[data-goto]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var target = Number(btn.getAttribute('data-goto'));
+        var current = Number(btn.closest('.qf-step').getAttribute('data-step'));
+        if (target > current) {
+          if (!validateStep(current)) return;
+        }
+        showStep(target);
+      });
     });
   }
 
-  /* ── ページ下部への到達で Sticky CTA を消す ── */
+  /* ── Form submission (compact + full) ──
+     TODO: バックエンド未接続。送信時は /thanks/ にリダイレクトするだけ。
+     後でAPIエンドポイントを実装したらここを差し替える。
+  */
+  document.querySelectorAll('form.qf').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      track('quote_form_submit');
+      var submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = '送信中...';
+      }
+      var redirect = form.getAttribute('data-redirect') || '/thanks/';
+      // Show inline success briefly, then redirect
+      try {
+        var wrap = document.createElement('div');
+        wrap.className = 'qf-success';
+        wrap.innerHTML = '<p><strong>送信を受け付けました。</strong>確認ページに移動します...</p>';
+        form.replaceWith(wrap);
+      } catch (err) { /* noop */ }
+      setTimeout(function () {
+        window.location.href = redirect;
+      }, 400);
+    });
+  });
+
+  /* ── Hide sticky CTA over footer ── */
   var stickyCta = document.querySelector('.sticky-cta');
   if (stickyCta) {
     var footer = document.querySelector('.sd-footer');
-    var obs = new IntersectionObserver(function (entries) {
-      stickyCta.style.opacity = entries[0].isIntersecting ? '0' : '1';
-      stickyCta.style.pointerEvents = entries[0].isIntersecting ? 'none' : 'auto';
-    }, { threshold: 0 });
-    if (footer) obs.observe(footer);
+    if (footer && 'IntersectionObserver' in window) {
+      var obs = new IntersectionObserver(function (entries) {
+        stickyCta.style.opacity = entries[0].isIntersecting ? '0' : '1';
+        stickyCta.style.pointerEvents = entries[0].isIntersecting ? 'none' : 'auto';
+      }, { threshold: 0 });
+      obs.observe(footer);
+    }
   }
 });

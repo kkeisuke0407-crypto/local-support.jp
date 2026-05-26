@@ -1,0 +1,23 @@
+---
+import type { ServiceData } from '../data/services/_types';
+interface Props { industries: ServiceData['industries']; serviceName: string; }
+const { industries, serviceName } = Astro.props;
+---
+<section class="sd-section section-white" id="industry">
+  <div class="sd-container">
+    <div class="section-head">
+      <span class="kicker">INDUSTRY</span>
+      <h2>{serviceName}は施設の種類でどう変わる？</h2>
+      <p>用途・規模によって対応内容・頻度・費用感が異なります</p>
+    </div>
+    <div class="gyoshu-grid">
+      {industries.map((ind) => (
+        <article class="gyoshu-card">
+          <h3>{ind.title}</h3>
+          <p>{ind.body}</p>
+          <span class="gyoshu-tag">{ind.tag}</span>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

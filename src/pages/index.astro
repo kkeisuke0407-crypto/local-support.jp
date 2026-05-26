@@ -1,341 +1,189 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
+import TrustBadges from '../components/TrustBadges.astro';
+import FAQ from '../components/FAQ.astro';
+import { site, serviceIndex, prefectures } from '../data/site';
 
-const PAGE_TITLE = "施設管理・設備メンテナンスの専門業者比較｜local-support.jp";
-const PAGE_DESC  = "受水槽清掃・アスベスト調査・ダクト清掃・シャッター点検など、施設管理の専門業者を地域から探せます。費用相場・法的義務・業者選びをサポートします。";
-const CANONICAL  = "https://local-support.jp/";
-const SITE_NAME  = "local-support.jp";
+const PAGE_TITLE = '施設管理の一括見積比較｜受水槽・アスベスト・ダクト・シャッター｜local-support.jp';
+const PAGE_DESC  = '受水槽清掃・アスベスト調査・ダクト清掃・シャッター点検など、施設管理の業者探しを一括見積で。登録業者から最大3社を厳選紹介・完全無料。全国47都道府県対応のB2B向け業者紹介サービス。';
+const CANONICAL  = `${site.domain}/`;
 
 const faqItems = [
   {
-    q: "このサイトはどのようなサービスを提供していますか？",
-    a: "施設管理・設備メンテナンスに関する専門業者のご紹介、費用相場の情報提供、法定義務の解説を行っています。受水槽清掃・アスベスト調査・ダクト清掃・シャッター点検など、各分野の専門業者を無料でご紹介します。"
+    q: '一括見積の利用に費用はかかりますか？',
+    a: '完全無料です。お見積もり依頼・業者紹介・ご相談まで、すべてのサービスを無料でご利用いただけます。紹介した業者と契約された後も、当サイトへの手数料は発生しません。',
   },
   {
-    q: "業者紹介に費用はかかりますか？",
-    a: "業者紹介・お見積もりの手配は無料です。紹介した業者との契約後も、当サイトへの手数料は発生しません。安心してご利用ください。"
+    q: '何社から見積もりが取れますか？',
+    a: 'サービス内容・所在地に応じて、対応可能な登録業者の中から最大3社を厳選してご紹介します。複数社の見積もりを比較することで、費用の妥当性確認と過剰請求の回避ができます。',
   },
   {
-    q: "どの地域まで対応していますか？",
-    a: "全国47都道府県に対応しています。お問い合わせフォームまたはお電話でご連絡いただき、施設所在地をお知らせいただければ、対応可能な地元業者をご紹介します。"
-  }
+    q: '対応エリアはどこですか？',
+    a: '全国47都道府県に対応しています。施設所在地に近い地元の登録業者を優先的にご紹介するため、迅速な対応・出張費の抑制が期待できます。',
+  },
+  {
+    q: 'しつこい営業電話は来ませんか？',
+    a: 'いいえ、来ません。ご紹介する業者は事前に審査済みで、しつこい営業を行わないことを利用規約で求めています。万一そのような対応があれば、こちらへご報告いただければ業者登録の停止対応をいたします。',
+  },
 ];
 
-const faqJsonLd = JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": faqItems.map(f => ({
-    "@type": "Question",
-    "name": f.q,
-    "acceptedAnswer": { "@type": "Answer", "text": f.a }
-  }))
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
 });
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: CANONICAL },
+  ],
+});
+
+const updatedJa = new Date(site.lastUpdated).toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 <BaseLayout
   title={PAGE_TITLE}
   description={PAGE_DESC}
   canonical={CANONICAL}
-  siteName={SITE_NAME}
-  logoSub="施設管理の専門業者を探す"
-  faqJsonLd={faqJsonLd}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  jsonLdBlocks={[breadcrumbLd, faqLd]}
 >
 
-<style>
-  .service-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-    margin-bottom: 32px;
-  }
-  .service-card {
-    background: #fff;
-    border-radius: var(--radius);
-    padding: 28px 22px 22px;
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--gray-200);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    transition: box-shadow .15s, transform .15s;
-    text-decoration: none;
-    color: inherit;
-  }
-  .service-card:hover {
-    box-shadow: var(--shadow-md);
-    transform: translateY(-3px);
-  }
-  .service-card-icon {
-    width: 52px; height: 52px;
-    background: var(--blue-light);
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 4px;
-  }
-  .service-card-icon svg { width: 28px; height: 28px; color: var(--blue); }
-  .service-card h3 {
-    font-size: 1rem;
-    font-weight: 800;
-    color: var(--gray-900);
-    margin: 0;
-  }
-  .service-card p {
-    font-size: .84rem;
-    color: var(--gray-500);
-    line-height: 1.6;
-    flex: 1;
-  }
-  .service-card-link {
-    font-size: .82rem;
-    font-weight: 700;
-    color: var(--blue);
-    margin-top: 4px;
-  }
-  .why-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 20px;
-  }
-  .why-card {
-    background: #fff;
-    border-radius: var(--radius);
-    padding: 24px;
-    box-shadow: var(--shadow-sm);
-    border-top: 4px solid var(--accent);
-    text-align: center;
-  }
-  .why-card-icon {
-    width: 52px; height: 52px;
-    background: #fffbeb;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 14px;
-  }
-  .why-card-icon svg { width: 26px; height: 26px; color: var(--accent); }
-  .why-card h3 { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 8px; }
-  .why-card p { font-size: .84rem; color: var(--gray-500); line-height: 1.6; }
-</style>
-
 <!-- ══ HERO ════════════════════════════════════════════════════ -->
-<section class="hero">
-  <div class="sd-container hero-inner">
-    <div class="hero-eyebrow">施設管理担当者・ビルオーナー・管理会社向け</div>
-    <h1>施設管理のお悩みを、<br/><em>地元の専門業者</em>へ</h1>
-    <p class="hero-sub">
-      受水槽清掃・アスベスト調査・ダクト清掃・シャッター点検など、<br/>
-      <strong>法的義務を伴う設備管理</strong>を、信頼できる地元業者にまとめてお任せください。
-    </p>
-    <div class="hero-badges">
-      <div class="hero-badge-item">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        <span>登録業者のみ紹介</span>
-      </div>
-      <div class="hero-badge-item">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>
-        <span>見積もり無料</span>
-      </div>
-      <div class="hero-badge-item">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        <span>全国対応</span>
-      </div>
+<section class="hero hero--b2b">
+  <div class="sd-container-wide hero-grid">
+    <div class="hero-copy">
+      <div class="hero-eyebrow">マンション・ビル・工場の管理担当者の方へ</div>
+      <h1 class="hero-h1">施設管理の業者探し、ぜんぶお任せください</h1>
+      <h2 class="hero-h2">受水槽・アスベスト・ダクト・シャッターなど 一括見積で最大3社をご紹介・完全無料</h2>
+      <ul class="hero-bullets">
+        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>完全無料・しつこい営業なし</span></li>
+        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>登録資格を確認済みの業者のみ紹介</span></li>
+        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>全国47都道府県・複数施設まとめてOK</span></li>
+        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>最大3社を厳選紹介・比較検討に最適</span></li>
+      </ul>
+      <dl class="hero-stats">
+        {site.stats.map((s) => (
+          <div class="hero-stat">
+            <dt>{s.label}</dt>
+            <dd>{s.value}</dd>
+          </div>
+        ))}
+      </dl>
+      <p class="hero-meta"><time datetime={site.lastUpdated}>最終更新：{updatedJa}</time> ／ 運営：{site.name}</p>
     </div>
-    <a href="#contact" class="hero-cta" data-scroll-to="#contact" data-track="hero_contact">
-      <span class="hero-cta-free">無料</span>
-      専門業者に相談する
-      <span>›</span>
-    </a>
-    <p class="hero-note">営業時間内（平日 9:00〜18:00）にご連絡します</p>
-  </div>
-  <div class="hero-wave">
-    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#f5f6f8"/>
-    </svg>
+    <div class="hero-form">
+      <aside class="qf-compact" aria-label="無料一括見積もり依頼フォーム">
+        <div class="qf-compact-head">
+          <span class="qf-compact-badge">完全無料</span>
+          <h3>30秒で無料一括見積</h3>
+          <p>必要なサービスを選んで送信</p>
+        </div>
+        {/* TODO: バックエンド未接続 — 送信時は /thanks/ にリダイレクト */}
+        <form class="qf qf--compact" action="#" method="POST" data-service="top" data-redirect="/thanks/?service=top" novalidate>
+          <div class="qf-row">
+            <label for="top-service">ご相談内容 <span class="qf-req">必須</span></label>
+            <select id="top-service" name="service" required>
+              <option value="">選択してください</option>
+              {serviceIndex.map((s) => (<option value={s.name}>{s.name}</option>))}
+              <option value="その他・複数">その他・複数まとめて</option>
+            </select>
+          </div>
+          <div class="qf-row">
+            <label for="top-company">会社名・施設名 <span class="qf-req">必須</span></label>
+            <input id="top-company" name="company" type="text" required placeholder="例：◯◯ビル管理組合" />
+          </div>
+          <div class="qf-row">
+            <label for="top-prefecture">所在地（都道府県） <span class="qf-req">必須</span></label>
+            <select id="top-prefecture" name="prefecture" required>
+              <option value="">選択してください</option>
+              {prefectures.map((p) => (<option value={p}>{p}</option>))}
+            </select>
+          </div>
+          <div class="qf-row">
+            <label for="top-email">連絡先メール <span class="qf-req">必須</span></label>
+            <input id="top-email" name="email" type="email" required placeholder="例：info@example.com" />
+          </div>
+          <button type="submit" class="qf-submit" data-track="top_hero_form_submit">無料で見積依頼する →</button>
+          <p class="qf-note">入力情報は業者紹介のみに使用します</p>
+        </form>
+      </aside>
+    </div>
   </div>
 </section>
 
 <!-- ══ サービス一覧 ════════════════════════════════════════════ -->
-<section class="sd-section" id="services">
+<section class="sd-section section-white" id="services">
   <div class="sd-container">
     <div class="section-head">
       <span class="kicker">SERVICES</span>
-      <h2>取り扱いサービス一覧</h2>
-      <p>各サービスの費用相場・法的義務・業者の選び方をくわしく解説しています</p>
+      <h2>取り扱いサービス｜B2B施設管理の一括見積</h2>
+      <p>各分野の登録業者から最大3社を厳選紹介します</p>
     </div>
     <div class="service-grid">
-      <a href="/jusuisou-seisou/" class="service-card">
-        <div class="service-card-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 7.5 7 7.5c-.29 0-1.15.56-2.29 1.56S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></svg>
-        </div>
-        <h3>受水槽清掃</h3>
-        <p>水道法で年1回以上の清掃が義務。費用相場・業者の選び方・登録資格の確認方法まで解説します。</p>
-        <span class="service-card-link">詳しく見る →</span>
-      </a>
-      <a href="/asbestos/" class="service-card">
-        <div class="service-card-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M4 20V8l8-6 8 6v12"/><path d="M10 20v-6h4v6"/><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3z"/></svg>
-        </div>
-        <h3>アスベスト調査・除去</h3>
-        <p>2022年法改正で全解体・改修工事前に有資格者による事前調査が義務化。対応業者をご紹介します。</p>
-        <span class="service-card-link">詳しく見る →</span>
-      </a>
-      <a href="/duct/" class="service-card">
-        <div class="service-card-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12h.01"/><path d="M17 12h.01"/><path d="M7 12h.01"/></svg>
-        </div>
-        <h3>ダクト清掃</h3>
-        <p>厨房排気ダクトの清掃を怠ると火災リスクが高まり消防法違反に。清掃頻度・費用相場を解説します。</p>
-        <span class="service-card-link">詳しく見る →</span>
-      </a>
-      <a href="/shutter/" class="service-card">
-        <div class="service-card-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="3" rx="1"/><rect x="2" y="10" width="20" height="3" rx="1"/><rect x="2" y="17" width="20" height="3" rx="1"/><path d="M12 6v4m0 7v4"/></svg>
-        </div>
-        <h3>シャッター点検・修理</h3>
-        <p>防火シャッターは建築基準法第12条で年1回の定期検査・報告が義務。費用と業者選びを解説します。</p>
-        <span class="service-card-link">詳しく見る →</span>
-      </a>
+      {serviceIndex.map((s) => (
+        <a href={`/${s.slug}/`} class="service-card">
+          <div class="service-card-tag">{s.short}</div>
+          <h3>{s.name}</h3>
+          <p>{s.description}</p>
+          <span class="service-card-link">詳しく見る →</span>
+        </a>
+      ))}
     </div>
   </div>
 </section>
 
-<!-- ══ 選ばれる理由 ════════════════════════════════════════════ -->
-<div class="divider"></div>
+<ProcessSteps />
+
+<TrustBadges stats={site.stats} />
+
+<!-- ══ Why us ══════════════════════════════════════════════════ -->
 <section class="sd-section section-white" id="why">
   <div class="sd-container">
     <div class="section-head">
       <span class="kicker">WHY US</span>
       <h2>local-support.jp が選ばれる理由</h2>
-      <p>施設管理の専門業者探しを、安心・簡単にします</p>
+      <p>B2B施設管理に特化した一括見積比較サービスです</p>
     </div>
     <div class="why-grid">
-      <div class="why-card">
-        <div class="why-card-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
+      <article class="why-card">
         <h3>登録業者のみ紹介</h3>
-        <p>各分野で必要な登録・資格・許認可を確認済みの業者のみをご紹介。無資格業者への発注リスクを回避できます。</p>
-      </div>
-      <div class="why-card">
-        <div class="why-card-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>
-        </div>
-        <h3>相談・見積もり無料</h3>
-        <p>お問い合わせから見積もり取得まで、費用は一切かかりません。複数業者への一括相談も可能です。</p>
-      </div>
-      <div class="why-card">
-        <div class="why-card-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        </div>
-        <h3>全国対応</h3>
-        <p>北海道から沖縄まで、全国47都道府県に対応。施設所在地に近い地元業者をご紹介するため、迅速な対応が期待できます。</p>
-      </div>
+        <p>各分野で必要な登録・資格・許認可を確認済みの業者のみご紹介。無資格業者への発注リスクを回避できます。</p>
+      </article>
+      <article class="why-card">
+        <h3>一括見積で最大3社を比較</h3>
+        <p>一度の入力で複数業者からお見積もりが届きます。同じ条件で比較できるため、費用妥当性の確認に最適です。</p>
+      </article>
+      <article class="why-card">
+        <h3>全国対応・地元業者ネットワーク</h3>
+        <p>全国47都道府県に対応。施設所在地に近い地元業者を優先紹介するため、出張費を抑え迅速な対応が期待できます。</p>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- ══ CTA ════════════════════════════════════════════════════ -->
-<section class="cta-section" id="cta">
+<FAQ faq={faqItems} serviceName="施設管理の一括見積" />
+
+<!-- ══ Bottom CTA ═════════════════════════════════════════════ -->
+<section class="cta-section" id="contact">
   <div class="sd-container">
     <div class="cta-inner">
-      <h2>まずはお気軽に<br/>ご相談ください</h2>
-      <p>どのサービスが必要か分からない場合もお気軽にどうぞ。施設の状況をお聞きし、必要な対応をご提案します。<br/>相談・見積もりに費用は一切かかりません。</p>
+      <h2>まずはサービスを選んで<br/>無料一括見積</h2>
+      <p>所要時間は約1分。登録業者から最大3社を厳選してご紹介します。</p>
       <div class="cta-buttons">
-        <a href="#contact" class="cta-btn-primary" data-scroll-to="#contact" data-track="cta_form">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          フォームで無料相談する
-        </a>
-        <a href="tel:0120-XXX-XXX" class="cta-btn-secondary" data-track="cta_tel">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.1 19.79 19.79 0 0 1 1.61 4.5a2 2 0 0 1 1.99-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          電話で相談する（平日9〜18時）
-        </a>
+        {serviceIndex.map((s) => (
+          <a class="cta-btn-secondary" href={`/${s.slug}/`}>{s.short}の見積依頼 →</a>
+        ))}
       </div>
-      <p class="cta-note">相談無料・見積もり無料・しつこい営業はしません</p>
-    </div>
-  </div>
-</section>
-
-<!-- ══ 問い合わせフォーム ══════════════════════════════════════ -->
-<section class="sd-section form-section" id="contact">
-  <div class="sd-container">
-    <div class="section-head">
-      <span class="kicker">CONTACT</span>
-      <h2>無料相談・お問い合わせ</h2>
-      <p>どのサービスでもお気軽にご相談ください。担当者よりご連絡します</p>
-    </div>
-    <div class="form-wrap">
-      <h3>無料相談フォーム</h3>
-      <p class="form-sub">営業時間内（平日9:00〜18:00）にご連絡します。土日祝は翌営業日の対応となります。</p>
-      <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
-        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
-        <input type="hidden" name="subject" value="【一般相談】お問い合わせ" />
-        <input type="hidden" name="redirected_from" value="top" />
-        <div class="form-group">
-          <label for="company">会社名・施設名 <span class="required">必須</span></label>
-          <input type="text" id="company" name="company" placeholder="例：〇〇ビル管理組合" required />
-        </div>
-        <div class="form-group">
-          <label for="name">担当者名 <span class="required">必須</span></label>
-          <input type="text" id="name" name="name" placeholder="例：山田 太郎" required />
-        </div>
-        <div class="form-group">
-          <label for="tel">電話番号 <span class="required">必須</span></label>
-          <input type="tel" id="tel" name="tel" placeholder="例：03-0000-0000" required />
-        </div>
-        <div class="form-group">
-          <label for="prefecture">都道府県 <span class="required">必須</span></label>
-          <select id="prefecture" name="prefecture" required>
-            <option value="">選択してください</option>
-            <option>北海道</option><option>青森県</option><option>岩手県</option><option>宮城県</option>
-            <option>秋田県</option><option>山形県</option><option>福島県</option><option>茨城県</option>
-            <option>栃木県</option><option>群馬県</option><option>埼玉県</option><option>千葉県</option>
-            <option>東京都</option><option>神奈川県</option><option>新潟県</option><option>富山県</option>
-            <option>石川県</option><option>福井県</option><option>山梨県</option><option>長野県</option>
-            <option>岐阜県</option><option>静岡県</option><option>愛知県</option><option>三重県</option>
-            <option>滋賀県</option><option>京都府</option><option>大阪府</option><option>兵庫県</option>
-            <option>奈良県</option><option>和歌山県</option><option>鳥取県</option><option>島根県</option>
-            <option>岡山県</option><option>広島県</option><option>山口県</option><option>徳島県</option>
-            <option>香川県</option><option>愛媛県</option><option>高知県</option><option>福岡県</option>
-            <option>佐賀県</option><option>長崎県</option><option>熊本県</option><option>大分県</option>
-            <option>宮崎県</option><option>鹿児島県</option><option>沖縄県</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="service_type">ご相談のサービス</label>
-          <select id="service_type" name="service_type">
-            <option value="">選択してください</option>
-            <option>受水槽清掃</option>
-            <option>アスベスト調査・除去</option>
-            <option>ダクト清掃</option>
-            <option>シャッター点検・修理</option>
-            <option>その他・複数サービス</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="message">ご相談内容・ご要望</label>
-          <textarea id="message" name="message" placeholder="施設の状況、ご希望のサービス内容、時期などをご記入ください"></textarea>
-        </div>
-        <button type="submit" class="form-submit" data-track="form_submit">無料で相談する →</button>
-        <p class="form-note">個人情報は業者紹介のみに使用し、第三者への販売・提供は行いません。</p>
-      </form>
-    </div>
-  </div>
-</section>
-
-<!-- ══ FAQ ════════════════════════════════════════════════════ -->
-<div class="divider"></div>
-<section class="sd-section section-white" id="faq">
-  <div class="sd-container">
-    <div class="section-head">
-      <span class="kicker">FAQ</span>
-      <h2>よくある質問</h2>
-      <p>サービスについてよく寄せられるご質問をまとめました</p>
-    </div>
-    <div class="faq-list">
-      {faqItems.map(item => (
-        <div class="faq-item">
-          <div class="faq-q"><span class="faq-q-badge">Q</span>{item.q}</div>
-          <div class="faq-a"><span class="faq-a-badge">A</span>{item.a}</div>
-        </div>
-      ))}
+      <p class="cta-note">完全無料／最大3社を厳選紹介／全国47都道府県対応</p>
     </div>
   </div>
 </section>

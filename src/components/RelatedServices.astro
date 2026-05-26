@@ -1,0 +1,29 @@
+---
+import { serviceIndex } from '../data/site';
+interface Props { currentSlug: string; relatedSlugs: string[]; }
+const { currentSlug, relatedSlugs } = Astro.props;
+const related = relatedSlugs
+  .map((slug) => serviceIndex.find((s) => s.slug === slug))
+  .filter((s): s is (typeof serviceIndex)[number] => !!s && s.slug !== currentSlug);
+---
+{related.length > 0 && (
+  <section class="sd-section section-white" id="related">
+    <div class="sd-container">
+      <div class="section-head">
+        <span class="kicker">RELATED</span>
+        <h2>他のサービスもまとめて相談できます</h2>
+        <p>施設管理のメンテナンスをまとめてご相談いただけます</p>
+      </div>
+      <div class="related-grid">
+        {related.map((s) => (
+          <a class="related-card" href={`/${s.slug}/`}>
+            <div class="related-card-tag">{s.short}</div>
+            <h3>{s.name}</h3>
+            <p>{s.description}</p>
+            <span class="related-link">詳しく見る →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+)}

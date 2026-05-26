@@ -1,0 +1,41 @@
+---
+import type { ServiceData } from '../data/services/_types';
+interface Props { legal: ServiceData['legal']; serviceName: string; }
+const { legal, serviceName } = Astro.props;
+---
+<section class="sd-section gimu-section" id="legal">
+  <div class="sd-container">
+    <div class="section-head">
+      <span class="kicker">LEGAL OBLIGATION</span>
+      <h2>{serviceName}の法的義務とは？</h2>
+      <p>{legal.summary}</p>
+    </div>
+    <div class="gimu-alert">
+      <div class="gimu-alert-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      <div>
+        <div class="gimu-alert-title">{legal.alertTitle}</div>
+        <div class="gimu-alert-body" set:html={legal.alertBody.replace(/(.+?罰金等)/, '<strong>$1</strong>')}></div>
+      </div>
+    </div>
+    <div class="gimu-cards">
+      {legal.cards.map((card) => (
+        <article class="gimu-card">
+          <div class="gimu-card-head">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <h3>{card.title}</h3>
+          </div>
+          <p>{card.body}</p>
+          <div class="tag-list">
+            {card.tags.map((t) => (<span class="tag-item">{t}</span>))}
+          </div>
+        </article>
+      ))}
+    </div>
+    <dl class="legal-basis">
+      <dt>関連法令</dt>
+      <dd>{legal.legalBasis.join(' ／ ')}</dd>
+    </dl>
+  </div>
+</section>

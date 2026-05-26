@@ -1,0 +1,123 @@
+---
+import type { ServiceData } from '../data/services/_types';
+import { prefectures } from '../data/site';
+interface Props { data: ServiceData; }
+const { data } = Astro.props;
+---
+<section class="sd-section form-section" id="contact">
+  <div class="sd-container">
+    <div class="section-head">
+      <span class="kicker">CONTACT</span>
+      <h2>{data.serviceName}の無料一括見積もり依頼</h2>
+      <p>3ステップ・約1分で入力完了。担当者より営業時間内（平日9:00〜18:00）にご連絡します</p>
+    </div>
+    <div class="qf-wrap">
+      <ol class="qf-progress" aria-label="入力ステップ">
+        <li class="qf-progress-item is-current" data-step="1"><span class="qf-progress-num">1</span><span class="qf-progress-label">施設情報</span></li>
+        <li class="qf-progress-item" data-step="2"><span class="qf-progress-num">2</span><span class="qf-progress-label">詳細要件</span></li>
+        <li class="qf-progress-item" data-step="3"><span class="qf-progress-num">3</span><span class="qf-progress-label">連絡先</span></li>
+      </ol>
+
+      {/* TODO: バックエンド未接続 — 送信時は /thanks/ にリダイレクトのみ */}
+      <form class="qf qf--full" id="quote-form-full" action="#" method="POST" data-service={data.slug} data-redirect={`/thanks/?service=${data.slug}`} novalidate>
+        <input type="hidden" name="service" value={data.serviceName} />
+
+        {/* Step 1 */}
+        <fieldset class="qf-step is-active" data-step="1">
+          <legend class="qf-step-title">Step 1：施設情報</legend>
+          <div class="qf-grid">
+            <div class="qf-row">
+              <label for="qf-company">会社名・施設名 <span class="qf-req">必須</span></label>
+              <input id="qf-company" name="company" type="text" required placeholder="例：◯◯ビル管理組合" />
+            </div>
+            <div class="qf-row">
+              <label for="qf-prefecture">所在地（都道府県） <span class="qf-req">必須</span></label>
+              <select id="qf-prefecture" name="prefecture" required>
+                <option value="">選択してください</option>
+                {prefectures.map((p) => (<option value={p}>{p}</option>))}
+              </select>
+            </div>
+            <div class="qf-row">
+              <label for="qf-city">市区町村</label>
+              <input id="qf-city" name="city" type="text" placeholder="例：千代田区" />
+            </div>
+            <div class="qf-row">
+              <label for="qf-facility">施設の種類 <span class="qf-req">必須</span></label>
+              <select id="qf-facility" name="facility_type" required>
+                <option value="">選択してください</option>
+                {data.facilityTypeOptions.map((o) => (<option value={o}>{o}</option>))}
+              </select>
+            </div>
+            {data.formCustomField && (
+              <div class="qf-row qf-row--wide">
+                <label for={`qf-${data.formCustomField.name}`}>{data.formCustomField.label}</label>
+                <select id={`qf-${data.formCustomField.name}`} name={data.formCustomField.name}>
+                  <option value="">選択してください</option>
+                  {data.formCustomField.options.map((o) => (<option value={o}>{o}</option>))}
+                </select>
+              </div>
+            )}
+          </div>
+          <div class="qf-nav">
+            <span></span>
+            <button type="button" class="qf-btn qf-btn-next" data-goto="2">次へ →</button>
+          </div>
+        </fieldset>
+
+        {/* Step 2 */}
+        <fieldset class="qf-step" data-step="2">
+          <legend class="qf-step-title">Step 2：詳細要件</legend>
+          <div class="qf-row">
+            <label>緊急度 <span class="qf-req">必須</span></label>
+            <div class="qf-radios">
+              <label class="qf-radio"><input type="radio" name="urgency" value="至急（1週間以内）" required /> 至急（1週間以内）</label>
+              <label class="qf-radio"><input type="radio" name="urgency" value="1ヶ月以内" /> 1ヶ月以内</label>
+              <label class="qf-radio"><input type="radio" name="urgency" value="3ヶ月以内" /> 3ヶ月以内</label>
+              <label class="qf-radio"><input type="radio" name="urgency" value="情報収集中" /> 情報収集中</label>
+            </div>
+          </div>
+          <div class="qf-row">
+            <label for="qf-schedule">希望時期・時間帯</label>
+            <input id="qf-schedule" name="schedule" type="text" placeholder="例：2025年7月上旬／平日19時以降など" />
+          </div>
+          <div class="qf-row">
+            <label for="qf-message">補足メッセージ・ご要望</label>
+            <textarea id="qf-message" name="message" rows="4" placeholder="ご相談内容、現在の状況、複数棟まとめての依頼、特殊な条件など、自由にご記入ください"></textarea>
+          </div>
+          <div class="qf-nav">
+            <button type="button" class="qf-btn qf-btn-back" data-goto="1">← 戻る</button>
+            <button type="button" class="qf-btn qf-btn-next" data-goto="3">次へ →</button>
+          </div>
+        </fieldset>
+
+        {/* Step 3 */}
+        <fieldset class="qf-step" data-step="3">
+          <legend class="qf-step-title">Step 3：連絡先</legend>
+          <div class="qf-grid">
+            <div class="qf-row">
+              <label for="qf-name">担当者名 <span class="qf-req">必須</span></label>
+              <input id="qf-name" name="name" type="text" required placeholder="例：山田 太郎" />
+            </div>
+            <div class="qf-row">
+              <label for="qf-email">連絡先メール <span class="qf-req">必須</span></label>
+              <input id="qf-email" name="email" type="email" required placeholder="例：info@example.com" />
+            </div>
+            <div class="qf-row qf-row--wide">
+              <label for="qf-tel">連絡先電話（任意）</label>
+              <input id="qf-tel" name="tel" type="tel" placeholder="例：03-0000-0000（任意）" />
+            </div>
+          </div>
+          <label class="qf-agree">
+            <input type="checkbox" name="agree" value="1" required />
+            <span><a href="/privacy/" target="_blank" rel="noopener">プライバシーポリシー</a>に同意して送信します</span>
+          </label>
+          <div class="qf-nav">
+            <button type="button" class="qf-btn qf-btn-back" data-goto="2">← 戻る</button>
+            <button type="submit" class="qf-btn qf-btn-submit" data-track="full_form_submit">無料で依頼を送信</button>
+          </div>
+          <p class="qf-note">個人情報は業者紹介のみに使用し、第三者への販売・提供は行いません。</p>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</section>

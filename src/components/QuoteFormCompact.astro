@@ -1,0 +1,43 @@
+---
+import type { ServiceData } from '../data/services/_types';
+import { prefectures } from '../data/site';
+interface Props { data: ServiceData; }
+const { data } = Astro.props;
+---
+<aside class="qf-compact" aria-label="無料見積もり依頼フォーム（簡易）">
+  <div class="qf-compact-head">
+    <span class="qf-compact-badge">完全無料</span>
+    <h3>30秒で無料見積もり依頼</h3>
+    <p>最大3社の{data.serviceName}業者をご紹介します</p>
+  </div>
+  {/* TODO: バックエンド未接続 — JS側で /thanks/ にリダイレクトのみ */}
+  <form class="qf qf--compact" action="#" method="POST" data-service={data.slug} data-redirect={`/thanks/?service=${data.slug}`} novalidate>
+    <input type="hidden" name="service" value={data.serviceName} />
+    <div class="qf-row">
+      <label for="cf-company">会社名・施設名 <span class="qf-req">必須</span></label>
+      <input id="cf-company" name="company" type="text" required placeholder="例：◯◯ビル管理組合" />
+    </div>
+    <div class="qf-row">
+      <label for="cf-prefecture">所在地（都道府県） <span class="qf-req">必須</span></label>
+      <select id="cf-prefecture" name="prefecture" required>
+        <option value="">選択してください</option>
+        {prefectures.map((p) => (<option value={p}>{p}</option>))}
+      </select>
+    </div>
+    {data.formCustomField && (
+      <div class="qf-row">
+        <label for={`cf-${data.formCustomField.name}`}>{data.formCustomField.label}</label>
+        <select id={`cf-${data.formCustomField.name}`} name={data.formCustomField.name}>
+          <option value="">選択してください</option>
+          {data.formCustomField.options.map((o) => (<option value={o}>{o}</option>))}
+        </select>
+      </div>
+    )}
+    <div class="qf-row">
+      <label for="cf-email">連絡先メール <span class="qf-req">必須</span></label>
+      <input id="cf-email" name="email" type="email" required placeholder="例：info@example.com" />
+    </div>
+    <button type="submit" class="qf-submit" data-track="hero_form_submit">無料で見積もりを依頼する →</button>
+    <p class="qf-note">詳細項目を入力したい方は <a href="#contact">こちらの詳細フォーム</a> へ</p>
+  </form>
+</aside>

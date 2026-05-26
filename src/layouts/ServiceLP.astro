@@ -1,0 +1,91 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import HeroWithForm from '../components/HeroWithForm.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
+import TrustBadges from '../components/TrustBadges.astro';
+import LegalSection from '../components/LegalSection.astro';
+import RiskCards from '../components/RiskCards.astro';
+import CostTable from '../components/CostTable.astro';
+import IndustrySection from '../components/IndustrySection.astro';
+import SelectionChecklist from '../components/SelectionChecklist.astro';
+import QuoteFormFull from '../components/QuoteFormFull.astro';
+import FAQ from '../components/FAQ.astro';
+import RelatedServices from '../components/RelatedServices.astro';
+import BottomCTA from '../components/BottomCTA.astro';
+import { site } from '../data/site';
+import type { ServiceData } from '../data/services/_types';
+
+interface Props { data: ServiceData; }
+const { data } = Astro.props;
+const canonical = `${site.domain}/${data.slug}/`;
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: data.serviceName, item: canonical },
+  ],
+});
+
+const serviceLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: `${data.serviceName}の一括見積比較`,
+  serviceType: data.serviceName,
+  description: data.meta.description,
+  url: canonical,
+  areaServed: { '@type': 'Country', name: 'Japan' },
+  provider: {
+    '@type': 'Organization',
+    name: site.org.legalName,
+    url: site.domain,
+  },
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'JPY',
+    description: '一括見積依頼・業者紹介は完全無料',
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: `${data.serviceName} 紹介メニュー`,
+    itemListElement: [
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: `${data.serviceName} 一括見積（最大3社）` } },
+    ],
+  },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: data.faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+});
+
+const jsonLdBlocks = [breadcrumbLd, serviceLd, faqLd];
+---
+<BaseLayout
+  title={data.meta.title}
+  description={data.meta.description}
+  canonical={canonical}
+  siteName={data.siteName}
+  logoSub="施設管理の一括見積比較"
+  jsonLdBlocks={jsonLdBlocks}
+>
+  <HeroWithForm data={data} />
+  <ProcessSteps serviceName={data.serviceName} />
+  <TrustBadges stats={data.trustStats} />
+  <LegalSection legal={data.legal} serviceName={data.serviceName} />
+  <RiskCards risks={data.risks} serviceName={data.serviceName} />
+  <CostTable costGuide={data.costGuide} serviceName={data.serviceName} lastUpdated={data.meta.lastUpdated} />
+  <IndustrySection industries={data.industries} serviceName={data.serviceName} />
+  <SelectionChecklist criteria={data.selectionCriteria} serviceName={data.serviceName} />
+  <QuoteFormFull data={data} />
+  <FAQ faq={data.faq} serviceName={data.serviceName} />
+  <RelatedServices currentSlug={data.slug} relatedSlugs={data.relatedServiceSlugs} />
+  <BottomCTA serviceName={data.serviceName} />
+</BaseLayout>

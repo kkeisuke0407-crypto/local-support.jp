@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProcessSteps from '../../components/ProcessSteps.astro';
+import { site } from '../../data/site';
+
+const title = 'ご利用の流れ｜local-support.jp 一括見積比較';
+const description = '一括見積依頼から業者紹介・契約までの3ステップをご案内します。完全無料・最大3社を厳選紹介。';
+const canonical = `${site.domain}/flow/`;
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'ご利用の流れ', item: canonical },
+  ],
+});
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  jsonLdBlocks={[breadcrumbLd]}
+>
+  <section class="hero hero--simple">
+    <div class="sd-container">
+      <h1 class="hero-h1">ご利用の流れ</h1>
+      <p class="hero-sub-simple">一括見積依頼から業者ご紹介まで、3ステップで完結します</p>
+    </div>
+  </section>
+
+  <ProcessSteps />
+
+  <section class="sd-section">
+    <div class="sd-container">
+      <div class="section-head">
+        <span class="kicker">DETAIL</span>
+        <h2>詳細フロー</h2>
+        <p>お見積もり依頼から業者ご紹介までの流れを詳しくご案内します</p>
+      </div>
+      <dl class="flow-dl">
+        <dt>1. フォーム送信</dt>
+        <dd>必要な情報（施設情報・要件・連絡先）をフォームから送信ください。所要時間は約1分。</dd>
+        <dt>2. 内容確認・業者選定（通常1営業日以内）</dt>
+        <dd>こちらで内容を確認のうえ、対応エリア・実績・資格を踏まえ最大3社を厳選します。</dd>
+        <dt>3. 業者からのご連絡</dt>
+        <dd>厳選された業者から直接メールでご連絡が入ります。条件・スケジュールをご相談ください。</dd>
+        <dt>4. お見積もり比較</dt>
+        <dd>複数業者の見積もり内容を比較。費用・対応範囲・実績・スケジュールを総合的に確認してください。</dd>
+        <dt>5. ご契約・施工</dt>
+        <dd>納得いただける業者とご契約のうえ、施工を実施。当サイトへの手数料は一切かかりません。</dd>
+      </dl>
+      <div class="cta-buttons" style="justify-content:center;margin-top:32px;">
+        <a class="cta-btn-primary" href="/">トップから見積依頼する →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

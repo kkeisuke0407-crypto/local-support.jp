@@ -1,0 +1,22 @@
+---
+import type { ServiceData } from '../data/services/_types';
+interface Props { faq: ServiceData['faq']; serviceName?: string; }
+const { faq, serviceName = '' } = Astro.props;
+---
+<section class="sd-section section-white" id="faq">
+  <div class="sd-container">
+    <div class="section-head">
+      <span class="kicker">FAQ</span>
+      <h2>{serviceName ? `${serviceName}に関するよくある質問` : 'よくある質問'}</h2>
+      <p>担当者からよく寄せられる質問をまとめました</p>
+    </div>
+    <div class="faq-list">
+      {faq.map((item) => (
+        <div class="faq-item">
+          <div class="faq-q"><span class="faq-q-badge">Q</span><h3 class="faq-q-text">{item.q}</h3></div>
+          <div class="faq-a"><span class="faq-a-badge">A</span>{item.a}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

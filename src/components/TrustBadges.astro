@@ -1,0 +1,16 @@
+---
+interface Props { stats: { label: string; value: string }[]; }
+const { stats } = Astro.props;
+---
+<section class="sd-section trust-section">
+  <div class="sd-container">
+    <dl class="trust-grid">
+      {stats.map((s) => (
+        <div class="trust-card">
+          <dt class="trust-label">{s.label}</dt>
+          <dd class="trust-value">{s.value}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>
