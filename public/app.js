@@ -92,6 +92,30 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  /* ── UTM / referrer capture into hidden fields ── */
+  (function attachTrackingFields() {
+    var params = new URLSearchParams(window.location.search);
+    var trackKeys = ['utm_source', 'utm_medium', 'utm_campaign'];
+    var values = {};
+    trackKeys.forEach(function (k) {
+      var v = params.get(k);
+      if (v) values[k] = v.slice(0, 120);
+    });
+    values.referrer = (document.referrer || '').slice(0, 200);
+    values.landing_path = (window.location.pathname || '').slice(0, 200);
+    document.querySelectorAll('form.qf').forEach(function (form) {
+      Object.keys(values).forEach(function (key) {
+        if (!values[key]) return;
+        if (form.querySelector('input[name="' + key + '"]')) return;
+        var input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = values[key];
+        form.appendChild(input);
+      });
+    });
+  })();
+
   /* ── Form submission (compact + full) ── */
   document.querySelectorAll('form.qf').forEach(function (form) {
     form.addEventListener('submit', function (e) {

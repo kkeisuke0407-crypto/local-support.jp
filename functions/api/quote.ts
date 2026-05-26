@@ -21,6 +21,11 @@ const FIELD_LABELS: Record<string, string> = {
   email: '連絡先メール',
   tel: '連絡先電話',
   agree: '同意',
+  utm_source: '流入元(utm_source)',
+  utm_medium: '流入媒体(utm_medium)',
+  utm_campaign: 'キャンペーン(utm_campaign)',
+  referrer: 'リファラ',
+  landing_path: '着地ページ',
 };
 
 const escapeHtml = (s: string): string =>
@@ -31,6 +36,10 @@ const escapeHtml = (s: string): string =>
     .replace(/'/g, '&#39;');
 
 const isValidEmail = (v: string): boolean => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+const isValidTel = (v: string): boolean => {
+  const digits = v.replace(/[-ー－\s()（）]/g, '');
+  return /^\+?\d{10,15}$/.test(digits);
+};
 
 interface QuotePayload {
   [key: string]: string;
@@ -79,11 +88,17 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       return jsonResponse(200, { ok: true });
     }
 
-    if (!data.company || !data.email || !data.prefecture) {
+    if (!data.company || !data.email || !data.prefecture || !data.tel) {
       return jsonResponse(400, { ok: false, error: '必須項目が不足しています' });
     }
     if (!isValidEmail(data.email)) {
       return jsonResponse(400, { ok: false, error: 'メールアドレスの形式が正しくありません' });
+    }
+    if (!isValidTel(data.tel)) {
+      return jsonResponse(400, { ok: false, error: '電話番号の形式が正しくありません' });
+    }
+    if (data.agree !== undefined && data.agree !== 'on' && data.agree !== 'true' && data.agree !== '1') {
+      return jsonResponse(400, { ok: false, error: 'プライバシーポリシーへの同意が必要です' });
     }
 
     const subject = `【お見積もり依頼】${data.service || ''} / ${data.company} / ${data.prefecture}`;
