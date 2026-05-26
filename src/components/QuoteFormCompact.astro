@@ -37,7 +37,11 @@ const { data } = Astro.props;
       <label for="cf-email">連絡先メール <span class="qf-req">必須</span></label>
       <input id="cf-email" name="email" type="email" required placeholder="例：info@example.com" />
     </div>
+    <div class="qf-row">
+      <label for="cf-tel">連絡先電話 <span class="qf-req">必須</span></label>
+      <input id="cf-tel" name="tel" type="tel" required placeholder="例：03-0000-0000" />
+    </div>
     <button type="submit" class="qf-submit" data-track="hero_form_submit">無料で見積もりを依頼する →</button>
-    <p class="qf-note">詳細項目を入力したい方は <a href="#contact">こちらの詳細フォーム</a> へ</p>
+    <p class="qf-note qf-note--cta">詳細項目を入力したい方は <a href="#contact">こちらの詳細フォーム</a> へ</p>
   </form>
 </aside>
