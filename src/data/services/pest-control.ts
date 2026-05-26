@@ -11,7 +11,7 @@ const data: ServiceData = {
     title: '業務用害虫駆除（PCO）の一括見積｜飲食・食品・福祉施設の業者を最大3社比較',
     description:
       '飲食店・食品工場・ホテル・福祉施設向けの業務用害虫駆除（PCO）を一括見積で比較。HACCP・特定建築物の衛生管理に対応した有資格業者を最大3社ご紹介、完全無料。',
-    lastUpdated: '2025-05-26',
+    lastUpdated: '2026-05-26',
   },
 
   hero: {

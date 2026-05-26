@@ -4,7 +4,7 @@ export const site = {
   tagline: '施設管理の一括見積比較',
   description:
     '受水槽清掃・アスベスト調査・ダクト清掃・シャッター点検など、施設管理に必要な専門業者を一括見積で比較できるB2B向け業者紹介サービス。',
-  lastUpdated: '2025-05-26',
+  lastUpdated: '2026-05-26',
   stats: [
     { label: '紹介可能業者数', value: '1,200社' },
     { label: '対応エリア', value: '全国47都道府県' },

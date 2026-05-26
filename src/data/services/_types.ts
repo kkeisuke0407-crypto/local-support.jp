@@ -8,7 +8,7 @@ export interface ServiceData {
   meta: {
     title: string;
     description: string;
-    lastUpdated: string; // ISO date e.g. '2025-05-26'
+    lastUpdated: string; // ISO date e.g. '2026-05-26'
   };
 
   hero: {
