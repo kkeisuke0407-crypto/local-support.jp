@@ -2,16 +2,20 @@
   "name": "local-support-jp",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "fetch-gsc": "node scripts/fetch-gsc.js",
+    "fetch-gsc:dry": "node scripts/fetch-gsc.js --dry-run"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.0.0",
     "astro": "^5.0.0"
   },
   "devDependencies": {
+    "googleapis": "^172.0.0",
     "playwright": "^1.60.0"
   }
 }
