@@ -70,6 +70,76 @@ function buildPlainText(data: QuotePayload): string {
     .join('\n');
 }
 
+function buildUserReplyHtml(data: QuotePayload): string {
+  const summaryKeys = ['service', 'company', 'prefecture', 'city', 'facility_type', 'urgency', 'schedule', 'name', 'email', 'tel'];
+  const rows = summaryKeys
+    .filter((k) => data[k] && data[k].trim() !== '')
+    .map((k) => {
+      const label = FIELD_LABELS[k] || k;
+      const value = escapeHtml(data[k]).replace(/\n/g, '<br>');
+      return `<tr><th style="text-align:left;padding:8px 12px;background:#f3f4f6;border:1px solid #e5e7eb;width:160px;vertical-align:top;font-weight:600;">${escapeHtml(label)}</th><td style="padding:8px 12px;border:1px solid #e5e7eb;">${value}</td></tr>`;
+    })
+    .join('');
+  const nameLine = data.name ? `${escapeHtml(data.name)} 様` : `${escapeHtml(data.company)} 御中`;
+  return `<!DOCTYPE html>
+<html lang="ja"><body style="font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans',sans-serif;color:#1f2937;max-width:680px;margin:0 auto;padding:24px;line-height:1.7;">
+<h2 style="color:#1d4ed8;border-bottom:2px solid #1d4ed8;padding-bottom:8px;">お見積もり依頼を受け付けました</h2>
+<p>${nameLine}</p>
+<p>このたびは local-support.jp をご利用いただき、誠にありがとうございます。<br>下記の内容でお見積もり依頼を受け付けましたのでご連絡いたします。</p>
+
+<h3 style="font-size:15px;margin-top:24px;color:#1f2937;">今後の流れ</h3>
+<ol style="padding-left:20px;font-size:14px;">
+  <li>こちらで内容を確認のうえ、対応可能な登録業者を最大3社まで厳選します（通常1営業日以内）。</li>
+  <li>厳選した業者から直接メールまたはお電話でご連絡が入ります。</li>
+  <li>お見積もりを比較し、納得いただける業者とご契約ください。</li>
+</ol>
+<p style="font-size:13px;color:#6b7280;">※ 土日祝のお申し込みは翌営業日以降の対応となります。<br>※ 業者からのご連絡が確認できない場合は、迷惑メールフォルダ、またはご登録の電話番号への着信履歴もあわせてご確認ください。</p>
+
+<h3 style="font-size:15px;margin-top:24px;color:#1f2937;">ご依頼内容（控え）</h3>
+<table style="border-collapse:collapse;width:100%;font-size:14px;margin-top:8px;">${rows}</table>
+
+<p style="margin-top:32px;font-size:12px;color:#9ca3af;border-top:1px solid #e5e7eb;padding-top:16px;">
+このメールは送信専用アドレスから自動送信されています。<br>
+内容についてのお問い合わせは、各サービスページのフォームよりご連絡ください。<br>
+<br>
+local-support.jp（運営：ローカル情報局）<br>
+<a href="https://local-support.jp/" style="color:#1d4ed8;">https://local-support.jp/</a>
+</p>
+</body></html>`;
+}
+
+function buildUserReplyText(data: QuotePayload): string {
+  const summaryKeys = ['service', 'company', 'prefecture', 'city', 'facility_type', 'urgency', 'schedule', 'name', 'email', 'tel'];
+  const summary = summaryKeys
+    .filter((k) => data[k] && data[k].trim() !== '')
+    .map((k) => `  ${FIELD_LABELS[k] || k}: ${data[k]}`)
+    .join('\n');
+  const nameLine = data.name ? `${data.name} 様` : `${data.company} 御中`;
+  return `${nameLine}
+
+このたびは local-support.jp をご利用いただき、誠にありがとうございます。
+下記の内容でお見積もり依頼を受け付けましたのでご連絡いたします。
+
+■ 今後の流れ
+  1. こちらで内容を確認のうえ、対応可能な登録業者を最大3社まで厳選します（通常1営業日以内）。
+  2. 厳選した業者から直接メールまたはお電話でご連絡が入ります。
+  3. お見積もりを比較し、納得いただける業者とご契約ください。
+
+※ 土日祝のお申し込みは翌営業日以降の対応となります。
+※ 業者からのご連絡が確認できない場合は、迷惑メールフォルダ、またはご登録の電話番号への着信履歴もあわせてご確認ください。
+
+■ ご依頼内容（控え）
+${summary}
+
+────────────────────────
+このメールは送信専用アドレスから自動送信されています。
+内容についてのお問い合わせは、各サービスページのフォームよりご連絡ください。
+
+local-support.jp（運営：ローカル情報局）
+https://local-support.jp/
+`;
+}
+
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   const jsonResponse = (status: number, body: object) =>
     new Response(JSON.stringify(body), {
@@ -125,6 +195,30 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       const errBody = await resendResp.text();
       console.error('Resend error:', resendResp.status, errBody);
       return jsonResponse(502, { ok: false, error: 'メール送信に失敗しました' });
+    }
+
+    // ユーザー宛の受付確認メール（失敗してもメイン処理は成功扱い）
+    try {
+      const userReplyResp = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${context.env.RESEND_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          from: FROM_ADDRESS,
+          to: [data.email],
+          subject: '【local-support.jp】お見積もり依頼を受け付けました',
+          html: buildUserReplyHtml(data),
+          text: buildUserReplyText(data),
+        }),
+      });
+      if (!userReplyResp.ok) {
+        const errBody = await userReplyResp.text();
+        console.error('User reply send failed:', userReplyResp.status, errBody);
+      }
+    } catch (replyErr) {
+      console.error('User reply send error:', replyErr);
     }
 
     return jsonResponse(200, { ok: true });
