@@ -1,0 +1,294 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { site } from '../../../data/site';
+
+const title = '看板点検の費用相場2025｜サイズ別・高所作業車込みの料金と補修工事の単価';
+const description = '看板・屋外広告物点検の費用相場をサイズ別（壁面・屋上広告塔・突き出し看板）に整理。高所作業車・足場の手配費用、電飾サインの電気点検追加コスト、点検後の補修工事単価、許可更新時の自治体提出代行まで施設オーナー向けに解説します。';
+const canonical = `${site.domain}/column/signboard-inspection-hiyo-sohba/`;
+const published = '2025-05-26';
+const modified = '2025-05-26';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '看板点検の費用相場ガイド', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'Article',
+  headline: title, description, datePublished: published, dateModified: modified,
+  inLanguage: 'ja-JP', url: canonical, mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  author: { '@type': 'Organization', name: site.org.legalName, url: site.domain },
+  publisher: { '@type': 'Organization', name: site.org.legalName, url: site.domain, logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.svg` } },
+  about: { '@type': 'Service', name: '看板・屋外広告物点検' },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: '看板点検の料金は1基いくら？', acceptedAnswer: { '@type': 'Answer', text: '小型壁面看板（〜3㎡）で1基3,000〜10,000円、中型壁面（3〜10㎡）で8,000〜20,000円、屋上広告塔は15,000〜150,000円が目安。高所作業車・足場が必要な場合は別途加算されます。' } },
+    { '@type': 'Question', name: '高所作業車の追加費用はどのくらい？', acceptedAnswer: { '@type': 'Answer', text: '機種・時間で変動しますが、半日30,000〜50,000円、1日50,000〜80,000円が目安。複数基まとめて1日で点検すると費用が分散できます。' } },
+    { '@type': 'Question', name: '電飾サインの追加料金は？', acceptedAnswer: { '@type': 'Answer', text: '電気部分の点検（電気工事士の同行）は構造点検にプラス5,000〜20,000円／基が目安。配線・絶縁・接地等の安全確認を伴います。' } },
+    { '@type': 'Question', name: '点検後の補修工事の費用は？', acceptedAnswer: { '@type': 'Answer', text: '締結ボルト交換等の軽微補修で1基10,000〜30,000円、塗装・防錆処理で30,000〜100,000円、サイン面の張替えで50,000円〜数十万円が目安です。点検費用と補修工事費用は別契約とするのが透明性が高いです。' } },
+    { '@type': 'Question', name: '許可更新時の自治体提出代行は？', acceptedAnswer: { '@type': 'Answer', text: '5,000〜15,000円程度が目安。多くの業者は点検＋報告書作成＋提出代行をセットで提供しています。自治体ごとに様式が異なるため、提出経験のある業者を選ぶと書類差し戻しを避けられます。' } },
+    { '@type': 'Question', name: '複数看板まとめての割引はある？', acceptedAnswer: { '@type': 'Answer', text: '複数基まとめての点検は割引が一般的。同一物件で5基以上、または複数物件をエリア集中で発注すると20〜30%程度の割引が出やすい傾向です。多店舗・複数物件保有事業者は一括契約のメリットが大きいです。' } },
+  ],
+});
+---
+<BaseLayout title={title} description={description} canonical={canonical} siteName={site.name} logoSub="施設管理の一括見積比較" jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}>
+  <article class="cl-article">
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>看板点検の費用相場ガイド</span>
+        </nav>
+        <span class="cl-cat">費用相場</span>
+        <h1 class="cl-title">看板点検の費用相場2025｜サイズ別・高所作業車込みの料金と補修工事の単価</h1>
+        <p class="cl-lead">
+          看板・屋外広告物点検の費用は、<strong>看板の種類・サイズ・設置高さ・基数・電飾の有無</strong>で大きく変動します。「壁面看板1枚で3,000円〜と聞いたが、本当にその金額で済むのか」「高所作業車の費用込みかどうかわからない」「点検後の補修工事はいくらが妥当か」といった疑問にお答えするため、本記事ではサイズ別の点検単価、高所作業車・足場の手配費用、電飾サインの追加コスト、補修工事の単価、自治体提出代行までを整理しました。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2025年5月26日</time>
+          <span>最終更新：2025年5月26日</span>
+          <span>執筆：{site.org.legalName}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#base-cost">看板種別・サイズ別の点検単価</a></li>
+          <li><a href="#height">高所作業車・足場の費用</a></li>
+          <li><a href="#electric">電飾サインの追加点検費用</a></li>
+          <li><a href="#repair">点検後の補修工事の単価</a></li>
+          <li><a href="#permit">許可更新時の自治体提出代行</a></li>
+          <li><a href="#discount">複数基・複数物件の割引</a></li>
+          <li><a href="#cheap">安すぎる業者の注意点</a></li>
+          <li><a href="#tips">見積比較のコツ</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>点検単価</strong>：小型壁面3,000〜10,000円、屋上広告塔15,000〜150,000円／基</li>
+            <li><strong>追加費用</strong>：高所作業車30,000〜80,000円／日、電飾点検は1基+5,000〜20,000円</li>
+            <li><strong>補修工事</strong>：軽微1〜3万円、塗装3〜10万円、サイン面張替え5万円〜と別途</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="base-cost" class="cl-section">
+        <h2>看板種別・サイズ別の点検単価</h2>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>看板種別・サイズ別の点検費用相場（税込目安・1基あたり）</caption>
+            <thead><tr><th scope="col">看板種別</th><th scope="col">点検費用目安</th><th scope="col">所要時間</th><th scope="col">高所作業</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">小型壁面看板（〜3㎡）</th><td>3,000〜10,000円</td><td>30分〜1時間</td><td>梯子・脚立で対応可</td></tr>
+              <tr><th scope="row">中型壁面看板（3〜10㎡）</th><td>8,000〜20,000円</td><td>1〜2時間</td><td>高所作業車検討</td></tr>
+              <tr><th scope="row">大型壁面看板（10㎡〜）</th><td>15,000〜40,000円</td><td>2〜3時間</td><td>高所作業車・足場</td></tr>
+              <tr><th scope="row">突き出し看板（袖看板）</th><td>5,000〜15,000円</td><td>1時間程度</td><td>高所作業車</td></tr>
+              <tr><th scope="row">屋上広告塔（中型）</th><td>15,000〜50,000円</td><td>2〜4時間</td><td>安全帯・高所作業必須</td></tr>
+              <tr><th scope="row">屋上広告塔（大型）</th><td>50,000〜150,000円</td><td>半日〜1日</td><td>足場必要なケースあり</td></tr>
+              <tr><th scope="row">独立広告塔（看板＋柱）</th><td>20,000〜80,000円</td><td>2〜4時間</td><td>柱基礎・腐食確認必須</td></tr>
+              <tr><th scope="row">電飾サイン点検追加</th><td>+5,000〜20,000円</td><td>+30分〜</td><td>電気工事士併用</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="height" class="cl-section">
+        <h2>高所作業車・足場の費用</h2>
+        <p>屋上広告塔・大型壁面看板の点検には高所作業設備が必要です。点検費用とは別に手配費用が加算されます。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>高所作業設備の費用相場（税込目安）</caption>
+            <thead><tr><th scope="col">設備</th><th scope="col">費用目安</th><th scope="col">備考</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">トラック式高所作業車（半日）</th><td>30,000〜50,000円</td><td>到達高さ10〜15m級</td></tr>
+              <tr><th scope="row">トラック式高所作業車（1日）</th><td>50,000〜80,000円</td><td>—</td></tr>
+              <tr><th scope="row">大型高所作業車（20m級）</th><td>80,000〜150,000円／日</td><td>大型看板用</td></tr>
+              <tr><th scope="row">ローリングタワー</th><td>10,000〜30,000円／日</td><td>室内・低層用</td></tr>
+              <tr><th scope="row">単管足場（仮設）</th><td>50,000円〜</td><td>規模・期間で変動</td></tr>
+              <tr><th scope="row">道路使用許可申請代行</th><td>10,000〜30,000円</td><td>必要時のみ</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="cl-callout">
+          <h3 class="cl-callout-h">複数基をまとめて1日で実施</h3>
+          <p>高所作業車は半日・1日の単位で費用が決まるため、複数基の看板を1日にまとめて点検すると、1基あたりの設備費用が大幅に削減できます。同一エリア内の複数店舗の点検をスケジュール調整するのが効率的です。</p>
+        </div>
+      </section>
+
+      <section id="electric" class="cl-section">
+        <h2>電飾サインの追加点検費用</h2>
+        <p>電飾を伴うサインは、構造点検（屋外広告物点検技能講習修了者）に加えて、電気部分の点検（電気工事士）が必要です。</p>
+        <ul>
+          <li><strong>電気点検追加料金</strong>：1基あたり5,000〜20,000円</li>
+          <li><strong>主な点検項目</strong>：配線の絶縁劣化、接地（アース）状態、漏電、防水処理、LED・蛍光灯の交換時期</li>
+          <li><strong>電気工事士の同行</strong>：別途手配費用が発生する場合あり</li>
+        </ul>
+        <p>電飾サインの漏電は店舗ファサードの火災・感電事故に直結します。電気部分の点検を「別料金で割高だから」と省略すると、後日の火災時に保険金不払いの根拠にされるケースもあるため必須項目と認識すべきです。</p>
+      </section>
+
+      <section id="repair" class="cl-section">
+        <h2>点検後の補修工事の単価</h2>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>補修工事の費用相場（税込目安）</caption>
+            <thead><tr><th scope="col">作業内容</th><th scope="col">費用目安</th><th scope="col">備考</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">締結ボルト交換・増し締め</th><td>10,000〜30,000円／基</td><td>軽微補修</td></tr>
+              <tr><th scope="row">取付下地の補修（小範囲）</th><td>20,000〜50,000円</td><td>—</td></tr>
+              <tr><th scope="row">塗装・防錆処理</th><td>30,000〜100,000円</td><td>面積による</td></tr>
+              <tr><th scope="row">サイン面の張替え（部分）</th><td>50,000〜150,000円</td><td>シート種別で変動</td></tr>
+              <tr><th scope="row">サイン面の張替え（全面）</th><td>100,000〜数十万円</td><td>大型は別途</td></tr>
+              <tr><th scope="row">電気配線交換</th><td>20,000〜100,000円</td><td>長さ・場所で変動</td></tr>
+              <tr><th scope="row">LED・蛍光灯交換</th><td>3,000〜10,000円／灯</td><td>本体代＋工賃</td></tr>
+              <tr><th scope="row">看板撤去（小型）</th><td>30,000〜80,000円</td><td>処分費含む</td></tr>
+              <tr><th scope="row">看板撤去（大型・屋上）</th><td>100,000〜300,000円</td><td>足場・処分費別</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="cl-callout cl-callout--warn">
+          <h3 class="cl-callout-h">補修工事は別業者相見積で透明性確保</h3>
+          <p>点検業者が「補修工事も自社対応します」と提案するケースは多いですが、補修見積が異常に高額になることもあります。10万円超の補修は別業者の相見積を取るルールにしておくと、コストの妥当性を確認できます。</p>
+        </div>
+      </section>
+
+      <section id="permit" class="cl-section">
+        <h2>許可更新時の自治体提出代行</h2>
+        <p>多くの自治体で屋外広告物の許可期間は3年。更新時には点検結果報告書の提出が必要で、業者に代行を依頼するのが効率的です。</p>
+        <ul>
+          <li><strong>点検結果報告書作成</strong>：3,000〜10,000円</li>
+          <li><strong>自治体提出代行</strong>：5,000〜15,000円</li>
+          <li><strong>許可申請書類一式作成</strong>：10,000〜30,000円</li>
+          <li><strong>提出時の自治体手数料</strong>：自治体規定（数千〜数万円）</li>
+        </ul>
+        <p>自治体ごとに様式・運用が異なるため、該当自治体への提出経験がある業者を選ぶと書類差し戻しのリスクを回避できます。</p>
+      </section>
+
+      <section id="discount" class="cl-section">
+        <h2>複数基・複数物件の割引</h2>
+        <ul>
+          <li><strong>同一物件で3基以上</strong>：5〜15%割引</li>
+          <li><strong>同一物件で5基以上</strong>：15〜25%割引（高所作業車の費用分散効果も大）</li>
+          <li><strong>複数物件・エリア集中</strong>：移動コスト削減で20〜30%割引</li>
+          <li><strong>多店舗チェーン本部一括契約</strong>：25〜35%割引、許可期限管理代行</li>
+        </ul>
+      </section>
+
+      <section id="cheap" class="cl-section">
+        <h2>安すぎる業者の注意点</h2>
+        <ul>
+          <li>無資格者による形式的な点検（屋外広告物点検技能講習修了者なし）</li>
+          <li>高所作業車を使わず脚立のみで「点検」と称する</li>
+          <li>電気点検を省略（電飾サインの危険箇所を見逃す）</li>
+          <li>記録に写真・測定値（締結トルク等）が含まれない</li>
+          <li>自治体提出を「別料金」とし、結果的に許可更新できない</li>
+          <li>補修工事の見積を一方的に提示し相見積を妨害</li>
+        </ul>
+      </section>
+
+      <section id="tips" class="cl-section">
+        <h2>見積比較のコツ</h2>
+        <ol>
+          <li><strong>「点検＋報告書作成＋自治体提出」のセット</strong>で範囲を統一</li>
+          <li><strong>高所作業車・足場の費用</strong>が見積に含まれているか</li>
+          <li><strong>電飾サインの電気点検</strong>が含まれているか（電気工事士併用）</li>
+          <li><strong>点検記録の品質</strong>（写真・測定値・該当法令の有無）</li>
+          <li><strong>補修工事の単価表</strong>を事前取得し透明性確保</li>
+          <li><strong>該当自治体への提出経験</strong>の有無</li>
+        </ol>
+      </section>
+
+      <div class="cl-cta">
+        <h2>看板・屋外広告物点検の見積比較なら</h2>
+        <p>有資格者が在籍する登録業者から最大3社の見積もりを<br/>完全無料・約1分で取得できます</p>
+        <a class="cta-btn-primary" href="/signboard-inspection/">無料で一括見積もりを依頼する →</a>
+      </div>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          <div class="cl-faq-item"><dt>小さな袖看板1枚でも高所作業車は必要？</dt><dd>設置高さによります。3m以下なら脚立対応も可ですが、安全と点検品質を考えると高所作業車の方が確実です。建物前の道路使用許可が必要な場合もあるため、業者と事前相談しましょう。</dd></div>
+          <div class="cl-faq-item"><dt>許可更新を忘れた場合の費用は？</dt><dd>許可期限切れ後の対応は、「無許可期間中の事故リスク」「過料」「再申請手数料」が発生します。1基あたり数万円〜数十万円の余分なコストになることもあるため、許可期限管理は社内で台帳化を推奨します。</dd></div>
+          <div class="cl-faq-item"><dt>台風後の緊急点検は別料金？</dt><dd>はい、緊急対応は通常料金の25〜50%増が一般的。年間契約に「緊急点検枠」を含めると、災害時の優先対応が確保できます。</dd></div>
+          <div class="cl-faq-item"><dt>看板の施設賠償責任保険の費用は？</dt><dd>看板単独の保険ではなく、施設賠償責任保険の特約として加入することが一般的。年間保険料は事業内容で大きく異なりますが、看板の追加で年間1〜5万円程度の上乗せとなる場合が多いです。</dd></div>
+          <div class="cl-faq-item"><dt>点検費用は経費にできますか？</dt><dd>はい、事業用設備の維持費として全額損金算入可能です。法令義務に基づく支出なので、税務上も問題ありません。</dd></div>
+          <div class="cl-faq-item"><dt>テナント設置看板はテナント負担？</dt><dd>賃貸契約・許可名義により異なります。多くの場合、看板の許可名義人（テナント）が点検費用を負担しますが、ビル所有者と分担するケースもあります。契約時に明確化することが推奨されます。</dd></div>
+        </dl>
+      </section>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連サービス・コラム</h2>
+        <ul>
+          <li><a href="/signboard-inspection/">看板・屋外広告物点検の業者を一括見積比較</a></li>
+          <li><a href="/column/signboard-inspection-horei-gimu/">看板の安全点検は法的義務？</a></li>
+          <li><a href="/shutter/">シャッター点検の業者を比較</a></li>
+          <li><a href="/flow/">ご利用の流れ・3ステップで業者紹介</a></li>
+        </ul>
+      </aside>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-callout li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+@media (max-width: 600px) { .cl-header { padding: 32px 0 28px; } .cl-body { padding: 28px 16px 48px; } .cl-section h2 { font-size: 1.15rem; } }
+</style>

@@ -1,0 +1,297 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { site } from '../../../data/site';
+
+const title = '業務用害虫駆除（PCO）の費用相場2025｜業種別・契約形態別の料金ガイド';
+const description = '飲食店・食品工場・ホテル・福祉施設の業務用害虫駆除（PCO）の費用相場を業種別・契約形態別に整理。月次モニタリング契約・スポット駆除・トコジラミ・大型施設対応の料金、薬剤コスト、IPM対応業者の選定ポイントまで施設管理者向けに解説します。';
+const canonical = `${site.domain}/column/pest-control-hiyo-sohba/`;
+const published = '2025-05-26';
+const modified = '2025-05-26';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '害虫駆除（PCO）の費用相場ガイド', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'Article',
+  headline: title, description, datePublished: published, dateModified: modified,
+  inLanguage: 'ja-JP', url: canonical, mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  author: { '@type': 'Organization', name: site.org.legalName, url: site.domain },
+  publisher: { '@type': 'Organization', name: site.org.legalName, url: site.domain, logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.svg` } },
+  about: { '@type': 'Service', name: '害虫駆除（業務用PCO）' },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: '飲食店の害虫駆除契約はいくら？', acceptedAnswer: { '@type': 'Answer', text: '小規模飲食店の月次モニタリング契約で月額8,000〜15,000円、中規模で15,000〜30,000円が目安です。月1回の訪問・粘着トラップ設置・モニタリング報告書発行を含む標準的なパッケージの料金です。' } },
+    { '@type': 'Question', name: '月次契約とスポット駆除、どちらが得？', acceptedAnswer: { '@type': 'Answer', text: '飲食・食品事業者は月次契約が原則。HACCP記録の継続性、ブランド毀損リスクの予防、コストの平準化のメリットがあります。スポット駆除は1回30,000〜100,000円が一般的で、年間4〜5回必要なら月次契約のほうが安く済みます。' } },
+    { '@type': 'Question', name: 'トコジラミ駆除の費用は？', acceptedAnswer: { '@type': 'Answer', text: '客室1室あたり30,000〜80,000円が一般的。再発防止のため2〜3回の処理が標準で、合計100,000〜300,000円/客室になることもあります。ホテルでは早期発見・全室点検が経営リスク対策として重要です。' } },
+    { '@type': 'Question', name: '食品工場の害虫管理費用は？', acceptedAnswer: { '@type': 'Answer', text: '工場規模により月50,000〜300,000円が目安。HACCP・FSSC22000等の認証維持が求められる場合は、月次モニタリング＋四半期の総合点検＋年次のリスクアセスメントを含む包括契約となり、年間数百万円規模になるケースもあります。' } },
+    { '@type': 'Question', name: 'IPM対応業者を選ぶ理由は？', acceptedAnswer: { '@type': 'Answer', text: 'IPM（総合的有害生物管理）は薬剤散布を最小化し、物理的駆除・環境改善を優先する手法。食品事業者・福祉施設・医療機関では薬剤接触リスクを下げる必要があり、IPM対応が標準です。また長期的にはコスト効率も高いです。' } },
+    { '@type': 'Question', name: '報告書の質で料金が変わりますか？', acceptedAnswer: { '@type': 'Answer', text: 'はい。HACCP対応の詳細な報告書（生息マップ・トレンド分析・改善提案付き）を発行する業者は月額+2,000〜5,000円程度高い傾向ですが、保健所立入時の対応や食中毒事故時の証拠として価値が大きいです。' } },
+  ],
+});
+---
+<BaseLayout title={title} description={description} canonical={canonical} siteName={site.name} logoSub="施設管理の一括見積比較" jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}>
+  <article class="cl-article">
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>害虫駆除（PCO）の費用相場ガイド</span>
+        </nav>
+        <span class="cl-cat">費用相場</span>
+        <h1 class="cl-title">業務用害虫駆除（PCO）の費用相場2025｜業種別・契約形態別の料金ガイド</h1>
+        <p class="cl-lead">
+          業務用害虫駆除（PCO: Pest Control Operations）の費用は、<strong>業種・施設規模・契約形態・対象害虫</strong>で大きく変動します。「月いくらが妥当か」「飲食店と食品工場で何が違うか」「トコジラミの駆除費用はホテル経営者にとってどれくらい大きい支出か」といった疑問に答えるため、業種別の月額契約相場、スポット駆除の単価、特殊害虫対応、HACCP対応報告書付き契約の付加コスト、多店舗一括契約の割引まで実態に即して整理しました。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2025年5月26日</time>
+          <span>最終更新：2025年5月26日</span>
+          <span>執筆：{site.org.legalName}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#monthly">業種別の月次契約相場</a></li>
+          <li><a href="#spot">スポット駆除の料金</a></li>
+          <li><a href="#special">特殊害虫（トコジラミ等）の料金</a></li>
+          <li><a href="#factors">費用を左右する要因</a></li>
+          <li><a href="#haccp">HACCP対応報告書付き契約</a></li>
+          <li><a href="#multi">多店舗一括契約の割引</a></li>
+          <li><a href="#cheap">安すぎる業者の注意点</a></li>
+          <li><a href="#tips">見積比較のコツ</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>飲食店月額目安</strong>：小規模8,000〜15,000円、中規模15,000〜30,000円、食品工場50,000〜300,000円</li>
+            <li><strong>スポット駆除</strong>：1回30,000〜100,000円、トコジラミは客室1室30,000〜80,000円×複数回</li>
+            <li><strong>注意点</strong>：HACCP対応報告書の品質、IPM（薬剤最小化）対応、業種別の業界知識を業者選定で重視</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="monthly" class="cl-section">
+        <h2>業種別の月次契約相場</h2>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>業種別の月次モニタリング契約 費用相場（税込目安）</caption>
+            <thead><tr><th scope="col">業種・規模</th><th scope="col">月額目安</th><th scope="col">訪問頻度</th><th scope="col">主な対象害虫</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">小規模飲食店（〜50席）</th><td>8,000〜15,000円</td><td>月1回</td><td>ゴキブリ・チョウバエ</td></tr>
+              <tr><th scope="row">中規模飲食店（50〜150席）</th><td>15,000〜30,000円</td><td>月1回</td><td>ゴキブリ・ネズミ・チョウバエ</td></tr>
+              <tr><th scope="row">飲食チェーン店（大型）</th><td>20,000〜50,000円</td><td>月1〜2回</td><td>包括的</td></tr>
+              <tr><th scope="row">ホテル・旅館</th><td>30,000〜80,000円</td><td>月1回</td><td>客室＋厨房＋共用部</td></tr>
+              <tr><th scope="row">スーパー・物販店</th><td>20,000〜60,000円</td><td>月1回</td><td>ゴキブリ・ネズミ・倉庫害虫</td></tr>
+              <tr><th scope="row">病院・福祉施設</th><td>20,000〜60,000円</td><td>月1回</td><td>低毒性駆除・IPM</td></tr>
+              <tr><th scope="row">食品工場（中規模）</th><td>50,000〜150,000円</td><td>月1〜2回</td><td>原料・製造・出荷エリア</td></tr>
+              <tr><th scope="row">食品工場（大規模）</th><td>150,000〜500,000円</td><td>月1〜4回</td><td>HACCP・FSSC22000対応</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="cl-note">上記は標準的なモニタリング契約の目安です。報告書品質・薬剤使用範囲・大量発生時の対応条件により上下します。</p>
+      </section>
+
+      <section id="spot" class="cl-section">
+        <h2>スポット駆除の料金</h2>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>スポット駆除の費用相場（税込目安・1回あたり）</caption>
+            <thead><tr><th scope="col">対象</th><th scope="col">費用目安</th><th scope="col">復旧目安</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">ゴキブリ大量発生（小規模店）</th><td>30,000〜60,000円</td><td>1〜2回処理</td></tr>
+              <tr><th scope="row">ネズミ侵入（小規模）</th><td>30,000〜80,000円</td><td>2〜3回処理</td></tr>
+              <tr><th scope="row">ネズミ侵入（中規模）</th><td>80,000〜200,000円</td><td>侵入経路封鎖含む</td></tr>
+              <tr><th scope="row">チョウバエ（厨房）</th><td>30,000〜50,000円</td><td>排水処理併用</td></tr>
+              <tr><th scope="row">蚊・ハエの大量発生</th><td>30,000〜80,000円</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>スポット駆除は単発で見ると高額ですが、年に4〜5回必要な場合は月次契約のほうが結果的に安く済みます。また、ブランド毀損リスクを考えると予防が経済的です。</p>
+      </section>
+
+      <section id="special" class="cl-section">
+        <h2>特殊害虫（トコジラミ等）の料金</h2>
+        <p>特殊害虫は通常のゴキブリ・ネズミ駆除より高額になります。とくにトコジラミ（南京虫）はホテル経営者にとって重大なコストです。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>特殊害虫駆除の費用相場（税込目安）</caption>
+            <thead><tr><th scope="col">害虫種類</th><th scope="col">費用目安</th><th scope="col">備考</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">トコジラミ（客室1室）</th><td>30,000〜80,000円／回</td><td>2〜3回処理が標準</td></tr>
+              <tr><th scope="row">トコジラミ（全室予防点検）</th><td>5,000〜15,000円／室</td><td>ホテル全室</td></tr>
+              <tr><th scope="row">シロアリ（小規模）</th><td>100,000〜300,000円</td><td>面積による</td></tr>
+              <tr><th scope="row">ハチ駆除（スズメバチ巣）</th><td>15,000〜80,000円</td><td>巣の高さ・大きさで変動</td></tr>
+              <tr><th scope="row">ノミ・ダニ駆除</th><td>20,000〜50,000円</td><td>福祉施設等</td></tr>
+              <tr><th scope="row">食品工場の特殊害虫</th><td>50,000〜数十万円</td><td>チャタテムシ・ノシメマダラメイガ等</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="cl-callout cl-callout--warn">
+          <h3 class="cl-callout-h">トコジラミは早期発見が決定打</h3>
+          <p>近年、海外渡航者の増加でトコジラミ被害が国内で再び増加。1室から短期間で全フロアに拡大することがあり、対応の遅れがホテル経営に致命傷となります。月次モニタリング契約で早期発見体制を作っておくことが、結果的に最大の防御策です。</p>
+        </div>
+      </section>
+
+      <section id="factors" class="cl-section">
+        <h2>費用を左右する要因</h2>
+        <ul>
+          <li><strong>施設面積・階数・複雑さ</strong>：エリア数・モニタリング地点数で工数増</li>
+          <li><strong>対象害虫の種類</strong>：複数種対応・特殊害虫対応で増額</li>
+          <li><strong>訪問頻度</strong>：月1回／月2回／週次</li>
+          <li><strong>報告書の詳細度</strong>：HACCP対応のフル報告書 vs 簡易報告</li>
+          <li><strong>使用薬剤・トラップ</strong>：高性能・低毒性製品はコスト増</li>
+          <li><strong>営業時間外作業</strong>：深夜・早朝対応の割増</li>
+          <li><strong>IPM対応</strong>：環境改善コンサル含む包括契約は割高だが効果大</li>
+        </ul>
+      </section>
+
+      <section id="haccp" class="cl-section">
+        <h2>HACCP対応報告書付き契約</h2>
+        <p>食品事業者ではHACCP対応のモニタリング報告書が必要です。報告書の品質で月額料金が変わります。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>報告書タイプ別の料金比較</caption>
+            <thead><tr><th scope="col">報告書タイプ</th><th scope="col">月額加算</th><th scope="col">特徴</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">簡易報告（チェックリスト）</th><td>標準</td><td>訪問記録・捕獲数のみ</td></tr>
+              <tr><th scope="row">HACCP対応報告書（標準）</th><td>+2,000〜5,000円</td><td>生息マップ・改善提案あり</td></tr>
+              <tr><th scope="row">トレンド分析付き</th><td>+5,000〜10,000円</td><td>年次サマリ・改善効果検証</td></tr>
+              <tr><th scope="row">クラウド共有・電子保管</th><td>+3,000〜5,000円</td><td>多店舗一括管理に必須</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>多店舗運営事業者にとって、クラウド共有・電子保管は管理工数削減の効果が大きいため積極的に活用すべき機能です。</p>
+      </section>
+
+      <section id="multi" class="cl-section">
+        <h2>多店舗一括契約の割引</h2>
+        <ul>
+          <li><strong>2〜5店舗</strong>：5〜15%割引</li>
+          <li><strong>5〜20店舗</strong>：15〜25%割引、本部窓口設置</li>
+          <li><strong>20店舗以上</strong>：25〜35%割引、専用担当者・カスタマイズ報告書</li>
+        </ul>
+        <p>本部一括契約のメリットは価格だけでなく、全店舗の品質均一化・モニタリング履歴のクラウド共有・本部からの品質監査の効率化です。</p>
+      </section>
+
+      <section id="cheap" class="cl-section">
+        <h2>安すぎる業者の注意点</h2>
+        <ul>
+          <li>モニタリング頻度の極端な不足（月1回未満）</li>
+          <li>無資格者による作業（ペストコントロール技術者なしの店舗対応）</li>
+          <li>薬剤散布の過剰実施（コストかかる物理駆除を回避）</li>
+          <li>食品接触箇所への配慮不足</li>
+          <li>報告書がHACCP記録として使えない品質</li>
+          <li>家庭向け業者の業務用施設対応（業界知識不足）</li>
+        </ul>
+      </section>
+
+      <section id="tips" class="cl-section">
+        <h2>見積比較のコツ</h2>
+        <ol>
+          <li><strong>報告書サンプルを必ず取得</strong>：HACCP記録として使える品質か確認</li>
+          <li><strong>IPMアプローチ</strong>を採用している業者を優先</li>
+          <li><strong>業界知識</strong>（飲食・食品・福祉等）の有無</li>
+          <li><strong>緊急対応の単価表</strong>を事前に書面化</li>
+          <li><strong>解約条件・契約更新条項</strong>（自動更新の有無）</li>
+          <li><strong>多店舗対応の場合は本部一括窓口</strong>の有無</li>
+        </ol>
+      </section>
+
+      <div class="cl-cta">
+        <h2>害虫駆除（PCO）の見積比較なら</h2>
+        <p>HACCP対応の有資格業者から最大3社の見積もりを<br/>完全無料・約1分で取得できます</p>
+        <a class="cta-btn-primary" href="/pest-control/">無料で一括見積もりを依頼する →</a>
+      </div>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          <div class="cl-faq-item"><dt>個人経営の飲食店で月8,000円は妥当？</dt><dd>はい、小規模店舗の標準的な料金帯です。月1回の訪問・粘着トラップ・モニタリング報告を含むのが一般的。これより安い業者は訪問頻度・報告品質に注意が必要です。</dd></div>
+          <div class="cl-faq-item"><dt>トコジラミの完全駆除には何回必要？</dt><dd>2〜3回の処理が標準です。卵が薬剤に強いため、孵化サイクルに合わせて2〜3週間間隔で複数回処理することが完全駆除の鍵。1回で終わると謳う業者には再発リスクを確認してください。</dd></div>
+          <div class="cl-faq-item"><dt>営業中に薬剤散布されると困りますが？</dt><dd>業務用PCO業者は営業時間外作業が前提。営業中の薬剤散布は厳禁で、必ず閉店後の対応となります。客室や厨房での薬剤使用には特に配慮が必要です。</dd></div>
+          <div class="cl-faq-item"><dt>HACCP対応の業者か事前に判断する方法は？</dt><dd>①日本ペストコントロール協会会員、②建築物ねずみ昆虫等防除業の登録、③HACCP対応報告書サンプルの提供可、④業種別（飲食・食品・福祉等）の対応実績、⑤IPM対応の明示、で判断できます。</dd></div>
+          <div class="cl-faq-item"><dt>食品工場で年間予算をどう組む？</dt><dd>規模により年間50万〜500万円程度。HACCP・FSSC22000認証維持のためには包括的なPCOプログラムが必要で、月次モニタリング＋四半期総合点検＋年次リスクアセスメント＋発生時のスポット対応をパッケージ化する形が一般的です。</dd></div>
+          <div class="cl-faq-item"><dt>害虫駆除費用は経費にできますか？</dt><dd>はい、衛生管理費として全額損金算入可能です。HACCP対応の証跡として領収書・モニタリング報告書を保管しておきましょう。</dd></div>
+        </dl>
+      </section>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連サービス・コラム</h2>
+        <ul>
+          <li><a href="/pest-control/">害虫駆除（業務用PCO）の業者を一括見積比較</a></li>
+          <li><a href="/column/pest-control-haccp/">HACCP制度化で必須になった害虫対策ガイド</a></li>
+          <li><a href="/grease-trap/">グリストラップ清掃の業者を比較</a></li>
+          <li><a href="/flow/">ご利用の流れ・3ステップで業者紹介</a></li>
+        </ul>
+      </aside>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-note { font-size: .82rem; color: var(--gray-500); font-style: italic; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-callout li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+@media (max-width: 600px) { .cl-header { padding: 32px 0 28px; } .cl-body { padding: 28px 16px 48px; } .cl-section h2 { font-size: 1.15rem; } }
+</style>

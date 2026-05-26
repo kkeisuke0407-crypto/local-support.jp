@@ -1,0 +1,298 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { site } from '../../../data/site';
+
+const title = '業務用エアコン洗浄・修理の費用相場2025｜分解洗浄・修理・入替の判断基準';
+const description = '業務用エアコンの洗浄・修理・入替の費用相場を機種・規模別に解説。フィルター清掃・熱交換器洗浄・完全分解洗浄の単価、修理（軽微〜重整備）の費用レンジ、入替判断基準、緊急修理の追加コスト、年間契約の割引まで施設管理担当者向けに整理します。';
+const canonical = `${site.domain}/column/aircon-business-hiyo-sohba/`;
+const published = '2025-05-26';
+const modified = '2025-05-26';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '業務用エアコンの費用相場ガイド', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'Article',
+  headline: title, description, datePublished: published, dateModified: modified,
+  inLanguage: 'ja-JP', url: canonical, mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  author: { '@type': 'Organization', name: site.org.legalName, url: site.domain },
+  publisher: { '@type': 'Organization', name: site.org.legalName, url: site.domain, logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.svg` } },
+  about: { '@type': 'Service', name: '業務用エアコン洗浄・修理' },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: '業務用エアコンの分解洗浄費用はいくら？', acceptedAnswer: { '@type': 'Answer', text: '完全分解洗浄は1台25,000〜50,000円が目安です。熱交換器洗浄（分解なし）であれば15,000〜25,000円、フィルター清掃のみの簡易メンテは5,000〜10,000円程度です。複数台契約・年間契約で割引されるケースが一般的です。' } },
+    { '@type': 'Question', name: '故障修理の費用はどのくらい？', acceptedAnswer: { '@type': 'Answer', text: '部品交換軽微（基板・センサー等）で10,000〜30,000円、ガス漏れ修理＋冷媒充填で30,000〜80,000円、コンプレッサー等の重整備で50,000〜200,000円が目安です。故障内容と機種年式で大きく変動します。' } },
+    { '@type': 'Question', name: '修理と入替の判断基準は？', acceptedAnswer: { '@type': 'Answer', text: '一般的な目安は「修理費用が新品の50%超」「機種年式10年以上」「過去2年で複数回故障」「省エネ機種への入替で電気代削減見込み」のいずれかが該当する場合は入替が経済的です。専門家のセカンドオピニオンを取ることが重要です。' } },
+    { '@type': 'Question', name: '緊急修理の追加料金はどのくらい？', acceptedAnswer: { '@type': 'Answer', text: '夏季・冬季のピーク時の緊急対応は通常料金の25〜50%増、夜間・休日対応はさらに50%増になることが一般的です。当日対応が必要な場合は他業者との競合で割増される傾向があります。' } },
+    { '@type': 'Question', name: '年間契約のメリットは？', acceptedAnswer: { '@type': 'Answer', text: '点検＋洗浄＋緊急対応がセットで10〜25%割安になるケースが一般的。緊急修理時の優先対応、部品調達優先、フロン点検記録の自動管理等のメリットがあります。多店舗・複数台保有事業者は年間契約のコスト効率が高いです。' } },
+    { '@type': 'Question', name: 'フロン回収費用は別ですか？', acceptedAnswer: { '@type': 'Answer', text: '機器廃棄・入替時のフロン回収は別途料金（1台5,000〜30,000円）です。フロン排出抑制法に基づく行程管理票の発行も含まれます。回収費を含まない見積は法令違反の可能性があるため避けるべきです。' } },
+  ],
+});
+---
+<BaseLayout title={title} description={description} canonical={canonical} siteName={site.name} logoSub="施設管理の一括見積比較" jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}>
+  <article class="cl-article">
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>業務用エアコンの費用相場ガイド</span>
+        </nav>
+        <span class="cl-cat">費用相場</span>
+        <h1 class="cl-title">業務用エアコン洗浄・修理の費用相場2025｜分解洗浄・修理・入替の判断基準</h1>
+        <p class="cl-lead">
+          業務用エアコンの費用は<strong>「洗浄」「修理」「入替」のどれを選ぶか</strong>で大きく変わります。「夏直前に冷えなくなった、修理か買い替えか」「電気代が上がっているから洗浄したい」「フロン回収費用は別請求になるのか」といった判断に必要な情報を、機種・規模別の費用相場、修理内容別の単価、入替判断基準、緊急対応の追加コスト、年間契約のメリットまで整理しました。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2025年5月26日</time>
+          <span>最終更新：2025年5月26日</span>
+          <span>執筆：{site.org.legalName}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#cleaning">洗浄の費用相場</a></li>
+          <li><a href="#repair">修理の費用相場</a></li>
+          <li><a href="#replace">入替の費用相場と判断基準</a></li>
+          <li><a href="#emergency">緊急対応の追加料金</a></li>
+          <li><a href="#furon">フロン回収・廃棄費用</a></li>
+          <li><a href="#contract">年間契約 vs スポット</a></li>
+          <li><a href="#multi">複数台・多店舗契約の割引</a></li>
+          <li><a href="#tips">見積比較のコツ</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>洗浄</strong>：簡易5,000〜10,000円、熱交換器15,000〜25,000円、完全分解25,000〜50,000円／台</li>
+            <li><strong>修理</strong>：軽微1〜3万円、ガス漏れ3〜8万円、コンプレッサー等重整備5〜20万円</li>
+            <li><strong>入替判断</strong>：修理費が新品の50%超、年式10年超、過去2年で複数回故障のいずれかで入替検討</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="cleaning" class="cl-section">
+        <h2>洗浄の費用相場</h2>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>業務用エアコン洗浄の費用相場（税込目安・1台あたり）</caption>
+            <thead><tr><th scope="col">作業内容</th><th scope="col">費用目安</th><th scope="col">所要時間</th><th scope="col">推奨頻度</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">フィルター清掃・簡易メンテ</th><td>5,000〜10,000円</td><td>30分〜</td><td>月1〜2回（自社可）</td></tr>
+              <tr><th scope="row">熱交換器洗浄（分解なし）</th><td>15,000〜25,000円</td><td>1〜2時間</td><td>年1回</td></tr>
+              <tr><th scope="row">完全分解洗浄</th><td>25,000〜50,000円</td><td>2〜4時間</td><td>2〜3年に1回</td></tr>
+              <tr><th scope="row">完全分解洗浄（天井埋込型）</th><td>30,000〜60,000円</td><td>3〜5時間</td><td>取外し作業が複雑</td></tr>
+              <tr><th scope="row">除菌・抗菌コーティング</th><td>+5,000〜10,000円</td><td>+30分</td><td>年1〜2回</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>フィルター清掃は自社対応可能ですが、熱交換器・送風ファン・ドレンパン内部は分解しないと清掃できず、放置すると効率低下・カビ・悪臭の原因に。電気代が前年比で大幅増加している場合、洗浄不足を疑うべきです。</p>
+      </section>
+
+      <section id="repair" class="cl-section">
+        <h2>修理の費用相場</h2>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>業務用エアコン修理の費用相場（税込目安）</caption>
+            <thead><tr><th scope="col">故障内容</th><th scope="col">費用目安</th><th scope="col">復旧目安</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">フィルター詰まり・電源系</th><td>5,000〜15,000円</td><td>当日</td></tr>
+              <tr><th scope="row">ファン・モーター交換</th><td>15,000〜30,000円</td><td>当日〜半日</td></tr>
+              <tr><th scope="row">基板・センサー交換</th><td>20,000〜50,000円</td><td>半日〜1日</td></tr>
+              <tr><th scope="row">ガス漏れ修理＋冷媒充填</th><td>30,000〜80,000円</td><td>半日〜1日</td></tr>
+              <tr><th scope="row">配管・継手交換</th><td>30,000〜100,000円</td><td>1〜2日</td></tr>
+              <tr><th scope="row">コンプレッサー交換</th><td>80,000〜200,000円</td><td>1〜2日</td></tr>
+              <tr><th scope="row">熱交換器交換</th><td>100,000〜300,000円</td><td>2〜3日</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="replace" class="cl-section">
+        <h2>入替の費用相場と判断基準</h2>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>業務用エアコン入替費用（税込目安・本体＋工事込み）</caption>
+            <thead><tr><th scope="col">機種・能力</th><th scope="col">入替費用</th><th scope="col">補足</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">天井カセット形 2.5馬力</th><td>200,000〜400,000円</td><td>小規模オフィス・店舗</td></tr>
+              <tr><th scope="row">天井カセット形 4〜5馬力</th><td>300,000〜600,000円</td><td>中規模オフィス・飲食店</td></tr>
+              <tr><th scope="row">天井カセット形 6〜8馬力</th><td>400,000〜800,000円</td><td>大型店舗</td></tr>
+              <tr><th scope="row">ビルマル（小規模・10馬力）</th><td>600,000〜1,200,000円</td><td>テナントビル等</td></tr>
+              <tr><th scope="row">ビルマル（中規模・20〜30馬力）</th><td>1,500,000〜3,000,000円</td><td>—</td></tr>
+              <tr><th scope="row">ビルマル（大規模・50馬力〜）</th><td>3,000,000円〜</td><td>大型ビル・ホテル</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>入替を検討すべき5つのサイン</h3>
+        <ol>
+          <li><strong>修理費用が新品の50%以上</strong>：修理しても残寿命が短ければ入替の方が経済的</li>
+          <li><strong>機種年式10年以上</strong>：部品調達が困難になり始める時期</li>
+          <li><strong>過去2年で複数回故障</strong>：本体寿命の兆候</li>
+          <li><strong>電気代の異常上昇</strong>：洗浄でも改善しない場合は機器効率低下</li>
+          <li><strong>省エネ機種への切替で長期コスト削減</strong>：補助金活用も検討</li>
+        </ol>
+        <div class="cl-callout">
+          <h3 class="cl-callout-h">省エネ補助金の活用</h3>
+          <p>業務用エアコン入替時は、省エネ機器導入補助金（自治体・国の制度）の対象となる場合があります。対象機器・申請時期は変動するため、業者に最新情報を確認しましょう。補助金で実質負担が30〜50%減になるケースもあります。</p>
+        </div>
+      </section>
+
+      <section id="emergency" class="cl-section">
+        <h2>緊急対応の追加料金</h2>
+        <ul>
+          <li><strong>夏季・冬季ピーク時の緊急対応</strong>：通常料金の25〜50%増</li>
+          <li><strong>夜間（22時〜翌朝6時）対応</strong>：+50%程度</li>
+          <li><strong>休日対応</strong>：+25〜50%</li>
+          <li><strong>当日中の駆けつけ</strong>：+10,000円〜の追加が一般的</li>
+          <li><strong>部品手配の急ぎ便</strong>：+5,000円〜数万円</li>
+        </ul>
+        <p>夏季の繁忙期は他業者との競合で割増される傾向。年間契約の優先枠を持っていると、ピーク時でも通常料金で対応してもらえるケースが多いため、店舗運営事業者は契約検討の価値があります。</p>
+      </section>
+
+      <section id="furon" class="cl-section">
+        <h2>フロン回収・廃棄費用</h2>
+        <p>機器の入替・廃棄時は、フロン排出抑制法に基づき第一種フロン類充塡回収業者によるフロン回収が必要です。</p>
+        <ul>
+          <li><strong>フロン回収（1台）</strong>：5,000〜30,000円（機種・冷媒種で変動）</li>
+          <li><strong>行程管理票発行</strong>：上記費用に通常含まれる</li>
+          <li><strong>機器本体の処分</strong>：別途産廃処分費（数千〜数万円）</li>
+        </ul>
+        <p>「フロン回収不要」「処分費込みで安い」という業者は法令違反の可能性があるため必ず避けるべきです。発注者側にも法的責任があるため、行程管理票の控えを必ず受領・保管しましょう。</p>
+      </section>
+
+      <section id="contract" class="cl-section">
+        <h2>年間契約 vs スポット</h2>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>契約形態別の比較</caption>
+            <thead><tr><th scope="col">項目</th><th scope="col">年間契約</th><th scope="col">スポット</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">価格</th><td>10〜25%割安</td><td>定価</td></tr>
+              <tr><th scope="row">緊急対応</th><td>優先枠あり、夏ピークも通常料金</td><td>料金割増＋順番待ち</td></tr>
+              <tr><th scope="row">フロン点検記録</th><td>自動管理</td><td>自社対応必要</td></tr>
+              <tr><th scope="row">部品調達</th><td>優先確保</td><td>都度発注</td></tr>
+              <tr><th scope="row">契約縛り</th><td>通常1年</td><td>なし</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="multi" class="cl-section">
+        <h2>複数台・多店舗契約の割引</h2>
+        <ul>
+          <li><strong>同一物件で5台以上</strong>：5〜15%割引</li>
+          <li><strong>5店舗以上</strong>：15〜25%割引</li>
+          <li><strong>20店舗以上</strong>：25〜35%割引、専用担当者</li>
+        </ul>
+        <p>本部一括契約のメリットは価格だけでなく、機種・年式・点検履歴の集中管理、フロン排出抑制法対応の効率化、緊急対応の優先処理です。</p>
+      </section>
+
+      <section id="tips" class="cl-section">
+        <h2>見積比較のコツ</h2>
+        <ol>
+          <li><strong>「洗浄／修理／入替」の3パターン</strong>で提案できる業者を選ぶ</li>
+          <li><strong>部品在庫・調達ルート</strong>を確認（緊急修理時の差が出る）</li>
+          <li><strong>主要メーカーの対応実績</strong>（ダイキン・三菱・東芝・パナソニック・日立等）</li>
+          <li><strong>フロン回収行程管理票の発行</strong>を必須条件にする</li>
+          <li><strong>緊急対応の単価表</strong>を事前に書面化</li>
+          <li><strong>年間契約の中身</strong>（点検＋洗浄＋部品交換限度額）を細かく比較</li>
+        </ol>
+      </section>
+
+      <div class="cl-cta">
+        <h2>業務用エアコン洗浄・修理の見積比較なら</h2>
+        <p>フロン法対応の有資格業者から最大3社の見積もりを<br/>完全無料・約1分で取得できます</p>
+        <a class="cta-btn-primary" href="/aircon-business/">無料で一括見積もりを依頼する →</a>
+      </div>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          <div class="cl-faq-item"><dt>故障してすぐ修理してくれるかが心配です</dt><dd>業者選定時に「夏季の緊急対応の目安時間」「年間契約の優先枠」「24時間対応の有無」を確認しましょう。平時に複数業者と関係を作っておくことが緊急時の安心につながります。</dd></div>
+          <div class="cl-faq-item"><dt>「分解洗浄」と「分解しない洗浄」の違いは？</dt><dd>分解しない簡易洗浄は熱交換器の外側を高圧水で洗うだけで、内部の汚れは除去できません。完全分解洗浄は本体を分解して熱交換器・送風ファン・ドレンパン等を個別に洗浄。徹底的な汚れ除去とカビ・悪臭対策には完全分解が必要です。</dd></div>
+          <div class="cl-faq-item"><dt>修理見積100万円と聞いたら相見積を取るべき？</dt><dd>はい、必ず取りましょう。修理範囲・部品調達ルートで業者により大きく価格差があります。50万円超の修理は2社以上の相見積が原則です。</dd></div>
+          <div class="cl-faq-item"><dt>旧機種の部品調達が困難と言われた</dt><dd>10年以上前の機種は部品供給が終了しているケースがあります。中古機・リビルト機の活用、代替機種への入替が選択肢になります。複数業者で対応方針を比較しましょう。</dd></div>
+          <div class="cl-faq-item"><dt>事務所のエアコンも年間契約が必要？</dt><dd>家庭用ルームエアコンを事務所で使っている場合はフロン排出抑制法の対象外です。業務用パッケージエアコンであれば、フロン点検記録管理を考えると年間契約が便利です。</dd></div>
+          <div class="cl-faq-item"><dt>洗浄費用は経費にできますか？</dt><dd>はい、事業用設備の維持費として全額損金算入可能です。入替時も減価償却資産として処理します。</dd></div>
+        </dl>
+      </section>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連サービス・コラム</h2>
+        <ul>
+          <li><a href="/aircon-business/">業務用エアコン洗浄・修理の業者を一括見積比較</a></li>
+          <li><a href="/column/aircon-business-furon-tenken/">フロン排出抑制法の点検義務ガイド</a></li>
+          <li><a href="/duct/">空調ダクト清掃の業者を比較</a></li>
+          <li><a href="/flow/">ご利用の流れ・3ステップで業者紹介</a></li>
+        </ul>
+      </aside>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-callout li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+@media (max-width: 600px) { .cl-header { padding: 32px 0 28px; } .cl-body { padding: 28px 16px 48px; } .cl-section h2 { font-size: 1.15rem; } }
+</style>
