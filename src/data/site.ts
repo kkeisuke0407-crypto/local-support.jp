@@ -46,6 +46,30 @@ export const serviceIndex = [
     short: '消防設備',
     description: '消防法で義務化されている機器点検・総合点検を有資格業者へ一括見積。',
   },
+  {
+    slug: 'grease-trap',
+    name: 'グリストラップ清掃',
+    short: 'グリストラップ',
+    description: '飲食店・厨房施設のグリストラップ清掃を許可業者へ一括見積。',
+  },
+  {
+    slug: 'aircon-business',
+    name: '業務用エアコン洗浄・修理',
+    short: '業務用エアコン',
+    description: '店舗・オフィスの業務用エアコン洗浄・修理を有資格業者へ一括見積。',
+  },
+  {
+    slug: 'pest-control',
+    name: '害虫駆除（業務用PCO）',
+    short: '害虫駆除',
+    description: '飲食・食品・福祉施設のHACCP対応害虫駆除を専門業者へ一括見積。',
+  },
+  {
+    slug: 'signboard-inspection',
+    name: '看板・屋外広告物点検',
+    short: '看板点検',
+    description: '屋外広告物条例に基づく看板の安全点検を有資格業者へ一括見積。',
+  },
 ] as const;
 
 export const prefectures = [
