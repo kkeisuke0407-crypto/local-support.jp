@@ -10,6 +10,7 @@ interface Props {
   logoSub?: string;
   ogImage?: string;
   jsonLdBlocks?: string[];
+  noindex?: boolean;
 }
 
 const {
@@ -20,6 +21,7 @@ const {
   logoSub = '施設管理の一括見積比較',
   ogImage = 'https://local-support.jp/og-default.svg',
   jsonLdBlocks = [],
+  noindex = false,
 } = Astro.props;
 
 // Always include Organization + WebSite JSON-LD
@@ -56,6 +58,7 @@ const allLdBlocks = [...baseLdBlocks, ...jsonLdBlocks];
   <title>{title}</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canonical} />
+  {noindex && <meta name="robots" content="noindex,nofollow" />}
 
   <meta property="og:type"        content="website" />
   <meta property="og:title"       content={title} />
@@ -70,11 +73,19 @@ const allLdBlocks = [...baseLdBlocks, ...jsonLdBlocks];
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" rel="stylesheet" />
 
-  <!-- Google tag (gtag.js) -->
+  <!-- Google tag (gtag.js) — Consent Mode v2 default: denied, granted on user consent -->
   <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-KS0PVE3PY5"></script>
   <script is:inline>
     window.dataLayer = window.dataLayer || [];
     function gtag(){ dataLayer.push(arguments); }
+    var stored = null;
+    try { stored = localStorage.getItem('ls_consent'); } catch (e) {}
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: stored === 'granted' ? 'granted' : 'denied',
+    });
     gtag('js', new Date());
     gtag('config', 'G-KS0PVE3PY5');
   </script>
@@ -131,6 +142,17 @@ const allLdBlocks = [...baseLdBlocks, ...jsonLdBlocks];
 <!-- ══ Sticky CTA（スマホ） ════════════════════════════════════ -->
 <div class="sticky-cta">
   <a href="#contact" class="sticky-btn-primary" data-scroll-to="#contact" data-track="sticky_form">無料で一括見積もり依頼 →</a>
+</div>
+
+<!-- ══ Cookie同意バナー ════════════════════════════════════════ -->
+<div id="cookie-banner" class="cookie-banner" hidden>
+  <p class="cookie-banner-text">
+    当サイトでは、サービス改善のためにCookieを利用したアクセス解析（Google Analytics）を使用しています。詳しくは<a href="/privacy/">プライバシーポリシー</a>をご確認ください。
+  </p>
+  <div class="cookie-banner-actions">
+    <button type="button" class="cookie-banner-btn cookie-banner-btn--accept" data-consent="granted">同意する</button>
+    <button type="button" class="cookie-banner-btn cookie-banner-btn--decline" data-consent="denied">拒否する</button>
+  </div>
 </div>
 
 <script is:inline src="/app.js"></script>
