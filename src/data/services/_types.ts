@@ -48,6 +48,10 @@ export interface ServiceData {
 
   selectionCriteria: { number: string; title: string; body: string }[];
 
+  mistakes: { title: string; symptom: string; cause: string; prevention: string }[];
+
+  comparisonTips: { title: string; body: string }[];
+
   faq: { q: string; a: string }[];
 
   formCustomField?: {

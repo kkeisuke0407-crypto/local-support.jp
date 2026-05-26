@@ -10,6 +10,8 @@ import RiskCards from '../components/RiskCards.astro';
 import CostTable from '../components/CostTable.astro';
 import IndustrySection from '../components/IndustrySection.astro';
 import SelectionChecklist from '../components/SelectionChecklist.astro';
+import MistakesSection from '../components/MistakesSection.astro';
+import ComparisonTipsSection from '../components/ComparisonTipsSection.astro';
 import QuoteFormFull from '../components/QuoteFormFull.astro';
 import FAQ from '../components/FAQ.astro';
 import RelatedServices from '../components/RelatedServices.astro';
@@ -90,6 +92,8 @@ const jsonLdBlocks = [breadcrumbLd, serviceLd, faqLd];
   <CostTable costGuide={data.costGuide} serviceName={data.serviceName} lastUpdated={data.meta.lastUpdated} />
   <IndustrySection industries={data.industries} serviceName={data.serviceName} />
   <SelectionChecklist criteria={data.selectionCriteria} serviceName={data.serviceName} />
+  <MistakesSection mistakes={data.mistakes} serviceName={data.serviceName} />
+  <ComparisonTipsSection tips={data.comparisonTips} serviceName={data.serviceName} />
   <QuoteFormFull data={data} />
   <FAQ faq={data.faq} serviceName={data.serviceName} />
   <PrefectureGrid serviceSlug={data.slug} serviceName={data.serviceName} />

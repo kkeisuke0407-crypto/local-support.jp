@@ -1,0 +1,27 @@
+---
+interface Props {
+  tips: { title: string; body: string }[];
+  serviceName: string;
+}
+const { tips, serviceName } = Astro.props;
+---
+<section class="sd-section section-gray" id="comparison-tips">
+  <div class="sd-container">
+    <div class="section-head">
+      <span class="kicker">COMPARISON</span>
+      <h2>{serviceName}業者の相見積もりのコツ</h2>
+      <p>複数業者を比較するときに見落としがちなポイント。一括見積もりを最大限活用する方法を解説します。</p>
+    </div>
+    <ol class="tips-grid">
+      {tips.map((t, i) => (
+        <li class="tip-card">
+          <div class="tip-num">{String(i + 1).padStart(2, '0')}</div>
+          <div class="tip-content">
+            <h3 class="tip-title">{t.title}</h3>
+            <p class="tip-body">{t.body}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

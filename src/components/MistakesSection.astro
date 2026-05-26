@@ -1,0 +1,40 @@
+---
+interface Props {
+  mistakes: { title: string; symptom: string; cause: string; prevention: string }[];
+  serviceName: string;
+}
+const { mistakes, serviceName } = Astro.props;
+---
+<section class="sd-section section-white" id="mistakes">
+  <div class="sd-container">
+    <div class="section-head">
+      <span class="kicker">CASE STUDY</span>
+      <h2>{serviceName}業者選びでよくある失敗事例</h2>
+      <p>過去の相談から多かったトラブルパターン。同じ失敗を避けるためのチェックポイントを解説します。</p>
+    </div>
+    <div class="mistakes-list">
+      {mistakes.map((m, i) => (
+        <article class="mistake-card">
+          <header class="mistake-card-head">
+            <span class="mistake-num">CASE {String(i + 1).padStart(2, '0')}</span>
+            <h3 class="mistake-title">{m.title}</h3>
+          </header>
+          <dl class="mistake-body">
+            <div class="mistake-row">
+              <dt><span class="mistake-tag mistake-tag--symptom">起きたこと</span></dt>
+              <dd>{m.symptom}</dd>
+            </div>
+            <div class="mistake-row">
+              <dt><span class="mistake-tag mistake-tag--cause">原因</span></dt>
+              <dd>{m.cause}</dd>
+            </div>
+            <div class="mistake-row">
+              <dt><span class="mistake-tag mistake-tag--prevention">防ぎ方</span></dt>
+              <dd>{m.prevention}</dd>
+            </div>
+          </dl>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
