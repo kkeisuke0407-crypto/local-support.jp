@@ -1,0 +1,297 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { site } from '../../../data/site';
+
+const title = '看板の安全点検は法的義務？2025年版｜屋外広告物条例と落下事故の管理者責任';
+const description = '屋外広告物法および各自治体の条例に基づく看板・サインの安全点検義務を解説。東京都・大阪府・福岡市等で進む有資格者点検の義務化、許可更新時の報告書、落下事故の管理者責任、過去の重大事故事例まで施設オーナー・店舗運営者向けに整理しました。';
+const canonical = `${site.domain}/column/signboard-inspection-horei-gimu/`;
+const published = '2025-05-26';
+const modified = '2025-05-26';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '看板の安全点検は法的義務？', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'Article',
+  headline: title, description, datePublished: published, dateModified: modified,
+  inLanguage: 'ja-JP', url: canonical, mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  author: { '@type': 'Organization', name: site.org.legalName, url: site.domain },
+  publisher: { '@type': 'Organization', name: site.org.legalName, url: site.domain, logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.svg` } },
+  about: { '@type': 'Service', name: '看板・屋外広告物点検' },
+  citation: [
+    { '@type': 'Legislation', name: '屋外広告物法' },
+    { '@type': 'Legislation', name: '建築基準法' },
+  ],
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: '看板の安全点検は法的に義務ですか？', acceptedAnswer: { '@type': 'Answer', text: '看板の点検義務は自治体の屋外広告物条例により規定されており、自治体ごとに対象・頻度・有資格者要件が異なります。多くの自治体で許可期間（通常3年）の更新時に点検結果報告が必須となっており、東京都・大阪府・福岡市などでは有資格者点検が義務化されています。' } },
+    { '@type': 'Question', name: '点検が必要な看板のサイズは？', acceptedAnswer: { '@type': 'Answer', text: '自治体の許可対象となる看板（多くは一定の規模・高さ以上）が点検対象です。許可不要のサイズでも、所有者には民事上の安全配慮義務があり、落下事故時には責任を問われるため定期点検が推奨されます。' } },
+    { '@type': 'Question', name: '点検頻度はどのくらい？', acceptedAnswer: { '@type': 'Answer', text: '多くの自治体で許可期間が3年と定められ、更新時に点検結果報告が必要です。台風・地震が多いエリアや海沿いの腐食しやすい立地では、自主的に年1回の点検を行うケースもあります。' } },
+    { '@type': 'Question', name: '看板点検技能講習修了者とは？', acceptedAnswer: { '@type': 'Answer', text: '一般社団法人日本サイン協会等が主催する「屋外広告物点検技能講習」を修了した者を指します。東京都・神奈川県・大阪府・福岡市等では、許可更新時の点検をこの資格者が実施することが義務付けられています。' } },
+    { '@type': 'Question', name: '落下事故が起きた場合の責任は？', acceptedAnswer: { '@type': 'Answer', text: '看板の所有者・管理者には民事上の工作物責任（民法第717条）が課されており、瑕疵による損害は所有者が無過失で賠償責任を負います。さらに点検義務違反が明らかな場合は刑事責任（業務上過失致死傷罪）も問われます。' } },
+    { '@type': 'Question', name: '点検していなくても、過去に問題ないなら大丈夫？', acceptedAnswer: { '@type': 'Answer', text: 'いいえ。腐食・締結ボルトの劣化・取付下地の損傷は数年単位で進行し、ある日突然脱落することがあります。「これまで大丈夫だった」は何の保証にもなりません。台風・地震を経た看板は特に劣化が進んでいるため要点検です。' } },
+  ],
+});
+---
+<BaseLayout title={title} description={description} canonical={canonical} siteName={site.name} logoSub="施設管理の一括見積比較" jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}>
+  <article class="cl-article">
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>看板の安全点検は法的義務？</span>
+        </nav>
+        <span class="cl-cat">法令・義務</span>
+        <h1 class="cl-title">看板の安全点検は法的義務？2025年版｜屋外広告物条例と落下事故の管理者責任</h1>
+        <p class="cl-lead">
+          看板（屋外広告物）の安全点検は、<strong>2015年札幌の看板落下事故</strong>（歩行者死亡）を契機に各自治体の条例で点検義務化・有資格者点検義務化が進んでいます。許可不要のサイズでも落下事故時の管理者責任は民事上の工作物責任（民法第717条）として無過失責任で問われるため、店舗オーナー・テナント・ビル管理者にとって「知らなかった」では済まされない領域です。本記事では、屋外広告物法と自治体条例の関係、許可更新時の点検報告、有資格者要件、落下事故の責任構造、業者選定のチェックポイントまで整理します。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2025年5月26日</time>
+          <span>最終更新：2025年5月26日</span>
+          <span>執筆：{site.org.legalName}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#law-overview">屋外広告物を規制する法令の全体像</a></li>
+          <li><a href="#jichitai">自治体条例による点検義務の現状</a></li>
+          <li><a href="#qualified">有資格者点検が必要なケース</a></li>
+          <li><a href="#permit">許可期間と更新時の点検報告</a></li>
+          <li><a href="#liability">落下事故時の管理者責任</a></li>
+          <li><a href="#cases">過去の重大事故事例</a></li>
+          <li><a href="#vendor">業者選定で確認すべきこと</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>義務の根拠</strong>：屋外広告物法＋各自治体の条例。許可期間（通常3年）の更新時に点検結果報告が必須</li>
+            <li><strong>有資格者要件</strong>：東京都・大阪府・福岡市等では「屋外広告物点検技能講習修了者」による点検が義務化</li>
+            <li><strong>落下事故の責任</strong>：民法第717条の工作物責任で<strong>所有者は無過失でも賠償責任</strong>。点検義務違反は刑事責任の対象にも</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="law-overview" class="cl-section">
+        <h2>屋外広告物を規制する法令の全体像</h2>
+        <p>看板（屋外広告物）の規制は、上位の屋外広告物法と、その委任を受けた都道府県・政令指定都市の条例で具体化される二層構造になっています。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>屋外広告物に関わる主要法令</caption>
+            <thead><tr><th scope="col">法令・条例</th><th scope="col">役割</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">屋外広告物法（法律）</th><td>都道府県・政令市に条例制定権限を付与、基本的な枠組みを規定</td></tr>
+              <tr><th scope="row">各都道府県・政令市の屋外広告物条例</th><td>具体的な許可基準・点検義務・有資格者要件等を規定</td></tr>
+              <tr><th scope="row">建築基準法</th><td>広告塔・看板の構造強度・落下防止に関する規定</td></tr>
+              <tr><th scope="row">電気事業法</th><td>電飾サインの電気設備の安全</td></tr>
+              <tr><th scope="row">民法第717条（工作物責任）</th><td>瑕疵による損害の所有者責任</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>つまり、「うちは東京で店をやっている」なら東京都屋外広告物条例を、「大阪なら」大阪府条例（または市町村条例）を確認する必要があります。同じ規模の看板でも自治体により扱いが異なるのが実情です。</p>
+      </section>
+
+      <section id="jichitai" class="cl-section">
+        <h2>自治体条例による点検義務の現状</h2>
+        <p>2015年の札幌看板落下事故以降、各自治体が条例改正を進めており、点検義務化・有資格者点検義務化が段階的に拡大しています。</p>
+        <h3>主要自治体の動向（一般的な傾向）</h3>
+        <ul>
+          <li><strong>東京都</strong>：許可申請時・更新時に点検結果報告が必要。一定規模以上は有資格者点検義務</li>
+          <li><strong>大阪府・大阪市</strong>：高さ・面積基準で有資格者点検が義務化</li>
+          <li><strong>神奈川県・横浜市</strong>：許可更新時の安全点検報告制度</li>
+          <li><strong>福岡市</strong>：有資格者点検義務化を先行導入</li>
+          <li><strong>その他多くの政令市・中核市</strong>：条例改正で順次導入が進行中</li>
+        </ul>
+        <p>各自治体の最新条例・運用は、自治体ホームページの「屋外広告物」関連ページで必ず確認してください。改正頻度が比較的高い領域のため、過去の知識のままで運用していると誤りに繋がります。</p>
+        <div class="cl-callout cl-callout--warn">
+          <h3 class="cl-callout-h">「点検義務化」は今後も拡大の方向</h3>
+          <p>国土交通省は屋外広告物の安全管理を強化する方向で、自治体ガイドライン・モデル条例の整備を進めています。現時点で点検義務化されていない自治体でも、近い将来導入される可能性が高い領域です。先行して自主点検を始めると、義務化対応も円滑になります。</p>
+        </div>
+      </section>
+
+      <section id="qualified" class="cl-section">
+        <h2>有資格者点検が必要なケース</h2>
+        <p>主要自治体では、一定規模以上の看板について「屋外広告物点検技能講習修了者」など特定資格者による点検が義務付けられています。</p>
+        <h3>主な有資格者</h3>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>看板点検に関連する主な資格</caption>
+            <thead><tr><th scope="col">資格</th><th scope="col">役割</th><th scope="col">取得方法</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">屋外広告物点検技能講習修了者</th><td>看板の構造・取付け部の安全点検</td><td>2日間程度の講習＋効果測定</td></tr>
+              <tr><th scope="row">屋外広告士</th><td>屋外広告物の企画・設計・施工・管理の総合資格</td><td>国家試験合格</td></tr>
+              <tr><th scope="row">電気工事士（第1種・第2種）</th><td>電飾サインの電気設備点検・工事</td><td>国家試験合格</td></tr>
+              <tr><th scope="row">建築設備検査員</th><td>建築物に付帯する設備の検査</td><td>講習＋修了考査</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>電飾サインは電気点検が別途必要</h3>
+        <p>電飾を伴うサインは、構造点検（屋外広告物点検技能講習修了者）に加えて、電気部分の点検（電気工事士）が必要です。配線の絶縁劣化・接地不良・浸水は漏電火災の原因になります。</p>
+      </section>
+
+      <section id="permit" class="cl-section">
+        <h2>許可期間と更新時の点検報告</h2>
+        <p>多くの自治体で屋外広告物の許可期間は3年と定められています。更新時には点検結果報告書の提出が必要です。</p>
+        <h3>更新申請に必要な一般的書類</h3>
+        <ul>
+          <li>許可更新申請書（自治体所定様式）</li>
+          <li>点検結果報告書（点検実施者の署名・資格番号入り）</li>
+          <li>看板の現況写真（直近撮影、各面・全景）</li>
+          <li>取付け状況の詳細写真（締結部・腐食状況等）</li>
+          <li>関連する設備認定書・設計図書（電飾の場合）</li>
+          <li>過去の点検履歴（連続更新の場合）</li>
+        </ul>
+        <h3>更新を忘れたらどうなる？</h3>
+        <ul>
+          <li>許可期限切れの看板は「無許可看板」として撤去命令の対象</li>
+          <li>無許可看板の放置は過料・罰則の対象</li>
+          <li>事故発生時に「無許可期間中の事故」となり責任がさらに重くなる</li>
+        </ul>
+        <p>「<strong>看板許可期限管理台帳</strong>」を社内で整備し、期限の6か月前にはアラートが上がる運用にしておくことが推奨されます。</p>
+      </section>
+
+      <section id="liability" class="cl-section">
+        <h2>落下事故時の管理者責任</h2>
+        <p>看板の落下事故は、刑事・民事・行政の3つの責任が同時に問われる重大事案です。</p>
+        <h3>民事責任：工作物責任（民法第717条）</h3>
+        <p>土地工作物の設置・保存に瑕疵があり他人に損害を生じさせた場合、その占有者または所有者は損害賠償責任を負います。看板は典型的な土地工作物に該当します。</p>
+        <ul>
+          <li><strong>占有者の責任</strong>：損害防止に必要な注意をしたことを証明できれば免責される（過失責任）</li>
+          <li><strong>所有者の責任</strong>：占有者が免責された場合に責任を負う、<strong>無過失責任</strong>（過失がなくても賠償責任）</li>
+        </ul>
+        <p>つまり、看板の所有者は「自分は注意していた」「定期点検していた」では民事責任から完全には逃れられず、瑕疵があれば賠償義務が発生します。施設賠償責任保険の補償範囲・免責事項の事前確認が極めて重要です。</p>
+        <h3>刑事責任：業務上過失致死傷罪</h3>
+        <p>業務として施設管理を行う者には注意義務があり、点検義務違反・放置等の過失で人身被害が発生した場合は業務上過失致死傷罪に問われる可能性があります。</p>
+        <h3>行政責任：撤去命令・指導</h3>
+        <p>自治体は事故発生に関わらず、危険な看板に対して改善命令・撤去命令を出すことができます。命令違反は条例違反として過料・罰則対象です。</p>
+      </section>
+
+      <section id="cases" class="cl-section">
+        <h2>過去の重大事故事例</h2>
+        <p>看板落下事故は社会的影響が大きく、過去にも複数の重大事故が発生しています（一般報道ベース）。</p>
+        <ul>
+          <li><strong>2015年 札幌市</strong>：商業ビルの外壁看板が落下、歩行者が死亡。施設管理体制・点検不備が問題視され、各自治体の点検義務化の契機となった</li>
+          <li><strong>近年の事例</strong>：強風・台風時の看板落下・電飾サイン火災が各地で発生。築古ビルの放置看板の落下事故も継続的に報告されている</li>
+        </ul>
+        <div class="cl-callout cl-callout--warn">
+          <h3 class="cl-callout-h">事故の典型パターン</h3>
+          <ul>
+            <li>10年以上点検していない築古ビルの屋上広告塔</li>
+            <li>看板取付下地の鉄骨が腐食、台風・強風で脱落</li>
+            <li>電飾サインの配線劣化による漏電火災</li>
+            <li>店舗閉店後も放置された看板の落下</li>
+            <li>テナント変更時に旧テナントの看板が更新されないまま劣化</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="vendor" class="cl-section">
+        <h2>業者選定で確認すべきこと</h2>
+        <ol>
+          <li><strong>屋外広告物点検技能講習修了者の在籍</strong>：主要自治体での点検は有資格者が必須</li>
+          <li><strong>該当自治体への提出経験</strong>：自治体ごとに様式・運用が異なるため、提出実績のある業者を優先</li>
+          <li><strong>高所作業車・足場の手配能力</strong>：高所看板の点検には不可欠、自社保有なら効率的</li>
+          <li><strong>電飾サインの電気点検対応</strong>：電気工事士の同行可否</li>
+          <li><strong>補修工事の単価透明性</strong>：点検後の補修見積の根拠開示、単価表事前提示</li>
+        </ol>
+        <p>「<strong>点検は安いが補修見積が異常に高い</strong>」は典型的な悪質パターン。点検と補修を切り離して相見積ができる業者を選ぶ、または補修工事は別途相見積を取るルールを社内で決めておくと安心です。</p>
+      </section>
+
+      <div class="cl-cta">
+        <h2>看板・屋外広告物点検の業者選びでお悩みなら</h2>
+        <p>有資格者が在籍する登録業者から最大3社の見積もりを<br/>完全無料・約1分で取得できます</p>
+        <a class="cta-btn-primary" href="/signboard-inspection/">無料で一括見積もりを依頼する →</a>
+      </div>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          <div class="cl-faq-item"><dt>小さな袖看板1枚でも点検義務はありますか？</dt><dd>自治体の許可対象サイズに該当すれば義務です。許可不要のサイズでも、民法第717条の工作物責任は所有者にあるため、自主点検は強く推奨されます。</dd></div>
+          <div class="cl-faq-item"><dt>賃借テナントが設置した看板の責任は誰？</dt><dd>賃貸借契約・許可名義によります。多くの場合、看板の許可名義人（賃借人）が一次的に責任を負いますが、ビル所有者にも管理責任が及ぶケースがあります。賃貸契約に看板の取扱い（点検・撤去・原状回復）を明記することが重要です。</dd></div>
+          <div class="cl-faq-item"><dt>店舗閉店後の看板はどうすればいい？</dt><dd>速やかに撤去し、自治体への「屋外広告物廃止届」を提出します。放置看板は無許可看板として撤去命令の対象、事故発生時の責任も継続して残ります。</dd></div>
+          <div class="cl-faq-item"><dt>台風後に自分で点検してもいいですか？</dt><dd>目視確認は推奨されますが、構造的な点検（締結トルク・腐食レベル）には専門知識が必要です。台風通過後は業者の応急点検を依頼することが安全です。</dd></div>
+          <div class="cl-faq-item"><dt>屋外広告物点検技能講習はどこで受けられる？</dt><dd>一般社団法人日本サイン協会等が定期的に開催しています。2日間程度の講習で効果測定後、修了証が交付されます。社内に1名でも修了者を持てば、自社対応が可能になる場合もあります。</dd></div>
+          <div class="cl-faq-item"><dt>看板の施設賠償責任保険は必須ですか？</dt><dd>法律上の必須ではありませんが、落下事故時の賠償額が高額になることを考えると加入が強く推奨されます。保険会社により点検義務違反時の不払い条項があるため、加入時に補償範囲を確認してください。</dd></div>
+        </dl>
+      </section>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連サービス・コラム</h2>
+        <ul>
+          <li><a href="/signboard-inspection/">看板・屋外広告物点検の業者を一括見積比較</a></li>
+          <li><a href="/shutter/">シャッター点検（特定建築物・防火設備）の業者を比較</a></li>
+          <li><a href="/shobo-setsubi/">消防設備点検の業者を比較</a></li>
+          <li><a href="/flow/">ご利用の流れ・3ステップで業者紹介</a></li>
+        </ul>
+      </aside>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-callout li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+@media (max-width: 600px) { .cl-header { padding: 32px 0 28px; } .cl-body { padding: 28px 16px 48px; } .cl-section h2 { font-size: 1.15rem; } }
+</style>

@@ -1,0 +1,295 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { site } from '../../../data/site';
+
+const title = 'フロン排出抑制法の点検義務ガイド2025｜業務用エアコン管理者が知るべき簡易点検・定期点検の要点';
+const description = '業務用エアコン・冷凍冷蔵機器の管理者に課されるフロン排出抑制法上の点検義務を解説。3か月に1回の簡易点検、規模別の定期点検（7.5kW以上3年・50kW以上1年）、漏洩量算定・国への報告、廃棄時のフロン回収まで、施設管理者向けに整理しました。';
+const canonical = `${site.domain}/column/aircon-business-furon-tenken/`;
+const published = '2025-05-26';
+const modified = '2025-05-26';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: 'フロン排出抑制法の点検義務ガイド', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'Article',
+  headline: title, description, datePublished: published, dateModified: modified,
+  inLanguage: 'ja-JP', url: canonical, mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  author: { '@type': 'Organization', name: site.org.legalName, url: site.domain },
+  publisher: { '@type': 'Organization', name: site.org.legalName, url: site.domain, logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.svg` } },
+  about: { '@type': 'Service', name: '業務用エアコン洗浄・修理' },
+  citation: [
+    { '@type': 'Legislation', name: 'フロン類の使用の合理化及び管理の適正化に関する法律（フロン排出抑制法）' },
+  ],
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: 'フロン排出抑制法の点検は誰が対象ですか？', acceptedAnswer: { '@type': 'Answer', text: '業務用冷凍空調機器（第一種特定製品）を管理する全ての事業者が対象です。家庭用エアコンや家庭用冷蔵庫は対象外。飲食店・コンビニ・スーパー・オフィス・倉庫等の業務用機器の所有者・使用者・占有者が「管理者」となります。' } },
+    { '@type': 'Question', name: '簡易点検と定期点検の違いは？', acceptedAnswer: { '@type': 'Answer', text: '簡易点検は全ての第一種特定製品に3か月に1回（目視・異音・水漏れ確認等）が必要で、管理者自身が実施可能。定期点検は圧縮機定格出力7.5kW以上の機器で3年に1回、50kW以上で1年に1回、有資格者（点検実施者）による実施が必要です。' } },
+    { '@type': 'Question', name: 'フロン漏洩量を国へ報告する義務はありますか？', acceptedAnswer: { '@type': 'Answer', text: '年間1,000 CO2トン以上のフロン類を漏洩した管理者は、翌年度の7月末までに事業所管大臣に報告する義務があります。これは比較的大規模な事業者向けですが、漏洩量算定式（漏洩量×GWP）の知識は中小事業者にも必要です。' } },
+    { '@type': 'Question', name: '点検記録はどれくらい保管しますか？', acceptedAnswer: { '@type': 'Answer', text: '点検整備記録簿は、機器を廃棄してから3年間保管する義務があります。機器の譲渡時には記録簿も引き継ぎます。記録簿には機器情報・点検実施日・点検結果・冷媒充填・回収量等を記載します。' } },
+    { '@type': 'Question', name: '廃棄時のフロン回収義務は誰の責任？', acceptedAnswer: { '@type': 'Answer', text: '機器を廃棄する管理者（=排出者）の責任です。第一種フロン類充塡回収業者へ委託し、行程管理票（A〜E票）を発行・保管します。建物の解体時は解体工事業者にも事前確認義務があります。' } },
+    { '@type': 'Question', name: '違反時の罰則は？', acceptedAnswer: { '@type': 'Answer', text: '点検・記録義務違反は50万円以下の罰金。廃棄時の不適正処理（行程管理票不発行・無許可業者への委託等）は1,000万円以下の罰金、漏洩量報告義務違反は10万円以下の過料が科される可能性があります。' } },
+  ],
+});
+---
+<BaseLayout title={title} description={description} canonical={canonical} siteName={site.name} logoSub="施設管理の一括見積比較" jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}>
+  <article class="cl-article">
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>フロン排出抑制法の点検義務ガイド</span>
+        </nav>
+        <span class="cl-cat">法令・義務</span>
+        <h1 class="cl-title">フロン排出抑制法の点検義務ガイド2025｜業務用エアコン管理者が知るべき簡易点検・定期点検の要点</h1>
+        <p class="cl-lead">
+          飲食店・店舗・オフィス・倉庫で使う<strong>業務用エアコン・冷凍冷蔵機器の管理者</strong>には、フロン排出抑制法に基づく定期的な点検・記録・適正廃棄の義務が課されています。「家庭用エアコンと同じ感覚」で管理していると、立入検査での指摘・罰則・取引先からのESG評価低下に直結します。本記事では、対象機器の判定、3か月ごとの簡易点検、規模別の定期点検（7.5kW以上3年・50kW以上1年）、漏洩量算定の考え方、廃棄時のフロン回収まで、施設管理担当者が押さえておくべき要点を整理します。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2025年5月26日</time>
+          <span>最終更新：2025年5月26日</span>
+          <span>執筆：{site.org.legalName}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#law-overview">フロン排出抑制法の全体像</a></li>
+          <li><a href="#target">対象となる機器（第一種特定製品）の判定</a></li>
+          <li><a href="#kani">簡易点検（3か月に1回・自社可）</a></li>
+          <li><a href="#teiki">定期点検（規模別・有資格者）</a></li>
+          <li><a href="#leakage">漏洩量算定と国への報告</a></li>
+          <li><a href="#disposal">廃棄時のフロン回収と行程管理票</a></li>
+          <li><a href="#penalty">違反時の罰則</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>義務の範囲</strong>：簡易点検（3か月に1回・自社可）＋定期点検（7.5kW以上3年・50kW以上1年・有資格者）＋記録保管＋廃棄時のフロン回収</li>
+            <li><strong>記録保管</strong>：点検整備記録簿は機器廃棄後3年間、行程管理票は5年間保管</li>
+            <li><strong>違反リスク</strong>：点検・記録義務違反50万円以下、廃棄時の不適正処理1,000万円以下の罰金</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="law-overview" class="cl-section">
+        <h2>フロン排出抑制法の全体像</h2>
+        <p>正式名称は「フロン類の使用の合理化及び管理の適正化に関する法律」（平成13年法律第64号、平成27年改正で現行体系）。地球温暖化対策の一環として、業務用機器のフロン類（HFC等）の漏洩防止・回収・適正処分を目的としています。</p>
+        <h3>関係するプレイヤー</h3>
+        <ul>
+          <li><strong>製造業者</strong>：低GWP（地球温暖化係数）機器への転換</li>
+          <li><strong>充塡回収業者</strong>：都道府県登録・有資格者による作業</li>
+          <li><strong>管理者</strong>（=本記事の主対象）：第一種特定製品の点検・記録・適正廃棄</li>
+          <li><strong>整備業者</strong>：適正な整備・冷媒漏洩防止</li>
+          <li><strong>建物解体業者</strong>：解体前のフロン類の有無確認</li>
+        </ul>
+        <p>この中で「管理者」は最も対象事業者が広く、対応漏れのリスクも高い立場です。</p>
+      </section>
+
+      <section id="target" class="cl-section">
+        <h2>対象となる機器（第一種特定製品）の判定</h2>
+        <p>フロン排出抑制法の対象は「第一種特定製品」と呼ばれる業務用冷凍空調機器です。家庭用と業務用の境界は、製品の用途・設計で判定されます。</p>
+        <h3>対象となる代表的な機器</h3>
+        <ul>
+          <li>パッケージエアコン（業務用）</li>
+          <li>ビルマルチエアコン</li>
+          <li>業務用冷蔵庫・冷凍庫・プレハブ冷凍冷蔵庫</li>
+          <li>冷凍冷蔵ショーケース（コンビニ・スーパー）</li>
+          <li>製氷機（業務用）</li>
+          <li>食品衛生上の業務用冷却装置</li>
+          <li>業務用ヒートポンプ給湯機</li>
+        </ul>
+        <h3>対象外</h3>
+        <ul>
+          <li>家庭用エアコン・家庭用冷蔵庫（家電リサイクル法の対象）</li>
+          <li>カーエアコン（自動車リサイクル法）</li>
+          <li>自販機の一部（用途による）</li>
+        </ul>
+        <div class="cl-callout cl-callout--warn">
+          <h3 class="cl-callout-h">事務所のエアコンは対象？</h3>
+          <p>はい、事務所に設置されているエアコンが「業務用パッケージエアコン」であれば対象です。家庭用ルームエアコンを事務所で使っている場合は家電リサイクル法の対象となり、フロン法の点検義務はありません。製品ラベル・取説で型番を確認してください。</p>
+        </div>
+      </section>
+
+      <section id="kani" class="cl-section">
+        <h2>簡易点検（3か月に1回・自社可）</h2>
+        <p>全ての第一種特定製品の管理者は、3か月に1回以上の簡易点検を実施する必要があります。資格は不要で、管理者自身（または店舗スタッフ）が実施可能です。</p>
+        <h3>簡易点検の内容</h3>
+        <ul>
+          <li><strong>室外機・室内機の外観</strong>：油にじみ、サビ、配管腐食、断熱材の損傷</li>
+          <li><strong>異音</strong>：圧縮機・送風ファンの異常音</li>
+          <li><strong>霜付き・氷結</strong>：熱交換器の異常霜</li>
+          <li><strong>水漏れ・ドレン詰まり</strong>：ドレンパン・配管</li>
+          <li><strong>機器の取扱い表示の損傷有無</strong></li>
+        </ul>
+        <p>確認結果は点検整備記録簿（簡易点検記録欄）に記載します。3か月に1回の頻度を守りつつ、店舗閉店時のルーチン点検として組み込むのが現実的です。</p>
+        <h3>「簡易点検記録簿」の様式</h3>
+        <p>環境省・経済産業省が公表しているテンプレートが利用可能です。エクセル等で複数機器を一覧管理できる形式が一般的です。</p>
+      </section>
+
+      <section id="teiki" class="cl-section">
+        <h2>定期点検（規模別・有資格者）</h2>
+        <p>圧縮機の定格出力に応じて、有資格者による定期点検（フロン漏洩の検出を含む厳密な点検）が必要です。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>機器規模別の定期点検頻度</caption>
+            <thead><tr><th scope="col">機器区分</th><th scope="col">圧縮機定格出力</th><th scope="col">定期点検頻度</th><th scope="col">実施者</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">小型機器</th><td>7.5kW未満</td><td>簡易点検のみ</td><td>管理者・スタッフ</td></tr>
+              <tr><th scope="row">中型機器</th><td>7.5kW以上 50kW未満</td><td>3年に1回以上</td><td>点検実施者（有資格者）</td></tr>
+              <tr><th scope="row">大型機器</th><td>50kW以上</td><td>1年に1回以上</td><td>点検実施者（有資格者）</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>「点検実施者」となれる資格</h3>
+        <ul>
+          <li>第一種冷媒フロン類取扱技術者</li>
+          <li>冷凍空気調和機器施工技能士（1級）</li>
+          <li>建築物環境衛生管理技術者（一定条件付き）</li>
+          <li>その他環境省・経済産業省が定める同等の資格</li>
+        </ul>
+        <p>定期点検では、機器内のフロン漏洩を検出するためにガス漏れ検知器を使用し、ジョイント部・配管接続部・圧縮機等を網羅的にチェックします。</p>
+      </section>
+
+      <section id="leakage" class="cl-section">
+        <h2>漏洩量算定と国への報告</h2>
+        <p>点検でフロン漏洩が確認されたら、漏洩量を算定し記録します。一定量を超えると国への報告義務が発生します。</p>
+        <h3>漏洩量の算定</h3>
+        <p>漏洩量（CO2換算）= 充填量（kg）× GWP（地球温暖化係数）</p>
+        <p>例：R-410A（GWP=2,090）を3kg漏洩 → 3 × 2,090 = 6,270 CO2-kg = 6.27 CO2トン</p>
+        <h3>国への報告義務</h3>
+        <ul>
+          <li><strong>対象</strong>：年間漏洩量1,000 CO2トン以上の管理者</li>
+          <li><strong>報告期限</strong>：翌年度7月末日まで</li>
+          <li><strong>提出先</strong>：事業所管大臣（事業の主たる省庁）</li>
+        </ul>
+        <p>1,000 CO2トンは、低GWP冷媒（GWP数百程度）なら数百kgの漏洩が必要ですが、高GWP冷媒（R-404A等GWP3,000超）では300kg程度で達してしまうため、大型施設・複数店舗運営事業者は要注意です。</p>
+        <div class="cl-callout">
+          <h3 class="cl-callout-h">ESG・温対法への波及</h3>
+          <p>フロン漏洩はScope1温室効果ガス排出に該当します。上場企業・大企業の取引先評価でも管理状況が問われる時代となっており、ESG経営の観点からも適切な管理が経営課題です。</p>
+        </div>
+      </section>
+
+      <section id="disposal" class="cl-section">
+        <h2>廃棄時のフロン回収と行程管理票</h2>
+        <p>機器を廃棄する際は、フロン類の回収を「第一種フロン類充塡回収業者」（都道府県知事登録）に委託し、行程管理票を発行します。</p>
+        <h3>廃棄時の手順</h3>
+        <ol>
+          <li>充塡回収業者を選定（許可業者リストは都道府県HPで確認可能）</li>
+          <li>行程管理票A票を交付（管理者→充塡回収業者）</li>
+          <li>充塡回収業者がフロン回収、B票・C票を返送</li>
+          <li>機器廃棄・処分業者へ引渡し</li>
+          <li>処分業者からE票（処分完了）の返送を受領</li>
+          <li>行程管理票一式を<strong>5年間保管</strong></li>
+        </ol>
+        <p>解体工事を伴う場合、解体業者にもフロン排出抑制法の事前確認義務（書面交付）があります。解体工事発注時はフロン排出抑制法対応の有無を確認しましょう。</p>
+      </section>
+
+      <section id="penalty" class="cl-section">
+        <h2>違反時の罰則</h2>
+        <ul>
+          <li><strong>点検・記録義務違反</strong>：50万円以下の罰金</li>
+          <li><strong>廃棄時の行程管理票不発行・無許可業者への委託</strong>：1,000万円以下の罰金（法人・両罰規定あり）</li>
+          <li><strong>漏洩量報告義務違反</strong>（1,000 CO2トン以上）：10万円以下の過料</li>
+          <li><strong>不適正な冷媒充填・回収</strong>：1年以下の懲役または50万円以下の罰金</li>
+        </ul>
+        <p>環境省・経済産業省・都道府県は立入検査の権限を持ち、書類確認・現場確認が行われます。社名公表の対象になることもあるため、ESGを重視する企業はとくに注意が必要です。</p>
+      </section>
+
+      <div class="cl-cta">
+        <h2>業務用エアコンの点検・修理業者選びでお悩みなら</h2>
+        <p>フロン法対応の有資格業者から最大3社の見積もりを<br/>完全無料・約1分で取得できます</p>
+        <a class="cta-btn-primary" href="/aircon-business/">無料で一括見積もりを依頼する →</a>
+      </div>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          <div class="cl-faq-item"><dt>事務所の壁掛けエアコンも対象ですか？</dt><dd>業務用パッケージエアコン（型番で判定）であれば対象です。家庭用ルームエアコンを事務所で使用している場合は対象外（家電リサイクル法）です。</dd></div>
+          <div class="cl-faq-item"><dt>テナント物件で誰が管理者になりますか？</dt><dd>機器の所有者ではなく、実際に使用・管理している事業者（テナント）が管理者となるのが原則です。賃貸契約・付帯機器の取扱いで明確化することが望ましいです。</dd></div>
+          <div class="cl-faq-item"><dt>3か月に1回の簡易点検は本当に必要？</dt><dd>はい、全ての第一種特定製品が対象です。立入時の記録提示を求められるため、四半期ごとに記録簿に記載するルーチン化が必要です。</dd></div>
+          <div class="cl-faq-item"><dt>定期点検を業者に頼むといくらかかりますか？</dt><dd>機種・規模・所在地で大きく変動しますが、1台あたり5,000〜30,000円程度。複数台一括契約で割引される場合が多いです。</dd></div>
+          <div class="cl-faq-item"><dt>機器の引越し・移設時もフロン回収が必要？</dt><dd>移設で冷媒回収を伴う場合は対象になり、充塡回収業者への委託が必要です。同一敷地内の単純移動でガス回収を伴わない場合は対象外です。</dd></div>
+          <div class="cl-faq-item"><dt>記録簿はExcelで作成してもよい？</dt><dd>はい、記載項目（機器情報・点検日・結果・冷媒情報等）が網羅されていれば様式は自由です。環境省・経済産業省提供のテンプレートを活用すると確実です。</dd></div>
+        </dl>
+      </section>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連サービス・コラム</h2>
+        <ul>
+          <li><a href="/aircon-business/">業務用エアコン洗浄・修理の業者を一括見積比較</a></li>
+          <li><a href="/duct/">空調ダクト清掃の業者を比較</a></li>
+          <li><a href="/shobo-setsubi/">消防設備点検の業者を比較</a></li>
+          <li><a href="/flow/">ご利用の流れ・3ステップで業者紹介</a></li>
+        </ul>
+      </aside>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-callout li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+@media (max-width: 600px) { .cl-header { padding: 32px 0 28px; } .cl-body { padding: 28px 16px 48px; } .cl-section h2 { font-size: 1.15rem; } }
+</style>

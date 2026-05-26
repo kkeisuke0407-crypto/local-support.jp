@@ -1,0 +1,430 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { site } from '../../../data/site';
+
+const title = '消防設備点検の法定義務ガイド2025｜機器点検・総合点検の頻度と罰則をまるごと解説';
+const description = '消防法第17条の3の3に基づく消防設備点検の義務を施設管理担当者向けに解説。機器点検（半年）・総合点検（年1）の違い、所轄消防署への報告サイクル、有資格者要件、違反時の30万円以下の罰金、対象施設の判定方法までまとめました。';
+const canonical = `${site.domain}/column/shobo-setsubi-horei-gimu/`;
+const published = '2025-05-26';
+const modified = '2025-05-26';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '消防設備点検の法定義務ガイド', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  author: { '@type': 'Organization', name: site.org.legalName, url: site.domain },
+  publisher: {
+    '@type': 'Organization',
+    name: site.org.legalName,
+    url: site.domain,
+    logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.svg` },
+  },
+  about: { '@type': 'Service', name: '消防設備点検', serviceType: '消防用設備等の点検' },
+  citation: [
+    { '@type': 'Legislation', name: '消防法第17条の3の3', url: 'https://elaws.e-gov.go.jp/document?lawid=323AC1000000186' },
+    { '@type': 'Legislation', name: '消防法施行令第36条' },
+    { '@type': 'Legislation', name: '消防法施行規則第31条の6' },
+  ],
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: '消防設備点検は法律で義務づけられていますか？',
+      acceptedAnswer: { '@type': 'Answer', text: '消防法第17条の3の3により、防火対象物の関係者（所有者・管理者・占有者）には消防用設備等の定期的な点検と所轄消防署への結果報告が義務付けられています。違反した場合は30万円以下の罰金または拘留が科される可能性があります。' },
+    },
+    {
+      '@type': 'Question',
+      name: '機器点検と総合点検の違いは何ですか？',
+      acceptedAnswer: { '@type': 'Answer', text: '機器点検は半年に1回、消防用設備等の配置・損傷の有無・機能の概要を外観や簡易な操作で確認する点検です。総合点検は1年に1回、設備全体を作動させて総合的に機能を確認する点検です。両方の実施が義務付けられています。' },
+    },
+    {
+      '@type': 'Question',
+      name: '点検結果報告書はどこへ提出しますか？',
+      acceptedAnswer: { '@type': 'Answer', text: '建物所在地を管轄する消防署（消防本部）へ提出します。提出頻度は特定防火対象物（ホテル・病院・飲食店等）で1年に1回、非特定防火対象物（共同住宅・事務所等）で3年に1回です。' },
+    },
+    {
+      '@type': 'Question',
+      name: '有資格者による点検が必要なのはどんな建物？',
+      acceptedAnswer: { '@type': 'Answer', text: '延べ面積1,000㎡以上の特定防火対象物・非特定防火対象物、特定一階段等防火対象物、政令で定める防火対象物は「消防設備士」または「消防設備点検資格者」による点検が義務付けられています。それ以外の建物は関係者自身による点検も可能です。' },
+    },
+    {
+      '@type': 'Question',
+      name: '点検記録はどれくらい保管しなければなりませんか？',
+      acceptedAnswer: { '@type': 'Answer', text: '消防法施行規則により、点検結果報告書および点検結果記録は3年間（一部は5年間）の保管が必要です。所轄消防署の立入検査時に提示できるよう、建物別・年度別に管理しておくことが推奨されます。' },
+    },
+    {
+      '@type': 'Question',
+      name: '点検を怠った場合の罰則は？',
+      acceptedAnswer: { '@type': 'Answer', text: '消防法第44条等により、点検・報告義務違反は30万円以下の罰金または拘留の対象となります。さらに火災発生時に点検不備が原因と認定されれば、業務上過失致死傷罪等の刑事責任、被害者からの民事賠償責任が問われる可能性があります。' },
+    },
+  ],
+});
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a>
+          <span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a>
+          <span aria-hidden="true">›</span>
+          <span>消防設備点検の法定義務ガイド</span>
+        </nav>
+        <span class="cl-cat">法令・義務</span>
+        <h1 class="cl-title">消防設備点検の法定義務ガイド2025｜機器点検・総合点検の頻度と罰則をまるごと解説</h1>
+        <p class="cl-lead">
+          消防設備点検は<strong>消防法第17条の3の3で義務化</strong>されており、ほぼすべての非戸建て建物の関係者（所有者・管理者・占有者）が対象となります。点検を怠ったり報告を怠ると<strong>30万円以下の罰金または拘留</strong>の対象になるだけでなく、火災発生時には刑事責任・賠償責任にも直結します。本記事では、機器点検と総合点検の違い、対象施設の判定、所轄消防署への報告サイクル、有資格者要件、罰則の実例まで施設管理担当者が知っておくべき法令知識を整理しました。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2025年5月26日</time>
+          <span>最終更新：2025年5月26日</span>
+          <span>執筆：{site.org.legalName}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#law-overview">消防設備点検を定める法令の全体像</a></li>
+          <li><a href="#target">点検対象となる建物（防火対象物の判定）</a></li>
+          <li><a href="#kiki-sougou">機器点検と総合点検の違い・頻度</a></li>
+          <li><a href="#houkoku">所轄消防署への報告サイクル</a></li>
+          <li><a href="#qualified">有資格者による点検が必要なケース</a></li>
+          <li><a href="#penalty">違反時の罰則と火災事故の責任事例</a></li>
+          <li><a href="#schedule">年間管理スケジュールのひな形</a></li>
+          <li><a href="#vendor">適切な点検業者を選ぶための確認事項</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>義務の根拠</strong>：消防法第17条の3の3が防火対象物の関係者に「定期点検＋所轄消防署への報告」を義務化</li>
+            <li><strong>点検頻度</strong>：機器点検は半年に1回、総合点検は1年に1回。報告は特定防火対象物で年1回、非特定で3年に1回</li>
+            <li><strong>違反リスク</strong>：30万円以下の罰金または拘留。火災発生時は刑事責任（業務上過失致死傷罪）・民事賠償の対象</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="law-overview" class="cl-section">
+        <h2>消防設備点検を定める法令の全体像</h2>
+        <p>消防設備の点検義務を構成する法令は、上位から下位へ次のように体系化されています。</p>
+        <ul>
+          <li><strong>消防法（法律）</strong>：第17条の3の3で防火対象物の関係者に点検・報告義務を課す</li>
+          <li><strong>消防法施行令（政令）</strong>：第36条で対象建物・点検事項を具体化</li>
+          <li><strong>消防法施行規則（省令）</strong>：第31条の6で点検頻度・報告様式・有資格者要件を規定</li>
+          <li><strong>消防庁告示「点検基準・点検要領」</strong>：具体的な点検項目・判定基準</li>
+          <li><strong>各市町村消防本部の運用</strong>：報告様式・電子報告の取扱い等</li>
+        </ul>
+        <p>つまり、「消防法」だけを読んでも実務がわからない構造になっています。所轄消防署が公表している運用ガイドや、日本消防設備安全センター発行の点検要領を併せて確認することが実務上の必須プロセスです。</p>
+        <div class="cl-callout cl-callout--warn">
+          <h3 class="cl-callout-h">よくある誤解</h3>
+          <ul>
+            <li>「点検しているから報告しなくていい」→ <strong>点検実施と所轄消防署への報告は別義務</strong>。報告を怠るとそれ自体が違反です。</li>
+            <li>「賃借人（テナント）には関係ない」→ 占有者も「関係者」に含まれます。区分所有・テナント保有部分の点検責任は契約で明確化が必要です。</li>
+            <li>「消防署が指摘するまで放置でいい」→ 立入検査で指摘された時点で「悪質」とみなされ罰則の対象になり得ます。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="target" class="cl-section">
+        <h2>点検対象となる建物（防火対象物の判定）</h2>
+        <p>消防法上の「防火対象物」は、消防法施行令別表第1で17項目に分類されます。住宅以外の建築物はほぼすべて何らかの項目に該当し、点検義務の対象となります。</p>
+        <h3>主な防火対象物の分類（特定／非特定）</h3>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>消防法施行令別表第1（主要なもの抜粋）</caption>
+            <thead>
+              <tr><th scope="col">項目</th><th scope="col">用途</th><th scope="col">区分</th><th scope="col">報告頻度</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">(1)項イ</th><td>劇場・映画館・演芸場</td><td>特定</td><td>1年に1回</td></tr>
+              <tr><th scope="row">(2)項イ</th><td>キャバレー・ナイトクラブ・遊技場</td><td>特定</td><td>1年に1回</td></tr>
+              <tr><th scope="row">(3)項イ/ロ</th><td>飲食店</td><td>特定</td><td>1年に1回</td></tr>
+              <tr><th scope="row">(4)項</th><td>百貨店・物販店</td><td>特定</td><td>1年に1回</td></tr>
+              <tr><th scope="row">(5)項イ</th><td>旅館・ホテル</td><td>特定</td><td>1年に1回</td></tr>
+              <tr><th scope="row">(5)項ロ</th><td>寄宿舎・下宿・共同住宅</td><td>非特定</td><td>3年に1回</td></tr>
+              <tr><th scope="row">(6)項イ</th><td>病院・診療所</td><td>特定</td><td>1年に1回</td></tr>
+              <tr><th scope="row">(6)項ロ/ハ/ニ</th><td>福祉施設・幼稚園・保育所</td><td>特定</td><td>1年に1回</td></tr>
+              <tr><th scope="row">(7)項</th><td>小・中・高・大学</td><td>非特定</td><td>3年に1回</td></tr>
+              <tr><th scope="row">(15)項</th><td>事務所</td><td>非特定</td><td>3年に1回</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>「特定防火対象物」は不特定多数の人が利用する施設で、防火管理上のリスクが高いため報告頻度や設備基準が厳しく設定されています。共同住宅（マンション）・事務所は「非特定」ですが、点検頻度自体は同じ（機器半年・総合年1）で、報告だけが3年に1回となります。</p>
+        <h3>複合用途防火対象物の扱い</h3>
+        <p>テナントビルのように1棟の中に複数用途が混在する建物は、特定用途部分が含まれていれば建物全体が「特定」として扱われます。例えば1階に飲食店、2階以上が事務所のビルは、全体として(16)項イ（特定用途含む複合用途）に該当し、報告は1年に1回です。</p>
+      </section>
+
+      <section id="kiki-sougou" class="cl-section">
+        <h2>機器点検と総合点検の違い・頻度</h2>
+        <p>消防設備点検は「機器点検」と「総合点検」の2種類があり、目的・頻度・実施内容が異なります。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>機器点検と総合点検の比較</caption>
+            <thead>
+              <tr><th scope="col">項目</th><th scope="col">機器点検</th><th scope="col">総合点検</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">頻度</th><td>6か月に1回</td><td>1年に1回</td></tr>
+              <tr><th scope="row">目的</th><td>外観・配置・損傷・機能の概要確認</td><td>設備を作動させて総合的に機能確認</td></tr>
+              <tr><th scope="row">主な内容</th><td>消火器の位置・圧力ゲージ確認、誘導灯の点灯確認、感知器の外観・取付状態確認等</td><td>消火栓の放水試験、スプリンクラーの作動試験、自動火災報知設備の総合作動試験等</td></tr>
+              <tr><th scope="row">必要時間（中規模ビル）</th><td>半日〜1日</td><td>1〜2日</td></tr>
+              <tr><th scope="row">入居者・利用者への影響</th><td>少ない</td><td>放水・警報音を伴うため事前告知必須</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>年間でいうと、機器点検2回＋総合点検1回＝<strong>合計3回の点検</strong>が必要です。多くの業者では、機器点検1回目と総合点検をまとめて同日実施し、年2回（春・秋など）で全点検をカバーするスケジュールを提案します。</p>
+        <h3>点検対象となる主な消防用設備等</h3>
+        <ul>
+          <li><strong>消火器・簡易消火用具</strong>：圧力ゲージ・本体腐食・期限</li>
+          <li><strong>屋内消火栓設備・屋外消火栓設備</strong>：放水試験・ポンプ作動</li>
+          <li><strong>スプリンクラー設備</strong>：作動試験・配管圧力・ヘッド状態</li>
+          <li><strong>泡消火設備・粉末消火設備・不活性ガス消火設備</strong>：薬剤量・配管</li>
+          <li><strong>自動火災報知設備</strong>：感知器・受信機・配線・電池</li>
+          <li><strong>ガス漏れ火災警報設備</strong></li>
+          <li><strong>非常警報設備（非常ベル・放送設備）</strong></li>
+          <li><strong>誘導灯・誘導標識</strong>：点灯・電池・視認性</li>
+          <li><strong>避難器具（避難はしご・救助袋等）</strong>：取付状態・損傷</li>
+          <li><strong>非常コンセント設備・無線通信補助設備</strong></li>
+        </ul>
+      </section>
+
+      <section id="houkoku" class="cl-section">
+        <h2>所轄消防署への報告サイクル</h2>
+        <p>点検と報告は別の義務です。点検結果は所定の様式（消防法施行規則別記様式第1号の2・第2号）にまとめ、建物所在地を管轄する消防署に提出します。</p>
+        <h3>報告頻度</h3>
+        <ul>
+          <li><strong>特定防火対象物</strong>（飲食店・ホテル・病院・福祉施設等）：<strong>1年に1回</strong></li>
+          <li><strong>非特定防火対象物</strong>（共同住宅・事務所・学校等）：<strong>3年に1回</strong></li>
+        </ul>
+        <h3>報告書の提出方法</h3>
+        <p>多くの消防本部で電子報告（オンライン提出）と紙提出の両方が選択できます。電子報告は提出履歴がデジタル管理できるため、引継ぎや立入対応時に有利です。所轄消防署のWebサイトで提出様式・提出先・受付時間を事前確認しましょう。</p>
+        <h3>報告内容に「不良」がある場合</h3>
+        <p>点検結果報告書には不良箇所と是正計画を記載します。所轄消防署は受理後、是正状況の追跡を行うことがあります。報告書提出後の是正工事完了報告（任意様式）も併せて提出すると、立入時のスムーズな対応につながります。</p>
+      </section>
+
+      <section id="qualified" class="cl-section">
+        <h2>有資格者による点検が必要なケース</h2>
+        <p>消防法施行令第36条第2項により、以下の建物は「消防設備士」または「消防設備点検資格者」による点検が義務付けられています。</p>
+        <ul>
+          <li>延べ面積<strong>1,000㎡以上</strong>の特定防火対象物</li>
+          <li>延べ面積1,000㎡以上の非特定防火対象物のうち消防長または消防署長が指定するもの</li>
+          <li>特定一階段等防火対象物（避難経路が階段1つしかない物件等）</li>
+          <li>全域放出方式の不活性ガス消火設備・ハロゲン化物消火設備等が設置されている防火対象物</li>
+        </ul>
+        <h3>消防設備士と消防設備点検資格者の違い</h3>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <thead>
+              <tr><th scope="col">資格</th><th scope="col">業務範囲</th><th scope="col">取得方法</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">消防設備士（甲種1〜5類、乙種1〜7類）</th><td>整備・工事＋点検</td><td>国家試験合格</td></tr>
+              <tr><th scope="row">消防設備点検資格者（第1種・第2種）</th><td>点検のみ（工事不可）</td><td>登録講習＋効果測定</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>業者選定時には、対象建物に必要な資格区分（例：1類＝水系消火設備、4類＝自火報設備）の有資格者が在籍しているかを確認することが重要です。</p>
+      </section>
+
+      <section id="penalty" class="cl-section">
+        <h2>違反時の罰則と火災事故の責任事例</h2>
+        <p>消防法違反は刑事罰の対象であり、火災事故発生時には別途過失責任が問われます。</p>
+        <h3>主な罰則</h3>
+        <ul>
+          <li><strong>点検・報告義務違反</strong>（消防法第44条）：30万円以下の罰金または拘留</li>
+          <li><strong>立入検査拒否・妨害</strong>：30万円以下の罰金または拘留</li>
+          <li><strong>消防用設備等の設置義務違反</strong>：1年以下の懲役または100万円以下の罰金</li>
+          <li><strong>防火管理者選任義務違反</strong>：6か月以下の懲役または50万円以下の罰金</li>
+        </ul>
+        <h3>過去の重大事故と関係者責任</h3>
+        <p>消防設備不備が問われた代表的な事故としては、以下のような事例があります（一般報道ベースで整理）。</p>
+        <ul>
+          <li><strong>2001年 新宿歌舞伎町ビル火災</strong>：自動火災報知設備の不備・避難障害物の放置等で多数の死傷者。ビル所有者・テナント側の関係者が刑事訴追された。</li>
+          <li><strong>2012年 広島ホテル火災</strong>：スプリンクラー未設置・防火扉故障等の複合要因。経営者の刑事責任が問われた。</li>
+          <li><strong>2017年 福山ホテル火災</strong>：自火報の不良放置等が原因の一つとされ、関係者の管理責任が問われた。</li>
+        </ul>
+        <p>これらの事故では、点検報告書の有無・点検実施記録の信頼性が裁判で重要な争点となっています。「形だけの点検」では民事・刑事責任から逃れられないのが実態です。</p>
+        <div class="cl-callout cl-callout--warn">
+          <h3 class="cl-callout-h">保険請求にも影響</h3>
+          <p>火災保険の請求時、消防設備の点検義務違反が判明すると保険金の減額・不払いの対象になるケースがあります。テナント・入居者からの賠償請求の根拠としても、点検記録の有無が決定的に重要です。</p>
+        </div>
+      </section>
+
+      <section id="schedule" class="cl-section">
+        <h2>年間管理スケジュールのひな形</h2>
+        <p>共同住宅・中規模商業ビル等の典型的な年間スケジュール例を示します。建物特性・テナント営業時間・年度予算に合わせて調整してください。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>年間消防設備点検スケジュール例（特定防火対象物）</caption>
+            <thead>
+              <tr><th scope="col">時期</th><th scope="col">実施内容</th><th scope="col">担当</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">4月</th><td>機器点検（春）＋総合点検（年次）＋不良箇所是正見積</td><td>点検業者</td></tr>
+              <tr><th scope="row">5月</th><td>是正工事実施・完了確認</td><td>工事業者</td></tr>
+              <tr><th scope="row">6月</th><td>点検結果報告書を所轄消防署へ提出</td><td>管理担当者</td></tr>
+              <tr><th scope="row">9月</th><td>防火管理者の年次研修・避難訓練計画</td><td>防火管理者</td></tr>
+              <tr><th scope="row">10月</th><td>機器点検（秋）</td><td>点検業者</td></tr>
+              <tr><th scope="row">11月</th><td>避難訓練の実施・記録</td><td>防火管理者</td></tr>
+              <tr><th scope="row">通年</th><td>感知器発報時の対応記録、設備変更時の届出</td><td>管理担当者</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="vendor" class="cl-section">
+        <h2>適切な点検業者を選ぶための確認事項</h2>
+        <p>消防設備点検は法的責任が大きく、業者選定が極めて重要です。価格だけで選ぶと、無資格者による形式的な点検・後日の高額是正工事・報告漏れ等のリスクがあります。</p>
+        <h3>確認すべき5つのポイント</h3>
+        <ol>
+          <li><strong>有資格者の在籍数と資格区分</strong>：自社建物に必要な類（1〜7類）をカバーする消防設備士・点検資格者が在籍するか</li>
+          <li><strong>所轄消防署への報告書作成・提出代行</strong>：点検実施だけでなく所轄消防署への提出までを契約範囲に含めるか</li>
+          <li><strong>是正工事の透明性</strong>：不良箇所の根拠（写真・測定値）の提示有無、是正工事の単価表事前提示</li>
+          <li><strong>年間契約条件・複数物件割引</strong>：年契約の中身（点検＋報告＋緊急対応）、複数物件契約のスケールメリット</li>
+          <li><strong>緊急対応の有無</strong>：警報発報時の駆けつけ対応の有無、目安時間、夜間休日対応</li>
+        </ol>
+      </section>
+
+      <div class="cl-cta">
+        <h2>消防設備点検の業者選びでお悩みなら</h2>
+        <p>有資格者の在籍する登録業者から最大3社の見積もりを<br/>完全無料・約1分で取得できます</p>
+        <a class="cta-btn-primary" href="/shobo-setsubi/">無料で一括見積もりを依頼する →</a>
+      </div>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          <div class="cl-faq-item">
+            <dt>共同住宅（マンション）も点検対象ですか？</dt>
+            <dd>はい、共同住宅は非特定防火対象物として点検対象です。機器点検（半年）・総合点検（年1）の頻度は同じで、報告のみ3年に1回となります。管理組合または管理会社が窓口となるのが一般的です。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>賃借人（テナント）にも点検義務がありますか？</dt>
+            <dd>消防法上「関係者」には所有者・管理者・占有者が含まれるため、テナントも対象となります。実務上は賃貸借契約・管理規約で誰が点検手配・費用負担するかを明確化することが重要です。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>点検は誰でも実施できますか？</dt>
+            <dd>延べ面積1,000㎡以上の特定防火対象物・特定一階段等防火対象物等は有資格者（消防設備士・消防設備点検資格者）による点検が必須です。それ以外は関係者自身でも可能ですが、専門知識が必要なため業者依頼が現実的です。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>消防署の立入検査は事前通知ありますか？</dt>
+            <dd>原則として事前通知ありで実施されますが、不審な情報があった場合は予告なしの立入も可能です。立入時は点検結果報告書・直近の点検記録・防火管理者選任届の提示を求められます。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>設備の改修・テナント工事をしたら再点検が必要？</dt>
+            <dd>用途変更・防火区画変更・感知器配置変更等を行った場合は、所轄消防署への届出と中間検査が必要になるケースがあります。テナント工事計画段階で点検業者にも事前共有することがトラブル防止になります。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>消防設備点検と建築基準法第12条の定期報告の違いは？</dt>
+            <dd>消防設備点検は消防法、定期報告は建築基準法に基づく別制度です。多くの建物で両方の義務が重複するため、点検・報告のスケジュールを統合管理すると効率的です。</dd>
+          </div>
+        </dl>
+      </section>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連サービス・コラム</h2>
+        <ul>
+          <li><a href="/shobo-setsubi/">消防設備点検の業者を一括見積比較</a></li>
+          <li><a href="/shutter/">シャッター点検（防火シャッター）の業者を比較</a></li>
+          <li><a href="/duct/">ダクト清掃（厨房ダクト火災予防）の業者を比較</a></li>
+          <li><a href="/flow/">ご利用の流れ・3ステップで業者紹介</a></li>
+        </ul>
+      </aside>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header {
+  background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%);
+  color: #fff;
+  padding: 48px 0 40px;
+}
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul, .cl-callout--warn ul { padding-left: 18px; margin: 0; }
+.cl-callout li, .cl-callout--warn li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+@media (max-width: 600px) {
+  .cl-header { padding: 32px 0 28px; }
+  .cl-body { padding: 28px 16px 48px; }
+  .cl-section h2 { font-size: 1.15rem; }
+}
+</style>

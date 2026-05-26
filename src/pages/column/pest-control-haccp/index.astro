@@ -1,0 +1,319 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { site } from '../../../data/site';
+
+const title = 'HACCP制度化で必須になった害虫対策ガイド2025｜飲食・食品事業者の防除記録の作り方';
+const description = '2021年6月から原則すべての食品事業者にHACCPに沿った衛生管理が義務化されました。本記事では、HACCP一般衛生管理の一項目「そ族・昆虫対策」について、月次モニタリング・記録様式・保健所立入時に求められる書類の整え方を、飲食店・食品工場・福祉施設の管理者向けに整理します。';
+const canonical = `${site.domain}/column/pest-control-haccp/`;
+const published = '2025-05-26';
+const modified = '2025-05-26';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: 'HACCP制度化で必須になった害虫対策ガイド', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'Article',
+  headline: title, description, datePublished: published, dateModified: modified,
+  inLanguage: 'ja-JP', url: canonical, mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  author: { '@type': 'Organization', name: site.org.legalName, url: site.domain },
+  publisher: { '@type': 'Organization', name: site.org.legalName, url: site.domain, logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.svg` } },
+  about: { '@type': 'Service', name: '害虫駆除（業務用PCO）' },
+  citation: [
+    { '@type': 'Legislation', name: '食品衛生法（HACCP制度化）' },
+    { '@type': 'Legislation', name: '建築物における衛生的環境の確保に関する法律（建築物衛生法）' },
+  ],
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: '小さな飲食店もHACCP対応が必要ですか？', acceptedAnswer: { '@type': 'Answer', text: 'はい。2021年6月から食品衛生法の改正により、原則すべての食品事業者にHACCPに沿った衛生管理が義務化されました。小規模事業者（取扱量が少ない・従業員50人未満等）は簡略化された「HACCPの考え方を取り入れた衛生管理」が認められますが、害虫対策の記録は必要です。' } },
+    { '@type': 'Question', name: '害虫対策の記録は何を残せばいいですか？', acceptedAnswer: { '@type': 'Answer', text: 'モニタリング日・場所・確認した害虫・改善措置・実施者・写真等を月次で記録します。業者のモニタリング報告書をそのままHACCP記録として活用するのが効率的です。記録は最低1年以上、できれば3年保管が推奨されます。' } },
+    { '@type': 'Question', name: '特定建築物のねずみ等防除義務との関係は？', acceptedAnswer: { '@type': 'Answer', text: '延べ床面積3,000㎡以上の特定建築物（事務所等は8,000㎡）は建築物衛生法により、ねずみ等の生息状況調査を2か月に1回実施することが義務付けられています。HACCP対応とは独立した別義務で、両方の対応が必要なケースもあります。' } },
+    { '@type': 'Question', name: 'IPM（総合的有害生物管理）とは？', acceptedAnswer: { '@type': 'Answer', text: '薬剤散布だけに頼らず、物理的駆除（捕獲・侵入経路封鎖）、環境改善（清掃・乾燥・整理整頓）、生物学的駆除等を組み合わせて、薬剤使用を最小化する管理手法です。食品事業者・福祉施設・医療機関で標準的な考え方となっています。' } },
+    { '@type': 'Question', name: '保健所立入時に何を提示しますか？', acceptedAnswer: { '@type': 'Answer', text: 'HACCPプラン（一般的衛生管理＋HACCP管理）、月次モニタリング記録、害虫発生時の対応記録、薬剤使用記録、業者契約書等です。直近1年分が提示できる状態にしておくのが標準です。' } },
+    { '@type': 'Question', name: '違反するとどうなりますか？', acceptedAnswer: { '@type': 'Answer', text: 'HACCP制度化の違反は直ちに罰則が科されるわけではなく、まず保健所からの改善指導・改善命令が行われます。命令違反や、害虫混入・食中毒事故発生時の管理不備が判明した場合は、営業停止処分や食品衛生法違反としての罰則の対象となります。' } },
+  ],
+});
+---
+<BaseLayout title={title} description={description} canonical={canonical} siteName={site.name} logoSub="施設管理の一括見積比較" jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}>
+  <article class="cl-article">
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>HACCP制度化で必須になった害虫対策ガイド</span>
+        </nav>
+        <span class="cl-cat">法令・義務</span>
+        <h1 class="cl-title">HACCP制度化で必須になった害虫対策ガイド2025｜飲食・食品事業者の防除記録の作り方</h1>
+        <p class="cl-lead">
+          2021年6月、食品衛生法改正により<strong>原則すべての食品事業者にHACCPに沿った衛生管理が義務化</strong>されました。HACCPは「危害分析と重要管理点」の管理手法ですが、その前提となる「一般的な衛生管理」の一項目に<strong>「そ族（ねずみ）・昆虫対策」</strong>が明記されています。保健所立入時に「害虫対策の記録を見せてください」と求められて慌てる事業者は今も多く、「やっているつもり」を「記録で示せる」状態にすることが急務です。本記事では、HACCP上の害虫対策の位置づけ、記録の作り方、保健所対応、業者選定までを整理します。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2025年5月26日</time>
+          <span>最終更新：2025年5月26日</span>
+          <span>執筆：{site.org.legalName}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#haccp-overview">HACCP制度化の全体像</a></li>
+          <li><a href="#ipest">HACCP上の害虫対策（そ族・昆虫対策）の位置づけ</a></li>
+          <li><a href="#tokutei">特定建築物のねずみ等防除義務</a></li>
+          <li><a href="#monitoring">月次モニタリングと記録の作り方</a></li>
+          <li><a href="#ipm">IPM（総合的有害生物管理）の考え方</a></li>
+          <li><a href="#hokenjo">保健所立入時の対応</a></li>
+          <li><a href="#vendor">業者選定で確認すべきこと</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>制度化の根拠</strong>：2021年6月から食品衛生法でHACCPに沿った衛生管理が義務化、「そ族・昆虫対策」は一般的衛生管理の必須項目</li>
+            <li><strong>必要な記録</strong>：月次のモニタリング記録（日付・場所・害虫・改善措置・実施者）を1年以上保管</li>
+            <li><strong>リスク</strong>：保健所改善指導 → 命令違反・事故発生時は営業停止処分・食品衛生法違反として罰則対象</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="haccp-overview" class="cl-section">
+        <h2>HACCP制度化の全体像</h2>
+        <p>HACCP（Hazard Analysis and Critical Control Point、ハサップ）は、食品の安全確保を目的とする国際標準の衛生管理手法です。1960年代にNASAが宇宙食の安全管理のために開発した手法を、1993年にCodex委員会が国際標準化しました。</p>
+        <h3>日本での制度化スケジュール</h3>
+        <ul>
+          <li>2018年6月：食品衛生法改正、HACCP制度化が決定</li>
+          <li>2020年6月：施行（1年間の猶予期間）</li>
+          <li>2021年6月：完全義務化（原則すべての食品事業者）</li>
+        </ul>
+        <h3>事業者規模別の対応</h3>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>事業者規模別のHACCP対応区分</caption>
+            <thead><tr><th scope="col">事業者区分</th><th scope="col">対応内容</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">大規模事業者（食品工場等）</th><td>HACCPに基づく衛生管理（7原則12手順の完全実施）</td></tr>
+              <tr><th scope="row">小規模事業者（飲食店・小規模製造業等）</th><td>HACCPの考え方を取り入れた衛生管理（業界団体策定の手引書ベース）</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>飲食店のほとんどは「HACCPの考え方を取り入れた衛生管理」の対象となり、各業界団体（日本食品衛生協会等）が策定した手引書に沿って一般的な衛生管理＋重要管理点の管理を実施します。</p>
+      </section>
+
+      <section id="ipest" class="cl-section">
+        <h2>HACCP上の害虫対策（そ族・昆虫対策）の位置づけ</h2>
+        <p>HACCPは「7原則」と「一般的な衛生管理（PRP: Prerequisite Programs）」の2層構造です。害虫対策は<strong>一般的な衛生管理（PRP）の必須項目</strong>に含まれます。</p>
+        <h3>一般的な衛生管理の項目（厚生労働省ガイドライン）</h3>
+        <ul>
+          <li>食品衛生責任者等の選任</li>
+          <li>施設の衛生管理</li>
+          <li>設備等の衛生管理</li>
+          <li>使用水等の管理</li>
+          <li><strong>そ族（ねずみ）及び昆虫対策</strong></li>
+          <li>廃棄物及び排水の取扱い</li>
+          <li>食品等の取扱い</li>
+          <li>検食の実施（学校給食等）</li>
+          <li>情報の提供</li>
+          <li>食品取扱者等の衛生管理</li>
+          <li>仕入元・販売先等の記録の作成・保存</li>
+          <li>食品衛生上の危害発生防止計画の作成等</li>
+          <li>回収・廃棄</li>
+          <li>運搬</li>
+          <li>販売</li>
+          <li>教育訓練</li>
+        </ul>
+        <h3>具体的に求められること</h3>
+        <ul>
+          <li><strong>計画</strong>：施設の害虫発生リスクを評価し、管理計画を作成</li>
+          <li><strong>実施</strong>：定期的なモニタリング・侵入防止対策・必要時の駆除</li>
+          <li><strong>記録</strong>：実施状況を記録・保管</li>
+          <li><strong>改善</strong>：問題発生時の対応・再発防止</li>
+        </ul>
+      </section>
+
+      <section id="tokutei" class="cl-section">
+        <h2>特定建築物のねずみ等防除義務</h2>
+        <p>HACCPとは別の法令ですが、建築物衛生法でも害虫対策が義務付けられています。</p>
+        <h3>建築物衛生法の特定建築物</h3>
+        <p>延べ床面積<strong>3,000㎡以上</strong>の興行場・百貨店・店舗・遊技場・図書館・博物館・美術館等、または<strong>8,000㎡以上</strong>の事務所が「特定建築物」に該当します。</p>
+        <h3>ねずみ等防除の義務</h3>
+        <ul>
+          <li>2か月に1回以上の発生状況調査</li>
+          <li>調査結果に基づく防除計画の作成・実施</li>
+          <li>調査・防除の記録を3年間保管</li>
+          <li>調査・防除を行う者は「ねずみ昆虫等防除業」登録業者であることが望ましい</li>
+        </ul>
+        <p>特定建築物の飲食テナント・厨房等は、HACCP対応と建築物衛生法対応の両方の対象となるため、業者選定時には「両方対応可能」を条件にすることが効率的です。</p>
+      </section>
+
+      <section id="monitoring" class="cl-section">
+        <h2>月次モニタリングと記録の作り方</h2>
+        <h3>モニタリング記録の必須項目</h3>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>害虫防除モニタリング記録の標準項目</caption>
+            <thead><tr><th scope="col">項目</th><th scope="col">内容</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">実施日時</th><td>YYYY/MM/DD、開始〜終了時刻</td></tr>
+              <tr><th scope="row">実施場所</th><td>店舗名・エリア（厨房／客席／バックヤード／倉庫等）</td></tr>
+              <tr><th scope="row">実施者</th><td>業者名・担当者名・資格</td></tr>
+              <tr><th scope="row">確認した害虫</th><td>種類・数量・捕獲器ごとの捕獲数</td></tr>
+              <tr><th scope="row">使用した薬剤・トラップ</th><td>製品名・成分・使用量・場所</td></tr>
+              <tr><th scope="row">改善措置・推奨事項</th><td>侵入経路封鎖・清掃強化・設備改善等</td></tr>
+              <tr><th scope="row">写真記録</th><td>捕獲数・侵入痕・改善前後</td></tr>
+              <tr><th scope="row">次回予定</th><td>次回モニタリング日</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>PCO業者の月次モニタリング報告書はこの形式を満たしていることが多く、そのままHACCP記録として活用するのが現実的・効率的です。</p>
+        <h3>記録の保管期間</h3>
+        <ul>
+          <li>HACCP上は明確な期限はないが、最低1年、できれば3年保管</li>
+          <li>特定建築物の場合は3年保管が義務</li>
+          <li>食中毒事故発生時の証拠・反証としても重要</li>
+        </ul>
+      </section>
+
+      <section id="ipm" class="cl-section">
+        <h2>IPM（総合的有害生物管理）の考え方</h2>
+        <p>IPM（Integrated Pest Management）は、薬剤散布に頼らず、複数のアプローチを組み合わせて害虫を管理する手法です。食品事業者・福祉施設・医療機関では標準的な考え方です。</p>
+        <h3>IPMの4つのアプローチ</h3>
+        <ol>
+          <li><strong>物理的駆除</strong>：粘着トラップ・捕獲器・侵入経路封鎖（網戸・ドアシール・配管周りシーリング）</li>
+          <li><strong>環境改善</strong>：清掃・乾燥・整理整頓・生ゴミ管理</li>
+          <li><strong>生物学的駆除</strong>：天敵活用（特定の業種で）</li>
+          <li><strong>化学的駆除</strong>：必要最小限の薬剤を、必要な場所・時期に限定使用</li>
+        </ol>
+        <p>従来型の「殺虫剤を定期散布」は、食品事業者・福祉施設では薬剤接触リスクや耐性害虫の発生で逆効果となるケースもあります。業者選定時に「IPM対応」を明確に打ち出している業者を優先しましょう。</p>
+        <div class="cl-callout">
+          <h3 class="cl-callout-h">IPMの実効性</h3>
+          <p>IPMアプローチを継続すると、半年〜1年で害虫発生数が大幅減少することが多く報告されています。「侵入経路を断つ」「環境改善で発生源をなくす」が根本的解決につながるためです。</p>
+        </div>
+      </section>
+
+      <section id="hokenjo" class="cl-section">
+        <h2>保健所立入時の対応</h2>
+        <p>保健所は通常、年1〜2回の定期立入と、苦情・通報があった際の随時立入を行います。立入時には以下の書類提示を求められます。</p>
+        <h3>提示を求められる書類</h3>
+        <ul>
+          <li>HACCPプラン（一般的衛生管理＋HACCP管理）</li>
+          <li>月次の害虫モニタリング記録（直近1年分）</li>
+          <li>害虫発生時の対応記録</li>
+          <li>薬剤使用記録</li>
+          <li>業者契約書・許可証コピー</li>
+          <li>清掃・消毒記録</li>
+          <li>食品衛生責任者の選任記録・講習修了証</li>
+        </ul>
+        <h3>指摘されやすいポイント</h3>
+        <ul>
+          <li>記録の継続性（月次が欠けている、半年以上未実施）</li>
+          <li>侵入経路の管理不足（排水溝・配管周り・搬入口）</li>
+          <li>生ゴミ・廃棄物管理（蓋なし・夜間放置）</li>
+          <li>薬剤管理（食品接触箇所での散布、保管場所）</li>
+        </ul>
+      </section>
+
+      <section id="vendor" class="cl-section">
+        <h2>業者選定で確認すべきこと</h2>
+        <ol>
+          <li><strong>PCO（業務用害虫駆除）専門業者</strong>：家庭向け業者ではなく業務用施設専門業者を選ぶ</li>
+          <li><strong>HACCP対応モニタリング報告書</strong>：報告書サンプルを事前取得し、HACCP記録としてそのまま使える品質か確認</li>
+          <li><strong>IPMアプローチ</strong>：薬剤散布だけでない総合的管理手法に対応</li>
+          <li><strong>業種への業界知識</strong>：飲食・食品工場・福祉施設等の業界別の規制・薬剤制約に精通</li>
+          <li><strong>緊急対応条件</strong>：大量発生・特殊害虫発見時のスポット駆除対応</li>
+        </ol>
+      </section>
+
+      <div class="cl-cta">
+        <h2>害虫駆除（PCO）業者選びでお悩みなら</h2>
+        <p>HACCP対応の有資格業者から最大3社の見積もりを<br/>完全無料・約1分で取得できます</p>
+        <a class="cta-btn-primary" href="/pest-control/">無料で一括見積もりを依頼する →</a>
+      </div>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          <div class="cl-faq-item"><dt>個人経営の小さな飲食店もHACCP対応必須ですか？</dt><dd>はい、対象です。ただし「HACCPの考え方を取り入れた衛生管理」の簡略化された形でよく、業界団体の手引書（日本食品衛生協会の業種別手引書等）に沿って実施します。害虫対策の記録も簡易な様式で構いません。</dd></div>
+          <div class="cl-faq-item"><dt>害虫対策を自社でやってもよい？</dt><dd>はい、必須ではありません。ただし日常の予防（清掃・侵入経路封鎖）と業者による月次モニタリングを組み合わせるのが現実的です。発生時の対応は専門知識・薬剤管理が必要なため業者依頼が一般的です。</dd></div>
+          <div class="cl-faq-item"><dt>モニタリング報告書の保管期間は？</dt><dd>HACCP上は明確な期限なしですが、最低1年、できれば3年保管が推奨されます。特定建築物の場合は建築物衛生法で3年保管が義務です。</dd></div>
+          <div class="cl-faq-item"><dt>業者依頼の費用はどのくらい？</dt><dd>小規模飲食店の月次モニタリング契約で月8,000〜15,000円、中規模で15,000〜30,000円、食品工場で50,000円〜が目安です。スポット駆除は1回30,000〜100,000円が一般的です。</dd></div>
+          <div class="cl-faq-item"><dt>HACCP対応の業者かどうかをどう判断する？</dt><dd>「HACCP対応報告書を発行できる」「IPMアプローチを採用している」「業種別の手引書を理解している」「保健所立入経験がある」等のキーワードで確認します。報告書サンプルを取り寄せるのが最確実です。</dd></div>
+          <div class="cl-faq-item"><dt>営業中に薬剤散布されると困りますが？</dt><dd>食品事業者・福祉施設では営業中の薬剤散布は厳禁です。業務終了後の散布対応、低毒性製剤の選定、客室・厨房での散布制限等、施設用途への配慮ができる業者を選びましょう。</dd></div>
+        </dl>
+      </section>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連サービス・コラム</h2>
+        <ul>
+          <li><a href="/pest-control/">害虫駆除（業務用PCO）の業者を一括見積比較</a></li>
+          <li><a href="/grease-trap/">グリストラップ清掃の業者を比較</a></li>
+          <li><a href="/duct/">ダクト清掃の業者を比較</a></li>
+          <li><a href="/flow/">ご利用の流れ・3ステップで業者紹介</a></li>
+        </ul>
+      </aside>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-callout li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+@media (max-width: 600px) { .cl-header { padding: 32px 0 28px; } .cl-body { padding: 28px 16px 48px; } .cl-section h2 { font-size: 1.15rem; } }
+</style>
