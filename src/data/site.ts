@@ -40,6 +40,12 @@ export const serviceIndex = [
     short: 'シャッター',
     description: '防火シャッター・電動シャッターの定期点検と修理の専門業者を比較。',
   },
+  {
+    slug: 'shobo-setsubi',
+    name: '消防設備点検',
+    short: '消防設備',
+    description: '消防法で義務化されている機器点検・総合点検を有資格業者へ一括見積。',
+  },
 ] as const;
 
 export const prefectures = [
