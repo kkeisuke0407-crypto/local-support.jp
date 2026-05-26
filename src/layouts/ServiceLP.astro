@@ -122,6 +122,31 @@ const jsonLdBlocks = [breadcrumbLd, serviceLd, faqLd, howToLd, priceLd].filter(B
   <ComparisonTipsSection tips={data.comparisonTips} serviceName={data.serviceName} />
   <QuoteFormFull data={data} />
   <FAQ faq={data.faq} serviceName={data.serviceName} />
+
+  {data.relatedColumns && data.relatedColumns.length > 0 && (
+    <section class="sd-section section-gray related-columns">
+      <div class="sd-container">
+        <h2 class="sd-h2">関連コラム</h2>
+        <p class="related-columns-sub">{data.serviceName}に関する費用・法令・業者選びの詳細解説</p>
+        <ul class="rcol-list">
+          {data.relatedColumns.map((col) => (
+            <li class="rcol-item">
+              <a href={col.href} class="rcol-link">
+                <div class="rcol-meta">
+                  <span class="rcol-cat">{col.category}</span>
+                  <time datetime={col.date} class="rcol-date">{col.date.replaceAll('-', '/')}</time>
+                </div>
+                <h3 class="rcol-title">{col.title}</h3>
+                <p class="rcol-excerpt">{col.excerpt}</p>
+                <span class="rcol-arrow">詳しく読む →</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
   <PrefectureGrid serviceSlug={data.slug} serviceName={data.serviceName} />
   <RelatedServices currentSlug={data.slug} relatedSlugs={data.relatedServiceSlugs} />
   <BottomCTA serviceName={data.serviceName} />

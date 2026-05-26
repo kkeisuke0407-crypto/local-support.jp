@@ -261,6 +261,23 @@ const data: ServiceData = {
   ],
 
   relatedServiceSlugs: ['duct', 'asbestos', 'shutter'],
+
+  relatedColumns: [
+    {
+      href: '/column/jusuisou-seisou-hiyo-sohba/',
+      category: '費用相場',
+      title: '受水槽清掃の費用相場2025｜規模別の料金・追加費用・業者選びの完全ガイド',
+      excerpt: '小規模3〜8万円・中規模8〜30万円・大規模30万円〜の規模別料金と、水質検査・排水処理などの追加費用を徹底解説。見積もり比較の進め方まで。',
+      date: '2025-05-26',
+    },
+    {
+      href: '/column/jusuisou-seisou-horei-gimu/',
+      category: '法令・義務',
+      title: '受水槽清掃の法定義務ガイド2025｜水道法・建築物衛生法の要点と違反ペナルティ',
+      excerpt: '水道法第34条の2が定める年1回以上の清掃義務と、建築物衛生法が適用される特定建築物の追加要件を整理。違反時の罰則・行政指導事例も解説。',
+      date: '2025-05-26',
+    },
+  ],
 };
 
 export default data;

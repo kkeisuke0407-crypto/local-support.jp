@@ -64,4 +64,12 @@ export interface ServiceData {
   facilityTypeOptions: string[];
 
   relatedServiceSlugs: string[];
+
+  relatedColumns?: {
+    href: string;
+    category: string;
+    title: string;
+    excerpt: string;
+    date: string;
+  }[];
 }
