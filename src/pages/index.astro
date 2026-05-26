@@ -1,52 +1,28 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ProcessSteps from '../components/ProcessSteps.astro';
-import TrustBadges from '../components/TrustBadges.astro';
-import FAQ from '../components/FAQ.astro';
-import { site, serviceIndex, prefectures } from '../data/site';
+import { site, serviceIndex } from '../data/site';
 
-const PAGE_TITLE = '施設管理の一括見積比較｜受水槽・アスベスト・ダクト・シャッター｜local-support.jp';
-const PAGE_DESC  = '受水槽清掃・アスベスト調査・ダクト清掃・シャッター点検など、施設管理の業者探しを一括見積で。登録業者から最大3社を厳選紹介・完全無料。全国47都道府県対応のB2B向け業者紹介サービス。';
+const PAGE_TITLE = 'local-support.jp｜施設管理の一括見積比較サービス';
+const PAGE_DESC  = '受水槽清掃・アスベスト調査・ダクト清掃・シャッター点検など、施設管理に必要な専門業者を一括見積で比較。登録済みの資格・許認可を持つ地元業者を最大3社ご紹介します。完全無料。';
 const CANONICAL  = `${site.domain}/`;
 
-const faqItems = [
-  {
-    q: '一括見積の利用に費用はかかりますか？',
-    a: '完全無料です。お見積もり依頼・業者紹介・ご相談まで、すべてのサービスを無料でご利用いただけます。紹介した業者と契約された後も、当サイトへの手数料は発生しません。',
-  },
-  {
-    q: '何社から見積もりが取れますか？',
-    a: 'サービス内容・所在地に応じて、対応可能な登録業者の中から最大3社を厳選してご紹介します。複数社の見積もりを比較することで、費用の妥当性確認と過剰請求の回避ができます。',
-  },
-  {
-    q: '対応エリアはどこですか？',
-    a: '全国47都道府県に対応しています。施設所在地に近い地元の登録業者を優先的にご紹介するため、迅速な対応・出張費の抑制が期待できます。',
-  },
-  {
-    q: 'しつこい営業電話は来ませんか？',
-    a: 'いいえ、来ません。ご紹介する業者は事前に審査済みで、しつこい営業を行わないことを利用規約で求めています。万一そのような対応があれば、こちらへご報告いただければ業者登録の停止対応をいたします。',
-  },
-];
-
-const faqLd = JSON.stringify({
+const websiteLd = JSON.stringify({
   '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqItems.map((f) => ({
-    '@type': 'Question',
-    name: f.q,
-    acceptedAnswer: { '@type': 'Answer', text: f.a },
-  })),
+  '@type': 'WebSite',
+  name: site.name,
+  url: site.domain,
+  description: site.description,
 });
 
-const breadcrumbLd = JSON.stringify({
+const orgLd = JSON.stringify({
   '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'トップ', item: CANONICAL },
-  ],
+  '@type': 'Organization',
+  name: site.org.legalName,
+  url: site.domain,
+  foundingDate: site.org.foundedYear,
+  areaServed: 'JP',
+  serviceType: '施設管理業者紹介',
 });
-
-const updatedJa = new Date(site.lastUpdated).toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 <BaseLayout
   title={PAGE_TITLE}
@@ -54,138 +30,274 @@ const updatedJa = new Date(site.lastUpdated).toLocaleDateString('ja-JP', { year:
   canonical={CANONICAL}
   siteName={site.name}
   logoSub="施設管理の一括見積比較"
-  jsonLdBlocks={[breadcrumbLd, faqLd]}
+  jsonLdBlocks={[websiteLd, orgLd]}
 >
 
 <!-- ══ HERO ════════════════════════════════════════════════════ -->
-<section class="hero hero--b2b">
-  <div class="sd-container-wide hero-grid">
-    <div class="hero-copy">
-      <div class="hero-eyebrow">マンション・ビル・工場の管理担当者の方へ</div>
-      <h1 class="hero-h1">施設管理の業者探し、ぜんぶお任せください</h1>
-      <h2 class="hero-h2">受水槽・アスベスト・ダクト・シャッターなど 一括見積で最大3社をご紹介・完全無料</h2>
-      <ul class="hero-bullets">
-        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>完全無料・しつこい営業なし</span></li>
-        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>登録資格を確認済みの業者のみ紹介</span></li>
-        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>全国47都道府県・複数施設まとめてOK</span></li>
-        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>最大3社を厳選紹介・比較検討に最適</span></li>
-      </ul>
-      <dl class="hero-stats">
-        {site.stats.map((s) => (
-          <div class="hero-stat">
-            <dt>{s.label}</dt>
-            <dd>{s.value}</dd>
-          </div>
-        ))}
-      </dl>
-      <p class="hero-meta"><time datetime={site.lastUpdated}>最終更新：{updatedJa}</time> ／ 運営：{site.name}</p>
-    </div>
-    <div class="hero-form">
-      <aside class="qf-compact" aria-label="無料一括見積もり依頼フォーム">
-        <div class="qf-compact-head">
-          <span class="qf-compact-badge">完全無料</span>
-          <h3>30秒で無料一括見積</h3>
-          <p>必要なサービスを選んで送信</p>
-        </div>
-        {/* TODO: バックエンド未接続 — 送信時は /thanks/ にリダイレクト */}
-        <form class="qf qf--compact" action="#" method="POST" data-service="top" data-redirect="/thanks/?service=top" novalidate>
-          <div class="qf-row">
-            <label for="top-service">ご相談内容 <span class="qf-req">必須</span></label>
-            <select id="top-service" name="service" required>
-              <option value="">選択してください</option>
-              {serviceIndex.map((s) => (<option value={s.name}>{s.name}</option>))}
-              <option value="その他・複数">その他・複数まとめて</option>
-            </select>
-          </div>
-          <div class="qf-row">
-            <label for="top-company">会社名・施設名 <span class="qf-req">必須</span></label>
-            <input id="top-company" name="company" type="text" required placeholder="例：◯◯ビル管理組合" />
-          </div>
-          <div class="qf-row">
-            <label for="top-prefecture">所在地（都道府県） <span class="qf-req">必須</span></label>
-            <select id="top-prefecture" name="prefecture" required>
-              <option value="">選択してください</option>
-              {prefectures.map((p) => (<option value={p}>{p}</option>))}
-            </select>
-          </div>
-          <div class="qf-row">
-            <label for="top-email">連絡先メール <span class="qf-req">必須</span></label>
-            <input id="top-email" name="email" type="email" required placeholder="例：info@example.com" />
-          </div>
-          <button type="submit" class="qf-submit" data-track="top_hero_form_submit">無料で見積依頼する →</button>
-          <p class="qf-note">入力情報は業者紹介のみに使用します</p>
-        </form>
-      </aside>
-    </div>
+<section class="lp-hero">
+  <div class="sd-container lp-hero-inner">
+    <p class="lp-hero-kicker">B2B施設管理の一括見積比較サービス</p>
+    <h1 class="lp-hero-h1">施設管理の業者探しを、<br/>もっとかんたんに。</h1>
+    <p class="lp-hero-desc">
+      受水槽清掃・アスベスト調査・ダクト清掃・シャッター点検など、<br class="pc-only"/>
+      施設管理に必要な専門業者を一括見積で比較できるサービスです。<br class="pc-only"/>
+      登録資格を確認済みの地元業者を最大3社ご紹介。完全無料でご利用いただけます。
+    </p>
+    <a href="/jusuisou-seisou/" class="lp-hero-cta">無料で一括見積もりを依頼する →</a>
+    <ul class="lp-hero-badges">
+      <li>完全無料</li>
+      <li>最大3社を厳選紹介</li>
+      <li>全国47都道府県対応</li>
+      <li>登録資格確認済み業者のみ</li>
+    </ul>
   </div>
 </section>
 
 <!-- ══ サービス一覧 ════════════════════════════════════════════ -->
-<section class="sd-section section-white" id="services">
+<section class="lp-services">
   <div class="sd-container">
-    <div class="section-head">
-      <span class="kicker">SERVICES</span>
-      <h2>取り扱いサービス｜B2B施設管理の一括見積</h2>
-      <p>各分野の登録業者から最大3社を厳選紹介します</p>
-    </div>
-    <div class="service-grid">
+    <h2 class="lp-section-title">取り扱いサービス</h2>
+    <div class="lp-service-grid">
       {serviceIndex.map((s) => (
-        <a href={`/${s.slug}/`} class="service-card">
-          <div class="service-card-tag">{s.short}</div>
+        <a href={`/${s.slug}/`} class="lp-service-card">
+          <span class="lp-service-label">{s.short}</span>
           <h3>{s.name}</h3>
           <p>{s.description}</p>
-          <span class="service-card-link">詳しく見る →</span>
+          <span class="lp-service-link">無料で見積依頼 →</span>
         </a>
       ))}
     </div>
   </div>
 </section>
 
-<ProcessSteps />
-
-<TrustBadges stats={site.stats} />
-
-<!-- ══ Why us ══════════════════════════════════════════════════ -->
-<section class="sd-section section-white" id="why">
+<!-- ══ 3ステップ ═══════════════════════════════════════════════ -->
+<section class="lp-steps">
   <div class="sd-container">
-    <div class="section-head">
-      <span class="kicker">WHY US</span>
-      <h2>local-support.jp が選ばれる理由</h2>
-      <p>B2B施設管理に特化した一括見積比較サービスです</p>
-    </div>
-    <div class="why-grid">
-      <article class="why-card">
+    <h2 class="lp-section-title">3ステップで業者紹介</h2>
+    <ol class="lp-step-list">
+      <li>
+        <span class="lp-step-num">01</span>
+        <h3>フォームで依頼</h3>
+        <p>施設情報・要件を入力するだけ。約1分で完了します。</p>
+      </li>
+      <li>
+        <span class="lp-step-num">02</span>
+        <h3>業者を厳選紹介</h3>
+        <p>資格・対応エリア・実績を確認のうえ、最大3社をご提案します。</p>
+      </li>
+      <li>
+        <span class="lp-step-num">03</span>
+        <h3>比較・ご契約</h3>
+        <p>複数社の見積もりを比較して、納得のいく業者を選んでください。</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ══ 選ばれる理由 ════════════════════════════════════════════ -->
+<section class="lp-why">
+  <div class="sd-container">
+    <h2 class="lp-section-title">local-support.jp が選ばれる理由</h2>
+    <div class="lp-why-grid">
+      <div class="lp-why-card">
         <h3>登録業者のみ紹介</h3>
-        <p>各分野で必要な登録・資格・許認可を確認済みの業者のみご紹介。無資格業者への発注リスクを回避できます。</p>
-      </article>
-      <article class="why-card">
+        <p>各分野で必要な登録・資格・許認可を確認済みの業者のみ紹介。無資格業者への発注リスクを回避できます。</p>
+      </div>
+      <div class="lp-why-card">
         <h3>一括見積で最大3社を比較</h3>
-        <p>一度の入力で複数業者からお見積もりが届きます。同じ条件で比較できるため、費用妥当性の確認に最適です。</p>
-      </article>
-      <article class="why-card">
+        <p>一度の入力で複数業者の見積もりが届きます。費用の妥当性確認と過剰請求の防止に役立ちます。</p>
+      </div>
+      <div class="lp-why-card">
         <h3>全国対応・地元業者ネットワーク</h3>
-        <p>全国47都道府県に対応。施設所在地に近い地元業者を優先紹介するため、出張費を抑え迅速な対応が期待できます。</p>
-      </article>
+        <p>全国47都道府県に対応。施設所在地に近い地元業者を優先紹介するため、出張費を抑えた対応が期待できます。</p>
+      </div>
+      <div class="lp-why-card">
+        <h3>完全無料・しつこい営業なし</h3>
+        <p>依頼から紹介まですべて無料。紹介した業者には過度な営業を禁じており、安心してご利用いただけます。</p>
+      </div>
     </div>
   </div>
 </section>
 
-<FAQ faq={faqItems} serviceName="施設管理の一括見積" />
-
 <!-- ══ Bottom CTA ═════════════════════════════════════════════ -->
-<section class="cta-section" id="contact">
-  <div class="sd-container">
-    <div class="cta-inner">
-      <h2>まずはサービスを選んで<br/>無料一括見積</h2>
-      <p>所要時間は約1分。登録業者から最大3社を厳選してご紹介します。</p>
-      <div class="cta-buttons">
-        {serviceIndex.map((s) => (
-          <a class="cta-btn-secondary" href={`/${s.slug}/`}>{s.short}の見積依頼 →</a>
-        ))}
-      </div>
-      <p class="cta-note">完全無料／最大3社を厳選紹介／全国47都道府県対応</p>
+<section class="lp-cta">
+  <div class="sd-container lp-cta-inner">
+    <h2>まずはサービスを選んで<br/>無料一括見積</h2>
+    <p>所要時間は約1分。登録業者から最大3社をご紹介します。</p>
+    <div class="lp-cta-btns">
+      {serviceIndex.map((s) => (
+        <a href={`/${s.slug}/`} class="lp-cta-btn">{s.name}の見積依頼 →</a>
+      ))}
     </div>
+    <p class="lp-cta-note">完全無料 ／ 最大3社を厳選紹介 ／ 全国47都道府県対応</p>
   </div>
 </section>
 
 </BaseLayout>
+
+<style>
+/* ── Hero ── */
+.lp-hero {
+  background: linear-gradient(135deg, var(--blue-dark) 0%, #1a3a6b 100%);
+  color: #fff;
+  padding: 80px 0 72px;
+  text-align: center;
+}
+.lp-hero-kicker {
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #93c5fd;
+  margin-bottom: 16px;
+}
+.lp-hero-h1 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 900;
+  line-height: 1.3;
+  margin-bottom: 24px;
+}
+.lp-hero-desc {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #bfdbfe;
+  margin-bottom: 32px;
+}
+.lp-hero-cta {
+  display: inline-block;
+  background: var(--accent);
+  color: #1a202c;
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 16px 40px;
+  border-radius: 8px;
+  transition: opacity .2s;
+  margin-bottom: 24px;
+}
+.lp-hero-cta:hover { opacity: .85; }
+.lp-hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  list-style: none;
+  margin-top: 8px;
+}
+.lp-hero-badges li {
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.25);
+  color: #e0f2fe;
+  font-size: .78rem;
+  padding: 4px 12px;
+  border-radius: 99px;
+}
+
+/* ── Section共通 ── */
+.lp-section-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 36px;
+  color: var(--gray-900);
+}
+
+/* ── Services ── */
+.lp-services {
+  padding: 64px 0;
+  background: var(--gray-100);
+}
+.lp-service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+.lp-service-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-200);
+  transition: box-shadow .2s, transform .2s;
+}
+.lp-service-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.lp-service-label {
+  font-size: .72rem;
+  font-weight: 700;
+  color: var(--blue);
+  background: var(--blue-light);
+  padding: 3px 10px;
+  border-radius: 99px;
+  align-self: flex-start;
+  margin-bottom: 12px;
+}
+.lp-service-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: var(--gray-900); }
+.lp-service-card p { font-size: .85rem; color: var(--gray-500); line-height: 1.6; flex: 1; margin-bottom: 16px; }
+.lp-service-link { font-size: .85rem; font-weight: 700; color: var(--blue); margin-top: auto; }
+
+/* ── Steps ── */
+.lp-steps { padding: 64px 0; background: #fff; }
+.lp-step-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 32px;
+  list-style: none;
+  counter-reset: none;
+  text-align: center;
+}
+.lp-step-num {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--blue-light);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.lp-step-list h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+.lp-step-list p { font-size: .875rem; color: var(--gray-500); line-height: 1.7; }
+
+/* ── Why ── */
+.lp-why { padding: 64px 0; background: var(--gray-100); }
+.lp-why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+.lp-why-card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-200);
+}
+.lp-why-card h3 { font-size: .95rem; font-weight: 700; margin-bottom: 8px; color: var(--blue-dark); }
+.lp-why-card p { font-size: .85rem; color: var(--gray-500); line-height: 1.7; }
+
+/* ── CTA ── */
+.lp-cta {
+  background: var(--blue-dark);
+  padding: 64px 0;
+  color: #fff;
+  text-align: center;
+}
+.lp-cta-inner h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: 12px; }
+.lp-cta-inner > p { color: #bfdbfe; margin-bottom: 28px; font-size: .95rem; }
+.lp-cta-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 16px; }
+.lp-cta-btn {
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.3);
+  color: #fff;
+  font-size: .9rem;
+  font-weight: 700;
+  padding: 12px 24px;
+  border-radius: 8px;
+  transition: background .2s;
+}
+.lp-cta-btn:hover { background: rgba(255,255,255,.22); }
+.lp-cta-note { font-size: .78rem; color: #93c5fd; }
+
+/* ── Util ── */
+.pc-only { display: none; }
+@media (min-width: 768px) { .pc-only { display: inline; } }
+</style>
