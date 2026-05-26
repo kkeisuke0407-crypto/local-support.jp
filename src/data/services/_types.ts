@@ -42,6 +42,8 @@ export interface ServiceData {
     };
     factors: string[];
     note: string;
+    /** Offer/PriceSpecification 用の価格レンジ（JPY） */
+    priceRange?: { min: number; max: number };
   };
 
   industries: { title: string; body: string; tag: string }[];

@@ -19,9 +19,20 @@ const orgLd = JSON.stringify({
   '@type': 'Organization',
   name: site.org.legalName,
   url: site.domain,
-  foundingDate: site.org.foundedYear,
   areaServed: 'JP',
   serviceType: '施設管理業者紹介',
+});
+
+const itemListLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: '施設管理の一括見積比較サービス一覧',
+  itemListElement: serviceIndex.map((s, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    url: `${site.domain}/${s.slug}/`,
+    name: s.name,
+  })),
 });
 ---
 <BaseLayout
@@ -30,7 +41,7 @@ const orgLd = JSON.stringify({
   canonical={CANONICAL}
   siteName={site.name}
   logoSub="施設管理の一括見積比較"
-  jsonLdBlocks={[websiteLd, orgLd]}
+  jsonLdBlocks={[websiteLd, orgLd, itemListLd]}
 >
 
 <!-- ══ HERO ════════════════════════════════════════════════════ -->
@@ -91,6 +102,52 @@ const orgLd = JSON.stringify({
         <p>複数社の見積もりを比較して、納得のいく業者を選んでください。</p>
       </li>
     </ol>
+  </div>
+</section>
+
+<!-- ══ 費用相場まとめ（AIO直接回答用） ════════════════════════ -->
+<section class="lp-cost-summary">
+  <div class="sd-container">
+    <h2 class="lp-section-title">サービス別の費用相場</h2>
+    <p class="lp-cost-lead">
+      各サービスの一般的な費用レンジを一覧で比較できます。実際の金額は施設規模・地域・業者により変動します。
+    </p>
+    <div class="lp-cost-table-wrap">
+      <table class="lp-cost-table">
+        <thead>
+          <tr>
+            <th scope="col">サービス</th>
+            <th scope="col">費用相場</th>
+            <th scope="col">主な義務・推奨頻度</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row"><a href="/jusuisou-seisou/">受水槽清掃</a></th>
+            <td>3万円〜30万円<br/><small>＋水質検査1〜2.5万円</small></td>
+            <td>水道法で年1回以上義務（10m³超）</td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="/asbestos/">アスベスト調査・除去</a></th>
+            <td>事前調査5〜20万円<br/>除去工事1〜10万円／㎡</td>
+            <td>解体・改修工事前に有資格者調査が義務</td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="/duct/">ダクト清掃</a></th>
+            <td>厨房ダクト5〜30万円<br/>空調ダクト10〜100万円</td>
+            <td>厨房年1〜2回／空調2〜3年に1回推奨</td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="/shutter/">シャッター点検・修理</a></th>
+            <td>点検1台1〜3万円<br/>修理2万円〜</td>
+            <td>建築基準法で防火シャッター年1回義務</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="lp-cost-note">
+      上記は2025年時点の一般的な相場目安です。最新かつ正確な金額は、複数業者からの見積もりでご確認ください。
+    </p>
   </div>
 </section>
 
@@ -190,6 +247,59 @@ const orgLd = JSON.stringify({
   font-size: .78rem;
   padding: 4px 12px;
   border-radius: 99px;
+}
+
+/* ── 費用相場まとめ ── */
+.lp-cost-summary {
+  padding: 64px 0;
+  background: #fff;
+}
+.lp-cost-lead {
+  text-align: center;
+  color: var(--gray-700);
+  font-size: .95rem;
+  margin: -16px auto 28px;
+  max-width: 720px;
+  line-height: 1.8;
+}
+.lp-cost-table-wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  overflow-x: auto;
+}
+.lp-cost-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .92rem;
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.lp-cost-table thead { background: var(--blue-light); }
+.lp-cost-table th, .lp-cost-table td {
+  padding: 16px 18px;
+  text-align: left;
+  border-bottom: 1px solid var(--gray-200);
+  vertical-align: top;
+}
+.lp-cost-table thead th { color: var(--blue-dark); font-weight: 800; }
+.lp-cost-table tbody th { width: 200px; font-weight: 700; }
+.lp-cost-table tbody th a { color: var(--blue); text-decoration: underline; }
+.lp-cost-table td { color: var(--gray-700); line-height: 1.65; }
+.lp-cost-table td small { font-size: .82em; color: var(--gray-500); }
+.lp-cost-table tbody tr:last-child th,
+.lp-cost-table tbody tr:last-child td { border-bottom: none; }
+.lp-cost-note {
+  text-align: center;
+  font-size: .82rem;
+  color: var(--gray-500);
+  margin-top: 18px;
+}
+@media (max-width: 640px) {
+  .lp-cost-table { font-size: .85rem; }
+  .lp-cost-table th, .lp-cost-table td { padding: 12px 10px; }
+  .lp-cost-table tbody th { width: 30%; }
 }
 
 /* ── Section共通 ── */

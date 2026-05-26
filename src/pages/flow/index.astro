@@ -15,6 +15,43 @@ const breadcrumbLd = JSON.stringify({
   ],
 });
 
+const flowFaq = [
+  {
+    q: '一括見積依頼から業者紹介までどれくらいかかりますか？',
+    a: 'フォーム送信後、通常1営業日以内にこちらから登録業者を厳選し、業者から直接ご連絡が入ります。お急ぎの場合はフォーム内の「緊急度」欄で当日対応希望を選択してください。',
+  },
+  {
+    q: '業者からの連絡は何社から、どのような形で届きますか？',
+    a: '対応可能な登録業者を最大3社まで厳選してご紹介します。業者からは原則メールでのご連絡となり、お電話を希望される場合はフォーム送信時にご指定ください。複数社から連絡が入った後、見積もり内容を比較してご契約先をお選びいただけます。',
+  },
+  {
+    q: '見積もり依頼後、必ず契約しなければなりませんか？',
+    a: 'いいえ、契約義務は一切ありません。複数業者の見積もりを比較した結果、ご依頼いただかない判断をされても問題ありません。当サイト・業者ともにキャンセル料は発生しません。',
+  },
+  {
+    q: '紹介された業者が合わなかった場合は？',
+    a: '別の業者をご紹介することが可能です。お問い合わせフォームより「別業者紹介希望」とご連絡ください。理由をお伺いしたうえで、再度厳選してご紹介します。',
+  },
+  {
+    q: 'local-support.jpへの手数料はかかりますか？',
+    a: '一切かかりません。一括見積依頼・業者紹介・契約後すべて完全無料でご利用いただけます。費用は業者との直接契約分のみが発生します。',
+  },
+  {
+    q: '土日祝にも対応してもらえますか？',
+    a: 'フォーム自体は24時間受付ています。土日祝のお申し込みは翌営業日以降の対応となります。緊急対応が必要な場合は、業者から直接ご連絡が入る形でできる限り早く対応します。',
+  },
+];
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: flowFaq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+});
+
 const steps = [
   {
     num: '01',
@@ -53,7 +90,7 @@ const steps = [
   },
 ];
 ---
-<BaseLayout title={title} description={description} canonical={canonical} siteName={site.name} jsonLdBlocks={[breadcrumbLd]}>
+<BaseLayout title={title} description={description} canonical={canonical} siteName={site.name} jsonLdBlocks={[breadcrumbLd, faqLd]}>
 
   <section class="hero hero--simple">
     <div class="sd-container">
@@ -88,6 +125,24 @@ const steps = [
       <div class="flow-cta">
         <p>まずはサービスを選んで、無料で一括見積もりを依頼してください。</p>
         <a class="cta-btn-primary" href="/">サービス一覧から依頼する →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sd-section section-white" id="flow-faq">
+    <div class="sd-container">
+      <div class="section-head">
+        <span class="kicker">FAQ</span>
+        <h2>ご利用の流れに関するよくある質問</h2>
+        <p>一括見積依頼から業者紹介までの疑問にお答えします</p>
+      </div>
+      <div class="flow-faq-list">
+        {flowFaq.map((f) => (
+          <details class="flow-faq-item">
+            <summary class="flow-faq-q">{f.q}</summary>
+            <div class="flow-faq-a"><p>{f.a}</p></div>
+          </details>
+        ))}
       </div>
     </div>
   </section>
@@ -195,5 +250,43 @@ const steps = [
   .flow-step-body { flex-direction: column; gap: 12px; }
   .flow-step-icon { width: 40px; height: 40px; }
   .flow-step-icon svg { width: 20px; height: 20px; }
+}
+
+.flow-faq-list { max-width: 800px; }
+.flow-faq-item {
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.flow-faq-q {
+  cursor: pointer;
+  padding: 18px 20px;
+  font-size: .98rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  list-style: none;
+  position: relative;
+  padding-right: 48px;
+}
+.flow-faq-q::-webkit-details-marker { display: none; }
+.flow-faq-q::after {
+  content: '+';
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--blue);
+  font-size: 1.3rem;
+  font-weight: 900;
+  transition: transform .2s;
+}
+.flow-faq-item[open] .flow-faq-q::after { content: '−'; }
+.flow-faq-a {
+  padding: 0 20px 18px;
+  color: var(--gray-700);
+  font-size: .92rem;
+  line-height: 1.85;
 }
 </style>

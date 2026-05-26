@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { site } from '../../data/site';
 
 const title = '運営者情報｜local-support.jp';
-const description = 'local-support.jp の運営者情報です。';
+const description = 'local-support.jp の運営者情報・運営方針・お問い合わせ方法。施設管理の一括見積比較サービスの運営体制と、ご紹介業者の審査基準についてご案内します。';
 const canonical = `${site.domain}/operator/`;
 
 const breadcrumbLd = JSON.stringify({
@@ -14,24 +14,93 @@ const breadcrumbLd = JSON.stringify({
     { '@type': 'ListItem', position: 2, name: '運営者情報', item: canonical },
   ],
 });
+
+const orgLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: site.org.legalName,
+  alternateName: site.name,
+  url: site.domain,
+  logo: `${site.domain}/og-default.svg`,
+  areaServed: { '@type': 'Country', name: 'Japan' },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'customer support',
+    availableLanguage: ['ja'],
+    areaServed: 'JP',
+  },
+  description: '施設管理・設備メンテナンスの一括見積比較サービスを運営。受水槽清掃・アスベスト調査・ダクト清掃・シャッター点検など、法令に基づく定期メンテナンスを必要とする施設管理担当者と、登録・資格を有する専門業者をつなぐB2B紹介サービス。',
+});
 ---
-<BaseLayout title={title} description={description} canonical={canonical} siteName={site.name} jsonLdBlocks={[breadcrumbLd]}>
+<BaseLayout title={title} description={description} canonical={canonical} siteName={site.name} jsonLdBlocks={[breadcrumbLd, orgLd]}>
   <section class="hero hero--simple">
     <div class="sd-container">
       <h1 class="hero-h1">運営者情報</h1>
+      <p class="hero-sub-simple">施設管理の一括見積比較サービスの運営体制とご紹介方針</p>
     </div>
   </section>
 
   <section class="sd-section section-white">
     <div class="sd-container">
-      <table class="info-table">
-        <tbody>
-          <tr><th>サービス名</th><td>local-support.jp</td></tr>
-          <tr><th>運営者</th><td>{site.org.legalName}</td></tr>
-          <tr><th>事業内容</th><td>施設管理・設備メンテナンス業者紹介サービス</td></tr>
-          <tr><th>お問い合わせ</th><td>各サービスページのお問い合わせフォームよりご連絡ください</td></tr>
-        </tbody>
-      </table>
+
+      <div class="op-block">
+        <h2 class="op-h2">サービス概要</h2>
+        <table class="info-table">
+          <tbody>
+            <tr><th>サービス名</th><td>local-support.jp（ローカルサポート）</td></tr>
+            <tr><th>運営者</th><td>{site.org.legalName}</td></tr>
+            <tr><th>事業内容</th><td>施設管理・設備メンテナンス業者の紹介サービス（一括見積比較）</td></tr>
+            <tr><th>対応エリア</th><td>全国47都道府県</td></tr>
+            <tr><th>取扱サービス</th><td>受水槽清掃／アスベスト調査・除去／ダクト清掃／シャッター点検・修理</td></tr>
+            <tr><th>利用料金</th><td>完全無料（見積依頼・業者紹介・契約後の手数料はすべて無料）</td></tr>
+            <tr><th>お問い合わせ</th><td>各サービスページのお問い合わせフォームよりご連絡ください</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="op-block">
+        <h2 class="op-h2">運営方針</h2>
+        <p class="op-lead">
+          local-support.jp は、<strong>施設管理担当者の業者選び負担を軽減する</strong>ことを目的に運営しています。
+          受水槽清掃やアスベスト調査など、法令上の点検・清掃義務がある分野では、無資格・無登録の業者への発注がそのまま管理者責任に直結します。
+          本サービスでは、法令上の登録・資格要件を確認できる業者のみをご紹介することで、施設管理者が安心して業者を比較・選定できる環境を提供します。
+        </p>
+      </div>
+
+      <div class="op-block">
+        <h2 class="op-h2">ご紹介業者の審査基準</h2>
+        <p class="op-lead">登録時に以下の項目を確認しています。</p>
+        <ul class="op-list">
+          <li><strong>法令上の登録・資格</strong>：建築物飲料水貯水槽清掃業の都道府県知事登録、建築物石綿含有建材調査者、建築設備検査員などの有資格者在籍を確認</li>
+          <li><strong>事業実態の確認</strong>：法人登記・所在地・事業継続年数の確認</li>
+          <li><strong>営業姿勢に関する誓約</strong>：「しつこい営業の禁止」「見積書への作業内訳明記」「追加費用発生条件の事前提示」を利用規約で要求</li>
+          <li><strong>事故・トラブル時の対応体制</strong>：施工不備や水質基準未達時の再施工・賠償体制を確認</li>
+        </ul>
+      </div>
+
+      <div class="op-block">
+        <h2 class="op-h2">情報の正確性について</h2>
+        <p class="op-lead">
+          本サイトに掲載している<strong>法令情報・費用相場・業者選びの基準は公開時点のもの</strong>です。
+          法令は改正されること、費用相場は地域・業者・施設状況により変動することがあるため、最終的な判断は管轄行政（保健所・水道局・労働基準監督署など）の最新情報、および複数の業者見積もりに基づいて行ってください。
+          記事は施設管理・設備メンテナンス業界の実務情報を参考に作成しており、最終更新日を各ページに明示しています。
+        </p>
+      </div>
+
+      <div class="op-block">
+        <h2 class="op-h2">お問い合わせ</h2>
+        <p class="op-lead">
+          サービスに関するお問い合わせは、各サービスのお問い合わせフォーム、または以下からお寄せください。
+        </p>
+        <ul class="op-list">
+          <li><a href="/jusuisou-seisou/#contact">受水槽清掃に関するお問い合わせ</a></li>
+          <li><a href="/asbestos/#contact">アスベスト調査・除去に関するお問い合わせ</a></li>
+          <li><a href="/duct/#contact">ダクト清掃に関するお問い合わせ</a></li>
+          <li><a href="/shutter/#contact">シャッター点検・修理に関するお問い合わせ</a></li>
+        </ul>
+        <p class="op-note">業者掲載のご相談・取材・その他のお問い合わせは、上記いずれかのフォームに「その他のお問い合わせ」とご記入のうえご連絡ください。</p>
+      </div>
+
     </div>
   </section>
 </BaseLayout>
@@ -40,4 +109,42 @@ const breadcrumbLd = JSON.stringify({
 .info-table { width: 100%; border-collapse: collapse; font-size: .95rem; }
 .info-table th, .info-table td { padding: 14px 16px; border-bottom: 1px solid var(--gray-200); text-align: left; }
 .info-table th { width: 200px; color: var(--gray-700); font-weight: 600; background: var(--gray-100); }
+
+.op-block { margin-bottom: 48px; max-width: 860px; }
+.op-block:last-child { margin-bottom: 0; }
+.op-h2 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--gray-900);
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--blue);
+}
+.op-lead {
+  font-size: .95rem;
+  line-height: 1.85;
+  color: var(--gray-700);
+  margin-bottom: 16px;
+}
+.op-list {
+  font-size: .92rem;
+  line-height: 1.85;
+  color: var(--gray-700);
+  padding-left: 22px;
+  margin-bottom: 12px;
+}
+.op-list li { margin-bottom: 8px; }
+.op-list a { color: var(--blue); text-decoration: underline; }
+.op-note {
+  font-size: .82rem;
+  color: var(--gray-500);
+  background: var(--gray-100);
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+
+@media (max-width: 640px) {
+  .info-table th { width: 120px; padding: 12px 10px; font-size: .85rem; }
+  .info-table td { padding: 12px 10px; font-size: .9rem; }
+}
 </style>

@@ -20,6 +20,7 @@ import BottomCTA from '../components/BottomCTA.astro';
 import { site } from '../data/site';
 import type { ServiceData } from '../data/services/_types';
 import type { Prefecture } from '../data/prefectures';
+import { isPrimaryPrefecture } from '../data/prefectures';
 
 interface Props { data: ServiceData; prefecture: Prefecture; }
 const { data, prefecture } = Astro.props;
@@ -27,6 +28,9 @@ const canonical = `${site.domain}/${data.slug}/${prefecture.slug}/`;
 const cityText = prefecture.majorCities.slice(0, 3).join('・');
 const title = `${prefecture.name}の${data.serviceName}｜${cityText}対応の業者を一括見積で比較`;
 const description = `${prefecture.name}（${prefecture.majorCities.join('・')}など）の${data.serviceName}に対応する業者を一括見積で比較。法定義務・費用相場・業者の選び方を解説。資格・許認可を確認した業者から最大3社を厳選紹介、完全無料。`;
+
+// 主要10都府県以外は段階的公開のためnoindex（ユニークコンテンツ拡充後に解除）
+const noindex = !isPrimaryPrefecture(prefecture.slug);
 
 const breadcrumbLd = JSON.stringify({
   '@context': 'https://schema.org',
@@ -72,7 +76,37 @@ const faqLd = JSON.stringify({
   })),
 });
 
-const jsonLdBlocks = [breadcrumbLd, serviceLd, faqLd];
+const howToLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: `${data.serviceName}の業者選びで確認すべきポイント`,
+  description: `${prefecture.name}で${data.serviceName}業者を選ぶ際の確認手順`,
+  step: data.selectionCriteria.map((c, i) => ({
+    '@type': 'HowToStep',
+    position: i + 1,
+    name: c.title,
+    text: c.body,
+  })),
+});
+
+const priceLd = data.costGuide.priceRange ? JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'AggregateOffer',
+  name: `${prefecture.name}の${data.serviceName}費用相場`,
+  description: data.costGuide.intro,
+  priceCurrency: 'JPY',
+  lowPrice: String(data.costGuide.priceRange.min),
+  highPrice: String(data.costGuide.priceRange.max),
+  offerCount: data.costGuide.table.rows.length,
+  areaServed: { '@type': 'AdministrativeArea', name: prefecture.name },
+  itemOffered: {
+    '@type': 'Service',
+    name: data.serviceName,
+    serviceType: data.serviceName,
+  },
+}) : null;
+
+const jsonLdBlocks = [breadcrumbLd, serviceLd, faqLd, howToLd, priceLd].filter(Boolean) as string[];
 ---
 <BaseLayout
   title={title}
@@ -81,6 +115,7 @@ const jsonLdBlocks = [breadcrumbLd, serviceLd, faqLd];
   siteName={data.siteName}
   logoSub={`${prefecture.name}の${data.serviceName}業者をご紹介`}
   jsonLdBlocks={jsonLdBlocks}
+  noindex={noindex}
 >
   <HeroWithForm data={data} />
   <TrustStrip />

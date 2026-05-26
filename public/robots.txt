@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /thanks/
 
 Sitemap: https://local-support.jp/sitemap-index.xml
