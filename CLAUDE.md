@@ -63,7 +63,7 @@ src/data/
 ### JSON-LD
 
 - `ServiceLP.astro`：BreadcrumbList・Service・FAQPage・HowTo・AggregateOffer（5種）
-- `PrefectureServiceLP.astro`：BreadcrumbList・Service・FAQPage
+- `PrefectureServiceLP.astro`：BreadcrumbList・Service・FAQPage・HowTo・AggregateOffer（5種）
 - コラム記事：Article・FAQPage・BreadcrumbList
   - `author` は必ず `{ '@type': 'Person', name: site.author.name, url: site.domain + '/author/' }` を使うこと（OrganizationではなくPerson型に統一済み）
 

@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { site } from '../../data/site';
 
-const title = 'コラム｜施設管理・設備メンテナンスの実務情報｜local-support.jp';
+const title = `コラム｜施設管理・設備メンテナンスの実務情報｜${site.name}`;
 const description = '受水槽清掃・アスベスト調査・ダクト清掃・シャッター点検・消防設備点検・グリストラップ清掃・業務用エアコン・害虫駆除・看板点検など、施設管理に関わる費用相場・法定義務・業者選びの実務情報をまとめたコラムです。施設管理担当者向け。';
 const canonical = `${site.domain}/column/`;
 
@@ -113,7 +113,7 @@ const columns: ColumnItem[] = [
 const itemListLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'local-support.jp コラム一覧',
+  name: `${site.name} コラム一覧`,
   itemListElement: columns.map((c, i) => ({
     '@type': 'ListItem',
     position: i + 1,
