@@ -2,7 +2,7 @@ import type { ServiceData } from './_types';
 
 const data: ServiceData = {
   slug: 'jusuisou-seisou',
-  siteName: '受水槽清掃ナビ',
+  siteName: 'ロカサポ｜受水槽清掃',
   serviceName: '受水槽清掃',
   serviceShortLabel: '受水槽',
   categoryKana: 'じゅすいそうせいそう',

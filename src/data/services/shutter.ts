@@ -2,7 +2,7 @@ import type { ServiceData } from './_types';
 
 const data: ServiceData = {
   slug: 'shutter',
-  siteName: 'シャッター点検ナビ',
+  siteName: 'ロカサポ｜シャッター点検・修理',
   serviceName: 'シャッター点検・修理',
   serviceShortLabel: 'シャッター',
   categoryKana: 'しゃったーてんけん',

@@ -2,7 +2,7 @@ import type { ServiceData } from './_types';
 
 const data: ServiceData = {
   slug: 'asbestos',
-  siteName: 'アスベスト調査ナビ',
+  siteName: 'ロカサポ｜アスベスト調査・除去',
   serviceName: 'アスベスト調査・除去',
   serviceShortLabel: 'アスベスト',
   categoryKana: 'あすべすとちょうさ',

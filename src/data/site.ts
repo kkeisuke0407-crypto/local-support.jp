@@ -1,5 +1,5 @@
 export const site = {
-  name: 'local-support.jp',
+  name: 'ロカサポ',
   domain: 'https://local-support.jp',
   tagline: '施設管理の一括見積比較',
   description:
@@ -12,6 +12,10 @@ export const site = {
   ],
   org: {
     legalName: 'ローカル情報局',
+  },
+  author: {
+    name: '寺尾聡',
+    role: '編集長・施設管理情報担当',
   },
 } as const;
 

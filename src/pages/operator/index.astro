@@ -2,8 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { site } from '../../data/site';
 
-const title = '運営者情報｜local-support.jp';
-const description = 'local-support.jp の運営者情報・運営方針・お問い合わせ方法。施設管理の一括見積比較サービスの運営体制と、ご紹介業者の審査基準についてご案内します。';
+const title = `運営者情報｜${site.name}`;
+const description = `${site.name} の運営者情報・運営方針・お問い合わせ方法。施設管理の一括見積比較サービスの運営体制と、ご紹介業者の審査基準についてご案内します。`;
 const canonical = `${site.domain}/operator/`;
 
 const breadcrumbLd = JSON.stringify({
@@ -30,6 +30,11 @@ const orgLd = JSON.stringify({
     areaServed: 'JP',
   },
   description: '施設管理・設備メンテナンスの一括見積比較サービスを運営。受水槽清掃・アスベスト調査・ダクト清掃・シャッター点検など、法令に基づく定期メンテナンスを必要とする施設管理担当者と、登録・資格を有する専門業者をつなぐB2B紹介サービス。',
+  member: {
+    '@type': 'Person',
+    name: site.author.name,
+    jobTitle: site.author.role,
+  },
 });
 ---
 <BaseLayout title={title} description={description} canonical={canonical} siteName={site.name} jsonLdBlocks={[breadcrumbLd, orgLd]}>
@@ -47,8 +52,9 @@ const orgLd = JSON.stringify({
         <h2 class="op-h2">サービス概要</h2>
         <table class="info-table">
           <tbody>
-            <tr><th>サービス名</th><td>local-support.jp（ローカルサポート）</td></tr>
-            <tr><th>運営者</th><td>{site.org.legalName}</td></tr>
+            <tr><th>サービス名</th><td>{site.name}（ロカサポ / local-support.jp）</td></tr>
+            <tr><th>運営者</th><td>{site.author.name}</td></tr>
+            <tr><th>運営組織</th><td>{site.org.legalName}</td></tr>
             <tr><th>事業内容</th><td>施設管理・設備メンテナンス業者の紹介サービス（一括見積比較）</td></tr>
             <tr><th>対応エリア</th><td>全国47都道府県</td></tr>
             <tr><th>取扱サービス</th><td>受水槽清掃／アスベスト調査・除去／ダクト清掃／シャッター点検・修理</td></tr>
@@ -61,7 +67,7 @@ const orgLd = JSON.stringify({
       <div class="op-block">
         <h2 class="op-h2">運営方針</h2>
         <p class="op-lead">
-          local-support.jp は、<strong>施設管理担当者の業者選び負担を軽減する</strong>ことを目的に運営しています。
+          {site.name} は、<strong>施設管理担当者の業者選び負担を軽減する</strong>ことを目的に運営しています。
           受水槽清掃やアスベスト調査など、法令上の点検・清掃義務がある分野では、無資格・無登録の業者への発注がそのまま管理者責任に直結します。
           本サービスでは、法令上の登録・資格要件を確認できる業者のみをご紹介することで、施設管理者が安心して業者を比較・選定できる環境を提供します。
         </p>
