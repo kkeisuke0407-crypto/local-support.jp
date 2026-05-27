@@ -2,8 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { site } from '../../data/site';
 
-const title = 'プライバシーポリシー｜local-support.jp';
-const description = 'local-support.jp のプライバシーポリシーです。';
+const title = `プライバシーポリシー｜${site.name}`;
+const description = `${site.name}のプライバシーポリシーです。`;
 const canonical = `${site.domain}/privacy/`;
 
 const breadcrumbLd = JSON.stringify({
@@ -24,7 +24,7 @@ const breadcrumbLd = JSON.stringify({
 
   <section class="sd-section section-white">
     <div class="sd-container policy-body">
-      <p>{site.org.legalName}（以下「当社」）は、local-support.jp（以下「本サービス」）において取得する個人情報の取り扱いについて、以下のとおり定めます。</p>
+      <p>{site.org.legalName}（以下「当社」）は、{site.name}（以下「本サービス」）において取得する個人情報の取り扱いについて、以下のとおり定めます。</p>
 
       <h2>1. 取得する情報</h2>
       <p>本サービスの見積もり依頼フォームにて、会社名・施設名、担当者名、連絡先メールアドレス、施設所在地（都道府県）、その他お客様が任意に入力した情報を取得します。</p>

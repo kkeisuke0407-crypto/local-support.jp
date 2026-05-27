@@ -1,6 +1,7 @@
 ---
 import type { Prefecture } from '../data/prefectures';
 import type { ServiceData } from '../data/services/_types';
+import { site } from '../data/site';
 interface Props { prefecture: Prefecture; service: ServiceData; }
 const { prefecture, service } = Astro.props;
 const citiesText = prefecture.majorCities.join('・');
@@ -12,7 +13,7 @@ const citiesText = prefecture.majorCities.join('・');
       <p class="pref-intro-region"><span class="pref-intro-region-tag">{prefecture.region}</span> 主要対応エリア：{citiesText}</p>
       <p class="pref-intro-body">{prefecture.context}</p>
       <p class="pref-intro-body">
-        local-support.jp では、{prefecture.name}内の<strong>{service.serviceName}</strong>に対応可能な業者の中から、ご依頼内容に応じて最大3社を厳選してご紹介します。お見積もり依頼は<strong>1分・完全無料</strong>。{prefecture.name}全域（{citiesText}など）に対応しています。
+        {site.name}では、{prefecture.name}内の<strong>{service.serviceName}</strong>に対応可能な業者の中から、ご依頼内容に応じて最大3社を厳選してご紹介します。お見積もり依頼は<strong>1分・完全無料</strong>。{prefecture.name}全域（{citiesText}など）に対応しています。
       </p>
     </div>
   </div>

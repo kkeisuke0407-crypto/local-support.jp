@@ -1,6 +1,7 @@
 ---
 import type { ServiceData } from '../data/services/_types';
 import QuoteFormCompact from './QuoteFormCompact.astro';
+import { site } from '../data/site';
 interface Props { data: ServiceData; }
 const { data } = Astro.props;
 const updatedJa = new Date(data.meta.lastUpdated).toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -29,7 +30,7 @@ const updatedJa = new Date(data.meta.lastUpdated).toLocaleDateString('ja-JP', { 
       </dl>
       <p class="hero-meta">
         <time datetime={data.meta.lastUpdated}>最終更新：{updatedJa}</time>
-        ／ 運営：local-support.jp
+        ／ 運営：{site.name}
       </p>
     </div>
     <div class="hero-form">

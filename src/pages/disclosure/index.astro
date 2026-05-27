@@ -2,8 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { site } from '../../data/site';
 
-const title = 'ご紹介業者について｜local-support.jp';
-const description = 'local-support.jp がご紹介する業者の選定基準・紹介プロセス・利用者保護の取り組みについて説明します。';
+const title = `ご紹介業者について｜${site.name}`;
+const description = `${site.name}がご紹介する業者の選定基準・紹介プロセス・利用者保護の取り組みについて説明します。`;
 const canonical = `${site.domain}/disclosure/`;
 
 const breadcrumbLd = JSON.stringify({
@@ -27,7 +27,7 @@ const breadcrumbLd = JSON.stringify({
     <div class="sd-container policy-body">
 
       <h2>1. ご紹介業者の選定方針</h2>
-      <p>local-support.jp は、お客様から見積もり依頼をお預かりしたのち、こちらで対応可能な業者を選定してご紹介します。ご紹介にあたっては、以下の方針を目安としています。紹介手数料の金額によって優先順位が変わることはありません。</p>
+      <p>{site.name}は、お客様から見積もり依頼をお預かりしたのち、こちらで対応可能な業者を選定してご紹介します。ご紹介にあたっては、以下の方針を目安としています。紹介手数料の金額によって優先順位が変わることはありません。</p>
       <ul>
         <li><strong>必要な資格・許認可の確認</strong>：各サービスに法令で求められる資格・許認可を保有していることを確認するよう努めています</li>
         <li><strong>営業姿勢</strong>：しつこい営業・不当な勧誘・契約強要を行わないことを利用規約で求めています</li>
