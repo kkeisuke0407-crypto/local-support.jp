@@ -13,10 +13,10 @@
 
   <!-- Left content area -->
   <!-- Site name -->
-  <text x="80" y="160" font-family="'Helvetica Neue', Arial, sans-serif" font-size="56" font-weight="900" fill="#ffffff" letter-spacing="-1">local-support.jp</text>
+  <text x="80" y="160" font-family="'Helvetica Neue', Arial, sans-serif" font-size="84" font-weight="900" fill="#ffffff" letter-spacing="-1">ロカサポ</text>
 
   <!-- Accent underline -->
-  <rect x="80" y="175" width="480" height="4" fill="#f59e0b" rx="2"/>
+  <rect x="80" y="180" width="340" height="4" fill="#f59e0b" rx="2"/>
 
   <!-- Japanese subtitle -->
   <text x="80" y="250" font-family="'Helvetica Neue', Arial, sans-serif" font-size="36" font-weight="700" fill="#93c5fd">施設管理の専門業者比較</text>

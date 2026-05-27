@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#0c4a6e"/>
+
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  </pattern>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <rect x="0" y="0" width="1200" height="8" fill="#f59e0b"/>
+
+  <text x="80" y="110" font-family="'Helvetica Neue', Arial, sans-serif" font-size="36" font-weight="700" fill="#f59e0b" letter-spacing="-0.5">ロカサポ</text>
+  <line x1="200" y1="98" x2="220" y2="98" stroke="#f59e0b" stroke-width="2"/>
+  <text x="240" y="110" font-family="'Helvetica Neue', Arial, sans-serif" font-size="24" font-weight="400" fill="rgba(255,255,255,0.7)">施設管理の一括見積比較</text>
+
+  <text x="80" y="240" font-family="'Helvetica Neue', Arial, sans-serif" font-size="76" font-weight="900" fill="#ffffff" letter-spacing="-2">受水槽清掃</text>
+
+  <rect x="80" y="265" width="120" height="5" fill="#f59e0b" rx="2"/>
+
+  <text x="80" y="335" font-family="'Helvetica Neue', Arial, sans-serif" font-size="32" font-weight="700" fill="#93c5fd">の専門業者を一括見積比較</text>
+
+  <text x="80" y="400" font-family="'Helvetica Neue', Arial, sans-serif" font-size="24" fill="rgba(255,255,255,0.75)">水道法・建築物衛生法対応</text>
+
+  <rect x="80" y="460" width="280" height="56" rx="28" fill="#f59e0b"/>
+  <text x="220" y="495" font-family="'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#1e293b" text-anchor="middle">無料で一括見積もり依頼</text>
+
+  <text x="80" y="565" font-family="'Helvetica Neue', Arial, sans-serif" font-size="16" fill="rgba(255,255,255,0.5)">完全無料 ｜ 最大3社を比較 ｜ 全国47都道府県対応</text>
+
+  <g transform="translate(960, 240)">
+    <path d="M75 10 L140 35 L140 90 C140 130 75 160 75 160 C75 160 10 130 10 90 L10 35 Z" fill="rgba(245,158,11,0.15)" stroke="#f59e0b" stroke-width="3"/>
+    <path d="M48 85 L67 104 L102 67" stroke="#f59e0b" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+</svg>
