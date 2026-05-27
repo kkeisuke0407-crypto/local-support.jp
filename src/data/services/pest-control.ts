@@ -2,7 +2,7 @@ import type { ServiceData } from './_types';
 
 const data: ServiceData = {
   slug: 'pest-control',
-  siteName: '害虫駆除（PCO）ナビ',
+  siteName: 'ロカサポ｜害虫駆除（PCO）',
   serviceName: '害虫駆除（業務用PCO）',
   serviceShortLabel: '害虫駆除',
   categoryKana: 'がいちゅうくじょ',

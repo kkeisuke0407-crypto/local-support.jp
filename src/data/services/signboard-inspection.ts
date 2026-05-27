@@ -2,7 +2,7 @@ import type { ServiceData } from './_types';
 
 const data: ServiceData = {
   slug: 'signboard-inspection',
-  siteName: '看板・屋外広告物点検ナビ',
+  siteName: 'ロカサポ｜看板・屋外広告物点検',
   serviceName: '看板・屋外広告物点検',
   serviceShortLabel: '看板点検',
   categoryKana: 'かんばんおくがいこうこくぶつてんけん',

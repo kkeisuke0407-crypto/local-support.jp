@@ -2,7 +2,7 @@ import type { ServiceData } from './_types';
 
 const data: ServiceData = {
   slug: 'grease-trap',
-  siteName: 'グリストラップ清掃ナビ',
+  siteName: 'ロカサポ｜グリストラップ清掃',
   serviceName: 'グリストラップ清掃',
   serviceShortLabel: 'グリストラップ',
   categoryKana: 'ぐりすとらっぷせいそう',
