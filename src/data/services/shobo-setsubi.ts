@@ -2,7 +2,7 @@ import type { ServiceData } from './_types';
 
 const data: ServiceData = {
   slug: 'shobo-setsubi',
-  siteName: '消防設備点検ナビ',
+  siteName: 'ロカサポ｜消防設備点検',
   serviceName: '消防設備点検',
   serviceShortLabel: '消防設備',
   categoryKana: 'しょうぼうせつびてんけん',

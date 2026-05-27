@@ -2,7 +2,7 @@ import type { ServiceData } from './_types';
 
 const data: ServiceData = {
   slug: 'aircon-business',
-  siteName: '業務用エアコン洗浄・修理ナビ',
+  siteName: 'ロカサポ｜業務用エアコン洗浄・修理',
   serviceName: '業務用エアコン洗浄・修理',
   serviceShortLabel: '業務用エアコン',
   categoryKana: 'ぎょうむようえあこんせんじょうしゅうり',
