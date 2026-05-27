@@ -189,6 +189,29 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  /* ── Scroll depth tracking ── */
+  (function initScrollDepth() {
+    if (!('IntersectionObserver' in window)) return;
+    var milestones = [25, 50, 75, 90];
+    var fired = {};
+    var docH = Math.max(document.body.scrollHeight, 1);
+    var sentinel = document.createElement('div');
+    sentinel.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;visibility:hidden;';
+    document.body.appendChild(sentinel);
+    function checkDepth() {
+      var scrolled = window.scrollY + window.innerHeight;
+      docH = Math.max(document.body.scrollHeight, 1);
+      var pct = Math.floor(scrolled / docH * 100);
+      milestones.forEach(function (m) {
+        if (!fired[m] && pct >= m) {
+          fired[m] = true;
+          track('scroll_depth_' + m);
+        }
+      });
+    }
+    window.addEventListener('scroll', checkDepth, { passive: true });
+  })();
+
   /* ── Hide sticky CTA over footer ── */
   var stickyCta = document.querySelector('.sticky-cta');
   if (stickyCta) {

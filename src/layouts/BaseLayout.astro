@@ -56,16 +56,6 @@ const baseLdBlocks = [
       'query-input': 'required name=search_term_string',
     },
   }),
-  JSON.stringify({
-    '@context': 'https://schema.org',
-    '@type': 'SiteLinksSearchBox',
-    url: site.domain,
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: `${site.domain}/?q={search_term_string}`,
-      'query-input': 'required name=search_term_string',
-    },
-  }),
 ];
 const allLdBlocks = [...baseLdBlocks, ...jsonLdBlocks];
 ---
