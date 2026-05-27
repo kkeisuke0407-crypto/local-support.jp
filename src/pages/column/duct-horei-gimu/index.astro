@@ -1,0 +1,473 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { site } from '../../../data/site';
+
+const title = 'ダクト清掃の法令義務ガイド2026｜消防法・建築物衛生法の要点と火災時の管理責任';
+const description = '厨房排気ダクト清掃を義務付ける消防法の防火管理義務と、空調ダクト管理を規制する建築物衛生法を施設管理担当者向けに解説。清掃頻度の根拠、消防署立入検査のポイント、火災保険との関係、清掃証明書の保管まで2026年最新版でまとめました。';
+const canonical = `${site.domain}/column/duct-horei-gimu/`;
+const published = '2026-05-27';
+const modified = '2026-05-27';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: 'ダクト清掃の法令義務ガイド', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 4600,
+  articleSection: '法令・義務',
+  keywords: 'ダクト清掃,消防法,建築物衛生法,防火管理義務,法定義務,火災保険,2026',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: {
+    '@type': 'Organization',
+    name: site.org.legalName,
+    url: site.domain,
+    logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.svg` },
+  },
+  about: { '@type': 'Service', name: 'ダクト清掃' },
+  citation: [
+    { '@type': 'Legislation', name: '消防法' },
+    { '@type': 'Legislation', name: '建築物における衛生的環境の確保に関する法律（建築物衛生法）' },
+  ],
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: 'ダクト清掃は法律で義務付けられていますか？', acceptedAnswer: { '@type': 'Answer', text: '「ダクトを○年に1回清掃すること」と直接規定する法令はありません。ただし、消防法上の防火管理義務（消防法第8条）に基づく「防火対象物の維持管理」として厨房ダクトのグリス除去が求められ、消防署の立入検査でも清掃記録が確認されます。また、建築物衛生法の特定建築物（延床3,000㎡以上等）では空調設備を含む空気環境の維持管理が義務付けられています。' } },
+    { '@type': 'Question', name: '消防署の立入検査でダクト清掃は確認されますか？', acceptedAnswer: { '@type': 'Answer', text: 'はい。飲食店・ホテル・商業施設などの防火対象物では、消防署の立入検査時に厨房ダクトのグリス状況と清掃記録の確認が行われます。清掃記録（実施日・業者名・清掃範囲）が保管されていない場合や、グリスの蓄積が著しい場合は改善指導を受けることがあります。' } },
+    { '@type': 'Question', name: 'ダクト火災で火災保険が下りないことはありますか？', acceptedAnswer: { '@type': 'Answer', text: 'あります。厨房ダクト内のグリス蓄積が原因で火災が発生した場合、「管理義務（防火管理義務）を怠った」として重大な過失と判断され、火災保険の支払いが一部または全額免責となるケースがあります。清掃証明書を定期的に受領・保管することが保険上も重要です。' } },
+    { '@type': 'Question', name: '建築物衛生法の対象となる建物は？', acceptedAnswer: { '@type': 'Answer', text: '不特定多数が利用する用途（事務所・ホテル・百貨店・興行場・旅館等）で延床面積3,000㎡以上（学校は8,000㎡以上）の建築物が「特定建築物」として対象となります。特定建築物では空気環境測定（2か月以内ごとに1回）・空調設備の清掃・維持管理が義務付けられています。' } },
+    { '@type': 'Question', name: '清掃証明書はどのくらい保管すればよいですか？', acceptedAnswer: { '@type': 'Answer', text: '法律上の明確な規定はありませんが、消防法上の防火管理記録として3年以上の保管が推奨されます。建築物衛生法の特定建築物では空気環境測定記録等を5年間保存する義務があります。火災保険の観点からは、少なくとも直近3〜5年分の保管が安全です。' } },
+    { '@type': 'Question', name: '飲食店の開業時にダクト清掃の届出は必要ですか？', acceptedAnswer: { '@type': 'Answer', text: '開業時のダクト清掃自体の届出は通常不要ですが、飲食店の開業届（保健所）や防火対象物使用開始届（消防署）の際に厨房設備・ダクト設備の設置状況を申告します。開業後は防火管理者の選任義務（一定規模以上）と消防計画の届出が必要となります。' } },
+  ],
+});
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a>
+          <span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a>
+          <span aria-hidden="true">›</span>
+          <span>ダクト清掃の法令義務ガイド</span>
+        </nav>
+        <span class="cl-cat">法令・義務</span>
+        <h1 class="cl-title">ダクト清掃の法令義務ガイド2026｜消防法・建築物衛生法の要点と火災時の管理責任</h1>
+        <p class="cl-lead">
+          厨房ダクトのグリス蓄積は<strong>消防法上の防火管理義務違反となるリスク</strong>があり、火災が発生すれば管理者責任・火災保険の免責にも直結します。本記事では、ダクト清掃に関係する消防法・建築物衛生法の要点、消防署立入検査で確認されるポイント、清掃証明書の保管義務まで2026年版で解説します。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年5月27日</time>
+          <span>最終更新：2026年5月27日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#fire-law">消防法と厨房ダクト清掃義務の関係</a></li>
+          <li><a href="#inspection">消防署の立入検査でどこを見られるか</a></li>
+          <li><a href="#building-sanitation">建築物衛生法と空調ダクト管理</a></li>
+          <li><a href="#insurance">火災保険との関係</a></li>
+          <li><a href="#records">清掃記録・証明書の保管義務</a></li>
+          <li><a href="#manager">防火管理者の役割と責任</a></li>
+          <li><a href="#checklist">年間管理スケジュールのサンプル</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>消防法</strong>：防火管理義務として厨房ダクトのグリス除去が必要。立入検査で清掃記録を確認される</li>
+            <li><strong>建築物衛生法</strong>：延床3,000㎡以上の特定建築物では空調設備を含む空気環境維持が義務</li>
+            <li><strong>保険リスク</strong>：グリス蓄積が原因の火災は「管理義務違反」として火災保険の免責になる場合あり</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="fire-law" class="cl-section">
+        <h2>消防法と厨房ダクト清掃義務の関係</h2>
+        <p>ダクト清掃を直接命じる法令条文はありませんが、<strong>消防法第8条に基づく防火管理義務</strong>が実質的にダクト清掃を要求しています。</p>
+
+        <div class="cl-callout cl-callout--blue">
+          <h3 class="cl-callout-h">消防法第8条（防火管理義務）のポイント</h3>
+          <ul>
+            <li>一定規模以上の防火対象物（飲食店・ホテル・商業施設等）の管理権原者は<strong>防火管理者を選任</strong>する義務がある</li>
+            <li>防火管理者は<strong>消防計画を作成</strong>し、防火対象物の<strong>維持管理</strong>を行う義務がある</li>
+            <li>「維持管理」には厨房設備・ダクトの油脂除去も含まれると消防当局は解釈している</li>
+            <li>違反した場合は消防法第46条により1年以下の懲役または100万円以下の罰金</li>
+          </ul>
+        </div>
+
+        <p>具体的には、消防庁の指導文書やガイドラインで「グリスフィルター・ダクト内の油脂は定期的に除去すること」と明記されており、消防署の立入検査でも確認項目となっています。</p>
+
+        <h3>防火対象物の規模と防火管理者選任義務</h3>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>防火管理者の選任が必要となる主な施設規模</caption>
+            <thead>
+              <tr>
+                <th scope="col">施設用途</th>
+                <th scope="col">収容人員</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">飲食店・物販店舗等（不特定多数利用）</th>
+                <td>30人以上</td>
+              </tr>
+              <tr>
+                <th scope="row">ホテル・旅館</th>
+                <td>10人以上</td>
+              </tr>
+              <tr>
+                <th scope="row">病院・社会福祉施設</th>
+                <td>10人以上</td>
+              </tr>
+              <tr>
+                <th scope="row">事務所・工場等（特定用途以外）</th>
+                <td>50人以上</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>上記規模に満たない小規模店舗でも、防火管理義務の趣旨から厨房ダクトの維持管理は適切に行う必要があります。</p>
+      </section>
+
+      <section id="inspection" class="cl-section">
+        <h2>消防署の立入検査でどこを見られるか</h2>
+        <p>消防署の立入検査（定期・抜き打ち）では、厨房設備に関して以下の点が確認されます。</p>
+
+        <ul class="cl-list">
+          <li><strong>グリスフィルターの状態</strong>：汚れの程度・交換・清掃の頻度</li>
+          <li><strong>フード・ダクト内のグリス蓄積状況</strong>：目視または記録による確認</li>
+          <li><strong>清掃記録の有無</strong>：直近の清掃実施日・業者名・清掃範囲が記録されているか</li>
+          <li><strong>消防計画との整合</strong>：消防計画にダクト清掃の実施計画が組み込まれているか</li>
+        </ul>
+
+        <p>改善指導を受けた場合は改善報告書の提出が求められます。重大な指摘が繰り返された場合は<strong>措置命令・警告・告発</strong>に至ることもあります。</p>
+
+        <h3>立入検査への備え</h3>
+        <p>日頃から以下の書類を整理・保管しておくことで、検査対応をスムーズに進められます。</p>
+
+        <ul class="cl-list">
+          <li>清掃証明書（実施日・業者名・清掃範囲・写真添付）</li>
+          <li>消防計画（ダクト清掃のスケジュールを記載）</li>
+          <li>グリスフィルターの交換・清掃記録</li>
+        </ul>
+      </section>
+
+      <section id="building-sanitation" class="cl-section">
+        <h2>建築物衛生法と空調ダクト管理</h2>
+        <p>建築物における衛生的環境の確保に関する法律（建築物衛生法）は、特定建築物の管理者に空気環境の維持を義務付けています。</p>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>建築物衛生法の主な管理基準（空調設備関係）</caption>
+            <thead>
+              <tr>
+                <th scope="col">管理項目</th>
+                <th scope="col">基準・頻度</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">空気環境測定</th>
+                <td>2か月以内ごとに1回</td>
+              </tr>
+              <tr>
+                <th scope="row">空調設備の清掃（冷却塔含む）</th>
+                <td>1年以内ごとに1回以上</td>
+              </tr>
+              <tr>
+                <th scope="row">空調機フィルター清掃</th>
+                <td>6か月以内ごとに1回以上</td>
+              </tr>
+              <tr>
+                <th scope="row">空調ダクト内部の清掃</th>
+                <td>必要と認められる時（汚染度による）</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>空調ダクト内部の清掃は「必要と認められる時」という規定のため、具体的な頻度は汚染度に応じて判断します。ただし、管理者は定期的に空調設備の状態を点検し、必要に応じて清掃を実施する義務があります。</p>
+
+        <h3>特定建築物の管理者義務まとめ</h3>
+        <ul class="cl-list">
+          <li>建築物環境衛生管理技術者（ビル管理士）の選任・届出（特定建築物のみ）</li>
+          <li>空気環境測定結果の記録・5年間保存</li>
+          <li>空調設備の清掃実施記録の作成・保管</li>
+          <li>都道府県知事への維持管理状況報告（定期報告）</li>
+        </ul>
+      </section>
+
+      <section id="insurance" class="cl-section">
+        <h2>火災保険との関係</h2>
+        <p>ダクト清掃と火災保険は密接な関係があります。<strong>清掃義務を怠った状態でのダクト火災は、火災保険の免責事由に該当するリスク</strong>があります。</p>
+
+        <div class="cl-callout">
+          <h3 class="cl-callout-h">火災保険が支払われないケースの例</h3>
+          <ul>
+            <li>厨房ダクト内のグリスに着火して火災が発生し、過去数年間の清掃記録がなかった場合</li>
+            <li>清掃を行っていたが証明書・記録がなく「管理義務を果たしていた」と立証できなかった場合</li>
+            <li>清掃頻度が著しく不足しており「重大な過失」と判断された場合</li>
+          </ul>
+        </div>
+
+        <p>火災保険の約款では「被保険者の重大な過失による損害は免責」と規定されているケースが多いため、清掃記録・証明書の保管は保険リスク管理の観点からも重要です。</p>
+      </section>
+
+      <section id="records" class="cl-section">
+        <h2>清掃記録・証明書の保管義務</h2>
+        <p>消防法上の防火管理記録として、清掃実施の記録は適切に保管する必要があります。</p>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>保管すべき主な書類と推奨保管期間</caption>
+            <thead>
+              <tr>
+                <th scope="col">書類</th>
+                <th scope="col">推奨保管期間</th>
+                <th scope="col">根拠</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">ダクト清掃証明書（厨房）</th>
+                <td>3年以上</td>
+                <td>消防法上の防火管理記録</td>
+              </tr>
+              <tr>
+                <th scope="row">空調設備清掃記録</th>
+                <td>5年以上</td>
+                <td>建築物衛生法の特定建築物</td>
+              </tr>
+              <tr>
+                <th scope="row">廃棄物処理マニフェスト</th>
+                <td>5年間（義務）</td>
+                <td>廃棄物処理法</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>清掃証明書には最低限、「清掃実施日・業者名・清掃範囲（フード数・ダクト延長）・清掃方法・担当者名・写真」が含まれていることを確認してください。</p>
+      </section>
+
+      <section id="manager" class="cl-section">
+        <h2>防火管理者の役割と責任</h2>
+        <p>飲食店・ホテル・商業施設などの防火対象物では、<strong>防火管理者が消防計画に基づく防火対象物の維持管理責任を負います</strong>。</p>
+
+        <ul class="cl-list">
+          <li>消防計画にダクト清掃の実施計画（頻度・業者選定方針）を組み込む</li>
+          <li>清掃の実施と記録の保管を管理する</li>
+          <li>消防署の立入検査への対応・改善指導への対処</li>
+          <li>火災発生時の初期消火・避難誘導・消防署への通報</li>
+        </ul>
+
+        <p>防火管理者が不選任の場合または消防計画が未提出の場合は、消防法違反となります（30万円以下の罰金）。</p>
+      </section>
+
+      <section id="checklist" class="cl-section">
+        <h2>年間管理スケジュールのサンプル</h2>
+        <p>飲食店の年間ダクト管理スケジュールのサンプルです。消防計画作成の参考にしてください。</p>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>飲食店向け 年間ダクト管理スケジュール（サンプル）</caption>
+            <thead>
+              <tr>
+                <th scope="col">時期</th>
+                <th scope="col">作業内容</th>
+                <th scope="col">担当</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">毎日</th>
+                <td>グリスフィルターの目視確認・汚れがひどい場合は交換</td>
+                <td>従業員</td>
+              </tr>
+              <tr>
+                <th scope="row">月1回</th>
+                <td>グリスフィルター・フードの清掃・状態記録</td>
+                <td>従業員または業者</td>
+              </tr>
+              <tr>
+                <th scope="row">年2回（6月・12月頃）</th>
+                <td>ダクト全長清掃・廃液処理・清掃証明書受領</td>
+                <td>専門業者</td>
+              </tr>
+              <tr>
+                <th scope="row">消防署立入検査時</th>
+                <td>清掃記録・証明書の提示・消防計画との整合確認</td>
+                <td>防火管理者</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問（FAQ）</h2>
+
+        <h3>Q1. ダクト清掃は法律で義務付けられていますか？</h3>
+        <p>「○年に1回の清掃」と直接規定する法令はありませんが、消防法上の防火管理義務として実質的にグリス除去が求められます。消防署の立入検査でも清掃記録が確認対象となります。</p>
+
+        <h3>Q2. 消防署の立入検査で清掃記録がないと問題になりますか？</h3>
+        <p>はい。清掃記録がなく、ダクト内のグリス蓄積が著しい場合は改善指導の対象となります。継続的に対応しない場合は措置命令・警告に至ることもあります。</p>
+
+        <h3>Q3. ダクト火災で火災保険が下りないことはありますか？</h3>
+        <p>あります。グリス蓄積が原因の火災で清掃記録がない場合、「重大な過失」として免責になる可能性があります。定期的な清掃証明書の保管が重要です。</p>
+
+        <h3>Q4. 建築物衛生法の対象建物は？</h3>
+        <p>不特定多数が利用する用途（事務所・ホテル・百貨店等）で延床面積3,000㎡以上（学校は8,000㎡以上）の建物が「特定建築物」として対象となります。</p>
+
+        <h3>Q5. 清掃証明書はどれくらい保管すればいいですか？</h3>
+        <p>消防法上の防火管理記録として3年以上、建築物衛生法の特定建築物では5年以上の保管が推奨されます。火災保険の観点からも直近3〜5年分の保管が安全です。</p>
+
+        <h3>Q6. 防火管理者のいない小規模店舗もダクト清掃は必要ですか？</h3>
+        <p>はい。防火管理者の選任義務がない規模の店舗でも、ダクト火災は「管理義務違反」として管理者責任を問われます。また火災保険の免責にも直結するため、定期的な清掃は必須です。</p>
+      </section>
+
+      <section class="cl-cta">
+        <h2>ダクト清掃の業者選びでお困りなら</h2>
+        <p>{site.name}では、清掃証明書の発行・廃棄物の適正処理に対応した業者の中から、ご依頼内容に応じて最大3社を厳選してご紹介します。<strong>お見積もり依頼は1分・完全無料</strong>です。</p>
+        <a href="/duct/" class="cta-btn-primary">無料で一括見積もりを依頼する →</a>
+      </section>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連する詳細情報</h2>
+        <ul>
+          <li><a href="/column/duct-hiyo-sohba/">ダクト清掃の費用相場2026｜厨房5〜30万円・空調10〜100万円を規模別に解説</a></li>
+          <li><a href="/duct/">ダクト清掃のサービストップ</a></li>
+          <li><a href="/flow/">一括見積依頼から契約までの流れ</a></li>
+          <li><a href="/operator/">運営者情報・ご紹介業者の審査基準</a></li>
+        </ul>
+      </aside>
+
+      <p class="cl-note">
+        ※ 本記事に掲載した法令・保険情報は2026年5月時点のものです。法令・保険約款は改正されることがあります。最終的な判断は所轄消防署・保険会社・専門家にご確認ください。
+      </p>
+
+    </div>
+
+  </article>
+</BaseLayout>
+
+<style>
+.cl-article { color: var(--gray-900); }
+.cl-header {
+  background: linear-gradient(135deg, #0f2742 0%, #1a56db 100%);
+  color: #fff;
+  padding: 48px 0 56px;
+}
+.cl-crumbs { font-size: .78rem; color: #bfdbfe; margin-bottom: 18px; }
+.cl-crumbs a { color: #bfdbfe; text-decoration: underline; }
+.cl-crumbs span { margin: 0 6px; opacity: .6; }
+.cl-cat {
+  display: inline-block;
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.3);
+  color: #e0f2fe;
+  font-size: .76rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 99px;
+  margin-bottom: 14px;
+  letter-spacing: .04em;
+}
+.cl-title {
+  font-size: clamp(1.4rem, 2.6vw, 2.1rem);
+  font-weight: 900;
+  line-height: 1.4;
+  color: #fff;
+  margin-bottom: 18px;
+  letter-spacing: -.01em;
+}
+.cl-lead { font-size: 1rem; line-height: 1.85; color: #e0f2fe; margin-bottom: 18px; max-width: 820px; }
+.cl-lead strong { color: #fde68a; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 18px; font-size: .78rem; color: rgba(255,255,255,.65); }
+.cl-body { padding: 48px 0 80px; max-width: 880px; }
+.cl-toc { background: var(--gray-100); border-left: 4px solid var(--blue); border-radius: 8px; padding: 24px 28px; margin-bottom: 48px; }
+.cl-toc-h { font-size: .9rem; font-weight: 800; color: var(--gray-900); margin-bottom: 12px; }
+.cl-toc ol { padding-left: 20px; font-size: .9rem; line-height: 1.95; color: var(--gray-700); }
+.cl-toc a { color: var(--blue); text-decoration: underline; }
+.cl-section { margin-bottom: 44px; }
+.cl-section h2 { font-size: 1.35rem; font-weight: 800; color: var(--gray-900); margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid var(--blue); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 700; color: var(--gray-900); margin: 28px 0 12px; }
+.cl-section p { font-size: .95rem; line-height: 1.95; color: var(--gray-700); margin-bottom: 16px; }
+.cl-section p strong { color: var(--gray-900); }
+.cl-section a { color: var(--blue); text-decoration: underline; }
+.cl-list { font-size: .92rem; line-height: 1.95; color: var(--gray-700); padding-left: 22px; margin-bottom: 16px; }
+.cl-list li { margin-bottom: 6px; }
+.cl-list li strong { color: var(--gray-900); }
+.cl-table-wrap { overflow-x: auto; margin-bottom: 20px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .9rem; background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-table caption { text-align: left; font-size: .85rem; color: var(--gray-500); padding-bottom: 8px; caption-side: top; }
+.cl-table th, .cl-table td { padding: 12px 14px; border-bottom: 1px solid var(--gray-200); text-align: left; vertical-align: top; }
+.cl-table thead { background: var(--blue-light); }
+.cl-table thead th { color: var(--blue-dark); font-weight: 800; }
+.cl-table tbody th { font-weight: 700; color: var(--gray-900); white-space: nowrap; }
+.cl-table td { color: var(--gray-700); }
+.cl-table tbody tr:last-child th, .cl-table tbody tr:last-child td { border-bottom: none; }
+.cl-callout { background: var(--gray-100); border-left: 4px solid var(--accent); border-radius: 8px; padding: 24px 28px; margin-bottom: 32px; }
+.cl-callout--blue { border-left-color: var(--blue); }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 10px; padding: 0; border: none; }
+.cl-callout ul, .cl-callout ol { font-size: .92rem; line-height: 1.95; color: var(--gray-700); padding-left: 22px; margin: 0; }
+.cl-callout li { margin-bottom: 4px; }
+.cl-callout li strong { color: var(--gray-900); }
+.cl-callout p { margin-bottom: 10px; }
+.cl-cta { background: linear-gradient(135deg, #0f2742 0%, #1a56db 100%); color: #fff; text-align: center; border-radius: 14px; padding: 40px 28px; margin: 48px 0; }
+.cl-cta h2 { font-size: 1.2rem; font-weight: 800; color: #fff; margin-bottom: 12px; border: none; padding: 0; }
+.cl-cta p { font-size: .92rem; color: #bfdbfe; margin-bottom: 22px; line-height: 1.8; }
+.cl-cta p strong { color: #fde68a; }
+.cl-cta .cta-btn-primary { display: inline-block; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 24px 28px; margin-bottom: 32px; }
+.cl-related-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 12px; }
+.cl-related ul { list-style: none; padding: 0; font-size: .9rem; line-height: 2; }
+.cl-related a { color: var(--blue); text-decoration: underline; }
+.cl-note { font-size: .78rem; color: var(--gray-500); line-height: 1.8; border-top: 1px solid var(--gray-200); padding-top: 20px; margin-top: 24px; }
+@media (max-width: 720px) {
+  .cl-header { padding: 36px 0 40px; }
+  .cl-body { padding: 32px 0 60px; }
+  .cl-toc, .cl-callout, .cl-related, .cl-cta { padding: 18px 20px; }
+  .cl-table { font-size: .82rem; }
+  .cl-table th, .cl-table td { padding: 10px 8px; }
+}
+</style>

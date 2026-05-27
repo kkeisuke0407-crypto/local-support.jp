@@ -17,6 +17,7 @@ import RelatedServices from '../components/RelatedServices.astro';
 import PrefectureGrid from '../components/PrefectureGrid.astro';
 import BottomCTA from '../components/BottomCTA.astro';
 import AIOSummary from '../components/AIOSummary.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
 import { site } from '../data/site';
 import type { ServiceData } from '../data/services/_types';
 
@@ -127,9 +128,11 @@ const jsonLdBlocks = [breadcrumbLd, serviceLd, webPageLd, faqLd, howToLd, priceL
   canonical={canonical}
   siteName={data.siteName}
   logoSub="施設管理の一括見積比較"
+  ogImage={`${site.domain}/og-${data.slug}.svg`}
   jsonLdBlocks={jsonLdBlocks}
 >
   <HeroWithForm data={data} />
+  <Breadcrumb items={[{ label: 'トップ', href: '/' }, { label: data.serviceName }]} />
   <AIOSummary lead={data.aiSummary.lead} facts={data.aiSummary.facts} serviceName={data.serviceName} />
   <TrustStrip />
   <ProcessSteps serviceName={data.serviceName} />

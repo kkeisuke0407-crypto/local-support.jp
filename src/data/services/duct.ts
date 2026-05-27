@@ -303,6 +303,23 @@ const data: ServiceData = {
   ],
 
   relatedServiceSlugs: ['jusuisou-seisou', 'shutter', 'asbestos'],
+
+  relatedColumns: [
+    {
+      href: '/column/duct-hiyo-sohba/',
+      category: '費用相場',
+      title: 'ダクト清掃の費用相場2026｜厨房5〜30万円・空調10〜100万円を規模・種別ごとに解説',
+      excerpt: '厨房排気ダクト・空調ダクト清掃の費用相場を規模別に解説。清掃工法の違い、付帯費用の内訳、清掃頻度の判断基準、業者選びのポイントまで整理した施設管理担当者向けガイド。',
+      date: '2026-05-27',
+    },
+    {
+      href: '/column/duct-horei-gimu/',
+      category: '法令・義務',
+      title: 'ダクト清掃の法令義務ガイド2026｜消防法・建築物衛生法の要点と火災時の管理責任',
+      excerpt: '消防法の防火管理義務と建築物衛生法の空調管理基準を整理。消防署立入検査での確認ポイント、火災保険との関係、清掃証明書の保管まで解説。',
+      date: '2026-05-27',
+    },
+  ],
 };
 
 export default data;
