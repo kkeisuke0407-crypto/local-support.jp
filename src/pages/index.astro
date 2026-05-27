@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site, serviceIndex } from '../data/site';
 
-const PAGE_TITLE = 'local-support.jp｜施設管理の一括見積比較サービス';
+const PAGE_TITLE = `${site.name}｜施設管理の一括見積比較サービス`;
 const PAGE_DESC  = '受水槽清掃・アスベスト調査・ダクト清掃・シャッター点検など、施設管理に必要な専門業者を一括見積で比較。登録済みの資格・許認可を持つ地元業者を最大3社ご紹介します。完全無料。';
 const CANONICAL  = `${site.domain}/`;
 
@@ -142,6 +142,31 @@ const itemListLd = JSON.stringify({
             <td>点検1台1〜3万円<br/>修理2万円〜</td>
             <td>建築基準法で防火シャッター年1回義務</td>
           </tr>
+          <tr>
+            <th scope="row"><a href="/shobo-setsubi/">消防設備点検</a></th>
+            <td>機器点検2〜5万円〜<br/>総合点検3〜10万円〜</td>
+            <td>消防法で年2回（機器点検）・2年に1回（総合点検）義務</td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="/grease-trap/">グリストラップ清掃</a></th>
+            <td>1〜5万円／回</td>
+            <td>下水道法・各自治体条例で定期清掃が必要</td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="/aircon-business/">業務用エアコン洗浄・修理</a></th>
+            <td>洗浄1台2〜8万円<br/>修理3万円〜</td>
+            <td>建築物衛生法対象施設は空調管理義務あり</td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="/pest-control/">害虫駆除（業務用PCO）</a></th>
+            <td>スポット1〜5万円<br/>月次契約1〜3万円／月</td>
+            <td>食品営業施設はHACCP対応・保健所指導対象</td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="/signboard-inspection/">看板・屋外広告物点検</a></th>
+            <td>1台1〜3万円〜<br/>高所作業車込み別途</td>
+            <td>屋外広告物条例・建築基準法で定期点検が必要</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -154,7 +179,7 @@ const itemListLd = JSON.stringify({
 <!-- ══ 選ばれる理由 ════════════════════════════════════════════ -->
 <section class="lp-why">
   <div class="sd-container">
-    <h2 class="lp-section-title">local-support.jp が選ばれる理由</h2>
+    <h2 class="lp-section-title">{site.name} が選ばれる理由</h2>
     <div class="lp-why-grid">
       <div class="lp-why-card">
         <h3>登録業者のみ紹介</h3>

@@ -3,7 +3,7 @@ import sitemap from '@astrojs/sitemap';
 
 // 主要10都府県のみ sitemap に含める（noindex の都道府県を除外）
 const PRIMARY_PREFS = ['tokyo','osaka','aichi','kanagawa','saitama','chiba','fukuoka','hokkaido','hyogo','shizuoka'];
-const PREF_PAGE_RE = /\/(jusuisou-seisou|asbestos|duct|shutter)\/([^/]+)\//;
+const PREF_PAGE_RE = /\/(jusuisou-seisou|asbestos|duct|shutter|shobo-setsubi|grease-trap|aircon-business|pest-control|signboard-inspection)\/([^/]+)\//;
 
 export default defineConfig({
   site: 'https://local-support.jp',
@@ -24,7 +24,7 @@ export default defineConfig({
         if (item.url === 'https://local-support.jp/') {
           return { ...item, priority: 1.0, changefreq: 'weekly' };
         }
-        if (/^https:\/\/local-support\.jp\/(jusuisou-seisou|asbestos|duct|shutter)\/$/.test(item.url)) {
+        if (/^https:\/\/local-support\.jp\/(jusuisou-seisou|asbestos|duct|shutter|shobo-setsubi|grease-trap|aircon-business|pest-control|signboard-inspection)\/$/.test(item.url)) {
           return { ...item, priority: 0.9, changefreq: 'monthly' };
         }
         // 主要都道府県ページ

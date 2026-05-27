@@ -28,7 +28,7 @@ const articleLd = JSON.stringify({
   inLanguage: 'ja-JP',
   url: canonical,
   mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
-  author: { '@type': 'Person', name: site.author.name },
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
   publisher: {
     '@type': 'Organization',
     name: site.org.legalName,
