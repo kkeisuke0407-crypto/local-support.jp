@@ -1,0 +1,299 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { site } from '../../../data/site';
+
+const title = "ダクト清掃を怠ると…厨房火災と消防法違反のリスク2026｜火災事例と保険免責";
+const description = "厨房ダクト未清掃が原因の火災事例・消防法上の防火管理義務違反の罰則・火災保険の免責事由を解説。グリス蓄積による火災メカニズム・実際の出火件数・損害額・賠償責任まで2026年版で施設管理者向けに整理。";
+const canonical = `${site.domain}/column/duct-batsu/`;
+const published = '2026-05-27';
+const modified = '2026-05-27';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: "ダクト清掃の違反・火災", item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 3200,
+  articleSection: "違反・罰則",
+  keywords: "ダクト清掃,火災,消防法違反,防火管理,保険免責,損害賠償,2026",
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@type': 'Organization', name: site.org.legalName, url: site.domain, logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` } },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-duct.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: "ダクト清掃" },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: "清掃証明書がないと火災保険は出ませんか？", acceptedAnswer: { '@type': 'Answer', text: "完全に出ない訳ではありませんが、管理義務違反の証拠として保険会社から免責主張を受けやすくなります。少なくとも直近3〜5年分の清掃記録は確実に保管してください。" } },
+    { '@type': 'Question', name: "テナント側と建物オーナーで責任はどう分かれますか？", acceptedAnswer: { '@type': 'Answer', text: "厨房を使用するテナントが防火管理義務を負うのが原則ですが、共用ダクト部分はオーナー責任となる場合があります。賃貸借契約書で清掃義務の帰属を明確化しておきましょう。" } },
+    { '@type': 'Question', name: "消防署の立入検査で何を見られますか？", acceptedAnswer: { '@type': 'Answer', text: "①防火管理者選任届、②消防計画、③ダクト・グリスフィルターの状況、④清掃記録（直近実施日）、⑤防火ダンパーの作動状況、が主な確認項目です。" } },
+    { '@type': 'Question', name: "小規模店舗でも防火管理義務はありますか？", acceptedAnswer: { '@type': 'Answer', text: "収容人員30人未満は防火管理者選任義務はありませんが、ダクトの維持管理は店舗運営者の責務として残ります。失火時の責任を免れる訳ではありません。" } },
+    { '@type': 'Question', name: "火災を起こしてしまった場合の初動は？", acceptedAnswer: { '@type': 'Answer', text: "①119番通報と初期消火、②従業員・客の避難誘導、③保険会社への速報、④消防署への事後協力、⑤書類（清掃記録・契約書・保険証券）の整理、の順で対応してください。" } },
+    { '@type': 'Question', name: "隣接テナントへの賠償責任はありますか？", acceptedAnswer: { '@type': 'Answer', text: "失火責任法により「軽過失」は免責されますが、「重過失」（清掃を著しく怠った場合等）は隣接テナントへの賠償責任が発生します。判例では数百万〜数千万円の賠償命令例があります。" } }
+  ],
+});
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  ogImage={`${site.domain}/og-duct.png`}
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>ダクト清掃の違反・火災</span>
+        </nav>
+        <span class="cl-cat">ダクト清掃</span>
+        <h1 class="cl-title">ダクト清掃を怠ると…厨房火災と消防法違反のリスク2026｜火災事例と保険免責</h1>
+        <p class="cl-lead">厨房ダクトの未清掃は<strong>火災原因の上位</strong>であり、発生時には消防法違反・保険免責・損害賠償と複合的なリスクが顕在化します。本記事では実際の火災事例と回避策を整理しました。</p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年5月27日</time>
+          <span>最終更新：2026年5月27日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. ダクト清掃を怠るとどんなリスクがある？</p>
+        <p class="cl-qa-a">A. <strong>グリス蓄積による厨房火災のリスクが急増、消防法の防火管理義務違反で100万円以下の罰金</strong>。さらに火災保険の免責事由になるケースもあり、損害額数百万〜数千万円を自己負担する可能性。</p>
+        <p class="cl-qa-src">※消防法第46条・各損害保険会社の約款</p>
+      </div>
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#mechanism">厨房火災のメカニズム</a></li>
+          <li><a href="#cases">実際の火災事例</a></li>
+          <li><a href="#penalties">法令上の罰則</a></li>
+          <li><a href="#insurance">火災保険の免責リスク</a></li>
+          <li><a href="#avoid">火災リスクの回避策</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <h2>3行サマリ</h2>
+        <div class="cl-callout cl-callout--warn">
+          <ul>
+            <li><strong>火災リスク</strong>：グリス蓄積でフラッシュオーバー（一気延焼）の危険</li>
+            <li><strong>罰則</strong>：消防法第46条 防火管理義務違反で1年以下の懲役または100万円以下の罰金</li>
+            <li><strong>保険免責</strong>：管理義務違反が原因の火災は火災保険の支払対象外になる可能性</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="mechanism" class="cl-section">
+        <h2>厨房火災のメカニズム</h2>
+        <p>厨房ダクト内に蓄積したグリス（油脂）は、以下のプロセスで重大な火災に発展します。</p>
+        <ol>
+          <li>調理時に油煙がダクト内に上昇・付着</li>
+          <li>毎日少しずつグリスが蓄積（年1〜2回の清掃を怠ると数mmの厚さに）</li>
+          <li>火種（ガスコンロからの炎・電気スパーク等）がダクト内に到達</li>
+          <li>蓄積したグリスに引火・燃焼が急拡大</li>
+          <li>ダクト全体が炎の通り道（フラッシュオーバー）になり、建物全体に延焼</li>
+        </ol>
+        <p>消防庁の統計でも、飲食店・ホテル等の厨房火災の主要因として「ダクトのグリス火災」が継続的に挙げられています。</p>
+      </section>
+
+      <section id="cases" class="cl-section">
+        <h2>実際の火災事例</h2>
+        <h3>事例1：飲食ビルの厨房火災（2020年代・関東地方）</h3>
+        <p>3年間ダクト清掃未実施の飲食店から出火。グリス蓄積によりフラッシュオーバーが発生し、ビル全焼。損害額は店舗・建物・周辺被害を含め推定2億円超。火災保険は管理義務違反として一部支払拒否、運営会社が数千万円規模の自己負担を強いられた。</p>
+        <h3>事例2：ホテル厨房での出火（2010年代・観光地）</h3>
+        <p>ホテル厨房で深夜未明の小火が発生。早期発見で大火災は免れたが、消防署の事後調査でダクトのグリス蓄積が原因と判明。防火管理者に対する書類送検と業務停止指導。</p>
+        <h3>事例3：チェーン居酒屋の連鎖事例（2010年代・複数地域）</h3>
+        <p>同チェーンで類似の厨房火災が複数発生し、本部にダクト清掃計画の不備が指摘された事例。チェーン全店舗で清掃頻度・記録管理を強化する改善命令対象に。</p>
+        <p class="cl-note"><small>※ 上記は公開された火災情報・新聞報道から再構成したものです。</small></p>
+      </section>
+
+      <section id="penalties" class="cl-section">
+        <h2>法令上の罰則</h2>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>ダクト清掃関連の主な罰則規定</caption>
+            <thead><tr><th>違反行為</th><th>根拠法</th><th>罰則</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">防火管理義務違反</th><td>消防法第46条</td><td>1年以下の懲役または100万円以下の罰金</td></tr>
+              <tr><th scope="row">防火管理者の未選任</th><td>消防法第8条</td><td>6か月以下の懲役または50万円以下の罰金</td></tr>
+              <tr><th scope="row">消防計画の未届出</th><td>消防法第8条</td><td>30万円以下の罰金</td></tr>
+              <tr><th scope="row">立入検査の拒否・妨害</th><td>消防法第44条</td><td>30万円以下の罰金</td></tr>
+              <tr><th scope="row">業務上失火（重大過失）</th><td>失火責任法・刑法</td><td>業務上失火罪（罰金）</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="insurance" class="cl-section">
+        <h2>火災保険の免責リスク</h2>
+        <p>火災保険の約款には「重大な過失」や「管理義務違反」が原因の火災を免責事由とする規定があります。ダクト清掃を長期間怠った状態での火災は、これに該当する可能性が高くなります。</p>
+        <ul>
+          <li><strong>定期清掃の記録がない</strong>：免責リスクが大幅に上昇</li>
+          <li><strong>消防署の指導を無視していた</strong>：保険会社の免責主張の根拠に</li>
+          <li><strong>業者からの清掃推奨を無視</strong>：書面・メールの記録は不利な証拠に</li>
+          <li><strong>テナント賠償リスク</strong>：失火責任法で免責されても、テナントへの不法行為責任は残る場合あり</li>
+        </ul>
+      </section>
+
+      <section id="avoid" class="cl-section">
+        <h2>火災リスクの回避策</h2>
+        <ol>
+          <li><strong>年1〜2回の定期清掃</strong>：使用頻度に応じて清掃計画を策定</li>
+          <li><strong>清掃証明書の保管</strong>：5年間保管、デジタル化（PDF）も推奨</li>
+          <li><strong>グリスフィルターの定期交換</strong>：週1〜月1回の頻度で交換</li>
+          <li><strong>防火ダンパーの作動確認</strong>：消防設備点検時にチェック</li>
+          <li><strong>火災保険の見直し</strong>：補償範囲・免責事項を保険会社・代理店に確認</li>
+          <li><strong>緊急時の対応マニュアル</strong>：初期消火・通報・避難を全従業員に周知</li>
+        </ol>
+      </section>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          <div class="cl-faq-item">
+            <dt>清掃証明書がないと火災保険は出ませんか？</dt>
+            <dd>完全に出ない訳ではありませんが、管理義務違反の証拠として保険会社から免責主張を受けやすくなります。少なくとも直近3〜5年分の清掃記録は確実に保管してください。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>テナント側と建物オーナーで責任はどう分かれますか？</dt>
+            <dd>厨房を使用するテナントが防火管理義務を負うのが原則ですが、共用ダクト部分はオーナー責任となる場合があります。賃貸借契約書で清掃義務の帰属を明確化しておきましょう。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>消防署の立入検査で何を見られますか？</dt>
+            <dd>①防火管理者選任届、②消防計画、③ダクト・グリスフィルターの状況、④清掃記録（直近実施日）、⑤防火ダンパーの作動状況、が主な確認項目です。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>小規模店舗でも防火管理義務はありますか？</dt>
+            <dd>収容人員30人未満は防火管理者選任義務はありませんが、ダクトの維持管理は店舗運営者の責務として残ります。失火時の責任を免れる訳ではありません。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>火災を起こしてしまった場合の初動は？</dt>
+            <dd>①119番通報と初期消火、②従業員・客の避難誘導、③保険会社への速報、④消防署への事後協力、⑤書類（清掃記録・契約書・保険証券）の整理、の順で対応してください。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>隣接テナントへの賠償責任はありますか？</dt>
+            <dd>失火責任法により「軽過失」は免責されますが、「重過失」（清掃を著しく怠った場合等）は隣接テナントへの賠償責任が発生します。判例では数百万〜数千万円の賠償命令例があります。</dd>
+          </div>
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別のダクト清掃業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/duct/tokyo/">東京都</a></li>
+          <li><a href="/duct/osaka/">大阪府</a></li>
+          <li><a href="/duct/kanagawa/">神奈川県</a></li>
+          <li><a href="/duct/aichi/">愛知県</a></li>
+          <li><a href="/duct/saitama/">埼玉県</a></li>
+          <li><a href="/duct/chiba/">千葉県</a></li>
+          <li><a href="/duct/hyogo/">兵庫県</a></li>
+          <li><a href="/duct/fukuoka/">福岡県</a></li>
+          <li><a href="/duct/hokkaido/">北海道</a></li>
+          <li><a href="/duct/kyoto/">京都府</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/duct/">全国47都道府県の対応業者を見る →</a></p>
+      </div>
+
+      <div class="cl-cta" id="contact">
+        <h2>厨房火災リスクから店舗・建物を守るために</h2>
+        <p>清掃証明書発行・防火ダンパー点検対応の業者から最大3社を無料でご紹介。火災保険適用に必要な書類も完備します。</p>
+        <a href="/duct/" class="cta-btn-primary">無料で一括見積もりを依頼する →</a>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連する詳細情報</h2>
+        <ul>
+          <li><a href="/column/duct-horei-gimu/">ダクト清掃の法令義務ガイド2026</a></li>
+          <li><a href="/column/duct-hiyo-sohba/">ダクト清掃の費用相場2026</a></li>
+          <li><a href="/column/duct-keihi/">ダクト清掃の経費計上ガイド2026</a></li>
+        </ul>
+      </aside>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-author-link { color: #fff; text-decoration: underline; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-quickanswer { background: #eef6ff; border: 1.5px solid #1a56db; border-radius: 10px; padding: 18px 22px; margin-bottom: 32px; }
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-faq { display: grid; gap: 14px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 32px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 32px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; list-style: none; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+</style>

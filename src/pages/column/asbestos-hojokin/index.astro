@@ -1,0 +1,306 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { site } from '../../../data/site';
+
+const title = "アスベスト補助金一覧2026｜国・都道府県・市区町村の助成金まとめ・申請の流れ";
+const description = "アスベスト事前調査・除去工事に使える補助金を国（環境省）・都道府県・主要市区町村別に整理。助成上限額（調査25万円・除去300万円が一般的）・対象建物・申請の流れ・必要書類まで2026年度版で解説。";
+const canonical = `${site.domain}/column/asbestos-hojokin/`;
+const published = '2026-05-27';
+const modified = '2026-05-27';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: "アスベスト補助金", item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 3200,
+  articleSection: "補助金・助成金",
+  keywords: "アスベスト,補助金,助成金,事前調査,除去工事,環境省,自治体,2026",
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@type': 'Organization', name: site.org.legalName, url: site.domain, logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` } },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-asbestos.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: "アスベスト調査・除去" },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: "個人住宅のアスベストにも補助金は出ますか？", acceptedAnswer: { '@type': 'Answer', text: "はい、多くの自治体で個人住宅も対象です。所有者が個人の場合も交付対象になりますが、収入要件がある自治体もあるためご確認ください。" } },
+    { '@type': 'Question', name: "マンション管理組合は申請できますか？", acceptedAnswer: { '@type': 'Answer', text: "はい、管理組合（管理者）名義で申請できる制度が多くあります。理事会決議・区分所有者の同意が必要なケースがあります。" } },
+    { '@type': 'Question', name: "事前調査だけで補助金を受けられますか？", acceptedAnswer: { '@type': 'Answer', text: "はい。事前調査単独でも補助対象になる制度が多くあります。除去工事を実施しない場合でも、調査結果は将来の解体時に活用できます。" } },
+    { '@type': 'Question', name: "補助金と他の助成金の併用は？", acceptedAnswer: { '@type': 'Answer', text: "同一工事に対する重複受給は禁止されることが多いですが、調査と除去でそれぞれ異なる補助金を申請できる場合もあります。各補助金の交付要綱を確認してください。" } },
+    { '@type': 'Question', name: "工事着手後の事後申請は可能ですか？", acceptedAnswer: { '@type': 'Answer', text: "原則として不可能です。多くの補助金は「事前申請・交付決定後の着工」が条件。事後申請可能な制度は限定的なため、必ず事前確認を。" } },
+    { '@type': 'Question', name: "補助金交付までの期間中の資金繰りは？", acceptedAnswer: { '@type': 'Answer', text: "工事費は一旦自己負担して、完了後に補助金が振り込まれる仕組みが一般的です。短期借入や工事業者との支払い条件交渉で資金繰りを調整してください。" } }
+  ],
+});
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  ogImage={`${site.domain}/og-asbestos.png`}
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>アスベスト補助金</span>
+        </nav>
+        <span class="cl-cat">アスベスト調査・除去</span>
+        <h1 class="cl-title">アスベスト補助金一覧2026｜国・都道府県・市区町村の助成金まとめ・申請の流れ</h1>
+        <p class="cl-lead">アスベスト調査・除去には<strong>国・自治体の補助金制度</strong>が活用できます。本記事では2026年度の主要補助金一覧と、申請手順・必要書類・採択率を上げるコツまで実務的に解説します。</p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年5月27日</time>
+          <span>最終更新：2026年5月27日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. アスベスト補助金はいくらもらえますか？</p>
+        <p class="cl-qa-a">A. <strong>事前調査で1棟あたり10〜25万円、除去工事で費用の1/2〜2/3（上限100〜300万円）</strong>が一般的な助成水準。自治体により条件が異なります。</p>
+        <p class="cl-qa-src">※環境省「アスベスト対策費補助金」および主要自治体の2026年度制度</p>
+      </div>
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#kinds">補助金の種類</a></li>
+          <li><a href="#national">国（環境省）の補助金</a></li>
+          <li><a href="#cities">主要自治体の補助金</a></li>
+          <li><a href="#flow">申請の流れ</a></li>
+          <li><a href="#tips">採択率を上げるコツ</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <h2>3行サマリ</h2>
+        <div class="cl-callout">
+          <ul>
+            <li><strong>調査補助</strong>：1棟あたり10〜25万円が一般的</li>
+            <li><strong>除去補助</strong>：費用の1/2〜2/3、上限100〜300万円が主流</li>
+            <li><strong>申請条件</strong>：事前申請＋交付決定後の着工が必須、年度予算上限あり</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="kinds" class="cl-section">
+        <h2>補助金の種類</h2>
+        <ul>
+          <li><strong>事前調査補助</strong>：建築物石綿含有建材調査者による調査費を補助</li>
+          <li><strong>除去工事補助</strong>：レベル1〜3の除去工事費を補助</li>
+          <li><strong>分析調査補助</strong>：定性・定量分析費用の一部を補助</li>
+          <li><strong>緊急除去補助</strong>：飛散リスクの高い建材の応急対応を補助</li>
+        </ul>
+      </section>
+
+      <section id="national" class="cl-section">
+        <h2>国（環境省）の補助金</h2>
+        <p>国の制度として、環境省が「住宅・建築物アスベスト改修事業」を継続実施しています。市区町村が窓口となり、国と自治体が連携して補助金を交付する形式です。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>環境省 アスベスト関連 補助制度（2026年度参考）</caption>
+            <thead><tr><th>区分</th><th>補助対象</th><th>補助率・上限</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">事前調査費</th><td>有資格者による事前調査</td><td>10/10、上限25万円/棟</td></tr>
+              <tr><th scope="row">除去工事費</th><td>レベル1〜3の除去</td><td>2/3、上限300万円/棟</td></tr>
+              <tr><th scope="row">封じ込め工事</th><td>飛散防止の封じ込め</td><td>2/3、上限200万円/棟</td></tr>
+              <tr><th scope="row">解体工事費</th><td>アスベスト除去を含む解体</td><td>2/3、上限120万円/棟</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="cl-note"><small>※ 補助対象・上限は自治体ごとに異なります。市区町村窓口で最新条件を確認してください。</small></p>
+      </section>
+
+      <section id="cities" class="cl-section">
+        <h2>主要自治体の補助金</h2>
+        <p>2026年度時点で公表されている主要自治体の補助制度を一覧化しました。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>主要自治体のアスベスト関連補助金（2026年度参考）</caption>
+            <thead><tr><th>自治体</th><th>調査補助</th><th>除去補助</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">東京都・各区</th><td>25万円/棟</td><td>2/3、上限300万円</td></tr>
+              <tr><th scope="row">大阪府・大阪市</th><td>20万円/棟</td><td>2/3、上限250万円</td></tr>
+              <tr><th scope="row">横浜市</th><td>25万円/棟</td><td>2/3、上限200万円</td></tr>
+              <tr><th scope="row">名古屋市</th><td>15万円/棟</td><td>1/2、上限120万円</td></tr>
+              <tr><th scope="row">福岡市</th><td>20万円/棟</td><td>2/3、上限180万円</td></tr>
+              <tr><th scope="row">札幌市</th><td>15万円/棟</td><td>1/2、上限100万円</td></tr>
+              <tr><th scope="row">京都市</th><td>20万円/棟</td><td>2/3、上限200万円</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="flow" class="cl-section">
+        <h2>申請の流れ</h2>
+        <ol>
+          <li><strong>事前相談</strong>：所在地の市区町村窓口に建物概要・工事内容を相談</li>
+          <li><strong>事前申請</strong>：交付申請書・工事計画書・見積書を提出</li>
+          <li><strong>審査・交付決定</strong>：通常2〜4週間（自治体により変動）</li>
+          <li><strong>工事実施</strong>：交付決定通知後に着工（先行着工は補助対象外）</li>
+          <li><strong>完了報告</strong>：完了写真・領収書・分析結果を添付して報告</li>
+          <li><strong>補助金交付</strong>：審査完了後に振込（通常1〜2ヶ月）</li>
+        </ol>
+      </section>
+
+      <section id="tips" class="cl-section">
+        <h2>採択率を上げるコツ</h2>
+        <ul>
+          <li><strong>早期申請</strong>：年度予算が上限に達すると受付終了。新年度開始直後（4月）の申請が有利</li>
+          <li><strong>有資格者業者の起用</strong>：建築物石綿含有建材調査者・石綿作業主任者の在籍を確認</li>
+          <li><strong>複数社見積もりの取得</strong>：適正価格の証明が審査でプラス評価</li>
+          <li><strong>必要書類の網羅</strong>：登記事項証明書・納税証明書等を漏れなく</li>
+          <li><strong>緊急性の説明</strong>：飛散リスク・健康被害リスクを写真・調査結果で具体的に</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          <div class="cl-faq-item">
+            <dt>個人住宅のアスベストにも補助金は出ますか？</dt>
+            <dd>はい、多くの自治体で個人住宅も対象です。所有者が個人の場合も交付対象になりますが、収入要件がある自治体もあるためご確認ください。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>マンション管理組合は申請できますか？</dt>
+            <dd>はい、管理組合（管理者）名義で申請できる制度が多くあります。理事会決議・区分所有者の同意が必要なケースがあります。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>事前調査だけで補助金を受けられますか？</dt>
+            <dd>はい。事前調査単独でも補助対象になる制度が多くあります。除去工事を実施しない場合でも、調査結果は将来の解体時に活用できます。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>補助金と他の助成金の併用は？</dt>
+            <dd>同一工事に対する重複受給は禁止されることが多いですが、調査と除去でそれぞれ異なる補助金を申請できる場合もあります。各補助金の交付要綱を確認してください。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>工事着手後の事後申請は可能ですか？</dt>
+            <dd>原則として不可能です。多くの補助金は「事前申請・交付決定後の着工」が条件。事後申請可能な制度は限定的なため、必ず事前確認を。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>補助金交付までの期間中の資金繰りは？</dt>
+            <dd>工事費は一旦自己負担して、完了後に補助金が振り込まれる仕組みが一般的です。短期借入や工事業者との支払い条件交渉で資金繰りを調整してください。</dd>
+          </div>
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別のアスベスト調査・除去業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/asbestos/tokyo/">東京都</a></li>
+          <li><a href="/asbestos/osaka/">大阪府</a></li>
+          <li><a href="/asbestos/kanagawa/">神奈川県</a></li>
+          <li><a href="/asbestos/aichi/">愛知県</a></li>
+          <li><a href="/asbestos/saitama/">埼玉県</a></li>
+          <li><a href="/asbestos/chiba/">千葉県</a></li>
+          <li><a href="/asbestos/hyogo/">兵庫県</a></li>
+          <li><a href="/asbestos/fukuoka/">福岡県</a></li>
+          <li><a href="/asbestos/hokkaido/">北海道</a></li>
+          <li><a href="/asbestos/kyoto/">京都府</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/asbestos/">全国47都道府県の対応業者を見る →</a></p>
+      </div>
+
+      <div class="cl-cta" id="contact">
+        <h2>アスベスト補助金対応の業者をお探しの方へ</h2>
+        <p>補助金申請に必要な書類作成に対応できる有資格者業者から最大3社を無料でご紹介します。</p>
+        <a href="/asbestos/" class="cta-btn-primary">無料で一括見積もりを依頼する →</a>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連する詳細情報</h2>
+        <ul>
+          <li><a href="/column/asbestos-hiyo-sohba/">アスベスト調査・除去の費用相場2026</a></li>
+          <li><a href="/column/asbestos-keihi/">アスベスト調査・除去の経費計上ガイド2026</a></li>
+          <li><a href="/column/asbestos-horei-gimu/">アスベスト法令義務ガイド2026</a></li>
+        </ul>
+      </aside>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-author-link { color: #fff; text-decoration: underline; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-quickanswer { background: #eef6ff; border: 1.5px solid #1a56db; border-radius: 10px; padding: 18px 22px; margin-bottom: 32px; }
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-faq { display: grid; gap: 14px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 32px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 32px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; list-style: none; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+</style>

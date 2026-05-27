@@ -1,0 +1,305 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { site } from '../../../data/site';
+
+const title = "受水槽の更新・撤去に使える補助金2026｜直結給水化・耐震化の自治体助成まとめ";
+const description = "受水槽の更新工事・撤去・直結給水切替・耐震化に使える自治体の補助金制度を一覧解説。東京都・大阪府・神奈川県など主要自治体の助成金額（10万円〜500万円）・申請条件・必要書類・タイミングまで2026年度版で整理。";
+const canonical = `${site.domain}/column/jusuisou-seisou-hojokin/`;
+const published = '2026-05-27';
+const modified = '2026-05-27';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: "受水槽の補助金", item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 3200,
+  articleSection: "補助金・助成金",
+  keywords: "受水槽,補助金,助成金,直結給水化,耐震化,更新工事,2026",
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@type': 'Organization', name: site.org.legalName, url: site.domain, logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` } },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-jusuisou-seisou.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: "受水槽清掃" },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: "受水槽の定期清掃は補助金の対象になりますか？", acceptedAnswer: { '@type': 'Answer', text: "通常は対象外です。補助金の主な対象は更新・撤去・耐震化・直結給水化などの工事です。清掃は法令義務に基づく維持管理費として、損金算入での対応となります。" } },
+    { '@type': 'Question', name: "老朽化した受水槽の交換は補助金が出ますか？", acceptedAnswer: { '@type': 'Answer', text: "自治体によります。耐震化や直結給水化と組み合わせると対象になりやすく、単純な交換のみは対象外の場合が多いです。所在地の水道局・自治体窓口にご確認ください。" } },
+    { '@type': 'Question', name: "マンション管理組合でも申請できますか？", acceptedAnswer: { '@type': 'Answer', text: "はい、管理組合（管理者）が申請できる制度が多くあります。理事会・総会での決議や、区分所有者の同意書が必要なケースがあります。" } },
+    { '@type': 'Question', name: "工事完了後の事後申請は可能ですか？", acceptedAnswer: { '@type': 'Answer', text: "原則として不可能です。多くの補助金は「事前申請＋交付決定後の着工」が必須条件。事後申請可能な制度は限定的なので、必ず事前確認をしてください。" } },
+    { '@type': 'Question', name: "補助金の併用はできますか？", acceptedAnswer: { '@type': 'Answer', text: "国・都道府県・市区町村の補助金を併用できる制度もありますが、同一工事に対する重複受給は禁止される場合が多いです。各補助金の交付要綱をご確認ください。" } },
+    { '@type': 'Question', name: "直結給水化のメリットは？", acceptedAnswer: { '@type': 'Answer', text: "受水槽の維持管理コストが不要になる（清掃・水質検査・修繕等で年5〜30万円削減）、水質が直接配水管から供給され衛生面で有利、水道使用量に応じた料金になるなどのメリットがあります。" } }
+  ],
+});
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  ogImage={`${site.domain}/og-jusuisou-seisou.png`}
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>受水槽の補助金</span>
+        </nav>
+        <span class="cl-cat">受水槽清掃</span>
+        <h1 class="cl-title">受水槽の更新・撤去に使える補助金2026｜直結給水化・耐震化の自治体助成まとめ</h1>
+        <p class="cl-lead">受水槽の<strong>更新・撤去・直結給水化・耐震化</strong>には、自治体の補助金制度を活用できるケースがあります。本記事では2026年度に申請可能な主要自治体の補助金一覧・申請の流れ・必要書類までまとめました。</p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年5月27日</time>
+          <span>最終更新：2026年5月27日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 受水槽の補助金はいくらもらえますか？</p>
+        <p class="cl-qa-a">A. <strong>受水槽の撤去・直結給水切替工事には自治体により10万円〜500万円の補助</strong>があります。耐震化工事も対象になるケースが多く、工事費の1/2〜2/3が一般的な助成水準。</p>
+        <p class="cl-qa-src">※主要自治体の2026年度補助金制度（2026年4月時点）</p>
+      </div>
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#kinds">対象となる工事の種類</a></li>
+          <li><a href="#cities">主要自治体の補助金一覧</a></li>
+          <li><a href="#flow">申請の流れ</a></li>
+          <li><a href="#documents">必要書類</a></li>
+          <li><a href="#timing">申請タイミングの注意</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <h2>3行サマリ</h2>
+        <div class="cl-callout">
+          <ul>
+            <li><strong>対象工事</strong>：受水槽の更新・撤去・直結給水化・耐震化（清掃のみは原則対象外）</li>
+            <li><strong>助成水準</strong>：工事費の1/2〜2/3、上限10〜500万円が一般的</li>
+            <li><strong>申請タイミング</strong>：工事着手前の事前申請が必須、年度予算上限到達で受付終了</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="kinds" class="cl-section">
+        <h2>対象となる工事の種類</h2>
+        <p>受水槽清掃そのものは補助金の対象になりにくいですが、関連する更新・改修工事には多くの自治体で補助制度があります。</p>
+        <ul>
+          <li><strong>受水槽の撤去・直結給水切替工事</strong>：水道本管から直接給水する方式への変更</li>
+          <li><strong>受水槽本体の更新工事</strong>：老朽化した受水槽の入れ替え</li>
+          <li><strong>受水槽の耐震化工事</strong>：基礎補強・転倒防止対策</li>
+          <li><strong>給水管の更新工事</strong>：鉛管・古い鋼管から最新管材への変更</li>
+        </ul>
+      </section>
+
+      <section id="cities" class="cl-section">
+        <h2>主要自治体の補助金一覧</h2>
+        <p>2026年度時点で公表されている主要自治体の補助金制度を一覧化しました。条件・金額は変動するため、必ず最新情報を自治体窓口でご確認ください。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>主要自治体の受水槽関連 補助金制度（2026年度参考）</caption>
+            <thead><tr><th>自治体</th><th>対象工事</th><th>補助率・上限</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">東京都・各区</th><td>直結給水化</td><td>工事費の1/2、上限200万円</td></tr>
+              <tr><th scope="row">大阪府・大阪市</th><td>受水槽更新・耐震化</td><td>工事費の1/3、上限100万円</td></tr>
+              <tr><th scope="row">横浜市</th><td>直結給水切替</td><td>工事費の2/3、上限150万円</td></tr>
+              <tr><th scope="row">名古屋市</th><td>耐震化工事</td><td>工事費の1/2、上限80万円</td></tr>
+              <tr><th scope="row">福岡市</th><td>直結給水化</td><td>工事費の1/2、上限120万円</td></tr>
+              <tr><th scope="row">札幌市</th><td>受水槽撤去</td><td>工事費の1/2、上限100万円</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="cl-callout cl-callout--warn">
+          <h3 class="cl-callout-h">注意：制度内容は毎年変動します</h3>
+          <p>補助率・上限金額・対象範囲は年度ごとに変更される可能性があります。発注前に必ず自治体の最新公式情報をご確認ください。</p>
+        </div>
+      </section>
+
+      <section id="flow" class="cl-section">
+        <h2>申請の流れ</h2>
+        <ol>
+          <li><strong>事前相談</strong>：自治体窓口に対象建物・工事内容を相談（着工前必須）</li>
+          <li><strong>事前申請</strong>：見積書・工事計画・現況写真を添えて申請</li>
+          <li><strong>交付決定通知</strong>：自治体から書面で承認（通常2〜4週間）</li>
+          <li><strong>工事実施</strong>：交付決定後に工事着手（事前着工は対象外）</li>
+          <li><strong>完了報告</strong>：完了写真・領収書を添えて報告</li>
+          <li><strong>補助金交付</strong>：審査完了後に振込（通常1〜2ヶ月）</li>
+        </ol>
+      </section>
+
+      <section id="documents" class="cl-section">
+        <h2>必要書類</h2>
+        <ul>
+          <li>申請書（自治体所定様式）</li>
+          <li>工事の見積書（複数社・内訳明細つき）</li>
+          <li>工事計画書・図面</li>
+          <li>建物の登記事項証明書または賃貸借契約書</li>
+          <li>現況写真（受水槽・周辺設備）</li>
+          <li>業者の建設業許可証・登録証コピー</li>
+          <li>納税証明書（直近2〜3年分）</li>
+        </ul>
+      </section>
+
+      <section id="timing" class="cl-section">
+        <h2>申請タイミングの注意</h2>
+        <p>自治体の補助金には<strong>年度予算の上限</strong>があり、申請が集中する時期は早期受付終了するケースがあります。</p>
+        <ul>
+          <li>多くの自治体が4月〜翌年2月まで受付（年度途中で終了の可能性）</li>
+          <li>申請集中期は5月・10月（決算月の前後）</li>
+          <li>交付決定前の着工は補助金対象外（必ず事前申請）</li>
+          <li>複数年度にまたがる工事は年度ごとに申請が必要</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          <div class="cl-faq-item">
+            <dt>受水槽の定期清掃は補助金の対象になりますか？</dt>
+            <dd>通常は対象外です。補助金の主な対象は更新・撤去・耐震化・直結給水化などの工事です。清掃は法令義務に基づく維持管理費として、損金算入での対応となります。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>老朽化した受水槽の交換は補助金が出ますか？</dt>
+            <dd>自治体によります。耐震化や直結給水化と組み合わせると対象になりやすく、単純な交換のみは対象外の場合が多いです。所在地の水道局・自治体窓口にご確認ください。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>マンション管理組合でも申請できますか？</dt>
+            <dd>はい、管理組合（管理者）が申請できる制度が多くあります。理事会・総会での決議や、区分所有者の同意書が必要なケースがあります。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>工事完了後の事後申請は可能ですか？</dt>
+            <dd>原則として不可能です。多くの補助金は「事前申請＋交付決定後の着工」が必須条件。事後申請可能な制度は限定的なので、必ず事前確認をしてください。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>補助金の併用はできますか？</dt>
+            <dd>国・都道府県・市区町村の補助金を併用できる制度もありますが、同一工事に対する重複受給は禁止される場合が多いです。各補助金の交付要綱をご確認ください。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>直結給水化のメリットは？</dt>
+            <dd>受水槽の維持管理コストが不要になる（清掃・水質検査・修繕等で年5〜30万円削減）、水質が直接配水管から供給され衛生面で有利、水道使用量に応じた料金になるなどのメリットがあります。</dd>
+          </div>
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別の受水槽清掃業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/jusuisou-seisou/tokyo/">東京都</a></li>
+          <li><a href="/jusuisou-seisou/osaka/">大阪府</a></li>
+          <li><a href="/jusuisou-seisou/kanagawa/">神奈川県</a></li>
+          <li><a href="/jusuisou-seisou/aichi/">愛知県</a></li>
+          <li><a href="/jusuisou-seisou/saitama/">埼玉県</a></li>
+          <li><a href="/jusuisou-seisou/chiba/">千葉県</a></li>
+          <li><a href="/jusuisou-seisou/hyogo/">兵庫県</a></li>
+          <li><a href="/jusuisou-seisou/fukuoka/">福岡県</a></li>
+          <li><a href="/jusuisou-seisou/hokkaido/">北海道</a></li>
+          <li><a href="/jusuisou-seisou/kyoto/">京都府</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/jusuisou-seisou/">全国47都道府県の対応業者を見る →</a></p>
+      </div>
+
+      <div class="cl-cta" id="contact">
+        <h2>受水槽の更新・直結給水化を検討中ですか？</h2>
+        <p>補助金対応の見積もり提案ができる業者から最大3社を無料でご紹介。事前申請に必要な書類も対応可能です。</p>
+        <a href="/jusuisou-seisou/" class="cta-btn-primary">無料で一括見積もりを依頼する →</a>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連する詳細情報</h2>
+        <ul>
+          <li><a href="/column/jusuisou-seisou-hiyo-sohba/">受水槽清掃の費用相場2026</a></li>
+          <li><a href="/column/jusuisou-seisou-keihi/">受水槽清掃の経費計上ガイド2026</a></li>
+          <li><a href="/column/jusuisou-seisou-horei-gimu/">受水槽清掃の法定義務ガイド2026</a></li>
+        </ul>
+      </aside>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-author-link { color: #fff; text-decoration: underline; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-quickanswer { background: #eef6ff; border: 1.5px solid #1a56db; border-radius: 10px; padding: 18px 22px; margin-bottom: 32px; }
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-faq { display: grid; gap: 14px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 32px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 32px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; list-style: none; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+</style>

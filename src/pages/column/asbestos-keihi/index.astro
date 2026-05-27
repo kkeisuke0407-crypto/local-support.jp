@@ -1,0 +1,315 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { site } from '../../../data/site';
+
+const title = "アスベスト調査・除去の費用は経費にできる？修繕費vs資本的支出の判定基準2026";
+const description = "アスベスト調査・除去工事費の会計処理を解説。事前調査5〜20万円は修繕費で損金算入、除去工事1〜10万円/㎡は資本的支出と修繕費の判定が必要。判定基準・仕訳例・税理士からよくある質問まで2026年版で解説。";
+const canonical = `${site.domain}/column/asbestos-keihi/`;
+const published = '2026-05-27';
+const modified = '2026-05-27';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: "アスベスト調査・除去の経費計上", item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 3200,
+  articleSection: "会計・経費",
+  keywords: "アスベスト,経費,損金算入,修繕費,資本的支出,仕訳,2026",
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@type': 'Organization', name: site.org.legalName, url: site.domain, logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` } },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-asbestos.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: "アスベスト調査・除去" },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: "事前調査だけ実施して除去工事をしない場合の処理は？", acceptedAnswer: { '@type': 'Answer', text: "調査結果でアスベスト含有なしと判明した場合や、当面除去しない場合は、調査費のみが発生します。全額修繕費（または調査費）として損金算入できます。" } },
+    { '@type': 'Question', name: "みなし含有での除去工事も経費にできますか？", acceptedAnswer: { '@type': 'Answer', text: "はい、できます。分析を省略してアスベスト含有とみなして除去した場合も、実施した工事費は同じ会計基準で処理します。費用負担は実施前提のため、書面で根拠を残してください。" } },
+    { '@type': 'Question', name: "解体工事と除去工事を同時実施した場合は？", acceptedAnswer: { '@type': 'Answer', text: "解体工事費は除却損または取壊し費として、除去工事費は修繕費または資本的支出として、それぞれ別の勘定で処理します。請求書で内訳を明確にしてもらうことが重要です。" } },
+    { '@type': 'Question', name: "個人事業主・大家業の確定申告では？", acceptedAnswer: { '@type': 'Answer', text: "事業所得・不動産所得の必要経費として「修繕費」勘定で計上します。大規模改修の一部であれば資本的支出として減価償却。判断に迷う場合は税理士に相談してください。" } },
+    { '@type': 'Question', name: "管理組合のアスベスト除去工事の処理は？", acceptedAnswer: { '@type': 'Answer', text: "修繕積立金会計から支出し、決算書では「特別修繕費」「アスベスト除去工事費」等で開示します。区分所有者からの一時金徴収も同じ会計区分で処理。" } },
+    { '@type': 'Question', name: "アスベスト関連の保険金を受け取った場合の処理は？", acceptedAnswer: { '@type': 'Answer', text: "保険金は雑収入として益金算入が原則です。対応する修繕費との損益通算は可能ですが、雑収入を益金として認識する必要があります。" } }
+  ],
+});
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  ogImage={`${site.domain}/og-asbestos.png`}
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>アスベスト調査・除去の経費計上</span>
+        </nav>
+        <span class="cl-cat">アスベスト調査・除去</span>
+        <h1 class="cl-title">アスベスト調査・除去の費用は経費にできる？修繕費vs資本的支出の判定基準2026</h1>
+        <p class="cl-lead">アスベスト関連費用は<strong>事前調査と除去工事で会計処理が異なる</strong>場合があります。本記事では国税庁の修繕費・資本的支出の判定基準に沿って、適切な勘定科目・仕訳・税務リスクを整理しました。</p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年5月27日</time>
+          <span>最終更新：2026年5月27日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. アスベスト調査・除去は経費にできますか？</p>
+        <p class="cl-qa-a">A. <strong>事前調査費は全額損金算入（修繕費）、除去工事は修繕費と資本的支出の判定が必要</strong>。法的義務に基づく除去は原則修繕費、価値増加を伴う場合は資本的支出として固定資産化＋減価償却。</p>
+        <p class="cl-qa-src">※国税庁・法人税基本通達7-8-1〜7-8-2</p>
+      </div>
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#survey">事前調査費の会計処理</a></li>
+          <li><a href="#removal">除去工事の判定基準</a></li>
+          <li><a href="#examples">判定の具体例</a></li>
+          <li><a href="#shiwake">仕訳例</a></li>
+          <li><a href="#subsidy">補助金との関係</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <h2>3行サマリ</h2>
+        <div class="cl-callout">
+          <ul>
+            <li><strong>事前調査費</strong>：全額損金算入（修繕費）が原則</li>
+            <li><strong>除去工事費</strong>：法的義務での除去は修繕費、価値増加を伴う改修は資本的支出</li>
+            <li><strong>補助金受領時</strong>：圧縮記帳または雑収入計上で税負担を調整</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="survey" class="cl-section">
+        <h2>事前調査費の会計処理</h2>
+        <p>アスベストの事前調査費（5〜20万円程度）は、解体・改修工事の事前準備としての性質を持ち、原則として<strong>全額が損金算入できる修繕費</strong>として処理できます。</p>
+        <p>勘定科目は<strong>「修繕費」または「調査費」「衛生管理費」</strong>を使用します。継続性の観点から毎期同じ科目を使うことが望ましいです。</p>
+      </section>
+
+      <section id="removal" class="cl-section">
+        <h2>除去工事の判定基準</h2>
+        <p>除去工事は法人税基本通達に基づき、修繕費か資本的支出かを判定します。</p>
+        <div class="cl-callout">
+          <h3 class="cl-callout-h">修繕費として処理できる主なケース</h3>
+          <ul>
+            <li>法令義務に基づく除去（大気汚染防止法・石綿障害予防規則）</li>
+            <li>建物の通常の維持管理・原状回復としての除去</li>
+            <li>20万円未満の小規模工事（金額基準）</li>
+            <li>おおむね3年以内の周期で行われる修理</li>
+          </ul>
+        </div>
+        <div class="cl-callout cl-callout--warn">
+          <h3 class="cl-callout-h">資本的支出として処理すべきケース</h3>
+          <ul>
+            <li>除去と同時に建物の価値・耐用年数を増加させる改修</li>
+            <li>用途変更・新設工事に伴う除去</li>
+            <li>建物全体の大規模リフォームの一部としての除去</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="examples" class="cl-section">
+        <h2>判定の具体例</h2>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>アスベスト除去工事の会計処理 判定例</caption>
+            <thead><tr><th>ケース</th><th>金額目安</th><th>会計処理</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">老朽化建物の解体に伴う除去</th><td>除去面積で変動</td><td>修繕費（損金算入）</td></tr>
+              <tr><th scope="row">テナント原状回復に伴う除去</th><td>10〜50万円</td><td>修繕費（損金算入）</td></tr>
+              <tr><th scope="row">大規模リノベーションの一部</th><td>100万円〜</td><td>資本的支出（資産計上）</td></tr>
+              <tr><th scope="row">用途変更（オフィス→店舗）</th><td>100万円〜</td><td>資本的支出（資産計上）</td></tr>
+              <tr><th scope="row">行政指導による応急除去</th><td>規模問わず</td><td>修繕費（損金算入）</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="shiwake" class="cl-section">
+        <h2>仕訳例</h2>
+        <h3>修繕費として処理する場合（80万円・消費税込み）</h3>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <thead><tr><th>借方</th><th>金額</th><th>貸方</th><th>金額</th></tr></thead>
+            <tbody>
+              <tr><td>修繕費</td><td>727,273円</td><td>普通預金</td><td>800,000円</td></tr>
+              <tr><td>仮払消費税</td><td>72,727円</td><td></td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>資本的支出として処理する場合（500万円・消費税込み）</h3>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <thead><tr><th>借方</th><th>金額</th><th>貸方</th><th>金額</th></tr></thead>
+            <tbody>
+              <tr><td>建物附属設備</td><td>4,545,455円</td><td>普通預金</td><td>5,000,000円</td></tr>
+              <tr><td>仮払消費税</td><td>454,545円</td><td></td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>※ 資本的支出は耐用年数に応じて減価償却します。</p>
+      </section>
+
+      <section id="subsidy" class="cl-section">
+        <h2>補助金との関係</h2>
+        <p>自治体のアスベスト除去補助金を受領した場合、税務上は<strong>雑収入として益金算入</strong>するか、<strong>圧縮記帳</strong>により課税を繰り延べる選択ができます。</p>
+        <h3>雑収入処理</h3>
+        <p>補助金額を当期の益金として計上し、対応する除去工事費は通常通り処理。当期の課税所得が増加するため、納税資金を準備する必要があります。</p>
+        <h3>圧縮記帳</h3>
+        <p>補助金額を取得資産の帳簿価額から控除し、減価償却を通じて長期間にわたって益金化する処理。資本的支出として処理した除去工事に対して有効です。</p>
+      </section>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          <div class="cl-faq-item">
+            <dt>事前調査だけ実施して除去工事をしない場合の処理は？</dt>
+            <dd>調査結果でアスベスト含有なしと判明した場合や、当面除去しない場合は、調査費のみが発生します。全額修繕費（または調査費）として損金算入できます。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>みなし含有での除去工事も経費にできますか？</dt>
+            <dd>はい、できます。分析を省略してアスベスト含有とみなして除去した場合も、実施した工事費は同じ会計基準で処理します。費用負担は実施前提のため、書面で根拠を残してください。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>解体工事と除去工事を同時実施した場合は？</dt>
+            <dd>解体工事費は除却損または取壊し費として、除去工事費は修繕費または資本的支出として、それぞれ別の勘定で処理します。請求書で内訳を明確にしてもらうことが重要です。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>個人事業主・大家業の確定申告では？</dt>
+            <dd>事業所得・不動産所得の必要経費として「修繕費」勘定で計上します。大規模改修の一部であれば資本的支出として減価償却。判断に迷う場合は税理士に相談してください。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>管理組合のアスベスト除去工事の処理は？</dt>
+            <dd>修繕積立金会計から支出し、決算書では「特別修繕費」「アスベスト除去工事費」等で開示します。区分所有者からの一時金徴収も同じ会計区分で処理。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>アスベスト関連の保険金を受け取った場合の処理は？</dt>
+            <dd>保険金は雑収入として益金算入が原則です。対応する修繕費との損益通算は可能ですが、雑収入を益金として認識する必要があります。</dd>
+          </div>
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別のアスベスト調査・除去業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/asbestos/tokyo/">東京都</a></li>
+          <li><a href="/asbestos/osaka/">大阪府</a></li>
+          <li><a href="/asbestos/kanagawa/">神奈川県</a></li>
+          <li><a href="/asbestos/aichi/">愛知県</a></li>
+          <li><a href="/asbestos/saitama/">埼玉県</a></li>
+          <li><a href="/asbestos/chiba/">千葉県</a></li>
+          <li><a href="/asbestos/hyogo/">兵庫県</a></li>
+          <li><a href="/asbestos/fukuoka/">福岡県</a></li>
+          <li><a href="/asbestos/hokkaido/">北海道</a></li>
+          <li><a href="/asbestos/kyoto/">京都府</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/asbestos/">全国47都道府県の対応業者を見る →</a></p>
+      </div>
+
+      <div class="cl-cta" id="contact">
+        <h2>アスベスト調査・除去の業者をお探しの方へ</h2>
+        <p>有資格者在籍・補助金対応・適格請求書発行に対応する業者から最大3社を無料でご紹介します。</p>
+        <a href="/asbestos/" class="cta-btn-primary">無料で一括見積もりを依頼する →</a>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連する詳細情報</h2>
+        <ul>
+          <li><a href="/column/asbestos-hiyo-sohba/">アスベスト調査・除去の費用相場2026</a></li>
+          <li><a href="/column/asbestos-horei-gimu/">アスベスト法令義務ガイド2026</a></li>
+          <li><a href="/column/asbestos-hojokin/">アスベスト補助金一覧2026</a></li>
+        </ul>
+      </aside>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-author-link { color: #fff; text-decoration: underline; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-quickanswer { background: #eef6ff; border: 1.5px solid #1a56db; border-radius: 10px; padding: 18px 22px; margin-bottom: 32px; }
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-faq { display: grid; gap: 14px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 32px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 32px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; list-style: none; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+</style>

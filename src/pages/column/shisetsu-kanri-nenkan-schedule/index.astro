@@ -1,0 +1,333 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { site } from '../../../data/site';
+
+const title = '施設管理の年間スケジュール2026｜マンション・ビル管理担当者向け 9種の法定点検カレンダー';
+const description = '受水槽清掃・消防設備点検・アスベスト調査・防火シャッター点検・ダクト清掃など、施設管理者が遵守すべき9種の法定点検を月別カレンダーで整理。月ごとに優先すべき点検項目・費用予算・違反ペナルティをまとめた管理組合・ビル管理向けピラー記事。';
+const canonical = `${site.domain}/column/shisetsu-kanri-nenkan-schedule/`;
+const published = '2026-05-27';
+const modified = '2026-05-27';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '施設管理の年間スケジュール', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 4200,
+  articleSection: '施設管理ガイド',
+  keywords: '施設管理,年間スケジュール,法定点検,カレンダー,マンション管理,ビル管理,2026',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@type': 'Organization', name: site.org.legalName, url: site.domain, logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` } },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-default.png`, width: 1200, height: 630 },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: '施設管理で1年間に必要な法定点検は何種類ありますか？', acceptedAnswer: { '@type': 'Answer', text: '一般的なマンション・ビルでは①受水槽清掃（年1回）②消防設備点検（機器年2回・総合年1回）③防火シャッター点検（年1回）④ダクト清掃（推奨年1〜2回）⑤建築物衛生法に基づく空気環境測定（2か月ごと）⑥業務用エアコン洗浄（推奨年1〜2回）⑦特定行政庁への定期報告（用途・規模別）等、最低7〜10種類の点検・清掃が必要です。' } },
+    { '@type': 'Question', name: '法定点検を一括で発注すると安くなりますか？', acceptedAnswer: { '@type': 'Answer', text: 'はい。同一業者または管理会社経由で複数物件・複数項目をまとめて契約すると、10〜30%の割引が一般的です。スケジュール調整も一元化でき管理業務の効率も向上します。' } },
+    { '@type': 'Question', name: '法定点検をすべて怠るとどのくらいの罰金がかかりますか？', acceptedAnswer: { '@type': 'Answer', text: '受水槽清掃100万円以下、消防設備点検30万円以下、防火設備定期報告100万円以下、アスベスト未調査50万円以下など、項目別に罰金が課されます。複数違反が累積すると総額数百万円規模になる可能性があります。' } },
+  ],
+});
+
+interface Month {
+  month: string;
+  primary: { service: string; slug: string; reason: string; cost: string }[];
+  budget: string;
+}
+
+const calendar: Month[] = [
+  { month: '1月', primary: [{ service: '消防設備点検（機器点検）', slug: 'shobo-setsubi', reason: '冬の火災シーズン前にスプリンクラー・消火栓を確認', cost: '小規模3〜5万円' }, { service: '防火シャッター点検', slug: 'shutter', reason: '建築基準法第12条の定期報告に向けた事前検査', cost: '1台1〜3万円' }], budget: '5〜10万円' },
+  { month: '2月', primary: [{ service: '業務用エアコン点検', slug: 'aircon-business', reason: '夏前の洗浄・修理は2月手配でコスト安', cost: '1台2〜5万円' }, { service: '看板点検', slug: 'signboard-inspection', reason: '春の許可更新前に詳細点検を実施', cost: '1台1〜3万円' }], budget: '3〜8万円' },
+  { month: '3月', primary: [{ service: 'アスベスト事前調査', slug: 'asbestos', reason: '解体・改修工事は新年度開始前に調査着手', cost: '5〜20万円' }, { service: '消防設備総合点検（特定防火対象物）', slug: 'shobo-setsubi', reason: '年度末締めの報告書作成', cost: '小規模5〜10万円' }], budget: '10〜30万円' },
+  { month: '4月', primary: [{ service: '受水槽清掃', slug: 'jusuisou-seisou', reason: '夏前の細菌繁殖期前の清掃が衛生上推奨', cost: '小規模3〜8万円' }, { service: 'グリストラップ清掃', slug: 'grease-trap', reason: '夏の悪臭・害虫発生を予防', cost: '1回1〜5万円' }], budget: '5〜15万円' },
+  { month: '5月', primary: [{ service: 'ダクト清掃（厨房）', slug: 'duct', reason: '夏の使用ピーク前にグリス除去・火災予防', cost: '5〜30万円' }, { service: '害虫駆除（PCO）', slug: 'pest-control', reason: '梅雨入り前のゴキブリ・ハエ対策', cost: 'スポット1〜5万円' }], budget: '6〜35万円' },
+  { month: '6月', primary: [{ service: 'フロン排出抑制法 定期点検', slug: 'aircon-business', reason: '7.5kW以上の機器は3ヶ月・1年・3年ごと', cost: '1台5,000〜2万円' }, { service: '受水槽清掃（年1回目を逃した施設）', slug: 'jusuisou-seisou', reason: '梅雨で水質悪化リスク', cost: '小規模3〜8万円' }], budget: '3〜10万円' },
+  { month: '7月', primary: [{ service: '害虫駆除（PCO）月次管理', slug: 'pest-control', reason: '夏季のピーク時期はモニタリング強化', cost: '1〜3万円/月' }, { service: 'エアコン緊急対応', slug: 'aircon-business', reason: '故障時の修理（猛暑期は遅延リスク）', cost: '修理3万円〜' }], budget: '5〜15万円' },
+  { month: '8月', primary: [{ service: '消防設備点検（機器2回目）', slug: 'shobo-setsubi', reason: '半年点検のタイミング', cost: '小規模3〜5万円' }], budget: '3〜8万円' },
+  { month: '9月', primary: [{ service: 'ダクト清掃（空調）', slug: 'duct', reason: '冷暖房切替前の空気環境改善', cost: '10〜100万円' }, { service: 'シャッター修理', slug: 'shutter', reason: '台風シーズン前の補修', cost: '修理2万円〜' }], budget: '15〜30万円' },
+  { month: '10月', primary: [{ service: 'アスベスト調査（解体予定物件）', slug: 'asbestos', reason: '冬期の解体工事に向けた事前準備', cost: '5〜20万円' }, { service: '看板点検（高所）', slug: 'signboard-inspection', reason: '冬の強風期前の打音検査', cost: '1台1〜3万円＋高所2〜5万円' }], budget: '10〜30万円' },
+  { month: '11月', primary: [{ service: 'グリストラップ清掃（年末営業前）', slug: 'grease-trap', reason: '繁忙期前の総合清掃', cost: '1回1〜5万円' }, { service: 'ダクト清掃（厨房・年末強化）', slug: 'duct', reason: '年末営業前の火災予防', cost: '5〜30万円' }], budget: '5〜35万円' },
+  { month: '12月', primary: [{ service: '消防設備総合点検（非特定防火対象物）', slug: 'shobo-setsubi', reason: '年1回の総合点検（共同住宅等）', cost: '3〜10万円' }, { service: '受水槽清掃（年1回目を逃した施設）', slug: 'jusuisou-seisou', reason: '最終締切として実施', cost: '小規模3〜8万円' }], budget: '5〜15万円' },
+];
+
+const services: { name: string; slug: string }[] = [
+  { name: '受水槽清掃', slug: 'jusuisou-seisou' },
+  { name: 'アスベスト調査・除去', slug: 'asbestos' },
+  { name: 'ダクト清掃', slug: 'duct' },
+  { name: 'シャッター点検', slug: 'shutter' },
+  { name: '消防設備点検', slug: 'shobo-setsubi' },
+  { name: 'グリストラップ清掃', slug: 'grease-trap' },
+  { name: '業務用エアコン', slug: 'aircon-business' },
+  { name: '害虫駆除（PCO）', slug: 'pest-control' },
+  { name: '看板点検', slug: 'signboard-inspection' },
+];
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>施設管理の年間スケジュール</span>
+        </nav>
+        <span class="cl-cat">施設管理ガイド</span>
+        <h1 class="cl-title">施設管理の年間スケジュール2026｜マンション・ビル管理担当者向け 9種の法定点検カレンダー</h1>
+        <p class="cl-lead">
+          施設管理担当者が遵守すべき法定点検は9種類以上に及び、月別の段取りを誤ると<strong>違反・違反金・住民影響</strong>に直結します。本記事では9種のメンテナンスを月別カレンダーで整理し、各月の優先項目・費用予算・関連法令まで一覧化しました。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年5月27日</time>
+          <span>最終更新：2026年5月27日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. マンション・ビル管理で1年に必要な法定点検は？</p>
+        <p class="cl-qa-a">A. <strong>①受水槽清掃 ②消防設備点検 ③防火シャッター点検 ④ダクト清掃 ⑤業務用エアコン洗浄 ⑥フロン定期点検 ⑦アスベスト調査 ⑧グリストラップ清掃 ⑨看板点検</strong>の9種。月別の段取りで違反と費用の両面を抑える。</p>
+        <p class="cl-qa-src">※ロカサポ編集部まとめ（2026年5月）</p>
+      </div>
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#calendar">月別カレンダー（1月〜12月）</a></li>
+          <li><a href="#9services">9種の点検サービス概要</a></li>
+          <li><a href="#tips">年間予算の組み方</a></li>
+          <li><a href="#mistakes">スケジュールでよくある失敗</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>9種の法定点検</strong>を漏れなく管理：受水槽・消防・防火シャッター・ダクト・エアコン・フロン・アスベスト・グリストラップ・看板</li>
+            <li><strong>季節要因を踏まえた発注</strong>：夏前のエアコン・ダクト、春の受水槽、秋の看板など最適タイミングがある</li>
+            <li><strong>年間予算の目安</strong>：中規模ビルで100〜300万円、マンション50〜150万円（規模・サービス組合せ次第）</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="calendar" class="cl-section">
+        <h2>月別カレンダー（1月〜12月）</h2>
+        <p>季節要因（夏前のエアコン、梅雨前の受水槽、台風前のシャッター等）と法定点検の時期を組み合わせた標準的な発注スケジュールです。施設の用途・規模により調整してください。</p>
+
+        <div class="schedule-grid">
+          {calendar.map((m) => (
+            <div class="month-card">
+              <h3 class="month-h">{m.month}</h3>
+              <ul class="month-list">
+                {m.primary.map((p) => (
+                  <li>
+                    <a href={`/${p.slug}/`} class="month-svc">{p.service}</a>
+                    <p class="month-reason">{p.reason}</p>
+                    <p class="month-cost">目安：{p.cost}</p>
+                  </li>
+                ))}
+              </ul>
+              <p class="month-budget">月予算目安：<strong>{m.budget}</strong></p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="9services" class="cl-section">
+        <h2>9種の点検サービス概要</h2>
+        <p>各サービスの法的根拠・頻度・費用目安を一覧で確認できます。詳細は各サービスのリンクから。</p>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>施設管理に必要な9種の点検・清掃</caption>
+            <thead>
+              <tr>
+                <th>サービス</th>
+                <th>法的根拠</th>
+                <th>推奨頻度</th>
+                <th>費用目安</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row"><a href="/jusuisou-seisou/">受水槽清掃</a></th><td>水道法第34条の2</td><td>年1回以上</td><td>3〜30万円</td></tr>
+              <tr><th scope="row"><a href="/asbestos/">アスベスト調査・除去</a></th><td>大気汚染防止法</td><td>解体・改修前</td><td>調査5〜20万円</td></tr>
+              <tr><th scope="row"><a href="/duct/">ダクト清掃</a></th><td>消防法・建築物衛生法</td><td>厨房年1〜2回</td><td>5〜100万円</td></tr>
+              <tr><th scope="row"><a href="/shutter/">シャッター点検</a></th><td>建築基準法第12条</td><td>年1回（特定建築物）</td><td>1〜3万円/台</td></tr>
+              <tr><th scope="row"><a href="/shobo-setsubi/">消防設備点検</a></th><td>消防法第17条の3の3</td><td>機器年2回・総合年1回</td><td>3〜30万円/年</td></tr>
+              <tr><th scope="row"><a href="/grease-trap/">グリストラップ清掃</a></th><td>下水道法・HACCP</td><td>月1〜3回</td><td>1〜5万円/回</td></tr>
+              <tr><th scope="row"><a href="/aircon-business/">業務用エアコン洗浄</a></th><td>建築物衛生法・フロン排出抑制法</td><td>年1〜2回</td><td>2〜8万円/台</td></tr>
+              <tr><th scope="row"><a href="/pest-control/">害虫駆除（PCO）</a></th><td>食品衛生法（HACCP）</td><td>月次管理推奨</td><td>1〜3万円/月</td></tr>
+              <tr><th scope="row"><a href="/signboard-inspection/">看板点検</a></th><td>屋外広告物条例・建築基準法第12条</td><td>2〜3年ごと（許可更新時）</td><td>1〜3万円/台</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="tips" class="cl-section">
+        <h2>年間予算の組み方</h2>
+        <p>施設の規模・用途に応じた年間予算の目安と、コストを抑えるコツを紹介します。</p>
+
+        <h3>規模別 年間予算の目安</h3>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>施設規模別の年間管理予算（9サービス合計）</caption>
+            <thead><tr><th>施設規模</th><th>年間予算目安</th><th>主な対象</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">小規模マンション（〜30戸）</th><td>30〜80万円</td><td>受水槽・消防・グリストラップ等</td></tr>
+              <tr><th scope="row">中規模マンション（30〜100戸）</th><td>50〜150万円</td><td>受水槽・消防・ダクト・エアコン等</td></tr>
+              <tr><th scope="row">小規模オフィスビル</th><td>50〜120万円</td><td>消防・エアコン・看板・ダクト等</td></tr>
+              <tr><th scope="row">中規模商業ビル</th><td>150〜400万円</td><td>全9サービス＋アスベスト調査</td></tr>
+              <tr><th scope="row">飲食店（単店）</th><td>20〜60万円</td><td>ダクト・グリストラップ・害虫・消防</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>コストを抑える3つのコツ</h3>
+        <ol>
+          <li><strong>同一業者・同一管理会社でまとめて契約</strong>：複数サービス一括で10〜30%の割引が一般的</li>
+          <li><strong>季節要因を考慮した発注</strong>：エアコンは冬・春に手配、看板は秋に手配など閑散期発注</li>
+          <li><strong>複数物件まとめての年間契約</strong>：管理組合・チェーン店舗は本部一括契約で大幅割引</li>
+        </ol>
+      </section>
+
+      <section id="mistakes" class="cl-section">
+        <h2>スケジュールでよくある失敗</h2>
+        <ul>
+          <li><strong>夏前のエアコン手配漏れ</strong>：6〜7月になってからの発注は業者対応が遅れ、機会損失と修理代の高額化を招く</li>
+          <li><strong>消防設備点検の報告期限超過</strong>：消防署への報告期限を過ぎると改善命令の対象に</li>
+          <li><strong>アスベスト調査の事後発覚</strong>：解体着工後に石綿含有が判明すると工期遅延と追加費用が発生</li>
+          <li><strong>受水槽清掃の梅雨時期発注</strong>：細菌繁殖期に当たり水質基準を満たせないリスク</li>
+          <li><strong>看板点検の許可更新間際</strong>：点検報告書がないと屋外広告物の許可更新が滞る</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          <div class="cl-faq-item">
+            <dt>施設管理で1年間に必要な法定点検は何種類？</dt>
+            <dd>一般的なマンション・ビルで7〜10種類。受水槽清掃、消防設備点検、防火シャッター点検、ダクト清掃、空気環境測定、業務用エアコン洗浄、特定行政庁への定期報告などが基本セットです。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>法定点検を一括で発注すると安くなりますか？</dt>
+            <dd>はい。同一業者または管理会社経由で複数物件・複数項目をまとめて契約すると、10〜30%の割引が一般的です。スケジュール調整も一元化でき管理業務の効率も向上します。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>法定点検をすべて怠るとどのくらいの罰金がかかりますか？</dt>
+            <dd>受水槽清掃100万円以下、消防設備点検30万円以下、防火設備定期報告100万円以下、アスベスト未調査50万円以下など、項目別に罰金が課されます。複数違反が累積すると総額数百万円規模になる可能性があります。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>新任の管理担当者が最初にやるべきことは？</dt>
+            <dd>①過去3年分の点検記録・契約書を確認、②未実施・未報告の項目を洗い出し、③管轄の保健所・消防署・特定行政庁へ現状を確認、の3ステップが基本です。</dd>
+          </div>
+        </dl>
+      </section>
+
+      <div class="cl-cta" id="contact">
+        <h2>9種の点検サービスを一括で見積もり比較</h2>
+        <p>{site.name}では、施設管理に必要な9サービスすべてに対応する登録業者から最大3社を無料でご紹介します。</p>
+        <a href="/" class="cta-btn-primary">無料で一括見積もりを依頼する →</a>
+      </div>
+
+      <div class="cl-related">
+        <h2 class="cl-related-h">関連する詳細情報</h2>
+        <ul>
+          {services.map((s) => (
+            <li><a href={`/${s.slug}/`}>{s.name}の業者を一括見積比較</a></li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-author-link { color: #fff; text-decoration: underline; }
+.cl-body { padding: 40px 20px 60px; max-width: 880px; }
+.cl-quickanswer { background: #eef6ff; border: 1.5px solid #1a56db; border-radius: 10px; padding: 18px 22px; margin-bottom: 32px; }
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-table tbody th a { color: var(--blue); text-decoration: none; }
+.cl-table tbody th a:hover { text-decoration: underline; }
+.schedule-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 18px; }
+.month-card { background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; padding: 18px 20px; }
+.month-h { background: var(--blue); color: #fff; font-size: .92rem; font-weight: 800; padding: 6px 12px; border-radius: 6px; display: inline-block; margin-bottom: 12px; }
+.month-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; gap: 12px; }
+.month-svc { display: block; font-size: .88rem; font-weight: 800; color: var(--blue); text-decoration: none; margin-bottom: 4px; }
+.month-svc:hover { text-decoration: underline; }
+.month-reason { font-size: .8rem; line-height: 1.65; color: var(--gray-700); margin: 0 0 2px; }
+.month-cost { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.month-budget { font-size: .82rem; color: var(--gray-700); border-top: 1px dashed var(--gray-200); padding-top: 10px; margin: 0; }
+.cl-faq { display: grid; gap: 14px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 32px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 32px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; list-style: none; }
+.cl-related li { padding: 0; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+</style>

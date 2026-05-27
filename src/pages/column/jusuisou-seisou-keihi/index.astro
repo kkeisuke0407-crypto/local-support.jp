@@ -1,0 +1,312 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { site } from '../../../data/site';
+
+const title = "受水槽清掃の費用は経費にできる？管理組合・法人の損金算入と仕訳実務2026";
+const description = "受水槽清掃は法令義務に基づく費用として全額損金算入が可能。管理組合・法人ごとの仕訳（管理費・修繕費・衛生管理費）、消費税の取扱い、領収書・作業報告書の保管期間、税理士からよくある質問まで2026年税制対応で実務解説。";
+const canonical = `${site.domain}/column/jusuisou-seisou-keihi/`;
+const published = '2026-05-27';
+const modified = '2026-05-27';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: "受水槽清掃の経費計上", item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 3200,
+  articleSection: "会計・経費",
+  keywords: "受水槽清掃,経費,損金算入,仕訳,修繕費,管理費,管理組合,2026",
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@type': 'Organization', name: site.org.legalName, url: site.domain, logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` } },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-jusuisou-seisou.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: "受水槽清掃" },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: "受水槽清掃は減価償却が必要ですか？", acceptedAnswer: { '@type': 'Answer', text: "不要です。定期清掃は維持管理費（修繕費）として支払い時に全額損金算入できます。減価償却が必要なのはタンク本体の交換・大規模改修などの資本的支出です。" } },
+    { '@type': 'Question', name: "管理組合での会計処理は法人と同じですか？", acceptedAnswer: { '@type': 'Answer', text: "異なります。区分所有法上の管理組合は法人格を持たない場合が多く、収益事業以外は法人税非課税。仕訳は管理費会計または修繕積立金会計から支出します。" } },
+    { '@type': 'Question', name: "水質検査費用も経費にできますか？", acceptedAnswer: { '@type': 'Answer', text: "はい、できます。水質検査は受水槽清掃とセットの法令義務であり、同じく修繕費・衛生管理費として全額損金算入が可能です。" } },
+    { '@type': 'Question', name: "消費税の仕入税額控除は受けられますか？", acceptedAnswer: { '@type': 'Answer', text: "インボイス制度対応の業者から請求書を受領していれば、消費税の仕入税額控除を受けられます。発注前に業者の適格請求書発行事業者登録番号を確認してください。" } },
+    { '@type': 'Question', name: "個人事業主の確定申告ではどう処理しますか？", acceptedAnswer: { '@type': 'Answer', text: "事業所得の必要経費として「修繕費」または「管理諸費」勘定で計上します。事業用と私的利用が混在する場合は、合理的な按分計算が必要です。" } },
+    { '@type': 'Question', name: "受水槽清掃の領収書を紛失した場合は？", acceptedAnswer: { '@type': 'Answer', text: "業者に再発行を依頼します。再発行できない場合は、銀行振込記録・契約書・作業報告書を組み合わせて支払いの事実を立証する書類を整えてください。" } }
+  ],
+});
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  ogImage={`${site.domain}/og-jusuisou-seisou.png`}
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>受水槽清掃の経費計上</span>
+        </nav>
+        <span class="cl-cat">受水槽清掃</span>
+        <h1 class="cl-title">受水槽清掃の費用は経費にできる？管理組合・法人の損金算入と仕訳実務2026</h1>
+        <p class="cl-lead">受水槽清掃の費用は<strong>原則として全額損金算入が可能</strong>です。本記事では管理組合・法人・個人事業主ごとの仕訳例、消費税の取扱い、書類の保管期間まで2026年版で実務解説します。</p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年5月27日</time>
+          <span>最終更新：2026年5月27日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 受水槽清掃は経費にできますか？</p>
+        <p class="cl-qa-a">A. <strong>法令義務に基づく費用として全額損金算入が可能</strong>。法人は修繕費・衛生管理費、管理組合は管理費・修繕積立金から、個人事業主は事業所得の必要経費として処理できます。</p>
+        <p class="cl-qa-src">※法人税法上の損金規定（2026年4月時点）</p>
+      </div>
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#principle">損金算入の基本ルール</a></li>
+          <li><a href="#shiwake">主体別の仕訳例</a></li>
+          <li><a href="#shouhizei">消費税の取扱い</a></li>
+          <li><a href="#records">書類の保管期間</a></li>
+          <li><a href="#qa">税理士からよくある質問</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <h2>3行サマリ</h2>
+        <div class="cl-callout">
+          <ul>
+            <li><strong>損金算入</strong>：法令義務に基づく費用として全額損金算入が可能</li>
+            <li><strong>勘定科目</strong>：法人は修繕費・衛生管理費、管理組合は管理費、個人事業主は必要経費</li>
+            <li><strong>保管書類</strong>：領収書・作業報告書・水質検査結果書を5年間保管</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="principle" class="cl-section">
+        <h2>損金算入の基本ルール</h2>
+        <p>受水槽清掃の費用は、水道法第34条の2に基づく法令義務の履行費用として、原則として全額損金算入が可能です。資本的支出（タンク本体の更新等）とは異なり、定期清掃は維持管理費として一括費用化できます。</p>
+        <p><strong>損金算入が認められる主な理由：</strong></p>
+        <ul>
+          <li>法令で年1回以上の清掃が義務化されている</li>
+          <li>建物の通常の維持管理に必要な費用である</li>
+          <li>収益獲得や資産価値の維持に直接寄与する</li>
+        </ul>
+      </section>
+
+      <section id="shiwake" class="cl-section">
+        <h2>主体別の仕訳例</h2>
+        <h3>法人（不動産・店舗運営など）</h3>
+        <p>勘定科目は<strong>「修繕費」または「衛生管理費」「管理諸費」</strong>を使用するのが一般的です。継続性の観点から毎期同じ科目を使うことが望ましいです。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>仕訳例（受水槽清掃 88,000円・消費税込み）</caption>
+            <thead><tr><th>借方</th><th>金額</th><th>貸方</th><th>金額</th></tr></thead>
+            <tbody>
+              <tr><td>修繕費</td><td>80,000円</td><td>普通預金</td><td>88,000円</td></tr>
+              <tr><td>仮払消費税</td><td>8,000円</td><td></td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>マンション管理組合</h3>
+        <p>区分所有法上の管理組合の場合、収益事業に該当しないため法人税は通常非課税。仕訳は<strong>管理費会計</strong>または<strong>修繕積立金会計</strong>から支出します。決算書では「管理費支出」「水道設備管理費」等で開示します。</p>
+
+        <h3>個人事業主</h3>
+        <p>事業所得の必要経費として計上します。家賃収入のあるオーナーは<strong>「修繕費」「管理諸費」</strong>勘定で経費処理してください。事業用と私的利用の按分が必要なケースは、面積比例・利用比例で合理的に按分します。</p>
+      </section>
+
+      <section id="shouhizei" class="cl-section">
+        <h2>消費税の取扱い</h2>
+        <p>受水槽清掃費用は<strong>消費税課税取引</strong>です。インボイス制度（2023年10月開始）に対応した適格請求書発行事業者からの請求書受領が前提となります。</p>
+        <ul>
+          <li>インボイス対応業者の場合：仕入税額控除が可能</li>
+          <li>免税事業者の場合：2026年9月までは仕入税額控除80%（2029年9月までは50%）</li>
+          <li>水質検査費用も同様に課税取引として処理</li>
+        </ul>
+        <div class="cl-callout cl-callout--warn">
+          <h3 class="cl-callout-h">注意：インボイス番号の確認</h3>
+          <p>2026年現在、適格請求書発行事業者でない業者からの仕入は税額控除に制限があります。発注前に業者の登録番号（T+13桁）を確認してください。</p>
+        </div>
+      </section>
+
+      <section id="records" class="cl-section">
+        <h2>書類の保管期間</h2>
+        <p>受水槽清掃に関連する書類は、税務・法令の双方の観点から長期保管が必要です。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>受水槽清掃関連書類の保管期間</caption>
+            <thead><tr><th>書類</th><th>保管期間</th><th>根拠</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">領収書・請求書</th><td>7年間</td><td>法人税法・所得税法</td></tr>
+              <tr><th scope="row">清掃証明書（作業報告書）</th><td>5年間</td><td>建築物衛生法</td></tr>
+              <tr><th scope="row">水質検査結果書</th><td>5年間</td><td>建築物衛生法</td></tr>
+              <tr><th scope="row">業者の登録証コピー</th><td>契約期間中</td><td>管理責任の立証</td></tr>
+              <tr><th scope="row">廃棄物マニフェスト</th><td>5年間</td><td>廃棄物処理法</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="qa" class="cl-section">
+        <h2>税理士からよくある質問</h2>
+        <p>受水槽清掃の経費処理で税理士から確認される代表的なポイントを整理します。</p>
+        <h3>Q1：複数年契約の前払金の扱いは？</h3>
+        <p>3年間の年間契約を一括前払いした場合、原則として<strong>各事業年度の費用に按分</strong>します。短期前払費用の特例（1年以内）に該当する場合は支払時に全額損金算入が可能です。</p>
+        <h3>Q2：タンク交換工事と清掃を同時実施した場合の処理は？</h3>
+        <p>清掃部分は修繕費（損金）として、タンク本体の交換は<strong>資本的支出</strong>として固定資産計上＋減価償却が原則です。請求書で清掃費と交換費を明確に分離してもらいましょう。</p>
+        <h3>Q3：管理組合から区分所有者への請求は課税対象？</h3>
+        <p>区分所有者から徴収する管理費は、管理組合の収益事業に該当しないため<strong>通常は消費税対象外</strong>です。ただし共益費の一部として徴収する場合は、性質により判定が異なることがあるため税理士へご確認ください。</p>
+      </section>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          <div class="cl-faq-item">
+            <dt>受水槽清掃は減価償却が必要ですか？</dt>
+            <dd>不要です。定期清掃は維持管理費（修繕費）として支払い時に全額損金算入できます。減価償却が必要なのはタンク本体の交換・大規模改修などの資本的支出です。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>管理組合での会計処理は法人と同じですか？</dt>
+            <dd>異なります。区分所有法上の管理組合は法人格を持たない場合が多く、収益事業以外は法人税非課税。仕訳は管理費会計または修繕積立金会計から支出します。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>水質検査費用も経費にできますか？</dt>
+            <dd>はい、できます。水質検査は受水槽清掃とセットの法令義務であり、同じく修繕費・衛生管理費として全額損金算入が可能です。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>消費税の仕入税額控除は受けられますか？</dt>
+            <dd>インボイス制度対応の業者から請求書を受領していれば、消費税の仕入税額控除を受けられます。発注前に業者の適格請求書発行事業者登録番号を確認してください。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>個人事業主の確定申告ではどう処理しますか？</dt>
+            <dd>事業所得の必要経費として「修繕費」または「管理諸費」勘定で計上します。事業用と私的利用が混在する場合は、合理的な按分計算が必要です。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>受水槽清掃の領収書を紛失した場合は？</dt>
+            <dd>業者に再発行を依頼します。再発行できない場合は、銀行振込記録・契約書・作業報告書を組み合わせて支払いの事実を立証する書類を整えてください。</dd>
+          </div>
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別の受水槽清掃業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/jusuisou-seisou/tokyo/">東京都</a></li>
+          <li><a href="/jusuisou-seisou/osaka/">大阪府</a></li>
+          <li><a href="/jusuisou-seisou/kanagawa/">神奈川県</a></li>
+          <li><a href="/jusuisou-seisou/aichi/">愛知県</a></li>
+          <li><a href="/jusuisou-seisou/saitama/">埼玉県</a></li>
+          <li><a href="/jusuisou-seisou/chiba/">千葉県</a></li>
+          <li><a href="/jusuisou-seisou/hyogo/">兵庫県</a></li>
+          <li><a href="/jusuisou-seisou/fukuoka/">福岡県</a></li>
+          <li><a href="/jusuisou-seisou/hokkaido/">北海道</a></li>
+          <li><a href="/jusuisou-seisou/kyoto/">京都府</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/jusuisou-seisou/">全国47都道府県の対応業者を見る →</a></p>
+      </div>
+
+      <div class="cl-cta" id="contact">
+        <h2>受水槽清掃の業者選びで悩んでいませんか？</h2>
+        <p>法令対応・書面交付・登録確認済みの業者から最大3社を無料でご紹介します。経費処理に必要な書類も完備。</p>
+        <a href="/jusuisou-seisou/" class="cta-btn-primary">無料で一括見積もりを依頼する →</a>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連する詳細情報</h2>
+        <ul>
+          <li><a href="/column/jusuisou-seisou-hiyo-sohba/">受水槽清掃の費用相場2026｜規模別の料金完全ガイド</a></li>
+          <li><a href="/column/jusuisou-seisou-horei-gimu/">受水槽清掃の法定義務ガイド2026</a></li>
+          <li><a href="/column/jusuisou-seisou-gyosha-sentaku/">受水槽清掃の業者選び完全ガイド2026</a></li>
+          <li><a href="/column/shisetsu-kanri-nenkan-schedule/">施設管理の年間スケジュール2026</a></li>
+        </ul>
+      </aside>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-author-link { color: #fff; text-decoration: underline; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-quickanswer { background: #eef6ff; border: 1.5px solid #1a56db; border-radius: 10px; padding: 18px 22px; margin-bottom: 32px; }
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-faq { display: grid; gap: 14px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 32px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 32px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; list-style: none; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+</style>
