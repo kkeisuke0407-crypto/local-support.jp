@@ -1,0 +1,559 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { site } from '../../../data/site';
+
+const title = '受水槽清掃の業者選び完全ガイド2026｜資格・実績・見積書で失敗しない10のチェックポイント';
+const description = '受水槽清掃業者を選ぶ際に確認すべき10項目を解説。建築物衛生法上の必須資格（建築物飲料水貯水槽清掃業登録）、水質検査の有無、清掃証明書の発行、廃棄物処理方法まで、施設管理担当者が見積もり段階で必ず確認すべきポイントをまとめました。';
+const canonical = `${site.domain}/column/jusuisou-seisou-gyosha-sentaku/`;
+const published = '2026-05-27';
+const modified = '2026-05-27';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '受水槽清掃の業者選び完全ガイド', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 4900,
+  articleSection: '業者選び',
+  keywords: '受水槽清掃,業者選び,資格,建築物飲料水貯水槽清掃業,見積もり,チェックリスト,2026',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: {
+    '@type': 'Organization',
+    name: site.org.legalName,
+    url: site.domain,
+    logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
+  },
+  about: { '@type': 'Service', name: '受水槽清掃' },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: '受水槽清掃業者を選ぶ際に最も重要な資格は何ですか？', acceptedAnswer: { '@type': 'Answer', text: '「建築物飲料水貯水槽清掃業」の都道府県知事登録（建築物衛生法に基づく）が必須です。この登録を受けた業者でなければ、特定建築物の受水槽清掃を請け負うことができません。登録通知書の写しを必ず事前に取得してください。' } },
+    { '@type': 'Question', name: '水質検査は清掃業者に依頼できますか？', acceptedAnswer: { '@type': 'Answer', text: '清掃後の水質検査は、厚生労働大臣の登録を受けた「登録水質検査機関」が実施する必要があります。多くの清掃業者は提携する検査機関を紹介または手配してくれますが、業者によっては別途手配が必要なケースもあります。見積もり段階で水質検査込みのパッケージか確認してください。' } },
+    { '@type': 'Question', name: '清掃証明書（作業報告書）は必ず発行してもらえますか？', acceptedAnswer: { '@type': 'Answer', text: '建築物衛生法の特定建築物では清掃記録の保存が義務です。清掃証明書（実施日・業者名・清掃方法・写真）は全業者が発行するわけではないため、見積もり段階で「発行の有無と記載内容」を確認してください。写真付きの詳細な報告書を出せる業者を選ぶのが安全です。' } },
+    { '@type': 'Question', name: '相見積もりを取るとき何社に依頼すればいいですか？', acceptedAnswer: { '@type': 'Answer', text: '最低3社が推奨です。1社では適正価格の判断ができず、2社では1社が極端に安い・高い場合の判断が難しいため、3社以上の比較が安全です。一括見積もりサービスを活用すると複数業者への同時依頼が効率的です。' } },
+    { '@type': 'Question', name: '安い業者を選んで問題になることはありますか？', acceptedAnswer: { '@type': 'Answer', text: 'あります。①無登録業者による不正な清掃（行政指導・罰金リスク）、②水質検査省略による衛生義務違反、③廃棄汚泥の不法投棄（廃棄物処理法違反）、④清掃後のフタ・配管の締め不足による汚染事故などのリスクがあります。価格だけでなく、登録証・実績・清掃報告書の質を必ず確認してください。' } },
+    { '@type': 'Question', name: '年間契約と単発依頼、どちらがお得ですか？', acceptedAnswer: { '@type': 'Answer', text: '年間契約（清掃＋水質検査をセットで年1〜2回実施）の方が単発より10〜20%程度割安になるケースが多いです。また、記録管理・スケジュール管理を業者に委託できる点でも年間契約が管理効率を高めます。複数物件を持つ施設管理者には特におすすめです。' } },
+  ],
+});
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a>
+          <span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a>
+          <span aria-hidden="true">›</span>
+          <span>受水槽清掃の業者選び完全ガイド</span>
+        </nav>
+        <span class="cl-cat">受水槽清掃</span>
+        <h1 class="cl-title">受水槽清掃の業者選び完全ガイド2026｜資格・実績・見積書で失敗しない10のチェックポイント</h1>
+        <p class="cl-lead">
+          受水槽清掃業者を選ぶ際に<strong>「安さだけで選んで後悔した」</strong>というケースは後を絶ちません。無登録業者による不正清掃、水質検査省略、廃棄汚泥の不法投棄など、法的リスクも伴います。本記事では、見積もり段階で必ず確認すべき<strong>10のチェックポイント</strong>を具体的に解説します。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年5月27日</time>
+          <span>最終更新：2026年5月27日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#checklist">10のチェックポイント一覧</a></li>
+          <li><a href="#check1">① 建築物飲料水貯水槽清掃業の登録確認</a></li>
+          <li><a href="#check2">② 有資格者（貯水槽清掃作業監督者）の在籍</a></li>
+          <li><a href="#check3">③ 水質検査（厚生労働省登録機関）の対応</a></li>
+          <li><a href="#check4">④ 清掃証明書・写真付き報告書の発行</a></li>
+          <li><a href="#check5">⑤ 廃棄汚泥の適正処理（産業廃棄物マニフェスト）</a></li>
+          <li><a href="#check6">⑥ 断水計画・利用者への周知サポート</a></li>
+          <li><a href="#check7">⑦ 清掃後の水質異常時の対応保証</a></li>
+          <li><a href="#check8">⑧ 施工実績・対応建物タイプの確認</a></li>
+          <li><a href="#check9">⑨ 賠償保険への加入確認</a></li>
+          <li><a href="#check10">⑩ 年間契約の内容と単価の透明性</a></li>
+          <li><a href="#quotation">見積書で確認すべき記載項目</a></li>
+          <li><a href="#mistakes">よくある失敗パターン</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>必須資格</strong>：建築物飲料水貯水槽清掃業の都道府県知事登録（建築物衛生法）＋貯水槽清掃作業監督者</li>
+            <li><strong>3大確認事項</strong>：水質検査の実施可否・清掃証明書の発行・廃棄汚泥のマニフェスト発行</li>
+            <li><strong>比較の鉄則</strong>：3社以上相見積もり・「一式」ではなく内訳単価で比較</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="checklist" class="cl-section">
+        <h2>10のチェックポイント一覧</h2>
+        <p>以下の表を見積もり依頼時のチェックシートとして活用してください。</p>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>受水槽清掃業者 選定チェックリスト</caption>
+            <thead>
+              <tr>
+                <th scope="col">番号</th>
+                <th scope="col">確認項目</th>
+                <th scope="col">確認方法</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">①</th>
+                <td>建築物飲料水貯水槽清掃業 都道府県知事登録</td>
+                <td>登録通知書の写しを取得</td>
+              </tr>
+              <tr>
+                <th scope="row">②</th>
+                <td>貯水槽清掃作業監督者の在籍</td>
+                <td>修了証の写しを取得</td>
+              </tr>
+              <tr>
+                <th scope="row">③</th>
+                <td>厚生労働省登録水質検査機関への依頼（または手配）</td>
+                <td>検査機関名を確認</td>
+              </tr>
+              <tr>
+                <th scope="row">④</th>
+                <td>清掃証明書（写真付き報告書）の発行</td>
+                <td>サンプル書式の提示を依頼</td>
+              </tr>
+              <tr>
+                <th scope="row">⑤</th>
+                <td>廃棄汚泥の産業廃棄物マニフェスト発行</td>
+                <td>契約書に明記を依頼</td>
+              </tr>
+              <tr>
+                <th scope="row">⑥</th>
+                <td>断水計画の作成・利用者への周知支援</td>
+                <td>対応可否を口頭/書面で確認</td>
+              </tr>
+              <tr>
+                <th scope="row">⑦</th>
+                <td>清掃後の水質異常時の無償対応</td>
+                <td>保証範囲を見積書に明記</td>
+              </tr>
+              <tr>
+                <th scope="row">⑧</th>
+                <td>同規模・同用途の施工実績</td>
+                <td>実績件数・対応建物タイプを質問</td>
+              </tr>
+              <tr>
+                <th scope="row">⑨</th>
+                <td>請負業者賠償責任保険への加入</td>
+                <td>保険証書の写し（または加入確認書）</td>
+              </tr>
+              <tr>
+                <th scope="row">⑩</th>
+                <td>年間契約内容の透明性（単価・作業範囲）</td>
+                <td>作業範囲・回数・単価を個別明示</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="check1" class="cl-section">
+        <h2>① 建築物飲料水貯水槽清掃業の登録確認</h2>
+        <p>建築物衛生法（第12条の2）に基づき、特定建築物の受水槽清掃は<strong>都道府県知事の登録を受けた業者</strong>でなければ行うことができません。</p>
+
+        <ul class="cl-list">
+          <li>登録は業者の所在地の都道府県知事への届出・審査によって交付される</li>
+          <li>登録の有効期間は<strong>6年間</strong>（更新制）。期限切れの業者もあるため確認が必要</li>
+          <li>無登録業者による清掃を行った場合、<strong>施設管理者も法令義務違反に問われるリスク</strong>がある</li>
+          <li>登録の確認は、業者から「登録通知書」（または「登録証明書」）の写しの提出を求めることで可能</li>
+        </ul>
+
+        <p class="cl-note">※ 未登録業者が「自社の特定建築物でない物件」で清掃を行う場合の解釈は自治体によって異なりますが、特定建築物・特定建築物以外に関わらず、衛生管理の観点から登録業者への依頼が強く推奨されます。</p>
+      </section>
+
+      <section id="check2" class="cl-section">
+        <h2>② 有資格者（貯水槽清掃作業監督者）の在籍</h2>
+        <p>建築物衛生法施行規則（第20条）により、貯水槽清掃業は<strong>貯水槽清掃作業監督者の資格を持つ者が清掃作業を監督</strong>することが義務付けられています。</p>
+
+        <ul class="cl-list">
+          <li>資格は厚生労働大臣の指定を受けた機関が実施する講習の修了で取得</li>
+          <li>清掃の実施当日に当該資格者が現場に立ち会うことが必要</li>
+          <li>見積もり段階で「施工担当者の資格証の写し」を提示できる業者を選ぶ</li>
+        </ul>
+      </section>
+
+      <section id="check3" class="cl-section">
+        <h2>③ 水質検査（厚生労働省登録機関）の対応</h2>
+        <p>受水槽清掃後の水質検査は、<strong>厚生労働大臣の登録を受けた水質検査機関</strong>が実施する必要があります。</p>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>清掃後に必要な主な水質検査項目（参考）</caption>
+            <thead>
+              <tr>
+                <th scope="col">検査項目</th>
+                <th scope="col">基準値</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">残留塩素</th>
+                <td>0.1mg/L以上（遊離残留塩素）</td>
+              </tr>
+              <tr>
+                <th scope="row">濁度</th>
+                <td>2度以下</td>
+              </tr>
+              <tr>
+                <th scope="row">色度</th>
+                <td>5度以下</td>
+              </tr>
+              <tr>
+                <th scope="row">pH値</th>
+                <td>5.8〜8.6</td>
+              </tr>
+              <tr>
+                <th scope="row">大腸菌</th>
+                <td>検出されないこと</td>
+              </tr>
+              <tr>
+                <th scope="row">一般細菌</th>
+                <td>1mLの検水で形成される集落数100以下</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>清掃と水質検査をセットで手配してくれる業者（検査機関と提携済み）を選ぶと、スケジュール調整や書類管理が大幅に楽になります。</p>
+      </section>
+
+      <section id="check4" class="cl-section">
+        <h2>④ 清掃証明書・写真付き報告書の発行</h2>
+        <p>建築物衛生法の特定建築物では清掃記録を<strong>5年間保存</strong>する義務があります。また、保健所の立入検査でも提出が求められます。</p>
+
+        <ul class="cl-list">
+          <li>報告書に含まれるべき情報：実施日・業者名・作業内容・清掃前後の状況写真・担当者氏名</li>
+          <li>写真は「清掃前・清掃中・清掃後・ふた施錠確認」の4段階がそろっているのが理想</li>
+          <li>デジタルデータ（PDFなど）での受け取りができると保管・提示が容易</li>
+          <li>見積もり段階でサンプル書式を見せてもらい、記載内容の充実度を確認する</li>
+        </ul>
+      </section>
+
+      <section id="check5" class="cl-section">
+        <h2>⑤ 廃棄汚泥の適正処理（産業廃棄物マニフェスト）</h2>
+        <p>受水槽清掃で排出された汚泥・排水は<strong>産業廃棄物</strong>として廃棄物処理法に基づき適正処理が必要です。</p>
+
+        <ul class="cl-list">
+          <li>清掃業者には「廃棄物処理業の許可」または「許可業者への委託」が必要</li>
+          <li>マニフェスト（産業廃棄物管理票）を発行し、排出者（施設側）への写しの交付が義務</li>
+          <li>マニフェストのA票（排出時）・B2票（運搬終了時）・D票（処分終了時）を受領・保管する</li>
+          <li>マニフェストを発行しない業者への依頼は廃棄物処理法違反のリスクがある</li>
+        </ul>
+      </section>
+
+      <section id="check6" class="cl-section">
+        <h2>⑥ 断水計画・利用者への周知サポート</h2>
+        <p>受水槽清掃中は断水が必要となります。マンション・ビルでは<strong>居住者・テナントへの事前周知</strong>が不可欠です。</p>
+
+        <ul class="cl-list">
+          <li>断水時間帯（通常4〜8時間）の決定と、余裕を持ったスケジュール調整</li>
+          <li>周知文の作成（業者が雛形を提供してくれるか確認）</li>
+          <li>清掃前後の水張り・排水の確認と給水再開のタイミング</li>
+          <li>高所・大型槽の場合は複数日にわたる施工もあり、スケジュール調整能力が重要</li>
+        </ul>
+      </section>
+
+      <section id="check7" class="cl-section">
+        <h2>⑦ 清掃後の水質異常時の対応保証</h2>
+        <p>清掃後に水質異常（濁り・臭い・大腸菌検出等）が発生した場合の<strong>無償再清掃・再検査の保証範囲</strong>を事前に確認してください。</p>
+
+        <ul class="cl-list">
+          <li>水質検査で基準値超過が出た場合の対応（再清掃・配管洗浄等）の費用負担を明確にする</li>
+          <li>保証内容は口頭ではなく見積書・契約書に明記してもらう</li>
+          <li>保険加入（請負業者賠償責任保険）があれば万一の補償も手厚い</li>
+        </ul>
+      </section>
+
+      <section id="check8" class="cl-section">
+        <h2>⑧ 施工実績・対応建物タイプの確認</h2>
+        <p>受水槽清掃の難易度は槽の規模・構造・設置場所によって異なります。<strong>同規模・同用途での施工実績</strong>を必ず確認しましょう。</p>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>受水槽のタイプ別 施工難易度と確認ポイント</caption>
+            <thead>
+              <tr>
+                <th scope="col">受水槽タイプ</th>
+                <th scope="col">施工難易度</th>
+                <th scope="col">確認ポイント</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">地上設置型（FRP・ステンレス）</th>
+                <td>標準</td>
+                <td>槽の材質・経年劣化への対応実績</td>
+              </tr>
+              <tr>
+                <th scope="row">地下埋設型</th>
+                <td>高め</td>
+                <td>地下作業・酸素濃度管理の経験</td>
+              </tr>
+              <tr>
+                <th scope="row">大型槽（5m³超）</th>
+                <td>高め</td>
+                <td>複数作業員の体制・時間見積もり</td>
+              </tr>
+              <tr>
+                <th scope="row">マンション（高層・多棟）</th>
+                <td>高め（管理調整含む）</td>
+                <td>断水調整・居住者対応の実績</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="check9" class="cl-section">
+        <h2>⑨ 賠償保険への加入確認</h2>
+        <p>清掃作業中の事故（槽の損傷・水漏れ・給水汚染等）に備え、<strong>請負業者賠償責任保険</strong>への加入を確認してください。</p>
+
+        <ul class="cl-list">
+          <li>保険証書の写しまたは加入確認書の提示を依頼する</li>
+          <li>保険の補償範囲（対人・対物・賠償上限額）も確認するのが理想</li>
+          <li>保険未加入の業者では、万一の事故時に賠償が得られないリスクがある</li>
+        </ul>
+      </section>
+
+      <section id="check10" class="cl-section">
+        <h2>⑩ 年間契約の内容と単価の透明性</h2>
+        <p>年間管理契約は割安になる反面、<strong>作業内容が曖昧なまま契約すると実際の作業が不十分だったというトラブル</strong>に発展しがちです。</p>
+
+        <ul class="cl-list">
+          <li>年間契約の内訳：清掃回数・水質検査回数・検査項目数・報告書の発行回数を個別に確認</li>
+          <li>追加費用が発生する条件（槽の修繕発見時・緊急対応時等）を明記させる</li>
+          <li>契約解除条件・更新時の価格変更ルールも確認しておく</li>
+        </ul>
+      </section>
+
+      <section id="quotation" class="cl-section">
+        <h2>見積書で確認すべき記載項目</h2>
+        <p>「一式〇〇万円」という見積もりは比較に使えません。以下の項目が個別に記載されている見積書を要求してください。</p>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>受水槽清掃 見積書の必要記載項目</caption>
+            <thead>
+              <tr>
+                <th scope="col">項目</th>
+                <th scope="col">確認内容</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">清掃作業費</th>
+                <td>槽の容量・作業員数・時間を根拠として記載</td>
+              </tr>
+              <tr>
+                <th scope="row">水質検査費</th>
+                <td>検査機関名・検査項目数・結果書発行を明示</td>
+              </tr>
+              <tr>
+                <th scope="row">廃棄汚泥処分費</th>
+                <td>処理業者名・処理方法・マニフェスト発行を明示</td>
+              </tr>
+              <tr>
+                <th scope="row">報告書作成費</th>
+                <td>写真枚数・報告書フォーマットを確認</td>
+              </tr>
+              <tr>
+                <th scope="row">出張費・交通費</th>
+                <td>別途加算の有無と金額を明示</td>
+              </tr>
+              <tr>
+                <th scope="row">消費税</th>
+                <td>税込・税別を明示（トラブル防止）</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="mistakes" class="cl-section">
+        <h2>よくある失敗パターン</h2>
+
+        <h3>失敗1：無登録業者に依頼して保健所から指導を受けた</h3>
+        <p><strong>原因</strong>：「安い業者」で検索してヒットした業者に依頼したが、建築物飲料水貯水槽清掃業の登録がなかった。<strong>対策</strong>：依頼前に登録通知書の写しを必ず取得する。</p>
+
+        <h3>失敗2：水質検査を別途手配する必要があると清掃後に知った</h3>
+        <p><strong>原因</strong>：見積もりに水質検査が含まれていると思っていたが「清掃のみ」だった。<strong>対策</strong>：見積もり段階で「水質検査込みか」を明示的に確認する。</p>
+
+        <h3>失敗3：廃棄汚泥をそのまま下水に流されていた</h3>
+        <p><strong>原因</strong>：廃棄物処理費が見積もりに含まれていなかった業者が、汚泥を敷地の排水口へ直接廃棄した。<strong>対策</strong>：マニフェスト発行を契約条件に明記する。</p>
+
+        <h3>失敗4：清掃後に濁りが出たが業者が対応してくれなかった</h3>
+        <p><strong>原因</strong>：清掃後の水質保証が口頭のみで、契約書には記載がなかった。<strong>対策</strong>：水質異常時の無償対応範囲を契約書に明記してもらう。</p>
+
+        <h3>失敗5：年間契約で「清掃のみで水質検査なし」だったことが判明した</h3>
+        <p><strong>原因</strong>：「年間管理契約」の名目で安い業者と契約したが、水質検査が含まれていなかった。<strong>対策</strong>：年間契約の内訳（清掃回数・水質検査回数）を書面で確認する。</p>
+      </section>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問（FAQ）</h2>
+
+        <h3>Q1. 業者選びで最も重要な資格は何ですか？</h3>
+        <p>建築物飲料水貯水槽清掃業の都道府県知事登録が必須です。登録通知書の写しを見積もり段階で必ず取得してください。</p>
+
+        <h3>Q2. 水質検査は清掃業者に依頼できますか？</h3>
+        <p>水質検査自体は厚生労働省の登録検査機関が実施します。多くの清掃業者が提携機関を紹介してくれますが、込みかどうかは必ず確認してください。</p>
+
+        <h3>Q3. 清掃証明書は何年間保存すればいいですか？</h3>
+        <p>建築物衛生法の特定建築物では5年間保存が義務です。それ以外の建物でも3年以上の保管が推奨されます。</p>
+
+        <h3>Q4. 相見積もりは何社に依頼すればいいですか？</h3>
+        <p>最低3社です。「一式」ではなく内訳単価（清掃費・水質検査費・廃棄物処理費）で比較してください。</p>
+
+        <h3>Q5. 年間契約と単発依頼、どちらがお得ですか？</h3>
+        <p>年間契約の方が10〜20%程度割安なケースが多いです。ただし内訳（清掃回数・水質検査回数）を事前に確認することが重要です。</p>
+
+        <h3>Q6. 安い業者に頼むリスクは？</h3>
+        <p>無登録業者・水質検査省略・廃棄汚泥の不法投棄・清掃品質の低さなどのリスクがあります。価格だけでなく登録証・実績・報告書の質を必ず確認してください。</p>
+      </section>
+
+      <section class="cl-cta">
+        <h2>受水槽清掃の業者選びでお困りなら</h2>
+        <p>{site.name}では、建築物飲料水貯水槽清掃業の登録・貯水槽清掃作業監督者の在籍・水質検査対応・清掃証明書の発行を確認済みの業者の中から、最大3社を厳選してご紹介します。<strong>お見積もり依頼は1分・完全無料</strong>です。</p>
+        <a href="/jusuisou-seisou/" class="cta-btn-primary">無料で一括見積もりを依頼する →</a>
+      </section>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連する詳細情報</h2>
+        <ul>
+          <li><a href="/column/jusuisou-seisou-hiyo-sohba/">受水槽清掃の費用相場2026｜規模別の料金・追加費用の完全ガイド</a></li>
+          <li><a href="/column/jusuisou-seisou-horei-gimu/">受水槽清掃の法定義務ガイド2026｜水道法・建築物衛生法の要点</a></li>
+          <li><a href="/jusuisou-seisou/">受水槽清掃のサービストップ</a></li>
+          <li><a href="/flow/">一括見積依頼から契約までの流れ</a></li>
+        </ul>
+      </aside>
+
+      <p class="cl-note">
+        ※ 本記事に掲載した法令・資格情報は2026年5月時点のものです。法令・制度は改正されることがあります。最終的な判断は所轄保健所・自治体または専門家にご確認ください。
+      </p>
+
+    </div>
+
+  </article>
+</BaseLayout>
+
+<style>
+.cl-article { color: var(--gray-900); }
+.cl-header {
+  background: linear-gradient(135deg, #0f2742 0%, #1a56db 100%);
+  color: #fff;
+  padding: 48px 0 56px;
+}
+.cl-crumbs { font-size: .78rem; color: #bfdbfe; margin-bottom: 18px; }
+.cl-crumbs a { color: #bfdbfe; text-decoration: underline; }
+.cl-crumbs span { margin: 0 6px; opacity: .6; }
+.cl-cat {
+  display: inline-block;
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.3);
+  color: #e0f2fe;
+  font-size: .76rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 99px;
+  margin-bottom: 14px;
+  letter-spacing: .04em;
+}
+.cl-title {
+  font-size: clamp(1.4rem, 2.6vw, 2.1rem);
+  font-weight: 900;
+  line-height: 1.4;
+  color: #fff;
+  margin-bottom: 18px;
+  letter-spacing: -.01em;
+}
+.cl-lead { font-size: 1rem; line-height: 1.85; color: #e0f2fe; margin-bottom: 18px; max-width: 820px; }
+.cl-lead strong { color: #fde68a; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 18px; font-size: .78rem; color: rgba(255,255,255,.65); }
+.cl-body { padding: 48px 0 80px; max-width: 880px; }
+.cl-toc { background: var(--gray-100); border-left: 4px solid var(--blue); border-radius: 8px; padding: 24px 28px; margin-bottom: 48px; }
+.cl-toc-h { font-size: .9rem; font-weight: 800; color: var(--gray-900); margin-bottom: 12px; }
+.cl-toc ol { padding-left: 20px; font-size: .9rem; line-height: 1.95; color: var(--gray-700); }
+.cl-toc a { color: var(--blue); text-decoration: underline; }
+.cl-section { margin-bottom: 44px; }
+.cl-section h2 { font-size: 1.35rem; font-weight: 800; color: var(--gray-900); margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid var(--blue); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 700; color: var(--gray-900); margin: 28px 0 12px; }
+.cl-section p { font-size: .95rem; line-height: 1.95; color: var(--gray-700); margin-bottom: 16px; }
+.cl-section p strong { color: var(--gray-900); }
+.cl-section a { color: var(--blue); text-decoration: underline; }
+.cl-list { font-size: .92rem; line-height: 1.95; color: var(--gray-700); padding-left: 22px; margin-bottom: 16px; }
+.cl-list li { margin-bottom: 6px; }
+.cl-list li strong { color: var(--gray-900); }
+.cl-table-wrap { overflow-x: auto; margin-bottom: 20px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .9rem; background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-table caption { text-align: left; font-size: .85rem; color: var(--gray-500); padding-bottom: 8px; caption-side: top; }
+.cl-table th, .cl-table td { padding: 12px 14px; border-bottom: 1px solid var(--gray-200); text-align: left; vertical-align: top; }
+.cl-table thead { background: var(--blue-light); }
+.cl-table thead th { color: var(--blue-dark); font-weight: 800; }
+.cl-table tbody th { font-weight: 700; color: var(--gray-900); white-space: nowrap; }
+.cl-table td { color: var(--gray-700); }
+.cl-table tbody tr:last-child th, .cl-table tbody tr:last-child td { border-bottom: none; }
+.cl-callout { background: var(--gray-100); border-left: 4px solid var(--accent); border-radius: 8px; padding: 24px 28px; margin-bottom: 32px; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 10px; padding: 0; border: none; }
+.cl-callout ul, .cl-callout ol { font-size: .92rem; line-height: 1.95; color: var(--gray-700); padding-left: 22px; margin: 0; }
+.cl-callout li { margin-bottom: 4px; }
+.cl-callout li strong { color: var(--gray-900); }
+.cl-cta { background: linear-gradient(135deg, #0f2742 0%, #1a56db 100%); color: #fff; text-align: center; border-radius: 14px; padding: 40px 28px; margin: 48px 0; }
+.cl-cta h2 { font-size: 1.2rem; font-weight: 800; color: #fff; margin-bottom: 12px; border: none; padding: 0; }
+.cl-cta p { font-size: .92rem; color: #bfdbfe; margin-bottom: 22px; line-height: 1.8; }
+.cl-cta p strong { color: #fde68a; }
+.cl-cta .cta-btn-primary { display: inline-block; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 24px 28px; margin-bottom: 32px; }
+.cl-related-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 12px; }
+.cl-related ul { list-style: none; padding: 0; font-size: .9rem; line-height: 2; }
+.cl-related a { color: var(--blue); text-decoration: underline; }
+.cl-note { font-size: .78rem; color: var(--gray-500); line-height: 1.8; border-top: 1px solid var(--gray-200); padding-top: 20px; margin-top: 24px; }
+@media (max-width: 720px) {
+  .cl-header { padding: 36px 0 40px; }
+  .cl-body { padding: 32px 0 60px; }
+  .cl-toc, .cl-callout, .cl-related, .cl-cta { padding: 18px 20px; }
+  .cl-table { font-size: .82rem; }
+  .cl-table th, .cl-table td { padding: 10px 8px; }
+}
+</style>

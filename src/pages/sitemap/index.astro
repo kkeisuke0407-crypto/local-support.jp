@@ -1,0 +1,215 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../data/site';
+import { allServices } from '../../data/services';
+import { prefecturesData } from '../../data/prefectures';
+
+const title = `サイトマップ｜${site.name}`;
+const description = `${site.name}の全ページ一覧。9サービス×47都道府県のサービスページ、コラム記事、運営情報など、サイト内すべてのページを一覧で確認できます。`;
+const canonical = `${site.domain}/sitemap/`;
+
+// 地方ブロックでグルーピング
+const regions = [
+  '北海道・東北', '関東', '中部', '近畿', '中国', '四国', '九州・沖縄',
+];
+const prefByRegion = regions.map((r) => ({
+  region: r,
+  list: prefecturesData.filter((p) => p.region === r),
+}));
+
+// コラム一覧（メンテしやすいよう手書きで集約）
+const columns = [
+  { href: '/column/jusuisou-seisou-hiyo-sohba/', category: '受水槽清掃', title: '受水槽清掃の費用相場2026' },
+  { href: '/column/jusuisou-seisou-horei-gimu/', category: '受水槽清掃', title: '受水槽清掃の法定義務ガイド2026' },
+  { href: '/column/jusuisou-seisou-gyosha-sentaku/', category: '受水槽清掃', title: '受水槽清掃の業者選び完全ガイド2026' },
+  { href: '/column/asbestos-hiyo-sohba/', category: 'アスベスト調査・除去', title: 'アスベスト調査・除去の費用相場2026' },
+  { href: '/column/asbestos-horei-gimu/', category: 'アスベスト調査・除去', title: 'アスベスト法令義務ガイド2026' },
+  { href: '/column/duct-hiyo-sohba/', category: 'ダクト清掃', title: 'ダクト清掃の費用相場2026' },
+  { href: '/column/duct-horei-gimu/', category: 'ダクト清掃', title: 'ダクト清掃の法令義務ガイド2026' },
+  { href: '/column/shutter-hiyo-sohba/', category: 'シャッター点検・修理', title: 'シャッター点検・修理の費用相場2026' },
+  { href: '/column/shutter-horei-gimu/', category: 'シャッター点検・修理', title: 'シャッター点検の法令義務ガイド2026' },
+  { href: '/column/shobo-setsubi-hiyo-sohba/', category: '消防設備点検', title: '消防設備点検の費用相場2026' },
+  { href: '/column/shobo-setsubi-horei-gimu/', category: '消防設備点検', title: '消防設備点検の法定義務ガイド2026' },
+  { href: '/column/grease-trap-hiyo-sohba/', category: 'グリストラップ清掃', title: 'グリストラップ清掃の費用相場2026' },
+  { href: '/column/grease-trap-horei-gimu/', category: 'グリストラップ清掃', title: 'グリストラップ清掃の法的義務ガイド2026' },
+  { href: '/column/aircon-business-hiyo-sohba/', category: '業務用エアコン', title: '業務用エアコン洗浄・修理の費用相場2026' },
+  { href: '/column/aircon-business-furon-tenken/', category: '業務用エアコン', title: 'フロン排出抑制法の点検義務ガイド2026' },
+  { href: '/column/pest-control-hiyo-sohba/', category: '害虫駆除', title: '業務用害虫駆除（PCO）の費用相場2026' },
+  { href: '/column/pest-control-haccp/', category: '害虫駆除', title: 'HACCP制度化で必須になった害虫対策ガイド2026' },
+  { href: '/column/signboard-inspection-hiyo-sohba/', category: '看板点検', title: '看板点検の費用相場2026' },
+  { href: '/column/signboard-inspection-horei-gimu/', category: '看板点検', title: '看板の安全点検は法的義務？2026年版' },
+];
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'サイトマップ', item: canonical },
+  ],
+});
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  jsonLdBlocks={[breadcrumbLd]}
+>
+  <section class="hero hero--simple">
+    <div class="sd-container">
+      <h1 class="hero-h1">サイトマップ</h1>
+      <p class="hero-sub-simple">{site.name}の全ページ一覧</p>
+    </div>
+  </section>
+
+  <section class="sd-section section-white">
+    <div class="sd-container sm-container">
+
+      <div class="sm-block">
+        <h2 class="sm-h2">基本ページ</h2>
+        <ul class="sm-list">
+          <li><a href="/">トップページ</a></li>
+          <li><a href="/column/">コラム一覧</a></li>
+          <li><a href="/flow/">ご利用の流れ</a></li>
+          <li><a href="/operator/">運営者情報</a></li>
+          <li><a href="/author/">編集長プロフィール</a></li>
+          <li><a href="/disclosure/">特定商取引法に基づく表記</a></li>
+          <li><a href="/privacy/">プライバシーポリシー</a></li>
+        </ul>
+      </div>
+
+      <div class="sm-block">
+        <h2 class="sm-h2">サービス（全国共通）</h2>
+        <ul class="sm-list sm-list--cols">
+          {allServices.map((s) => (
+            <li><a href={`/${s.slug}/`}>{s.serviceName}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="sm-block">
+        <h2 class="sm-h2">都道府県別サービスページ</h2>
+        <p class="sm-note">9サービス×47都道府県のページがあります。各サービスから地域を選択してください。</p>
+
+        {allServices.map((s) => (
+          <div class="sm-svc">
+            <h3 class="sm-h3"><a href={`/${s.slug}/`}>{s.serviceName}</a></h3>
+            {prefByRegion.map((r) => (
+              <div class="sm-region">
+                <span class="sm-region-label">{r.region}：</span>
+                <span class="sm-region-prefs">
+                  {r.list.map((p, i) => (
+                    <>
+                      <a href={`/${s.slug}/${p.slug}/`}>{p.name}</a>{i < r.list.length - 1 ? '・' : ''}
+                    </>
+                  ))}
+                </span>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+
+      <div class="sm-block">
+        <h2 class="sm-h2">コラム記事</h2>
+        <ul class="sm-list">
+          {columns.map((c) => (
+            <li>
+              <span class="sm-col-cat">[{c.category}]</span>
+              <a href={c.href}>{c.title}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <p class="sm-foot">
+        XML サイトマップ（検索エンジン向け）：<a href="/sitemap-index.xml">/sitemap-index.xml</a>
+      </p>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.sm-container { max-width: 960px; }
+.sm-block { margin-bottom: 56px; }
+.sm-h2 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--gray-900);
+  margin-bottom: 18px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--blue);
+}
+.sm-h3 {
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin: 24px 0 10px;
+}
+.sm-h3 a { color: var(--blue); text-decoration: none; }
+.sm-h3 a:hover { text-decoration: underline; }
+.sm-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: .92rem;
+  line-height: 2;
+}
+.sm-list a { color: var(--blue); text-decoration: none; }
+.sm-list a:hover { text-decoration: underline; }
+.sm-list--cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 4px 24px;
+}
+.sm-note {
+  font-size: .88rem;
+  color: var(--gray-600);
+  margin-bottom: 16px;
+}
+.sm-svc {
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  padding: 18px 22px;
+  margin-bottom: 14px;
+  background: #fff;
+}
+.sm-region {
+  font-size: .88rem;
+  line-height: 1.95;
+  padding: 4px 0;
+}
+.sm-region-label {
+  display: inline-block;
+  color: var(--gray-600);
+  font-weight: 700;
+  min-width: 110px;
+}
+.sm-region-prefs a {
+  color: var(--blue);
+  text-decoration: none;
+  margin: 0 1px;
+}
+.sm-region-prefs a:hover { text-decoration: underline; }
+.sm-col-cat {
+  display: inline-block;
+  color: var(--gray-500);
+  font-size: .78rem;
+  margin-right: 8px;
+  font-weight: 700;
+}
+.sm-foot {
+  font-size: .85rem;
+  color: var(--gray-600);
+  text-align: center;
+  padding-top: 24px;
+  border-top: 1px solid var(--gray-200);
+}
+.sm-foot a { color: var(--blue); }
+@media (max-width: 640px) {
+  .sm-region-label { display: block; min-width: 0; margin-bottom: 2px; }
+}
+</style>
