@@ -21,7 +21,7 @@ const articleLd = JSON.stringify({
   '@context': 'https://schema.org', '@type': 'Article',
   headline: title, description, datePublished: published, dateModified: modified,
   inLanguage: 'ja-JP', url: canonical, mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
-  author: { '@type': 'Organization', name: site.org.legalName, url: site.domain },
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
   publisher: { '@type': 'Organization', name: site.org.legalName, url: site.domain, logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.svg` } },
   about: { '@type': 'Service', name: '看板・屋外広告物点検' },
   citation: [
@@ -59,7 +59,7 @@ const faqLd = JSON.stringify({
         <div class="cl-meta">
           <time datetime={published}>公開：2026年5月26日</time>
           <span>最終更新：2026年5月26日</span>
-          <span>執筆：{site.org.legalName}</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
         </div>
       </div>
     </header>

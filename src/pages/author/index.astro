@@ -1,0 +1,259 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../data/site';
+
+const title = `${site.author.name}｜${site.name} 編集長プロフィール`;
+const description = `${site.name}（ロカサポ）の${site.author.role}、${site.author.name}のプロフィールページ。施設管理・設備メンテナンス分野の情報を監修・発信しています。`;
+const canonical = `${site.domain}/author/`;
+const published = '2026-05-27';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: `${site.author.name} プロフィール`, item: canonical },
+  ],
+});
+
+const personLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.author.name,
+  jobTitle: site.author.role,
+  worksFor: {
+    '@type': 'Organization',
+    name: site.org.legalName,
+    url: site.domain,
+  },
+  url: canonical,
+  knowsAbout: [
+    '受水槽清掃',
+    'アスベスト調査・除去',
+    'ダクト清掃',
+    'シャッター点検・修理',
+    '消防設備点検',
+    'グリストラップ清掃',
+    '業務用エアコン清掃',
+    '害虫駆除',
+    '施設管理',
+    '設備メンテナンス',
+    '建築物衛生法',
+    '水道法',
+  ],
+  description: `施設管理・設備メンテナンス分野の情報メディア「${site.name}」の${site.author.role}。ビル管理・マンション管理・商業施設の法定点検・清掃に関する情報を調査・執筆・監修。`,
+});
+---
+<BaseLayout title={title} description={description} canonical={canonical} siteName={site.name} jsonLdBlocks={[breadcrumbLd, personLd]}>
+  <section class="hero hero--simple">
+    <div class="sd-container">
+      <h1 class="hero-h1">{site.author.name}のプロフィール</h1>
+      <p class="hero-sub-simple">{site.name} {site.author.role}</p>
+    </div>
+  </section>
+
+  <section class="sd-section section-white">
+    <div class="sd-container">
+      <div class="author-profile">
+
+        <div class="author-card">
+          <div class="author-avatar">
+            <div class="author-avatar-placeholder">寺</div>
+          </div>
+          <div class="author-card-body">
+            <p class="author-name">{site.author.name}</p>
+            <p class="author-role">{site.author.role} / {site.name}</p>
+            <p class="author-bio">
+              施設管理・設備メンテナンス分野の情報メディア「{site.name}」を運営。
+              ビルオーナー・マンション管理組合・商業施設担当者を対象に、受水槽清掃・アスベスト調査・ダクト清掃・消防設備点検など法定メンテナンスに関する情報を調査・監修・執筆。
+              各分野の専門業者へのヒアリングをもとに、費用相場・法令義務・業者選びのポイントを実務目線でまとめています。
+            </p>
+          </div>
+        </div>
+
+        <div class="author-section">
+          <h2 class="author-h2">専門領域</h2>
+          <ul class="author-expertise-list">
+            <li>受水槽・貯水槽の法定清掃（水道法・建築物衛生法）</li>
+            <li>アスベスト含有建材の事前調査と除去工事（改正大防法・石綿障害予防規則）</li>
+            <li>厨房・空調ダクトの清掃と防火管理</li>
+            <li>シャッター・防火設備の定期点検</li>
+            <li>消防用設備等の定期点検（消防法第17条の3の3）</li>
+            <li>グリストラップ清掃と排水基準対応</li>
+            <li>業務用エアコン・空調設備の衛生管理</li>
+            <li>害虫防除（PCO）と HACCP 対応</li>
+          </ul>
+        </div>
+
+        <div class="author-section">
+          <h2 class="author-h2">執筆・監修コンテンツ</h2>
+          <ul class="author-article-list">
+            <li>
+              <a href="/column/jusuisou-seisou-hiyo-sohba/" class="author-article-link">
+                受水槽清掃の費用相場2026｜規模別の料金・追加費用・業者選びの完全ガイド
+              </a>
+            </li>
+            <li>
+              <a href="/column/jusuisou-seisou-horei-gimu/" class="author-article-link">
+                受水槽清掃は法律で義務？水道法・建築物衛生法・条例の違いを徹底解説
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="author-section">
+          <h2 class="author-h2">コンテンツ制作方針</h2>
+          <p class="author-policy-text">
+            当サイトのコンテンツは以下の方針で作成しています。
+          </p>
+          <ul class="author-policy-list">
+            <li><strong>一次情報の確認：</strong>法令原文・官公庁の公表データ・各都道府県の条例を直接参照し、情報の正確性を確保。</li>
+            <li><strong>専門業者へのヒアリング：</strong>費用相場・作業内容・注意点は、対応エリアの専門業者への直接取材をもとに記載。</li>
+            <li><strong>定期更新：</strong>法改正・価格変動があった場合は記事を随時更新し、最終更新日を明記。</li>
+            <li><strong>中立な業者紹介：</strong>提携業者の情報は明示し、特定業者を不当に優遇したランキング・評価は行わない。</li>
+          </ul>
+        </div>
+
+        <div class="author-section">
+          <h2 class="author-h2">運営メディア</h2>
+          <table class="info-table">
+            <tbody>
+              <tr><th>メディア名</th><td>{site.name}（ロカサポ）</td></tr>
+              <tr><th>URL</th><td><a href={site.domain}>{site.domain}</a></td></tr>
+              <tr><th>運営組織</th><td>{site.org.legalName}</td></tr>
+              <tr><th>対応分野</th><td>施設管理・設備メンテナンス全般（法定点検・清掃・工事）</td></tr>
+              <tr><th>対象読者</th><td>ビルオーナー・施設管理担当者・マンション管理組合・店舗・工場担当者</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.author-profile {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.author-card {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  background: var(--gray-100, #f5f5f5);
+  border-radius: 12px;
+  padding: 28px;
+}
+
+.author-avatar {
+  flex-shrink: 0;
+}
+
+.author-avatar-placeholder {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--primary, #1565c0);
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.author-card-body {
+  flex: 1;
+}
+
+.author-name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0 0 4px;
+  color: var(--gray-900, #111);
+}
+
+.author-role {
+  font-size: 0.875rem;
+  color: var(--primary, #1565c0);
+  font-weight: 600;
+  margin: 0 0 12px;
+}
+
+.author-bio {
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  color: var(--gray-700, #444);
+  margin: 0;
+}
+
+.author-section {
+  border-top: 2px solid var(--gray-200, #e0e0e0);
+  padding-top: 28px;
+}
+
+.author-h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 16px;
+  color: var(--gray-900, #111);
+}
+
+.author-expertise-list,
+.author-policy-list {
+  margin: 0;
+  padding-left: 1.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.author-expertise-list li,
+.author-policy-list li {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--gray-700, #444);
+}
+
+.author-article-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.author-article-list li {
+  border-left: 3px solid var(--primary, #1565c0);
+  padding-left: 12px;
+}
+
+.author-article-link {
+  color: var(--primary, #1565c0);
+  text-decoration: none;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.author-article-link:hover {
+  text-decoration: underline;
+}
+
+.author-policy-text {
+  font-size: 0.9375rem;
+  color: var(--gray-700, #444);
+  margin: 0 0 12px;
+}
+
+@media (max-width: 600px) {
+  .author-card {
+    flex-direction: column;
+  }
+}
+</style>
