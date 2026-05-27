@@ -19,7 +19,7 @@ const {
   canonical,
   siteName = site.name,
   logoSub = '施設管理の一括見積比較',
-  ogImage = 'https://local-support.jp/og-default.svg',
+  ogImage = 'https://local-support.jp/og-default.png',
   jsonLdBlocks = [],
   noindex = false,
 } = Astro.props;
@@ -32,7 +32,7 @@ const baseLdBlocks = [
     name: site.org.legalName,
     alternateName: site.name,
     url: site.domain,
-    logo: `${site.domain}/og-default.svg`,
+    logo: `${site.domain}/og-default.png`,
     areaServed: 'JP',
   }),
   JSON.stringify({
@@ -140,6 +140,7 @@ const allLdBlocks = [...baseLdBlocks, ...jsonLdBlocks];
       <a href="/operator/">運営者情報</a>
       <a href="/privacy/">プライバシーポリシー</a>
       <a href="/disclosure/">ご紹介業者について</a>
+      <a href="/sitemap/">サイトマップ</a>
     </div>
     <p class="sd-footer-copy">© 2026 {siteName}. All rights reserved.</p>
   </div>

@@ -78,7 +78,7 @@ const webPageLd = JSON.stringify({
     '@type': 'SpeakableSpecification',
     cssSelector: ['.aio-summary', '.faq-q', '.faq-a'],
   },
-  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-default.svg` },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
 });
 
 const faqLd = JSON.stringify({
@@ -128,7 +128,7 @@ const jsonLdBlocks = [breadcrumbLd, serviceLd, webPageLd, faqLd, howToLd, priceL
   canonical={canonical}
   siteName={data.siteName}
   logoSub="施設管理の一括見積比較"
-  ogImage={`${site.domain}/og-${data.slug}.svg`}
+  ogImage={`${site.domain}/og-${data.slug}.png`}
   jsonLdBlocks={jsonLdBlocks}
 >
   <HeroWithForm data={data} />
