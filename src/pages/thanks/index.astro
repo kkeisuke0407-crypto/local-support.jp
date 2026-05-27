@@ -34,7 +34,42 @@ const description = 'お見積もり依頼を受け付けました。担当者�
         <p class="thanks-note">
           ※ メールが見当たらない場合は、迷惑メールフォルダのご確認、またはご登録の電話番号への着信履歴もあわせてご確認ください。
         </p>
+
+        <div class="thanks-next">
+          <h2 class="thanks-next-h">業者選定までに読んでおきたい記事</h2>
+          <ul class="thanks-next-list">
+            <li><a href="/column/jusuisou-seisou-gyosha-sentaku/">業者選びで失敗しない10のチェックポイント</a></li>
+            <li><a href="/case/">他の管理担当者が選んだ業者の事例10件を見る</a></li>
+            <li><a href="/flow/">業者紹介から契約までの流れ</a></li>
+            <li><a href="/about/">ロカサポの審査基準（紹介業者の5項目）</a></li>
+          </ul>
+        </div>
+
+        <div class="thanks-other">
+          <h2 class="thanks-next-h">他の施設管理サービスもまとめて見積もり比較</h2>
+          <div class="thanks-svc-grid">
+            <a href="/jusuisou-seisou/">受水槽清掃</a>
+            <a href="/asbestos/">アスベスト調査</a>
+            <a href="/duct/">ダクト清掃</a>
+            <a href="/shutter/">シャッター点検</a>
+            <a href="/shobo-setsubi/">消防設備点検</a>
+            <a href="/grease-trap/">グリストラップ清掃</a>
+            <a href="/aircon-business/">業務用エアコン</a>
+            <a href="/pest-control/">害虫駆除</a>
+            <a href="/signboard-inspection/">看板点検</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+.thanks-next, .thanks-other { margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--gray-200); text-align: left; }
+.thanks-next-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid var(--blue); }
+.thanks-next-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.thanks-next-list a { color: var(--blue); font-size: .9rem; text-decoration: underline; }
+.thanks-svc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; }
+.thanks-svc-grid a { display: block; background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 6px; padding: 10px 14px; font-size: .87rem; font-weight: 700; color: var(--blue); text-decoration: none; text-align: center; }
+.thanks-svc-grid a:hover { background: var(--blue-light); }
+</style>

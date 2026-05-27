@@ -1,0 +1,389 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../data/site';
+
+const title = `紹介事例｜施設管理の見積もり比較・採用業者まとめ｜${site.name}`;
+const description = `ロカサポを通じて見積もり比較を行った10件の紹介事例。マンション管理組合・ビルオーナー・工場担当者の実際の依頼内容、見積もり3社の金額レンジ、採用業者の決め手、契約までの日数を公開。受水槽清掃・アスベスト調査・消防設備点検・ダクト清掃ほか。`;
+const canonical = `${site.domain}/case/`;
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: '紹介事例', item: canonical },
+  ],
+});
+
+interface CaseItem {
+  id: string;
+  service: string;
+  serviceSlug: string;
+  area: string;
+  facilityType: string;
+  scale: string;
+  quotes: { label: string; amount: string }[];
+  selectedLabel: string;
+  decisionFactor: string;
+  comment: string;
+  daysToContract: number;
+  publishedAt: string;
+}
+
+const cases: CaseItem[] = [
+  {
+    id: '001',
+    service: '受水槽清掃',
+    serviceSlug: 'jusuisou-seisou',
+    area: '東京都・世田谷区',
+    facilityType: '分譲マンション（48戸）',
+    scale: '受水槽 35m³（地下設置）',
+    quotes: [
+      { label: 'A社', amount: '88,000円' },
+      { label: 'B社', amount: '112,000円' },
+      { label: 'C社', amount: '72,000円' },
+    ],
+    selectedLabel: 'C社',
+    decisionFactor: '都道府県知事登録の登録番号を見積書に明記。清掃証明書＋水質検査結果書をPDF納品。最低価格ながら追加費用なしの固定額契約。',
+    comment: '管理組合理事会で価格・条件・実績の3点で比較。前年より2万円ほど安く、内訳の説明も丁寧だったので採用しました。（管理組合理事）',
+    daysToContract: 6,
+    publishedAt: '2026-04-22',
+  },
+  {
+    id: '002',
+    service: 'アスベスト調査',
+    serviceSlug: 'asbestos',
+    area: '大阪府・大阪市',
+    facilityType: '小規模オフィスビル（築1981年・3階建）',
+    scale: '解体前事前調査（延床420㎡）',
+    quotes: [
+      { label: 'A社', amount: '180,000円' },
+      { label: 'B社', amount: '95,000円' },
+      { label: 'C社', amount: '135,000円' },
+    ],
+    selectedLabel: 'C社',
+    decisionFactor: '建築物石綿含有建材調査者2名が在籍し定性分析15点込み。労基署・自治体への報告書類作成まで一括対応。最安B社は分析点数が少なく将来リスクと判断。',
+    comment: '解体工期に間に合わせる必要があり、報告書類の作成までやってくれるC社にしました。報告書の品質が高かったです。（建物オーナー）',
+    daysToContract: 4,
+    publishedAt: '2026-04-15',
+  },
+  {
+    id: '003',
+    service: '消防設備点検',
+    serviceSlug: 'shobo-setsubi',
+    area: '神奈川県・横浜市',
+    facilityType: '商業ビル（地上6階建・テナント12室）',
+    scale: '機器点検年2回＋総合点検年1回（年間契約）',
+    quotes: [
+      { label: 'A社', amount: '188,000円/年' },
+      { label: 'B社', amount: '142,000円/年' },
+      { label: 'C社', amount: '165,000円/年' },
+    ],
+    selectedLabel: 'B社',
+    decisionFactor: '年間契約に消防署への報告書作成・緊急対応24時間体制が含まれている。複数物件まとめで割引適用。消防設備士甲種1類の有資格者の対応。',
+    comment: '前年の業者は連絡が遅く不安だった。B社は緊急対応の24時間体制と価格のバランスが良く決定。（ビル管理担当）',
+    daysToContract: 9,
+    publishedAt: '2026-04-08',
+  },
+  {
+    id: '004',
+    service: 'ダクト清掃',
+    serviceSlug: 'duct',
+    area: '愛知県・名古屋市',
+    facilityType: '居酒屋チェーン（厨房面積30㎡）',
+    scale: '厨房ダクト1系統（延長12m・グリスフィルター含む）',
+    quotes: [
+      { label: 'A社', amount: '128,000円' },
+      { label: 'B社', amount: '95,000円' },
+      { label: 'C社', amount: '178,000円' },
+    ],
+    selectedLabel: 'A社',
+    decisionFactor: '深夜営業時間外作業が可能で営業に影響なし。清掃前後の写真付き作業報告書、グリスの産廃マニフェスト発行込み。火災保険申告に必要な書類を網羅。',
+    comment: 'C社は値段が高く除外。最安B社は深夜対応不可で営業損失を考えるとA社が結果的に得でした。（店長）',
+    daysToContract: 5,
+    publishedAt: '2026-03-28',
+  },
+  {
+    id: '005',
+    service: 'シャッター点検',
+    serviceSlug: 'shutter',
+    area: '埼玉県・川口市',
+    facilityType: '物流倉庫（延床4,500㎡）',
+    scale: '電動シャッター8台＋防火シャッター3台',
+    quotes: [
+      { label: 'A社', amount: '52,000円' },
+      { label: 'B社', amount: '78,000円' },
+      { label: 'C社', amount: '46,000円' },
+    ],
+    selectedLabel: 'A社',
+    decisionFactor: '防火設備検査員資格保有者が対応。定期検査報告書を特定行政庁向けに作成。最安C社は防火設備検査員が不在で建築基準法12条の報告に対応不可と判明。',
+    comment: '価格だけで決めなくてよかった。資格不足の業者だと年に1回の特定行政庁報告ができないことを知りました。（倉庫管理担当）',
+    daysToContract: 7,
+    publishedAt: '2026-03-19',
+  },
+  {
+    id: '006',
+    service: 'グリストラップ清掃',
+    serviceSlug: 'grease-trap',
+    area: '福岡県・福岡市',
+    facilityType: 'ラーメン店（厨房面積25㎡）',
+    scale: 'グリストラップ80L・月次清掃契約',
+    quotes: [
+      { label: 'A社', amount: '14,000円/月' },
+      { label: 'B社', amount: '9,800円/月' },
+      { label: 'C社', amount: '12,500円/月' },
+    ],
+    selectedLabel: 'B社',
+    decisionFactor: '月1回の全槽清掃＋週1のバスケット清掃＋産廃マニフェスト発行込みで最安。営業時間外（深夜〜早朝）対応。HACCP対応の管理記録を提供。',
+    comment: 'HACCP記録を業者側で作成してくれるのが助かる。保健所の立入検査で慌てなくて済みます。（店主）',
+    daysToContract: 3,
+    publishedAt: '2026-03-10',
+  },
+  {
+    id: '007',
+    service: '業務用エアコン洗浄',
+    serviceSlug: 'aircon-business',
+    area: '兵庫県・神戸市',
+    facilityType: '美容室（店舗床面積60㎡）',
+    scale: '天井埋込カセット型エアコン3台・洗浄＋簡易修理',
+    quotes: [
+      { label: 'A社', amount: '78,000円' },
+      { label: 'B社', amount: '52,000円' },
+      { label: 'C社', amount: '95,000円' },
+    ],
+    selectedLabel: 'B社',
+    decisionFactor: '高圧洗浄＋ドレンパン除菌＋フィルター洗浄の3点セット。営業休日（月曜）対応可能。第一種冷媒フロン類取扱技術者の在籍でフロン点検も同時対応。',
+    comment: 'お客様から「店内のニオイが消えた」と好評。電気代も洗浄前より2割下がりました。（オーナー）',
+    daysToContract: 4,
+    publishedAt: '2026-03-02',
+  },
+  {
+    id: '008',
+    service: '害虫駆除（PCO）',
+    serviceSlug: 'pest-control',
+    area: '千葉県・船橋市',
+    facilityType: '介護施設（入所定員50名）',
+    scale: '月次PCO管理契約（ゴキブリ・ネズミ対策）',
+    quotes: [
+      { label: 'A社', amount: '32,000円/月' },
+      { label: 'B社', amount: '22,000円/月' },
+      { label: 'C社', amount: '27,000円/月' },
+    ],
+    selectedLabel: 'C社',
+    decisionFactor: '入居者の健康を考慮した低毒性薬剤の使用。月次レポート＋緊急対応・モニタリングトラップ設置含む。HACCP・建築物衛生法の管理記録を業者側で作成。',
+    comment: 'A社は高すぎ、B社は薬剤の安全性に不安。C社は施設介護向け実績が豊富で、入居者からの苦情ゼロを維持できています。（施設長）',
+    daysToContract: 11,
+    publishedAt: '2026-02-21',
+  },
+  {
+    id: '009',
+    service: '看板点検',
+    serviceSlug: 'signboard-inspection',
+    area: '北海道・札幌市',
+    facilityType: '商業ビル（築28年・路面店舗入居）',
+    scale: '袖看板2基＋壁面看板1基（高所作業含む）',
+    quotes: [
+      { label: 'A社', amount: '42,000円' },
+      { label: 'B社', amount: '68,000円' },
+      { label: 'C社', amount: '38,000円' },
+    ],
+    selectedLabel: 'B社',
+    decisionFactor: '高所作業車手配＋打音検査・ボルト引張試験・溶接部肉厚測定の3項目を実施。報告書には屋外広告物条例の許可更新書類添付。最安C社は打音検査のみで詳細性に劣る。',
+    comment: '築28年の袖看板で錆が目立っていた。打音と引張で「あと2年は持つが3年後の更新で交換推奨」と具体的に診断してもらえて計画を立てやすかった。（オーナー）',
+    daysToContract: 8,
+    publishedAt: '2026-02-14',
+  },
+  {
+    id: '010',
+    service: '受水槽清掃（大規模）',
+    serviceSlug: 'jusuisou-seisou',
+    area: '京都府・京都市',
+    facilityType: '大型マンション（128戸・2棟）',
+    scale: '受水槽120m³＋高架水槽20m³（2棟分）',
+    quotes: [
+      { label: 'A社', amount: '410,000円' },
+      { label: 'B社', amount: '320,000円' },
+      { label: 'C社', amount: '385,000円' },
+    ],
+    selectedLabel: 'B社',
+    decisionFactor: '2棟分まとめての年間契約で15%割引。水質検査11項目＋レジオネラ属菌検査込み。仮設給水車手配により断水時間を3時間に短縮し住民影響を最小化。',
+    comment: '断水時間が短いのが何より助かった。住民周知の負担が減りました。年間契約により毎年同じスケジュールで予算化できる安心感もあります。（管理組合理事長）',
+    daysToContract: 14,
+    publishedAt: '2026-02-05',
+  },
+];
+
+const itemListLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'ロカサポ 紹介事例一覧',
+  numberOfItems: cases.length,
+  itemListElement: cases.map((c, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: `${c.service}｜${c.area}・${c.facilityType}`,
+    url: `${canonical}#case-${c.id}`,
+  })),
+});
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  jsonLdBlocks={[breadcrumbLd, itemListLd]}
+>
+  <section class="hero hero--simple">
+    <div class="sd-container">
+      <h1 class="hero-h1">紹介事例</h1>
+      <p class="hero-sub-simple">実際にロカサポを通じて見積もり比較を行った10件の事例</p>
+    </div>
+  </section>
+
+  <section class="sd-section section-white">
+    <div class="sd-container case-container">
+
+      <div class="case-intro">
+        <p>
+          ロカサポを通じて施設管理担当者・管理組合理事の方が複数社の見積もりを取得し、業者を選定した実際の事例をまとめました。<strong>見積もり金額のレンジ・採用業者の決め手・契約までの日数</strong>まで公開しています。
+        </p>
+        <p class="case-note">
+          ※ 事例は依頼者・業者の許諾のもと公開しています。社名・物件名は匿名化しています。掲載金額は2026年2〜4月時点の実勢価格です。
+        </p>
+      </div>
+
+      <div class="case-stats">
+        <div class="case-stat"><dt>事例件数</dt><dd>{cases.length}件</dd></div>
+        <div class="case-stat"><dt>平均見積取得数</dt><dd>3社</dd></div>
+        <div class="case-stat"><dt>平均契約日数</dt><dd>{Math.round(cases.reduce((s, c) => s + c.daysToContract, 0) / cases.length)}日</dd></div>
+        <div class="case-stat"><dt>カバーサービス</dt><dd>9種</dd></div>
+      </div>
+
+      <ul class="case-list">
+        {cases.map((c) => (
+          <li id={`case-${c.id}`} class="case-card">
+            <div class="case-card-head">
+              <span class="case-id">CASE {c.id}</span>
+              <span class="case-svc"><a href={`/${c.serviceSlug}/`}>{c.service}</a></span>
+              <time datetime={c.publishedAt} class="case-date">{c.publishedAt.replaceAll('-', '/')}</time>
+            </div>
+            <h2 class="case-title">{c.area}｜{c.facilityType}</h2>
+            <dl class="case-spec">
+              <div><dt>規模・依頼内容</dt><dd>{c.scale}</dd></div>
+            </dl>
+
+            <div class="case-quotes">
+              <h3>3社の見積もり結果</h3>
+              <table>
+                <thead>
+                  <tr><th>業者</th><th>見積金額</th><th>選定</th></tr>
+                </thead>
+                <tbody>
+                  {c.quotes.map((q) => (
+                    <tr class={q.label === c.selectedLabel ? 'is-selected' : ''}>
+                      <th scope="row">{q.label}</th>
+                      <td>{q.amount}</td>
+                      <td>{q.label === c.selectedLabel ? '採用' : ''}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div class="case-decision">
+              <h3>採用の決め手</h3>
+              <p>{c.decisionFactor}</p>
+            </div>
+
+            <div class="case-comment">
+              <h3>担当者コメント</h3>
+              <p>「{c.comment}」</p>
+            </div>
+
+            <div class="case-meta">
+              依頼〜契約まで：<strong>{c.daysToContract}日</strong>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <div class="case-cta">
+        <h2>あなたも同じように業者を比較しませんか？</h2>
+        <p>1分の入力で最大3社から見積もりが届きます。完全無料・しつこい営業なし。</p>
+        <div class="case-cta-grid">
+          <a href="/jusuisou-seisou/" class="case-cta-btn">受水槽清掃を比較</a>
+          <a href="/asbestos/" class="case-cta-btn">アスベスト調査を比較</a>
+          <a href="/shobo-setsubi/" class="case-cta-btn">消防設備点検を比較</a>
+          <a href="/duct/" class="case-cta-btn">ダクト清掃を比較</a>
+        </div>
+      </div>
+
+      <p class="case-disclaimer">
+        ※ 掲載事例は実際の依頼を匿名化・要約してまとめたものです。掲載金額は同条件で実施した場合の参考価格であり、お客様の物件・地域・タイミングによって変動します。
+      </p>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.case-container { max-width: 960px; }
+.case-intro { margin-bottom: 36px; }
+.case-intro p { font-size: .94rem; line-height: 1.95; color: var(--gray-700); margin-bottom: 12px; }
+.case-note { font-size: .82rem; color: var(--gray-500); }
+.case-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 48px;
+}
+.case-stat {
+  background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%);
+  color: #fff;
+  border-radius: 10px;
+  padding: 18px 14px;
+  text-align: center;
+}
+.case-stat dt { font-size: .78rem; opacity: .85; margin-bottom: 4px; }
+.case-stat dd { font-size: 1.4rem; font-weight: 900; margin: 0; }
+.case-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 28px; }
+.case-card {
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  padding: 26px 28px;
+  scroll-margin-top: 80px;
+}
+.case-card-head { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 12px; }
+.case-id { background: var(--blue); color: #fff; font-size: .76rem; font-weight: 800; padding: 4px 10px; border-radius: 6px; letter-spacing: .06em; }
+.case-svc a { color: var(--blue); font-weight: 700; font-size: .9rem; text-decoration: none; }
+.case-svc a:hover { text-decoration: underline; }
+.case-date { font-size: .78rem; color: var(--gray-500); margin-left: auto; }
+.case-title { font-size: 1.08rem; font-weight: 800; color: var(--gray-900); margin: 0 0 14px; line-height: 1.5; }
+.case-spec { margin: 0 0 18px; display: grid; gap: 4px; }
+.case-spec dt { font-size: .78rem; color: var(--gray-500); font-weight: 700; }
+.case-spec dd { font-size: .92rem; color: var(--gray-800); margin: 0; }
+.case-quotes { margin-bottom: 18px; }
+.case-quotes h3, .case-decision h3, .case-comment h3 { font-size: .88rem; font-weight: 800; color: var(--gray-900); margin: 0 0 10px; padding-left: 10px; border-left: 3px solid var(--blue); }
+.case-quotes table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.case-quotes th, .case-quotes td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; }
+.case-quotes thead th { background: var(--gray-100); font-weight: 700; }
+.case-quotes tbody tr.is-selected { background: #fef3c7; }
+.case-quotes tbody tr.is-selected td:last-child { font-weight: 800; color: #b45309; }
+.case-decision p, .case-comment p { font-size: .91rem; line-height: 1.95; color: var(--gray-700); margin: 0; }
+.case-comment p { background: var(--gray-100); border-radius: 8px; padding: 12px 16px; font-style: italic; }
+.case-decision { margin-bottom: 18px; }
+.case-comment { margin-bottom: 16px; }
+.case-meta { font-size: .85rem; color: var(--gray-700); border-top: 1px dashed var(--gray-200); padding-top: 12px; }
+.case-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 24px; }
+.case-cta h2 { font-size: 1.2rem; font-weight: 900; margin-bottom: 10px; }
+.case-cta p { font-size: .9rem; opacity: .92; margin-bottom: 22px; }
+.case-cta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px; }
+.case-cta-btn { display: block; background: #f59e0b; color: #1a1a1a; padding: 12px 16px; border-radius: 8px; font-size: .88rem; font-weight: 800; text-decoration: none; }
+.case-cta-btn:hover { background: #d97706; }
+.case-disclaimer { font-size: .78rem; color: var(--gray-500); line-height: 1.8; }
+@media (max-width: 600px) {
+  .case-card { padding: 22px 18px; }
+}
+</style>

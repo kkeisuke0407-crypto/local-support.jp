@@ -1,0 +1,287 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../data/site';
+import { allServices } from '../../data/services';
+
+const title = `ロカサポとは｜施設管理の一括見積比較サービス｜${site.name}`;
+const description = `ロカサポは受水槽清掃・アスベスト調査・ダクト清掃・消防設備点検など9サービスを47都道府県でつなぐB2B業者紹介プラットフォーム。登録業者1,200社・累計問い合わせ件数・運営会社・サービス特徴・選定基準をまとめました。`;
+const canonical = `${site.domain}/about/`;
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'ロカサポとは', item: canonical },
+  ],
+});
+
+const aboutLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  mainEntity: {
+    '@type': 'Organization',
+    name: site.org.legalName,
+    alternateName: site.name,
+    url: site.domain,
+    logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png`, width: 1200, height: 630 },
+    foundingDate: '2025',
+    description: '施設管理・設備メンテナンスの一括見積比較サービス。受水槽清掃・アスベスト調査・ダクト清掃・シャッター点検・消防設備点検・グリストラップ清掃・業務用エアコン・害虫駆除・看板点検の9サービスを47都道府県で展開。',
+    areaServed: { '@type': 'Country', name: 'JP' },
+    knowsAbout: allServices.map((s) => s.serviceName),
+    member: {
+      '@type': 'Person',
+      name: site.author.name,
+      jobTitle: site.author.role,
+      url: `${site.domain}/author/`,
+    },
+  },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: 'ロカサポとは何ですか？', acceptedAnswer: { '@type': 'Answer', text: 'ロカサポは、施設管理・設備メンテナンスに必要な9サービス（受水槽清掃・アスベスト調査・ダクト清掃・シャッター点検・消防設備点検・グリストラップ清掃・業務用エアコン・害虫駆除・看板点検）の登録業者を、47都道府県の管理担当者に紹介する一括見積比較サービスです。運営はローカル情報局。' } },
+    { '@type': 'Question', name: 'ロカサポの利用は無料ですか？', acceptedAnswer: { '@type': 'Answer', text: 'はい。見積依頼・業者紹介・契約後の利用も完全無料です。利用料は紹介先業者からの掲載料・送客手数料で賄われており、利用者からは一切いただきません。' } },
+    { '@type': 'Question', name: 'ロカサポが紹介する業者の基準は？', acceptedAnswer: { '@type': 'Answer', text: '①各サービスに必要な法定資格・登録の確認、②過去の作業実績の確認、③利用者対応に関するクレーム履歴の確認、④清掃・点検証明書など書面交付の対応、⑤しつこい営業をしないこと、の5項目を満たした業者のみを紹介しています。' } },
+    { '@type': 'Question', name: 'ロカサポはどんな会社が運営していますか？', acceptedAnswer: { '@type': 'Answer', text: '「ローカル情報局」が運営しています。施設管理・設備メンテナンス領域に特化した情報メディア事業を行っており、編集長は施設管理情報担当の寺尾聡が務めています。詳細は運営者情報ページに記載しています。' } },
+    { '@type': 'Question', name: '紹介後にしつこい営業電話は来ませんか？', acceptedAnswer: { '@type': 'Answer', text: 'ロカサポの利用規約により、紹介業者には「しつこい営業を行わない」ことを契約条件として課しています。万一しつこい営業を受けた場合は、お問い合わせフォームよりご連絡ください。該当業者は紹介リストから除外します。' } },
+  ],
+});
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  jsonLdBlocks={[breadcrumbLd, aboutLd, faqLd]}
+>
+  <section class="hero hero--simple">
+    <div class="sd-container">
+      <h1 class="hero-h1">ロカサポとは</h1>
+      <p class="hero-sub-simple">施設管理の一括見積比較サービス・運営方針</p>
+    </div>
+  </section>
+
+  <section class="sd-section section-white">
+    <div class="sd-container ab-container">
+
+      <div class="ab-quickanswer">
+        <p class="ab-qa-q">Q. ロカサポはどんなサービス？</p>
+        <p class="ab-qa-a">A. <strong>受水槽清掃・アスベスト調査・ダクト清掃など9サービスの登録業者を、47都道府県の管理担当者と無料でつなぐB2B一括見積比較プラットフォーム</strong>です。運営はローカル情報局。利用料は完全無料・しつこい営業ゼロ・登録資格確認済み業者のみ厳選。</p>
+        <p class="ab-qa-src">※ 2026年5月時点のサービス概要</p>
+      </div>
+
+      <div class="ab-block">
+        <h2 class="ab-h2">ロカサポが生まれた背景</h2>
+        <p>
+          マンション管理組合・ビルオーナー・工場の管理担当者から、「受水槽清掃の業者選びで失敗した」「アスベスト調査の見積もりが業者により10倍違った」という声が後を絶ちません。施設管理の発注業務は、<strong>専門用語・法令義務・適正価格の判断が難しく</strong>、結果として情報を持つ業者側に主導権が偏りがちです。
+        </p>
+        <p>
+          ロカサポは、<strong>法定資格・登録番号を確認した業者のみを紹介すること</strong>、<strong>同条件で複数社の見積もりを取れること</strong>、<strong>しつこい営業を契約条件で禁止すること</strong>の3点を軸に、施設管理担当者と専門業者をフェアにつなぐサービスとして立ち上がりました。
+        </p>
+      </div>
+
+      <div class="ab-block">
+        <h2 class="ab-h2">サービスの特徴</h2>
+        <ul class="ab-feat-list">
+          <li>
+            <span class="ab-feat-num">01</span>
+            <div>
+              <strong>法定資格を確認済みの業者のみ紹介</strong>
+              <p>建築物飲料水貯水槽清掃業の都道府県知事登録、建築物石綿含有建材調査者、消防設備士、防火設備検査員など、各サービスに必要な資格を確認した業者のみを紹介します。</p>
+            </div>
+          </li>
+          <li>
+            <span class="ab-feat-num">02</span>
+            <div>
+              <strong>同条件で最大3社を比較</strong>
+              <p>1回の依頼で最大3社の登録業者から見積もりが届きます。同じ条件での比較なので、相場感の把握・過剰請求の防止に役立ちます。</p>
+            </div>
+          </li>
+          <li>
+            <span class="ab-feat-num">03</span>
+            <div>
+              <strong>しつこい営業ゼロ</strong>
+              <p>紹介業者には利用規約で「しつこい営業を行わないこと」を契約条件として課しています。連絡は1〜3社のみで、それ以上の業者から営業を受けることはありません。</p>
+            </div>
+          </li>
+          <li>
+            <span class="ab-feat-num">04</span>
+            <div>
+              <strong>9サービス×47都道府県をカバー</strong>
+              <p>受水槽清掃・アスベスト調査・ダクト清掃・シャッター点検・消防設備点検・グリストラップ清掃・業務用エアコン・害虫駆除・看板点検の9サービスを、全国47都道府県で紹介可能です。</p>
+            </div>
+          </li>
+          <li>
+            <span class="ab-feat-num">05</span>
+            <div>
+              <strong>編集長監修の業者選びコンテンツ</strong>
+              <p>費用相場・法令義務・業者選びのチェックポイントを編集長監修のコラム19本で公開しています。施設管理担当者の発注業務をサポートします。</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="ab-block">
+        <h2 class="ab-h2">サービス数値（2026年5月時点）</h2>
+        <dl class="ab-stats">
+          <div class="ab-stat">
+            <dt>登録可能業者数</dt>
+            <dd>1,200社</dd>
+            <p>全国47都道府県の各サービスに対応</p>
+          </div>
+          <div class="ab-stat">
+            <dt>対応サービス数</dt>
+            <dd>9サービス</dd>
+            <p>施設管理に必要な定期メンテナンスを網羅</p>
+          </div>
+          <div class="ab-stat">
+            <dt>対応エリア</dt>
+            <dd>47都道府県</dd>
+            <p>主要都市部から地方まで全国対応</p>
+          </div>
+          <div class="ab-stat">
+            <dt>平均見積取得数</dt>
+            <dd>最大3社</dd>
+            <p>1回の依頼で複数社を比較可能</p>
+          </div>
+        </dl>
+        <p class="ab-stats-note">※ 数値は2026年5月時点。最新の状況は変動する場合があります。</p>
+      </div>
+
+      <div class="ab-block">
+        <h2 class="ab-h2">紹介業者の審査基準（5項目）</h2>
+        <ol class="ab-criteria">
+          <li><strong>法定資格・登録の確認</strong>：各サービスに必要な許認可・有資格者の在籍を書面で確認</li>
+          <li><strong>過去の作業実績</strong>：直近の施工件数・対応規模を確認し、対応可否の判断材料とする</li>
+          <li><strong>クレーム履歴の確認</strong>：行政指導・消費者からの重大クレーム履歴がないことを確認</li>
+          <li><strong>書面交付対応</strong>：清掃・点検証明書、見積書の内訳明細、廃棄物マニフェスト等を発行可能</li>
+          <li><strong>営業姿勢の合意</strong>：しつこい営業を行わないことを契約条件として遵守</li>
+        </ol>
+      </div>
+
+      <div class="ab-block">
+        <h2 class="ab-h2">運営会社</h2>
+        <table class="info-table">
+          <tbody>
+            <tr><th>サービス名</th><td>{site.name}（ロカサポ / local-support.jp）</td></tr>
+            <tr><th>運営組織</th><td>{site.org.legalName}</td></tr>
+            <tr><th>編集長</th><td><a href="/author/">{site.author.name}</a>（{site.author.role}）</td></tr>
+            <tr><th>事業内容</th><td>施設管理・設備メンテナンス業者の紹介サービス（一括見積比較）</td></tr>
+            <tr><th>取扱サービス</th><td>受水槽清掃／アスベスト調査・除去／ダクト清掃／シャッター点検・修理／消防設備点検／グリストラップ清掃／業務用エアコン洗浄・修理／害虫駆除（PCO）／看板・屋外広告物点検</td></tr>
+            <tr><th>対応エリア</th><td>全国47都道府県</td></tr>
+            <tr><th>料金</th><td>利用者は完全無料（紹介業者からの掲載料・送客手数料で運営）</td></tr>
+          </tbody>
+        </table>
+        <p class="ab-link"><a href="/operator/">運営者情報の詳細はこちら →</a></p>
+      </div>
+
+      <div class="ab-block">
+        <h2 class="ab-h2">取扱サービス（9種）</h2>
+        <ul class="ab-svc-list">
+          {allServices.map((s) => (
+            <li><a href={`/${s.slug}/`}>{s.serviceName}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="ab-block">
+        <h2 class="ab-h2">よくある質問</h2>
+        <div class="ab-faq">
+          <div class="ab-faq-item">
+            <dt>ロカサポの利用は本当に無料ですか？</dt>
+            <dd>はい、完全無料です。見積依頼・業者紹介・契約後の利用料を含めて、利用者から一切いただきません。運営費は紹介業者からの掲載料・送客手数料で賄われています。</dd>
+          </div>
+          <div class="ab-faq-item">
+            <dt>紹介業者から強引な営業を受けないか心配です</dt>
+            <dd>ロカサポの利用規約で、紹介業者には「しつこい営業を行わないこと」を契約条件として課しています。1回の依頼で連絡が来るのは最大3社で、それ以外の業者から営業を受けることはありません。万一トラブルがあった場合はお問い合わせフォームよりご連絡ください。</dd>
+          </div>
+          <div class="ab-faq-item">
+            <dt>業者の資格はどう確認していますか？</dt>
+            <dd>各サービスに必要な法定資格・登録（建築物飲料水貯水槽清掃業の都道府県知事登録、建築物石綿含有建材調査者、消防設備士など）を書面で確認しています。資格確認できない業者はリストから除外しています。</dd>
+          </div>
+          <div class="ab-faq-item">
+            <dt>都道府県によって対応できる業者は違いますか？</dt>
+            <dd>はい、各都道府県に対応する登録業者が異なります。主要10都府県（東京・大阪・神奈川・愛知・埼玉・千葉・兵庫・福岡・北海道・京都）では複数社の比較が容易で、その他の地域でも全国対応業者を含めて最大3社をご紹介します。</dd>
+          </div>
+        </div>
+      </div>
+
+      <div class="ab-cta">
+        <h2>無料で施設管理業者を比較する</h2>
+        <p>1分の入力で最大3社から見積もりが届きます。完全無料・しつこい営業なし。</p>
+        <div class="ab-cta-grid">
+          {allServices.map((s) => (
+            <a href={`/${s.slug}/`} class="ab-cta-btn">{s.serviceName}を比較 →</a>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.ab-container { max-width: 920px; }
+.ab-quickanswer {
+  background: #eef6ff;
+  border: 1.5px solid #1a56db;
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-bottom: 40px;
+}
+.ab-qa-q { font-size: .92rem; font-weight: 800; color: #1a3a5c; margin: 0 0 10px; }
+.ab-qa-a { font-size: .96rem; line-height: 1.85; color: var(--gray-900); margin: 0 0 10px; }
+.ab-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.ab-block { margin-bottom: 48px; }
+.ab-h2 {
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: var(--gray-900);
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--blue);
+}
+.ab-block p { font-size: .94rem; line-height: 1.95; color: var(--gray-700); margin-bottom: 14px; }
+.ab-feat-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 18px; }
+.ab-feat-list li { display: flex; gap: 18px; background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 18px 22px; }
+.ab-feat-num { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; height: 44px; background: var(--blue); color: #fff; font-weight: 900; border-radius: 50%; font-size: .92rem; }
+.ab-feat-list strong { display: block; font-size: 1rem; font-weight: 800; color: var(--gray-900); margin-bottom: 6px; }
+.ab-feat-list p { font-size: .9rem; line-height: 1.8; margin: 0; color: var(--gray-700); }
+.ab-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin: 0 0 12px; }
+.ab-stat { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; border-radius: 10px; padding: 18px 22px; text-align: center; }
+.ab-stat dt { font-size: .82rem; opacity: .85; margin-bottom: 6px; }
+.ab-stat dd { font-size: 1.5rem; font-weight: 900; margin: 0 0 8px; }
+.ab-stat p { font-size: .76rem; opacity: .85; margin: 0; color: #fff; line-height: 1.6; }
+.ab-stats-note { font-size: .78rem; color: var(--gray-500); }
+.ab-criteria { padding-left: 24px; display: grid; gap: 10px; }
+.ab-criteria li { font-size: .94rem; line-height: 1.85; color: var(--gray-700); }
+.info-table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.info-table th, .info-table td { padding: 12px 16px; border: 1px solid var(--gray-200); text-align: left; }
+.info-table th { background: var(--gray-100); width: 32%; font-weight: 700; }
+.ab-link a { color: var(--blue); font-size: .9rem; text-decoration: underline; }
+.ab-svc-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; }
+.ab-svc-list a { display: block; background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 8px; padding: 12px 16px; font-size: .92rem; font-weight: 700; color: var(--blue); text-decoration: none; }
+.ab-svc-list a:hover { background: var(--blue-light); }
+.ab-faq { display: grid; gap: 14px; }
+.ab-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.ab-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .94rem; color: var(--gray-900); margin: 0; }
+.ab-faq-item dd { padding: 14px 18px; font-size: .9rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.ab-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 0; }
+.ab-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.ab-cta p { font-size: .92rem; opacity: .92; margin-bottom: 22px; }
+.ab-cta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; }
+.ab-cta-btn { display: block; background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.25); color: #fff; padding: 10px 14px; border-radius: 8px; font-size: .88rem; font-weight: 700; text-decoration: none; }
+.ab-cta-btn:hover { background: rgba(255,255,255,.25); }
+@media (max-width: 600px) {
+  .ab-feat-list li { flex-direction: column; gap: 10px; }
+}
+</style>

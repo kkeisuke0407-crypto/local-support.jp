@@ -69,6 +69,13 @@ const faqLd = JSON.stringify({
     </header>
 
     <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. HACCPで害虫対策は義務ですか？</p>
+        <p class="cl-qa-a">A. <strong>2021年6月のHACCP義務化（食品衛生法改正）により、飲食店・食品工場では害虫の侵入防止・管理が法的に求められる</strong>。保健所の立入検査で管理記録の提示が求められるケースが増加。</p>
+        <p class="cl-qa-src">※食品衛生法（HACCP制度化）2021年6月完全施行</p>
+      </div>
+
       <aside class="cl-toc" aria-label="目次">
         <h2 class="cl-toc-h">この記事の目次</h2>
         <ol>
@@ -260,6 +267,23 @@ const faqLd = JSON.stringify({
         </dl>
       </section>
 
+            <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別の害虫駆除（業務用PCO）業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/pest-control/tokyo/">東京都</a></li>
+          <li><a href="/pest-control/osaka/">大阪府</a></li>
+          <li><a href="/pest-control/kanagawa/">神奈川県</a></li>
+          <li><a href="/pest-control/aichi/">愛知県</a></li>
+          <li><a href="/pest-control/saitama/">埼玉県</a></li>
+          <li><a href="/pest-control/chiba/">千葉県</a></li>
+          <li><a href="/pest-control/hyogo/">兵庫県</a></li>
+          <li><a href="/pest-control/fukuoka/">福岡県</a></li>
+          <li><a href="/pest-control/hokkaido/">北海道</a></li>
+          <li><a href="/pest-control/kyoto/">京都府</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/pest-control/">全国47都道府県の対応業者を見る →</a></p>
+      </div>
+
       <aside class="cl-related">
         <h2 class="cl-related-h">関連サービス・コラム</h2>
         <ul>
@@ -322,4 +346,23 @@ const faqLd = JSON.stringify({
 .cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
 .cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
 @media (max-width: 600px) { .cl-header { padding: 32px 0 28px; } .cl-body { padding: 28px 16px 48px; } .cl-section h2 { font-size: 1.15rem; } }
+
+.cl-quickanswer {
+  background: #eef6ff;
+  border: 1.5px solid #1a56db;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-bottom: 32px;
+}
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+
 </style>

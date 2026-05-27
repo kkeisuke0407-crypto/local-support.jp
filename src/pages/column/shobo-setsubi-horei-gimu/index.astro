@@ -118,6 +118,13 @@ const faqLd = JSON.stringify({
 
     <div class="sd-container cl-body">
 
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 消防設備点検は法律で義務ですか？</p>
+        <p class="cl-qa-a">A. <strong>消防法第17条の3の3により、消防用設備を設置している建物は機器点検（年2回）・総合点検（年1回）が義務</strong>。点検結果の消防長への報告義務もあり、未実施は30万円以下の罰金対象。</p>
+        <p class="cl-qa-src">※消防法第17条の3の3（2026年4月時点）</p>
+      </div>
+
+
       <aside class="cl-toc" aria-label="目次">
         <h2 class="cl-toc-h">この記事の目次</h2>
         <ol>
@@ -362,6 +369,23 @@ const faqLd = JSON.stringify({
         </dl>
       </section>
 
+            <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別の消防設備点検業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/shobo-setsubi/tokyo/">東京都</a></li>
+          <li><a href="/shobo-setsubi/osaka/">大阪府</a></li>
+          <li><a href="/shobo-setsubi/kanagawa/">神奈川県</a></li>
+          <li><a href="/shobo-setsubi/aichi/">愛知県</a></li>
+          <li><a href="/shobo-setsubi/saitama/">埼玉県</a></li>
+          <li><a href="/shobo-setsubi/chiba/">千葉県</a></li>
+          <li><a href="/shobo-setsubi/hyogo/">兵庫県</a></li>
+          <li><a href="/shobo-setsubi/fukuoka/">福岡県</a></li>
+          <li><a href="/shobo-setsubi/hokkaido/">北海道</a></li>
+          <li><a href="/shobo-setsubi/kyoto/">京都府</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/shobo-setsubi/">全国47都道府県の対応業者を見る →</a></p>
+      </div>
+
       <aside class="cl-related">
         <h2 class="cl-related-h">関連サービス・コラム</h2>
         <ul>
@@ -433,4 +457,23 @@ const faqLd = JSON.stringify({
   .cl-body { padding: 28px 16px 48px; }
   .cl-section h2 { font-size: 1.15rem; }
 }
+
+.cl-quickanswer {
+  background: #eef6ff;
+  border: 1.5px solid #1a56db;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-bottom: 32px;
+}
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+
 </style>
