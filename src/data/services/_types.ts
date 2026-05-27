@@ -11,6 +11,12 @@ export interface ServiceData {
     lastUpdated: string; // ISO date e.g. '2026-05-26'
   };
 
+  /** AI検索引用用サマリー（ページ冒頭に配置・FAQPage補完） */
+  aiSummary: {
+    lead: string; // 2文程度の直接回答（定義・義務・相場を凝縮）
+    facts: { label: string; value: string }[]; // 3〜4件のKey-Value事実
+  };
+
   hero: {
     eyebrow: string;
     headline: string;

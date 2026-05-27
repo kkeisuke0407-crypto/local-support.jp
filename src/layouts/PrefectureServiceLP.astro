@@ -17,6 +17,7 @@ import FAQ from '../components/FAQ.astro';
 import RelatedServices from '../components/RelatedServices.astro';
 import PrefectureGrid from '../components/PrefectureGrid.astro';
 import BottomCTA from '../components/BottomCTA.astro';
+import AIOSummary from '../components/AIOSummary.astro';
 import { site } from '../data/site';
 import type { ServiceData } from '../data/services/_types';
 import type { Prefecture } from '../data/prefectures';
@@ -118,6 +119,7 @@ const jsonLdBlocks = [breadcrumbLd, serviceLd, faqLd, howToLd, priceLd].filter(B
   noindex={noindex}
 >
   <HeroWithForm data={data} />
+  <AIOSummary lead={data.aiSummary.lead} facts={data.aiSummary.facts} serviceName={data.serviceName} />
   <TrustStrip />
   <PrefectureIntro prefecture={prefecture} service={data} />
   <ProcessSteps serviceName={data.serviceName} />
