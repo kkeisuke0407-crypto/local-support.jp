@@ -1,0 +1,519 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { site } from '../../../data/site';
+
+const title = 'シャッター点検・修理の費用相場2026｜点検1〜3万円・修理2万円〜を種別・規模ごとに解説';
+const description = '防火シャッター・電動シャッターの点検・修理費用を2026年最新版で解説。点検1〜3万円/台、修理2万円〜をベースに、シャッター種別（防火・防煙・電動・手動）ごとの相場、部品交換・大規模修繕の費用、業者選びのポイントまで施設管理担当者向けにまとめました。';
+const canonical = `${site.domain}/column/shutter-hiyo-sohba/`;
+const published = '2026-05-27';
+const modified = '2026-05-27';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: 'シャッター点検・修理の費用相場', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 4400,
+  articleSection: '費用相場',
+  keywords: 'シャッター点検,シャッター修理,費用相場,防火シャッター,電動シャッター,建築基準法,2026',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: {
+    '@type': 'Organization',
+    name: site.org.legalName,
+    url: site.domain,
+    logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.svg` },
+  },
+  about: { '@type': 'Service', name: 'シャッター点検・修理' },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: '防火シャッターの点検費用はいくらですか？', acceptedAnswer: { '@type': 'Answer', text: '1台あたり10,000〜30,000円が目安です。複数台数をまとめて依頼したり、年間契約を結ぶと1台あたりの単価が下がります。建築基準法第12条に基づく定期検査報告書の作成・提出が含まれる場合は追加費用が発生するケースもあります。' } },
+    { '@type': 'Question', name: 'シャッター修理の費用はいくらですか？', acceptedAnswer: { '@type': 'Answer', text: '軽微な調整・油さし・部品交換で20,000〜80,000円、スプリング・シャフト交換で50,000〜200,000円、大規模修繕（スラット総交換等）で300,000〜1,000,000円以上が目安です。電動シャッターのモーター交換は100,000〜300,000円程度です。' } },
+    { '@type': 'Question', name: 'シャッターの点検は何年に1回必要ですか？', acceptedAnswer: { '@type': 'Answer', text: '建築基準法第12条に基づく防火設備検査は特定建築物で年1回の実施・報告が義務です。電動シャッターや一般シャッターについても、製造メーカーは年1回の保守点検を推奨しています。' } },
+    { '@type': 'Question', name: 'シャッター点検で見積もりを取るときのポイントは？', acceptedAnswer: { '@type': 'Answer', text: '①防火設備検査員資格の有無（法定検査の場合は必須）、②定期報告書の作成・提出代行の可否、③修理が必要な場合の追加費用の概算提示、④複数台まとめ発注の割引の有無、の4点を確認してください。' } },
+    { '@type': 'Question', name: '修理と交換の判断基準は？', acceptedAnswer: { '@type': 'Answer', text: '一般的に、修理費用が新設費用の50〜60%を超える場合は交換を検討します。また、スラット（羽板）の腐食・変形が広範囲に及ぶ場合、シャフト・スプリングが著しく劣化している場合も交換が推奨されます。耐用年数の目安は手動シャッターで15〜20年、電動で10〜15年です。' } },
+  ],
+});
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a>
+          <span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a>
+          <span aria-hidden="true">›</span>
+          <span>シャッター点検・修理の費用相場</span>
+        </nav>
+        <span class="cl-cat">シャッター点検・修理</span>
+        <h1 class="cl-title">シャッター点検・修理の費用相場2026｜点検1〜3万円・修理2万円〜を種別・規模ごとに解説</h1>
+        <p class="cl-lead">
+          防火シャッターの定期検査費用は<strong>1台あたり1〜3万円</strong>が目安ですが、電動・防煙・手動など種別や台数によって異なります。修理費用は<strong>軽微な調整で2〜8万円、スプリング交換で5〜20万円</strong>が相場です。本記事では、シャッター種別ごとの費用相場、部品交換・大規模修繕の単価、業者選びのポイントを2026年版で解説します。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年5月27日</time>
+          <span>最終更新：2026年5月27日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#inspection-cost">点検費用 種別・台数別相場</a></li>
+          <li><a href="#repair-cost">修理費用 故障・劣化内容別相場</a></li>
+          <li><a href="#parts">主な部品交換費用の目安</a></li>
+          <li><a href="#renewal">交換・新設費用の目安</a></li>
+          <li><a href="#add-cost">付帯費用の内訳</a></li>
+          <li><a href="#law">法令義務と定期報告との関係</a></li>
+          <li><a href="#select">業者選びで確認すべき5つのポイント</a></li>
+          <li><a href="#mistakes">よくある失敗パターン</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>点検費用</strong>：1台あたり1〜3万円（台数が多いほど単価が下がる傾向）</li>
+            <li><strong>修理費用</strong>：軽微な調整2〜8万円・スプリング交換5〜20万円・モーター交換10〜30万円</li>
+            <li><strong>法令義務</strong>：建築基準法第12条に基づく防火設備検査は特定建築物で年1回・報告義務あり</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="inspection-cost" class="cl-section">
+        <h2>点検費用 種別・台数別相場</h2>
+        <p>シャッター点検の費用は、シャッターの種別（防火・防煙・電動・手動）と台数によって異なります。</p>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>シャッター点検費用 種別・台数別相場（2026年5月時点・税込目安）</caption>
+            <thead>
+              <tr>
+                <th scope="col">種別</th>
+                <th scope="col">1台あたり費用</th>
+                <th scope="col">備考</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">防火シャッター（法定検査）</th>
+                <td>15,000〜30,000円/台</td>
+                <td>定期報告書作成・提出代行込みの場合は別途加算</td>
+              </tr>
+              <tr>
+                <th scope="row">防煙シャッター</th>
+                <td>15,000〜35,000円/台</td>
+                <td>煙感知器連動の動作確認が必要</td>
+              </tr>
+              <tr>
+                <th scope="row">電動シャッター（保守点検）</th>
+                <td>10,000〜25,000円/台</td>
+                <td>モーター・リモコン動作確認を含む</td>
+              </tr>
+              <tr>
+                <th scope="row">手動シャッター（保守点検）</th>
+                <td>8,000〜20,000円/台</td>
+                <td>スラット・スプリング・ガイドレール確認</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p><strong>台数割引</strong>：同一施設で5台以上まとめて依頼すると1台あたりの費用が1〜2割程度割安になるケースがあります。複数の施設・フロアにシャッターがある場合はまとめて相見積もりを取るのが効率的です。</p>
+
+        <h3>年間保守契約の場合</h3>
+        <p>年1〜2回の定期点検と緊急時の出張対応をセットにした<strong>年間保守契約</strong>では、1台あたり年間15,000〜40,000円程度が一般的です。緊急時の出張費が含まれる契約か否かで価格差があるため、契約内容を詳細に確認してください。</p>
+      </section>
+
+      <section id="repair-cost" class="cl-section">
+        <h2>修理費用 故障・劣化内容別相場</h2>
+        <p>シャッターの修理費用は、故障・劣化の内容によって大きく異なります。</p>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>シャッター修理費用 故障内容別相場（2026年5月時点・税込目安）</caption>
+            <thead>
+              <tr>
+                <th scope="col">故障・劣化内容</th>
+                <th scope="col">修理費用目安</th>
+                <th scope="col">緊急度</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">開閉が重い・異音がする（調整・注油）</th>
+                <td>20,000〜50,000円</td>
+                <td>中</td>
+              </tr>
+              <tr>
+                <th scope="row">リモコン・スイッチの不具合</th>
+                <td>15,000〜60,000円</td>
+                <td>中</td>
+              </tr>
+              <tr>
+                <th scope="row">スラット（羽板）の変形・穴あき補修</th>
+                <td>30,000〜150,000円</td>
+                <td>中〜高</td>
+              </tr>
+              <tr>
+                <th scope="row">シャッターが上がらない・下りない</th>
+                <td>30,000〜200,000円</td>
+                <td>高（緊急対応）</td>
+              </tr>
+              <tr>
+                <th scope="row">スプリング（バランスバネ）の破断</th>
+                <td>50,000〜200,000円</td>
+                <td>高（要修理）</td>
+              </tr>
+              <tr>
+                <th scope="row">電動モーターの故障</th>
+                <td>100,000〜300,000円</td>
+                <td>高</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>緊急対応（営業時間外・休日）の場合は<strong>基本料金に出張費・緊急割増（1〜2万円程度）</strong>が加算されます。特にシャッターが閉まらない・開かない状態は防犯・営業上の緊急事態となるため、年間保守契約で緊急対応を含めておくことが推奨されます。</p>
+      </section>
+
+      <section id="parts" class="cl-section">
+        <h2>主な部品交換費用の目安</h2>
+        <p>修理で交換される主な部品と費用の目安を整理します。</p>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>シャッター主要部品交換費用（部品代＋工賃込み・参考相場）</caption>
+            <thead>
+              <tr>
+                <th scope="col">部品名</th>
+                <th scope="col">費用目安</th>
+                <th scope="col">交換目安</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">スラット（羽板）1枚</th>
+                <td>5,000〜20,000円/枚</td>
+                <td>変形・穴あき・腐食時</td>
+              </tr>
+              <tr>
+                <th scope="row">スプリング（バランスバネ）</th>
+                <td>50,000〜150,000円</td>
+                <td>破断・劣化時（10〜15年目安）</td>
+              </tr>
+              <tr>
+                <th scope="row">電動モーター</th>
+                <td>80,000〜250,000円</td>
+                <td>動作不良・焼付き時</td>
+              </tr>
+              <tr>
+                <th scope="row">シャフト</th>
+                <td>30,000〜100,000円</td>
+                <td>変形・腐食時</td>
+              </tr>
+              <tr>
+                <th scope="row">座板（床際部品）</th>
+                <td>10,000〜40,000円</td>
+                <td>変形・腐食時</td>
+              </tr>
+              <tr>
+                <th scope="row">ガイドレール</th>
+                <td>20,000〜80,000円/本</td>
+                <td>変形・腐食時</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="renewal" class="cl-section">
+        <h2>交換・新設費用の目安</h2>
+        <p>修理費用が交換費用の50〜60%を超える場合や、耐用年数に達した場合は交換を検討します。</p>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>シャッター交換・新設費用の目安（2026年5月時点）</caption>
+            <thead>
+              <tr>
+                <th scope="col">種別</th>
+                <th scope="col">費用目安</th>
+                <th scope="col">耐用年数目安</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">手動シャッター（標準サイズ）</th>
+                <td>200,000〜600,000円</td>
+                <td>15〜25年</td>
+              </tr>
+              <tr>
+                <th scope="row">電動シャッター（標準サイズ）</th>
+                <td>500,000〜1,500,000円</td>
+                <td>10〜15年（モーター）</td>
+              </tr>
+              <tr>
+                <th scope="row">防火シャッター</th>
+                <td>800,000〜2,500,000円</td>
+                <td>20〜30年（躯体）</td>
+              </tr>
+              <tr>
+                <th scope="row">オーバースライダー（大型）</th>
+                <td>1,000,000〜5,000,000円</td>
+                <td>10〜20年</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>交換・新設費用には、既存シャッターの撤去・廃棄費用（50,000〜200,000円）、電気工事費（電動化の場合）が別途加算されます。</p>
+      </section>
+
+      <section id="add-cost" class="cl-section">
+        <h2>付帯費用の内訳</h2>
+        <p>点検・修理の見積もりに含まれていない場合がある付帯費用を確認してください。</p>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>シャッター点検・修理の主な付帯費用（参考相場）</caption>
+            <thead>
+              <tr>
+                <th scope="col">付帯項目</th>
+                <th scope="col">費用目安</th>
+                <th scope="col">備考</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">定期報告書作成・提出代行</th>
+                <td>20,000〜60,000円</td>
+                <td>建築基準法第12条対応（特定建築物）</td>
+              </tr>
+              <tr>
+                <th scope="row">高所作業車・足場</th>
+                <td>50,000〜200,000円</td>
+                <td>大型シャッター・高所設置の場合</td>
+              </tr>
+              <tr>
+                <th scope="row">緊急出張費</th>
+                <td>10,000〜25,000円</td>
+                <td>営業時間外・休日対応</td>
+              </tr>
+              <tr>
+                <th scope="row">廃棄物処理（交換時）</th>
+                <td>10,000〜50,000円</td>
+                <td>スラット・モーター等の廃材処分</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="law" class="cl-section">
+        <h2>法令義務と定期報告との関係</h2>
+        <p>防火シャッターは建築基準法第12条に基づく<strong>定期検査・報告義務</strong>の対象です。</p>
+
+        <ul class="cl-list">
+          <li><strong>対象</strong>：不特定多数が利用する特定建築物（店舗・ホテル・病院等）の防火シャッター・防火扉</li>
+          <li><strong>頻度</strong>：年1回の検査・特定行政庁への報告書提出</li>
+          <li><strong>資格</strong>：防火設備検査員（一級・二級建築士または有資格者）による実施が必要</li>
+          <li><strong>罰則</strong>：定期報告を怠った場合、建築基準法第101条により100万円以下の罰金の対象</li>
+        </ul>
+
+        <p>法令義務の詳細は<a href="/column/shutter-horei-gimu/">シャッター点検の法令義務ガイド</a>で詳しく解説しています。</p>
+      </section>
+
+      <section id="select" class="cl-section">
+        <h2>業者選びで確認すべき5つのポイント</h2>
+
+        <h3>① 防火設備検査員資格の有無</h3>
+        <p>建築基準法第12条に基づく法定検査は、防火設備検査員（または一級・二級建築士）の資格者が実施する必要があります。<strong>資格証の写しを見積もり段階で確認</strong>してください。</p>
+
+        <h3>② 定期報告書の作成・提出代行</h3>
+        <p>特定行政庁への定期報告書の作成・提出まで対応できる業者を選ぶと、施設側の事務作業が大幅に軽減されます。<strong>報告書提出まで含めた料金体系</strong>かどうかを確認してください。</p>
+
+        <h3>③ 修理が必要な場合の即日対応</h3>
+        <p>点検で不具合が発見された場合、速やかに修理に対応できる体制があるかを確認してください。<strong>点検と修理を一気通貫で対応</strong>できる業者は対応がスムーズです。</p>
+
+        <h3>④ 緊急対応の可否・出動時間</h3>
+        <p>シャッターが突然故障した際に、<strong>最短で出動できる体制（夜間・休日対応）</strong>があるかを確認してください。年間保守契約に緊急対応が含まれているかも重要です。</p>
+
+        <h3>⑤ メーカー対応・部品調達力</h3>
+        <p>設置されているシャッターのメーカーに対応している業者かを確認してください。<strong>純正部品の調達が速いメーカー認定業者</strong>は修理期間の短縮につながります。</p>
+      </section>
+
+      <section id="mistakes" class="cl-section">
+        <h2>よくある失敗パターン</h2>
+
+        <h3>失敗1：法定検査の資格なし業者に依頼し、報告書が無効になった</h3>
+        <p><strong>原因</strong>：「シャッター点検」とある業者に依頼したが、防火設備検査員の資格者が在籍していなかったため、特定行政庁への報告書が受理されなかった。<strong>対策</strong>：見積もり段階で資格証の写しを取得する。</p>
+
+        <h3>失敗2：定期報告書の期限を過ぎていた</h3>
+        <p><strong>原因</strong>：検査は実施したが報告書の提出期限（特定行政庁が指定する期限）を確認しておらず、未提出状態が続いていた。<strong>対策</strong>：業者に提出期限管理まで依頼するか、自社でカレンダー管理を行う。</p>
+
+        <h3>失敗3：価格だけで選んだ業者が部品交換で高額追加請求</h3>
+        <p><strong>原因</strong>：点検費用が安い業者を選んだが、点検後の修理・部品交換が割高で、結果的に総費用が高くなった。<strong>対策</strong>：点検費用だけでなく「不具合発見時の修理単価（部品代・工賃の内訳）」もあらかじめ確認しておく。</p>
+
+        <h3>失敗4：スプリング破断を放置して全交換に</h3>
+        <p><strong>原因</strong>：開閉が重くなるサインを無視して使い続け、スプリングが破断。応急修理では対応できず、本体ごと交換となった。<strong>対策</strong>：開閉に違和感を感じたら早期に業者に点検を依頼する。</p>
+      </section>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問（FAQ）</h2>
+
+        <h3>Q1. 防火シャッターの点検費用はいくらですか？</h3>
+        <p>1台あたり15,000〜30,000円が目安です。5台以上まとめて依頼すると単価が1〜2割割安になるケースがあります。定期報告書の作成・提出代行が含まれる場合は別途加算されます。</p>
+
+        <h3>Q2. シャッター修理の費用はいくらですか？</h3>
+        <p>軽微な調整・注油で20,000〜50,000円、スプリング交換で50,000〜200,000円、電動モーター交換で100,000〜300,000円が目安です。</p>
+
+        <h3>Q3. シャッターの点検は何年に1回必要ですか？</h3>
+        <p>建築基準法第12条の特定建築物では防火設備検査が年1回・報告義務があります。一般的なシャッターも製造メーカーは年1回の保守点検を推奨しています。</p>
+
+        <h3>Q4. シャッターを修理するか交換するかの判断基準は？</h3>
+        <p>修理費用が交換費用の50〜60%を超える場合は交換が経済的です。腐食・変形が広範囲に及ぶ場合も交換を検討します。耐用年数（手動15〜25年・電動10〜15年）も判断材料になります。</p>
+
+        <h3>Q5. 定期報告書は自分で作れますか？</h3>
+        <p>定期報告書の作成は防火設備検査員（または一級・二級建築士等）が実施した検査結果に基づき行うものであり、有資格者が作成する必要があります。業者に作成・提出代行を依頼するのが一般的です。</p>
+      </section>
+
+      <section class="cl-cta">
+        <h2>シャッター点検・修理の業者選びでお困りなら</h2>
+        <p>{site.name}では、防火設備検査員の在籍と定期報告書の作成・提出対応を確認済みの業者の中から、ご依頼内容に応じて最大3社を厳選してご紹介します。<strong>お見積もり依頼は1分・完全無料</strong>です。</p>
+        <a href="/shutter/" class="cta-btn-primary">無料で一括見積もりを依頼する →</a>
+      </section>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連する詳細情報</h2>
+        <ul>
+          <li><a href="/column/shutter-horei-gimu/">シャッター点検の法令義務ガイド2026｜建築基準法第12条の要点と報告義務</a></li>
+          <li><a href="/shutter/">シャッター点検・修理のサービストップ</a></li>
+          <li><a href="/flow/">一括見積依頼から契約までの流れ</a></li>
+          <li><a href="/operator/">運営者情報・ご紹介業者の審査基準</a></li>
+        </ul>
+      </aside>
+
+      <p class="cl-note">
+        ※ 本記事に掲載した費用相場は2026年5月時点のものです。費用はメーカー・機種・地域・業者により変動します。最終的な判断は複数の業者見積もりに基づいて行ってください。
+      </p>
+
+    </div>
+
+  </article>
+</BaseLayout>
+
+<style>
+.cl-article { color: var(--gray-900); }
+.cl-header {
+  background: linear-gradient(135deg, #0f2742 0%, #1a56db 100%);
+  color: #fff;
+  padding: 48px 0 56px;
+}
+.cl-crumbs { font-size: .78rem; color: #bfdbfe; margin-bottom: 18px; }
+.cl-crumbs a { color: #bfdbfe; text-decoration: underline; }
+.cl-crumbs span { margin: 0 6px; opacity: .6; }
+.cl-cat {
+  display: inline-block;
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.3);
+  color: #e0f2fe;
+  font-size: .76rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 99px;
+  margin-bottom: 14px;
+  letter-spacing: .04em;
+}
+.cl-title {
+  font-size: clamp(1.4rem, 2.6vw, 2.1rem);
+  font-weight: 900;
+  line-height: 1.4;
+  color: #fff;
+  margin-bottom: 18px;
+  letter-spacing: -.01em;
+}
+.cl-lead { font-size: 1rem; line-height: 1.85; color: #e0f2fe; margin-bottom: 18px; max-width: 820px; }
+.cl-lead strong { color: #fde68a; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 18px; font-size: .78rem; color: rgba(255,255,255,.65); }
+.cl-body { padding: 48px 0 80px; max-width: 880px; }
+.cl-toc { background: var(--gray-100); border-left: 4px solid var(--blue); border-radius: 8px; padding: 24px 28px; margin-bottom: 48px; }
+.cl-toc-h { font-size: .9rem; font-weight: 800; color: var(--gray-900); margin-bottom: 12px; }
+.cl-toc ol { padding-left: 20px; font-size: .9rem; line-height: 1.95; color: var(--gray-700); }
+.cl-toc a { color: var(--blue); text-decoration: underline; }
+.cl-section { margin-bottom: 44px; }
+.cl-section h2 { font-size: 1.35rem; font-weight: 800; color: var(--gray-900); margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid var(--blue); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 700; color: var(--gray-900); margin: 28px 0 12px; }
+.cl-section p { font-size: .95rem; line-height: 1.95; color: var(--gray-700); margin-bottom: 16px; }
+.cl-section p strong { color: var(--gray-900); }
+.cl-section a { color: var(--blue); text-decoration: underline; }
+.cl-list { font-size: .92rem; line-height: 1.95; color: var(--gray-700); padding-left: 22px; margin-bottom: 16px; }
+.cl-list li { margin-bottom: 6px; }
+.cl-list li strong { color: var(--gray-900); }
+.cl-table-wrap { overflow-x: auto; margin-bottom: 20px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .9rem; background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-table caption { text-align: left; font-size: .85rem; color: var(--gray-500); padding-bottom: 8px; caption-side: top; }
+.cl-table th, .cl-table td { padding: 12px 14px; border-bottom: 1px solid var(--gray-200); text-align: left; vertical-align: top; }
+.cl-table thead { background: var(--blue-light); }
+.cl-table thead th { color: var(--blue-dark); font-weight: 800; }
+.cl-table tbody th { font-weight: 700; color: var(--gray-900); white-space: nowrap; }
+.cl-table td { color: var(--gray-700); }
+.cl-table tbody tr:last-child th, .cl-table tbody tr:last-child td { border-bottom: none; }
+.cl-callout { background: var(--gray-100); border-left: 4px solid var(--accent); border-radius: 8px; padding: 24px 28px; margin-bottom: 32px; }
+.cl-callout--blue { border-left-color: var(--blue); }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 10px; padding: 0; border: none; }
+.cl-callout ul, .cl-callout ol { font-size: .92rem; line-height: 1.95; color: var(--gray-700); padding-left: 22px; margin: 0; }
+.cl-callout li { margin-bottom: 4px; }
+.cl-callout li strong { color: var(--gray-900); }
+.cl-callout p { margin-bottom: 10px; }
+.cl-cta { background: linear-gradient(135deg, #0f2742 0%, #1a56db 100%); color: #fff; text-align: center; border-radius: 14px; padding: 40px 28px; margin: 48px 0; }
+.cl-cta h2 { font-size: 1.2rem; font-weight: 800; color: #fff; margin-bottom: 12px; border: none; padding: 0; }
+.cl-cta p { font-size: .92rem; color: #bfdbfe; margin-bottom: 22px; line-height: 1.8; }
+.cl-cta p strong { color: #fde68a; }
+.cl-cta .cta-btn-primary { display: inline-block; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 24px 28px; margin-bottom: 32px; }
+.cl-related-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 12px; }
+.cl-related ul { list-style: none; padding: 0; font-size: .9rem; line-height: 2; }
+.cl-related a { color: var(--blue); text-decoration: underline; }
+.cl-note { font-size: .78rem; color: var(--gray-500); line-height: 1.8; border-top: 1px solid var(--gray-200); padding-top: 20px; margin-top: 24px; }
+@media (max-width: 720px) {
+  .cl-header { padding: 36px 0 40px; }
+  .cl-body { padding: 32px 0 60px; }
+  .cl-toc, .cl-callout, .cl-related, .cl-cta { padding: 18px 20px; }
+  .cl-table { font-size: .82rem; }
+  .cl-table th, .cl-table td { padding: 10px 8px; }
+}
+</style>

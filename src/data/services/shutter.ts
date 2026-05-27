@@ -304,6 +304,23 @@ const data: ServiceData = {
   ],
 
   relatedServiceSlugs: ['jusuisou-seisou', 'duct', 'asbestos'],
+
+  relatedColumns: [
+    {
+      href: '/column/shutter-hiyo-sohba/',
+      category: '費用相場',
+      title: 'シャッター点検・修理の費用相場2026｜点検1〜3万円・修理2万円〜を種別・規模ごとに解説',
+      excerpt: '防火シャッター・電動シャッターの点検・修理費用を種別ごとに解説。部品交換・交換費用の目安、業者選びで確認すべき資格要件まで整理した施設管理担当者向けガイド。',
+      date: '2026-05-27',
+    },
+    {
+      href: '/column/shutter-horei-gimu/',
+      category: '法令・義務',
+      title: 'シャッター点検の法令義務ガイド2026｜建築基準法第12条・防火設備検査の要点と罰則',
+      excerpt: '建築基準法第12条に基づく防火シャッターの定期検査義務を解説。対象建物・資格要件・報告書提出先・100万円以下の罰金リスクまでまとめました。',
+      date: '2026-05-27',
+    },
+  ],
 };
 
 export default data;
