@@ -1,7 +1,8 @@
 ---
 import type { ServiceData } from '../data/services/_types';
-interface Props { legal: ServiceData['legal']; serviceName: string; }
-const { legal, serviceName } = Astro.props;
+interface Props { legal: ServiceData['legal']; serviceName: string; relatedColumns?: ServiceData['relatedColumns']; }
+const { legal, serviceName, relatedColumns } = Astro.props;
+const legalColumn = relatedColumns?.find((c) => c.category === '法令・義務' || c.category === '法令');
 ---
 <section class="sd-section gimu-section" id="legal">
   <div class="sd-container">
@@ -37,5 +38,15 @@ const { legal, serviceName } = Astro.props;
       <dt>関連法令</dt>
       <dd>{legal.legalBasis.join(' ／ ')}</dd>
     </dl>
+    {legalColumn && (
+      <a href={legalColumn.href} class="inline-column-cta">
+        <span class="inline-column-cta-icon" aria-hidden="true">📖</span>
+        <span class="inline-column-cta-body">
+          <span class="inline-column-cta-label">法令・義務の詳しい解説</span>
+          <span class="inline-column-cta-title">{legalColumn.title}</span>
+        </span>
+        <span class="inline-column-cta-arrow" aria-hidden="true">→</span>
+      </a>
+    )}
   </div>
 </section>

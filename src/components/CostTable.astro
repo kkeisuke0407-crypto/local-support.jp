@@ -1,8 +1,9 @@
 ---
 import type { ServiceData } from '../data/services/_types';
-interface Props { costGuide: ServiceData['costGuide']; serviceName: string; lastUpdated: string; }
-const { costGuide, serviceName, lastUpdated } = Astro.props;
+interface Props { costGuide: ServiceData['costGuide']; serviceName: string; lastUpdated: string; relatedColumns?: ServiceData['relatedColumns']; }
+const { costGuide, serviceName, lastUpdated, relatedColumns } = Astro.props;
 const updatedJa = new Date(lastUpdated).toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
+const costColumn = relatedColumns?.find((c) => c.category === '費用相場');
 ---
 <section class="sd-section section-white" id="cost">
   <div class="sd-container">
@@ -42,5 +43,15 @@ const updatedJa = new Date(lastUpdated).toLocaleDateString('ja-JP', { year: 'num
       </ul>
       <p class="cost-note-box"><strong>料金の確認について：</strong>{costGuide.note}</p>
     </div>
+    {costColumn && (
+      <a href={costColumn.href} class="inline-column-cta">
+        <span class="inline-column-cta-icon" aria-hidden="true">💰</span>
+        <span class="inline-column-cta-body">
+          <span class="inline-column-cta-label">費用相場の詳細解説</span>
+          <span class="inline-column-cta-title">{costColumn.title}</span>
+        </span>
+        <span class="inline-column-cta-arrow" aria-hidden="true">→</span>
+      </a>
+    )}
   </div>
 </section>
