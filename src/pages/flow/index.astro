@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { site } from '../../data/site';
 
-const title = 'ご利用の流れ｜local-support.jp';
+const title = `ご利用の流れ｜${site.name}`;
 const description = '一括見積依頼から業者紹介・契約までの流れを詳しくご案内します。完全無料・最大3社を厳選紹介。';
 const canonical = `${site.domain}/flow/`;
 
@@ -33,7 +33,7 @@ const flowFaq = [
     a: '別の業者をご紹介することが可能です。お問い合わせフォームより「別業者紹介希望」とご連絡ください。理由をお伺いしたうえで、再度厳選してご紹介します。',
   },
   {
-    q: 'local-support.jpへの手数料はかかりますか？',
+    q: `${site.name}への手数料はかかりますか？`,
     a: '一切かかりません。一括見積依頼・業者紹介・契約後すべて完全無料でご利用いただけます。費用は業者との直接契約分のみが発生します。',
   },
   {
