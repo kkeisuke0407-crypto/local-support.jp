@@ -70,11 +70,14 @@ a { color: inherit; text-decoration: none; }
 .sd-logo { display: flex; align-items: center; gap: 10px; }
 .sd-logo-icon {
   width: 36px; height: 36px;
-  background: var(--accent);
+  background: #fff;
   border-radius: 8px;
   display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.18);
 }
 .sd-logo-icon svg { width: 20px; height: 20px; color: #fff; }
+.sd-logo-icon img { width: 36px; height: 36px; display: block; }
 .sd-logo-wrap span:first-child {
   display: block;
   font-size: .95rem;
@@ -975,6 +978,13 @@ a { color: inherit; text-decoration: none; }
   padding: 56px 0 64px;
   overflow: hidden;
   position: relative;
+}
+.hero--with-image {
+  background-image:
+    linear-gradient(90deg, #0f2742 0%, rgba(15,39,66,.96) 38%, rgba(15,39,66,.82) 58%, rgba(15,39,66,.52) 100%),
+    var(--hero-image);
+  background-size: cover, cover;
+  background-position: center, right center;
 }
 .hero--b2b::before {
   content: '';

@@ -88,22 +88,27 @@ const featuredColumns = [
 <!-- ══ HERO ════════════════════════════════════════════════════ -->
 <section class="lp-hero">
   <div class="sd-container lp-hero-inner">
-    <p class="lp-hero-kicker">ローカル情報局が運営する施設管理サービスハブ</p>
-    <h1 class="lp-hero-h1">{site.name}<br/><span class="lp-hero-h1-sub">— 施設管理の業者選びを、もっとかんたんに。</span></h1>
-    <p class="lp-hero-desc">
-      受水槽清掃・消防設備点検・アスベスト調査など、<br class="pc-only"/>
-      <strong>9つの施設管理サービス分野で業者紹介サイトを運営</strong>しています。<br class="pc-only"/>
-      お見積もり依頼は各サービスサイトから、取材・提携のご相談はこのページ下部のフォームへ。
-    </p>
-    <div class="lp-hero-ctas">
-      <a href="#services" class="lp-hero-cta">運営サービス一覧を見る ↓</a>
-      <a href="#contact" class="lp-hero-cta-secondary">取材・提携のお問い合わせ</a>
+    <div class="lp-hero-copy">
+      <p class="lp-hero-kicker">ローカル情報局が運営する施設管理サービスハブ</p>
+      <h1 class="lp-hero-h1">{site.name}<br/><span class="lp-hero-h1-sub">— 施設管理の業者選びを、もっとかんたんに。</span></h1>
+      <p class="lp-hero-desc">
+        受水槽清掃・消防設備点検・アスベスト調査など、<br class="pc-only"/>
+        <strong>9つの施設管理サービス分野で業者紹介サイトを運営</strong>しています。<br class="pc-only"/>
+        お見積もり依頼は各サービスサイトから、取材・提携のご相談はこのページ下部のフォームへ。
+      </p>
+      <div class="lp-hero-ctas">
+        <a href="#services" class="lp-hero-cta">運営サービス一覧を見る ↓</a>
+        <a href="#contact" class="lp-hero-cta-secondary">取材・提携のお問い合わせ</a>
+      </div>
+      <ul class="lp-hero-badges">
+        <li>運営サービス：9分野</li>
+        <li>全国47都道府県対応</li>
+        <li>資格・許認可確認済み業者のみ紹介</li>
+      </ul>
     </div>
-    <ul class="lp-hero-badges">
-      <li>運営サービス：9分野</li>
-      <li>全国47都道府県対応</li>
-      <li>資格・許認可確認済み業者のみ紹介</li>
-    </ul>
+    <figure class="lp-hero-visual">
+      <img src="/images/brand/hero-local-support-top.webp" width="1600" height="900" alt="施設管理担当者と点検スタッフがタブレットで点検内容を確認している様子" decoding="async" fetchpriority="high" />
+    </figure>
   </div>
 </section>
 
@@ -120,6 +125,7 @@ const featuredColumns = [
     <div class="lp-service-grid">
       {serviceIndex.map((s) => (
         <a href={`/${s.slug}/`} class="lp-service-card">
+          <img class="lp-service-card-img" src={`/images/services/hero-${s.slug}.webp`} width="480" height="270" alt="" loading="lazy" decoding="async" />
           <span class="lp-service-label">{s.short}</span>
           <h3>{s.name}</h3>
           <p>{s.description}</p>
@@ -199,8 +205,17 @@ const featuredColumns = [
 .lp-hero {
   background: linear-gradient(135deg, var(--blue-dark) 0%, #1a3a6b 100%);
   color: #fff;
-  padding: 80px 0 72px;
-  text-align: center;
+  padding: 72px 0;
+  overflow: hidden;
+}
+.lp-hero-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, .9fr);
+  gap: 40px;
+  align-items: center;
+}
+.lp-hero-copy {
+  text-align: left;
 }
 .lp-hero-kicker {
   font-size: .8rem;
@@ -234,7 +249,7 @@ const featuredColumns = [
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  justify-content: center;
+  justify-content: flex-start;
   margin-bottom: 24px;
 }
 .lp-hero-cta {
@@ -265,7 +280,7 @@ const featuredColumns = [
 .lp-hero-badges {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 8px;
   list-style: none;
   margin: 8px 0 0;
@@ -278,6 +293,18 @@ const featuredColumns = [
   font-size: .78rem;
   padding: 4px 12px;
   border-radius: 99px;
+}
+.lp-hero-visual {
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 22px 70px rgba(0,0,0,.32);
+  border: 1px solid rgba(255,255,255,.18);
+  margin: 0;
+}
+.lp-hero-visual img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
 }
 
 /* ── Section共通 ── */
@@ -323,14 +350,22 @@ const featuredColumns = [
   background: #fff;
   border: 1px solid var(--gray-200);
   border-radius: 12px;
-  padding: 22px;
+  padding: 0 0 22px;
   text-decoration: none;
   color: inherit;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   transition: box-shadow .2s, transform .2s, border-color .2s;
 }
 .lp-service-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); border-color: var(--blue-light); }
+.lp-service-card-img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--gray-100);
+  margin-bottom: 18px;
+}
 .lp-service-label {
   display: inline-block;
   background: var(--blue-light);
@@ -341,11 +376,11 @@ const featuredColumns = [
   border-radius: 99px;
   letter-spacing: .04em;
   width: fit-content;
-  margin-bottom: 12px;
+  margin: 0 22px 12px;
 }
-.lp-service-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: var(--gray-900); }
-.lp-service-card p { font-size: .85rem; color: var(--gray-500); line-height: 1.6; flex: 1; margin-bottom: 16px; }
-.lp-service-link { font-size: .85rem; font-weight: 700; color: var(--blue); }
+.lp-service-card h3 { font-size: 1rem; font-weight: 700; margin: 0 22px 8px; color: var(--gray-900); }
+.lp-service-card p { font-size: .85rem; color: var(--gray-500); line-height: 1.6; flex: 1; margin: 0 22px 16px; }
+.lp-service-link { font-size: .85rem; font-weight: 700; color: var(--blue); margin: 0 22px; }
 
 /* ── ロカサポについて ── */
 .lp-about {
@@ -451,6 +486,9 @@ const featuredColumns = [
 
 @media (max-width: 640px) {
   .lp-hero { padding: 56px 0 48px; }
+  .lp-hero-inner { grid-template-columns: 1fr; gap: 28px; }
+  .lp-hero-copy { text-align: center; }
+  .lp-hero-badges { justify-content: center; }
   .lp-services, .lp-about, .lp-columns { padding: 48px 0; }
   .lp-hero-ctas { flex-direction: column; align-items: stretch; }
   .lp-hero-cta, .lp-hero-cta-secondary { text-align: center; }

@@ -5,8 +5,9 @@ import { site } from '../data/site';
 interface Props { data: ServiceData; }
 const { data } = Astro.props;
 const updatedJa = new Date(data.meta.lastUpdated).toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
+const heroImage = `/images/services/hero-${data.slug}.webp`;
 ---
-<section class="hero hero--b2b">
+<section class="hero hero--b2b hero--with-image" style={`--hero-image: url('${heroImage}')`}>
   <div class="sd-container-wide hero-grid">
     <div class="hero-copy">
       <div class="hero-eyebrow">{data.hero.eyebrow}</div>
