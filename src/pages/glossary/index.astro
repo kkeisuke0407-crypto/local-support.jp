@@ -1,0 +1,592 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../data/site';
+
+const title = '施設管理用語集｜ロカサポ — 法令・資格・設備・業界用語をわかりやすく解説';
+const description = '受水槽清掃・消防設備点検・アスベスト調査・グリストラップ清掃など、施設管理に関わる法令名・有資格者・設備部位・業界用語を1ページにまとめて解説。「特定建築物とは」「フロン排出抑制法とは」など実務でよく出る用語を網羅。';
+const canonical = `${site.domain}/glossary/`;
+
+interface Term {
+  id: string;
+  term: string;
+  reading?: string;
+  definition: string;
+  relatedHref?: string;
+  relatedLabel?: string;
+}
+
+interface Category {
+  id: string;
+  title: string;
+  description: string;
+  terms: Term[];
+}
+
+const categories: Category[] = [
+  {
+    id: 'law',
+    title: '法令・規制',
+    description: '施設管理の根拠となる主な法令・規則・条例。',
+    terms: [
+      {
+        id: 'suido-ho',
+        term: '水道法',
+        reading: 'すいどうほう',
+        definition: '清浄・豊富・低廉な水道供給を目的とする法律。第34条の2で有効容量10m³超の貯水槽（簡易専用水道）を持つ建物の管理者に、年1回以上の清掃・水質検査・報告書作成を義務付けている。',
+        relatedHref: '/jusuisou-seisou/',
+        relatedLabel: '受水槽清掃',
+      },
+      {
+        id: 'biru-kan-ho',
+        term: '建築物衛生法（ビル管法）',
+        reading: 'けんちくぶつえいせいほう',
+        definition: '正式名称「建築物における衛生的環境の確保に関する法律」。延べ床面積3,000㎡以上（学校は8,000㎡以上）の特定建築物に空気・水・清掃・ねずみ等の衛生管理基準を定める。',
+        relatedHref: '/column/jusuisou-seisou-horei-gimu/',
+        relatedLabel: '関連コラム',
+      },
+      {
+        id: 'kanni-senyou-suido',
+        term: '簡易専用水道',
+        reading: 'かんいせんようすいどう',
+        definition: '水道事業者から供給される水のみを水源とし、有効容量10m³を超える受水槽を持つ給水設備。水道法の管理基準と年1回以上の検査が義務。',
+        relatedHref: '/jusuisou-seisou/',
+        relatedLabel: '受水槽清掃',
+      },
+      {
+        id: 'taikiosen-boshi-ho',
+        term: '大気汚染防止法',
+        reading: 'たいきおせんぼうしほう',
+        definition: '大気汚染物質の排出規制を定める法律。アスベスト関連では、解体・改修工事の事前調査結果報告（2022年4月〜）、特定粉じん排出等作業の届出を義務付ける。',
+        relatedHref: '/asbestos/',
+        relatedLabel: 'アスベスト調査',
+      },
+      {
+        id: 'sekimen-soku',
+        term: '石綿障害予防規則（石綿則）',
+        reading: 'せきめんしょうがいよぼうきそく',
+        definition: '労働安全衛生法に基づく省令。アスベスト含有建材のレベル1〜3に応じた作業基準、有資格者による事前調査、隔離養生・負圧除塵などの飛散防止措置を定める。',
+        relatedHref: '/asbestos/',
+        relatedLabel: 'アスベスト調査',
+      },
+      {
+        id: 'shobo-ho',
+        term: '消防法',
+        reading: 'しょうぼうほう',
+        definition: '火災予防・警戒・鎮圧を目的とする法律。第17条の3の3で防火対象物の関係者に、消防用設備等の定期的な点検（機器点検・総合点検）と所轄消防署への報告を義務付ける。',
+        relatedHref: '/shobo-setsubi/',
+        relatedLabel: '消防設備点検',
+      },
+      {
+        id: 'gesuido-ho',
+        term: '下水道法',
+        reading: 'げすいどうほう',
+        definition: '公共下水道への排水基準を定める法律。第12条で除害施設の設置、排水水質の維持を義務付ける。グリストラップ清掃を怠ると油脂類が基準（ノルマルヘキサン抽出物質30mg/L以下）を超過し改善命令の対象に。',
+        relatedHref: '/grease-trap/',
+        relatedLabel: 'グリストラップ清掃',
+      },
+      {
+        id: 'haikibutsu-shori-ho',
+        term: '廃棄物処理法（廃掃法）',
+        reading: 'はいきぶつしょりほう',
+        definition: '正式名称「廃棄物の処理及び清掃に関する法律」。産業廃棄物の排出事業者責任、許可業者への委託、マニフェスト（A〜E票）発行・5年保管を定める。',
+        relatedHref: '/grease-trap/',
+        relatedLabel: 'グリストラップ清掃',
+      },
+      {
+        id: 'furon-haishutsu-yokusei-ho',
+        term: 'フロン排出抑制法',
+        reading: 'ふろんはいしゅつよくせいほう',
+        definition: '正式名称「フロン類の使用の合理化及び管理の適正化に関する法律」。業務用エアコン・冷凍冷蔵機器（第一種特定製品）の管理者に、3か月に1回の簡易点検・規模別の定期点検・廃棄時のフロン回収を義務付ける。',
+        relatedHref: '/aircon-business/',
+        relatedLabel: '業務用エアコン',
+      },
+      {
+        id: 'shokuhin-eisei-ho-haccp',
+        term: '食品衛生法（HACCP制度化）',
+        reading: 'しょくひんえいせいほう',
+        definition: '2021年6月から原則すべての食品事業者にHACCPに沿った衛生管理を義務付け。一般衛生管理の必須項目に「そ族・昆虫対策」が含まれ、保健所立入で防除記録の提示を求められる。',
+        relatedHref: '/pest-control/',
+        relatedLabel: '害虫駆除（PCO）',
+      },
+      {
+        id: 'okugai-koukokubutsu-ho',
+        term: '屋外広告物法',
+        reading: 'おくがいこうこくぶつほう',
+        definition: '屋外広告物の表示・設置を規制する法律。具体基準は各都道府県・政令市の屋外広告物条例で定められ、許可期間中の安全点検・更新時の点検結果報告が求められる。',
+        relatedHref: '/signboard-inspection/',
+        relatedLabel: '看板点検',
+      },
+      {
+        id: 'minpo-717',
+        term: '民法第717条（工作物責任）',
+        reading: 'みんぽうだい717じょう',
+        definition: '土地工作物の設置・保存に瑕疵があり他人に損害を生じた場合の責任を定める条文。看板の所有者は無過失でも賠償責任を負う（無過失責任）。看板落下事故の管理者責任の根拠。',
+        relatedHref: '/column/signboard-inspection-horei-gimu/',
+        relatedLabel: '関連コラム',
+      },
+    ],
+  },
+  {
+    id: 'qualification',
+    title: '資格・許認可',
+    description: '施設管理業務に必要な国家資格・登録・許可。',
+    terms: [
+      {
+        id: 'kenchiku-suiso-seisogyo',
+        term: '建築物飲料水貯水槽清掃業',
+        reading: 'けんちくぶつ-いんりょうすいちょすいそう-せいそうぎょう',
+        definition: '建築物衛生法に基づく都道府県知事登録制度。受水槽清掃を業として行うために必要。登録のない業者に発注した場合、義務を履行したと認められないリスクがある。',
+        relatedHref: '/jusuisou-seisou/',
+        relatedLabel: '受水槽清掃',
+      },
+      {
+        id: 'kenchiku-sekimen-chosasha',
+        term: '建築物石綿含有建材調査者',
+        reading: 'けんちくぶつせきめんがんゆうけんざいちょうさしゃ',
+        definition: 'アスベスト事前調査の有資格者。2023年10月から有資格者による事前調査が義務化。「一般」「特定」「一戸建て等」の3区分があり、建物種別に応じて使い分ける。',
+        relatedHref: '/asbestos/',
+        relatedLabel: 'アスベスト調査',
+      },
+      {
+        id: 'sekimen-sagyo-shunin',
+        term: '石綿作業主任者',
+        reading: 'せきめんさぎょうしゅにんしゃ',
+        definition: '石綿則に基づき、アスベスト除去作業を直接指揮する有資格者。レベル1・レベル2の除去工事では選任必須。',
+        relatedHref: '/asbestos/',
+        relatedLabel: 'アスベスト調査',
+      },
+      {
+        id: 'shobo-setsubishi',
+        term: '消防設備士（甲種・乙種）',
+        reading: 'しょうぼうせつびし',
+        definition: '消防用設備等の整備・工事・点検ができる国家資格。甲種（工事＋点検）と乙種（点検のみ）があり、第1類〜第7類で対象設備が異なる（1類：水系消火、4類：自火報など）。',
+        relatedHref: '/shobo-setsubi/',
+        relatedLabel: '消防設備点検',
+      },
+      {
+        id: 'shobo-tenken-shikaku',
+        term: '消防設備点検資格者',
+        reading: 'しょうぼうせつびてんけんしかくしゃ',
+        definition: '消防設備の点検のみが可能な民間資格（登録講習修了者）。第1種・第2種があり、消防設備士と並んで延べ1,000㎡超の特定防火対象物等の有資格者点検を担う。',
+        relatedHref: '/shobo-setsubi/',
+        relatedLabel: '消防設備点検',
+      },
+      {
+        id: 'daiichishu-furon-toriatsukai-gijutsusha',
+        term: '第一種冷媒フロン類取扱技術者',
+        reading: 'だいいっしゅれいばいふろんるいとりあつかいぎじゅつしゃ',
+        definition: 'フロン排出抑制法の有資格者制度の中心資格。業務用エアコン・冷凍冷蔵機器の冷媒充填・回収・定期点検を行うために必要。',
+        relatedHref: '/aircon-business/',
+        relatedLabel: '業務用エアコン',
+      },
+      {
+        id: 'daiichishu-furon-juten-kaishu-gyosha',
+        term: '第一種フロン類充塡回収業者',
+        reading: 'だいいっしゅふろんるいじゅうてんかいしゅうぎょうしゃ',
+        definition: '都道府県知事登録の業者。フロン排出抑制法に基づき、業務用機器のフロン回収・行程管理票（A〜E票）発行を担う。',
+        relatedHref: '/aircon-business/',
+        relatedLabel: '業務用エアコン',
+      },
+      {
+        id: 'sanpai-shushu-unpan-gyo',
+        term: '産業廃棄物収集運搬業',
+        reading: 'さんぎょうはいきぶつしゅうしゅううんぱんぎょう',
+        definition: '都道府県知事の許可制。グリストラップ清掃で発生する汚泥・廃油や、アスベスト除去後の廃棄物などを運搬するのに必須。委託前に許可証コピーで品目・有効期限の確認が推奨される。',
+        relatedHref: '/grease-trap/',
+        relatedLabel: 'グリストラップ清掃',
+      },
+      {
+        id: 'kenchikubutsu-nezumi-konchu-bojogyo',
+        term: '建築物ねずみ昆虫等防除業',
+        reading: 'けんちくぶつねずみこんちゅうとうぼうじょぎょう',
+        definition: '建築物衛生法に基づく都道府県知事登録。特定建築物のねずみ・昆虫等の防除を業として行うために必要。「ペストコントロール技術者」が選任要件。',
+        relatedHref: '/pest-control/',
+        relatedLabel: '害虫駆除',
+      },
+      {
+        id: 'okugai-tenken-ginou-shuryo',
+        term: '屋外広告物点検技能講習修了者',
+        reading: 'おくがいこうこくぶつてんけんぎのうこうしゅうしゅうりょうしゃ',
+        definition: '日本サイン協会等が実施する技能講習を修了した者。東京都・神奈川県・大阪府・福岡市等では屋外広告物の許可更新時の点検をこの資格者が実施することが義務化されている。',
+        relatedHref: '/signboard-inspection/',
+        relatedLabel: '看板点検',
+      },
+    ],
+  },
+  {
+    id: 'equipment',
+    title: '設備・部位',
+    description: '施設管理の対象となる設備・部位の名称。',
+    terms: [
+      {
+        id: 'jusuisou',
+        term: '受水槽／貯水槽',
+        reading: 'じゅすいそう／ちょすいそう',
+        definition: '水道本管から供給された水を一時的に貯める槽。マンション・ビル等の中高層建物で水圧不足を補うために設置される。有効容量10m³超は簡易専用水道として水道法の管理基準対象。',
+        relatedHref: '/jusuisou-seisou/',
+        relatedLabel: '受水槽清掃',
+      },
+      {
+        id: 'koukasuisou',
+        term: '高架水槽',
+        reading: 'こうかすいそう',
+        definition: '建物屋上に設置され、ポンプで揚水した水を重力で各階に供給する水槽。受水槽とセットで管理対象となるケースが多い。',
+        relatedHref: '/jusuisou-seisou/',
+        relatedLabel: '受水槽清掃',
+      },
+      {
+        id: 'grease-trap',
+        term: 'グリストラップ（阻集器）',
+        reading: 'ぐりすとらっぷ',
+        definition: '飲食店厨房等の排水に含まれる油脂・残渣を分離・捕集する装置。建築基準法施行令第129条の2の4で設置と機能維持が定められる。週次のバスケット清掃、2〜6か月に1回の全槽清掃が業界標準。',
+        relatedHref: '/grease-trap/',
+        relatedLabel: 'グリストラップ清掃',
+      },
+      {
+        id: 'scum',
+        term: 'スカム',
+        reading: 'すかむ',
+        definition: 'グリストラップの水面に浮上する油脂層。放置すると悪臭・害虫発生・配管詰まりの原因になる。週1〜月1回程度の除去が推奨される。',
+        relatedHref: '/grease-trap/',
+        relatedLabel: 'グリストラップ清掃',
+      },
+      {
+        id: 'duct',
+        term: 'ダクト',
+        reading: 'だくと',
+        definition: '空気を通すための管・通路。厨房ダクト（排気）、空調ダクト（給排気）に大別される。厨房ダクトは油脂蓄積による火災リスクから年1〜2回、空調ダクトは衛生・効率維持のため2〜3年に1回の清掃が推奨される。',
+        relatedHref: '/duct/',
+        relatedLabel: 'ダクト清掃',
+      },
+      {
+        id: 'sprinkler',
+        term: 'スプリンクラー設備',
+        reading: 'すぷりんくらー',
+        definition: '火災時に天井から自動的に放水する消火設備。ホテル・病院・大規模商業施設等で設置義務あり。消防設備点検の総合点検で作動試験を実施する。',
+        relatedHref: '/shobo-setsubi/',
+        relatedLabel: '消防設備点検',
+      },
+      {
+        id: 'jidoukasai-hochi-setsubi',
+        term: '自動火災報知設備',
+        reading: 'じどうかさいほうちせつび',
+        definition: '熱・煙感知器が火災を検知し、受信機を介して警報を発する設備。消防法で広範な防火対象物に設置義務あり。機器点検（半年）・総合点検（年1）の対象。',
+        relatedHref: '/shobo-setsubi/',
+        relatedLabel: '消防設備点検',
+      },
+      {
+        id: 'boukashutter',
+        term: '防火シャッター',
+        reading: 'ぼうかしゃったー',
+        definition: '火災時に自動降下し、延焼を防ぐ防火区画を形成するシャッター。建築基準法第12条で年1回の検査・特定行政庁への報告が義務付けられる。',
+        relatedHref: '/shutter/',
+        relatedLabel: 'シャッター点検',
+      },
+      {
+        id: 'okujou-koukokuto',
+        term: '屋上広告塔',
+        reading: 'おくじょうこうこくとう',
+        definition: '建物屋上に設置される独立構造の広告物。腐食・台風被害・落下リスクが大きく、屋外広告物条例で許可期間中の安全点検が義務付けられる。',
+        relatedHref: '/signboard-inspection/',
+        relatedLabel: '看板点検',
+      },
+      {
+        id: 'sodekanban',
+        term: '突き出し看板（袖看板）',
+        reading: 'つきだしかんばん（そでかんばん）',
+        definition: '建物壁面から道路側に突き出して設置される看板。重心が建物外側にあるため落下リスクが高く、定期点検と固定部の劣化チェックが重要。',
+        relatedHref: '/signboard-inspection/',
+        relatedLabel: '看板点検',
+      },
+    ],
+  },
+  {
+    id: 'inspection',
+    title: '検査・業界用語',
+    description: '点検・検査・契約・管理業務で使われる業界用語。',
+    terms: [
+      {
+        id: 'kiki-tenken',
+        term: '機器点検',
+        reading: 'ききてんけん',
+        definition: '消防用設備等の外観・配置・機能の概要を確認する点検。消防法に基づき6か月に1回の実施が義務付けられる。',
+        relatedHref: '/shobo-setsubi/',
+        relatedLabel: '消防設備点検',
+      },
+      {
+        id: 'sogo-tenken',
+        term: '総合点検',
+        reading: 'そうごうてんけん',
+        definition: '消防用設備等を実際に作動させて総合的に機能を確認する点検。消火栓の放水試験、スプリンクラーの作動試験等を含み、年1回の実施が義務。',
+        relatedHref: '/shobo-setsubi/',
+        relatedLabel: '消防設備点検',
+      },
+      {
+        id: 'tokutei-boka-taisho',
+        term: '特定防火対象物',
+        reading: 'とくていぼうかたいしょうぶつ',
+        definition: '消防法施行令別表第1のうち、不特定多数が利用する施設（飲食店・ホテル・病院・福祉施設等）。点検報告は1年に1回（非特定の共同住宅・事務所等は3年に1回）。',
+        relatedHref: '/shobo-setsubi/',
+        relatedLabel: '消防設備点検',
+      },
+      {
+        id: 'tokutei-kenchikubutsu',
+        term: '特定建築物（ビル管法）',
+        reading: 'とくていけんちくぶつ',
+        definition: '建築物衛生法上の特定建築物。延べ床面積3,000㎡以上（学校は8,000㎡以上）の興行場・百貨店・店舗・遊技場・図書館・博物館・美術館・事務所等が該当。空気・水・清掃・ねずみ防除等の管理義務が課される。',
+      },
+      {
+        id: 'jizen-chosa',
+        term: '事前調査（アスベスト）',
+        reading: 'じぜんちょうさ',
+        definition: '解体・改修・補修工事の着手前に行うアスベスト含有有無の調査。書面調査と現地目視調査を行い、必要に応じて分析調査で確定する。2023年10月から有資格者による実施が義務化。',
+        relatedHref: '/asbestos/',
+        relatedLabel: 'アスベスト調査',
+      },
+      {
+        id: 'n-hex',
+        term: 'ノルマルヘキサン抽出物質（n-Hex）',
+        reading: 'のるまるへきさんちゅうしゅつぶっしつ',
+        definition: '排水中の油脂類の指標。下水道法・水質汚濁防止法で動植物油脂類は30mg/L以下、鉱油類は5mg/L以下の基準が課される。グリストラップ清掃不足の典型指標。',
+        relatedHref: '/grease-trap/',
+        relatedLabel: 'グリストラップ清掃',
+      },
+      {
+        id: 'manifest',
+        term: 'マニフェスト（産業廃棄物管理票）',
+        reading: 'まにふぇすと',
+        definition: '産業廃棄物の排出から最終処分までの流れを管理する伝票（A〜E票）。廃棄物処理法で排出事業者に発行と5年保管が義務付けられる。電子マニフェスト（JWNET）対応業者が推奨される。',
+        relatedHref: '/grease-trap/',
+        relatedLabel: 'グリストラップ清掃',
+      },
+      {
+        id: 'ipm',
+        term: 'IPM（総合的有害生物管理）',
+        reading: 'あいぴーえむ',
+        definition: 'Integrated Pest Management の略。薬剤散布を最小化し、物理的駆除（捕獲・侵入経路封鎖）・環境改善（清掃・乾燥）・必要最小限の化学的駆除を組み合わせる害虫管理手法。食品事業者・福祉施設・医療機関では標準。',
+        relatedHref: '/pest-control/',
+        relatedLabel: '害虫駆除',
+      },
+      {
+        id: 'haccp',
+        term: 'HACCP（ハサップ）',
+        reading: 'はさっぷ',
+        definition: 'Hazard Analysis and Critical Control Point。食品の安全確保のための国際標準の衛生管理手法。2021年6月から原則すべての食品事業者に義務化され、害虫対策・防除記録が一般的衛生管理の必須項目となっている。',
+        relatedHref: '/pest-control/',
+        relatedLabel: '害虫駆除',
+      },
+      {
+        id: 'koutei-kanri-hyo',
+        term: '行程管理票',
+        reading: 'こうていかんりひょう',
+        definition: 'フロン排出抑制法に基づく、業務用機器の廃棄時のフロン回収プロセスを管理する伝票（A・B票等）。管理者はA票交付、回収業者からのB・C票受領、処分業者からのE票受領まで5年保管する義務がある。',
+        relatedHref: '/aircon-business/',
+        relatedLabel: '業務用エアコン',
+      },
+    ],
+  },
+];
+
+const allTerms = categories.flatMap((c) => c.terms);
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: '用語集', item: canonical },
+  ],
+});
+
+const definedTermSetLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'DefinedTermSet',
+  name: '施設管理用語集',
+  url: canonical,
+  hasDefinedTerm: allTerms.map((t) => ({
+    '@type': 'DefinedTerm',
+    name: t.term,
+    description: t.definition,
+    url: `${canonical}#${t.id}`,
+    inDefinedTermSet: canonical,
+  })),
+});
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理用語集"
+  jsonLdBlocks={[breadcrumbLd, definedTermSetLd]}
+>
+  <section class="gl-hero">
+    <div class="sd-container">
+      <nav class="gl-crumbs" aria-label="パンくず">
+        <a href="/">トップ</a><span aria-hidden="true">›</span><span>用語集</span>
+      </nav>
+      <h1 class="gl-h1">施設管理用語集</h1>
+      <p class="gl-lead">
+        受水槽清掃・消防設備点検・アスベスト調査など、施設管理の現場で頻出する<strong>法令・資格・設備・業界用語</strong>を{allTerms.length}語まとめました。「何を意味するか」「どのサービスと関係するか」を1行で確認できます。
+      </p>
+    </div>
+  </section>
+
+  <section class="sd-section gl-section">
+    <div class="sd-container gl-container">
+
+      <nav class="gl-toc" aria-label="カテゴリナビ">
+        <p class="gl-toc-h">カテゴリ</p>
+        <ul>
+          {categories.map((c) => (
+            <li><a href={`#${c.id}`}>{c.title}（{c.terms.length}語）</a></li>
+          ))}
+        </ul>
+      </nav>
+
+      {categories.map((cat) => (
+        <section class="gl-cat" id={cat.id}>
+          <h2 class="gl-cat-title">{cat.title}</h2>
+          <p class="gl-cat-desc">{cat.description}</p>
+          <dl class="gl-dl">
+            {cat.terms.map((t) => (
+              <div class="gl-item" id={t.id}>
+                <dt>
+                  <span class="gl-term">{t.term}</span>
+                  {t.reading && <span class="gl-reading">（{t.reading}）</span>}
+                </dt>
+                <dd>
+                  <p class="gl-def">{t.definition}</p>
+                  {t.relatedHref && (
+                    <p class="gl-related">
+                      関連：<a href={t.relatedHref}>{t.relatedLabel}</a>
+                    </p>
+                  )}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      ))}
+
+      <aside class="gl-cta">
+        <h2>業者をお探しの方へ</h2>
+        <p>用語を確認したら、各サービスサイトから無料一括見積もりを依頼できます。</p>
+        <div class="gl-cta-btns">
+          <a href="/jusuisou-seisou/" class="gl-cta-btn">受水槽清掃</a>
+          <a href="/shobo-setsubi/" class="gl-cta-btn">消防設備点検</a>
+          <a href="/asbestos/" class="gl-cta-btn">アスベスト</a>
+          <a href="/duct/" class="gl-cta-btn">ダクト清掃</a>
+          <a href="/grease-trap/" class="gl-cta-btn">グリストラップ</a>
+          <a href="/aircon-business/" class="gl-cta-btn">業務用エアコン</a>
+          <a href="/pest-control/" class="gl-cta-btn">害虫駆除</a>
+          <a href="/signboard-inspection/" class="gl-cta-btn">看板点検</a>
+          <a href="/shutter/" class="gl-cta-btn">シャッター</a>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.gl-hero {
+  background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%);
+  color: #fff;
+  padding: 48px 0 40px;
+}
+.gl-crumbs { font-size: .78rem; opacity: .85; margin-bottom: 16px; display: flex; gap: 6px; align-items: center; }
+.gl-crumbs a { color: #fff; text-decoration: none; }
+.gl-crumbs a:hover { text-decoration: underline; }
+.gl-h1 { font-size: clamp(1.4rem, 3.2vw, 2rem); font-weight: 900; line-height: 1.4; margin-bottom: 14px; }
+.gl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 760px; }
+.gl-lead strong { color: #fff; }
+
+.gl-section { padding: 48px 0 64px; background: #fff; }
+.gl-container { max-width: 900px; }
+
+.gl-toc {
+  background: var(--gray-100, #f3f4f6);
+  border: 1px solid var(--gray-200, #e5e7eb);
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-bottom: 40px;
+}
+.gl-toc-h {
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  color: var(--gray-700, #374151);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.gl-toc ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 8px;
+}
+.gl-toc a { color: var(--blue, #1d4ed8); font-size: .9rem; text-decoration: none; font-weight: 600; }
+.gl-toc a:hover { text-decoration: underline; }
+
+.gl-cat { margin-bottom: 48px; scroll-margin-top: 80px; }
+.gl-cat-title {
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--gray-900, #111827);
+  border-bottom: 2px solid var(--blue-light, #dbeafe);
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+}
+.gl-cat-desc { font-size: .88rem; color: var(--gray-600, #4b5563); margin-bottom: 20px; }
+
+.gl-dl { margin: 0; padding: 0; }
+.gl-item {
+  border: 1px solid var(--gray-200, #e5e7eb);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  scroll-margin-top: 80px;
+  background: #fff;
+}
+.gl-item dt { margin-bottom: 8px; }
+.gl-term { font-weight: 800; font-size: 1.02rem; color: var(--gray-900, #111827); }
+.gl-reading { font-size: .8rem; color: var(--gray-500, #6b7280); margin-left: 8px; }
+.gl-item dd { margin: 0; }
+.gl-def { font-size: .92rem; line-height: 1.85; color: var(--gray-700, #374151); margin: 0 0 6px; }
+.gl-related { font-size: .82rem; color: var(--gray-600, #4b5563); margin: 0; }
+.gl-related a { color: var(--blue, #1d4ed8); text-decoration: underline; }
+
+.gl-cta {
+  background: var(--gray-100, #f3f4f6);
+  border-radius: 12px;
+  padding: 28px 24px;
+  margin-top: 48px;
+  text-align: center;
+}
+.gl-cta h2 { font-size: 1.15rem; font-weight: 800; color: var(--gray-900, #111827); margin-bottom: 8px; }
+.gl-cta p { font-size: .92rem; color: var(--gray-700, #374151); margin-bottom: 18px; }
+.gl-cta-btns { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.gl-cta-btn {
+  display: inline-block;
+  background: #fff;
+  border: 1px solid var(--gray-300, #d1d5db);
+  border-radius: 99px;
+  padding: 8px 16px;
+  font-size: .85rem;
+  font-weight: 700;
+  color: var(--gray-800, #1f2937);
+  text-decoration: none;
+  transition: background .15s, border-color .15s;
+}
+.gl-cta-btn:hover { background: var(--blue-light, #dbeafe); border-color: var(--blue, #1d4ed8); color: var(--blue-dark, #1e3a8a); }
+
+@media (max-width: 640px) {
+  .gl-hero { padding: 36px 0 30px; }
+  .gl-section { padding: 32px 0 48px; }
+  .gl-cat-title { font-size: 1.15rem; }
+  .gl-item { padding: 14px 16px; }
+}
+</style>
