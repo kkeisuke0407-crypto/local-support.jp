@@ -1,0 +1,92 @@
+---
+/**
+ * 取材・提携・メディア用の汎用問い合わせフォーム
+ * 見積もり依頼ではないため /api/contact エンドポイントへ送信
+ */
+---
+<section class="cf-section" id="contact">
+  <div class="sd-container cf-container">
+    <div class="cf-head">
+      <span class="cf-kicker">CONTACT</span>
+      <h2>お問い合わせ</h2>
+      <p class="cf-lead">
+        取材・提携・メディア掲載に関するお問い合わせはこちらから。<br/>
+        <strong>※ 業者一括見積のご依頼は</strong>各サービスサイトのフォームよりお願いいたします。
+      </p>
+    </div>
+
+    <form class="qf cf-form" action="/api/contact" method="POST" data-redirect="/thanks/?source=contact" novalidate>
+      <input type="text" name="website" tabindex="-1" autocomplete="off" class="qf-honeypot" aria-hidden="true" />
+
+      <div class="qf-row qf-row--wide">
+        <label for="cf-inquiry-type">お問い合わせ種別 <span class="qf-req">必須</span></label>
+        <select id="cf-inquiry-type" name="inquiry_type" required>
+          <option value="">選択してください</option>
+          <option value="取材依頼">取材依頼</option>
+          <option value="提携相談">提携相談（業者・メディア）</option>
+          <option value="メディア掲載">メディア掲載・引用</option>
+          <option value="広告・スポンサー">広告・スポンサー</option>
+          <option value="運営サービスについて">運営サービスについて</option>
+          <option value="その他">その他</option>
+        </select>
+      </div>
+
+      <div class="qf-row qf-row--half">
+        <label for="cf-name">お名前 <span class="qf-req">必須</span></label>
+        <input id="cf-name" name="name" type="text" required placeholder="例：山田太郎" />
+      </div>
+      <div class="qf-row qf-row--half">
+        <label for="cf-company">会社・媒体名（任意）</label>
+        <input id="cf-company" name="company" type="text" placeholder="例：◯◯メディア" />
+      </div>
+
+      <div class="qf-row qf-row--half">
+        <label for="cf-email">メールアドレス <span class="qf-req">必須</span></label>
+        <input id="cf-email" name="email" type="email" required placeholder="例：info@example.com" />
+      </div>
+      <div class="qf-row qf-row--half">
+        <label for="cf-tel">電話番号（任意）</label>
+        <input id="cf-tel" name="tel" type="tel" placeholder="例：03-0000-0000" />
+      </div>
+
+      <div class="qf-row qf-row--wide">
+        <label for="cf-message">お問い合わせ内容 <span class="qf-req">必須</span></label>
+        <textarea id="cf-message" name="message" rows="6" required placeholder="ご質問・ご要望の詳細をご記入ください。"></textarea>
+      </div>
+
+      <div class="qf-row qf-row--wide">
+        <label class="qf-agree">
+          <input type="checkbox" name="agree" value="1" required />
+          <span><a href="/privacy/" target="_blank" rel="noopener">プライバシーポリシー</a>に同意して送信します</span>
+        </label>
+      </div>
+
+      <button type="submit" class="qf-submit cf-submit" data-track="contact_form_submit">送信する →</button>
+      <p class="cf-note">通常2〜3営業日以内にご返信いたします（土日祝を除く）。</p>
+    </form>
+  </div>
+</section>
+
+<style>
+.cf-section { padding: 64px 0; background: var(--gray-100, #f3f4f6); }
+.cf-container { max-width: 760px; }
+.cf-head { text-align: center; margin-bottom: 32px; }
+.cf-kicker {
+  display: inline-block;
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  color: var(--blue, #1d4ed8);
+  margin-bottom: 8px;
+}
+.cf-head h2 { font-size: clamp(1.4rem, 3.2vw, 1.9rem); font-weight: 900; margin-bottom: 12px; }
+.cf-lead { font-size: .92rem; line-height: 1.8; color: var(--gray-700, #374151); }
+.cf-lead strong { color: var(--gray-900, #111827); }
+.cf-form { background: #fff; border: 1px solid var(--gray-200, #e5e7eb); border-radius: 12px; padding: 28px 24px; }
+.cf-submit { width: 100%; margin-top: 8px; }
+.cf-note { text-align: center; font-size: .8rem; color: var(--gray-500, #6b7280); margin-top: 14px; }
+@media (max-width: 640px) {
+  .cf-section { padding: 40px 0; }
+  .cf-form { padding: 22px 18px; }
+}
+</style>
