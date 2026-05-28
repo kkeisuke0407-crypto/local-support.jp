@@ -1,0 +1,213 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../data/site';
+
+const title = '編集方針・取材ポリシー｜ロカサポ';
+const description = 'ロカサポ（運営：ローカル情報局）の編集方針・取材ポリシー・利益相反の開示・訂正方針を明示します。施設管理担当者が安心して情報を参照できるサイト運営を目指しています。';
+const canonical = `${site.domain}/editorial-policy/`;
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: '編集方針・取材ポリシー', item: canonical },
+  ],
+});
+
+const policyLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: title,
+  description,
+  url: canonical,
+  inLanguage: 'ja-JP',
+  publisher: { '@type': 'Organization', name: site.org.legalName, url: site.domain },
+});
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="編集方針・取材ポリシー"
+  jsonLdBlocks={[breadcrumbLd, policyLd]}
+>
+  <section class="ep-hero">
+    <div class="sd-container">
+      <nav class="ep-crumbs" aria-label="パンくず">
+        <a href="/">トップ</a><span aria-hidden="true">›</span><span>編集方針・取材ポリシー</span>
+      </nav>
+      <h1 class="ep-h1">編集方針・取材ポリシー</h1>
+      <p class="ep-lead">
+        ロカサポ（運営：{site.org.legalName}）は、マンション管理組合・ビル管理会社・店舗オーナーなど施設管理担当者が「業者選びで迷わない」ための情報メディアです。本ページでは、執筆・取材・利益相反・訂正に関する基本方針を公開します。
+      </p>
+      <p class="ep-meta">最終更新：2026年5月26日</p>
+    </div>
+  </section>
+
+  <section class="sd-section ep-section">
+    <div class="sd-container ep-container">
+
+      <article class="ep-article">
+
+        <h2>1. 編集ミッション</h2>
+        <p>
+          ロカサポは、<strong>「施設管理担当者が、業者選びで判断を誤らないこと」</strong>を編集ミッションに掲げています。法令上の義務・費用相場・業者選定基準・典型的なトラブル事例を、当事者目線でわかりやすく整理することを目指します。
+        </p>
+        <ul>
+          <li>大手アグリゲータでは扱われにくいニッチな専門領域（消防設備点検・グリストラップ清掃・看板点検など）にも一次情報を提供します</li>
+          <li>「業者比較」だけでなく、依頼前後の意思決定に必要な背景知識を提供します</li>
+          <li>過剰な不安を煽る記述、根拠のない断定的な表現は避けます</li>
+        </ul>
+
+        <h2>2. 執筆・取材ポリシー</h2>
+
+        <h3>2-1. 一次情報の優先</h3>
+        <p>
+          法令・規制に関する記述は、原則として以下の一次情報源を参照します。
+        </p>
+        <ul>
+          <li>e-Gov 法令検索（政府公式）</li>
+          <li>所管省庁の公式ガイドライン（厚生労働省・消防庁・環境省・経済産業省・国土交通省など）</li>
+          <li>業界団体の公式資料（日本ペストコントロール協会、日本サイン協会等）</li>
+          <li>各都道府県・市区町村の公式条例・通達</li>
+        </ul>
+
+        <h3>2-2. 費用相場の取り扱い</h3>
+        <p>
+          費用相場は「ロカサポ調査」と表記した独自のヒアリング結果と、業界団体・主要事業者の公表データを組み合わせて掲載しています。具体的な調査メソッドは <a href="/research/methodology/">調査方法ページ</a>（準備中）に公開予定です。
+        </p>
+        <p>
+          相場には地域差・施設規模・契約条件による幅があるため、必ず「目安」と明記し、最終的な金額判断は複数業者の見積を取得することを推奨しています。
+        </p>
+
+        <h3>2-3. 更新サイクル</h3>
+        <p>
+          法令改正・運用変更・税制変更があった場合は速やかに該当記事を更新します。年に1回、各記事の最終更新日を見直し、変更がない場合でも内容の妥当性をチェックします。
+        </p>
+
+        <h2>3. 監修・レビュー</h2>
+        <p>
+          法令の解釈や税務・補助金に関する記述については、関連分野の有資格者（建築士・社会保険労務士・税理士など）の協力のもと、可能な範囲で監修を受けています。監修者の表示は今後拡充していきます。
+        </p>
+        <p>
+          AIによる下書きを使用する場合がありますが、<strong>公開前に必ず編集部の人間が法令引用・数値・固有名詞を確認</strong>し、誤情報のリスクを最小化しています。
+        </p>
+
+        <h2>4. 利益相反の開示</h2>
+        <p>
+          ロカサポは業者紹介サービスです。読者が各サービスサイトのフォームから依頼することで、紹介先業者から手数料を受け取る可能性があるビジネスモデルです（具体的な料率は公開時期未定）。この透明性を保つため、以下を遵守します。
+        </p>
+        <ul>
+          <li>特定業者を過度に推奨する記事は作成しません</li>
+          <li>業者から金銭授受を受けて掲載順位を変更することはありません</li>
+          <li>「PR」「スポンサード」記事を掲載する場合は、記事冒頭に明示します（現時点では掲載なし）</li>
+          <li>編集記事と広告枠は明確に区別します</li>
+        </ul>
+
+        <h2>5. 訂正・更新ポリシー</h2>
+        <p>
+          記事内容に誤りや、最新情報との齟齬が発覚した場合は、可能な限り速やかに修正します。重大な訂正の場合は、記事末尾に「訂正履歴」として残します。
+        </p>
+        <p>
+          訂正・追記をご希望の場合は、<a href="/#contact">お問い合わせフォーム</a>から「種別：その他」を選択してご連絡ください。原則として営業日3日以内に対応します。
+        </p>
+
+        <h2>6. 著作権・引用</h2>
+        <p>
+          本サイトの記事・図表・データは、出典明記＋本サイトへのリンクを条件に引用していただけます。引用範囲を超える転載・改変はお問い合わせください。
+        </p>
+        <p>
+          逆に、第三者の著作物（行政公表資料・業界団体の図表など）を引用する際は、必ず出典を明記しています。
+        </p>
+
+        <h2>7. プライバシー・個人情報</h2>
+        <p>
+          フォーム送信などで取得した個人情報の取扱いは、<a href="/privacy/">プライバシーポリシー</a>に従います。法令上必要な場合を除き、第三者提供は行いません。
+        </p>
+
+        <h2>8. 取材・寄稿のお問い合わせ</h2>
+        <p>
+          メディア掲載・取材依頼・寄稿のご相談は、お問い合わせフォームの「種別：取材依頼／メディア掲載」よりご連絡ください。原則として2〜3営業日以内にご返信いたします。
+        </p>
+        <p>
+          <a href="/#contact" class="ep-cta-link">取材・提携のお問い合わせフォームへ →</a>
+        </p>
+
+        <h2>9. 運営者情報</h2>
+        <ul class="ep-meta-list">
+          <li><strong>サイト名：</strong>{site.name}（local-support.jp）</li>
+          <li><strong>運営：</strong>{site.org.legalName}</li>
+          <li><strong>編集長：</strong>{site.author.name}（{site.author.role}）</li>
+          <li><strong>運営者情報：</strong><a href="/operator/">/operator/</a></li>
+        </ul>
+
+      </article>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.ep-hero { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.ep-crumbs { font-size: .78rem; opacity: .85; margin-bottom: 16px; display: flex; gap: 6px; align-items: center; }
+.ep-crumbs a { color: #fff; text-decoration: none; }
+.ep-crumbs a:hover { text-decoration: underline; }
+.ep-h1 { font-size: clamp(1.4rem, 3.2vw, 2rem); font-weight: 900; line-height: 1.4; margin-bottom: 14px; }
+.ep-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 760px; }
+.ep-lead strong { color: #fff; }
+.ep-meta { font-size: .78rem; opacity: .7; margin-top: 18px; }
+
+.ep-section { padding: 48px 0 64px; background: #fff; }
+.ep-container { max-width: 820px; }
+.ep-article h2 {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--gray-900, #111827);
+  border-bottom: 2px solid var(--blue-light, #dbeafe);
+  padding-bottom: 8px;
+  margin: 36px 0 14px;
+}
+.ep-article h2:first-of-type { margin-top: 0; }
+.ep-article h3 {
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: var(--gray-800, #1f2937);
+  margin: 22px 0 10px;
+}
+.ep-article p {
+  font-size: .94rem;
+  line-height: 1.9;
+  color: var(--gray-700, #374151);
+  margin-bottom: 14px;
+}
+.ep-article ul {
+  padding-left: 22px;
+  margin: 8px 0 18px;
+}
+.ep-article li {
+  font-size: .92rem;
+  line-height: 1.85;
+  color: var(--gray-700, #374151);
+  margin-bottom: 6px;
+}
+.ep-article a { color: var(--blue, #1d4ed8); text-decoration: underline; }
+.ep-article strong { color: var(--gray-900, #111827); font-weight: 700; }
+
+.ep-meta-list { list-style: none; padding: 0; background: var(--gray-100, #f3f4f6); border-radius: 10px; padding: 18px 22px; }
+.ep-meta-list li { font-size: .9rem; margin-bottom: 6px; }
+
+.ep-cta-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-weight: 700;
+  color: var(--blue, #1d4ed8);
+}
+
+@media (max-width: 640px) {
+  .ep-hero { padding: 36px 0 30px; }
+  .ep-section { padding: 32px 0 48px; }
+  .ep-article h2 { font-size: 1.1rem; }
+}
+</style>
