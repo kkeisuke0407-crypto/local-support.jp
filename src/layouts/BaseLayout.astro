@@ -32,7 +32,7 @@ const baseLdBlocks = [
     name: site.org.legalName,
     alternateName: site.name,
     url: site.domain,
-    logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png`, width: 1200, height: 630 },
+    logo: `${site.domain}/logo-mark.svg`,
     areaServed: { '@type': 'Country', name: 'JP' },
     contactPoint: {
       '@type': 'ContactPoint',
@@ -79,8 +79,8 @@ const allLdBlocks = [...baseLdBlocks, ...jsonLdBlocks];
   <meta name="twitter:card"       content="summary_large_image" />
 
   <meta name="theme-color" content="#1a56db" />
-  <link rel="icon" type="image/svg+xml" href="/og-default.svg" />
-  <link rel="apple-touch-icon" href="/og-default.svg" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/logo-mark.svg" />
 
   <!-- Fonts: preconnect + preload critical weight -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -127,7 +127,7 @@ const allLdBlocks = [...baseLdBlocks, ...jsonLdBlocks];
   <div class="sd-header-inner">
     <a href="/" class="sd-logo">
       <div class="sd-logo-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <img src="/logo-mark.svg" width="36" height="36" alt="" decoding="async" />
       </div>
       <div class="sd-logo-wrap">
         <span>{siteName}</span>
