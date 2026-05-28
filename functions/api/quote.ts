@@ -18,6 +18,7 @@ const FIELD_LABELS: Record<string, string> = {
   schedule: '希望時期・時間帯',
   message: '補足メッセージ',
   name: '担当者名',
+  contact_method: '希望の連絡方法',
   email: '連絡先メール',
   tel: '連絡先電話',
   agree: '同意',
@@ -158,13 +159,27 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       return jsonResponse(200, { ok: true });
     }
 
-    if (!data.company || !data.email || !data.prefecture || !data.tel) {
+    if (!data.company || !data.prefecture) {
       return jsonResponse(400, { ok: false, error: '必須項目が不足しています' });
     }
-    if (!isValidEmail(data.email)) {
+
+    // 連絡方法バリデーション
+    const method = data.contact_method;
+    if (method === 'メール') {
+      if (!data.email) return jsonResponse(400, { ok: false, error: 'メールアドレスを入力してください' });
+    } else if (method === '電話') {
+      if (!data.tel) return jsonResponse(400, { ok: false, error: '電話番号を入力してください' });
+    } else if (method === 'どちらでも') {
+      if (!data.email && !data.tel) return jsonResponse(400, { ok: false, error: 'メールまたは電話番号を入力してください' });
+    } else {
+      // contact_method未指定（旧フォーム互換）：両方必須
+      if (!data.email || !data.tel) return jsonResponse(400, { ok: false, error: '必須項目が不足しています' });
+    }
+
+    if (data.email && !isValidEmail(data.email)) {
       return jsonResponse(400, { ok: false, error: 'メールアドレスの形式が正しくありません' });
     }
-    if (!isValidTel(data.tel)) {
+    if (data.tel && !isValidTel(data.tel)) {
       return jsonResponse(400, { ok: false, error: '電話番号の形式が正しくありません' });
     }
     if (data.agree !== undefined && data.agree !== 'on' && data.agree !== 'true' && data.agree !== '1') {
@@ -184,7 +199,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       body: JSON.stringify({
         from: FROM_ADDRESS,
         to: [TO_ADDRESS],
-        reply_to: data.email,
+        ...(data.email ? { reply_to: data.email } : {}),
         subject,
         html,
         text,
@@ -197,8 +212,8 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       return jsonResponse(502, { ok: false, error: 'メール送信に失敗しました' });
     }
 
-    // ユーザー宛の受付確認メール（失敗してもメイン処理は成功扱い）
-    try {
+    // ユーザー宛の受付確認メール（メールアドレスがある場合のみ・失敗してもメイン処理は成功扱い）
+    if (data.email) try {
       const userReplyResp = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {

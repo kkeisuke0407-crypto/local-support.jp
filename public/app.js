@@ -169,6 +169,40 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  /* ── Contact method toggle ── */
+  (function initContactMethod() {
+    document.querySelectorAll('form.qf').forEach(function (form) {
+      var methodInputs = form.querySelectorAll('input[name="contact_method"]');
+      if (!methodInputs.length) return;
+
+      var emailRow = form.querySelector('.qf-contact-email');
+      var telRow   = form.querySelector('.qf-contact-tel');
+      var emailEl  = emailRow && emailRow.querySelector('input[name="email"]');
+      var telEl    = telRow   && telRow.querySelector('input[name="tel"]');
+
+      function applyMethod(method) {
+        if (method === 'メール') {
+          if (emailRow) { emailRow.hidden = false; if (emailEl) emailEl.required = true; }
+          if (telRow)   { telRow.hidden   = true;  if (telEl)   { telEl.required = false; telEl.value = ''; } }
+        } else if (method === '電話') {
+          if (emailRow) { emailRow.hidden = true;  if (emailEl) { emailEl.required = false; emailEl.value = ''; } }
+          if (telRow)   { telRow.hidden   = false; if (telEl)   telEl.required = true; }
+        } else { // どちらでも
+          if (emailRow) { emailRow.hidden = false; if (emailEl) emailEl.required = false; }
+          if (telRow)   { telRow.hidden   = false; if (telEl)   telEl.required = false; }
+        }
+      }
+
+      // JS有効時：初期状態は両方非表示
+      if (emailRow) emailRow.hidden = true;
+      if (telRow)   telRow.hidden   = true;
+
+      methodInputs.forEach(function (input) {
+        input.addEventListener('change', function () { applyMethod(this.value); });
+      });
+    });
+  })();
+
   /* ── Cookie consent banner ── */
   var banner = document.getElementById('cookie-banner');
   if (banner) {
