@@ -18,6 +18,8 @@ import furonTenken from './furon-tenken';
 import reitoReizou from './reito-reizou';
 import solarCleaning from './solar-cleaning';
 import solarOm from './solar-om';
+import gaihekiToso from './gaiheki-toso';
+import yaneFukikae from './yane-fukikae';
 
 export const allServices: ServiceData[] = [
   jusuisouSeisou,
@@ -39,6 +41,8 @@ export const allServices: ServiceData[] = [
   reitoReizou,
   solarCleaning,
   solarOm,
+  gaihekiToso,
+  yaneFukikae,
 ];
 
 export const serviceBySlug = Object.fromEntries(
