@@ -3,8 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactFormGeneric from '../components/ContactFormGeneric.astro';
 import { site, serviceIndex } from '../data/site';
 
-const PAGE_TITLE = `${site.name}｜施設管理の業者紹介サイトを9分野で運営`;
-const PAGE_DESC  = 'ロカサポ（運営：ローカル情報局）は、受水槽清掃・消防設備点検・アスベスト調査など9分野で施設管理の業者紹介サイトを運営しています。各サービス一覧・お役立ち記事・取材／提携のお問い合わせはこちらから。';
+const PAGE_TITLE = `${site.name}｜施設管理の業者紹介サイトを27分野で運営`;
+const PAGE_DESC  = 'ロカサポ（運営：ローカル情報局）は、受水槽清掃・消防設備点検・アスベスト調査など27分野で施設管理の業者紹介サイトを運営しています。各サービス一覧・お役立ち記事・取材／提携のお問い合わせはこちらから。';
 const CANONICAL  = `${site.domain}/`;
 
 const websiteLd = JSON.stringify({
@@ -81,7 +81,7 @@ const featuredColumns = [
   description={PAGE_DESC}
   canonical={CANONICAL}
   siteName={site.name}
-  logoSub="施設管理の業者紹介サイトを9分野で運営"
+  logoSub="施設管理の業者紹介サイトを27分野で運営"
   jsonLdBlocks={[websiteLd, orgLd, itemListLd]}
 >
 
@@ -93,7 +93,7 @@ const featuredColumns = [
       <h1 class="lp-hero-h1">{site.name}<br/><span class="lp-hero-h1-sub">— 施設管理の業者選びを、もっとかんたんに。</span></h1>
       <p class="lp-hero-desc">
         受水槽清掃・消防設備点検・アスベスト調査など、<br class="pc-only"/>
-        <strong>9分野で施設管理の業者紹介サイトを運営</strong>しています。<br class="pc-only"/>
+        <strong>27分野で施設管理の業者紹介サイトを運営</strong>しています。<br class="pc-only"/>
         見積もりのご依頼は各サービスサイトから、取材・提携のご相談はページ下部のフォームへどうぞ。
       </p>
       <div class="lp-hero-ctas">
@@ -101,7 +101,7 @@ const featuredColumns = [
         <a href="#contact" class="lp-hero-cta-secondary">取材・提携のお問い合わせ</a>
       </div>
       <ul class="lp-hero-badges">
-        <li>運営サービス：9分野</li>
+        <li>運営サービス：27分野</li>
         <li>全国47都道府県に対応</li>
         <li>資格・許認可を確認した業者のみ紹介</li>
       </ul>
