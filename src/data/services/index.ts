@@ -8,6 +8,8 @@ import greaseTrap from './grease-trap';
 import airconBusiness from './aircon-business';
 import pestControl from './pest-control';
 import signboardInspection from './signboard-inspection';
+import jikayouDenki from './jikayou-denki';
+import elevatorHoshu from './elevator-hoshu';
 
 export const allServices: ServiceData[] = [
   jusuisouSeisou,
@@ -19,6 +21,8 @@ export const allServices: ServiceData[] = [
   airconBusiness,
   pestControl,
   signboardInspection,
+  jikayouDenki,
+  elevatorHoshu,
 ];
 
 export const serviceBySlug = Object.fromEntries(
