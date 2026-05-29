@@ -20,6 +20,7 @@ import BottomCTA from '../components/BottomCTA.astro';
 import AIOSummary from '../components/AIOSummary.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import { site } from '../data/site';
+import { ogImageUrl } from '../data/ogImage';
 import type { ServiceData } from '../data/services/_types';
 import type { Prefecture } from '../data/prefectures';
 import { isPrimaryPrefecture } from '../data/prefectures';
@@ -138,7 +139,7 @@ const jsonLdBlocks = [breadcrumbLd, serviceLd, webPageLd, faqLd, howToLd, priceL
   canonical={canonical}
   siteName={data.siteName}
   logoSub={`${prefecture.name}の${data.serviceName}業者をご紹介`}
-  ogImage={`${site.domain}/og-${data.slug}.png`}
+  ogImage={ogImageUrl(data.slug)}
   jsonLdBlocks={jsonLdBlocks}
   noindex={noindex}
 >
