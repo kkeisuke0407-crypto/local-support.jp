@@ -3,8 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactFormGeneric from '../components/ContactFormGeneric.astro';
 import { site, serviceIndex } from '../data/site';
 
-const PAGE_TITLE = `${site.name}｜施設管理サービス事業の運営者ハブ`;
-const PAGE_DESC  = 'ロカサポ（運営：ローカル情報局）は、受水槽清掃・消防設備点検・アスベスト調査など9つの施設管理サービス分野で業者紹介サイトを運営しています。各サービスの一覧、お役立ち情報、取材・提携のお問い合わせはこちらから。';
+const PAGE_TITLE = `${site.name}｜施設管理の業者紹介サイトを9分野で運営`;
+const PAGE_DESC  = 'ロカサポ（運営：ローカル情報局）は、受水槽清掃・消防設備点検・アスベスト調査など9分野で施設管理の業者紹介サイトを運営しています。各サービス一覧・お役立ち記事・取材／提携のお問い合わせはこちらから。';
 const CANONICAL  = `${site.domain}/`;
 
 const websiteLd = JSON.stringify({
@@ -81,7 +81,7 @@ const featuredColumns = [
   description={PAGE_DESC}
   canonical={CANONICAL}
   siteName={site.name}
-  logoSub="施設管理サービス事業の運営者ハブ"
+  logoSub="施設管理の業者紹介サイトを9分野で運営"
   jsonLdBlocks={[websiteLd, orgLd, itemListLd]}
 >
 
@@ -89,12 +89,12 @@ const featuredColumns = [
 <section class="lp-hero">
   <div class="sd-container lp-hero-inner">
     <div class="lp-hero-copy">
-      <p class="lp-hero-kicker">ローカル情報局が運営する施設管理サービスハブ</p>
+      <p class="lp-hero-kicker">ローカル情報局が運営する施設管理メディア</p>
       <h1 class="lp-hero-h1">{site.name}<br/><span class="lp-hero-h1-sub">— 施設管理の業者選びを、もっとかんたんに。</span></h1>
       <p class="lp-hero-desc">
         受水槽清掃・消防設備点検・アスベスト調査など、<br class="pc-only"/>
-        <strong>9つの施設管理サービス分野で業者紹介サイトを運営</strong>しています。<br class="pc-only"/>
-        お見積もり依頼は各サービスサイトから、取材・提携のご相談はこのページ下部のフォームへ。
+        <strong>9分野で施設管理の業者紹介サイトを運営</strong>しています。<br class="pc-only"/>
+        見積もりのご依頼は各サービスサイトから、取材・提携のご相談はページ下部のフォームへどうぞ。
       </p>
       <div class="lp-hero-ctas">
         <a href="#services" class="lp-hero-cta">運営サービス一覧を見る ↓</a>
@@ -102,8 +102,8 @@ const featuredColumns = [
       </div>
       <ul class="lp-hero-badges">
         <li>運営サービス：9分野</li>
-        <li>全国47都道府県対応</li>
-        <li>資格・許認可確認済み業者のみ紹介</li>
+        <li>全国47都道府県に対応</li>
+        <li>資格・許認可を確認した業者のみ紹介</li>
       </ul>
     </div>
     <figure class="lp-hero-visual">
@@ -119,7 +119,7 @@ const featuredColumns = [
       <span class="lp-section-kicker">SERVICES</span>
       <h2 class="lp-section-title">運営しているサービスサイト</h2>
       <p class="lp-section-lead">
-        各サービスごとに専門サイトを運営しています。お見積もり依頼は各サイトのフォームよりお願いいたします。
+        サービスごとに専門サイトを用意しています。見積もりのご依頼は各サイトのフォームからお願いします。
       </p>
     </div>
     <div class="lp-service-grid">
@@ -143,25 +143,25 @@ const featuredColumns = [
       <span class="lp-section-kicker">ABOUT</span>
       <h2 class="lp-section-title">{site.name}について</h2>
       <p class="lp-section-lead">
-        マンション管理組合・ビル管理会社・店舗オーナーが業者選びで迷わない情報を、運営者の責任で発信しています。
+        マンション管理組合・ビル管理会社・店舗オーナーが業者選びで迷わないように、運営者の責任で情報を発信しています。
       </p>
     </div>
     <div class="lp-about-grid">
       <div class="lp-about-card">
         <h3>登録業者のみ紹介</h3>
-        <p>各分野で必要な登録・資格・許認可を確認済みの業者のみ紹介。無資格業者への発注リスクを回避できます。</p>
+        <p>各分野で必要な登録・資格・許認可を確認した業者だけを紹介。無資格業者にうっかり依頼してしまうリスクを避けられます。</p>
       </div>
       <div class="lp-about-card">
         <h3>一括見積で最大3社を比較</h3>
-        <p>一度の入力で複数業者の見積もりが届きます。費用の妥当性確認と過剰請求の防止に役立ちます。</p>
+        <p>一度の入力で複数業者の見積もりが届きます。金額が妥当かどうか、相見積もりで判断しやすくなります。</p>
       </div>
       <div class="lp-about-card">
         <h3>全国対応・地元業者ネットワーク</h3>
-        <p>全国47都道府県に対応。施設所在地に近い地元業者を優先紹介するため、出張費を抑えた対応が期待できます。</p>
+        <p>全国47都道府県に対応。施設の近くの業者を優先して紹介するので、出張費を抑えやすいのもメリットです。</p>
       </div>
       <div class="lp-about-card">
         <h3>完全無料・しつこい営業なし</h3>
-        <p>依頼から紹介まですべて無料。紹介した業者には過度な営業を禁じており、安心してご利用いただけます。</p>
+        <p>依頼から紹介まで無料。紹介した業者にはしつこい営業を禁止しているので、安心してお使いいただけます。</p>
       </div>
     </div>
   </div>
@@ -174,7 +174,7 @@ const featuredColumns = [
       <span class="lp-section-kicker">COLUMN</span>
       <h2 class="lp-section-title">お役立ち情報・コラム</h2>
       <p class="lp-section-lead">
-        施設管理に関わる法令・費用相場・業者選びの実務情報を発信しています。
+        施設管理にまつわる法令・費用相場・業者選びの実務をまとめたコラムです。
       </p>
     </div>
     <ul class="lp-column-list">

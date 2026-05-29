@@ -1,9 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { site, serviceIndex } from '../../data/site';
+import { site } from '../../data/site';
 
 const title = '業者・施工会社の方へ｜ロカサポへの掲載・提携のご案内';
-const description = '受水槽清掃・消防設備点検・アスベスト調査など、施設管理サービスを提供する業者様向けの提携・掲載案内ページ。ロカサポは登録資格・許認可を確認した有資格業者のみを施設管理担当者にご紹介しています。';
+const description = 'ロカサポは、施設管理サービスを手がける業者の方の登録を無料で受け付けています。一旦の登録条件は「ロカサポへの被リンク設置」のみ。見積依頼の流れと被リンクの設置方法をまとめました。';
 const canonical = `${site.domain}/for-partners/`;
 
 const breadcrumbLd = JSON.stringify({
@@ -15,31 +15,12 @@ const breadcrumbLd = JSON.stringify({
   ],
 });
 
-const faqLd = JSON.stringify({
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: [
-    { '@type': 'Question', name: '掲載に費用はかかりますか？', acceptedAnswer: { '@type': 'Answer', text: '初期登録は無料です。具体的な紹介料・成果報酬の料率は、サービス分野・対応エリア・登録時期で個別にご相談させていただきます。詳細はお問い合わせください。' } },
-    { '@type': 'Question', name: 'どのような業者が登録できますか？', acceptedAnswer: { '@type': 'Answer', text: '各サービス分野で必要な登録・国家資格・許認可を保有する業者が対象です。例：受水槽清掃なら「建築物飲料水貯水槽清掃業」の都道府県知事登録、消防設備点検なら消防設備士または消防設備点検資格者の在籍が必要です。' } },
-    { '@type': 'Question', name: '対応エリアはどう選べますか？', acceptedAnswer: { '@type': 'Answer', text: '都道府県・市区町村単位で対応エリアを指定いただけます。複数都道府県の対応も可能です。出張対応の可否・追加料金の条件も登録時に登録いただきます。' } },
-    { '@type': 'Question', name: '紹介の流れを教えてください。', acceptedAnswer: { '@type': 'Answer', text: '依頼者から見積依頼が入った時点で、対応可能な登録業者を最大3社まで厳選しご紹介します。依頼者と業者の直接連絡となり、その後の見積提示・契約は当事者間で進めていただきます。' } },
-    { '@type': 'Question', name: '紹介後の報告・支払いはどのような流れですか？', acceptedAnswer: { '@type': 'Answer', text: '成約有無は月次で業者様からご報告いただきます。成果報酬型の場合、報告に基づき翌月末にご請求書を発行いたします。詳細な運用ルールは個別契約時にご説明します。' } },
-    { '@type': 'Question', name: '途中で解約・休止できますか？', acceptedAnswer: { '@type': 'Answer', text: 'はい、月単位での休止・解約が可能です。1か月前のご連絡をお願いしています。違約金は発生しません。' } },
-  ],
-});
-
-// 必要な資格・許認可の対応表
-const qualifications = [
-  { service: '受水槽清掃', slug: 'jusuisou-seisou', required: '建築物飲料水貯水槽清掃業（都道府県知事登録）' },
-  { service: 'アスベスト調査・除去', slug: 'asbestos', required: '建築物石綿含有建材調査者、石綿作業主任者（除去工事）' },
-  { service: 'ダクト清掃', slug: 'duct', required: '産業廃棄物収集運搬業（清掃廃棄物がある場合）' },
-  { service: 'シャッター点検・修理', slug: 'shutter', required: '建築設備検査員・防火設備検査員（防火シャッター）' },
-  { service: '消防設備点検', slug: 'shobo-setsubi', required: '消防設備士（甲種・乙種）、消防設備点検資格者' },
-  { service: 'グリストラップ清掃', slug: 'grease-trap', required: '産業廃棄物収集運搬業（汚泥・廃油）' },
-  { service: '業務用エアコン洗浄・修理', slug: 'aircon-business', required: '第一種冷媒フロン類取扱技術者、第一種フロン類充塡回収業者登録' },
-  { service: '害虫駆除（業務用PCO）', slug: 'pest-control', required: '建築物ねずみ昆虫等防除業、ペストコントロール技術者' },
-  { service: '看板・屋外広告物点検', slug: 'signboard-inspection', required: '屋外広告物点検技能講習修了者、電気工事士（電飾サイン）' },
-];
+// 被リンク用のサンプルコード
+const linkUrl = site.domain + '/';
+const textLinkSample = `<a href="${linkUrl}" target="_blank" rel="noopener">施設管理の業者紹介サイト｜ロカサポ</a>`;
+const bannerLinkSample = `<a href="${linkUrl}" target="_blank" rel="noopener">
+  <img src="${site.domain}/images/partners/banner.png" alt="施設管理の業者紹介サイト ロカサポ" width="2172" height="724" style="max-width:100%;height:auto;">
+</a>`;
 ---
 <BaseLayout
   title={title}
@@ -47,7 +28,7 @@ const qualifications = [
   canonical={canonical}
   siteName={site.name}
   logoSub="業者・施工会社の方へ"
-  jsonLdBlocks={[breadcrumbLd, faqLd]}
+  jsonLdBlocks={[breadcrumbLd]}
 >
   <section class="fp-hero">
     <div class="sd-container">
@@ -57,121 +38,79 @@ const qualifications = [
       <p class="fp-kicker">FOR PARTNERS</p>
       <h1 class="fp-h1">業者・施工会社の方へ<br/><span class="fp-h1-sub">— ロカサポへの掲載・提携のご案内</span></h1>
       <p class="fp-lead">
-        ロカサポは、<strong>登録資格・許認可を確認した有資格業者のみ</strong>を施設管理担当者（マンション管理組合・ビル管理会社・店舗オーナー等）にご紹介しています。新規登録・提携のご相談を受け付けています。
+        ロカサポでは、施設管理サービスを手がける業者の方の登録を<strong>無料</strong>で受け付けています。
+        紹介料・成果報酬とも、現在は<strong>0円</strong>。お試しいただきやすい運用にしています。
       </p>
-      <div class="fp-cta-row">
-        <a href="#apply" class="fp-cta-primary">提携のお問い合わせへ ↓</a>
-        <a href="#flow" class="fp-cta-secondary">提携の流れを見る</a>
-      </div>
+      <a href="#apply" class="fp-cta-primary">お問い合わせへ ↓</a>
     </div>
   </section>
 
   <section class="sd-section fp-section">
     <div class="sd-container fp-container">
 
-      <h2 id="why" class="fp-h2">ロカサポと提携するメリット</h2>
-      <div class="fp-merit-grid">
-        <div class="fp-merit-card">
-          <h3>質の高い依頼者層</h3>
-          <p>マンション管理組合・ビル管理会社・店舗運営事業者が中心。価格だけでなく資格・実績・継続性を重視する層が依頼者です。</p>
-        </div>
-        <div class="fp-merit-card">
-          <h3>マッチング前の事前選別</h3>
-          <p>依頼者から事前にエリア・施設種別・緊急度を取得しているため、対応可能な依頼のみがご案内されます。</p>
-        </div>
-        <div class="fp-merit-card">
-          <h3>有資格者のみの紹介で差別化</h3>
-          <p>登録には資格・許認可の確認が必須。「無資格・無許可業者」と一括にならず、価格競争に巻き込まれにくい設計です。</p>
-        </div>
-        <div class="fp-merit-card">
-          <h3>低リスクで開始可能</h3>
-          <p>初期登録費用は無料。月単位での休止・解約が可能で、違約金もありません。</p>
-        </div>
-      </div>
-
-      <h2 id="qualifications" class="fp-h2">対応サービスと必要な資格・許認可</h2>
+      <h2 id="cond" class="fp-h2">登録の条件</h2>
       <p class="fp-desc">
-        ロカサポは下記9分野のサービスで業者を募集しています。登録には各分野で必要な資格・許認可の保有が必要です。
+        現在は無料での提携運用中のため、登録条件は<strong>「ロカサポへの被リンクを設置していただくこと」</strong>の1点だけです。
+        設置方法は <a href="#backlink">このページ後半</a> でご案内しています。
       </p>
-      <div class="fp-table-wrap">
-        <table class="fp-table">
-          <thead>
-            <tr>
-              <th scope="col">サービス分野</th>
-              <th scope="col">必要な資格・許認可（例）</th>
-            </tr>
-          </thead>
-          <tbody>
-            {qualifications.map((q) => (
-              <tr>
-                <th scope="row"><a href={`/${q.slug}/`}>{q.service}</a></th>
-                <td>{q.required}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
       <p class="fp-note">
-        上記以外の関連資格（建築士・電気工事士・防火管理者・施工管理技士など）も評価対象です。詳細はお問い合わせ時にお知らせください。
+        ※ 将来的に紹介料・成果報酬の設定や、必要資格・許認可の確認をお願いする場合は、事前にご相談のうえで進めます。事後的に費用が発生することはありません。
       </p>
 
-      <h2 id="flow" class="fp-h2">提携の流れ</h2>
+      <h2 id="flow" class="fp-h2">見積依頼から成約までの流れ</h2>
       <ol class="fp-flow">
         <li>
           <span class="fp-flow-num">STEP 1</span>
-          <h3>お問い合わせ</h3>
-          <p>ページ下部のフォームから「種別：提携相談」を選択してご連絡ください。会社概要・対応サービス・対応エリアを簡単にご記入いただきます。</p>
+          <h3>依頼者がフォームから見積依頼</h3>
+          <p>各サービスサイトのフォームから、施設情報・エリア・希望時期などが届きます。</p>
         </li>
         <li>
           <span class="fp-flow-num">STEP 2</span>
-          <h3>ヒアリング・資格確認</h3>
-          <p>営業日3日以内に運営者よりご返信。電話またはオンライン会議で20〜30分程度のヒアリングと、必要な許認可・資格証の確認を行います。</p>
+          <h3>ロカサポから業者へご案内</h3>
+          <p>対応エリア・サービス範囲に合う登録業者へ、依頼内容をメールでお送りします。受けるか辞退するかは業者側で選んでいただけます。</p>
         </li>
         <li>
           <span class="fp-flow-num">STEP 3</span>
-          <h3>契約・登録</h3>
-          <p>登録条件・料率にご合意いただいた後、業者プロフィール（対応エリア・営業時間・得意分野等）を登録します。所要は1〜2週間。</p>
+          <h3>業者から依頼者へ直接連絡</h3>
+          <p>受けていただいた業者から、依頼者へ直接メール・電話で連絡し、見積もり提示・現地調査・契約を進めていただきます。</p>
         </li>
         <li>
           <span class="fp-flow-num">STEP 4</span>
-          <h3>紹介開始</h3>
-          <p>依頼者から見積依頼が入り次第、対応可能エリア・サービス範囲に基づき最大3社にご紹介します。月次の成約報告と請求処理を行います。</p>
+          <h3>成約報告（任意）</h3>
+          <p>今後の運営の参考にさせていただくため、成約の有無を月に1回ほどご報告いただけると助かります。現状、紹介料・成果報酬はいただいていません。</p>
         </li>
       </ol>
 
-      <h2 id="faq" class="fp-h2">よくあるご質問</h2>
-      <dl class="fp-faq">
-        <div class="fp-faq-item">
-          <dt>掲載に費用はかかりますか？</dt>
-          <dd>初期登録は無料です。具体的な紹介料・成果報酬の料率は、サービス分野・対応エリア・登録時期により個別にご相談させていただきます。</dd>
-        </div>
-        <div class="fp-faq-item">
-          <dt>個人事業主でも登録できますか？</dt>
-          <dd>はい、必要な資格・許認可を保有していれば個人事業主も登録可能です。</dd>
-        </div>
-        <div class="fp-faq-item">
-          <dt>同業他社のサイトにも登録していますが大丈夫ですか？</dt>
-          <dd>問題ありません。他社サービスとの併用に制限は設けていません。</dd>
-        </div>
-        <div class="fp-faq-item">
-          <dt>紹介された案件を断ることはできますか？</dt>
-          <dd>はい、対応不可・繁忙期等で断ることは可能です。ただし極端に高頻度の辞退は紹介順位に影響する場合があります。</dd>
-        </div>
-        <div class="fp-faq-item">
-          <dt>紹介後のトラブル対応はどうなりますか？</dt>
-          <dd>依頼者と業者の間で発生したトラブルについて、ロカサポは原則として直接の責任を負いません。ただし、明らかに業者側に重大な過失（無資格作業・法令違反等）があった場合は、登録解除も含めた措置を取ります。</dd>
-        </div>
-        <div class="fp-faq-item">
-          <dt>業者プロフィールの内容は公開されますか？</dt>
-          <dd>依頼者へ紹介する際に、社名・対応エリア・得意分野・主な実績などを共有します。電話番号・メール等の連絡先は依頼受諾の合意後にやり取りされます。</dd>
-        </div>
-      </dl>
+      <h2 id="backlink" class="fp-h2">被リンクの設置方法</h2>
+      <p class="fp-desc">
+        御社サイトのフッターやリンク集ページに、次のいずれかの方法でロカサポへのリンクを設置してください。<strong>バナーでもテキストリンクでもどちらでもOK</strong>です。
+      </p>
+
+      <h3 class="fp-h3">A. バナーリンクの場合（推奨）</h3>
+      <p class="fp-desc-sm">
+        専用のバナー画像をご用意しています。下のHTMLをコピーして、御社サイトに貼り付けてください。
+      </p>
+      <div class="fp-banner-preview">
+        <img src="/images/partners/banner.png" alt="ロカサポ｜施設管理の業者紹介サイト" width="2172" height="724" />
+      </div>
+      <pre class="fp-code"><code>{bannerLinkSample}</code></pre>
+      <p class="fp-desc-sm">
+        ※ バナー画像はロカサポ側でホストしていますので、御社サーバーへのアップロードは不要です。サイズは <code>max-width:100%</code> で自動調整される設定になっています。
+      </p>
+
+      <h3 class="fp-h3">B. テキストリンクの場合</h3>
+      <p class="fp-desc-sm">画像を貼りたくない場合は、テキストリンクでもOKです。</p>
+      <pre class="fp-code"><code>{textLinkSample}</code></pre>
+
+      <h3 class="fp-h3">設置後のご連絡</h3>
+      <p class="fp-desc-sm">
+        被リンクを設置していただいたら、<strong>設置先ページのURL</strong>をお問い合わせフォームからお知らせください。確認のうえ、登録手続きを進めます。
+      </p>
 
       <div id="apply" class="fp-apply">
-        <h2>提携・登録のお問い合わせ</h2>
-        <p>下記より「種別：提携相談（業者・メディア）」を選択してお問い合わせください。</p>
+        <h2>登録・お問い合わせ</h2>
+        <p>下のフォームから「種別：提携相談（業者・メディア）」を選んでお問い合わせください。<br/>営業日3日以内にご返信します。</p>
         <a href="/#contact" class="fp-apply-btn">お問い合わせフォームへ →</a>
-        <p class="fp-apply-note">通常2〜3営業日以内にご返信いたします。</p>
       </div>
 
     </div>
@@ -188,7 +127,6 @@ const qualifications = [
 .fp-h1-sub { display: block; font-size: clamp(.95rem, 2vw, 1.15rem); font-weight: 600; color: #cbe1ff; margin-top: 6px; }
 .fp-lead { font-size: .95rem; line-height: 1.85; opacity: .95; max-width: 760px; margin-bottom: 24px; }
 .fp-lead strong { color: #fff; }
-.fp-cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
 .fp-cta-primary {
   display: inline-block;
   background: var(--accent, #f59e0b);
@@ -200,18 +138,6 @@ const qualifications = [
   text-decoration: none;
 }
 .fp-cta-primary:hover { opacity: .9; }
-.fp-cta-secondary {
-  display: inline-block;
-  background: transparent;
-  border: 1.5px solid rgba(255,255,255,.6);
-  color: #fff;
-  font-weight: 600;
-  font-size: .95rem;
-  padding: 11px 24px;
-  border-radius: 8px;
-  text-decoration: none;
-}
-.fp-cta-secondary:hover { background: rgba(255,255,255,.12); }
 
 .fp-section { padding: 56px 0 64px; background: #fff; }
 .fp-container { max-width: 880px; }
@@ -226,34 +152,18 @@ const qualifications = [
   scroll-margin-top: 80px;
 }
 .fp-h2:first-of-type { margin-top: 0; }
-.fp-desc { font-size: .92rem; line-height: 1.85; color: var(--gray-700, #374151); margin-bottom: 16px; }
-.fp-note { font-size: .82rem; color: var(--gray-500, #6b7280); margin-top: 12px; font-style: italic; }
-
-.fp-merit-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 16px;
-  margin-bottom: 8px;
-}
-.fp-merit-card {
-  background: var(--gray-100, #f3f4f6);
-  border-radius: 10px;
-  padding: 20px 22px;
-}
-.fp-merit-card h3 {
-  font-size: 1rem;
+.fp-h3 {
+  font-size: 1.05rem;
   font-weight: 800;
-  color: var(--gray-900, #111827);
-  margin-bottom: 8px;
+  color: var(--gray-800, #1f2937);
+  margin: 24px 0 8px;
 }
-.fp-merit-card p { font-size: .88rem; line-height: 1.75; color: var(--gray-700, #374151); margin: 0; }
-
-.fp-table-wrap { overflow-x: auto; margin: 16px 0; }
-.fp-table { width: 100%; border-collapse: collapse; font-size: .9rem; }
-.fp-table th, .fp-table td { padding: 12px 14px; border: 1px solid var(--gray-200, #e5e7eb); text-align: left; line-height: 1.65; }
-.fp-table thead th { background: var(--blue-light, #dbeafe); color: var(--blue-dark, #1e3a8a); font-weight: 700; }
-.fp-table tbody th[scope="row"] { background: var(--gray-100, #f3f4f6); font-weight: 700; white-space: nowrap; }
-.fp-table tbody th a { color: var(--blue, #1d4ed8); text-decoration: underline; }
+.fp-desc { font-size: .92rem; line-height: 1.85; color: var(--gray-700, #374151); margin-bottom: 12px; }
+.fp-desc strong { color: var(--gray-900, #111827); }
+.fp-desc a { color: var(--blue, #1d4ed8); text-decoration: underline; }
+.fp-desc-sm { font-size: .88rem; line-height: 1.8; color: var(--gray-700, #374151); margin-bottom: 10px; }
+.fp-desc-sm code { background: var(--gray-100, #f3f4f6); padding: 2px 6px; border-radius: 4px; font-size: .82rem; }
+.fp-note { font-size: .82rem; color: var(--gray-500, #6b7280); margin-top: 8px; line-height: 1.7; }
 
 .fp-flow { list-style: none; padding: 0; margin: 18px 0 8px; display: grid; gap: 14px; }
 .fp-flow li {
@@ -276,10 +186,31 @@ const qualifications = [
 .fp-flow h3 { font-size: 1.02rem; font-weight: 800; color: var(--gray-900, #111827); margin-bottom: 6px; }
 .fp-flow p { font-size: .9rem; line-height: 1.85; color: var(--gray-700, #374151); margin: 0; }
 
-.fp-faq { display: grid; gap: 12px; margin: 18px 0 8px; }
-.fp-faq-item { border: 1px solid var(--gray-200, #e5e7eb); border-radius: 10px; overflow: hidden; }
-.fp-faq-item dt { background: var(--gray-100, #f3f4f6); padding: 14px 18px; font-weight: 700; font-size: .94rem; color: var(--gray-900, #111827); }
-.fp-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700, #374151); margin: 0; }
+.fp-banner-preview {
+  background: var(--gray-100, #f3f4f6);
+  border-radius: 10px;
+  padding: 18px;
+  margin: 10px 0 12px;
+  text-align: center;
+}
+.fp-banner-preview img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
+}
+
+.fp-code {
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-size: .82rem;
+  line-height: 1.65;
+  overflow-x: auto;
+  margin: 8px 0 12px;
+}
+.fp-code code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 
 .fp-apply {
   background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%);
@@ -291,7 +222,7 @@ const qualifications = [
   scroll-margin-top: 80px;
 }
 .fp-apply h2 { font-size: 1.2rem; font-weight: 900; margin-bottom: 10px; color: #fff; border: none; padding: 0; }
-.fp-apply p { font-size: .92rem; opacity: .92; margin-bottom: 16px; }
+.fp-apply p { font-size: .92rem; opacity: .92; margin-bottom: 16px; line-height: 1.8; }
 .fp-apply-btn {
   display: inline-block;
   background: var(--accent, #f59e0b);
@@ -303,13 +234,12 @@ const qualifications = [
   text-decoration: none;
 }
 .fp-apply-btn:hover { opacity: .9; }
-.fp-apply-note { margin-top: 14px; font-size: .82rem; opacity: .8; }
 
 @media (max-width: 640px) {
   .fp-hero { padding: 40px 0 32px; }
   .fp-section { padding: 36px 0 48px; }
   .fp-h2 { font-size: 1.15rem; }
-  .fp-cta-row { flex-direction: column; align-items: stretch; }
-  .fp-cta-primary, .fp-cta-secondary { text-align: center; }
 }
 </style>
+</content>
+</invoke>
