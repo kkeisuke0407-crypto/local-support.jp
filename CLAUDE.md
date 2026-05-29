@@ -22,12 +22,12 @@ npm run fetch-gsc:auth # クラウド環境用：ブラウザなしで OAuth2 �
 
 ### ページ生成の仕組み
 
-452ページを3種のルートで生成する：
+3種のルートでページを生成する（現在27サービス）：
 
 | ルート | レイアウト | 説明 |
 |---|---|---|
-| `/[service]/` | `ServiceLP.astro` | サービスカテゴリトップ（9サービス） |
-| `/[service]/[prefecture]/` | `PrefectureServiceLP.astro` | 都道府県 × サービス（9 × 47 = 423ページ） |
+| `/[service]/` | `ServiceLP.astro` | サービスカテゴリトップ（27サービス） |
+| `/[service]/[prefecture]/` | `PrefectureServiceLP.astro` | 都道府県 × サービス（27 × 47 = 1,269ページ） |
 | `/column/[slug]/` | 各コラム固有 | 記事コンテンツ（手動追加） |
 
 都道府県 × サービスの組み合わせは `src/pages/[service]/[prefecture]/index.astro` の `getStaticPaths()` が `allServices × prefecturesData` の直積で生成する。
@@ -58,7 +58,18 @@ src/data/
 
 ### noindex 戦略
 
-主要10都府県（`PRIMARY_PREFECTURE_SLUGS`）のみ検索インデックス対象。残り37都道府県は `noindex,nofollow`。解除条件は `docs/seo-scoring-rules.md` の「noindex解除ルール」を参照。`astro.config.mjs` の `sitemap filter` も主要10都府県のみを対象にしている。
+主要6都府県（`PRIMARY_PREFECTURE_SLUGS` = tokyo / osaka / aichi / kanagawa / fukuoka / saitama）のみ検索インデックス対象。残り41都道府県は `noindex,nofollow`。`astro.config.mjs` の `sitemap filter` も主要6都府県のみを対象にしている。
+
+**6都府県に絞った理由**：27サービスへ横展開した結果、インデックス対象が 27×10=270 ページに膨張し、新規ドメインでクロール予算が分散して「Discovered/Crawled – currently not indexed」が多発した。クロール予算を集中させるため 10→6 に縮小（27×6=162）。各サービスが「勝ち筋」になり地域固有データ（後述 `priceFactor`/`localFactors`）を拡充できた県から、saitama 以外の旧主要県（chiba / hokkaido / hyogo / shizuoka）を段階的に再追加する。解除条件は `docs/seo-scoring-rules.md` の「noindex解除ルール」を参照。
+
+### 都道府県ページの独自化（重複判定対策）
+
+都道府県ページは1サービス内で本文（法定義務・リスク・相場表・FAQ等）が47県共通のため、地名置換だけの重複（doorwayページ）と判定されやすい。これを避けるため `Prefecture` に地域固有フィールドを持たせ、各ページに固有コンテンツを生成する：
+
+- `priceFactor?`：全国平均=1.0 とした費用水準の目安。`CostTable` が「地域の相場感」注記を生成し、`PrefectureServiceLP` の AggregateOffer 構造化データの価格レンジにも乗算する（→ 県ごとに数値が変わる）。
+- `localFactors?`：その県固有の業者選び・費用・作業条件の事情（2〜4点）。`PrefectureIntro` が独自セクションとして描画する。
+
+いずれもインデックス対象（主要6都府県）のみ設定すれば十分。未設定の県は注記・セクションを出さない。**新たにインデックス対象へ昇格させる県には、必ず `priceFactor` と `localFactors` を先に拡充してから** `PRIMARY_PREFECTURE_SLUGS` に追加すること。
 
 ### JSON-LD
 

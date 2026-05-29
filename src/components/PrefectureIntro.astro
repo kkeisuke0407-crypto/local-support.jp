@@ -15,6 +15,67 @@ const citiesText = prefecture.majorCities.join('・');
       <p class="pref-intro-body">
         {site.name}では、{prefecture.name}内の<strong>{service.serviceName}</strong>に対応可能な業者の中から、ご依頼内容に応じて最大3社を厳選してご紹介します。お見積もり依頼は<strong>1分・完全無料</strong>。{prefecture.name}全域（{citiesText}など）に対応しています。
       </p>
+      {prefecture.localFactors && prefecture.localFactors.length > 0 && (
+        <div class="pref-local-factors">
+          <h3 class="pref-local-factors-title">{prefecture.name}で{service.serviceName}を依頼するときに知っておきたいこと</h3>
+          <ul class="pref-local-factors-list">
+            {prefecture.localFactors.map((f) => (
+              <li class="pref-local-factor">
+                <span class="pref-local-factor-title">{f.title}</span>
+                <span class="pref-local-factor-body">{f.body}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   </div>
 </section>
+
+<style>
+  .pref-local-factors {
+    margin-top: 1.75rem;
+    padding: 1.5rem;
+    background: #f6f9fc;
+    border: 1px solid #e2e9f0;
+    border-radius: 12px;
+  }
+  .pref-local-factors-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 0 0 1rem;
+    line-height: 1.5;
+  }
+  .pref-local-factors-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.9rem;
+  }
+  .pref-local-factor {
+    padding-left: 1.4rem;
+    position: relative;
+  }
+  .pref-local-factor::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.45em;
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    background: #2f80c4;
+  }
+  .pref-local-factor-title {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+  }
+  .pref-local-factor-body {
+    display: block;
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: #44525e;
+  }
+</style>
