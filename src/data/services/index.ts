@@ -22,6 +22,8 @@ import gaihekiToso from './gaiheki-toso';
 import yaneFukikae from './yane-fukikae';
 import kaitai from './kaitai';
 import zanchibutsu from './zanchibutsu';
+import bohanCamera from './bohan-camera';
+import nyutaishitsu from './nyutaishitsu';
 
 export const allServices: ServiceData[] = [
   jusuisouSeisou,
@@ -47,6 +49,8 @@ export const allServices: ServiceData[] = [
   yaneFukikae,
   kaitai,
   zanchibutsu,
+  bohanCamera,
+  nyutaishitsu,
 ];
 
 export const serviceBySlug = Object.fromEntries(
