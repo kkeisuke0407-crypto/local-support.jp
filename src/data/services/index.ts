@@ -14,6 +14,8 @@ import johkasou from './johkasou';
 import haisuikan from './haisuikan';
 import tokushuKenchiku from './tokushu-kenchiku';
 import boukaTenken from './bouka-tenken';
+import furonTenken from './furon-tenken';
+import reitoReizou from './reito-reizou';
 
 export const allServices: ServiceData[] = [
   jusuisouSeisou,
@@ -31,6 +33,8 @@ export const allServices: ServiceData[] = [
   haisuikan,
   tokushuKenchiku,
   boukaTenken,
+  furonTenken,
+  reitoReizou,
 ];
 
 export const serviceBySlug = Object.fromEntries(
