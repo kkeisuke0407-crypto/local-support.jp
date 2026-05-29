@@ -20,6 +20,8 @@ import solarCleaning from './solar-cleaning';
 import solarOm from './solar-om';
 import gaihekiToso from './gaiheki-toso';
 import yaneFukikae from './yane-fukikae';
+import kaitai from './kaitai';
+import zanchibutsu from './zanchibutsu';
 
 export const allServices: ServiceData[] = [
   jusuisouSeisou,
@@ -43,6 +45,8 @@ export const allServices: ServiceData[] = [
   solarOm,
   gaihekiToso,
   yaneFukikae,
+  kaitai,
+  zanchibutsu,
 ];
 
 export const serviceBySlug = Object.fromEntries(
