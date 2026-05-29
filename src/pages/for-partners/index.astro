@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { site } from '../../data/site';
 
 const title = '業者・施工会社の方へ｜ロカサポへの掲載・提携のご案内';
-const description = 'ロカサポは、施設管理サービスを手がける業者の方の登録を無料で受け付けています。登録条件は「必要な資格・許認可の保有」と「ロカサポへの被リンク設置」の2点だけ。見積依頼の流れと被リンクの設置方法をまとめました。';
+const description = 'ロカサポは、施設管理サービスを手がける業者の方の登録を無料で受け付けています。一旦の登録条件は「ロカサポへの被リンク設置」のみ。見積依頼の流れと被リンクの設置方法をまとめました。';
 const canonical = `${site.domain}/for-partners/`;
 
 const breadcrumbLd = JSON.stringify({
@@ -15,24 +15,11 @@ const breadcrumbLd = JSON.stringify({
   ],
 });
 
-// 必要な資格・許認可
-const qualifications = [
-  { service: '受水槽清掃', slug: 'jusuisou-seisou', required: '建築物飲料水貯水槽清掃業（都道府県知事登録）' },
-  { service: 'アスベスト調査・除去', slug: 'asbestos', required: '建築物石綿含有建材調査者、石綿作業主任者（除去工事の場合）' },
-  { service: 'ダクト清掃', slug: 'duct', required: '産業廃棄物収集運搬業（清掃廃棄物が出る場合）' },
-  { service: 'シャッター点検・修理', slug: 'shutter', required: '建築設備検査員・防火設備検査員（防火シャッター）' },
-  { service: '消防設備点検', slug: 'shobo-setsubi', required: '消防設備士（甲種・乙種）、消防設備点検資格者' },
-  { service: 'グリストラップ清掃', slug: 'grease-trap', required: '産業廃棄物収集運搬業（汚泥・廃油）' },
-  { service: '業務用エアコン洗浄・修理', slug: 'aircon-business', required: '第一種冷媒フロン類取扱技術者、第一種フロン類充塡回収業者登録' },
-  { service: '害虫駆除（業務用PCO）', slug: 'pest-control', required: '建築物ねずみ昆虫等防除業、ペストコントロール技術者' },
-  { service: '看板・屋外広告物点検', slug: 'signboard-inspection', required: '屋外広告物点検技能講習修了者、電気工事士（電飾サイン）' },
-];
-
 // 被リンク用のサンプルコード
 const linkUrl = site.domain + '/';
 const textLinkSample = `<a href="${linkUrl}" target="_blank" rel="noopener">施設管理の業者紹介サイト｜ロカサポ</a>`;
 const bannerLinkSample = `<a href="${linkUrl}" target="_blank" rel="noopener">
-  <img src="${site.domain}/images/partners/banner-300x100.png" alt="施設管理の業者紹介サイト ロカサポ" width="300" height="100">
+  <img src="${site.domain}/images/partners/banner.png" alt="施設管理の業者紹介サイト ロカサポ" width="750" height="240" style="max-width:100%;height:auto;">
 </a>`;
 ---
 <BaseLayout
@@ -52,7 +39,7 @@ const bannerLinkSample = `<a href="${linkUrl}" target="_blank" rel="noopener">
       <h1 class="fp-h1">業者・施工会社の方へ<br/><span class="fp-h1-sub">— ロカサポへの掲載・提携のご案内</span></h1>
       <p class="fp-lead">
         ロカサポでは、施設管理サービスを手がける業者の方の登録を<strong>無料</strong>で受け付けています。
-        登録の条件は、<strong>必要な資格・許認可をお持ちであること</strong>と、<strong>ロカサポへの被リンクを設置していただくこと</strong>の2点だけです。
+        紹介料・成果報酬とも、現在は<strong>0円</strong>。お試しいただきやすい運用にしています。
       </p>
       <a href="#apply" class="fp-cta-primary">お問い合わせへ ↓</a>
     </div>
@@ -62,38 +49,12 @@ const bannerLinkSample = `<a href="${linkUrl}" target="_blank" rel="noopener">
     <div class="sd-container fp-container">
 
       <h2 id="cond" class="fp-h2">登録の条件</h2>
-      <ol class="fp-cond">
-        <li>
-          <h3>1. 必要な資格・許認可をお持ちであること</h3>
-          <p>サービス分野ごとに、行政の登録や国家資格などが必要です。詳しくは下の表をご覧ください。</p>
-        </li>
-        <li>
-          <h3>2. ロカサポへの被リンクを設置していただくこと</h3>
-          <p>御社サイトのフッターなどに、ロカサポへのリンク（バナーまたはテキスト）を設置してください。設置方法は <a href="#backlink">このページ後半</a> でご案内しています。</p>
-        </li>
-      </ol>
-
-      <h2 id="qualifications" class="fp-h2">対応サービスと必要な資格・許認可</h2>
-      <div class="fp-table-wrap">
-        <table class="fp-table">
-          <thead>
-            <tr>
-              <th scope="col">サービス分野</th>
-              <th scope="col">必要な資格・許認可（例）</th>
-            </tr>
-          </thead>
-          <tbody>
-            {qualifications.map((q) => (
-              <tr>
-                <th scope="row"><a href={`/${q.slug}/`}>{q.service}</a></th>
-                <td>{q.required}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <p class="fp-desc">
+        現在は無料での提携運用中のため、登録条件は<strong>「ロカサポへの被リンクを設置していただくこと」</strong>の1点だけです。
+        設置方法は <a href="#backlink">このページ後半</a> でご案内しています。
+      </p>
       <p class="fp-note">
-        上記以外の関連資格（建築士・電気工事士・防火管理者・施工管理技士 など）もプラス評価になります。お問い合わせのときにあわせてお知らせください。
+        ※ 将来的に紹介料・成果報酬の設定や、必要資格・許認可の確認をお願いする場合は、事前にご相談のうえで進めます。事後的に費用が発生することはありません。
       </p>
 
       <h2 id="flow" class="fp-h2">見積依頼から成約までの流れ</h2>
@@ -115,8 +76,8 @@ const bannerLinkSample = `<a href="${linkUrl}" target="_blank" rel="noopener">
         </li>
         <li>
           <span class="fp-flow-num">STEP 4</span>
-          <h3>成約報告</h3>
-          <p>成約の有無を月に1回、業者様からご報告ください。現時点では紹介料・成果報酬とも0円です（将来的に料率が発生する場合は、事前に必ずご相談します）。</p>
+          <h3>成約報告（任意）</h3>
+          <p>今後の運営の参考にさせていただくため、成約の有無を月に1回ほどご報告いただけると助かります。現状、紹介料・成果報酬はいただいていません。</p>
         </li>
       </ol>
 
@@ -125,18 +86,21 @@ const bannerLinkSample = `<a href="${linkUrl}" target="_blank" rel="noopener">
         御社サイトのフッターやリンク集ページに、次のいずれかの方法でロカサポへのリンクを設置してください。<strong>バナーでもテキストリンクでもどちらでもOK</strong>です。
       </p>
 
-      <h3 class="fp-h3">A. テキストリンクの場合</h3>
-      <p class="fp-desc-sm">下のHTMLをコピーして、御社サイトに貼り付けてください。</p>
-      <pre class="fp-code"><code>{textLinkSample}</code></pre>
-
-      <h3 class="fp-h3">B. バナーリンクの場合</h3>
+      <h3 class="fp-h3">A. バナーリンクの場合（推奨）</h3>
       <p class="fp-desc-sm">
-        バナー画像は <strong>300×100px のPNG</strong> をご用意しています。下のHTMLをコピーして、御社サイトに貼り付けてください。
+        専用のバナー画像をご用意しています。下のHTMLをコピーして、御社サイトに貼り付けてください。
       </p>
+      <div class="fp-banner-preview">
+        <img src="/images/partners/banner.png" alt="ロカサポ｜施設管理の業者紹介サイト" width="750" height="240" />
+      </div>
       <pre class="fp-code"><code>{bannerLinkSample}</code></pre>
       <p class="fp-desc-sm">
-        ※ バナー画像はロカサポ側で用意し、URL（<code>/images/partners/banner-300x100.png</code>）を直接参照していただけます。御社サーバーへの画像アップロードは不要です。
+        ※ バナー画像はロカサポ側でホストしていますので、御社サーバーへのアップロードは不要です。サイズは <code>max-width:100%</code> で自動調整される設定になっています。
       </p>
+
+      <h3 class="fp-h3">B. テキストリンクの場合</h3>
+      <p class="fp-desc-sm">画像を貼りたくない場合は、テキストリンクでもOKです。</p>
+      <pre class="fp-code"><code>{textLinkSample}</code></pre>
 
       <h3 class="fp-h3">設置後のご連絡</h3>
       <p class="fp-desc-sm">
@@ -195,26 +159,11 @@ const bannerLinkSample = `<a href="${linkUrl}" target="_blank" rel="noopener">
   margin: 24px 0 8px;
 }
 .fp-desc { font-size: .92rem; line-height: 1.85; color: var(--gray-700, #374151); margin-bottom: 12px; }
+.fp-desc strong { color: var(--gray-900, #111827); }
+.fp-desc a { color: var(--blue, #1d4ed8); text-decoration: underline; }
 .fp-desc-sm { font-size: .88rem; line-height: 1.8; color: var(--gray-700, #374151); margin-bottom: 10px; }
 .fp-desc-sm code { background: var(--gray-100, #f3f4f6); padding: 2px 6px; border-radius: 4px; font-size: .82rem; }
-.fp-note { font-size: .82rem; color: var(--gray-500, #6b7280); margin-top: 12px; }
-
-.fp-cond { list-style: none; padding: 0; margin: 18px 0 8px; display: grid; gap: 14px; }
-.fp-cond li {
-  background: var(--gray-100, #f3f4f6);
-  border-radius: 10px;
-  padding: 18px 22px;
-}
-.fp-cond h3 { font-size: 1.02rem; font-weight: 800; color: var(--gray-900, #111827); margin-bottom: 6px; }
-.fp-cond p { font-size: .9rem; line-height: 1.85; color: var(--gray-700, #374151); margin: 0; }
-.fp-cond a { color: var(--blue, #1d4ed8); text-decoration: underline; }
-
-.fp-table-wrap { overflow-x: auto; margin: 16px 0; }
-.fp-table { width: 100%; border-collapse: collapse; font-size: .9rem; }
-.fp-table th, .fp-table td { padding: 12px 14px; border: 1px solid var(--gray-200, #e5e7eb); text-align: left; line-height: 1.65; }
-.fp-table thead th { background: var(--blue-light, #dbeafe); color: var(--blue-dark, #1e3a8a); font-weight: 700; }
-.fp-table tbody th[scope="row"] { background: var(--gray-100, #f3f4f6); font-weight: 700; white-space: nowrap; }
-.fp-table tbody th a { color: var(--blue, #1d4ed8); text-decoration: underline; }
+.fp-note { font-size: .82rem; color: var(--gray-500, #6b7280); margin-top: 8px; line-height: 1.7; }
 
 .fp-flow { list-style: none; padding: 0; margin: 18px 0 8px; display: grid; gap: 14px; }
 .fp-flow li {
@@ -236,6 +185,20 @@ const bannerLinkSample = `<a href="${linkUrl}" target="_blank" rel="noopener">
 }
 .fp-flow h3 { font-size: 1.02rem; font-weight: 800; color: var(--gray-900, #111827); margin-bottom: 6px; }
 .fp-flow p { font-size: .9rem; line-height: 1.85; color: var(--gray-700, #374151); margin: 0; }
+
+.fp-banner-preview {
+  background: var(--gray-100, #f3f4f6);
+  border-radius: 10px;
+  padding: 18px;
+  margin: 10px 0 12px;
+  text-align: center;
+}
+.fp-banner-preview img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
+}
 
 .fp-code {
   background: #0f172a;
