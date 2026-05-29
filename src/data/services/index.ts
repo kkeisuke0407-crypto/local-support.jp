@@ -10,6 +10,8 @@ import pestControl from './pest-control';
 import signboardInspection from './signboard-inspection';
 import jikayouDenki from './jikayou-denki';
 import elevatorHoshu from './elevator-hoshu';
+import johkasou from './johkasou';
+import haisuikan from './haisuikan';
 
 export const allServices: ServiceData[] = [
   jusuisouSeisou,
@@ -23,6 +25,8 @@ export const allServices: ServiceData[] = [
   signboardInspection,
   jikayouDenki,
   elevatorHoshu,
+  johkasou,
+  haisuikan,
 ];
 
 export const serviceBySlug = Object.fromEntries(
