@@ -13,7 +13,7 @@ import { parseSeedCsv } from './sources/seed.ts';
 import { enrichCompany } from './enrich.ts';
 import { scoreCompany } from './score.ts';
 import { toCsv } from './csv.ts';
-import { SEGMENT_PRIORITY } from '../config/scoring.ts';
+import { prioritize } from './prioritize.ts';
 import type { EnrichedCompany } from './types.ts';
 
 interface Args {
@@ -35,18 +35,6 @@ function parseArgs(argv: string[]): Args {
     else if (k === '--delay') a.delayMs = parseInt(argv[++i], 10);
   }
   return a;
-}
-
-/** 営業効果順：セグメント優先 → スコア降順。メール経路を上位に寄せる。 */
-function prioritize(rows: EnrichedCompany[]): EnrichedCompany[] {
-  const segRank = new Map(SEGMENT_PRIORITY.map((s, i) => [s, i]));
-  const chRank: Record<string, number> = { email: 0, form: 1, manual: 2 };
-  return [...rows].sort((x, y) => {
-    const ch = (chRank[x.contact_channel ?? 'manual'] ?? 9) - (chRank[y.contact_channel ?? 'manual'] ?? 9);
-    if (ch !== 0) return ch;                                  // メール最優先
-    if ((y.score ?? 0) !== (x.score ?? 0)) return (y.score ?? 0) - (x.score ?? 0);
-    return (segRank.get(x.segment) ?? 99) - (segRank.get(y.segment) ?? 99);
-  });
 }
 
 async function main() {

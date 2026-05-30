@@ -59,6 +59,7 @@ export function parseSeedCsv(text: string): SeedCompany[] {
       managed_property_count: num(get('managed_property_count')),
       facility_count: num(get('facility_count')),
       sales_refused: /^(true|1|yes)$/i.test(get('sales_refused')),
+      seed_source_url: get('seed_source_url') || undefined,
     });
   }
   return out;

@@ -21,36 +21,53 @@ npm install
 ## 2. 動作実証（ネットワーク不要）
 
 ```bash
-npm run demo
-# → out/leads.demo.csv を生成（サンプルseedをオフライン処理）
+npm run pipeline:demo   # seed自動取得→エンリッチ→スコア→CSV を fixture で一気通貫
+npm run seed:demo       # seed自動取得のみ（fixture）
+npm run demo            # seedを与えてエンリッチ→CSV（旧来のサンプルseed処理）
 ```
+
+`pipeline:demo` は `fixtures/*.html`（架空データ）から母集団を作り、重複排除して
+`data/seed.tokyo.demo.csv` と `out/leads.pipeline.demo.csv` を生成する。
 
 ## 3. 本番の流れ（東京都100社）
 
-### Step 1: seed（母集団）を用意する
-`config/scoring.ts` の TargetSegment 別に、社名＋所在地（＋わかればURL）を
-`data/seed.tokyo.csv` に整形する。出どころ（公開情報）：
-
-| segment | データ取得元 |
-|---|---|
-| `mansion_kanri` / `fudosan_kanri` | マンション管理業協会・賃貸管理業協会の**登録業者一覧（公開）** |
-| `kaigo` | **介護サービス情報公表システム**（厚労省・全国） |
-| `byoin` / `clinic` | **医療機能情報提供制度**／病院名簿 |
-| `shogyo_shisetsu` | 商業施設運営会社の公開リスト |
-
-seed CSV の列（`company_name` と `segment` は必須、他は任意）：
-```csv
-company_name,segment,prefecture,address,website_url,contact_email,contact_form_url,phone,industry,corporate_number,employee_count,managed_property_count,facility_count,sales_refused
-```
-
-> URLが分かっていればエンリッチが速く正確。空でも可（その場合は manual 行きになりやすい）。
-> 任意で `corporate_number` を法人番号APIで補完できる（`src/sources/houjinBangou.ts`、要 `HOUJIN_BANGOU_APP_ID`）。
-
-### Step 2: 収集＋エンリッチ＋スコアリング＋CSV出力
+### 一気通貫（推奨）
+seed自動取得 → エンリッチ → スコアリング → CSV を1コマンドで：
 ```bash
-npm run collect -- --seed data/seed.tokyo.csv --limit 100 --out out/leads.tokyo.csv --delay 1500
+npm run pipeline -- --pref 東京都 --limit 100 \
+  --seed-out data/seed.tokyo.csv --out out/leads.tokyo.csv --delay 1500
 ```
 
+### 段階実行
+```bash
+# (1) 母集団だけ自動生成
+npm run seed -- --pref 東京都 --limit 100 --out data/seed.tokyo.csv
+# (2) その seed をエンリッチ＋スコア＋CSV
+npm run collect -- --seed data/seed.tokyo.csv --limit 100 --out out/leads.tokyo.csv
+```
+
+### seed自動取得の取得元（セグメント別・優先順位順）
+
+| 優先 | segment | 取得元アダプタ（`src/seedsources/`） |
+|---|---|---|
+| 1 | `mansion_kanri` | マンション管理業協会 会員一覧 |
+| 1 | `fudosan_kanri` | 賃貸住宅管理業者 登録一覧 |
+| 2 | `kaigo` | 介護サービス情報公表システム |
+| 3 | `shogyo_shisetsu` | 日本ショッピングセンター協会 会員一覧 |
+| 4 | `byoin` | 医療情報ネット（医療機能情報提供制度） |
+
+- 各レコードに **取得元URL（`seed_source_url`）** を必ず保存。
+- **重複排除**：法人番号があれば最優先キー、無ければ「正規化社名＋都道府県」。優先順位の高い取得元を残す（先勝ち）。
+- 任意で `corporate_number` を法人番号APIで補完（`src/sources/houjinBangou.ts`、要 `HOUJIN_BANGOU_APP_ID`）。
+
+> ⚠️ 各アダプタの `liveListUrls()` と `parseList()` のセレクタは、
+> **実サイトのマークアップに合わせて稼働時に要調整**（公開ディレクトリは構造が変わるため）。
+> fixture は既定セレクタ（`tr.company` / `.name` / `.address` / `.corporate-number`）に合わせてある。
+
+### 共通オプション
+- `--pref` … 都道府県名（全国対応。`src/seedsources/prefs.ts` に47都道府県コード）。
+- `--per-segment N` … セグメントごとの取得上限。
+- `--mode live|fixture` … 取得元（本番=HTTP / デモ=fixture）。
 - `--delay` … 同一サイトへの礼儀的アクセス間隔(ms)。1500ms程度を推奨。
 - robots.txt を尊重し、不許可ページはスキップ（`robots_allowed=false`）。
 - 「営業お断り」を検出した企業は `score=0` / `contact_channel=manual` で保存。
@@ -74,15 +91,26 @@ npm run collect -- --seed data/seed.tokyo.csv --limit 100 --out out/leads.tokyo.
 outbound/
   config/scoring.ts          スコアリング仕様（単一ソース）
   src/
-    run.ts                   CLIエントリ（収集オーケストレーション）
+    pipeline.ts              一気通貫CLI（seed取得→エンリッチ→スコア→CSV）
+    seedBuild.ts             seed自動取得CLI（母集団生成のみ）
+    run.ts                   エンリッチCLI（既存seedを処理）
+    seedsources/
+      index.ts               レジストリ・重複排除・runSeedSources()
+      types.ts               SeedSource / FetchFn / PrefRef
+      fetcher.ts             httpFetch（本番）/ fixtureFetch（デモ）
+      parseUtil.ts           リストHTML共通パーサ
+      prefs.ts               47都道府県コード
+      mansionKanri.ts / fudosanKanri.ts / kaigo.ts / shogyo.ts / byoin.ts
     sources/seed.ts          seed CSV 読み込み
     sources/houjinBangou.ts  法人番号API（任意・corporate_number補完）
     enrich.ts                公式サイト巡回→連絡先抽出（メール最優先）
     extract.ts               email/form/phone/営業お断り 抽出
     robots.ts                robots.txt 許可判定
     score.ts                 scoring.ts 連携
-    csv.ts                   CSV出力（leads_schema.md準拠）
+    prioritize.ts            営業効果順ソート（email>form>manual）
+    csv.ts / seedCsv.ts      CSV出力
     types.ts
+  fixtures/*.html            デモ用サンプルHTML（架空データ）
   data/seed.tokyo.example.csv  サンプルseed（架空企業）
   out/                        生成物（gitignore）
 ```

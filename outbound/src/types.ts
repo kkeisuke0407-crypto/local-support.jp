@@ -17,6 +17,7 @@ export interface SeedCompany {
   managed_property_count?: number | null;
   facility_count?: number | null;
   sales_refused?: boolean;
+  seed_source_url?: string;  // 母集団をどこから取得したか（取得元URL）
 }
 
 /** エンリッチ後の1社（CSV出力の元）。 */

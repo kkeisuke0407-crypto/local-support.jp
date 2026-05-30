@@ -16,6 +16,7 @@ export const CSV_COLUMNS = [
   'contact_channel',
   'email_source',
   'source_url',
+  'seed_source_url',
   'robots_allowed',
   'sales_refused',
   'collected_at',

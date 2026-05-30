@@ -6,7 +6,11 @@
   "description": "local-support.jp アウトバウンド送客エンジン（収集＋エンリッチ＋スコアリング）",
   "scripts": {
     "collect": "tsx src/run.ts",
-    "demo": "tsx src/run.ts --seed data/seed.tokyo.example.csv --no-fetch --out out/leads.demo.csv"
+    "demo": "tsx src/run.ts --seed data/seed.tokyo.example.csv --no-fetch --out out/leads.demo.csv",
+    "seed": "tsx src/seedBuild.ts",
+    "seed:demo": "tsx src/seedBuild.ts --mode fixture --pref 東京都 --out data/seed.tokyo.demo.csv",
+    "pipeline": "tsx src/pipeline.ts",
+    "pipeline:demo": "tsx src/pipeline.ts --mode fixture --pref 東京都 --no-fetch --seed-out data/seed.tokyo.demo.csv --out out/leads.pipeline.demo.csv"
   },
   "dependencies": {
     "cheerio": "^1.0.0"
