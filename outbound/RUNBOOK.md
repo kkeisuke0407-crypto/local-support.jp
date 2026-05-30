@@ -50,16 +50,37 @@ npm run pipeline:demo
 
 ## 3. 実行コマンド（本番・実データ）
 
-### 一気通貫（推奨）
+> 新方針：**介護・医療は公的CSVを手元に置いて読む**のが最も安定。
+> まず CSV を用意（3-0）→ 一気通貫（3-1）。
+
+### 3-0. 公的CSVを用意する（介護・医療）
+取得元の詳細は `docs/data-sources.md` 参照。
+
+1. **介護**：介護サービス情報公表システム（`https://www.kaigokensaku.mhlw.go.jp/13/`）で
+   東京都＋サービス種別を検索 → **CSVダウンロード** → `outbound/data/sources/kaigo_13.csv` に保存
+2. **医療**：医療機能情報提供制度（医療情報ネット）または都道府県の
+   医療機能情報オープンデータCSV → `outbound/data/sources/byoin_13.csv` に保存
+
+> `13` は東京都の都道府県コード。CSVのカラム名が多少違っても、アダプタが
+> 候補名の部分一致で吸収する（`法人名称`／`開設者名称`／`所在地` 等）。
+> うまく取れない場合は CSV のヘッダ行を共有してください（マッピング調整します）。
+
+### 3-1. 一気通貫（推奨）
 ```bash
-npm run pipeline -- --mode live --pref 東京都 --limit 100 \
+# 介護・医療（安定CSV）だけで母集団→リスト化
+npm run pipeline -- --mode live --only-stable --pref 東京都 --limit 100 \
+  --data-dir data/sources \
   --seed-out data/seed.tokyo.csv \
   --out out/leads.tokyo.csv \
   --delay 1500
 ```
-- `--mode live` … 実サイトから取得（デモfixtureではなく本番）
-- `--limit 100` … 100社で打ち切り
-- `--delay 1500` … 各サイトへのアクセス間隔1.5秒（行儀よく）
+- `--only-stable` … 安定取得元（介護・医療のCSV）だけに絞る（HTML系の不動産等を除外）
+- `--data-dir` … 手動DLしたCSVの置き場（既定 `data/sources`）
+- `--mode live` … 本番（fixtureではない）
+- `--delay 1500` … サイト巡回（メール抽出）の礼儀的間隔
+
+> HTML系（マンション管理・不動産・商業施設）も含めて試すなら `--only-stable` を外す。
+> ただし現状その3つは取得元URL/セレクタ未確定のため 0〜少数になり得る（後回し対象）。
 
 ### 段階実行したい場合
 ```bash
@@ -92,7 +113,9 @@ npm run report -- --in out/leads.tokyo.csv
 
 | 症状 | 原因 | 対処 |
 |---|---|---|
-| **母集団が0〜数社しか取れない** | ★最有力。各取得元の `liveListUrls()`/`parseList()` のセレクタが実サイトと不一致 | 取得元ページのHTMLを保存して共有 → セレクタを実サイトに合わせて修正（次の改善作業） |
+| **介護/医療が0社** | `data/sources/kaigo_13.csv` 等が未配置 | 3-0でCSVをダウンロードして配置（ログに「CSV未配置」と出る） |
+| **会社名カラムが見つかりません** | CSVのヘッダ名が想定外 | ヘッダ行を共有 → `kaigo.ts`/`byoin.ts` の `column` 候補に追加 |
+| **HTML系（管理/不動産/商業）が0社** | 取得元URL/セレクタ未確定（後回し対象） | `--only-stable` で除外して進める。実装は実サイトHTML入手後 |
 | `[robots] skip ...` が大量 | robots.txt で禁止 | そのサイトは対象外（正常動作）。電話のみ手動取得へ |
 | `[fetch error] ... timeout` | サイトが遅い/落ちてる | `--delay` を上げる／時間をおく |
 | メール取得が極端に低い | サイトがフォームのみ or メールを画像化 | `form` 経路として活用（仕様どおり）。manual増は想定内 |

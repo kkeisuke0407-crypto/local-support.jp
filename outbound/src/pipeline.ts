@@ -8,8 +8,7 @@
  */
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { dirname } from 'node:path';
-import { runSeedSources, buildFixtureMap } from './seedsources/index.ts';
-import { httpFetch, fixtureFetch } from './seedsources/fetcher.ts';
+import { runSeedSources } from './seedsources/index.ts';
 import { prefByName } from './seedsources/prefs.ts';
 import { enrichCompany } from './enrich.ts';
 import { scoreCompany } from './score.ts';
@@ -27,11 +26,13 @@ interface Args {
   perSegmentLimit?: number;
   mode: 'live' | 'fixture';
   fetchSites: boolean;
+  onlyStable: boolean;
+  dataDir?: string;
   delayMs: number;
 }
 
 function parseArgs(argv: string[]): Args {
-  const a: Args = { pref: '東京都', out: 'out/leads.tokyo.csv', mode: 'live', fetchSites: true, delayMs: 1500 };
+  const a: Args = { pref: '東京都', out: 'out/leads.tokyo.csv', mode: 'live', fetchSites: true, onlyStable: false, delayMs: 1500 };
   for (let i = 0; i < argv.length; i++) {
     const k = argv[i];
     if (k === '--pref') a.pref = argv[++i];
@@ -41,6 +42,8 @@ function parseArgs(argv: string[]): Args {
     else if (k === '--per-segment') a.perSegmentLimit = parseInt(argv[++i], 10);
     else if (k === '--mode') a.mode = argv[++i] as 'live' | 'fixture';
     else if (k === '--no-fetch') a.fetchSites = false;
+    else if (k === '--only-stable') a.onlyStable = true;
+    else if (k === '--data-dir') a.dataDir = argv[++i];
     else if (k === '--delay') a.delayMs = parseInt(argv[++i], 10);
   }
   return a;
@@ -48,14 +51,13 @@ function parseArgs(argv: string[]): Args {
 
 async function main() {
   const a = parseArgs(process.argv.slice(2));
-  console.error(`[pipeline] pref=${a.pref} mode=${a.mode} fetchSites=${a.fetchSites} limit=${a.limit ?? '∞'}`);
+  console.error(`[pipeline] pref=${a.pref} mode=${a.mode} fetchSites=${a.fetchSites} onlyStable=${a.onlyStable} limit=${a.limit ?? '∞'}`);
 
   // 1) seed自動取得
-  const pref = prefByName(a.pref);
-  const seedFetch = a.mode === 'fixture' ? fixtureFetch(buildFixtureMap()) : httpFetch();
   const { companies: seeds, stats } = await runSeedSources({
-    pref, mode: a.mode, fetch: seedFetch,
-    limit: a.limit, perSegmentLimit: a.perSegmentLimit, perRequestDelayMs: a.delayMs,
+    pref: prefByName(a.pref), mode: a.mode,
+    onlyStable: a.onlyStable, dataDir: a.dataDir,
+    limit: a.limit, perSegmentLimit: a.perSegmentLimit,
   });
   if (a.seedOut) {
     mkdirSync(dirname(a.seedOut), { recursive: true });

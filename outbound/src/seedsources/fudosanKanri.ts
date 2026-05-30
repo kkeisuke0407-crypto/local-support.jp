@@ -1,23 +1,14 @@
-import type { SeedSource, PrefRef } from './types.ts';
-import { parseRows } from './parseUtil.ts';
+import { htmlSource } from './htmlSource.ts';
 
 /**
- * 不動産・ビル管理会社：賃貸住宅管理業者登録 / 賃貸管理ビジネス協会の会員一覧（公開）
- * ※実サイトのエンドポイント・マークアップは稼働時に要確認。
+ * 不動産・ビル管理会社：賃貸住宅管理業者登録（国交省）の登録業者一覧
+ * ※安定CSVが見つかっていないため当面 HTML（後回し対象・URL/セレクタ要確定）。
  */
-export const fudosanKanri: SeedSource = {
+export const fudosanKanri = htmlSource({
   segment: 'fudosan_kanri',
-  name: '賃貸住宅管理業者 登録一覧',
-  homepage: 'https://www.mlit.go.jp/',
-  liveListUrls(pref: PrefRef): string[] {
-    return [`https://www.chintaikanri.jp/list?pref=${pref.code}&page=1`];
-  },
-  demo: { url: 'fixture://fudosan_kanri/tokyo', fixture: 'fixtures/fudosan_kanri_tokyo.html' },
-  parseList(html, sourceUrl) {
-    return parseRows(html, sourceUrl, {
-      segment: 'fudosan_kanri',
-      industry: '不動産・ビル管理',
-      prefecture: '東京都',
-    });
-  },
-};
+  name: '賃貸住宅管理業者 登録一覧（HTML・要調整）',
+  homepage: 'https://etakken.mlit.go.jp/',
+  industry: '不動産・ビル管理',
+  liveListUrls: (pref) => [`https://etakken.mlit.go.jp/chintai/list?pref=${pref.code}&page=1`],
+  demoFile: 'fudosan_kanri_tokyo.html',
+});

@@ -6,3 +6,5 @@ out/
 data/seed.tokyo.csv
 data/seed.*.csv
 !data/seed.tokyo.example.csv
+# 手動DLした公的CSV（介護・医療など）はコミットしない
+data/sources/

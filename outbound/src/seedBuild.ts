@@ -4,12 +4,12 @@
  *   npm run seed -- --pref 東京都 --limit 100 --out data/seed.tokyo.csv
  *   npm run seed:demo            # fixtureから生成（ネットワーク不要）
  *
- * セグメント別アダプタを優先順位順に回し、重複排除して seed CSV を出力する。
+ * セグメント別アダプタを優先順位順（安定取得元＝CSVを上位）に回し、
+ * 重複排除して seed CSV を出力する。
  */
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { dirname } from 'node:path';
-import { runSeedSources, buildFixtureMap } from './seedsources/index.ts';
-import { httpFetch, fixtureFetch } from './seedsources/fetcher.ts';
+import { runSeedSources } from './seedsources/index.ts';
 import { prefByName } from './seedsources/prefs.ts';
 import { toSeedCsv } from './seedCsv.ts';
 import type { TargetSegment } from '../config/scoring.ts';
@@ -21,11 +21,12 @@ interface Args {
   perSegmentLimit?: number;
   mode: 'live' | 'fixture';
   segments?: TargetSegment[];
-  delayMs: number;
+  onlyStable: boolean;
+  dataDir?: string;
 }
 
 function parseArgs(argv: string[]): Args {
-  const a: Args = { pref: '東京都', out: 'data/seed.tokyo.csv', mode: 'live', delayMs: 1500 };
+  const a: Args = { pref: '東京都', out: 'data/seed.tokyo.csv', mode: 'live', onlyStable: false };
   for (let i = 0; i < argv.length; i++) {
     const k = argv[i];
     if (k === '--pref') a.pref = argv[++i];
@@ -34,28 +35,27 @@ function parseArgs(argv: string[]): Args {
     else if (k === '--per-segment') a.perSegmentLimit = parseInt(argv[++i], 10);
     else if (k === '--mode') a.mode = argv[++i] as 'live' | 'fixture';
     else if (k === '--segments') a.segments = argv[++i].split(',') as TargetSegment[];
-    else if (k === '--delay') a.delayMs = parseInt(argv[++i], 10);
+    else if (k === '--only-stable') a.onlyStable = true;
+    else if (k === '--data-dir') a.dataDir = argv[++i];
   }
   return a;
 }
 
 export async function buildSeed(a: Args) {
-  const pref = prefByName(a.pref);
-  const fetch = a.mode === 'fixture' ? fixtureFetch(buildFixtureMap()) : httpFetch();
   return runSeedSources({
-    pref,
+    pref: prefByName(a.pref),
     mode: a.mode,
-    fetch,
     segments: a.segments,
+    onlyStable: a.onlyStable,
     limit: a.limit,
     perSegmentLimit: a.perSegmentLimit,
-    perRequestDelayMs: a.delayMs,
+    dataDir: a.dataDir,
   });
 }
 
 async function main() {
   const a = parseArgs(process.argv.slice(2));
-  console.error(`[seed-build] pref=${a.pref} mode=${a.mode} limit=${a.limit ?? '∞'}`);
+  console.error(`[seed-build] pref=${a.pref} mode=${a.mode} onlyStable=${a.onlyStable} limit=${a.limit ?? '∞'}`);
   const { companies } = await buildSeed(a);
   mkdirSync(dirname(a.out), { recursive: true });
   writeFileSync(a.out, toSeedCsv(companies), 'utf8');

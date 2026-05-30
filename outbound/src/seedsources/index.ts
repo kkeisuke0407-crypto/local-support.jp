@@ -1,22 +1,25 @@
 import type { SeedCompany } from '../types.ts';
 import type { TargetSegment } from '../../config/scoring.ts';
-import type { FetchFn, PrefRef, SeedSource } from './types.ts';
+import type { LoadContext, PrefRef, SeedSource } from './types.ts';
+import { textFetch } from './fetcher.ts';
+import { kaigo } from './kaigo.ts';
+import { byoin } from './byoin.ts';
 import { mansionKanri } from './mansionKanri.ts';
 import { fudosanKanri } from './fudosanKanri.ts';
-import { kaigo } from './kaigo.ts';
 import { shogyo } from './shogyo.ts';
-import { byoin } from './byoin.ts';
 
-/** 取得元レジストリ（営業効果の優先順位どおりに並べる） */
+/**
+ * 取得元レジストリ（新方針の優先順位：安定取得元＝CSV/公的データを上位に）
+ *  1. 介護（CSV）   2. 医療（CSV）   3. マンション管理（HTML・後回し）
+ *  4. 不動産（HTML・後回し）   5. 商業施設（HTML・後回し）
+ */
 export const SOURCES: SeedSource[] = [
-  mansionKanri, // 1
-  fudosanKanri, // 1
-  kaigo,        // 2
-  shogyo,       // 3
-  byoin,        // 4
+  kaigo,        // 1 CSV（安定）
+  byoin,        // 2 CSV（安定）
+  mansionKanri, // 3 HTML（要調整）
+  fudosanKanri, // 4 HTML（要調整）
+  shogyo,       // 5 HTML（要調整）
 ];
-
-const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 /** 社名の正規化（重複排除キー用） */
 export function normalizeName(name: string): string {
@@ -26,7 +29,7 @@ export function normalizeName(name: string): string {
     .toLowerCase();
 }
 
-/** 重複排除：法人番号があれば最優先、無ければ 正規化社名＋都道府県。先勝ち（優先順位の高い取得元を残す）。 */
+/** 重複排除：法人番号があれば最優先、無ければ 正規化社名＋都道府県。先勝ち。 */
 export function dedup(list: SeedCompany[]): SeedCompany[] {
   const seen = new Set<string>();
   const out: SeedCompany[] = [];
@@ -44,11 +47,12 @@ export function dedup(list: SeedCompany[]): SeedCompany[] {
 export interface SeedRunOptions {
   pref: PrefRef;
   mode: 'live' | 'fixture';
-  fetch: FetchFn;
-  segments?: TargetSegment[];   // 取得対象セグメント（未指定なら全部）
-  limit?: number;               // 全体の上限
-  perSegmentLimit?: number;     // セグメントごとの上限
-  perRequestDelayMs?: number;   // 礼儀的アクセス間隔（live時）
+  segments?: TargetSegment[];
+  onlyStable?: boolean;       // 安定取得元（CSV/API）だけに絞る
+  limit?: number;
+  perSegmentLimit?: number;
+  dataDir?: string;           // csv-file の置き場（既定 data/sources）
+  fixtureDir?: string;        // 既定 fixtures
 }
 
 export interface SeedRunResult {
@@ -56,50 +60,43 @@ export interface SeedRunResult {
   stats: { collected: number; deduped: number };
 }
 
-/**
- * セグメント別アダプタを優先順位順に回し、母集団 SeedCompany[] を生成。
- * 各レコードに seed_source_url を保存。最後に重複排除＋上限適用。
- */
 export async function runSeedSources(opt: SeedRunOptions): Promise<SeedRunResult> {
-  const delay = opt.perRequestDelayMs ?? 1500;
+  const ctx: LoadContext = {
+    pref: opt.pref,
+    mode: opt.mode,
+    fetch: textFetch(),
+    dataDir: opt.dataDir ?? 'data/sources',
+    fixtureDir: opt.fixtureDir ?? 'fixtures',
+  };
+
   const collected: SeedCompany[] = [];
   const perSegCount = new Map<TargetSegment, number>();
 
   for (const src of SOURCES) {
     if (opt.segments && !opt.segments.includes(src.segment)) continue;
+    if (opt.onlyStable && !src.stable) continue;
 
-    const urls = opt.mode === 'fixture' ? [src.demo.url] : src.liveListUrls(opt.pref);
-    const fixtureMapHint = opt.mode === 'fixture' ? `（fixture: ${src.demo.fixture}）` : '';
-    console.error(`[seed] ${src.segment} ← ${src.name} ${fixtureMapHint}`);
-
-    for (const url of urls) {
-      const html = await opt.fetch(url);
-      if (opt.mode === 'live') await sleep(delay);
-      if (!html) {
-        console.error(`  取得失敗/スキップ: ${url}`);
-        continue;
-      }
-      const rows = src.parseList(html, opt.mode === 'fixture' ? src.homepage : url);
-      // セグメント上限
-      for (const r of rows) {
-        const n = perSegCount.get(src.segment) ?? 0;
-        if (opt.perSegmentLimit && n >= opt.perSegmentLimit) break;
-        collected.push(r);
-        perSegCount.set(src.segment, n + 1);
-      }
-      console.error(`  +${rows.length}社 (${url})`);
+    console.error(`[seed] ${src.segment} ← ${src.name} [${src.kind}${src.stable ? '/安定' : ''}]`);
+    let rows: SeedCompany[] = [];
+    try {
+      rows = await src.load(ctx);
+    } catch (e) {
+      console.error(`  読み込みエラー: ${(e as Error).message}`);
     }
+
+    let added = 0;
+    for (const r of rows) {
+      const n = perSegCount.get(src.segment) ?? 0;
+      if (opt.perSegmentLimit && n >= opt.perSegmentLimit) break;
+      collected.push(r);
+      perSegCount.set(src.segment, n + 1);
+      added++;
+    }
+    console.error(`  +${added}社`);
   }
 
   const deduped = dedup(collected);
   const limited = opt.limit ? deduped.slice(0, opt.limit) : deduped;
   console.error(`[seed] 収集 ${collected.length} → 重複排除後 ${deduped.length} → 出力 ${limited.length}`);
   return { companies: limited, stats: { collected: collected.length, deduped: deduped.length } };
-}
-
-/** デモ用：SOURCES の demo.url → fixtureファイル のマップを作る */
-export function buildFixtureMap(base = ''): Map<string, string> {
-  const m = new Map<string, string>();
-  for (const s of SOURCES) m.set(s.demo.url, base ? `${base}/${s.demo.fixture}` : s.demo.fixture);
-  return m;
 }

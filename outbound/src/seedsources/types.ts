@@ -1,7 +1,7 @@
 import type { SeedCompany } from '../types.ts';
 import type { TargetSegment } from '../../config/scoring.ts';
 
-/** URL → HTML（取得できなければ null）。本番=HTTP / デモ=fixture を差し替える */
+/** URL → テキスト（HTML/CSV）。取得できなければ null */
 export type FetchFn = (url: string) => Promise<string | null>;
 
 export interface PrefRef {
@@ -9,15 +9,25 @@ export interface PrefRef {
   code: string; // JIS都道府県コード '13'
 }
 
+/** 取得元アダプタに渡す実行コンテキスト */
+export interface LoadContext {
+  pref: PrefRef;
+  mode: 'live' | 'fixture';
+  fetch: FetchFn;       // csv-url / html（live）用
+  dataDir: string;      // csv-file（live）：手元にDLしたCSVの置き場（既定 data/sources）
+  fixtureDir: string;   // デモ用fixtureの置き場（既定 fixtures）
+}
+
+/** 取得元の種類。安定度： csv-url ≈ csv-file ＞ html */
+export type SourceKind = 'csv-url' | 'csv-file' | 'html';
+
 /** セグメント別の取得元アダプタ */
 export interface SeedSource {
   segment: TargetSegment;
-  name: string;       // 取得元の表示名
-  homepage: string;   // 取得元トップ（記録用）
-  /** 本番：都道府県に対するリストページURL（ページネーション分を配列で） */
-  liveListUrls(pref: PrefRef): string[];
-  /** デモ：fixtureファイルと、それに紐づくダミーURL */
-  demo: { url: string; fixture: string };
-  /** リストHTML → 企業配列（各レコードに seed_source_url を必ず付与） */
-  parseList(html: string, sourceUrl: string): SeedCompany[];
+  name: string;
+  homepage: string;     // 取得元（記録用）
+  kind: SourceKind;
+  stable: boolean;      // 安定取得元か（CSV/API系=true, HTML系=false）
+  /** 母集団を取得して SeedCompany[] を返す（各レコードに seed_source_url を付与） */
+  load(ctx: LoadContext): Promise<SeedCompany[]>;
 }
