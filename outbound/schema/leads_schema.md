@@ -48,4 +48,3 @@ id,corporate_number,company_name,website_url,contact_email,email_source,email_is
 > 注意：本ファイルは**スキーマ定義**です。実在企業のデータは含みません。
 > 実データは収集ツール（次フェーズ実装）が公的DB＋公式サイトから取得し、
 > `computeScore()` を通して `score`/`score_reasons`/`contact_channel` を埋めます。
-</content>

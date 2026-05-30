@@ -1,0 +1,18 @@
+{
+  "name": "local-support-outbound",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "description": "local-support.jp アウトバウンド送客エンジン（収集＋エンリッチ＋スコアリング）",
+  "scripts": {
+    "collect": "tsx src/run.ts",
+    "demo": "tsx src/run.ts --seed data/seed.tokyo.example.csv --no-fetch --out out/leads.demo.csv"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "@types/node": "^22.10.0"
+  }
+}

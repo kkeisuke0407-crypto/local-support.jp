@@ -115,4 +115,3 @@ CREATE INDEX IF NOT EXISTS idx_referrals_company ON referrals(company_id);
 --   送信→返信率: message_events(reply) / outreach_messages(sent)
 --   送客数:       SELECT COUNT(*) FROM referrals;
 -- ============================================================
-</content>

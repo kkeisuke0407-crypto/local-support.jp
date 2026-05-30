@@ -1,0 +1,8 @@
+node_modules/
+out/
+*.sqlite
+.env
+# 実データseed（PII）はコミットしない。example のみ追跡。
+data/seed.tokyo.csv
+data/seed.*.csv
+!data/seed.tokyo.example.csv
