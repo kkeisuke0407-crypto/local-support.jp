@@ -51,11 +51,16 @@ export interface SeedRunOptions {
   perRequestDelayMs?: number;   // 礼儀的アクセス間隔（live時）
 }
 
+export interface SeedRunResult {
+  companies: SeedCompany[];
+  stats: { collected: number; deduped: number };
+}
+
 /**
  * セグメント別アダプタを優先順位順に回し、母集団 SeedCompany[] を生成。
  * 各レコードに seed_source_url を保存。最後に重複排除＋上限適用。
  */
-export async function runSeedSources(opt: SeedRunOptions): Promise<SeedCompany[]> {
+export async function runSeedSources(opt: SeedRunOptions): Promise<SeedRunResult> {
   const delay = opt.perRequestDelayMs ?? 1500;
   const collected: SeedCompany[] = [];
   const perSegCount = new Map<TargetSegment, number>();
@@ -89,7 +94,7 @@ export async function runSeedSources(opt: SeedRunOptions): Promise<SeedCompany[]
   const deduped = dedup(collected);
   const limited = opt.limit ? deduped.slice(0, opt.limit) : deduped;
   console.error(`[seed] 収集 ${collected.length} → 重複排除後 ${deduped.length} → 出力 ${limited.length}`);
-  return limited;
+  return { companies: limited, stats: { collected: collected.length, deduped: deduped.length } };
 }
 
 /** デモ用：SOURCES の demo.url → fixtureファイル のマップを作る */

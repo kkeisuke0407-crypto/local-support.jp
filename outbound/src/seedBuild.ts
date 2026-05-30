@@ -42,7 +42,7 @@ function parseArgs(argv: string[]): Args {
 export async function buildSeed(a: Args) {
   const pref = prefByName(a.pref);
   const fetch = a.mode === 'fixture' ? fixtureFetch(buildFixtureMap()) : httpFetch();
-  const rows = await runSeedSources({
+  return runSeedSources({
     pref,
     mode: a.mode,
     fetch,
@@ -51,16 +51,15 @@ export async function buildSeed(a: Args) {
     perSegmentLimit: a.perSegmentLimit,
     perRequestDelayMs: a.delayMs,
   });
-  return rows;
 }
 
 async function main() {
   const a = parseArgs(process.argv.slice(2));
   console.error(`[seed-build] pref=${a.pref} mode=${a.mode} limit=${a.limit ?? '∞'}`);
-  const rows = await buildSeed(a);
+  const { companies } = await buildSeed(a);
   mkdirSync(dirname(a.out), { recursive: true });
-  writeFileSync(a.out, toSeedCsv(rows), 'utf8');
-  console.error(`[seed-build] ${rows.length}社 → ${a.out}`);
+  writeFileSync(a.out, toSeedCsv(companies), 'utf8');
+  console.error(`[seed-build] ${companies.length}社 → ${a.out}`);
 }
 
 // CLIとして直接実行された時のみ main を走らせる

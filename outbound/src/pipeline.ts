@@ -16,6 +16,7 @@ import { scoreCompany } from './score.ts';
 import { prioritize } from './prioritize.ts';
 import { toCsv } from './csv.ts';
 import { toSeedCsv } from './seedCsv.ts';
+import { computeMetrics, formatMetrics } from './metrics.ts';
 import type { EnrichedCompany } from './types.ts';
 
 interface Args {
@@ -52,7 +53,7 @@ async function main() {
   // 1) seed自動取得
   const pref = prefByName(a.pref);
   const seedFetch = a.mode === 'fixture' ? fixtureFetch(buildFixtureMap()) : httpFetch();
-  const seeds = await runSeedSources({
+  const { companies: seeds, stats } = await runSeedSources({
     pref, mode: a.mode, fetch: seedFetch,
     limit: a.limit, perSegmentLimit: a.perSegmentLimit, perRequestDelayMs: a.delayMs,
   });
@@ -74,18 +75,16 @@ async function main() {
   mkdirSync(dirname(a.out), { recursive: true });
   writeFileSync(a.out, toCsv(sorted), 'utf8');
 
-  const byCh = sorted.reduce<Record<string, number>>((m, r) => {
-    const c = r.contact_channel ?? 'manual';
-    m[c] = (m[c] ?? 0) + 1; return m;
-  }, {});
-  const bySeg = sorted.reduce<Record<string, number>>((m, r) => {
-    m[r.segment] = (m[r.segment] ?? 0) + 1; return m;
-  }, {});
+  // 指標を算出し、CSVの隣に stats.json として保存（report で再表示できる）
+  const metrics = computeMetrics(sorted);
+  const statsPath = a.out.replace(/\.csv$/, '.stats.json');
+  writeFileSync(statsPath, JSON.stringify({ ...stats, metrics }, null, 2), 'utf8');
+
   console.error(`\n[done] ${sorted.length}社 → ${a.out}`);
-  console.error(`  チャネル: email=${byCh.email ?? 0} / form=${byCh.form ?? 0} / manual=${byCh.manual ?? 0}`);
-  console.error(`  セグメント: ${Object.entries(bySeg).map(([k, v]) => `${k}=${v}`).join(' / ')}`);
+  console.error(formatMetrics(metrics, stats));
+  console.error(`（指標は ${statsPath} にも保存。再表示は: npm run report -- --in ${a.out}）`);
   if (a.mode === 'fixture' || !a.fetchSites) {
-    console.error('  ※ デモ/オフライン：メール抽出は実サイト巡回が必要なため、ほとんど manual になります（本番 --mode live で email が増えます）');
+    console.error('※ デモ/オフライン：メール抽出は実サイト巡回が必要なため、ほとんど manual になります（本番 --mode live で email が増えます）');
   }
 }
 

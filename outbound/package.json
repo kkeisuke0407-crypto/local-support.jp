@@ -10,7 +10,8 @@
     "seed": "tsx src/seedBuild.ts",
     "seed:demo": "tsx src/seedBuild.ts --mode fixture --pref 東京都 --out data/seed.tokyo.demo.csv",
     "pipeline": "tsx src/pipeline.ts",
-    "pipeline:demo": "tsx src/pipeline.ts --mode fixture --pref 東京都 --no-fetch --seed-out data/seed.tokyo.demo.csv --out out/leads.pipeline.demo.csv"
+    "pipeline:demo": "tsx src/pipeline.ts --mode fixture --pref 東京都 --no-fetch --seed-out data/seed.tokyo.demo.csv --out out/leads.pipeline.demo.csv",
+    "report": "tsx src/report.ts"
   },
   "dependencies": {
     "cheerio": "^1.0.0"
