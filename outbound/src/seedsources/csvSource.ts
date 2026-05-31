@@ -34,6 +34,8 @@ export interface CsvSourceConfig {
   demoFile: string;
   /** 全国CSVの場合：この列名で都道府県を絞り込む（値が pref.name と一致する行のみ採用） */
   prefectureColumn?: string;
+  /** 全国CSVの場合：この列名（都道府県コード）が pref.code と一致する行のみ採用 */
+  prefectureCodeColumn?: string;
 }
 
 function findHeader(headers: string[], candidates: string[]): string | undefined {
@@ -91,6 +93,7 @@ export function csvSource(cfg: CsvSourceConfig): SeedSource {
       const urlH = cfg.column.website_url ? findHeader(headers, cfg.column.website_url) : undefined;
       const addrContains = cfg.column.addressContains ?? ['所在地', '住所'];
       const prefH = cfg.prefectureColumn ? findHeader(headers, [cfg.prefectureColumn]) : undefined;
+      const prefCodeH = cfg.prefectureCodeColumn ? findHeader(headers, [cfg.prefectureCodeColumn]) : undefined;
 
       if (!nameH) {
         console.error(`  会社名カラムが見つかりません（ヘッダ: ${headers.join(' / ')}）`);
@@ -100,6 +103,10 @@ export function csvSource(cfg: CsvSourceConfig): SeedSource {
       const out: SeedCompany[] = [];
       for (const row of rows) {
         if (prefH && (row[prefH] ?? '').trim() !== ctx.pref.name) continue;
+        if (prefCodeH) {
+          const v = (row[prefCodeH] ?? '').trim().replace(/^0+/, '');
+          if (v !== ctx.pref.code.replace(/^0+/, '')) continue;
+        }
         const name = (row[nameH] ?? '').trim();
         if (!name) continue;
         const cnRaw = hojinH ? (row[hojinH] ?? '').replace(/[^\d]/g, '') : '';
