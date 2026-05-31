@@ -72,9 +72,16 @@ async function main() {
 
   // 2) エンリッチ（メール最優先） + 3) スコアリング
   const results: EnrichedCompany[] = [];
+  const t0 = Date.now();
   for (let i = 0; i < seeds.length; i++) {
     const enriched = await enrichCompany(seeds[i], { fetch: a.fetchSites, perRequestDelayMs: a.delayMs });
     results.push(scoreCompany(enriched));
+    // 10件ごとに進捗を表示（長時間ジョブの体感対策）
+    if ((i + 1) % 10 === 0 || i === seeds.length - 1) {
+      const sec = Math.round((Date.now() - t0) / 1000);
+      const eta = i + 1 < seeds.length ? Math.round((sec / (i + 1)) * (seeds.length - i - 1)) : 0;
+      console.error(`  [enrich] ${i + 1}/${seeds.length}  経過${sec}s  残り推定${eta}s  最新: ${seeds[i].company_name}`);
+    }
   }
 
   // 4) 営業効果順ソート → CSV出力
