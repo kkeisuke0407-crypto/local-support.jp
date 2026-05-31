@@ -18,14 +18,26 @@ import RelatedServices from '../components/RelatedServices.astro';
 import PrefectureGrid from '../components/PrefectureGrid.astro';
 import BottomCTA from '../components/BottomCTA.astro';
 import AIOSummary from '../components/AIOSummary.astro';
+import PrefectureLocalSection from '../components/PrefectureLocalSection.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import { site } from '../data/site';
+import { ogImageUrl } from '../data/ogImage';
 import type { ServiceData } from '../data/services/_types';
 import type { Prefecture } from '../data/prefectures';
 import { isPrimaryPrefecture } from '../data/prefectures';
 
 interface Props { data: ServiceData; prefecture: Prefecture; }
 const { data, prefecture } = Astro.props;
+
+// サービス × 都道府県の固有コンテンツ（あれば共通コンテンツに上書き／追加）
+const override = data.prefectureOverrides?.[prefecture.slug];
+// 地域補正済みの相場表があれば差し替え
+const costGuide = override?.costRows
+  ? { ...data.costGuide, table: { ...data.costGuide.table, rows: override.costRows } }
+  : data.costGuide;
+// 都道府県固有FAQを共通FAQの末尾に追加
+const faq = override?.localFaq ? [...data.faq, ...override.localFaq] : data.faq;
+
 const canonical = `${site.domain}/${data.slug}/${prefecture.slug}/`;
 const cityText = prefecture.majorCities.slice(0, 3).join('・');
 const title = `${prefecture.name}の${data.serviceName}｜${cityText}対応の業者を一括見積で比較`;
@@ -73,7 +85,7 @@ const serviceLd = JSON.stringify({
 const faqLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: data.faq.map((f) => ({
+  mainEntity: faq.map((f) => ({
     '@type': 'Question',
     name: f.q,
     acceptedAnswer: { '@type': 'Answer', text: f.a },
@@ -111,15 +123,17 @@ const webPageLd = JSON.stringify({
   },
 });
 
+// 地域の費用水準（priceFactor）を反映し、構造化データの価格レンジを都道府県ごとに変える
+const priceFactor = prefecture.priceFactor ?? 1;
 const priceLd = data.costGuide.priceRange ? JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'AggregateOffer',
   name: `${prefecture.name}の${data.serviceName}費用相場`,
   description: data.costGuide.intro,
   priceCurrency: 'JPY',
-  lowPrice: String(data.costGuide.priceRange.min),
-  highPrice: String(data.costGuide.priceRange.max),
-  offerCount: data.costGuide.table.rows.length,
+  lowPrice: String(Math.round(data.costGuide.priceRange.min * priceFactor)),
+  highPrice: String(Math.round(data.costGuide.priceRange.max * priceFactor)),
+  offerCount: costGuide.table.rows.length,
   areaServed: { '@type': 'AdministrativeArea', name: prefecture.name },
   itemOffered: {
     '@type': 'Service',
@@ -136,7 +150,7 @@ const jsonLdBlocks = [breadcrumbLd, serviceLd, webPageLd, faqLd, howToLd, priceL
   canonical={canonical}
   siteName={data.siteName}
   logoSub={`${prefecture.name}の${data.serviceName}業者をご紹介`}
-  ogImage={`${site.domain}/og-${data.slug}.png`}
+  ogImage={ogImageUrl(data.slug)}
   jsonLdBlocks={jsonLdBlocks}
   noindex={noindex}
 >
@@ -149,17 +163,20 @@ const jsonLdBlocks = [breadcrumbLd, serviceLd, webPageLd, faqLd, howToLd, priceL
   <AIOSummary lead={data.aiSummary.lead} facts={data.aiSummary.facts} serviceName={data.serviceName} />
   <TrustStrip />
   <PrefectureIntro prefecture={prefecture} service={data} />
+  {override?.localSection && (
+    <PrefectureLocalSection title={override.localSection.title} paragraphs={override.localSection.paragraphs} />
+  )}
   <ProcessSteps serviceName={data.serviceName} />
   <TrustBadges stats={data.trustStats} />
   <LegalSection legal={data.legal} serviceName={data.serviceName} relatedColumns={data.relatedColumns} />
   <RiskCards risks={data.risks} serviceName={data.serviceName} />
-  <CostTable costGuide={data.costGuide} serviceName={data.serviceName} lastUpdated={data.meta.lastUpdated} relatedColumns={data.relatedColumns} />
+  <CostTable costGuide={costGuide} serviceName={data.serviceName} lastUpdated={data.meta.lastUpdated} relatedColumns={data.relatedColumns} prefecture={prefecture} />
   <IndustrySection industries={data.industries} serviceName={data.serviceName} />
   <SelectionChecklist criteria={data.selectionCriteria} serviceName={data.serviceName} />
   <MistakesSection mistakes={data.mistakes} serviceName={data.serviceName} />
   <ComparisonTipsSection tips={data.comparisonTips} serviceName={data.serviceName} />
   <QuoteFormFull data={data} />
-  <FAQ faq={data.faq} serviceName={data.serviceName} />
+  <FAQ faq={faq} serviceName={data.serviceName} />
   <PrefectureGrid serviceSlug={data.slug} serviceName={data.serviceName} />
   <RelatedServices currentSlug={data.slug} relatedSlugs={data.relatedServiceSlugs} />
   <BottomCTA serviceName={data.serviceName} />

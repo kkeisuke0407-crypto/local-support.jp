@@ -1,5 +1,5 @@
 ---
-import { site } from '../data/site';
+import { site, serviceIndex } from '../data/site';
 import '../styles/global.css';
 
 interface Props {
@@ -33,7 +33,15 @@ const baseLdBlocks = [
     alternateName: site.name,
     url: site.domain,
     logo: `${site.domain}/logo-mark.svg`,
+    description: site.description,
     areaServed: { '@type': 'Country', name: 'JP' },
+    knowsAbout: serviceIndex.map((s) => s.name),
+    founder: {
+      '@type': 'Person',
+      name: site.author.name,
+      jobTitle: site.author.role,
+      url: `${site.domain}/author/`,
+    },
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'customer service',
@@ -41,7 +49,6 @@ const baseLdBlocks = [
       availableLanguage: 'Japanese',
       url: `${site.domain}/`,
     },
-    sameAs: [],
   }),
   JSON.stringify({
     '@context': 'https://schema.org',
