@@ -18,9 +18,11 @@ export const kaigo = csvSource({
   industry: '介護施設運営',
   liveFile: (pref) => `kaigo_${pref.code}.csv`,
   demoFile: 'kaigo_sample.csv',
+  prefectureColumn: '都道府県名',
   column: {
-    company_name: ['法人名称', '法人名', '事業者名', '事業所名称', '事業所名', '名称'],
+    company_name: ['法人の名称', '法人名称', '法人名', '事業所名', '名称'],
     corporate_number: ['法人番号'],
-    addressContains: ['所在地', '住所'],
+    addressContains: ['住所', '所在地'],
+    website_url: ['URL'],
   },
 });
