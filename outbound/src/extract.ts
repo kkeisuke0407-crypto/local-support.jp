@@ -29,6 +29,7 @@ const DUMMY_EMAIL_PATTERNS: RegExp[] = [
   /@(example\.(com|net|org|jp|co\.jp)|sample\.(com|co\.jp)|test\.(com|co\.jp)|domain\.(com|co\.jp)|your-?site\.\w+|your-?domain\.\w+|mysite\.\w+|maru\.com|form\.jp|xxx?\.\w+)$/i,
   // Sentry/監視SDKが埋め込むトラッキング用ダミー
   /sentry[-_]?(next|test|prod)?\.wixpress\.com$/i,
+  /@sentry\./i,
   /@.*\.example\./i,
 ];
 
