@@ -79,6 +79,8 @@ export function csvSource(cfg: CsvSourceConfig): SeedSource {
         }
       }
       if (!text) return [];
+      // UTF-8 BOM を除去（医療機能情報のCSVなど BOM 付きで配布されるため）
+      if (text.charCodeAt(0) === 0xfeff) text = text.slice(1);
 
       const rows = parseCsvToObjects(text);
       if (rows.length === 0) return [];

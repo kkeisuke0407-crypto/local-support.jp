@@ -19,6 +19,23 @@ const PHONE_RE = /0(?:\d{1,4}-\d{1,4}-\d{3,4}|\d{9,10})|0120-?\d{2,3}-?\d{3,4}/g
 /** 個別担当アドレスっぽいか（info@ 等の代表アドレスは false 寄り） */
 const GENERIC_LOCALPARTS = ['info', 'contact', 'support', 'mail', 'office', 'inquiry', 'webmaster', 'admin'];
 
+/** 明らかにダミー/プレースホルダなメール（テンプレ流用や雛形で残ったもの） */
+const DUMMY_EMAIL_PATTERNS: RegExp[] = [
+  // ローカル部の典型
+  /^(sample|example|test|demo|dummy|hoge|fuga|foo|bar|baz|aaa+|bbb+|xxx+|yyy+|zzz+|abc|name|user|noreply|no-reply|donotreply|do-not-reply)@/i,
+  /^[a-z]@/i,                 // 1文字ローカル
+  /^(.)\1{2,}@/i,              // sssss@ など同一文字連続
+  // ドメイン側の典型（プレースホルダ）
+  /@(example\.(com|net|org|jp|co\.jp)|sample\.(com|co\.jp)|test\.(com|co\.jp)|domain\.(com|co\.jp)|your-?site\.\w+|your-?domain\.\w+|mysite\.\w+|maru\.com|form\.jp|xxx?\.\w+)$/i,
+  // Sentry/監視SDKが埋め込むトラッキング用ダミー
+  /sentry[-_]?(next|test|prod)?\.wixpress\.com$/i,
+  /@.*\.example\./i,
+];
+
+export function isDummyEmail(email: string): boolean {
+  return DUMMY_EMAIL_PATTERNS.some((re) => re.test(email));
+}
+
 export function isPersonalEmail(email: string): boolean {
   const local = email.split('@')[0]?.toLowerCase() ?? '';
   if (GENERIC_LOCALPARTS.includes(local)) return false;
@@ -51,15 +68,15 @@ export function extractContacts(html: string, baseUrl: string): ExtractResult {
     if (email) return;
     const href = $(el).attr('href') || '';
     const m = href.replace(/^mailto:/, '').split('?')[0].trim();
-    if (m && EMAIL_RE.test(m)) email = m;
+    if (m && EMAIL_RE.test(m) && !isDummyEmail(m)) email = m;
     EMAIL_RE.lastIndex = 0;
   });
 
   // 2) 本文中のメール表記
   if (!email) {
     const hits = html.match(EMAIL_RE) || [];
-    // 画像/CDN拡張子の誤検出を除外
-    const clean = hits.filter((e) => !/\.(png|jpe?g|gif|webp|svg|css|js)$/i.test(e));
+    // 画像/CDN拡張子の誤検出・ダミーメールを除外
+    const clean = hits.filter((e) => !/\.(png|jpe?g|gif|webp|svg|css|js)$/i.test(e) && !isDummyEmail(e));
     if (clean.length) email = clean[0];
   }
 

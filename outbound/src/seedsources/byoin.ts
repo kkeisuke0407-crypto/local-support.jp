@@ -17,9 +17,15 @@ export const byoin = csvSource({
   industry: '病院・医療法人',
   liveFile: (pref) => `byoin_${pref.code}.csv`,
   demoFile: 'byoin_sample.csv',
+  prefectureColumn: '都道府県名',
   column: {
-    company_name: ['開設者名称', '開設者', '法人名称', '医療機関名称', '医療機関名', '名称'],
+    company_name: [
+      '開設者名（法人名等）', '開設者の名称', '開設者名称', '開設者名',
+      '開設者', '法人の名称', '法人名称', '医療機関の名称', '医療機関名称',
+      '医療機関名', '名称',
+    ],
     corporate_number: ['法人番号'],
     addressContains: ['所在地', '住所'],
+    website_url: ['ホームページアドレス', 'ホームページ', 'URL', 'HP'],
   },
 });

@@ -15,6 +15,7 @@ import { scoreCompany } from './score.ts';
 import { prioritize } from './prioritize.ts';
 import { toCsv } from './csv.ts';
 import { toSeedCsv } from './seedCsv.ts';
+import { toReviewCsv } from './reviewCsv.ts';
 import { computeMetrics, formatMetrics } from './metrics.ts';
 import type { EnrichedCompany } from './types.ts';
 
@@ -22,6 +23,8 @@ interface Args {
   pref: string;
   out: string;
   seedOut?: string;
+  reviewOut?: string;
+  reviewTop: number;
   limit?: number;
   perSegmentLimit?: number;
   mode: 'live' | 'fixture';
@@ -32,12 +35,14 @@ interface Args {
 }
 
 function parseArgs(argv: string[]): Args {
-  const a: Args = { pref: '東京都', out: 'out/leads.tokyo.csv', mode: 'live', fetchSites: true, onlyStable: false, delayMs: 1500 };
+  const a: Args = { pref: '東京都', out: 'out/leads.tokyo.csv', mode: 'live', fetchSites: true, onlyStable: false, delayMs: 1500, reviewTop: 50 };
   for (let i = 0; i < argv.length; i++) {
     const k = argv[i];
     if (k === '--pref') a.pref = argv[++i];
     else if (k === '--out') a.out = argv[++i];
     else if (k === '--seed-out') a.seedOut = argv[++i];
+    else if (k === '--review-out') a.reviewOut = argv[++i];
+    else if (k === '--review-top') a.reviewTop = parseInt(argv[++i], 10);
     else if (k === '--limit') a.limit = parseInt(argv[++i], 10);
     else if (k === '--per-segment') a.perSegmentLimit = parseInt(argv[++i], 10);
     else if (k === '--mode') a.mode = argv[++i] as 'live' | 'fixture';
@@ -76,6 +81,13 @@ async function main() {
   const sorted = prioritize(results);
   mkdirSync(dirname(a.out), { recursive: true });
   writeFileSync(a.out, toCsv(sorted), 'utf8');
+
+  // 人間レビュー用：上位N件のレビュー用CSV
+  if (a.reviewOut) {
+    mkdirSync(dirname(a.reviewOut), { recursive: true });
+    writeFileSync(a.reviewOut, toReviewCsv(sorted, a.reviewTop), 'utf8');
+    console.error(`[pipeline] レビュー用CSV保存 → ${a.reviewOut}（上位${a.reviewTop}件）`);
+  }
 
   // 指標を算出し、CSVの隣に stats.json として保存（report で再表示できる）
   const metrics = computeMetrics(sorted);
