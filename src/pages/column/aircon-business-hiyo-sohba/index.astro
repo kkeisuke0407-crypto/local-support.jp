@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
 const title = '業務用エアコン洗浄・修理の費用相場2026｜分解洗浄・修理・入替の判断基準';
@@ -75,8 +76,11 @@ const faqLd = JSON.stringify({
       <div class="cl-quickanswer">
         <p class="cl-qa-q">Q. 業務用エアコン洗浄・修理の費用はいくらですか？</p>
         <p class="cl-qa-a">A. <strong>洗浄は1台あたり2〜8万円、修理は3万円〜（部品代別途）</strong>。建築物衛生法の対象施設では複数台まとめて年間契約にすると1台あたり単価が下がる。</p>
-        <p class="cl-qa-src">※ロカサポ調査（2026年1〜4月・全国39社の見積データ）</p>
+        <p class="cl-qa-src">※ロカサポ編集部による相場調査（2026年1〜4月）</p>
       </div>
+
+      <ColumnCtaCard serviceSlug="aircon-business" serviceName="æ¥­åç¨ã¨ã¢ã³ã³" variant="top" />
+
 
       <aside class="cl-toc" aria-label="目次">
         <h2 class="cl-toc-h">この記事の目次</h2>

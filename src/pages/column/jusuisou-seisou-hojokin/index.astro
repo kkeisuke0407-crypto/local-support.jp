@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
 const title = "受水槽の更新・撤去に使える補助金2026｜直結給水化・耐震化の自治体助成まとめ";
@@ -86,6 +87,9 @@ const faqLd = JSON.stringify({
         <p class="cl-qa-a">A. <strong>受水槽の撤去・直結給水切替工事には自治体により10万円〜500万円の補助</strong>があります。耐震化工事も対象になるケースが多く、工事費の1/2〜2/3が一般的な助成水準。</p>
         <p class="cl-qa-src">※主要自治体の2026年度補助金制度（2026年4月時点）</p>
       </div>
+
+      <ColumnCtaCard serviceSlug="jusuisou-seisou" serviceName="åæ°´æ§½æ¸æ" variant="top" />
+
 
       <aside class="cl-toc" aria-label="目次">
         <h2 class="cl-toc-h">この記事の目次</h2>

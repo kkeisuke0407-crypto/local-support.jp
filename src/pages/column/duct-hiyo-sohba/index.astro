@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
 const title = 'ダクト清掃の費用相場2026｜厨房5〜30万円・空調10〜100万円を規模・種別ごとに解説';
@@ -97,8 +98,11 @@ const faqLd = JSON.stringify({
       <div class="cl-quickanswer">
         <p class="cl-qa-q">Q. ダクト清掃の費用はいくらですか？</p>
         <p class="cl-qa-a">A. <strong>厨房ダクト1系統5〜30万円・空調ダクト10〜100万円</strong>が目安。飲食店の厨房ダクトは油脂量・ダクト延長・高所作業の有無で変動する。</p>
-        <p class="cl-qa-src">※ロカサポ調査（2026年1〜4月・全国36社の見積データ）</p>
+        <p class="cl-qa-src">※ロカサポ編集部による相場調査（2026年1〜4月）</p>
       </div>
+
+      <ColumnCtaCard serviceSlug="duct" serviceName="ãã¯ãæ¸æ" variant="top" />
+
 
 
       <aside class="cl-toc" aria-label="目次">
