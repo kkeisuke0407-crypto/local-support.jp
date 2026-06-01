@@ -159,7 +159,7 @@ const appLd = JSON.stringify({
         </div>
         <div class="au-actions">
           <button type="button" class="au-back" data-back>← 戻る</button>
-          <button type="button" class="au-next" data-next disabled>次へ →</button>
+          <button type="button" class="au-next" data-next disabled>次へ</button>
         </div>
       </div>
 
@@ -300,7 +300,7 @@ const appLd = JSON.stringify({
             <label for="au-name">ご担当者名（任意）</label>
             <input id="au-name" name="name" type="text" placeholder="例：山田" />
           </div>
-          <button type="submit" class="qf-submit" data-track="audit_quote_submit">この内容で無料相談する →</button>
+          <button type="submit" class="qf-submit" data-track="audit_quote_submit">この内容で無料相談する</button>
         </form>
         <button type="button" class="au-quote-back" id="au-quote-back">← 診断結果に戻る</button>
       </div>
@@ -473,7 +473,7 @@ const appLd = JSON.stringify({
         const meta = LEVEL_META[res.level];
         const reasons = res.reasons.map((x) => `<li>${x}</li>`).join('');
         const link = res.level !== 'low'
-          ? `<a class="au-card-link" href="/${res.id}/">${res.label}の相場・基礎知識を見る →</a>` : '';
+          ? `<a class="au-card-link" href="/${res.id}/">${res.label}の相場・基礎知識を見る</a>` : '';
         return `<div class="au-card lv-${res.level}">
           <div class="au-card-head">
             <span>${meta.icon}</span>
