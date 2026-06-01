@@ -50,6 +50,22 @@ const faqLd = JSON.stringify({
     { '@type': 'Question', name: "補助金交付までの期間中の資金繰りは？", acceptedAnswer: { '@type': 'Answer', text: "工事費は一旦自己負担して、完了後に補助金が振り込まれる仕組みが一般的です。短期借入や工事業者との支払い条件交渉で資金繰りを調整してください。" } }
   ],
 });
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.faq-q', '.faq-a'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
+});
+
 ---
 <BaseLayout
   title={title}
@@ -58,7 +74,7 @@ const faqLd = JSON.stringify({
   siteName={site.name}
   logoSub="施設管理の一括見積比較"
   ogImage={`${site.domain}/og-asbestos.png`}
-  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
 >
   <article class="cl-article">
 

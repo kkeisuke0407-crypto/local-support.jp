@@ -50,6 +50,22 @@ const faqLd = JSON.stringify({
     { '@type': 'Question', name: "ダクト清掃に絞った補助金はないですか？", acceptedAnswer: { '@type': 'Answer', text: "2026年現在、ダクト清掃単独で対象となる補助金は限定的です。代わりに「衛生管理」「防火対策」「設備更新」など広いカテゴリで申請するのが現実的です。" } }
   ],
 });
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.faq-q', '.faq-a'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
+});
+
 ---
 <BaseLayout
   title={title}
@@ -58,7 +74,7 @@ const faqLd = JSON.stringify({
   siteName={site.name}
   logoSub="施設管理の一括見積比較"
   ogImage={`${site.domain}/og-duct.png`}
-  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
 >
   <article class="cl-article">
 

@@ -50,6 +50,22 @@ const faqLd = JSON.stringify({
     { '@type': 'Question', name: "海外で類似の事例はありますか？", acceptedAnswer: { '@type': 'Answer', text: "欧米諸国でも同様にアスベスト被害は深刻な社会問題化しており、各国で厳格な規制が整備されています。日本の規制も国際的な動向を踏まえて段階的に強化されています。" } }
   ],
 });
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.faq-q', '.faq-a'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
+});
+
 ---
 <BaseLayout
   title={title}
@@ -58,7 +74,7 @@ const faqLd = JSON.stringify({
   siteName={site.name}
   logoSub="施設管理の一括見積比較"
   ogImage={`${site.domain}/og-asbestos.png`}
-  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
 >
   <article class="cl-article">
 
