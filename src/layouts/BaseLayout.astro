@@ -141,9 +141,10 @@ const allLdBlocks = [...baseLdBlocks, ...jsonLdBlocks];
         <span class="sd-logo-sub">{logoSub}</span>
       </div>
     </a>
-    <a href="#contact" class="sd-header-cta" data-scroll-to="#contact" data-track="header_contact">
-      無料で一括見積 ›
-    </a>
+    <nav class="sd-header-nav" aria-label="主要メニュー">
+      <a href="/audit/" class="sd-header-link" data-track="header_audit">30秒コスト診断</a>
+      <a href="#contact" class="sd-header-cta" data-scroll-to="#contact" data-track="header_contact">無料で一括見積</a>
+    </nav>
   </div>
 </header>
 
@@ -154,25 +155,59 @@ const allLdBlocks = [...baseLdBlocks, ...jsonLdBlocks];
 <!-- ══ FOOTER ════════════════════════════════════════════════ -->
 <footer class="sd-footer">
   <div class="sd-footer-inner">
-    <div class="sd-footer-logo">{siteName}</div>
-    <p class="sd-footer-desc">
-      施設管理・設備メンテナンスの一括見積比較サイト。受水槽清掃・アスベスト調査・ダクト清掃・シャッター点検など、登録業者から最大3社を無料でご紹介します。
-      掲載情報は公開時点のものです。最新の法令・費用は各機関・業者の公式情報をご確認ください。
-    </p>
-    <div class="sd-footer-links">
-      <a href="/">トップ</a>
-      <a href="/about/">ロカサポとは</a>
-      <a href="/case/">紹介事例</a>
-      <a href="/flow/">ご利用の流れ</a>
-      <a href="/column/">コラム</a>
-      <a href="/author/">運営者プロフィール</a>
-      <a href="/operator/">運営者情報</a>
-      <a href="/privacy/">プライバシーポリシー</a>
-      <a href="/disclosure/">ご紹介業者について</a>
-      <a href="/sitemap/">サイトマップ</a>
-      <a href="/#press">取材・提携のお問い合わせ</a>
+    <div class="sd-footer-top">
+      <div class="sd-footer-brand">
+        <div class="sd-footer-logo">{siteName}</div>
+        <p class="sd-footer-desc">
+          施設管理・設備メンテナンスの一括見積比較サイト。受水槽清掃・アスベスト調査・消防設備点検など27分野の登録業者から最大3社を無料でご紹介します。
+        </p>
+      </div>
+      <div class="sd-footer-cols">
+        <div class="sd-footer-col">
+          <h3 class="sd-footer-col-h">無料ツール</h3>
+          <ul>
+            <li><a href="/audit/">30秒コスト診断</a></li>
+            <li><a href="/#contact">ご依頼の流れ</a></li>
+            <li><a href="/flow/">ご利用ガイド</a></li>
+          </ul>
+        </div>
+        <div class="sd-footer-col">
+          <h3 class="sd-footer-col-h">主要サービス</h3>
+          <ul>
+            <li><a href="/jusuisou-seisou/">受水槽清掃</a></li>
+            <li><a href="/shobo-setsubi/">消防設備点検</a></li>
+            <li><a href="/asbestos/">アスベスト調査・除去</a></li>
+            <li><a href="/duct/">ダクト清掃</a></li>
+            <li><a href="/pest-control/">害虫駆除</a></li>
+            <li><a href="/grease-trap/">グリストラップ清掃</a></li>
+            <li><a href="/">全27サービスを見る</a></li>
+          </ul>
+        </div>
+        <div class="sd-footer-col">
+          <h3 class="sd-footer-col-h">運営情報</h3>
+          <ul>
+            <li><a href="/about/">ロカサポとは</a></li>
+            <li><a href="/case/">紹介事例</a></li>
+            <li><a href="/author/">編集長プロフィール</a></li>
+            <li><a href="/operator/">運営者情報</a></li>
+            <li><a href="/editorial-policy/">編集方針</a></li>
+            <li><a href="/research/methodology/">調査方法</a></li>
+          </ul>
+        </div>
+        <div class="sd-footer-col">
+          <h3 class="sd-footer-col-h">お役立ち</h3>
+          <ul>
+            <li><a href="/column/">コラム</a></li>
+            <li><a href="/glossary/">施設管理用語集</a></li>
+            <li><a href="/disclosure/">ご紹介業者について</a></li>
+            <li><a href="/privacy/">プライバシーポリシー</a></li>
+            <li><a href="/sitemap/">サイトマップ</a></li>
+            <li><a href="/#press">取材・提携のお問い合わせ</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <p class="sd-footer-copy">© 2026 {siteName}. All rights reserved.</p>
+    <p class="sd-footer-copy">© 2026 {siteName}（運営：{site.org.legalName}）. All rights reserved.</p>
   </div>
 </footer>
 
