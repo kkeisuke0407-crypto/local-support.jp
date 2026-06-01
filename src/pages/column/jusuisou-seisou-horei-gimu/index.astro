@@ -178,6 +178,7 @@ const webPageLd = JSON.stringify({
           <li><a href="#jichitai">自治体条例による上乗せ規制</a></li>
           <li><a href="#penalty">違反時のペナルティと行政指導事例</a></li>
           <li><a href="#records">保存すべき書類・記録の一覧</a></li>
+          <li><a href="#inspection-check">保健所立入検査セルフチェック（実務者向け）</a></li>
           <li><a href="#checklist">年間管理スケジュールのひな形</a></li>
           <li><a href="#vendor">適切な業者に依頼するための確認事項</a></li>
           <li><a href="#faq">よくある質問</a></li>
@@ -452,6 +453,48 @@ const webPageLd = JSON.stringify({
               </tr>
             </tbody>
           </table>
+        </div>
+      </section>
+
+      <section id="inspection-check" class="cl-section">
+        <h2>保健所立入検査セルフチェック（実務者向け）</h2>
+        <p>建築物衛生法の特定建築物・水道法の簡易専用水道は、保健所による立入検査の対象です。検査では下記の点が確認されます。<strong>事前に自施設で照合し、不備があれば次の清掃発注時に修正を依頼してください。</strong>該当しない場合は法令違反として改善命令や報告徴収の対象になります（水道法第39条・建築物衛生法第11条）。</p>
+
+        <h3>① 清掃の実施状況（直近3年分）</h3>
+        <ul class="cl-check">
+          <li>年1回以上、清掃作業報告書が揃っているか</li>
+          <li>作業日・作業者名・使用消毒薬剤・濃度・接触時間が明記されているか</li>
+          <li>清掃前後の写真（マンホール内部・壁面・吐水口空間）が添付されているか</li>
+          <li>清掃業者が建築物飲料水貯水槽清掃業の登録業者か（登録証の写しを保管）</li>
+        </ul>
+
+        <h3>② 水質検査の実施状況</h3>
+        <ul class="cl-check">
+          <li>清掃後の水質検査結果書（残留塩素・色・濁り・臭味の5〜10項目）が揃っているか</li>
+          <li>厚生労働省登録の水質検査機関による検査か</li>
+          <li>基準を満たさない項目があった場合、改善措置の記録が残っているか</li>
+          <li>定期検査（簡易専用水道は年1回・指定検査機関）の受検証明書があるか</li>
+        </ul>
+
+        <h3>③ 受水槽本体の状態</h3>
+        <ul class="cl-check">
+          <li>マンホールに施錠がされているか（建築物衛生法施行規則）</li>
+          <li>マンホール周囲・通気管・オーバーフロー管に防虫網が設置・損傷なしか</li>
+          <li>受水槽周囲の点検スペース（上部1m・側面・下面60cm以上）が確保されているか</li>
+          <li>外観検査でひび割れ・漏水・赤錆・塗装剥離がないか</li>
+        </ul>
+
+        <h3>④ 管理体制・書類整備</h3>
+        <ul class="cl-check">
+          <li>管理責任者（建築物環境衛生管理技術者または委託先）が明確か</li>
+          <li>過去5年分の清掃・水質検査・修繕記録が保管されているか</li>
+          <li>管理委託契約書に清掃・水質検査の実施が明記されているか</li>
+          <li>水質異常時の連絡先・対応手順が文書化されているか</li>
+        </ul>
+
+        <div class="cl-callout">
+          <h3 class="cl-callout-h">3項目以上が「該当しない」場合は要注意</h3>
+          <p>上記4カテゴリ（合計16項目）のうち、3項目以上で不備がある場合、保健所立入検査で口頭指導・改善命令の対象になる可能性が高い水準です。次回の清掃発注時に、報告書・写真・水質検査結果書の発行を確認できる業者へ切り替えることをおすすめします。</p>
         </div>
       </section>
 
@@ -828,5 +871,33 @@ const webPageLd = JSON.stringify({
 .cl-pref-list a:hover { background: var(--blue-light); }
 .cl-pref-more { font-size: .87rem; margin: 0; }
 .cl-pref-more a { color: var(--blue); text-decoration: underline; }
+
+/* 保健所立入検査セルフチェック */
+.cl-check {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 22px;
+  display: grid;
+  gap: 8px;
+}
+.cl-check li {
+  position: relative;
+  padding: 10px 14px 10px 38px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: .9rem;
+  line-height: 1.65;
+  color: var(--gray-800);
+}
+.cl-check li::before {
+  content: "☐";
+  position: absolute;
+  left: 12px;
+  top: 10px;
+  font-size: 1.1rem;
+  color: var(--blue);
+  font-weight: 700;
+}
 
 </style>
