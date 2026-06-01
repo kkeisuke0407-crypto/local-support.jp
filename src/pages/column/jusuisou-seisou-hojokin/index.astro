@@ -116,6 +116,7 @@ const webPageLd = JSON.stringify({
           <li><a href="#flow">申請の流れ</a></li>
           <li><a href="#documents">必要書類</a></li>
           <li><a href="#timing">申請タイミングの注意</a></li>
+          <li><a href="#patterns">自治体タイプ別の申請パターン（補助制度の3類型）</a></li>
           <li><a href="#faq">よくある質問</a></li>
         </ol>
       </aside>
@@ -199,6 +200,47 @@ const webPageLd = JSON.stringify({
           <li>交付決定前の着工は補助金対象外（必ず事前申請）</li>
           <li>複数年度にまたがる工事は年度ごとに申請が必要</li>
         </ul>
+      </section>
+
+      <section id="patterns" class="cl-section">
+        <h2>自治体タイプ別の申請パターン</h2>
+        <p>市区町村の補助金制度は、財政規模や水道行政の方針によって<strong>大きく3類型</strong>に分かれます。お住まいの自治体がどのパターンかを判定すると、申請の難易度・想定スケジュール・必要書類のあたりがつきます。</p>
+
+        <h3>類型A：直結給水化推進型（政令市・中核市に多い）</h3>
+        <div class="cl-pattern">
+          <p class="cl-pattern-feature"><strong>特徴：</strong>水道事業の経営効率化として「受水槽方式→直結直圧／直結増圧」への切替を奨励。補助対象工事を「直結化」に限定するか、直結化に厚めの補助率を設定。</p>
+          <p class="cl-pattern-target"><strong>主な対象：</strong>3階建以下の小規模ビル・マンション・店舗</p>
+          <p class="cl-pattern-amount"><strong>補助額の目安：</strong>工事費の1/2〜2/3、上限30万〜100万円程度</p>
+          <p class="cl-pattern-tip"><strong>進め方のポイント：</strong>事前に水道局へ「直結化が物理的に可能か（給水量・水圧・管路の判定）」の事前審査を依頼。可否によって補助金活用ルートが大きく変わります。</p>
+        </div>
+
+        <h3>類型B：耐震・更新支援型（地震多発地域・水道老朽化進行地域）</h3>
+        <div class="cl-pattern">
+          <p class="cl-pattern-feature"><strong>特徴：</strong>受水槽の耐震補強・取替・FRP化など「設備の更新」に補助。直結化に限定しない代わりに、築年数や耐震性能の要件あり。</p>
+          <p class="cl-pattern-target"><strong>主な対象：</strong>1981年以前建築の建物・耐震診断未実施の受水槽</p>
+          <p class="cl-pattern-amount"><strong>補助額の目安：</strong>工事費の1/3〜1/2、上限50万〜200万円程度</p>
+          <p class="cl-pattern-tip"><strong>進め方のポイント：</strong>耐震診断結果書が必須書類になる場合が多いです。診断費用にも別途補助が出る自治体もあるため、診断＋更新工事をセットで計画すると有利です。</p>
+        </div>
+
+        <h3>類型C：制度なし／一般補助への上乗せ型（小規模自治体に多い）</h3>
+        <div class="cl-pattern">
+          <p class="cl-pattern-feature"><strong>特徴：</strong>受水槽専用の補助金制度がない。代わりに「省エネ設備改修」「居住環境改善」「分譲マンション共用部改修」など一般枠で対応可能なケースがある。</p>
+          <p class="cl-pattern-target"><strong>主な対象：</strong>分譲マンション管理組合・共同住宅オーナー</p>
+          <p class="cl-pattern-amount"><strong>補助額の目安：</strong>工事費の1/3、上限20万〜50万円程度（制度による）</p>
+          <p class="cl-pattern-tip"><strong>進め方のポイント：</strong>「受水槽更新」単独では対象外でも、「給水設備改修＋省エネポンプ導入」「共用部リフォーム」とパッケージ化すれば対象になる場合あり。自治体の住宅政策担当窓口にも相談しましょう。</p>
+        </div>
+
+        <h3>判定フローチャート</h3>
+        <ol class="cl-flow-steps">
+          <li><strong>ステップ1</strong>：自治体の「水道局」または「給水課」のサイトで「直結給水化補助」「貯水槽更新補助」を検索。ヒットすれば類型AまたはB。</li>
+          <li><strong>ステップ2</strong>：ヒットしない場合、「住宅課」「建築指導課」「省エネ推進課」のサイトを横断検索（キーワード：マンション共用部・給水設備・省エネ改修）。ヒットすれば類型C。</li>
+          <li><strong>ステップ3</strong>：それでもヒットしない場合は、水道局に「受水槽の更新を検討中。利用可能な補助制度はあるか」と電話照会。担当外の場合は窓口を案内してもらえます。</li>
+        </ol>
+
+        <div class="cl-callout">
+          <h3 class="cl-callout-h">補助金は「工事の発注前」に申請が原則</h3>
+          <p>3類型いずれも共通して、<strong>業者との契約・着工の前に申請</strong>が必要です。契約後・着工後の遡及申請は原則認められません。受水槽の状態が悪化してから慌てて申請すると間に合わないため、年度の早い時期（4〜7月）に情報収集と申請準備を始めるのが鉄則です。</p>
+        </div>
       </section>
 
       <section id="faq" class="cl-section">
@@ -336,4 +378,20 @@ const webPageLd = JSON.stringify({
 .cl-pref-list a:hover { background: var(--blue-light); }
 .cl-pref-more { font-size: .87rem; margin: 0; }
 .cl-pref-more a { color: var(--blue); text-decoration: underline; }
+
+/* 補助金 自治体類型パターン */
+.cl-pattern {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px 18px;
+  margin: 0 0 18px;
+}
+.cl-pattern > p { font-size: .9rem; line-height: 1.75; color: var(--gray-700); margin: 0 0 8px; }
+.cl-pattern > p:last-child { margin-bottom: 0; }
+.cl-pattern strong { color: var(--blue-dark); }
+.cl-pattern-tip { padding-top: 8px; border-top: 1px dashed #cbd5e1; margin-top: 8px !important; }
+.cl-flow-steps { padding-left: 22px; margin: 0 0 18px; }
+.cl-flow-steps li { font-size: .9rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 6px; }
+.cl-flow-steps strong { color: var(--blue); }
 </style>

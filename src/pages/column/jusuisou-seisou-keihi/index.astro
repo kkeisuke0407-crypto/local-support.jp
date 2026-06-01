@@ -115,6 +115,7 @@ const webPageLd = JSON.stringify({
           <li><a href="#shiwake">主体別の仕訳例</a></li>
           <li><a href="#shouhizei">消費税の取扱い</a></li>
           <li><a href="#records">書類の保管期間</a></li>
+          <li><a href="#case-patterns">ケース別仕訳パターン集（実務即用）</a></li>
           <li><a href="#qa">税理士からよくある質問</a></li>
           <li><a href="#faq">よくある質問</a></li>
         </ol>
@@ -193,6 +194,119 @@ const webPageLd = JSON.stringify({
               <tr><th scope="row">廃棄物マニフェスト</th><td>5年間</td><td>廃棄物処理法</td></tr>
             </tbody>
           </table>
+        </div>
+      </section>
+
+      <section id="case-patterns" class="cl-section">
+        <h2>ケース別仕訳パターン集</h2>
+        <p>受水槽関連の支出は、清掃のような<strong>「年次のメンテナンス」</strong>か、<strong>「資本的支出（取替・改良）」</strong>かで仕訳が変わります。判定を誤ると、本来一括損金算入できる費用を減価償却で配分してしまったり、逆に資産計上すべき支出を費用処理して税務調査で否認されたりします。代表的な8パターンを整理しました。</p>
+
+        <h3>パターン1：年次の定期清掃（最も基本のケース）</h3>
+        <div class="cl-case">
+          <p class="cl-case-label">支出内容：清掃業者へ年1回の清掃費（税抜5万円・税込5.5万円）を支払</p>
+          <table class="cl-table cl-case-table">
+            <thead><tr><th>借方</th><th>金額</th><th>貸方</th><th>金額</th></tr></thead>
+            <tbody>
+              <tr><td>修繕費</td><td>50,000</td><td>普通預金</td><td>55,000</td></tr>
+              <tr><td>仮払消費税</td><td>5,000</td><td></td><td></td></tr>
+            </tbody>
+          </table>
+          <p class="cl-case-note">判定：通常の維持管理 → <strong>修繕費（全額損金算入）</strong>。「衛生管理費」「保守料」勘定でも可。</p>
+        </div>
+
+        <h3>パターン2：水質検査の単独実施</h3>
+        <div class="cl-case">
+          <p class="cl-case-label">支出内容：清掃とは別途、水質検査機関へ検査料（税抜1.5万円）を支払</p>
+          <table class="cl-table cl-case-table">
+            <thead><tr><th>借方</th><th>金額</th><th>貸方</th><th>金額</th></tr></thead>
+            <tbody>
+              <tr><td>支払手数料</td><td>15,000</td><td>普通預金</td><td>16,500</td></tr>
+              <tr><td>仮払消費税</td><td>1,500</td><td></td><td></td></tr>
+            </tbody>
+          </table>
+          <p class="cl-case-note">判定：検査機関への手数料 → <strong>支払手数料</strong>または<strong>衛生管理費</strong>。修繕費とは区別すると科目別の管理がしやすくなります。</p>
+        </div>
+
+        <h3>パターン3：受水槽内部の部分補修（漏水・サビ対応）</h3>
+        <div class="cl-case">
+          <p class="cl-case-label">支出内容：清掃時に発見した漏水箇所の補修費（税抜15万円）</p>
+          <table class="cl-table cl-case-table">
+            <thead><tr><th>借方</th><th>金額</th><th>貸方</th><th>金額</th></tr></thead>
+            <tbody>
+              <tr><td>修繕費</td><td>150,000</td><td>普通預金</td><td>165,000</td></tr>
+              <tr><td>仮払消費税</td><td>15,000</td><td></td><td></td></tr>
+            </tbody>
+          </table>
+          <p class="cl-case-note">判定：原状回復目的の補修 → <strong>修繕費</strong>。20万円未満は資本的支出の判定基準を満たさないため、原則一括損金算入可能です。</p>
+        </div>
+
+        <h3>パターン4：受水槽の取替（耐用年数を延長する改良）</h3>
+        <div class="cl-case">
+          <p class="cl-case-label">支出内容：老朽化した受水槽（FRP・3m³）を新品に取替（税抜80万円）</p>
+          <table class="cl-table cl-case-table">
+            <thead><tr><th>借方</th><th>金額</th><th>貸方</th><th>金額</th></tr></thead>
+            <tbody>
+              <tr><td>建物附属設備</td><td>800,000</td><td>普通預金</td><td>880,000</td></tr>
+              <tr><td>仮払消費税</td><td>80,000</td><td></td><td></td></tr>
+            </tbody>
+          </table>
+          <p class="cl-case-note">判定：固定資産の更新 → <strong>建物附属設備として資産計上</strong>。法定耐用年数15年（給排水設備）で減価償却。金額が大きく、耐用年数を延長する改良なので一括費用処理不可。</p>
+        </div>
+
+        <h3>パターン5：直結給水化への切替工事</h3>
+        <div class="cl-case">
+          <p class="cl-case-label">支出内容：受水槽方式から直結増圧方式への切替工事（税抜250万円）。旧受水槽は撤去。</p>
+          <table class="cl-table cl-case-table">
+            <thead><tr><th>借方</th><th>金額</th><th>貸方</th><th>金額</th></tr></thead>
+            <tbody>
+              <tr><td>建物附属設備</td><td>2,500,000</td><td>普通預金</td><td>2,750,000</td></tr>
+              <tr><td>仮払消費税</td><td>250,000</td><td></td><td></td></tr>
+              <tr><td>除却損</td><td>（簿価分）</td><td>建物附属設備（旧受水槽）</td><td>（簿価分）</td></tr>
+            </tbody>
+          </table>
+          <p class="cl-case-note">判定：新規設備の取得＋旧設備の除却。<strong>新設備は資産計上、旧設備の未償却残高は除却損として一括費用化</strong>。補助金を受けた場合は別途圧縮記帳の検討が必要です（次パターン参照）。</p>
+        </div>
+
+        <h3>パターン6：補助金を受給した場合（圧縮記帳）</h3>
+        <div class="cl-case">
+          <p class="cl-case-label">支出内容：パターン5の工事で自治体から50万円の補助金を受給</p>
+          <table class="cl-table cl-case-table">
+            <thead><tr><th>借方</th><th>金額</th><th>貸方</th><th>金額</th></tr></thead>
+            <tbody>
+              <tr><td>普通預金</td><td>500,000</td><td>国庫補助金収入（特別利益）</td><td>500,000</td></tr>
+              <tr><td>建物附属設備圧縮損</td><td>500,000</td><td>建物附属設備</td><td>500,000</td></tr>
+            </tbody>
+          </table>
+          <p class="cl-case-note">判定：補助金受給に伴う圧縮記帳。受給した補助金額を取得価額から減額することで、当期の課税所得増を回避できます。<strong>適用には「国庫補助金等で取得した固定資産等の圧縮額の損金算入に関する明細書（別表十三(一)）」の提出が必要</strong>。</p>
+        </div>
+
+        <h3>パターン7：分譲マンション管理組合の場合（修繕積立金からの支出）</h3>
+        <div class="cl-case">
+          <p class="cl-case-label">支出内容：管理組合が修繕積立金から清掃費（税込5.5万円）を支出</p>
+          <table class="cl-table cl-case-table">
+            <thead><tr><th>借方</th><th>金額</th><th>貸方</th><th>金額</th></tr></thead>
+            <tbody>
+              <tr><td>修繕費</td><td>55,000</td><td>普通預金</td><td>55,000</td></tr>
+            </tbody>
+          </table>
+          <p class="cl-case-note">判定：管理組合の収支報告上は<strong>修繕費</strong>として処理。原則として管理組合は法人税の対象外（収益事業を行わない場合）なので、消費税の仮払処理は不要。組合員への会計報告は税抜・税込のいずれで統一するか規約に従ってください。</p>
+        </div>
+
+        <h3>パターン8：賃貸オーナー（個人事業主）の場合</h3>
+        <div class="cl-case">
+          <p class="cl-case-label">支出内容：賃貸物件の受水槽清掃費（税込5.5万円）を個人事業主オーナーが支出</p>
+          <table class="cl-table cl-case-table">
+            <thead><tr><th>借方</th><th>金額</th><th>貸方</th><th>金額</th></tr></thead>
+            <tbody>
+              <tr><td>修繕費</td><td>55,000</td><td>事業用普通預金</td><td>55,000</td></tr>
+            </tbody>
+          </table>
+          <p class="cl-case-note">判定：不動産所得の<strong>必要経費（修繕費）</strong>として全額算入。免税事業者の場合は税込経理、課税事業者の場合は税抜経理＋仮払消費税で処理します。青色申告決算書の「修繕費」欄に記載。</p>
+        </div>
+
+        <div class="cl-callout">
+          <h3 class="cl-callout-h">資本的支出と修繕費の判定基準（簡易フロー）</h3>
+          <p>判定に迷ったら以下の順で確認してください。①金額が<strong>20万円未満</strong>なら原則修繕費（少額の判定基準）。②<strong>耐用年数を延長</strong>するか<strong>価値を増加</strong>させるかで判定 → どちらかに該当すれば資本的支出。③形式基準として「<strong>取得価額のおおむね10%相当額以下</strong>」の支出は修繕費として一括費用処理が認められます（法人税基本通達7-8-3、所基通37-13）。最終判断は税理士または所轄税務署にご確認ください。</p>
         </div>
       </section>
 
@@ -343,4 +457,20 @@ const webPageLd = JSON.stringify({
 .cl-pref-list a:hover { background: var(--blue-light); }
 .cl-pref-more { font-size: .87rem; margin: 0; }
 .cl-pref-more a { color: var(--blue); text-decoration: underline; }
+
+/* ケース別仕訳パターン */
+.cl-case {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin: 0 0 18px;
+}
+.cl-case-label { font-size: .9rem; font-weight: 700; color: var(--gray-900); margin: 0 0 10px; line-height: 1.55; }
+.cl-case-table { width: 100%; font-size: .85rem; margin: 0 0 10px; }
+.cl-case-table th, .cl-case-table td { padding: 6px 10px; border: 1px solid #d1d5db; text-align: left; }
+.cl-case-table thead th { background: #f1f5f9; font-weight: 700; font-size: .82rem; color: var(--gray-800); }
+.cl-case-table td { background: #fff; }
+.cl-case-note { font-size: .85rem; line-height: 1.75; color: var(--gray-700); margin: 0; }
+.cl-case-note strong { color: var(--blue-dark); }
 </style>
