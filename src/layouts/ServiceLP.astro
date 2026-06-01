@@ -43,10 +43,22 @@ const serviceLd = JSON.stringify({
   description: data.meta.description,
   url: canonical,
   areaServed: { '@type': 'Country', name: 'Japan' },
+  audience: {
+    '@type': 'BusinessAudience',
+    audienceType: 'マンション管理組合・ビル管理会社・施設管理担当者',
+  },
   provider: {
     '@type': 'Organization',
     name: site.org.legalName,
+    alternateName: site.name,
     url: site.domain,
+    logo: `${site.domain}/logo-mark.svg`,
+    founder: {
+      '@type': 'Person',
+      name: site.author.name,
+      jobTitle: site.author.role,
+      url: `${site.domain}/author/`,
+    },
   },
   termsOfService: `${site.domain}/disclosure/`,
   category: data.serviceName,
@@ -55,6 +67,8 @@ const serviceLd = JSON.stringify({
     price: '0',
     priceCurrency: 'JPY',
     description: '一括見積依頼・業者紹介は完全無料',
+    availability: 'https://schema.org/InStock',
+    eligibleRegion: { '@type': 'Country', name: 'Japan' },
   },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
@@ -75,6 +89,13 @@ const webPageLd = JSON.stringify({
   dateModified: data.meta.lastUpdated,
   inLanguage: 'ja-JP',
   isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  about: { '@type': 'Service', name: data.serviceName },
+  reviewedBy: {
+    '@type': 'Person',
+    name: site.author.name,
+    jobTitle: site.author.role,
+    url: `${site.domain}/author/`,
+  },
   speakable: {
     '@type': 'SpeakableSpecification',
     cssSelector: ['.aio-summary', '.faq-q', '.faq-a'],
