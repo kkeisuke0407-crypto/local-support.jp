@@ -3,8 +3,10 @@
  * 取材・提携・メディア用の汎用問い合わせフォーム
  * 見積もり依頼ではないため /api/contact エンドポイントへ送信
  */
+interface Props { sectionId?: string; }
+const { sectionId = 'contact' } = Astro.props;
 ---
-<section class="cf-section" id="contact">
+<section class="cf-section" id={sectionId}>
   <div class="sd-container cf-container">
     <div class="cf-head">
       <span class="cf-kicker">CONTACT</span>

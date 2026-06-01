@@ -1,0 +1,112 @@
+---
+/**
+ * コラム記事内に挿入するCTAカード（top: 冒頭直後／bottom: 末尾用）
+ * - top: 「30秒コスト診断」＋「サービスの一括見積」の2択
+ * - bottom: 既存の cl-cta があるカラムでは使わない
+ */
+interface Props {
+  serviceSlug: string;
+  serviceName: string;
+  variant?: 'top' | 'bottom';
+}
+const { serviceSlug, serviceName, variant = 'top' } = Astro.props;
+const isTop = variant === 'top';
+---
+<aside class={`col-cta-card${isTop ? ' col-cta-card--top' : ' col-cta-card--bottom'}`}>
+  <div class="col-cta-head">
+    <span class="col-cta-eyebrow">{isTop ? 'この記事を読む前に' : '記事のまとめ'}</span>
+    <p class="col-cta-h">
+      {isTop
+        ? <>{serviceName}の<strong>コスト見直し・一括見積</strong>はこちらから</>
+        : <>{serviceName}の<strong>業者選び・見積</strong>はロカサポで</>}
+    </p>
+    <p class="col-cta-sub">
+      個人情報なしで30秒のコスト診断、または登録業者ネットワークから最大3社まで一括見積を依頼できます。<br/>
+      <strong>あなたが選ぶまで、業者からの連絡は来ません。</strong>
+    </p>
+  </div>
+  <div class="col-cta-btns">
+    <a href="/audit/" class="col-cta-btn col-cta-btn--primary" data-track={`column_${variant}_audit`}>
+      まず30秒でコスト診断 →
+    </a>
+    <a href={`/${serviceSlug}/`} class="col-cta-btn col-cta-btn--secondary" data-track={`column_${variant}_quote`}>
+      {serviceName}の一括見積を依頼 →
+    </a>
+  </div>
+</aside>
+
+<style>
+.col-cta-card {
+  background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+  border: 1px solid #bfdbfe;
+  border-left: 5px solid var(--blue, #1d4ed8);
+  border-radius: 12px;
+  padding: 20px 22px;
+  margin: 24px 0 32px;
+  box-shadow: 0 2px 8px rgba(29, 78, 216, 0.06);
+}
+.col-cta-card--bottom {
+  background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%);
+  border-color: #fcd34d;
+  border-left-color: #d97706;
+}
+.col-cta-eyebrow {
+  display: inline-block;
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  color: var(--blue, #1d4ed8);
+  background: #dbeafe;
+  padding: 3px 10px;
+  border-radius: 99px;
+  margin-bottom: 10px;
+}
+.col-cta-card--bottom .col-cta-eyebrow {
+  color: #b45309;
+  background: #fde68a;
+}
+.col-cta-h {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #111827;
+  line-height: 1.55;
+  margin: 0 0 8px;
+}
+.col-cta-h strong { color: var(--blue, #1d4ed8); }
+.col-cta-card--bottom .col-cta-h strong { color: #b45309; }
+.col-cta-sub {
+  font-size: .85rem;
+  line-height: 1.75;
+  color: #4b5563;
+  margin: 0 0 16px;
+}
+.col-cta-sub strong { color: #111827; }
+.col-cta-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.col-cta-btn {
+  display: inline-block;
+  font-size: .92rem;
+  font-weight: 800;
+  padding: 12px 22px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: opacity .2s, transform .15s;
+  text-align: center;
+}
+.col-cta-btn:hover { opacity: .88; transform: translateY(-1px); }
+.col-cta-btn--primary {
+  background: #fbbf24;
+  color: #1a202c;
+}
+.col-cta-btn--secondary {
+  background: var(--blue, #1d4ed8);
+  color: #fff;
+}
+@media (max-width: 640px) {
+  .col-cta-btns { flex-direction: column; }
+  .col-cta-btn { width: 100%; }
+}
+</style>

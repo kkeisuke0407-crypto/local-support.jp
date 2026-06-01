@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
 const title = 'アスベスト調査・除去の費用相場2026｜事前調査5〜20万円・除去工事1〜10万円/㎡を規模別に解説';
@@ -97,8 +98,11 @@ const faqLd = JSON.stringify({
       <div class="cl-quickanswer">
         <p class="cl-qa-q">Q. アスベスト調査・除去の費用はいくらですか？</p>
         <p class="cl-qa-a">A. <strong>事前調査5〜20万円、除去工事1〜10万円/㎡</strong>が目安。レベル1（吹付け石綿）は最も高く3〜10万円/㎡。補助金で最大2/3が助成される自治体あり。</p>
-        <p class="cl-qa-src">※ロカサポ調査（2026年1〜4月・全国38社の見積データ）</p>
+        <p class="cl-qa-src">※ロカサポ編集部による相場調査（2026年1〜4月）</p>
       </div>
+
+      <ColumnCtaCard serviceSlug="asbestos" serviceName="ã¢ã¹ãã¹ãèª¿æ»ã»é¤å»" variant="top" />
+
 
 
       <aside class="cl-toc" aria-label="目次">

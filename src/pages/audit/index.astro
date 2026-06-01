@@ -14,14 +14,85 @@ const facilityOrder: FacilityType[] = ['kaigo', 'byoin', 'clinic', 'mansion', 's
 // 「もっと見る」用：featured 以外をグループごとに整理
 const moreGroups: ServiceGroup[] = ['法定点検', '衛生・設備', '建物・大規模', '設備投資', 'その他'];
 const nonFeatured = AUDIT_SERVICES.filter((s) => !s.featured);
+
+const canonical = `${site.domain}/audit/`;
+
+// 診断ツールの FAQ（静的・クロール可能／AIO引用用）
+const auditFaq = [
+  {
+    q: '施設管理コスト診断は無料ですか？',
+    a: '完全無料です。診断結果の表示まで個人情報の入力は不要で、料金は一切かかりません。',
+  },
+  {
+    q: '個人情報を入力しなくても診断できますか？',
+    a: 'できます。施設の種類・気になるサービス・見積取得状況・契約の見直し状況の4問に答えるだけで、見直し優先度スコアが表示されます。会社名や連絡先の入力は、希望する場合の相場確認依頼時のみです。',
+  },
+  {
+    q: '診断するとすぐに業者から営業電話が来ますか？',
+    a: '来ません。診断はあくまで見直し優先度の自己チェックです。相場確認を希望して連絡先を入力した場合も、ロカサポ編集部が条件に合う業者を厳選してご案内するため、複数業者からの一斉電話は発生しません。',
+  },
+  {
+    q: 'どんなサービスが診断対象ですか？',
+    a: `受水槽清掃・消防設備点検・害虫駆除・グリストラップ清掃・アスベスト調査など、施設管理に関わる全${AUDIT_SERVICES.length}種のサービスから、契約中または気になるものを複数選んで診断できます。`,
+  },
+  {
+    q: '診断にかかる時間はどれくらいですか？',
+    a: '約30秒・4タップで完了します。施設の種類とサービスを選ぶだけなので、移動中やすき間時間でも診断できます。',
+  },
+];
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: '施設管理コスト診断', item: canonical },
+  ],
+});
+
+const howToLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: '施設管理コスト診断の使い方',
+  description: '4つの質問に答えるだけで、契約中の施設管理サービスの見直し優先度を無料で診断します。',
+  totalTime: 'PT30S',
+  step: [
+    { '@type': 'HowToStep', position: 1, name: '施設の種類を選ぶ', text: '介護施設・病院・マンション・商業施設など、あてはまる施設の種類を選びます。' },
+    { '@type': 'HowToStep', position: 2, name: '気になるサービスを選ぶ', text: '契約中または気になる施設管理サービスを複数選択します。' },
+    { '@type': 'HowToStep', position: 3, name: '見積取得状況を答える', text: '直近で見積もりを取得・比較したことがあるかを選びます。' },
+    { '@type': 'HowToStep', position: 4, name: '契約の見直し状況を答える', text: '契約を定期的に見直しているか、自動更新かを選ぶと診断結果が表示されます。' },
+  ],
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: auditFaq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+});
+
+const appLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: '施設管理コスト診断',
+  url: canonical,
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  description,
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'JPY' },
+  provider: { '@type': 'Organization', name: site.org.legalName, url: site.domain },
+});
 ---
 <BaseLayout
   title={title}
   description={description}
-  canonical={`${site.domain}/audit/`}
+  canonical={canonical}
   siteName={site.name}
   logoSub="施設管理コスト診断"
-  noindex
+  jsonLdBlocks={[breadcrumbLd, howToLd, faqLd, appLd]}
 >
   <section class="sd-section">
     <div class="audit" id="audit">
@@ -234,6 +305,56 @@ const nonFeatured = AUDIT_SERVICES.filter((s) => !s.featured);
         <button type="button" class="au-quote-back" id="au-quote-back">← 診断結果に戻る</button>
       </div>
 
+    </div>
+  </section>
+
+  <!-- ══ 静的解説コンテンツ（SEO/AIO・クロール可能） ══ -->
+  <section class="au-static sd-section">
+    <div class="sd-container au-static-inner">
+      <h2>施設管理コスト診断とは</h2>
+      <p>
+        施設管理コスト診断は、マンション管理組合・ビル管理会社・介護施設・病院などの管理担当者が、
+        契約中の施設管理サービスについて<strong>「見直し（相見積もり）の優先度」を約30秒・4タップで無料セルフチェック</strong>できるツールです。
+        受水槽清掃・消防設備点検・害虫駆除・グリストラップ清掃・アスベスト調査など全{AUDIT_SERVICES.length}種のサービスに対応し、
+        個人情報の入力なしでリスクスコア（100点満点）と項目別の見直し優先度が表示されます。
+      </p>
+
+      <h2>こんな施設管理担当者におすすめ</h2>
+      <ul class="au-static-list">
+        <li>長年同じ業者に発注していて、費用が妥当か分からない</li>
+        <li>契約がほぼ自動更新で、最後にいつ相見積もりを取ったか覚えていない</li>
+        <li>法定点検の抜け漏れがないか、項目を一度棚卸ししたい</li>
+        <li>複数業者からの一斉営業電話は避けたいが、相場感だけは把握したい</li>
+      </ul>
+
+      <h2>診断の流れ（約30秒・4ステップ）</h2>
+      <ol class="au-static-steps">
+        <li><strong>施設の種類を選ぶ</strong>：介護施設・病院・マンション・商業施設など。</li>
+        <li><strong>気になるサービスを選ぶ</strong>：契約中・気になるものを複数選択。</li>
+        <li><strong>見積取得状況を答える</strong>：直近で比較したことがあるか。</li>
+        <li><strong>契約の見直し状況を答える</strong>：定期見直しか自動更新か。</li>
+      </ol>
+      <p class="au-static-note">
+        診断はセルフチェックです。結果を見たうえで相場確認を希望する場合のみ、会社名・連絡先を入力してください。
+        <strong>あなたが業者を選ぶまで、業者からの連絡は一切来ません。</strong>
+      </p>
+
+      <h2>診断できる主な施設管理サービス</h2>
+      <ul class="au-static-services">
+        {AUDIT_SERVICES.map((s) => (
+          <li><a href={`/${s.id}/`}>{s.label}</a></li>
+        ))}
+      </ul>
+
+      <h2>よくある質問</h2>
+      <dl class="au-static-faq">
+        {auditFaq.map((f) => (
+          <div class="au-static-faq-item">
+            <dt class="faq-q">{f.q}</dt>
+            <dd class="faq-a">{f.a}</dd>
+          </div>
+        ))}
+      </dl>
     </div>
   </section>
 

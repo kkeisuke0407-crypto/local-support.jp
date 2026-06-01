@@ -3,8 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactFormGeneric from '../components/ContactFormGeneric.astro';
 import { site, serviceIndex } from '../data/site';
 
-const PAGE_TITLE = `${site.name}｜施設管理の業者紹介サイトを27分野で運営`;
-const PAGE_DESC  = 'ロカサポ（運営：ローカル情報局）は、受水槽清掃・消防設備点検・アスベスト調査など27分野で施設管理の業者紹介サイトを運営しています。各サービス一覧・お役立ち記事・取材／提携のお問い合わせはこちらから。';
+const PAGE_TITLE = `施設管理の業者選び・コスト見直し｜${site.name}（一括見積・無料）`;
+const PAGE_DESC  = '受水槽清掃・消防設備点検・アスベスト調査など27分野・全国47都道府県の登録業者から最大3社を無料で一括見積比較。30秒のコスト診断つき。マンション管理組合・ビル管理会社・施設管理担当者向け。あなたが選ぶまで業者から連絡は来ません。';
 const CANONICAL  = `${site.domain}/`;
 const heroImageVersion = '20260529-office-cleanup';
 
@@ -90,21 +90,26 @@ const featuredColumns = [
 <section class="lp-hero">
   <div class="sd-container lp-hero-inner">
     <div class="lp-hero-copy">
-      <p class="lp-hero-kicker">ローカル情報局が運営する施設管理メディア</p>
-      <h1 class="lp-hero-h1">{site.name}<br/><span class="lp-hero-h1-sub">— 施設管理の業者選びを、もっとかんたんに。</span></h1>
+      <p class="lp-hero-kicker">マンション管理組合・ビル管理会社・施設管理担当者の方へ</p>
+      <h1 class="lp-hero-h1">施設管理の業者選び・<br class="sp-only"/>コスト見直しを、<br/><span class="lp-hero-h1-sub">登録業者の一括見積で。完全無料。</span></h1>
       <p class="lp-hero-desc">
         受水槽清掃・消防設備点検・アスベスト調査など、<br class="pc-only"/>
-        <strong>27分野で施設管理の業者紹介サイトを運営</strong>しています。<br class="pc-only"/>
-        見積もりのご依頼は各サービスサイトから、取材・提携のご相談はページ下部のフォームへどうぞ。
+        <strong>27分野・全国47都道府県の登録業者</strong>から最大3社を無料でご紹介。<br class="pc-only"/>
+        <strong>あなたが業者を選ぶまで、業者からの連絡は一切来ません。</strong>
       </p>
       <div class="lp-hero-ctas">
-        <a href="#services" class="lp-hero-cta">運営サービス一覧を見る ↓</a>
-        <a href="#contact" class="lp-hero-cta-secondary">取材・提携のお問い合わせ</a>
+        <a href="/audit/" class="lp-hero-cta" data-track="hero_cta_audit">
+          まず30秒で<br class="sp-only"/>コスト診断（個人情報なし）→
+        </a>
+        <a href="#services" class="lp-hero-cta-secondary" data-track="hero_cta_services">
+          サービスを選んで<br class="sp-only"/>一括見積を依頼 →
+        </a>
       </div>
       <ul class="lp-hero-badges">
         <li>運営サービス：27分野</li>
         <li>全国47都道府県に対応</li>
         <li>資格・許認可を確認した業者のみ紹介</li>
+        <li>運営：ローカル情報局（編集長 寺尾聡）</li>
       </ul>
     </div>
     <figure class="lp-hero-visual">
@@ -113,14 +118,114 @@ const featuredColumns = [
   </div>
 </section>
 
+<!-- ══ 6ステップ安心フロー ════════════════════════════════════════ -->
+<section class="lp-flow" id="contact">
+  <div class="sd-container">
+    <div class="lp-section-head">
+      <span class="lp-section-kicker">HOW IT WORKS</span>
+      <h2 class="lp-section-title">ご依頼から契約までの流れ</h2>
+      <p class="lp-section-lead">
+        <strong>あなたが業者を選ぶまで、業者からの連絡は一切来ません。</strong><br/>
+        他社の一括見積サイトと違って、「依頼した瞬間に5社から電話が鳴る」ことはありません。
+      </p>
+    </div>
+    <ol class="lp-flow-steps">
+      <li class="lp-flow-step">
+        <span class="lp-flow-num">1</span>
+        <div>
+          <h3>ご依頼（無料・約1分）</h3>
+          <p>サービスを選んで、施設情報と連絡先を入力します。費用は一切かかりません。</p>
+        </div>
+      </li>
+      <li class="lp-flow-step">
+        <span class="lp-flow-num">2</span>
+        <div>
+          <h3>ロカサポが登録業者へ打診</h3>
+          <p>ご依頼内容に合致する登録業者へ、ロカサポからお声がけします。あなたの連絡先は業者には渡しません。</p>
+        </div>
+      </li>
+      <li class="lp-flow-step">
+        <span class="lp-flow-num">3</span>
+        <div>
+          <h3>手を挙げた業者から最大5社を選定</h3>
+          <p>対応可能と回答した業者の中から、資格・実績・対応エリアを確認のうえ最大5社を選定します。</p>
+        </div>
+      </li>
+      <li class="lp-flow-step">
+        <span class="lp-flow-num">4</span>
+        <div>
+          <h3>概算見積・実績を一覧でご確認</h3>
+          <p>各社の概算見積・対応実績・資格情報を専用ページでまとめてご覧いただけます。<strong>ここまで業者からの連絡はありません。</strong></p>
+        </div>
+      </li>
+      <li class="lp-flow-step">
+        <span class="lp-flow-num">5</span>
+        <div>
+          <h3>あなたが選んだ業者だけが連絡</h3>
+          <p>詳細な見積・打ち合わせをしたい業者を選んでください（1〜3社まで）。選ばれた業者だけがあなたに直接ご連絡します。</p>
+        </div>
+      </li>
+      <li class="lp-flow-step">
+        <span class="lp-flow-num">6</span>
+        <div>
+          <h3>比較してご契約</h3>
+          <p>最終見積を比較し、納得いただける業者とご契約ください。契約しない場合も費用はかかりません。</p>
+        </div>
+      </li>
+    </ol>
+    <div class="lp-flow-ctas">
+      <a href="/audit/" class="lp-flow-cta-primary" data-track="flow_cta_audit">まず30秒でコスト診断（個人情報なし）→</a>
+      <a href="#services" class="lp-flow-cta-secondary" data-track="flow_cta_services">サービスを選んで一括見積 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ご依頼前のよくある不安 ════════════════════════════════════ -->
+<section class="lp-uncertainty">
+  <div class="sd-container">
+    <div class="lp-section-head">
+      <span class="lp-section-kicker">CONCERNS</span>
+      <h2 class="lp-section-title">ご依頼前のよくある不安</h2>
+      <p class="lp-section-lead">施設管理担当者の方から寄せられるご質問にお答えします。</p>
+    </div>
+    <dl class="lp-uncertainty-list">
+      <div class="lp-uncertainty-item">
+        <dt>Q. しつこい営業電話は来ませんか？</dt>
+        <dd>A. <strong>あなたが業者を選ぶまで、業者からの連絡は一切来ません。</strong>選んだ後も、登録業者には「しつこい営業の禁止」を規約で義務付けています。違反があった場合は登録解除します。</dd>
+      </div>
+      <div class="lp-uncertainty-item">
+        <dt>Q. なぜ無料で利用できるのですか？</dt>
+        <dd>A. ご契約が成立した際に、業者側から紹介手数料をいただく仕組みです。<strong>依頼者の方からは一切費用をいただきません。</strong>契約しなかった場合も無料です。</dd>
+      </div>
+      <div class="lp-uncertainty-item">
+        <dt>Q. 何社から連絡が来ますか？</dt>
+        <dd>A. ご依頼者が選んだ業者のみ（最大3社まで指定可能）。一般的な一括見積サイトのように「依頼直後に5〜10社から一斉に電話」ということはありません。</dd>
+      </div>
+      <div class="lp-uncertainty-item">
+        <dt>Q. 個人情報・施設情報はどう扱われますか？</dt>
+        <dd>A. あなたが業者を選ぶまで、連絡先は業者に開示しません。選択後も、選んだ業者のみに必要最小限の情報を共有します。詳細は<a href="/privacy/">プライバシーポリシー</a>。</dd>
+      </div>
+      <div class="lp-uncertainty-item">
+        <dt>Q. どんな業者を紹介してくれますか？</dt>
+        <dd>A. 各分野で必要な<strong>登録・資格・許認可を確認した業者のみ</strong>。例：受水槽清掃なら「建築物飲料水貯水槽清掃業」の都道府県知事登録、アスベストなら「事前調査者」資格を必須としています。</dd>
+      </div>
+      <div class="lp-uncertainty-item">
+        <dt>Q. 見積を取っただけで契約は強制されませんか？</dt>
+        <dd>A. 強制されません。<strong>見積取得・比較のみで終了することも可能です。</strong>違約金・キャンセル料は一切かかりません。</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
 <!-- ══ サービス一覧 ════════════════════════════════════════════ -->
 <section class="lp-services" id="services">
   <div class="sd-container">
     <div class="lp-section-head">
       <span class="lp-section-kicker">SERVICES</span>
-      <h2 class="lp-section-title">運営しているサービスサイト</h2>
+      <h2 class="lp-section-title">サービスを選んで一括見積を依頼</h2>
       <p class="lp-section-lead">
-        サービスごとに専門サイトを用意しています。見積もりのご依頼は各サイトのフォームからお願いします。
+        ご依頼したいサービスを選んでください。各サービスの詳細ページから見積もり依頼フォームへ進めます。<br/>
+        どのサービスを依頼すべきか分からない方は <a href="/audit/"><strong>30秒のコスト診断</strong></a> をご利用ください。
       </p>
     </div>
     <div class="lp-service-grid">
@@ -196,8 +301,8 @@ const featuredColumns = [
   </div>
 </section>
 
-<!-- ══ お問い合わせ ════════════════════════════════════════════ -->
-<ContactFormGeneric />
+<!-- ══ 取材・提携のお問い合わせ（フッターからの導線） ══════════════ -->
+<ContactFormGeneric sectionId="press" />
 
 </BaseLayout>
 
@@ -485,13 +590,139 @@ const featuredColumns = [
 }
 .lp-columns-more-link:hover { background: var(--gray-200); }
 
+/* ── 6ステップ安心フロー ── */
+.lp-flow {
+  padding: 72px 0;
+  background: linear-gradient(180deg, #fff 0%, var(--gray-100) 100%);
+}
+.lp-flow-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 880px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+.lp-flow-step {
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  padding: 22px 22px 22px 64px;
+  position: relative;
+}
+.lp-flow-num {
+  position: absolute;
+  top: 22px;
+  left: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: #fff;
+  font-weight: 900;
+  font-size: 1rem;
+}
+.lp-flow-step h3 {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--gray-900);
+  margin: 0 0 8px;
+  line-height: 1.4;
+}
+.lp-flow-step p {
+  font-size: .88rem;
+  color: var(--gray-700);
+  line-height: 1.7;
+  margin: 0;
+}
+.lp-flow-step p strong { color: var(--blue-dark); }
+.lp-flow-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 40px;
+}
+.lp-flow-cta-primary {
+  display: inline-block;
+  background: var(--accent);
+  color: #1a202c;
+  font-weight: 800;
+  font-size: 1rem;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: opacity .2s;
+}
+.lp-flow-cta-primary:hover { opacity: .88; }
+.lp-flow-cta-secondary {
+  display: inline-block;
+  background: var(--blue);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1rem;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: opacity .2s;
+}
+.lp-flow-cta-secondary:hover { opacity: .88; }
+
+/* ── ご依頼前のよくある不安 ── */
+.lp-uncertainty {
+  padding: 72px 0;
+  background: #fff;
+}
+.lp-uncertainty-list {
+  max-width: 880px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 14px;
+}
+.lp-uncertainty-item {
+  background: var(--gray-100);
+  border-left: 4px solid var(--blue);
+  border-radius: 8px;
+  padding: 18px 22px;
+}
+.lp-uncertainty-item dt {
+  font-size: .95rem;
+  font-weight: 800;
+  color: var(--gray-900);
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+.lp-uncertainty-item dd {
+  font-size: .88rem;
+  color: var(--gray-700);
+  line-height: 1.75;
+  margin: 0;
+}
+.lp-uncertainty-item dd strong { color: var(--blue-dark); }
+.lp-uncertainty-item dd a { color: var(--blue); text-decoration: underline; }
+
+/* ── 表示切替ユーティリティ ── */
+.pc-only { display: inline; }
+.sp-only { display: none; }
+@media (max-width: 640px) {
+  .pc-only { display: none; }
+  .sp-only { display: inline; }
+}
+
 @media (max-width: 640px) {
   .lp-hero { padding: 56px 0 48px; }
   .lp-hero-inner { grid-template-columns: 1fr; gap: 28px; }
   .lp-hero-copy { text-align: center; }
   .lp-hero-badges { justify-content: center; }
-  .lp-services, .lp-about, .lp-columns { padding: 48px 0; }
+  .lp-services, .lp-about, .lp-columns, .lp-flow, .lp-uncertainty { padding: 48px 0; }
   .lp-hero-ctas { flex-direction: column; align-items: stretch; }
   .lp-hero-cta, .lp-hero-cta-secondary { text-align: center; }
+  .lp-flow-ctas { flex-direction: column; align-items: stretch; }
+  .lp-flow-cta-primary, .lp-flow-cta-secondary { text-align: center; }
 }
 </style>

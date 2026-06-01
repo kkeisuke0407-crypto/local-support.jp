@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
 const title = 'グリストラップ清掃の費用相場2026｜店舗規模別・頻度別の料金ガイドと追加コストの見抜き方';
@@ -75,8 +76,11 @@ const faqLd = JSON.stringify({
       <div class="cl-quickanswer">
         <p class="cl-qa-q">Q. グリストラップ清掃の費用はいくらですか？</p>
         <p class="cl-qa-a">A. <strong>小型（飲食店一般）1〜2万円/回、中型2〜3万円/回、大型3〜5万円/回</strong>が目安。バスケット清掃（週1回）は業者契約で月1〜2万円程度。</p>
-        <p class="cl-qa-src">※ロカサポ調査（2026年1〜4月・全国32社の見積データ）</p>
+        <p class="cl-qa-src">※ロカサポ編集部による相場調査（2026年1〜4月）</p>
       </div>
+
+      <ColumnCtaCard serviceSlug="grease-trap" serviceName="ã°ãªã¹ãã©ããæ¸æ" variant="top" />
+
 
       <aside class="cl-toc" aria-label="目次">
         <h2 class="cl-toc-h">この記事の目次</h2>

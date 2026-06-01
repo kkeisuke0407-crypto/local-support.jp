@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
 const title = '消防設備点検の費用相場2026｜建物規模・契約形態・是正工事の単価をまるごと解説';
@@ -75,8 +76,11 @@ const faqLd = JSON.stringify({
       <div class="cl-quickanswer">
         <p class="cl-qa-q">Q. 消防設備点検の費用はいくらですか？</p>
         <p class="cl-qa-a">A. <strong>共同住宅（〜30戸）で年額3〜8万円、小規模オフィスで4〜10万円、中規模商業ビルで10〜30万円</strong>。年間契約・複数物件まとめで割引されるケースが多い。</p>
-        <p class="cl-qa-src">※ロカサポ調査（2026年1〜4月・全国44社の見積データ）</p>
+        <p class="cl-qa-src">※ロカサポ編集部による相場調査（2026年1〜4月）</p>
       </div>
+
+      <ColumnCtaCard serviceSlug="shobo-setsubi" serviceName="æ¶é²è¨­åç¹æ¤" variant="top" />
+
 
       <aside class="cl-toc" aria-label="目次">
         <h2 class="cl-toc-h">この記事の目次</h2>

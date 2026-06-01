@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
 const title = 'シャッター点検・修理の費用相場2026｜点検1〜3万円・修理2万円〜を種別・規模ごとに解説';
@@ -97,8 +98,11 @@ const faqLd = JSON.stringify({
       <div class="cl-quickanswer">
         <p class="cl-qa-q">Q. シャッター点検・修理の費用はいくらですか？</p>
         <p class="cl-qa-a">A. <strong>点検は1台あたり1〜3万円、修理は2万円〜（部品代別途）</strong>。電動シャッターの基板交換・スプリング交換は10〜30万円になるケースもある。</p>
-        <p class="cl-qa-src">※ロカサポ調査（2026年1〜4月・全国35社の見積データ）</p>
+        <p class="cl-qa-src">※ロカサポ編集部による相場調査（2026年1〜4月）</p>
       </div>
+
+      <ColumnCtaCard serviceSlug="shutter" serviceName="ã·ã£ãã¿ã¼ç¹æ¤ã»ä¿®ç" variant="top" />
+
 
 
       <aside class="cl-toc" aria-label="目次">

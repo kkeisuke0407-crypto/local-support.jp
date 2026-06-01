@@ -206,3 +206,30 @@
   .audit-hero h1 { font-size: 22px; }
   .au-services { grid-template-columns: 1fr; }
 }
+
+/* ── 静的解説コンテンツ（SEO/AIO） ── */
+.au-static { background: #fff; border-top: 1px solid #eef0f4; }
+.au-static-inner { max-width: 760px; }
+.au-static-inner h2 {
+  font-size: 20px; font-weight: 900; color: #111827;
+  margin: 36px 0 14px; padding-bottom: 8px; border-bottom: 2px solid var(--au-blue);
+}
+.au-static-inner h2:first-child { margin-top: 0; }
+.au-static-inner p { font-size: 15px; line-height: 1.9; color: #374151; margin-bottom: 14px; }
+.au-static-inner strong { color: var(--au-blue-dark); }
+.au-static-list, .au-static-steps { margin: 0 0 14px; padding-left: 22px; }
+.au-static-list li, .au-static-steps li { font-size: 15px; line-height: 1.85; color: #374151; margin-bottom: 6px; }
+.au-static-note {
+  background: #f0f7ff; border-left: 4px solid var(--au-blue); border-radius: 8px;
+  padding: 14px 18px; font-size: 14px !important; line-height: 1.8 !important;
+}
+.au-static-services {
+  list-style: none; padding: 0; margin: 0 0 14px;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 6px 16px;
+}
+.au-static-services li { font-size: 14px; }
+.au-static-services a { color: var(--au-blue); text-decoration: none; }
+.au-static-services a:hover { text-decoration: underline; }
+.au-static-faq-item { border-bottom: 1px solid #eef0f4; padding: 14px 0; }
+.au-static-faq-item dt { font-size: 15px; font-weight: 800; color: #111827; margin-bottom: 8px; }
+.au-static-faq-item dd { font-size: 14px; line-height: 1.85; color: #374151; margin: 0; }

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
 const title = '看板点検の費用相場2026｜サイズ別・高所作業車込みの料金と補修工事の単価';
@@ -75,8 +76,11 @@ const faqLd = JSON.stringify({
       <div class="cl-quickanswer">
         <p class="cl-qa-q">Q. 看板点検の費用はいくらですか？</p>
         <p class="cl-qa-a">A. <strong>1台あたり1〜3万円（高所作業が必要な場合は別途2〜5万円）</strong>。老朽化した袖看板・屋上看板・壁面看板は打音検査・目視検査・ボルト点検が必要。</p>
-        <p class="cl-qa-src">※ロカサポ調査（2026年1〜4月・全国31社の見積データ）</p>
+        <p class="cl-qa-src">※ロカサポ編集部による相場調査（2026年1〜4月）</p>
       </div>
+
+      <ColumnCtaCard serviceSlug="signboard-inspection" serviceName="çæ¿ç¹æ¤" variant="top" />
+
 
       <aside class="cl-toc" aria-label="目次">
         <h2 class="cl-toc-h">この記事の目次</h2>

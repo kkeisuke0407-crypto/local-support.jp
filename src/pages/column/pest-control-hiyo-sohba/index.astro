@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
 const title = '業務用害虫駆除（PCO）の費用相場2026｜業種別・契約形態別の料金ガイド';
@@ -75,8 +76,11 @@ const faqLd = JSON.stringify({
       <div class="cl-quickanswer">
         <p class="cl-qa-q">Q. 業務用害虫駆除（PCO）の費用はいくらですか？</p>
         <p class="cl-qa-a">A. <strong>スポット駆除1〜5万円、月次管理契約1〜3万円/月</strong>が目安。ゴキブリ・ネズミなど害虫の種類・施設面積・発生状況で変動する。</p>
-        <p class="cl-qa-src">※ロカサポ調査（2026年1〜4月・全国28社の見積データ）</p>
+        <p class="cl-qa-src">※ロカサポ編集部による相場調査（2026年1〜4月）</p>
       </div>
+
+      <ColumnCtaCard serviceSlug="pest-control" serviceName="å®³è«é§é¤" variant="top" />
+
 
       <aside class="cl-toc" aria-label="目次">
         <h2 class="cl-toc-h">この記事の目次</h2>

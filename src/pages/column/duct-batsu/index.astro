@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
 const title = "ダクト清掃を怠ると…厨房火災と消防法違反のリスク2026｜火災事例と保険免責";
@@ -86,6 +87,9 @@ const faqLd = JSON.stringify({
         <p class="cl-qa-a">A. <strong>グリス蓄積による厨房火災のリスクが急増、消防法の防火管理義務違反で100万円以下の罰金</strong>。さらに火災保険の免責事由になるケースもあり、損害額数百万〜数千万円を自己負担する可能性。</p>
         <p class="cl-qa-src">※消防法第46条・各損害保険会社の約款</p>
       </div>
+
+      <ColumnCtaCard serviceSlug="duct" serviceName="ãã¯ãæ¸æ" variant="top" />
+
 
       <aside class="cl-toc" aria-label="目次">
         <h2 class="cl-toc-h">この記事の目次</h2>
