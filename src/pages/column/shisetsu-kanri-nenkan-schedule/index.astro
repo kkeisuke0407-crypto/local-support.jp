@@ -46,6 +46,22 @@ const faqLd = JSON.stringify({
     { '@type': 'Question', name: '法定点検をすべて怠るとどのくらいの罰金がかかりますか？', acceptedAnswer: { '@type': 'Answer', text: '受水槽清掃100万円以下、消防設備点検30万円以下、防火設備定期報告100万円以下、アスベスト未調査50万円以下など、項目別に罰金が課されます。複数違反が累積すると総額数百万円規模になる可能性があります。' } },
   ],
 });
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.faq-q', '.faq-a'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
+});
+
 
 interface Month {
   month: string;
@@ -86,7 +102,7 @@ const services: { name: string; slug: string }[] = [
   canonical={canonical}
   siteName={site.name}
   logoSub="施設管理の一括見積比較"
-  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
 >
   <article class="cl-article">
 

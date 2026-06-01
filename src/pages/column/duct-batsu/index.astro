@@ -50,6 +50,22 @@ const faqLd = JSON.stringify({
     { '@type': 'Question', name: "隣接テナントへの賠償責任はありますか？", acceptedAnswer: { '@type': 'Answer', text: "失火責任法により「軽過失」は免責されますが、「重過失」（清掃を著しく怠った場合等）は隣接テナントへの賠償責任が発生します。判例では数百万〜数千万円の賠償命令例があります。" } }
   ],
 });
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.faq-q', '.faq-a'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
+});
+
 ---
 <BaseLayout
   title={title}
@@ -58,7 +74,7 @@ const faqLd = JSON.stringify({
   siteName={site.name}
   logoSub="施設管理の一括見積比較"
   ogImage={`${site.domain}/og-duct.png`}
-  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
 >
   <article class="cl-article">
 
