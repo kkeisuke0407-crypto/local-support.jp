@@ -2,7 +2,7 @@ interface Env {
   RESEND_API_KEY: string;
 }
 
-const TO_ADDRESS = 'localsupport.info@gmail.com';
+const TO_ADDRESS = 'contact@local-support.jp';
 const FROM_ADDRESS = 'local-support.jp <contact@local-support.jp>';
 
 const FIELD_LABELS: Record<string, string> = {
