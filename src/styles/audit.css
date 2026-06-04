@@ -207,6 +207,31 @@
   .au-services { grid-template-columns: 1fr; }
 }
 
+/* ── キーボード操作のフォーカス表示（マウス時は出さない） ── */
+.au-opt:focus-visible,
+.au-svc:focus-visible,
+.au-cta:focus-visible,
+.au-next:focus-visible,
+.au-back:focus-visible,
+.au-more button:focus-visible,
+.au-detail-invite button:focus-visible,
+.au-quote input:focus-visible,
+.au-quote select:focus-visible,
+.au-quote .qf-radio:focus-within,
+.au-quote .qf-submit:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 2px;
+}
+
+/* ── 動きを抑える設定の人には演出を止める ── */
+@media (prefers-reduced-motion: reduce) {
+  .au-step.is-active,
+  .au-result.is-active,
+  .au-quote.is-active { animation: none; }
+  .au-spinner { animation-duration: 1.6s; }
+  .au-opt, .au-svc { transition: none; }
+}
+
 /* ── 静的解説コンテンツ（SEO/AIO） ── */
 .au-static { background: #fff; border-top: 1px solid #eef0f4; }
 .au-static-inner { max-width: 760px; }
