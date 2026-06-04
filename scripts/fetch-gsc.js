@@ -20,11 +20,12 @@
  *    GOOGLE_CLIENT_ID=xxxx.apps.googleusercontent.com
  *    GOOGLE_CLIENT_SECRET=GOCSPX-xxxx
  *    GSC_SITE_URL=https://local-support.jp/
+ *    TOKEN_ENCRYPTION_KEY=（自動生成または指定）
  *
  * ■ 初回認証（ローカルマシンで実行する場合）
  *    npm run fetch-gsc
  *    → ブラウザが自動で開く → Google アカウントでログイン → 許可
- *    → トークンが .gsc-token.json に保存される（以降は自動）
+ *    → トークンが .gsc-token.json に暗号化されて保存される（以降は自動）
  *
  * ■ 初回認証（クラウド環境・ブラウザが開けない場合）
  *    npm run fetch-gsc:auth
@@ -42,9 +43,10 @@
 import 'dotenv/config';
 import { google } from 'googleapis';
 import { createServer } from 'http';
-import { readFileSync, writeFileSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync, chmodSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import crypto from 'crypto';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
@@ -65,6 +67,15 @@ const REDIRECT_URI_AUTO   = `http://localhost:${REDIRECT_PORT}/callback`;
 const REDIRECT_URI_MANUAL = 'http://localhost';
 const REDIRECT_URI  = MANUAL ? REDIRECT_URI_MANUAL : REDIRECT_URI_AUTO;
 const SCOPES = ['https://www.googleapis.com/auth/webmasters.readonly'];
+
+// 暗号化キー（環境変数から取得、なければ生成）
+let ENCRYPTION_KEY = process.env.TOKEN_ENCRYPTION_KEY;
+if (!ENCRYPTION_KEY) {
+  ENCRYPTION_KEY = crypto.randomBytes(32).toString('hex');
+  console.warn('⚠️  TOKEN_ENCRYPTION_KEY が設定されていません。ランダムに生成しました。');
+  console.warn('   本番環境では、環境変数に設定してください:\n');
+  console.warn(`   export TOKEN_ENCRYPTION_KEY="${ENCRYPTION_KEY}"\n`);
+}
 
 function getArg(name) {
   const idx = args.indexOf(name);
@@ -91,6 +102,46 @@ console.log(`   プロパティ: ${SITE_URL}`);
 if (DRY_RUN) console.log(`   ⚠️  ドライラン（CSVは更新しません）`);
 console.log('');
 
+// ─── 暗号化・復号化ユーティリティ ──────────────────────────────
+function encryptToken(token) {
+  const iv = crypto.randomBytes(16);
+  const cipher = crypto.createCipheriv(
+    'aes-256-cbc',
+    Buffer.from(ENCRYPTION_KEY, 'hex'),
+    iv
+  );
+
+  const encrypted = Buffer.concat([
+    cipher.update(JSON.stringify(token), 'utf8'),
+    cipher.final()
+  ]);
+
+  return JSON.stringify({
+    iv: iv.toString('hex'),
+    data: encrypted.toString('hex')
+  });
+}
+
+function decryptToken(encryptedData) {
+  try {
+    const { iv, data } = JSON.parse(encryptedData);
+    const decipher = crypto.createDecipheriv(
+      'aes-256-cbc',
+      Buffer.from(ENCRYPTION_KEY, 'hex'),
+      Buffer.from(iv, 'hex')
+    );
+
+    const decrypted = Buffer.concat([
+      decipher.update(Buffer.from(data, 'hex')),
+      decipher.final()
+    ]);
+
+    return JSON.parse(decrypted.toString('utf8'));
+  } catch (err) {
+    throw new Error('Token decryption failed. The encryption key may be incorrect.');
+  }
+}
+
 // ─── OAuth2 認証 ─────────────────────────────────────────────────
 function buildOAuth2Client() {
   if (!CLIENT_ID || !CLIENT_SECRET) {
@@ -105,16 +156,25 @@ function buildOAuth2Client() {
 function loadSavedToken(oauth2) {
   if (!existsSync(TOKEN_PATH)) return false;
   try {
-    const token = JSON.parse(readFileSync(TOKEN_PATH, 'utf8'));
+    const encryptedData = readFileSync(TOKEN_PATH, 'utf8');
+    const token = decryptToken(encryptedData);
     oauth2.setCredentials(token);
     return true;
-  } catch {
+  } catch (err) {
+    console.error('Failed to load saved token:', err.message);
     return false;
   }
 }
 
 function saveToken(oauth2) {
-  writeFileSync(TOKEN_PATH, JSON.stringify(oauth2.credentials, null, 2), 'utf8');
+  const encrypted = encryptToken(oauth2.credentials);
+  writeFileSync(TOKEN_PATH, encrypted, 'utf8');
+  // ファイルパーミッションを制限（Unixライクなシステムのみ）
+  try {
+    chmodSync(TOKEN_PATH, 0o600);
+  } catch {
+    // Windowsなど対応していないシステムは無視
+  }
 }
 
 async function authorizeViaBrowser(oauth2) {
