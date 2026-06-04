@@ -30,6 +30,18 @@
 .audit-hero p { font-size: 15px; color: var(--au-muted); margin: 0 0 6px; }
 .audit-hero .au-assure { font-size: 13px; color: var(--au-green); font-weight: 700; }
 
+/* ── コンパクト安心バー（メール流入でヒーローが消えた時の代替） ── */
+.audit-assurebar {
+  display: flex; flex-wrap: wrap; gap: 6px; align-items: center; justify-content: center;
+  background: #eff6ff; border: 1px solid #dbeafe; border-radius: 999px;
+  padding: 8px 14px; margin: 4px auto 14px; max-width: max-content;
+  font-size: 13px; color: var(--au-blue-dark); font-weight: 700;
+}
+.audit-assurebar[hidden] { display: none; }
+.audit-assurebar .aa-brand { color: var(--au-blue); font-weight: 900; }
+.audit-assurebar .aa-sep { color: #93c5fd; }
+.audit-assurebar .aa-item { color: #1e3a8a; font-weight: 600; }
+
 /* ── ステップ進捗 ── */
 .au-progress { display: flex; gap: 6px; justify-content: center; margin: 20px 0 24px; }
 .au-progress span {
