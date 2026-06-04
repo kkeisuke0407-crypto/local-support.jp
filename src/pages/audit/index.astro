@@ -105,6 +105,15 @@ const appLd = JSON.stringify({
         <p class="au-assure">個人情報の入力なしで結果が表示されます</p>
       </div>
 
+      <!-- ══ コンパクト安心バー（メール流入時にヒーロー代わりに表示） ══ -->
+      <div class="audit-assurebar" id="au-assurebar" hidden>
+        <strong class="aa-brand">ロカサポ</strong>
+        <span class="aa-sep" aria-hidden="true">／</span>
+        <span class="aa-item">無料・30秒</span>
+        <span class="aa-sep" aria-hidden="true">・</span>
+        <span class="aa-item">個人情報不要</span>
+      </div>
+
       <!-- ══ 進捗バー ══ -->
       <div class="au-progress" id="au-progress" aria-hidden="true">
         <span></span><span></span><span></span><span></span>
@@ -130,7 +139,7 @@ const appLd = JSON.stringify({
         <p class="au-q-sub">複数選択できます（契約中・気になるもの）</p>
         <div class="au-services" id="au-svc-featured" data-multi="services">
           {FEATURED_SERVICES.map((s) => (
-            <button type="button" class="au-svc" data-value={s.id}>
+            <button type="button" class="au-svc" data-value={s.id} aria-pressed="false">
               <span>{s.label}</span>
               <span class="au-check">✓</span>
             </button>
@@ -146,7 +155,7 @@ const appLd = JSON.stringify({
                   <h4>{g}</h4>
                   <div class="au-services" data-multi="services">
                     {items.map((s) => (
-                      <button type="button" class="au-svc" data-value={s.id}>
+                      <button type="button" class="au-svc" data-value={s.id} aria-pressed="false">
                         <span>{s.label}</span>
                         <span class="au-check">✓</span>
                       </button>
@@ -189,13 +198,13 @@ const appLd = JSON.stringify({
       </div>
 
       <!-- ══ ローディング ══ -->
-      <div class="au-loading" id="au-loading">
+      <div class="au-loading" id="au-loading" role="status" aria-live="polite">
         <div class="au-spinner"></div>
         <p>AIが見直し優先度を診断中…</p>
       </div>
 
       <!-- ══ 結果 ══ -->
-      <div class="au-result" id="au-result">
+      <div class="au-result" id="au-result" role="region" aria-live="polite" aria-label="診断結果">
         <div class="au-score">
           <p class="au-score-label">施設管理リスクスコア</p>
           <div class="au-score-num"><span id="au-score-num">--</span><small> / 100</small></div>
@@ -387,15 +396,24 @@ const appLd = JSON.stringify({
 
     const $ = (sel: string) => document.querySelector(sel) as HTMLElement;
     const $$ = (sel: string) => Array.from(document.querySelectorAll(sel)) as HTMLElement[];
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const scrollTop = () => window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
     const steps = $$('.au-step');
     const progress = $$('#au-progress span');
+
+    const assureBar = document.getElementById('au-assurebar');
 
     function showStep(n: number) {
       state.step = n;
       steps.forEach((el) => el.classList.toggle('is-active', Number(el.dataset.step) === n));
       progress.forEach((p, i) => p.classList.toggle('is-done', i < n));
       $('#au-hero').style.display = n === 1 ? '' : 'none';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // ヒーローが隠れる時（メール流入で n>=2 で開始した時など）はコンパクト安心バーを出す
+      if (assureBar) {
+        if (n === 1) assureBar.setAttribute('hidden', '');
+        else assureBar.removeAttribute('hidden');
+      }
+      scrollTop();
     }
 
     // 単一選択（タップで自動的に次へ）
@@ -418,8 +436,8 @@ const appLd = JSON.stringify({
       scope.querySelectorAll('[data-multi="services"] .au-svc').forEach((btn) => {
         btn.addEventListener('click', () => {
           const id = (btn as HTMLElement).dataset.value!;
-          if (state.services.has(id)) { state.services.delete(id); btn.classList.remove('is-selected'); }
-          else { state.services.add(id); btn.classList.add('is-selected'); }
+          if (state.services.has(id)) { state.services.delete(id); btn.classList.remove('is-selected'); btn.setAttribute('aria-pressed', 'false'); }
+          else { state.services.add(id); btn.classList.add('is-selected'); btn.setAttribute('aria-pressed', 'true'); }
           ($('[data-next]') as HTMLButtonElement).disabled = state.services.size === 0;
         });
       });
@@ -442,10 +460,11 @@ const appLd = JSON.stringify({
     function runDiagnosis() {
       steps.forEach((el) => el.classList.remove('is-active'));
       $('#au-hero').style.display = 'none';
+      if (assureBar) assureBar.setAttribute('hidden', '');
       progress.forEach((p) => p.classList.add('is-done'));
       const loading = $('#au-loading');
       loading.classList.add('is-active');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      scrollTop();
 
       setTimeout(() => {
         loading.classList.remove('is-active');
@@ -524,7 +543,7 @@ const appLd = JSON.stringify({
       $('#au-quote').classList.add('is-active');
       const pref = document.getElementById('au-prefecture') as HTMLSelectElement;
       if (prefFromRef && pref) pref.value = prefFromRef;
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      scrollTop();
     }
     $('#au-cta-main').addEventListener('click', goToQuote);
     $('#au-cta-sticky').addEventListener('click', goToQuote);
@@ -533,7 +552,7 @@ const appLd = JSON.stringify({
       $('#au-quote').classList.remove('is-active');
       $('#au-result').classList.add('is-active');
       $('#au-sticky').classList.add('is-active');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      scrollTop();
     });
 
     // 詳細診断（サブ）：任意の追加情報パネルを開閉。入力は見積メッセージに反映される。

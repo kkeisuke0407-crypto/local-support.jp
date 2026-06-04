@@ -30,6 +30,18 @@
 .audit-hero p { font-size: 15px; color: var(--au-muted); margin: 0 0 6px; }
 .audit-hero .au-assure { font-size: 13px; color: var(--au-green); font-weight: 700; }
 
+/* ── コンパクト安心バー（メール流入でヒーローが消えた時の代替） ── */
+.audit-assurebar {
+  display: flex; flex-wrap: wrap; gap: 6px; align-items: center; justify-content: center;
+  background: #eff6ff; border: 1px solid #dbeafe; border-radius: 999px;
+  padding: 8px 14px; margin: 4px auto 14px; max-width: max-content;
+  font-size: 13px; color: var(--au-blue-dark); font-weight: 700;
+}
+.audit-assurebar[hidden] { display: none; }
+.audit-assurebar .aa-brand { color: var(--au-blue); font-weight: 900; }
+.audit-assurebar .aa-sep { color: #93c5fd; }
+.audit-assurebar .aa-item { color: #1e3a8a; font-weight: 600; }
+
 /* ── ステップ進捗 ── */
 .au-progress { display: flex; gap: 6px; justify-content: center; margin: 20px 0 24px; }
 .au-progress span {
@@ -158,6 +170,9 @@
   border-radius: 10px; padding: 10px 20px; font-size: 14px; font-weight: 700; cursor: pointer;
 }
 
+/* このページは専用の追従CTA（.au-sticky）を使うため、共通の固定CTAは隠す */
+.sticky-cta { display: none !important; }
+
 /* スクロール追従CTA */
 .au-sticky {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; display: none;
@@ -205,6 +220,31 @@
 @media (max-width: 480px) {
   .audit-hero h1 { font-size: 22px; }
   .au-services { grid-template-columns: 1fr; }
+}
+
+/* ── キーボード操作のフォーカス表示（マウス時は出さない） ── */
+.au-opt:focus-visible,
+.au-svc:focus-visible,
+.au-cta:focus-visible,
+.au-next:focus-visible,
+.au-back:focus-visible,
+.au-more button:focus-visible,
+.au-detail-invite button:focus-visible,
+.au-quote input:focus-visible,
+.au-quote select:focus-visible,
+.au-quote .qf-radio:focus-within,
+.au-quote .qf-submit:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 2px;
+}
+
+/* ── 動きを抑える設定の人には演出を止める ── */
+@media (prefers-reduced-motion: reduce) {
+  .au-step.is-active,
+  .au-result.is-active,
+  .au-quote.is-active { animation: none; }
+  .au-spinner { animation-duration: 1.6s; }
+  .au-opt, .au-svc { transition: none; }
 }
 
 /* ── 静的解説コンテンツ（SEO/AIO） ── */

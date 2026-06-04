@@ -91,7 +91,10 @@ const bannerLinkSample = `<a href="${linkUrl}" target="_blank" rel="noopener">
         専用のバナー画像をご用意しています。下のHTMLをコピーして、御社サイトに貼り付けてください。
       </p>
       <div class="fp-banner-preview">
-        <img src="/images/partners/banner.png" alt="ロカサポ｜施設管理の業者紹介サイト" width="2172" height="724" />
+        <picture>
+          <source srcset="/images/partners/banner.webp" type="image/webp" />
+          <img src="/images/partners/banner.png" alt="ロカサポ｜施設管理の業者紹介サイト" width="2172" height="724" loading="lazy" decoding="async" />
+        </picture>
       </div>
       <pre class="fp-code"><code>{bannerLinkSample}</code></pre>
       <p class="fp-desc-sm">

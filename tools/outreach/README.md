@@ -1,6 +1,7 @@
 # outreach mailer
 
-CSVリスト → テンプレ差し込み → Gmail SMTP で1日N件送るだけの最小ツール。
+CSVリスト → テンプレ差し込み → Resend HTTP API で1日N件送るだけの最小ツール。
+**HTTPS経由なのでクラウド環境・ローカルどちらでも動く**（SMTPポート不要）。
 
 ## セットアップ（初回のみ）
 
@@ -8,15 +9,13 @@ CSVリスト → テンプレ差し込み → Gmail SMTP で1日N件送るだけ
 cd tools/outreach
 npm install
 
-# 1) Gmailアプリパスワードを取得
-#    Googleアカウント → 2段階認証を有効化 → アプリパスワード生成
-#    https://myaccount.google.com/apppasswords
-
-# 2) .env を作成
+# 1) .env を作成
 cp .env.example .env
-# GMAIL_USER, GMAIL_APP_PASSWORD を埋める
+# RESEND_API_KEY を埋める（問い合わせフォームと同じキー）
+#   → Cloudflare Pages の環境変数 RESEND_API_KEY と同じ値
+#   → または https://resend.com/api-keys で発行
 
-# 3) リストCSVを作成
+# 2) リストCSVを作成
 cp list.example.csv list.csv
 # facility_name, email, prefecture, facility_type を埋める
 ```
@@ -43,6 +42,13 @@ node send.js --limit=5
 - 件名：`subject.txt`
 - 本文：`template.txt`
 - 差し込み変数：`{{facility_name}}` `{{prefecture}}` `{{facility_type}}`
+
+## 送信の仕組み
+
+- Resend の `https://api.resend.com/emails` に POST（問い合わせフォームと同じ経路）
+- From: `info@local-support.jp`（Resendで検証済みドメイン）
+- 返信先: `support@local-support.jp`（.env の REPLY_TO で変更可）
+- SPF/DKIM/DMARC は Resend 側で処理（SPFに `_spf.resend.com` 設定済み）
 
 ## 注意
 
