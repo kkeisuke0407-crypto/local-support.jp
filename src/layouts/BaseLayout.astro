@@ -27,24 +27,27 @@ const {
   preloadImage,
 } = Astro.props;
 
-// Always include Organization + WebSite JSON-LD
+// Always include Organization + WebSite JSON-LD（@id でエンティティを相互連結）
+const orgId = `${site.domain}/#organization`;
+const siteId = `${site.domain}/#website`;
+const authorId = `${site.domain}/author/#person`;
 const baseLdBlocks = [
   JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': orgId,
     name: site.org.legalName,
     alternateName: site.name,
     url: site.domain,
-    logo: `${site.domain}/logo-mark.svg`,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${site.domain}/logo-mark.svg`,
+    },
     description: site.description,
     areaServed: { '@type': 'Country', name: 'JP' },
     knowsAbout: serviceIndex.map((s) => s.name),
-    founder: {
-      '@type': 'Person',
-      name: site.author.name,
-      jobTitle: site.author.role,
-      url: `${site.domain}/author/`,
-    },
+    founder: { '@id': authorId },
+    employee: { '@id': authorId },
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'customer service',
@@ -55,11 +58,23 @@ const baseLdBlocks = [
   }),
   JSON.stringify({
     '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': authorId,
+    name: site.author.name,
+    jobTitle: site.author.role,
+    url: `${site.domain}/author/`,
+    worksFor: { '@id': orgId },
+    knowsAbout: serviceIndex.map((s) => s.name),
+  }),
+  JSON.stringify({
+    '@context': 'https://schema.org',
     '@type': 'WebSite',
+    '@id': siteId,
     name: site.name,
     url: site.domain,
     inLanguage: 'ja-JP',
     description: site.description,
+    publisher: { '@id': orgId },
     potentialAction: {
       '@type': 'SearchAction',
       target: { '@type': 'EntryPoint', urlTemplate: `${site.domain}/?q={search_term_string}` },
@@ -84,9 +99,16 @@ const allLdBlocks = [...baseLdBlocks, ...jsonLdBlocks];
   <meta property="og:description" content={description} />
   <meta property="og:url"         content={canonical} />
   <meta property="og:image"       content={ogImage} />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt"   content={title} />
+  <meta property="og:image:type"  content="image/png" />
   <meta property="og:locale"      content="ja_JP" />
   <meta property="og:site_name"   content={siteName} />
-  <meta name="twitter:card"       content="summary_large_image" />
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image"       content={ogImage} />
 
   <meta name="theme-color" content="#1a56db" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -135,6 +157,8 @@ const allLdBlocks = [...baseLdBlocks, ...jsonLdBlocks];
   ))}
 </head>
 <body>
+
+<a href="#main" class="sd-skip-link">本文へスキップ</a>
 
 <!-- ══ HEADER ══════════════════════════════════════════════════ -->
 <header class="sd-header">
