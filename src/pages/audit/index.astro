@@ -85,6 +85,18 @@ const appLd = JSON.stringify({
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'JPY' },
   provider: { '@type': 'Organization', name: site.org.legalName, url: site.domain },
 });
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  url: canonical,
+  name: title,
+  description,
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.au-static-inner h2', '.au-static-inner p', '.au-static-faq-item dt', '.au-static-faq-item dd'],
+  },
+});
 ---
 <BaseLayout
   title={title}
@@ -92,7 +104,7 @@ const appLd = JSON.stringify({
   canonical={canonical}
   siteName={site.name}
   logoSub="施設管理コスト診断"
-  jsonLdBlocks={[breadcrumbLd, howToLd, faqLd, appLd]}
+  jsonLdBlocks={[breadcrumbLd, howToLd, faqLd, appLd, webPageLd]}
 >
   <section class="sd-section">
     <div class="audit" id="audit">
