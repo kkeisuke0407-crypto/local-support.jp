@@ -11,6 +11,8 @@ interface Props {
   ogImage?: string;
   jsonLdBlocks?: string[];
   noindex?: boolean;
+  /** Preload LCP image (typically a CSS background-image not auto-discovered) */
+  preloadImage?: string;
 }
 
 const {
@@ -22,6 +24,7 @@ const {
   ogImage = 'https://local-support.jp/og-default.png',
   jsonLdBlocks = [],
   noindex = false,
+  preloadImage,
 } = Astro.props;
 
 // Always include Organization + WebSite JSON-LD
@@ -89,13 +92,16 @@ const allLdBlocks = [...baseLdBlocks, ...jsonLdBlocks];
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/logo-mark.svg" />
 
-  <!-- Fonts: preconnect + preload critical weight -->
+  {preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />}
+
+  <!-- Fonts: preconnect + non-blocking load (media swap pattern) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&display=swap" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" />
   <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
   <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" rel="stylesheet" /></noscript>
 
   <!-- Google tag (gtag.js) — Consent Mode v2 default: denied, granted on user consent -->
   <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-KS0PVE3PY5"></script>
@@ -200,6 +206,7 @@ const allLdBlocks = [...baseLdBlocks, ...jsonLdBlocks];
             <li><a href="/column/">コラム</a></li>
             <li><a href="/glossary/">施設管理用語集</a></li>
             <li><a href="/disclosure/">ご紹介業者について</a></li>
+            <li><a href="/for-partners/">業者・施工会社の方へ</a></li>
             <li><a href="/privacy/">プライバシーポリシー</a></li>
             <li><a href="/sitemap/">サイトマップ</a></li>
             <li><a href="/#press">取材・提携のお問い合わせ</a></li>
