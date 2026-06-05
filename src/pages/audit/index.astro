@@ -321,6 +321,10 @@ const webPageLd = JSON.stringify({
             <label for="au-name">ご担当者名（任意）</label>
             <input id="au-name" name="name" type="text" placeholder="例：山田" />
           </div>
+          <label class="qf-agree">
+            <input type="checkbox" name="agree" value="1" required />
+            <span><a href="/privacy/" target="_blank" rel="noopener">プライバシーポリシー</a>に同意して送信します</span>
+          </label>
           <button type="submit" class="qf-submit" data-track="audit_quote_submit">この内容で無料相談する</button>
         </form>
         <button type="button" class="au-quote-back" id="au-quote-back">← 診断結果に戻る</button>
