@@ -249,15 +249,10 @@ document.addEventListener('DOMContentLoaded', function () {
   /* ── Hide sticky CTA over footer ── */
   var stickyCta = document.querySelector('.sticky-cta');
   if (stickyCta) {
-    /* On pages without an on-page #contact form, the sticky CTA's
-       "scroll to #contact" is a dead link. Redirect it to the audit hub. */
-    var stickyPrimary = stickyCta.querySelector('.sticky-btn-primary');
-    if (stickyPrimary && stickyPrimary.getAttribute('data-scroll-to') === '#contact' && !document.querySelector('#contact')) {
-      stickyPrimary.setAttribute('href', '/audit/');
-      stickyPrimary.removeAttribute('data-scroll-to');
-      stickyPrimary.textContent = 'まず30秒で無料コスト診断';
-    }
-
+    /* href="/audit/" + data-scroll-to="#contact" means:
+       - on pages WITH #contact form → smooth-scroll handler intercepts
+       - on pages WITHOUT → href takes over and navigates to /audit/
+       so no JS rewrite is needed here. */
     var footer = document.querySelector('.sd-footer');
     if (footer && 'IntersectionObserver' in window) {
       var obs = new IntersectionObserver(function (entries) {
