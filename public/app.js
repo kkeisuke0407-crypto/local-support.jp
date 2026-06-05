@@ -135,8 +135,9 @@ document.addEventListener('DOMContentLoaded', function () {
         submitBtn.textContent = '送信中...';
       }
       var redirect = form.getAttribute('data-redirect') || '/thanks/';
+      var endpoint = form.getAttribute('action') || '/api/quote';
 
-      fetch('/api/quote', {
+      fetch(endpoint, {
         method: 'POST',
         body: new FormData(form),
       }).then(function (resp) {
