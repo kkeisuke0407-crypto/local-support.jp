@@ -164,7 +164,7 @@ const webPageLd = JSON.stringify({
               const items = nonFeatured.filter((s) => s.group === g);
               return items.length ? (
                 <div class="au-more-group">
-                  <h4>{g}</h4>
+                  <p class="au-more-group-label">{g}</p>
                   <div class="au-services" data-multi="services">
                     {items.map((s) => (
                       <button type="button" class="au-svc" data-value={s.id} aria-pressed="false">
@@ -330,6 +330,36 @@ const webPageLd = JSON.stringify({
         <button type="button" class="au-quote-back" id="au-quote-back">← 診断結果に戻る</button>
       </div>
 
+    </div>
+  </section>
+
+  <!-- ══ AIO要点まとめ（AI Overview/音声検索向け） ══ -->
+  <section class="aio-summary" aria-label="施設管理コスト診断の要点">
+    <div class="sd-container">
+      <div class="aio-inner">
+        <p class="aio-label">📋 このページの要点</p>
+        <p class="aio-lead">
+          施設管理コスト診断は、契約中の受水槽清掃・消防設備点検・害虫駆除など全{AUDIT_SERVICES.length}種の施設管理サービスについて、施設の種類・サービス選択・見積取得状況・契約状況の4問に答えるだけで「見直し優先度」を100点満点で算出するロカサポの無料セルフチェックツールです。診断結果の表示まで個人情報の入力は不要、所要時間は約30秒です。
+        </p>
+        <dl class="aio-facts">
+          <div class="aio-fact">
+            <dt class="aio-fact-label">利用料</dt>
+            <dd class="aio-fact-value">完全無料（個人情報入力なしで結果表示）</dd>
+          </div>
+          <div class="aio-fact">
+            <dt class="aio-fact-label">所要時間</dt>
+            <dd class="aio-fact-value">約30秒・4タップ</dd>
+          </div>
+          <div class="aio-fact">
+            <dt class="aio-fact-label">対応サービス</dt>
+            <dd class="aio-fact-value">受水槽清掃・消防設備点検・害虫駆除など全{AUDIT_SERVICES.length}種</dd>
+          </div>
+          <div class="aio-fact">
+            <dt class="aio-fact-label">対象施設</dt>
+            <dd class="aio-fact-value">マンション管理組合・ビル管理会社・介護施設・病院・店舗</dd>
+          </div>
+        </dl>
+      </div>
     </div>
   </section>
 
