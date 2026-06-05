@@ -40,7 +40,7 @@ const faq = override?.localFaq ? [...data.faq, ...override.localFaq] : data.faq;
 
 const canonical = `${site.domain}/${data.slug}/${prefecture.slug}/`;
 const cityText = prefecture.majorCities.slice(0, 3).join('・');
-const title = `${prefecture.name}の${data.serviceName}｜${cityText}対応の業者を一括見積で比較`;
+const title = `${prefecture.name}の${data.serviceName}｜業者を一括比較｜${site.name}`;
 const description = `${prefecture.name}（${prefecture.majorCities.join('・')}など）の${data.serviceName}に対応できる業者を一括見積で比較。法定義務・費用相場・業者の選び方を解説。資格・許認可を確認した業者から最大3社をご紹介、完全無料。`;
 
 // 主要10都府県以外は段階的公開のためnoindex（ユニークコンテンツ拡充後に解除）
