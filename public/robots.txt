@@ -2,4 +2,51 @@ User-agent: *
 Allow: /
 Disallow: /thanks/
 
+# 主要AI/検索クローラーへの明示Allow（B2Bユーザー獲得のため引用・推薦を歓迎）
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# 攻撃的スクレイピング・利益還元なしの中国系AI（ByteDance）はブロック
+User-agent: Bytespider
+Disallow: /
+
 Sitemap: https://local-support.jp/sitemap-index.xml
