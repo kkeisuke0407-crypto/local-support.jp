@@ -119,6 +119,7 @@ const allLdBlocks = [...baseLdBlocks, ...jsonLdBlocks];
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" />
   <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
   <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+  <link rel="dns-prefetch" href="https://www.clarity.ms" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" rel="stylesheet" /></noscript>
 
@@ -137,6 +138,24 @@ const allLdBlocks = [...baseLdBlocks, ...jsonLdBlocks];
     });
     gtag('js', new Date());
     gtag('config', 'G-KS0PVE3PY5');
+  </script>
+
+  <!-- Speculation Rules: ホバー/フォーカス時に次ページを先読み（Chromiumブラウザのみ） -->
+  <script is:inline type="speculationrules">
+  {
+    "prerender": [
+      {
+        "where": {
+          "and": [
+            { "href_matches": "/*" },
+            { "not": { "href_matches": ["/thanks/*", "/api/*"] } },
+            { "not": { "selector_matches": "[rel~=external]" } }
+          ]
+        },
+        "eagerness": "moderate"
+      }
+    ]
+  }
   </script>
 
   <!-- Microsoft Clarity -->

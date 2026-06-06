@@ -471,6 +471,10 @@ const webPageLd = JSON.stringify({
 .cl-case-table th, .cl-case-table td { padding: 6px 10px; border: 1px solid #d1d5db; text-align: left; }
 .cl-case-table thead th { background: #f1f5f9; font-weight: 700; font-size: .82rem; color: var(--gray-800); }
 .cl-case-table td { background: #fff; }
+@media (max-width: 640px) {
+  /* 仕訳テーブルが狭い画面で崩れないよう横スクロール許可 */
+  .cl-case-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+}
 .cl-case-note { font-size: .85rem; line-height: 1.75; color: var(--gray-700); margin: 0; }
 .cl-case-note strong { color: var(--blue-dark); }
 </style>

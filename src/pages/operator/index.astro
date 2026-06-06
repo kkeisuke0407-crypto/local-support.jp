@@ -155,7 +155,9 @@ const orgLd = JSON.stringify({
 }
 
 @media (max-width: 640px) {
-  .info-table th { width: 120px; padding: 12px 10px; font-size: .85rem; }
-  .info-table td { padding: 12px 10px; font-size: .9rem; }
+  /* 狭い画面では横スクロール可能にして表崩れを防ぐ */
+  .info-table { display: block; overflow-x: auto; white-space: nowrap; }
+  .info-table th { width: 120px; padding: 12px 10px; font-size: .85rem; white-space: normal; }
+  .info-table td { padding: 12px 10px; font-size: .9rem; white-space: normal; }
 }
 </style>
