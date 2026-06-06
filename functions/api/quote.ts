@@ -3,7 +3,7 @@ interface Env {
 }
 
 const TO_ADDRESS = 'contact@local-support.jp';
-const FROM_ADDRESS = 'local-support.jp <contact@local-support.jp>';
+const FROM_ADDRESS = 'ロカサポ <contact@local-support.jp>';
 const FIELD_LABELS: Record<string, string> = {
   service: 'サービス',
   company: '会社名・施設名',
@@ -230,7 +230,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         body: JSON.stringify({
           from: FROM_ADDRESS,
           to: [data.email],
-          subject: '【local-support.jp】お見積もり依頼を受け付けました',
+          subject: '【ロカサポ】お見積もり依頼を受け付けました',
           html: buildUserReplyHtml(data),
           text: buildUserReplyText(data),
         }),
