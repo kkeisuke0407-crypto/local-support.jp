@@ -129,6 +129,13 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     });
 
   try {
+    // 簡易ボット対策：正規ブラウザの同一オリジン送信は Origin ヘッダを必ず送る。
+    // Origin が存在し、かつ自サイト以外なら拒否（直接POSTするボットを弾く）。
+    const origin = context.request.headers.get('Origin');
+    if (origin && !/^https?:\/\/(www\.)?local-support\.jp$/.test(origin)) {
+      return jsonResponse(403, { ok: false, error: '不正なリクエストです' });
+    }
+
     const formData = await context.request.formData();
     const data: ContactPayload = {};
     for (const [key, value] of formData.entries()) {
