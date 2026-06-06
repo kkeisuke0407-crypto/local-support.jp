@@ -35,20 +35,20 @@ const { sectionId = 'contact' } = Astro.props;
 
       <div class="qf-row qf-row--half">
         <label for="cf-name">お名前 <span class="qf-req">必須</span></label>
-        <input id="cf-name" name="name" type="text" required placeholder="例：山田太郎" />
+        <input id="cf-name" name="name" type="text" required placeholder="例：山田太郎" autocomplete="name" />
       </div>
       <div class="qf-row qf-row--half">
         <label for="cf-company">会社・媒体名（任意）</label>
-        <input id="cf-company" name="company" type="text" placeholder="例：◯◯メディア" />
+        <input id="cf-company" name="company" type="text" placeholder="例：◯◯メディア" autocomplete="organization" />
       </div>
 
       <div class="qf-row qf-row--half">
         <label for="cf-email">メールアドレス <span class="qf-req">必須</span></label>
-        <input id="cf-email" name="email" type="email" required placeholder="例：info@example.com" />
+        <input id="cf-email" name="email" type="email" required placeholder="例：info@example.com" autocomplete="email" />
       </div>
       <div class="qf-row qf-row--half">
         <label for="cf-tel">電話番号（任意）</label>
-        <input id="cf-tel" name="tel" type="tel" placeholder="例：03-0000-0000" />
+        <input id="cf-tel" name="tel" type="tel" placeholder="例：03-0000-0000" autocomplete="tel" />
       </div>
 
       <div class="qf-row qf-row--wide">

@@ -3,7 +3,7 @@ interface Env {
 }
 
 const TO_ADDRESS = 'contact@local-support.jp';
-const FROM_ADDRESS = 'local-support.jp <contact@local-support.jp>';
+const FROM_ADDRESS = 'ロカサポ <contact@local-support.jp>';
 
 const FIELD_LABELS: Record<string, string> = {
   inquiry_type: 'お問い合わせ種別',
@@ -129,6 +129,13 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     });
 
   try {
+    // 簡易ボット対策：正規ブラウザの同一オリジン送信は Origin ヘッダを必ず送る。
+    // Origin が存在し、かつ自サイト以外なら拒否（直接POSTするボットを弾く）。
+    const origin = context.request.headers.get('Origin');
+    if (origin && !/^https?:\/\/(www\.)?local-support\.jp$/.test(origin)) {
+      return jsonResponse(403, { ok: false, error: '不正なリクエストです' });
+    }
+
     const formData = await context.request.formData();
     const data: ContactPayload = {};
     for (const [key, value] of formData.entries()) {
@@ -190,7 +197,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         body: JSON.stringify({
           from: FROM_ADDRESS,
           to: [data.email],
-          subject: '【local-support.jp】お問い合わせを受け付けました',
+          subject: '【ロカサポ】お問い合わせを受け付けました',
           html: buildUserReplyHtml(data),
           text: buildUserReplyText(data),
         }),

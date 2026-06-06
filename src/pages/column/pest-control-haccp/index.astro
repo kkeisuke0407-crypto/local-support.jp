@@ -63,7 +63,7 @@ const webPageLd = JSON.stringify({
   isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
   speakable: {
     '@type': 'SpeakableSpecification',
-    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.faq-q', '.faq-a'],
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
   },
   primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
 });
@@ -99,7 +99,7 @@ const webPageLd = JSON.stringify({
         <p class="cl-qa-src">※食品衛生法（HACCP制度化）2021年6月完全施行</p>
       </div>
 
-      <ColumnCtaCard serviceSlug="pest-control" serviceName="å®³è«é§é¤" variant="top" />
+      <ColumnCtaCard serviceSlug="pest-control" serviceName="害虫駆除" variant="top" />
 
 
       <aside class="cl-toc" aria-label="目次">

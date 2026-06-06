@@ -50,20 +50,6 @@ const breadcrumbLd = JSON.stringify({
   ],
 });
 
-const howToLd = JSON.stringify({
-  '@context': 'https://schema.org',
-  '@type': 'HowTo',
-  name: '施設管理コスト診断の使い方',
-  description: '4つの質問に答えるだけで、契約中の施設管理サービスの見直し優先度を無料で診断します。',
-  totalTime: 'PT30S',
-  step: [
-    { '@type': 'HowToStep', position: 1, name: '施設の種類を選ぶ', text: '介護施設・病院・マンション・商業施設など、あてはまる施設の種類を選びます。' },
-    { '@type': 'HowToStep', position: 2, name: '気になるサービスを選ぶ', text: '契約中または気になる施設管理サービスを複数選択します。' },
-    { '@type': 'HowToStep', position: 3, name: '見積取得状況を答える', text: '直近で見積もりを取得・比較したことがあるかを選びます。' },
-    { '@type': 'HowToStep', position: 4, name: '契約の見直し状況を答える', text: '契約を定期的に見直しているか、自動更新かを選ぶと診断結果が表示されます。' },
-  ],
-});
-
 const faqLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -104,7 +90,7 @@ const webPageLd = JSON.stringify({
   canonical={canonical}
   siteName={site.name}
   logoSub="施設管理コスト診断"
-  jsonLdBlocks={[breadcrumbLd, howToLd, faqLd, appLd, webPageLd]}
+  jsonLdBlocks={[breadcrumbLd, faqLd, appLd, webPageLd]}
 >
   <section class="sd-section">
     <div class="audit" id="audit">
@@ -292,11 +278,11 @@ const webPageLd = JSON.stringify({
 
           <div class="qf-row">
             <label for="au-company">会社名・施設名 <span class="qf-req">必須</span></label>
-            <input id="au-company" name="company" type="text" required placeholder="例：◯◯介護センター" />
+            <input id="au-company" name="company" type="text" required placeholder="例：◯◯介護センター" autocomplete="organization" />
           </div>
           <div class="qf-row">
             <label for="au-prefecture">所在地（都道府県） <span class="qf-req">必須</span></label>
-            <select id="au-prefecture" name="prefecture" required>
+            <select id="au-prefecture" name="prefecture" required autocomplete="address-level1">
               <option value="">選択してください</option>
               {prefectures.map((p) => (<option value={p}>{p}</option>))}
             </select>
@@ -311,15 +297,15 @@ const webPageLd = JSON.stringify({
           </div>
           <div class="qf-row qf-contact-email">
             <label for="au-email">連絡先メール</label>
-            <input id="au-email" name="email" type="email" placeholder="例：info@example.com" />
+            <input id="au-email" name="email" type="email" placeholder="例：info@example.com" autocomplete="email" />
           </div>
           <div class="qf-row qf-contact-tel">
             <label for="au-tel">連絡先電話</label>
-            <input id="au-tel" name="tel" type="tel" placeholder="例：03-0000-0000" />
+            <input id="au-tel" name="tel" type="tel" placeholder="例：03-0000-0000" autocomplete="tel" />
           </div>
           <div class="qf-row">
             <label for="au-name">ご担当者名（任意）</label>
-            <input id="au-name" name="name" type="text" placeholder="例：山田" />
+            <input id="au-name" name="name" type="text" placeholder="例：山田" autocomplete="name" />
           </div>
           <label class="qf-agree">
             <input type="checkbox" name="agree" value="1" required />

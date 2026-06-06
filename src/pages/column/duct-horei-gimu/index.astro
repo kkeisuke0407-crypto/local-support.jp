@@ -76,7 +76,7 @@ const webPageLd = JSON.stringify({
   isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
   speakable: {
     '@type': 'SpeakableSpecification',
-    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.faq-q', '.faq-a'],
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
   },
   primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
 });
@@ -122,7 +122,7 @@ const webPageLd = JSON.stringify({
         <p class="cl-qa-src">※消防法・建築物衛生法（2026年4月時点）</p>
       </div>
 
-      <ColumnCtaCard serviceSlug="duct" serviceName="ãã¯ãæ¸æ" variant="top" />
+      <ColumnCtaCard serviceSlug="duct" serviceName="ダクト清掃" variant="top" />
 
 
 
@@ -421,6 +421,14 @@ const webPageLd = JSON.stringify({
         </ul>
         <p class="cl-pref-more"><a href="/duct/">全国47都道府県の対応業者を見る</a></p>
       </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">参考法令・一次資料</h2>
+        <ul>
+          <li><a href="https://elaws.e-gov.go.jp/document?lawid=323AC1000000186" target="_blank" rel="noopener">消防法（昭和23年法律第186号）｜e-Gov</a></li>
+          <li><a href="https://elaws.e-gov.go.jp/document?lawid=345AC0000000020" target="_blank" rel="noopener">建築物衛生法｜e-Gov</a></li>
+        </ul>
+      </aside>
 
       <aside class="cl-related">
         <h2 class="cl-related-h">関連する詳細情報</h2>

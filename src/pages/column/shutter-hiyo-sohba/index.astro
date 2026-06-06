@@ -71,7 +71,7 @@ const webPageLd = JSON.stringify({
   isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
   speakable: {
     '@type': 'SpeakableSpecification',
-    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.faq-q', '.faq-a'],
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
   },
   primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
 });
@@ -117,7 +117,7 @@ const webPageLd = JSON.stringify({
         <p class="cl-qa-src">※ロカサポ編集部による相場調査（2026年1〜4月）</p>
       </div>
 
-      <ColumnCtaCard serviceSlug="shutter" serviceName="ã·ã£ãã¿ã¼ç¹æ¤ã»ä¿®ç" variant="top" />
+      <ColumnCtaCard serviceSlug="shutter" serviceName="シャッター点検・修理" variant="top" />
 
 
 

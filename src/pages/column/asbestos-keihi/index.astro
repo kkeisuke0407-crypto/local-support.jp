@@ -61,7 +61,7 @@ const webPageLd = JSON.stringify({
   isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
   speakable: {
     '@type': 'SpeakableSpecification',
-    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.faq-q', '.faq-a'],
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
   },
   primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
 });
@@ -104,7 +104,7 @@ const webPageLd = JSON.stringify({
         <p class="cl-qa-src">※国税庁・法人税基本通達7-8-1〜7-8-2</p>
       </div>
 
-      <ColumnCtaCard serviceSlug="asbestos" serviceName="ã¢ã¹ãã¹ãèª¿æ»ã»é¤å»" variant="top" />
+      <ColumnCtaCard serviceSlug="asbestos" serviceName="アスベスト調査・除去" variant="top" />
 
 
       <aside class="cl-toc" aria-label="目次">

@@ -76,7 +76,7 @@ const webPageLd = JSON.stringify({
   isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
   speakable: {
     '@type': 'SpeakableSpecification',
-    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.faq-q', '.faq-a'],
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
   },
   primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
 });
@@ -122,7 +122,7 @@ const webPageLd = JSON.stringify({
         <p class="cl-qa-src">※大気汚染防止法第18条の15（2026年4月時点）</p>
       </div>
 
-      <ColumnCtaCard serviceSlug="asbestos" serviceName="ã¢ã¹ãã¹ãèª¿æ»ã»é¤å»" variant="top" />
+      <ColumnCtaCard serviceSlug="asbestos" serviceName="アスベスト調査・除去" variant="top" />
 
 
 
@@ -486,6 +486,15 @@ const webPageLd = JSON.stringify({
         </ul>
         <p class="cl-pref-more"><a href="/asbestos/">全国47都道府県の対応業者を見る</a></p>
       </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">参考法令・一次資料</h2>
+        <ul>
+          <li><a href="https://elaws.e-gov.go.jp/document?lawid=343AC0000000097" target="_blank" rel="noopener">大気汚染防止法（昭和43年法律第97号）｜e-Gov</a></li>
+          <li><a href="https://elaws.e-gov.go.jp/document?lawid=417M60000100021" target="_blank" rel="noopener">石綿障害予防規則（厚生労働省令第21号）｜e-Gov</a></li>
+          <li><a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/sekimen/index.html" target="_blank" rel="noopener">石綿（アスベスト）対策｜厚生労働省</a></li>
+        </ul>
+      </aside>
 
       <aside class="cl-related">
         <h2 class="cl-related-h">関連する詳細情報</h2>

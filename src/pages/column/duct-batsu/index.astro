@@ -61,7 +61,7 @@ const webPageLd = JSON.stringify({
   isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
   speakable: {
     '@type': 'SpeakableSpecification',
-    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.faq-q', '.faq-a'],
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
   },
   primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
 });
@@ -104,7 +104,7 @@ const webPageLd = JSON.stringify({
         <p class="cl-qa-src">※消防法第46条・各損害保険会社の約款</p>
       </div>
 
-      <ColumnCtaCard serviceSlug="duct" serviceName="ãã¯ãæ¸æ" variant="top" />
+      <ColumnCtaCard serviceSlug="duct" serviceName="ダクト清掃" variant="top" />
 
 
       <aside class="cl-toc" aria-label="目次">

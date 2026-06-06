@@ -73,7 +73,7 @@ const webPageLd = JSON.stringify({
   isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
   speakable: {
     '@type': 'SpeakableSpecification',
-    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.faq-q', '.faq-a'],
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
   },
   primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
 });
@@ -109,7 +109,7 @@ const webPageLd = JSON.stringify({
         <p class="cl-qa-src">※下水道法・食品衛生法・HACCP制度（2026年4月時点）</p>
       </div>
 
-      <ColumnCtaCard serviceSlug="grease-trap" serviceName="ã°ãªã¹ãã©ããæ¸æ" variant="top" />
+      <ColumnCtaCard serviceSlug="grease-trap" serviceName="グリストラップ清掃" variant="top" />
 
 
       <aside class="cl-toc" aria-label="目次">
@@ -288,6 +288,15 @@ const webPageLd = JSON.stringify({
         </ul>
         <p class="cl-pref-more"><a href="/grease-trap/">全国47都道府県の対応業者を見る</a></p>
       </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">参考法令・一次資料</h2>
+        <ul>
+          <li><a href="https://elaws.e-gov.go.jp/document?lawid=333AC0000000079" target="_blank" rel="noopener">下水道法（昭和33年法律第79号）｜e-Gov</a></li>
+          <li><a href="https://elaws.e-gov.go.jp/document?lawid=325AC0000000201" target="_blank" rel="noopener">建築基準法｜e-Gov</a></li>
+          <li><a href="https://elaws.e-gov.go.jp/document?lawid=345AC0000000137" target="_blank" rel="noopener">廃棄物処理法｜e-Gov</a></li>
+        </ul>
+      </aside>
 
       <aside class="cl-related">
         <h2 class="cl-related-h">関連サービス・コラム</h2>

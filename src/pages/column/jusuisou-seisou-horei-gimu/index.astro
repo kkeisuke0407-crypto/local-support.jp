@@ -118,7 +118,7 @@ const webPageLd = JSON.stringify({
   isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
   speakable: {
     '@type': 'SpeakableSpecification',
-    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.faq-q', '.faq-a'],
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
   },
   primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
 });
@@ -164,7 +164,7 @@ const webPageLd = JSON.stringify({
         <p class="cl-qa-src">※水道法第34条の2・建築物衛生法（2026年4月時点）</p>
       </div>
 
-      <ColumnCtaCard serviceSlug="jusuisou-seisou" serviceName="åæ°´æ§½æ¸æ" variant="top" />
+      <ColumnCtaCard serviceSlug="jusuisou-seisou" serviceName="受水槽清掃" variant="top" />
 
 
 
@@ -616,6 +616,15 @@ const webPageLd = JSON.stringify({
         </ul>
         <p class="cl-pref-more"><a href="/jusuisou-seisou/">全国47都道府県の対応業者を見る</a></p>
       </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">参考法令・一次資料</h2>
+        <ul>
+          <li><a href="https://elaws.e-gov.go.jp/document?lawid=332AC0000000177" target="_blank" rel="noopener">水道法（昭和32年法律第177号）｜e-Gov法令検索</a></li>
+          <li><a href="https://elaws.e-gov.go.jp/document?lawid=345AC0000000020" target="_blank" rel="noopener">建築物における衛生的環境の確保に関する法律（建築物衛生法）｜e-Gov</a></li>
+          <li><a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/topics/bukyoku/kenkou/suido/jouhou/jigyousha/index.html" target="_blank" rel="noopener">水道事業者向け情報｜厚生労働省</a></li>
+        </ul>
+      </aside>
 
       <aside class="cl-related">
         <h2 class="cl-related-h">関連する詳細情報</h2>
