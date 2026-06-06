@@ -107,19 +107,6 @@ const faqLd = JSON.stringify({
   })),
 });
 
-const howToLd = JSON.stringify({
-  '@context': 'https://schema.org',
-  '@type': 'HowTo',
-  name: `${data.serviceName}の業者選びで確認すべきポイント`,
-  description: `${prefecture.name}で${data.serviceName}業者を選ぶ際の確認手順`,
-  step: data.selectionCriteria.map((c, i) => ({
-    '@type': 'HowToStep',
-    position: i + 1,
-    name: c.title,
-    text: c.body,
-  })),
-});
-
 const webPageLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'WebPage',
