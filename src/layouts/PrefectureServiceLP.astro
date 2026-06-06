@@ -63,6 +63,7 @@ const serviceLd = JSON.stringify({
   serviceType: data.serviceName,
   description: description,
   url: canonical,
+  brand: { '@type': 'Brand', name: site.name },
   areaServed: [
     { '@type': 'AdministrativeArea', name: prefecture.name },
     ...prefecture.majorCities.map((city) => ({ '@type': 'City', name: city, containedInPlace: { '@type': 'AdministrativeArea', name: prefecture.name } })),

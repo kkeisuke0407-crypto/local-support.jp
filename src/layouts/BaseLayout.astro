@@ -75,11 +75,7 @@ const baseLdBlocks = [
     inLanguage: 'ja-JP',
     description: site.description,
     publisher: { '@id': orgId },
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: { '@type': 'EntryPoint', urlTemplate: `${site.domain}/?q={search_term_string}` },
-      'query-input': 'required name=search_term_string',
-    },
+    /* potentialAction: SearchAction は実サイト内検索の実装がないため記載しない（虚偽防止） */
   }),
 ];
 const allLdBlocks = [...baseLdBlocks, ...jsonLdBlocks];
@@ -259,6 +255,6 @@ const allLdBlocks = [...baseLdBlocks, ...jsonLdBlocks];
   </div>
 </div>
 
-<script is:inline src={`/app.js?v=${import.meta.env.BUILD_ID || Date.now()}`}></script>
+<script is:inline defer src={`/app.js?v=${import.meta.env.BUILD_ID || Date.now()}`}></script>
 </body>
 </html>

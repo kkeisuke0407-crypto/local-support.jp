@@ -42,6 +42,7 @@ const serviceLd = JSON.stringify({
   serviceType: data.serviceName,
   description: data.meta.description,
   url: canonical,
+  brand: { '@type': 'Brand', name: site.name },
   areaServed: { '@type': 'Country', name: 'Japan' },
   audience: {
     '@type': 'BusinessAudience',
