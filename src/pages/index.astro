@@ -115,7 +115,7 @@ const featuredColumns = [
   canonical={CANONICAL}
   siteName={site.name}
   logoSub="施設管理の業者紹介サイトを27分野で運営"
-  preloadImage="/images/brand/hero-local-support-top.webp"
+  preloadImage={`/images/brand/hero-local-support-top.webp?v=${heroImageVersion}`}
   jsonLdBlocks={[websiteLd, orgLd, itemListLd, faqLd, webPageLd]}
 >
 
@@ -146,7 +146,7 @@ const featuredColumns = [
       </ul>
     </div>
     <figure class="lp-hero-visual">
-      <img src="/images/brand/hero-local-support-top.webp" width="1600" height="900" alt="施設管理担当者と点検スタッフがタブレットで点検内容を確認している様子" decoding="async" fetchpriority="high" />
+      <img src={`/images/brand/hero-local-support-top.webp?v=${heroImageVersion}`} width="1600" height="900" alt="施設管理担当者と点検スタッフがタブレットで点検内容を確認している様子" decoding="async" fetchpriority="high" />
     </figure>
   </div>
 </section>

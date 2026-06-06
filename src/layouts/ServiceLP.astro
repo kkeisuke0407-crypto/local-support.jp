@@ -143,7 +143,11 @@ const priceLd = data.costGuide.priceRange ? JSON.stringify({
   },
 }) : null;
 
-const jsonLdBlocks = [breadcrumbLd, serviceLd, webPageLd, faqLd, howToLd, priceLd].filter(Boolean) as string[];
+/* HowTo schema は 2023年以降 Google が「料理・DIY・修理」など物理的な
+   手順に限定したため、業務手順（見積依頼の流れ等）には不適格となった。
+   リッチリザルト対象外＆無効構造化データとして警告を受けるおそれが
+   あるため、howToLd は jsonLdBlocks に含めない。 */
+const jsonLdBlocks = [breadcrumbLd, serviceLd, webPageLd, faqLd, priceLd].filter(Boolean) as string[];
 ---
 <BaseLayout
   title={data.meta.title}
