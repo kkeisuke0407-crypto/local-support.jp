@@ -72,19 +72,8 @@ const serviceLd = JSON.stringify({
     '@type': 'BusinessAudience',
     audienceType: 'マンション管理組合・ビル管理会社・施設管理担当者',
   },
-  provider: {
-    '@type': 'Organization',
-    name: site.org.legalName,
-    alternateName: site.name,
-    url: site.domain,
-    logo: `${site.domain}/logo-mark.svg`,
-    founder: {
-      '@type': 'Person',
-      name: site.author.name,
-      jobTitle: site.author.role,
-      url: `${site.domain}/author/`,
-    },
-  },
+  /* Organizationエンティティは BaseLayout で @id 付き定義済み。ここでは参照のみ */
+  provider: { '@id': `${site.domain}/#organization` },
   termsOfService: `${site.domain}/disclosure/`,
   category: data.serviceName,
   offers: {
