@@ -26,7 +26,7 @@ const articleLd = JSON.stringify({
   articleSection: '法令・義務',
   keywords: '看板点検,屋外広告物法,自治体条例,有資格者点検,落下事故,管理者責任,許可更新,2026',
   author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
-  publisher: { '@type': 'Organization', name: site.org.legalName, url: site.domain, logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` } },
+  publisher: { '@id': `${site.domain}/#organization` },
   image: { '@type': 'ImageObject', url: `${site.domain}/og-signboard-inspection.png`, width: 1200, height: 630 },
   about: { '@type': 'Service', name: '看板・屋外広告物点検' },
   citation: [
@@ -65,7 +65,7 @@ const webPageLd = JSON.stringify({
     '@type': 'SpeakableSpecification',
     cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
   },
-  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-signboard-inspection.png` },
 });
 
 ---

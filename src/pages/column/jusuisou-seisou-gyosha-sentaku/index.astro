@@ -33,12 +33,7 @@ const articleLd = JSON.stringify({
   articleSection: '業者選び',
   keywords: '受水槽清掃,業者選び,資格,建築物飲料水貯水槽清掃業,見積もり,チェックリスト,2026',
   author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
-  publisher: {
-    '@type': 'Organization',
-    name: site.org.legalName,
-    url: site.domain,
-    logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
-  },
+  publisher: { '@id': `${site.domain}/#organization` },
   image: { '@type': 'ImageObject', url: `${site.domain}/og-jusuisou-seisou.png`, width: 1200, height: 630 },
   about: { '@type': 'Service', name: '受水槽清掃' },
 });
@@ -74,7 +69,7 @@ const webPageLd = JSON.stringify({
     '@type': 'SpeakableSpecification',
     cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
   },
-  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-jusuisou-seisou.png` },
 });
 
 ---

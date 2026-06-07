@@ -33,7 +33,7 @@ const articleLd = JSON.stringify({
   articleSection: '施設管理ガイド',
   keywords: '施設管理,年間スケジュール,法定点検,カレンダー,マンション管理,ビル管理,2026',
   author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
-  publisher: { '@type': 'Organization', name: site.org.legalName, url: site.domain, logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` } },
+  publisher: { '@id': `${site.domain}/#organization` },
   image: { '@type': 'ImageObject', url: `${site.domain}/og-default.png`, width: 1200, height: 630 },
 });
 

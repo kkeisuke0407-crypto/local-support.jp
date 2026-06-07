@@ -33,12 +33,7 @@ const articleLd = JSON.stringify({
   articleSection: '法令・義務',
   keywords: '消防設備点検,消防法,機器点検,総合点検,防火対象物,有資格者,罰則,2026',
   author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
-  publisher: {
-    '@type': 'Organization',
-    name: site.org.legalName,
-    url: site.domain,
-    logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
-  },
+  publisher: { '@id': `${site.domain}/#organization` },
   image: { '@type': 'ImageObject', url: `${site.domain}/og-shobo-setsubi.png`, width: 1200, height: 630 },
   about: { '@type': 'Service', name: '消防設備点検', serviceType: '消防用設備等の点検' },
   citation: [
@@ -103,7 +98,7 @@ const webPageLd = JSON.stringify({
     '@type': 'SpeakableSpecification',
     cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
   },
-  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-shobo-setsubi.png` },
 });
 
 ---

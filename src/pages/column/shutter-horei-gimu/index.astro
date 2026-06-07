@@ -33,12 +33,7 @@ const articleLd = JSON.stringify({
   articleSection: '法令・義務',
   keywords: 'シャッター点検,建築基準法第12条,防火設備検査,定期報告,防火設備検査員,法定義務,2026',
   author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
-  publisher: {
-    '@type': 'Organization',
-    name: site.org.legalName,
-    url: site.domain,
-    logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
-  },
+  publisher: { '@id': `${site.domain}/#organization` },
   image: { '@type': 'ImageObject', url: `${site.domain}/og-shutter.png`, width: 1200, height: 630 },
   about: { '@type': 'Service', name: 'シャッター点検・修理' },
   citation: [
@@ -78,7 +73,7 @@ const webPageLd = JSON.stringify({
     '@type': 'SpeakableSpecification',
     cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
   },
-  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-shutter.png` },
 });
 
 ---

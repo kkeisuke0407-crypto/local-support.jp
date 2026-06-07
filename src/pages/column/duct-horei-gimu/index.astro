@@ -33,12 +33,7 @@ const articleLd = JSON.stringify({
   articleSection: '法令・義務',
   keywords: 'ダクト清掃,消防法,建築物衛生法,防火管理義務,法定義務,火災保険,2026',
   author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
-  publisher: {
-    '@type': 'Organization',
-    name: site.org.legalName,
-    url: site.domain,
-    logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
-  },
+  publisher: { '@id': `${site.domain}/#organization` },
   image: { '@type': 'ImageObject', url: `${site.domain}/og-duct.png`, width: 1200, height: 630 },
   about: { '@type': 'Service', name: 'ダクト清掃' },
   citation: [
@@ -78,7 +73,7 @@ const webPageLd = JSON.stringify({
     '@type': 'SpeakableSpecification',
     cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
   },
-  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-duct.png` },
 });
 
 ---
