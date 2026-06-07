@@ -22,6 +22,12 @@ function lastmodForUrl(url) {
 export default defineConfig({
   site: 'https://local-support.jp',
   trailingSlash: 'always',
+  // ホバー時の次ページ先読み（Chromium 系の Speculation Rules を補完）
+  // compressHTML はデフォルトで true、inlineStylesheets は CSS が大きいため未使用
+  prefetch: {
+    prefetchAll: false,
+    defaultStrategy: 'hover',
+  },
   build: {
     format: 'directory',
   },
