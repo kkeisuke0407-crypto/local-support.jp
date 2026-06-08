@@ -38,6 +38,7 @@ const breadcrumbLd = JSON.stringify({
 const serviceLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'Service',
+  '@id': `${canonical}#service`,
   name: `${data.serviceName}の一括見積比較`,
   serviceType: data.serviceName,
   description: data.meta.description,
@@ -78,8 +79,10 @@ const webPageLd = JSON.stringify({
   description: data.meta.description,
   dateModified: data.meta.lastUpdated,
   inLanguage: 'ja-JP',
-  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
-  about: { '@type': 'Service', name: data.serviceName },
+  isPartOf: { '@id': `${site.domain}/#website` },
+  /* このページの主題は Service エンティティ。AI に「何のページか」を明示する */
+  mainEntity: { '@id': `${canonical}#service` },
+  about: { '@id': `${canonical}#service` },
   reviewedBy: {
     '@type': 'Person',
     name: site.author.name,
@@ -120,10 +123,24 @@ const priceLd = data.costGuide.priceRange ? JSON.stringify({
 }) : null;
 
 /* HowTo schema は 2023年以降 Google が「料理・DIY・修理」など物理的な
-   手順に限定したため、業務手順（見積依頼の流れ等）には不適格となった。
-   リッチリザルト対象外＆無効構造化データとして警告を受けるおそれが
-   あるため、howToLd は jsonLdBlocks に含めない。 */
-const jsonLdBlocks = [breadcrumbLd, serviceLd, webPageLd, faqLd, priceLd].filter(Boolean) as string[];
+   手順に限定したため、業務手順（見積依頼の流れ等）には不適格。
+   代替として ItemList で「業者選びチェックリスト」を構造化する。
+   ItemList はHowToと違い汎用で、AI Overview の引用にも使われる。 */
+const checklistLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: `${data.serviceName}の業者選びチェックリスト`,
+  description: `${data.serviceName}の業者を選ぶときに確認すべき${data.selectionCriteria.length}項目`,
+  itemListOrder: 'https://schema.org/ItemListOrderAscending',
+  numberOfItems: data.selectionCriteria.length,
+  itemListElement: data.selectionCriteria.map((c, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: c.title,
+    description: c.body,
+  })),
+});
+const jsonLdBlocks = [breadcrumbLd, serviceLd, webPageLd, faqLd, checklistLd, priceLd].filter(Boolean) as string[];
 ---
 <BaseLayout
   title={data.meta.title}

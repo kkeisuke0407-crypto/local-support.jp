@@ -59,6 +59,7 @@ const breadcrumbLd = JSON.stringify({
 const serviceLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'Service',
+  '@id': `${canonical}#service`,
   name: `${prefecture.name}の${data.serviceName}一括見積比較`,
   serviceType: data.serviceName,
   description: description,
@@ -105,8 +106,10 @@ const webPageLd = JSON.stringify({
   description: description,
   dateModified: data.meta.lastUpdated,
   inLanguage: 'ja-JP',
-  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
-  about: { '@type': 'Service', name: data.serviceName },
+  isPartOf: { '@id': `${site.domain}/#website` },
+  /* このページの主題は Service エンティティ。地域指定もここで明示 */
+  mainEntity: { '@id': `${canonical}#service` },
+  about: { '@id': `${canonical}#service` },
   spatialCoverage: { '@type': 'AdministrativeArea', name: prefecture.name },
   reviewedBy: {
     '@type': 'Person',
@@ -139,9 +142,23 @@ const priceLd = data.costGuide.priceRange ? JSON.stringify({
   },
 }) : null;
 
-/* HowTo schema は 2023年以降 Google が「料理・DIY・修理」など物理的な
-   手順に限定したため、見積依頼フロー等の業務手順は不適格。除外する。 */
-const jsonLdBlocks = [breadcrumbLd, serviceLd, webPageLd, faqLd, priceLd].filter(Boolean) as string[];
+/* HowTo の代替として ItemList で「業者選びチェックリスト」を構造化。
+   ItemList はHowToと違い汎用で AI Overview の引用にも使われる。 */
+const checklistLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: `${prefecture.name}の${data.serviceName}業者選びチェックリスト`,
+  description: `${prefecture.name}で${data.serviceName}業者を選ぶときに確認すべき${data.selectionCriteria.length}項目`,
+  itemListOrder: 'https://schema.org/ItemListOrderAscending',
+  numberOfItems: data.selectionCriteria.length,
+  itemListElement: data.selectionCriteria.map((c, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: c.title,
+    description: c.body,
+  })),
+});
+const jsonLdBlocks = [breadcrumbLd, serviceLd, webPageLd, faqLd, checklistLd, priceLd].filter(Boolean) as string[];
 ---
 <BaseLayout
   title={title}
