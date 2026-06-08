@@ -29,7 +29,7 @@ const articleLd = JSON.stringify({
   inLanguage: 'ja-JP',
   url: canonical,
   mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
-  wordCount: 3200,
+  wordCount: 4400,
   articleSection: "補助金・助成金",
   keywords: "アスベスト,補助金,助成金,事前調査,除去工事,環境省,自治体,2026",
   author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
@@ -116,6 +116,8 @@ const webPageLd = JSON.stringify({
           <li><a href="#cities">主要自治体の補助金</a></li>
           <li><a href="#flow">申請の流れ</a></li>
           <li><a href="#tips">採択率を上げるコツ</a></li>
+          <li><a href="#cost-simulation">補助金活用の費用シミュレーション</a></li>
+          <li><a href="#combination">他制度との併用と注意点</a></li>
           <li><a href="#faq">よくある質問</a></li>
         </ol>
       </aside>
@@ -200,6 +202,49 @@ const webPageLd = JSON.stringify({
           <li><strong>必要書類の網羅</strong>：登記事項証明書・納税証明書等を漏れなく</li>
           <li><strong>緊急性の説明</strong>：飛散リスク・健康被害リスクを写真・調査結果で具体的に</li>
         </ul>
+      </section>
+
+      <section id="cost-simulation" class="cl-section">
+        <h2>補助金を活用した費用シミュレーション</h2>
+        <p>「補助金を使うと結局いくらで済むのか」は、建物規模・含有量・自治体によって大きく異なります。代表的な3パターンで実費負担額のレンジを示します。</p>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>アスベスト除去工事の補助金活用シミュレーション（税抜目安）</caption>
+            <thead><tr><th>建物規模</th><th>除去面積</th><th>工事費（補助前）</th><th>補助額の目安</th><th>実費負担</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">小規模ビル</th><td>50㎡（駐車場下吹付）</td><td>120万円</td><td>40万円（1/3補助）</td><td>80万円</td></tr>
+              <tr><th scope="row">中規模ビル</th><td>200㎡（機械室・階段室）</td><td>500万円</td><td>200万円（上限2/3補助）</td><td>300万円</td></tr>
+              <tr><th scope="row">大規模ビル</th><td>800㎡（共用部広範囲）</td><td>2,000万円</td><td>500万円（上限額）</td><td>1,500万円</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>上記は除去工事費のみ。<strong>事前調査費は別途5〜20万円、分析費は1検体5,000〜30,000円</strong>かかります。事前調査にも自治体補助が出る場合（上限10万円程度）があるため、調査段階から補助金活用を検討してください。</p>
+
+        <h3>補助金が下りないリスクの想定</h3>
+        <ul>
+          <li><strong>申請時期遅れ</strong>：年度後半（10月以降）は予算枯渇リスクあり。早期着工を予定なら4〜6月に申請</li>
+          <li><strong>調査者の資格不足</strong>：建築物石綿含有建材調査者の資格証明が不備だと事前調査自体が無効に</li>
+          <li><strong>所有形態の制限</strong>：賃貸物件のテナント工事は対象外の場合あり。所有者経由の申請が原則</li>
+        </ul>
+      </section>
+
+      <section id="combination" class="cl-section">
+        <h2>他制度との併用と注意点</h2>
+        <p>アスベスト対策の補助金は、他の建物関連制度と組み合わせて活用できる場合があります。代表的な併用例を整理します。</p>
+
+        <h3>解体工事補助金との併用</h3>
+        <p>建物全体の解体を計画している場合、アスベスト除去補助金と解体補助金（耐震性不足建物の除却支援等）を併用できる自治体があります。ただし<strong>同一工程内の同一費用に対する重複支給は不可</strong>のため、事前調査費・除去工事費・解体費を明確に区分した見積書が必要です。</p>
+
+        <h3>耐震改修補助金との併用</h3>
+        <p>1981年以前の旧耐震建物では、耐震改修工事に伴うアスベスト除去が補助対象になるケースがあります。耐震改修補助は通常工事費の23〜33%、アスベスト除去補助は1/3〜2/3で、両方適用すれば実質負担を大幅に圧縮できます。<strong>同時申請が原則</strong>のため、年度初め段階で工事計画を確定させる必要があります。</p>
+
+        <h3>分譲マンション共用部改修との関連</h3>
+        <p>共用部のアスベスト除去は、長期修繕計画の修繕積立金から支出するのが一般的ですが、自治体によっては<strong>「分譲マンション共用部改修補助」</strong>の枠でアスベスト除去も対象に含めるケースがあります。管理組合の総会決議書、長期修繕計画書を申請書類に添付してください。</p>
+
+        <h3>注意：補助金収入の税務処理</h3>
+        <p>受け取った補助金は<strong>収益（雑収入）</strong>として益金算入が原則。ただし「国庫補助金等の圧縮記帳」制度を使えば、工事費から補助金額を差し引いた額を取得価額として処理でき、課税繰延が可能です。除去工事費が建物・設備として資産計上される場合は圧縮記帳の検討価値が大きいため、税理士に相談してください。</p>
       </section>
 
       <section id="faq" class="cl-section">
