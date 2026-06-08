@@ -29,7 +29,7 @@ const articleLd = JSON.stringify({
   inLanguage: 'ja-JP',
   url: canonical,
   mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
-  wordCount: 4900,
+  wordCount: 6500,
   articleSection: "会計・経費",
   keywords: "受水槽清掃,経費,損金算入,仕訳,修繕費,管理費,管理組合,2026",
   author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
@@ -115,6 +115,7 @@ const webPageLd = JSON.stringify({
           <li><a href="#shiwake">主体別の仕訳例</a></li>
           <li><a href="#shouhizei">消費税の取扱い</a></li>
           <li><a href="#records">書類の保管期間</a></li>
+          <li><a href="#invoice">インボイス制度対応の実務チェック</a></li>
           <li><a href="#case-patterns">ケース別仕訳パターン集（実務即用）</a></li>
           <li><a href="#qa">税理士からよくある質問</a></li>
           <li><a href="#faq">よくある質問</a></li>
@@ -195,6 +196,51 @@ const webPageLd = JSON.stringify({
             </tbody>
           </table>
         </div>
+      </section>
+
+      <section id="invoice" class="cl-section">
+        <h2>インボイス制度対応の実務チェック</h2>
+        <p>2023年10月から開始されたインボイス制度（適格請求書等保存方式）は、受水槽清掃の費用処理にも直接影響します。仕入税額控除を確実に受けるための、実務上のチェックポイントを整理します。</p>
+
+        <h3>インボイス対応業者からの請求書の確認項目</h3>
+        <p>業者から受け取る請求書が「適格請求書」として有効か、以下の6点を確認してください。</p>
+        <ol>
+          <li><strong>適格請求書発行事業者の登録番号（T+13桁）</strong>の明記</li>
+          <li>取引年月日</li>
+          <li>取引内容（軽減税率対象品目はその旨記載）</li>
+          <li>税率ごとに区分した合計額（税抜または税込）</li>
+          <li>税率ごとの消費税額および適用税率</li>
+          <li>請求書受領者の氏名または名称</li>
+        </ol>
+        <p>受水槽清掃は軽減税率対象ではないため、すべて10%税率での記載となります。</p>
+
+        <h3>登録番号は事前に確認する</h3>
+        <p>業者の適格請求書発行事業者の登録番号は、国税庁の<strong>「適格請求書発行事業者公表サイト」</strong>（invoice-kohyo.nta.go.jp）で検索・確認できます。発注前に登録の有効性を確認すれば、後から「実は登録切れだった」という事態を避けられます。</p>
+
+        <h3>免税事業者と取引する場合の経過措置</h3>
+        <p>受水槽清掃の地元業者の中には、年間売上1,000万円以下の免税事業者も含まれます。免税事業者から請求を受けた場合、インボイス制度の経過措置として以下のように仕入税額控除できます。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>免税事業者との取引の仕入税額控除の経過措置</caption>
+            <thead><tr><th>期間</th><th>控除割合</th></tr></thead>
+            <tbody>
+              <tr><td>2023年10月〜2026年9月</td><td>80%</td></tr>
+              <tr><td>2026年10月〜2029年9月</td><td>50%</td></tr>
+              <tr><td>2029年10月以降</td><td>0%（控除不可）</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>2026年現在の実務的な選択肢</h3>
+        <p>2026年現在、免税事業者との取引の仕入税額控除は<strong>80%</strong>適用可能です。ただし2029年10月以降は完全に控除不可となるため、長期契約を結ぶ業者の選定では「インボイス登録の有無」を重要な判断基準に加える必要があります。複数業者の見積比較では、税込価格だけでなく<strong>「仕入税額控除を考慮した実質負担額」</strong>での比較が現実的です。</p>
+
+        <h3>電子帳簿保存法との関係</h3>
+        <p>2024年1月から電子取引データの電子保存が義務化されました。電子メールで業者から受領した請求書PDF・見積書PDFは、紙印刷だけでなく<strong>電子データのままでの保存</strong>が必要です。電子帳簿保存法の要件（真実性・可視性の確保）を満たすため、以下の対応が推奨されます。</p>
+        <ul>
+          <li>ファイル名に「日付_業者名_取引内容」を含めて検索性を確保</li>
+          <li>タイムスタンプ付きクラウドサービス（freee・マネーフォワード等）の利用</li>
+          <li>または、訂正・削除履歴が残る業務システムでの管理</li>
+        </ul>
       </section>
 
       <section id="case-patterns" class="cl-section">
