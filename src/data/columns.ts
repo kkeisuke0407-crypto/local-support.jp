@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/furon-tenken-horei-gimu/',
+    category: 'フロン点検',
+    title: 'フロン排出抑制法の点検義務ガイド2026｜業務用エアコン・冷凍冷蔵設備の管理者責任',
+    excerpt: '業務用エアコン・冷凍冷蔵設備の簡易点検（3ヶ月に1回）・定期点検（年1回または3年に1回）の対象機器・実施者要件・記録保存義務を整理。漏洩量算定報告・廃棄時のフロン回収・違反時の罰金リスクまで2026年最新版で解説。',
+    date: '2026-06-05',
+  },
+  {
     href: '/column/shisetsu-kanri-nenkan-schedule/',
     category: '施設管理ガイド',
     title: '施設管理の年間スケジュール2026｜マンション・ビル管理担当者向け 9種の法定点検カレンダー',

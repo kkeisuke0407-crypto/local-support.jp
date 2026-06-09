@@ -305,7 +305,15 @@ const data: ServiceData = {
 
   relatedServiceSlugs: ['aircon-business', 'duct', 'shobo-setsubi'],
 
-  relatedColumns: [],
+  relatedColumns: [
+    {
+      href: '/column/furon-tenken-horei-gimu/',
+      category: '法令・義務',
+      title: 'フロン排出抑制法の点検義務ガイド2026｜業務用エアコン・冷凍冷蔵設備の管理者責任',
+      excerpt: '簡易点検（3ヶ月に1回）・定期点検（年1回または3年に1回）の対象機器・実施者要件・記録保存義務、漏洩量算定報告、廃棄時のフロン回収、違反時の罰金リスクまで2026年版で解説。',
+      date: '2026-06-05',
+    },
+  ],
 
   prefectureOverrides: {
     tokyo: {
