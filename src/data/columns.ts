@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/elevator-hoshu-horei-gimu/',
+    category: 'エレベーター',
+    title: 'エレベーター保守点検の法定義務ガイド2026｜建築基準法第12条と所有者責任',
+    excerpt: 'エレベーター（昇降機）の建築基準法第12条による定期検査報告（年1回）・保守点検（月1回が標準）の義務を整理。POG契約とフルメンテナンス契約の違い、メーカー系と独立系業者の比較、違反時の100万円以下の罰金、事故時の所有者責任まで2026年版で解説。',
+    date: '2026-06-05',
+  },
+  {
     href: '/column/bouka-tenken-horei-gimu/',
     category: '防火対象物点検',
     title: '防火対象物点検の法定義務ガイド2026｜消防法第8条の2の2と管理権原者の責任',

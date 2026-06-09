@@ -304,7 +304,15 @@ const data: ServiceData = {
 
   relatedServiceSlugs: ['shobo-setsubi', 'jikayou-denki', 'shutter'],
 
-  relatedColumns: [],
+  relatedColumns: [
+    {
+      href: '/column/elevator-hoshu-horei-gimu/',
+      category: '法令・義務',
+      title: 'エレベーター保守点検の法定義務ガイド2026｜建築基準法第12条と所有者責任',
+      excerpt: '建築基準法第12条による定期検査報告（年1回）・保守点検（月1回が標準）の義務、POG契約とフルメンテナンス契約の違い、メーカー系と独立系業者の比較、違反時の100万円以下の罰金まで2026年版で解説。',
+      date: '2026-06-05',
+    },
+  ],
 
   prefectureOverrides: {
     tokyo: {
