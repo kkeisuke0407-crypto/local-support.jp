@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/bouka-tenken-horei-gimu/',
+    category: '防火対象物点検',
+    title: '防火対象物点検の法定義務ガイド2026｜消防法第8条の2の2と管理権原者の責任',
+    excerpt: '特定防火対象物の収容人員300人以上、または地階・3階以上の特定用途部分がある収容人員30人以上の建物に義務付けられた年1回の点検・報告サイクル、防火対象物点検資格者要件、3年に1回への緩和を可能にする特例認定制度、違反時の30万円以下の罰金リスクまで2026年版で解説。',
+    date: '2026-06-05',
+  },
+  {
     href: '/column/jikayou-denki-horei-gimu/',
     category: '自家用電気',
     title: '自家用電気工作物の保安点検義務ガイド2026｜電気事業法による設置者責任とキュービクル点検',

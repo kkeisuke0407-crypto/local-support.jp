@@ -1,0 +1,498 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = '防火対象物点検の法定義務ガイド2026｜消防法第8条の2の2と管理権原者の責任';
+const description = '防火対象物点検（消防法第8条の2の2）の対象施設・年1回の点検報告義務・防火対象物点検資格者要件・違反時の罰金30万円のリスクを整理。特例認定制度（3年に1回への緩和）の活用、消防署への報告手順、関連する防火管理者・消防設備点検との違いまで施設管理担当者向けに2026年版で解説。';
+const canonical = `${site.domain}/column/bouka-tenken-horei-gimu/`;
+const published = '2026-06-05';
+const modified = '2026-06-05';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '防火対象物点検の法定義務ガイド', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 5300,
+  articleSection: '法令・義務',
+  keywords: '防火対象物点検,消防法第8条の2の2,管理権原者,防火対象物点検資格者,特例認定,2026',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-bouka-tenken.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '防火対象物点検' },
+  citation: [
+    { '@type': 'Legislation', name: '消防法第8条の2の2（防火対象物点検）' },
+    { '@type': 'Legislation', name: '消防法第8条（防火管理者の選任）' },
+    { '@type': 'Legislation', name: '消防法第17条の3の3（消防設備点検）' },
+    { '@type': 'Legislation', name: '消防法第44条（罰則）' },
+  ],
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: '防火対象物点検と消防設備点検の違いは？', acceptedAnswer: { '@type': 'Answer', text: '防火対象物点検は「建物の防火管理体制全体」（防火管理者選任・消防計画作成・避難訓練実施・避難経路確保等）を点検します。消防設備点検は「消防設備機器」（消火器・自動火災報知設備・スプリンクラー等）の作動状況を点検。両方とも消防法上の義務ですが、対象範囲と実施者資格が異なります。' } },
+    { '@type': 'Question', name: '防火対象物点検が必要な施設は？', acceptedAnswer: { '@type': 'Answer', text: '特定防火対象物（不特定多数が利用する建物）で、①収容人員300人以上、または②地階・3階以上の階に特定用途部分がある収容人員30人以上の建物が対象。具体的にはホテル・百貨店・飲食店ビル・病院・福祉施設・カラオケ店・複合商業施設等です。' } },
+    { '@type': 'Question', name: '点検の頻度は？', acceptedAnswer: { '@type': 'Answer', text: '原則として年1回以上の実施・消防署への報告が必要です。3年連続で「適合」の判定を受けた場合、所轄消防署長への申請により「特例認定」を取得すると、以後3年に1回への緩和が可能。長期的な点検費用を大きく削減できる制度です。' } },
+    { '@type': 'Question', name: '点検は誰が実施できますか？', acceptedAnswer: { '@type': 'Answer', text: '「防火対象物点検資格者」の国家資格保有者が実施します。主な資格者は、防災・消防設備関連の実務経験を持つ技術者で、（一財）日本消防設備安全センターによる講習・修了考査を経て資格を取得しています。社内資格者がいなければ、専門業者への委託が一般的です。' } },
+    { '@type': 'Question', name: '違反した場合の罰則は？', acceptedAnswer: { '@type': 'Answer', text: '防火対象物点検未実施・未報告は30万円以下の罰金または拘留（消防法第44条）。重大な火災事故が発生した場合、業務上過失致死傷罪（刑法）の対象になり、5年以下の懲役または100万円以下の罰金が科される可能性があります。管理権原者個人への責任追及も発生します。' } },
+    { '@type': 'Question', name: '管理権原者とは誰ですか？', acceptedAnswer: { '@type': 'Answer', text: '建物の管理について権限を有する者（オーナー・建物管理会社・テナント等）。区分所有マンションでは管理組合理事長、賃貸ビルでは原則オーナー、テナントが独自管理する区画はテナント代表者など、建物形態によって複数の管理権原者が存在することもあります。点検義務はそれぞれの管理権原者ごとに発生します。' } },
+    { '@type': 'Question', name: '特例認定の取得手順は？', acceptedAnswer: { '@type': 'Answer', text: '3年連続で点検結果が「適合」の判定を受けた後、所轄消防署長に「特例認定申請」を提出。消防署の審査を経て認定されると、以後3年間は点検頻度が緩和（3年に1回）されます。認定の有効期間は3年で、その後再申請が必要。火災事故・違反等があると認定が取り消される場合があります。' } },
+    { '@type': 'Question', name: '記録の保管期間は？', acceptedAnswer: { '@type': 'Answer', text: '防火対象物点検結果報告書の控え・点検記録・是正報告書等は3年間保管が義務付けられています。電子データでの保管も可能。消防署立入検査時の提示資料となるほか、火災発生時の管理状況の証明資料としても重要です。' } },
+    { '@type': 'Question', name: 'テナントが多数入る複合ビルの場合は？', acceptedAnswer: { '@type': 'Answer', text: '建物全体は1つの防火対象物として点検対象になりますが、管理権原者が複数の場合は連名で報告書を提出するか、代表者を定めて報告します。テナント区画の点検協力は管理権原者間の合意・契約で確保。「統括防火管理者」を選任することで全体の調整を一元化できます。' } }
+  ],
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@id': `${site.domain}/#website` },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-bouka-tenken.png` },
+});
+
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a>
+          <span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a>
+          <span aria-hidden="true">›</span>
+          <span>防火対象物点検の法定義務ガイド</span>
+        </nav>
+        <span class="cl-cat">法令・義務</span>
+        <h1 class="cl-title">防火対象物点検の法定義務ガイド2026｜消防法第8条の2の2と管理権原者の責任</h1>
+        <p class="cl-lead">
+          ホテル・百貨店・飲食店ビル・病院・福祉施設など特定の防火対象物には、<strong>消防法第8条の2の2による「防火対象物点検」</strong>が義務付けられています。本記事では、対象施設の判定、年1回の点検・報告サイクル、防火対象物点検資格者要件、3年に1回への緩和を可能にする特例認定制度、違反時の罰金リスクまで、施設管理担当者向けに2026年版で整理しました。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年6月5日</time>
+          <span>最終更新：2026年6月5日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 防火対象物点検はどんな建物に義務付けられますか？</p>
+        <p class="cl-qa-a">A. <strong>特定防火対象物のうち、収容人員300人以上、または地階・3階以上に特定用途のある収容人員30人以上の建物</strong>。年1回・防火対象物点検資格者が点検し消防署に報告。違反は30万円以下の罰金。</p>
+        <p class="cl-qa-src">※消防法第8条の2の2・第44条（2026年4月時点）</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="bouka-tenken" serviceName="防火対象物点検" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#scope">対象施設の判定（特定防火対象物）</a></li>
+          <li><a href="#difference">消防設備点検・防火管理者制度との違い</a></li>
+          <li><a href="#contents">点検内容と確認項目</a></li>
+          <li><a href="#qualified">防火対象物点検資格者の要件</a></li>
+          <li><a href="#report">消防署への報告手順</a></li>
+          <li><a href="#special">特例認定制度（3年に1回への緩和）</a></li>
+          <li><a href="#penalties">違反時の罰則</a></li>
+          <li><a href="#tips">実務上のポイント</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>対象</strong>：特定防火対象物の収容人員300人以上、または地階・3階以上の特定用途・収容人員30人以上の建物</li>
+            <li><strong>義務</strong>：年1回（特例認定取得後は3年に1回）の点検・消防署への報告</li>
+            <li><strong>違反リスク</strong>：30万円以下の罰金（消防法第44条）、火災発生時は業務上過失致死傷罪</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="scope" class="cl-section">
+        <h2>対象施設の判定（特定防火対象物）</h2>
+        <p>防火対象物点検が義務付けられるのは、<strong>「特定防火対象物」</strong>のうち一定規模以上のものです。特定防火対象物とは、不特定多数の人が利用する建物で、消防法施行令別表第1に列挙されています。</p>
+
+        <h3>特定防火対象物の例</h3>
+        <ul>
+          <li>飲食店・カラオケ店・ナイトクラブ等</li>
+          <li>百貨店・物販店舗</li>
+          <li>ホテル・旅館</li>
+          <li>病院・診療所</li>
+          <li>福祉施設（特別養護老人ホーム・有料老人ホーム等）</li>
+          <li>幼稚園・保育園</li>
+          <li>劇場・映画館・公会堂</li>
+          <li>キャバレー・パチンコ店</li>
+          <li>サウナ・銭湯（公衆浴場）</li>
+          <li>複合用途防火対象物（上記用途が混在する建物）</li>
+        </ul>
+
+        <h3>規模要件（点検義務の発生条件）</h3>
+        <ol>
+          <li><strong>条件A</strong>：収容人員300人以上の特定防火対象物</li>
+          <li><strong>条件B</strong>：地階または3階以上の階に特定用途部分がある収容人員30人以上の特定防火対象物</li>
+        </ol>
+        <p>収容人員は「入居者・従業員等の数の合計」で算定。階数は地下含む全階で算定します。例えば3階建ての複合ビルでカラオケ店があり総収容人員が35人なら、条件Bで点検対象となります。</p>
+
+        <h3>対象外となる建物</h3>
+        <ul>
+          <li>事務所ビル単独用途（特定防火対象物ではない）</li>
+          <li>工場・倉庫単独用途</li>
+          <li>住宅・マンション単独用途</li>
+          <li>規模要件を満たさない小規模建物</li>
+        </ul>
+      </section>
+
+      <section id="difference" class="cl-section">
+        <h2>消防設備点検・防火管理者制度との違い</h2>
+        <p>消防法には複数の防火関連義務があり、混同しやすいため整理します。</p>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>消防法上の主な防火関連義務の比較</caption>
+            <thead><tr><th>制度</th><th>根拠法</th><th>対象</th><th>頻度</th><th>実施者</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">防火管理者選任</th><td>消防法第8条</td><td>収容人員30人以上（一定条件）</td><td>常時選任</td><td>事業所内の有資格者</td></tr>
+              <tr><th scope="row">消防設備点検</th><td>消防法第17条の3の3</td><td>すべての防火対象物</td><td>機器点検6ヶ月・総合点検1年</td><td>消防設備士・消防設備点検資格者</td></tr>
+              <tr><th scope="row">防火対象物点検</th><td>消防法第8条の2の2</td><td>特定防火対象物の一部</td><td>年1回（特例認定後3年に1回）</td><td>防火対象物点検資格者</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>3つの義務の関係性</h3>
+        <p>防火対象物点検の対象施設では、<strong>3つの義務すべてを並行して遵守</strong>する必要があります。消防設備点検を実施していても防火対象物点検は別途必要で、相互に代替できません。</p>
+
+        <h3>実務上の発注</h3>
+        <p>多くの消防設備点検業者は「防火対象物点検資格者」も社内に抱えており、両方の点検をワンストップで対応します。発注時は「両方の点検をまとめて依頼可能か」を確認すると、業務効率と費用を最適化できます。</p>
+      </section>
+
+      <section id="contents" class="cl-section">
+        <h2>点検内容と確認項目</h2>
+        <p>防火対象物点検は「建物の防火管理体制全体」を点検します。消防設備機器の作動を確認する消防設備点検とは異なり、書類確認・現地観察が中心となります。</p>
+
+        <h3>主な点検項目（書類確認）</h3>
+        <ol>
+          <li>防火管理者の選任・届出状況</li>
+          <li>消防計画の作成・届出状況</li>
+          <li>避難訓練・消火訓練の実施記録</li>
+          <li>防火・防災教育の実施記録</li>
+          <li>消防設備点検結果報告書</li>
+          <li>防火設備の維持管理記録</li>
+          <li>危険物の管理記録（該当する場合）</li>
+        </ol>
+
+        <h3>主な点検項目（現地確認）</h3>
+        <ol>
+          <li>避難経路の確保状況（廊下・階段の物品放置等）</li>
+          <li>避難口・非常口の確保</li>
+          <li>防火戸・防火シャッター・防火ダンパーの作動・設置状況</li>
+          <li>消火器・消火設備の配置・期限</li>
+          <li>誘導灯・誘導標識の点灯・視認性</li>
+          <li>排煙設備の状況</li>
+          <li>カーテン・じゅうたん等の防炎物品使用状況</li>
+        </ol>
+
+        <h3>点検結果の判定</h3>
+        <ul>
+          <li><strong>適合</strong>：点検項目すべてが基準を満たしている</li>
+          <li><strong>不適合</strong>：点検項目に基準不適合がある</li>
+        </ul>
+        <p>不適合があった場合、所定の期間内に改善し、改善報告書を消防署に提出する必要があります。</p>
+      </section>
+
+      <section id="qualified" class="cl-section">
+        <h2>防火対象物点検資格者の要件</h2>
+        <p>点検は<strong>「防火対象物点検資格者」</strong>の国家資格保有者が実施します。資格取得には実務経験と講習修了が必要です。</p>
+
+        <h3>資格取得要件</h3>
+        <p>以下のいずれかの実務経験を持ち、（一財）日本消防設備安全センターの講習・修了考査を経て資格を取得します。</p>
+        <ul>
+          <li>消防設備士・消防設備点検資格者として5年以上の実務経験</li>
+          <li>建築物調査員資格者として5年以上の実務経験</li>
+          <li>建築主事の経験</li>
+          <li>消防団員等として防災実務経験</li>
+          <li>その他、（一財）日本消防設備安全センターが定める実務経験要件</li>
+        </ul>
+
+        <h3>資格者の探し方</h3>
+        <p>多くの消防設備点検会社・ビル管理会社が防火対象物点検資格者を社内に抱えています。発注時は「防火対象物点検資格者の登録番号」と「点検実施者の氏名」を見積書で確認してください。</p>
+
+        <h3>点検費用の相場</h3>
+        <p>建物規模により異なりますが、おおよそ<strong>5万円〜30万円</strong>が中心レンジ。中小規模ビルなら10万円程度、大規模複合施設は30万円超になる場合があります。消防設備点検と一括発注すれば、合計費用を10〜20%程度抑えられる場合があります。</p>
+      </section>
+
+      <section id="report" class="cl-section">
+        <h2>消防署への報告手順</h2>
+        <p>点検実施後、<strong>所轄消防署（消防本部）に「防火対象物点検結果報告書」</strong>を提出します。</p>
+
+        <h3>報告書の提出期限</h3>
+        <p>点検実施日から所定の期間内（通常1〜2週間以内）に報告書を提出。報告期限は所轄消防署の運用によって異なるため、契約業者と事前に確認してください。</p>
+
+        <h3>報告書の記載内容</h3>
+        <ul>
+          <li>建物の概要（名称・所在地・用途・規模）</li>
+          <li>管理権原者の情報</li>
+          <li>防火対象物点検資格者の情報</li>
+          <li>点検実施日・点検範囲</li>
+          <li>点検結果（適合・不適合の判定）</li>
+          <li>不適合事項と改善計画（該当する場合）</li>
+        </ul>
+
+        <h3>「防火基準点検済証」の交付</h3>
+        <p>点検結果が「適合」の場合、消防署から<strong>「防火基準点検済証」</strong>が交付されます。この証票を建物の出入口等に掲示することで、利用者に防火管理の適正性をアピールできます。ホテル・百貨店等では集客・営業上のメリットがあるため、点検合格を継続することが重要です。</p>
+
+        <h3>不適合だった場合の対応</h3>
+        <p>不適合事項があった場合、所定の期間内に改善し、<strong>「改善報告書」</strong>を消防署に提出。再点検が必要な場合は、追加費用が発生することがあります。重大な不適合は消防署からの改善命令の対象となり、命令違反は別途罰金対象です。</p>
+      </section>
+
+      <section id="special" class="cl-section">
+        <h2>特例認定制度（3年に1回への緩和）</h2>
+        <p>毎年の点検・報告は管理負担が大きいため、消防法は<strong>「特例認定制度」</strong>を設けています。3年連続で適合判定を取得すれば、以後3年に1回への緩和が可能です。</p>
+
+        <h3>特例認定の取得要件</h3>
+        <ul>
+          <li>3年連続で防火対象物点検結果が「適合」</li>
+          <li>過去3年間に重大な消防法違反がない</li>
+          <li>過去3年間に火災事故が発生していない</li>
+          <li>管理権原者・防火管理者が適切に選任されている</li>
+        </ul>
+
+        <h3>特例認定取得の流れ</h3>
+        <ol>
+          <li>3年連続「適合」を達成</li>
+          <li>所轄消防署長に「特例認定申請書」を提出</li>
+          <li>消防署の審査（書類審査＋現地確認）</li>
+          <li>認定通知の受領</li>
+          <li>以後3年間は点検頻度が緩和</li>
+        </ol>
+
+        <h3>特例認定のメリットとデメリット</h3>
+        <p><strong>メリット</strong>：点検費用が大幅に削減（年1回→3年に1回で約1/3）、管理負担の軽減、適正管理の対外的アピール。<br /><strong>デメリット</strong>：3年間で点検が緩い分、日常管理が甘くなりがち。火災事故・違反等で認定が取り消されると、再認定まで時間がかかります。</p>
+
+        <h3>認定の有効期間と更新</h3>
+        <p>特例認定の有効期間は<strong>3年</strong>。期間満了前に再度3年連続点検（このときも3回連続適合が必要）を経て、再申請する必要があります。火災事故・重大な違反があると認定が取り消され、再申請まで3年間の点検実績が再度必要になります。</p>
+      </section>
+
+      <section id="penalties" class="cl-section">
+        <h2>違反時の罰則</h2>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>防火対象物点検関連の主な罰則</caption>
+            <thead><tr><th>違反内容</th><th>罰則</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">防火対象物点検未実施</th><td>30万円以下の罰金または拘留（第44条）</td></tr>
+              <tr><th scope="row">消防署への報告未提出</th><td>30万円以下の罰金または拘留</td></tr>
+              <tr><th scope="row">点検結果の虚偽報告</th><td>30万円以下の罰金</td></tr>
+              <tr><th scope="row">改善命令違反</th><td>1年以下の懲役または100万円以下の罰金</td></tr>
+              <tr><th scope="row">無資格者による点検</th><td>30万円以下の罰金</td></tr>
+              <tr><th scope="row">火災事故発生時の管理不備</th><td>業務上過失致死傷罪（刑法・5年以下の懲役または100万円以下の罰金）</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>違反発覚のパターン</h3>
+        <ul>
+          <li>消防署の定期立入検査</li>
+          <li>近隣・利用者からの通報</li>
+          <li>火災事故発生時の調査</li>
+          <li>建物売却・テナント入替時の調査</li>
+          <li>従業員・元従業員からの内部告発</li>
+        </ul>
+      </section>
+
+      <section id="tips" class="cl-section">
+        <h2>実務上のポイント</h2>
+
+        <h3>消防設備点検との一括発注で費用最適化</h3>
+        <p>多くの消防設備点検業者は防火対象物点検資格者を社内に抱えており、両方の点検をワンストップで対応できます。<strong>同じ業者に一括発注</strong>することで、訪問回数の削減・書類提出の効率化・費用の10〜20%程度の削減が可能です。年間管理契約に両方を含めるのが実務上の標準です。</p>
+
+        <h3>点検結果の不適合を放置しない</h3>
+        <p>不適合事項を放置すると、毎年の点検でも同じ事項が指摘され続け、<strong>特例認定の取得が困難</strong>になります。指摘事項は速やかに改善し、3年連続適合を目指すことで、長期的な点検費用を大きく削減できます。</p>
+
+        <h3>管理権原者の明確化が点検協力の前提</h3>
+        <p>複合ビル・テナントビルでは、<strong>管理権原者を建物全体・各テナントごとに明確化</strong>することが点検協力の前提です。建物所有者（オーナー）が建物共用部分、各テナントが専有部分の管理権原者となるのが一般的。「統括防火管理者」を選任すれば、全体調整が一元化できます。</p>
+
+        <h3>火災事故時の管理状況の証明資料として保管</h3>
+        <p>万が一火災事故が発生した場合、適正な防火管理が実施されていたことを証明する資料として、<strong>防火対象物点検結果報告書</strong>が極めて重要になります。管理権原者の責任を軽減する根拠書類になるため、保管期間（3年間）を厳守し、可能なら永久保存してください。</p>
+      </section>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          <div class="cl-faq-item">
+            <dt>防火対象物点検と消防設備点検の違いは？</dt>
+            <dd>防火対象物点検は建物の防火管理体制全体（防火管理者・消防計画・避難訓練等）を点検。消防設備点検は消防設備機器の作動状況を点検。両方が消防法上の義務です。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>防火対象物点検が必要な施設は？</dt>
+            <dd>特定防火対象物の収容人員300人以上、または地階・3階以上の特定用途部分がある収容人員30人以上の建物が対象。ホテル・百貨店・飲食店ビル・病院等。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>点検の頻度は？</dt>
+            <dd>原則年1回。3年連続適合で特例認定を取得すれば3年に1回に緩和できます。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>点検は誰が実施できますか？</dt>
+            <dd>防火対象物点検資格者の国家資格保有者が実施。消防設備点検会社等が社内に抱えています。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>違反した場合の罰則は？</dt>
+            <dd>未実施・未報告は30万円以下の罰金または拘留。火災事故時は業務上過失致死傷罪の対象。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>特例認定の取得手順は？</dt>
+            <dd>3年連続適合後に所轄消防署長に申請。審査を経て認定されると以後3年間は点検頻度が緩和されます。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>記録の保管期間は？</dt>
+            <dd>点検結果報告書・改善報告書等は3年間保管が義務付けられています。</dd>
+          </div>
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別の防火対象物点検業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/bouka-tenken/tokyo/">東京都</a></li>
+          <li><a href="/bouka-tenken/osaka/">大阪府</a></li>
+          <li><a href="/bouka-tenken/kanagawa/">神奈川県</a></li>
+          <li><a href="/bouka-tenken/aichi/">愛知県</a></li>
+          <li><a href="/bouka-tenken/saitama/">埼玉県</a></li>
+          <li><a href="/bouka-tenken/fukuoka/">福岡県</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/bouka-tenken/">全国47都道府県の対応業者を見る</a></p>
+      </div>
+
+      <div class="cl-cta" id="contact">
+        <h2>防火対象物点検・特例認定取得をお考えの方へ</h2>
+        <p>防火対象物点検資格者の登録を確認した業者をご紹介。消防設備点検との一括対応・特例認定申請支援まで可能な業者を最大3社まで無料で比較できます。</p>
+        <a href="/bouka-tenken/" class="cta-btn-primary">無料で一括見積もりを依頼する</a>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">参考法令・一次資料</h2>
+        <ul>
+          <li><a href="https://elaws.e-gov.go.jp/document?lawid=323AC1000000186" target="_blank" rel="noopener">消防法（昭和23年法律第186号）｜e-Gov</a></li>
+          <li><a href="https://www.fdma.go.jp/" target="_blank" rel="noopener">総務省消防庁</a></li>
+          <li><a href="https://www.fesc.or.jp/" target="_blank" rel="noopener">（一財）日本消防設備安全センター</a></li>
+        </ul>
+      </aside>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連する詳細情報</h2>
+        <ul>
+          <li><a href="/bouka-tenken/">防火対象物点検のサービストップ</a></li>
+          <li><a href="/shobo-setsubi/">消防設備点検のサービストップ</a></li>
+          <li><a href="/column/shobo-setsubi-horei-gimu/">消防設備点検の法定義務ガイド</a></li>
+          <li><a href="/flow/">一括見積依頼から契約までの流れ</a></li>
+        </ul>
+      </aside>
+
+      <ColumnCtaCard serviceSlug="bouka-tenken" serviceName="防火対象物点検" variant="bottom" />
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-article { background: #fff; }
+.cl-header { background: linear-gradient(135deg, #f0f9ff, #e0f2fe); padding: 40px 0 32px; border-bottom: 1px solid var(--gray-200); }
+.cl-crumbs { font-size: .82rem; color: var(--gray-600); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.cl-crumbs a { color: var(--blue); text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; font-size: .75rem; font-weight: 800; color: var(--blue-dark); background: #dbeafe; padding: 4px 12px; border-radius: 999px; margin-bottom: 14px; letter-spacing: .04em; }
+.cl-title { font-size: clamp(1.4rem, 3.5vw, 1.9rem); font-weight: 900; line-height: 1.45; color: var(--gray-900); margin-bottom: 14px; }
+.cl-lead { font-size: 1rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 20px; }
+.cl-lead strong { color: var(--gray-900); }
+.cl-meta { font-size: .82rem; color: var(--gray-600); display: flex; gap: 16px; flex-wrap: wrap; }
+.cl-author-link { color: var(--blue); }
+.cl-body { padding: 32px 16px 48px; max-width: 800px; }
+.cl-quickanswer { background: #fef3c7; border-left: 4px solid #f59e0b; border-radius: 8px; padding: 18px 22px; margin-bottom: 28px; }
+.cl-qa-q { font-size: .95rem; font-weight: 700; color: var(--gray-900); margin-bottom: 8px; }
+.cl-qa-a { font-size: .92rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 8px; }
+.cl-qa-a strong { color: #b45309; }
+.cl-qa-src { font-size: .78rem; color: var(--gray-600); margin: 0; }
+.cl-toc { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-toc ol { padding-left: 22px; margin: 0; }
+.cl-toc li { font-size: .92rem; line-height: 1.85; }
+.cl-toc a { color: var(--blue); text-decoration: none; }
+.cl-toc a:hover { text-decoration: underline; }
+.cl-section { margin: 36px 0; scroll-margin-top: 80px; }
+.cl-section h2 { font-size: 1.35rem; font-weight: 900; color: var(--gray-900); border-bottom: 3px solid var(--blue); padding-bottom: 8px; margin-bottom: 18px; line-height: 1.45; }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-900); margin: 24px 0 12px; padding-left: 12px; border-left: 4px solid var(--blue); }
+.cl-section p { font-size: .95rem; line-height: 1.9; color: var(--gray-800); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 24px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; margin-bottom: 6px; }
+.cl-section strong { color: var(--gray-900); }
+.cl-callout { background: #f0f9ff; border: 1px solid #bae6fd; border-left: 4px solid var(--blue); border-radius: 8px; padding: 18px 22px; margin: 20px 0; }
+.cl-callout-h { font-size: 1rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-table-wrap { overflow-x: auto; margin: 16px 0; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .88rem; border: 1px solid var(--gray-200); }
+.cl-table caption { text-align: left; font-size: .85rem; font-weight: 700; color: var(--gray-700); margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--gray-100); font-weight: 700; }
+.cl-table tbody th { background: #f9fafb; font-weight: 600; }
+.cl-faq { margin: 0; padding: 0; }
+.cl-faq-item { border-bottom: 1px solid var(--gray-200); padding: 16px 0; }
+.cl-faq-item dt { font-size: .98rem; font-weight: 700; color: var(--gray-900); margin-bottom: 8px; }
+.cl-faq-item dd { font-size: .92rem; line-height: 1.8; color: var(--gray-700); margin-left: 0; }
+.cl-pref-links { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin: 32px 0; }
+.cl-pref-h { font-size: .92rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; }
+.cl-pref-list { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin-bottom: 10px; }
+.cl-pref-list a { display: inline-block; background: #fff; border: 1px solid var(--gray-300); border-radius: 6px; padding: 6px 14px; font-size: .85rem; color: var(--blue); text-decoration: none; }
+.cl-pref-list a:hover { background: var(--blue); color: #fff; }
+.cl-pref-more { font-size: .85rem; }
+.cl-pref-more a { color: var(--blue); }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 32px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cl-cta .cta-btn-primary { background: var(--accent); color: var(--gray-900); padding: 12px 32px; border-radius: 8px; font-weight: 800; text-decoration: none; display: inline-block; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 32px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; list-style: none; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+@media (max-width: 640px) {
+  .cl-body { padding: 24px 14px 36px; }
+  .cl-section h2 { font-size: 1.2rem; }
+  .cl-section h3 { font-size: 1rem; }
+}
+</style>

@@ -305,7 +305,15 @@ const data: ServiceData = {
 
   relatedServiceSlugs: ['shobo-setsubi', 'tokushu-kenchiku', 'elevator-hoshu'],
 
-  relatedColumns: [],
+  relatedColumns: [
+    {
+      href: '/column/bouka-tenken-horei-gimu/',
+      category: '法令・義務',
+      title: '防火対象物点検の法定義務ガイド2026｜消防法第8条の2の2と管理権原者の責任',
+      excerpt: '対象施設の判定、年1回の点検・報告サイクル、防火対象物点検資格者要件、3年に1回への緩和を可能にする特例認定制度、違反時の30万円以下の罰金まで2026年版で解説。',
+      date: '2026-06-05',
+    },
+  ],
 
   prefectureOverrides: {
     tokyo: {
