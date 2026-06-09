@@ -305,7 +305,15 @@ const data: ServiceData = {
 
   relatedServiceSlugs: ['shobo-setsubi', 'jusuisou-seisou', 'duct'],
 
-  relatedColumns: [],
+  relatedColumns: [
+    {
+      href: '/column/jikayou-denki-horei-gimu/',
+      category: '法令・義務',
+      title: '自家用電気工作物の保安点検義務ガイド2026｜電気事業法による設置者責任とキュービクル点検',
+      excerpt: '保安規程・電気主任技術者選任・月次点検・年次点検義務、外部委託承認制度の活用、違反時の300万円以下の罰金まで2026年版で解説。',
+      date: '2026-06-05',
+    },
+  ],
 
   prefectureOverrides: {
     tokyo: {

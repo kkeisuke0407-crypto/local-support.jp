@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/jikayou-denki-horei-gimu/',
+    category: '自家用電気',
+    title: '自家用電気工作物の保安点検義務ガイド2026｜電気事業法による設置者責任とキュービクル点検',
+    excerpt: '高圧600V超のキュービクル等を持つ事業所の保安規程・電気主任技術者選任・月次点検・年次点検義務を整理。外部委託承認制度（電気保安法人）の活用、違反時の300万円以下の罰金、感電事故時の刑事責任まで2026年版で解説。',
+    date: '2026-06-05',
+  },
+  {
     href: '/column/johkasou-horei-gimu/',
     category: '浄化槽',
     title: '浄化槽法の保守点検・清掃義務ガイド2026｜年1回の法定検査と管理者責任',
