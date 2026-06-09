@@ -304,7 +304,15 @@ const data: ServiceData = {
 
   relatedServiceSlugs: ['jusuisou-seisou', 'grease-trap', 'duct'],
 
-  relatedColumns: [],
+  relatedColumns: [
+    {
+      href: '/column/johkasou-horei-gimu/',
+      category: '法令・義務',
+      title: '浄化槽法の保守点検・清掃義務ガイド2026｜年1回の法定検査と管理者責任',
+      excerpt: '保守点検・清掃・第7条検査・第11条検査の3つの義務を整理。違反時の100万円以下の罰金、検査未受検率の実態、管理者責任まで2026年版で解説。',
+      date: '2026-06-05',
+    },
+  ],
 
   prefectureOverrides: {
     tokyo: {

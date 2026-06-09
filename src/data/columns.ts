@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/johkasou-horei-gimu/',
+    category: '浄化槽',
+    title: '浄化槽法の保守点検・清掃義務ガイド2026｜年1回の法定検査と管理者責任',
+    excerpt: '保守点検（4ヶ月〜年1回・登録業者）・清掃（年1回以上・市町村許可業者）・法定検査（第7条・第11条）の3つの義務を整理。違反時の100万円以下の罰金、第11条検査の全国受検率60%の実態、管理者責任まで2026年版で解説。',
+    date: '2026-06-05',
+  },
+  {
     href: '/column/furon-tenken-horei-gimu/',
     category: 'フロン点検',
     title: 'フロン排出抑制法の点検義務ガイド2026｜業務用エアコン・冷凍冷蔵設備の管理者責任',
