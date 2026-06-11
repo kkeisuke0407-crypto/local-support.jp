@@ -305,7 +305,15 @@ const data: ServiceData = {
 
   relatedServiceSlugs: ['shobo-setsubi', 'elevator-hoshu', 'jikayou-denki'],
 
-  relatedColumns: [],
+  relatedColumns: [
+    {
+      href: '/column/tokushu-kenchiku-horei-gimu/',
+      category: '法令・義務',
+      title: '特殊建築物定期調査の法定義務ガイド2026｜建築基準法第12条第1項と所有者責任',
+      excerpt: 'ホテル・病院・福祉施設・百貨店等の対象建物の判定、3年に1回の調査、特定建築物調査員の資格、3つの定期検査計画、違反時の100万円以下の罰金まで2026年版で解説。',
+      date: '2026-06-05',
+    },
+  ],
 
   prefectureOverrides: {
     tokyo: {

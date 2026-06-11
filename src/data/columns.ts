@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/tokushu-kenchiku-horei-gimu/',
+    category: '特殊建築物',
+    title: '特殊建築物定期調査の法定義務ガイド2026｜建築基準法第12条第1項と所有者責任',
+    excerpt: 'ホテル・百貨店・病院・福祉施設等の特殊建築物に課された建築基準法第12条第1項による定期調査報告（おおむね3年に1回）の対象建物・調査内容・特定建築物調査員の資格要件・違反時の100万円以下の罰金リスクを整理。建築設備検査・防火設備検査との関係まで2026年版で解説。',
+    date: '2026-06-05',
+  },
+  {
     href: '/column/elevator-hoshu-horei-gimu/',
     category: 'エレベーター',
     title: 'エレベーター保守点検の法定義務ガイド2026｜建築基準法第12条と所有者責任',
