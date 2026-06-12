@@ -10,15 +10,15 @@ import { buildReasons } from './reasons.ts';
  *  - 施設管理リスクスコア（100 = 健全）を算出
  */
 export function diagnose(input: DiagnosisInput): DiagnosisResult {
-  const { serviceIds, quoteStatus, contractStatus } = input;
+  const { serviceIds, facilitySize, quoteStatus, contractStatus } = input;
 
   const results: ServiceResult[] = serviceIds
     .map((id) => SERVICE_BY_ID[id])
     .filter((s): s is NonNullable<typeof s> => Boolean(s))
     .map((s) => {
-      const points = servicePoints(quoteStatus, contractStatus, s.weight);
+      const points = servicePoints(quoteStatus, contractStatus, s.weight, facilitySize);
       const level = levelOf(points);
-      return { id: s.id, label: s.label, level, points, reasons: buildReasons(quoteStatus, contractStatus, level) };
+      return { id: s.id, label: s.label, level, points, reasons: buildReasons(quoteStatus, contractStatus, level, facilitySize) };
     });
 
   // 優先度（高→中→低）→ 同優先度内はリスク点の高い順

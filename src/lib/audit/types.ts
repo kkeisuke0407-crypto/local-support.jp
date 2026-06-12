@@ -11,10 +11,13 @@ export type FacilityType =
   | 'kaigo' | 'byoin' | 'clinic' | 'mansion'
   | 'shogyo' | 'office' | 'kojo' | 'other';
 
-/** Q3：見積もりの取得状況 */
+/** Q3：施設規模 */
+export type FacilitySize = 'xs' | 's' | 'm' | 'l' | 'unknown';
+
+/** Q4：見積もりの取得状況 */
 export type QuoteStatus = 'within3y' | 'over4y' | 'never' | 'unknown';
 
-/** Q4：契約の見直し状況 */
+/** Q5：契約の見直し状況 */
 export type ContractStatus = 'reviewed' | 'auto' | 'unknown';
 
 /** 見直し優先度 */
@@ -43,6 +46,7 @@ export type ServiceGroup = '法定点検' | '衛生・設備' | '建物・大規
 export interface DiagnosisInput {
   facility: FacilityType;
   serviceIds: string[];
+  facilitySize: FacilitySize;
   quoteStatus: QuoteStatus;
   contractStatus: ContractStatus;
 }
