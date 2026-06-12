@@ -159,7 +159,16 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     const formData = await context.request.formData();
     const data: QuotePayload = {};
     for (const [key, value] of formData.entries()) {
-      if (typeof value === 'string') data[key] = value;
+      if (typeof value !== 'string') continue;
+      if (key === 'additional_services') continue;
+      data[key] = value;
+    }
+    // 複数選択の追加サービスを service フィールドにマージ
+    const additional = formData.getAll('additional_services').filter((v): v is string => typeof v === 'string' && v.trim() !== '');
+    if (additional.length > 0) {
+      const baseService = (data.service || '').trim();
+      const combined = baseService ? [baseService, ...additional] : additional;
+      data.service = combined.join('、');
     }
 
     if (data.website) {
