@@ -1,8 +1,9 @@
 ---
 import type { ServiceData } from '../data/services/_types';
-import { prefectures } from '../data/site';
+import { prefectures, serviceIndex } from '../data/site';
 interface Props { data: ServiceData; }
 const { data } = Astro.props;
+const otherServices = serviceIndex.filter((s) => s.slug !== data.slug);
 ---
 <aside class="qf-compact" aria-label="無料見積もり依頼フォーム（簡易）">
   <div class="qf-compact-head">
@@ -50,6 +51,25 @@ const { data } = Astro.props;
       <label for="cf-tel">連絡先電話</label>
       <input id="cf-tel" name="tel" type="tel" placeholder="例：03-0000-0000" autocomplete="tel" />
     </div>
+
+    <div class="qf-row qf-other-services">
+      <details class="qf-other">
+        <summary>
+          <span class="qf-other-title">＋ 他のサービスも一緒に見積もり</span>
+          <span class="qf-other-sub">複数選択OK</span>
+        </summary>
+        <p class="qf-other-help">{data.serviceName}とあわせて見積もりを取りたいサービスにチェック。</p>
+        <div class="qf-other-grid">
+          {otherServices.map((s) => (
+            <label class="qf-other-item">
+              <input type="checkbox" name="additional_services" value={s.name} class="qf-other-check" />
+              <span class="qf-other-name">{s.name}</span>
+            </label>
+          ))}
+        </div>
+      </details>
+    </div>
+
     <button type="submit" class="qf-submit" data-track="hero_form_submit">無料で見積もりを依頼する</button>
     <p class="qf-note qf-note--cta">詳細項目を入力したい方は <a href="#contact">こちらの詳細フォーム</a> へ</p>
   </form>

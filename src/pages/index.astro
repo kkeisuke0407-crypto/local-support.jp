@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactFormGeneric from '../components/ContactFormGeneric.astro';
-import { site, serviceIndex } from '../data/site';
+import { site, serviceIndex, prefectures } from '../data/site';
 
 const PAGE_TITLE = `施設管理の業者選び・コスト見直し｜${site.name}（一括見積・無料）`;
 const PAGE_DESC  = '受水槽清掃・消防設備点検・アスベスト調査など27分野・全国47都道府県の実績・信頼のある専門業者から最大3社を無料で一括見積比較。30秒のコスト診断つき。マンション管理組合・ビル管理会社・施設管理担当者向け。業者をお選びいただくまで業者から連絡は来ません。';
@@ -257,23 +257,122 @@ const featuredColumns = [
       <span class="lp-section-kicker">SERVICES</span>
       <h2 class="lp-section-title">サービスを選んで一括見積を依頼</h2>
       <p class="lp-section-lead">
-        ご依頼したいサービスを選んでください。各サービスの詳細ページから見積もり依頼フォームへ進めます。<br/>
+        <strong>複数選択OK</strong> ✓ 気になるサービスにチェックを入れて、まとめて一括見積を依頼できます。<br/>
         どのサービスを依頼すべきか分からない方は <a href="/audit/"><strong>30秒のコスト診断</strong></a> をご利用ください。
       </p>
     </div>
     <div class="lp-service-grid">
       {serviceIndex.map((s) => (
-        <a href={`/${s.slug}/`} class="lp-service-card">
+        <div class="lp-service-card" data-service-slug={s.slug} data-service-name={s.name}>
+          <label class="lp-service-pick">
+            <input type="checkbox" class="lp-service-check" data-service-name={s.name} />
+            <span class="lp-service-pick-label"><span class="lp-pick-off">＋ 見積リストに追加</span><span class="lp-pick-on">✓ 選択中</span></span>
+          </label>
           <img class="lp-service-card-img" src={`/images/services/hero-${s.slug}.webp?v=${heroImageVersion}`} width="480" height="270" alt="" loading="lazy" decoding="async" />
           <span class="lp-service-label">{s.short}</span>
           <h3>{s.name}</h3>
           <p>{s.description}</p>
-          <span class="lp-service-link">サービスサイトを見る</span>
-        </a>
+          <a href={`/${s.slug}/`} class="lp-service-link">サービス詳細・単独で依頼 →</a>
+        </div>
       ))}
+    </div>
+
+    <!-- ══ 複数選択一括見積フォーム ══ -->
+    <div class="lp-bulkquote" id="lp-bulkquote" hidden>
+      <div class="lp-bulkquote-head">
+        <h3>選択したサービスで一括見積</h3>
+        <p class="lp-bulkquote-count"><strong id="lp-bulk-count">0</strong> サービス選択中</p>
+        <div id="lp-bulk-chips" class="lp-bulk-chips"></div>
+      </div>
+      <form class="qf lp-bulkquote-form" action="/api/quote" method="POST" data-redirect="/thanks/?from=bulk" novalidate>
+        <input type="hidden" name="service" id="lp-bulk-service" value="" />
+        <input type="hidden" name="message" id="lp-bulk-message" value="" />
+        <input type="text" name="website" tabindex="-1" autocomplete="off" class="qf-honeypot" aria-hidden="true" />
+
+        <div class="qf-row">
+          <label for="lp-bulk-company">会社名・施設名 <span class="qf-req">必須</span></label>
+          <input id="lp-bulk-company" name="company" type="text" required placeholder="例：◯◯ビル管理組合" autocomplete="organization" />
+        </div>
+        <div class="qf-row">
+          <label for="lp-bulk-prefecture">所在地（都道府県） <span class="qf-req">必須</span></label>
+          <select id="lp-bulk-prefecture" name="prefecture" required autocomplete="address-level1">
+            <option value="">選択してください</option>
+            {prefectures.map((p) => (<option value={p}>{p}</option>))}
+          </select>
+        </div>
+        <div class="qf-row">
+          <label>希望の連絡方法 <span class="qf-req">必須</span></label>
+          <div class="qf-radios">
+            <label class="qf-radio"><input type="radio" name="contact_method" value="メール" required /> メール</label>
+            <label class="qf-radio"><input type="radio" name="contact_method" value="電話" /> 電話</label>
+            <label class="qf-radio"><input type="radio" name="contact_method" value="どちらでも" /> どちらでも</label>
+          </div>
+        </div>
+        <div class="qf-row">
+          <label for="lp-bulk-email">連絡先メール</label>
+          <input id="lp-bulk-email" name="email" type="email" placeholder="例：info@example.com" autocomplete="email" />
+        </div>
+        <div class="qf-row">
+          <label for="lp-bulk-tel">連絡先電話</label>
+          <input id="lp-bulk-tel" name="tel" type="tel" placeholder="例：03-0000-0000" autocomplete="tel" />
+        </div>
+        <div class="qf-row">
+          <label for="lp-bulk-name">ご担当者名（任意）</label>
+          <input id="lp-bulk-name" name="name" type="text" placeholder="例：山田" autocomplete="name" />
+        </div>
+        <div class="qf-row">
+          <label for="lp-bulk-note">補足メッセージ（任意）</label>
+          <textarea id="lp-bulk-note" name="note" rows="3" placeholder="複数棟まとめての依頼・特殊な条件などご記入ください"></textarea>
+        </div>
+        <label class="qf-agree">
+          <input type="checkbox" name="agree" value="1" required />
+          <span><a href="/privacy/" target="_blank" rel="noopener">プライバシーポリシー</a>に同意して送信します</span>
+        </label>
+        <button type="submit" class="qf-submit" data-track="bulk_quote_submit">選択したサービスで無料一括見積を依頼</button>
+      </form>
+    </div>
+
+    <!-- スクロール追従：選択サマリー -->
+    <div class="lp-bulk-sticky" id="lp-bulk-sticky" hidden>
+      <span><strong id="lp-bulk-count-mini">0</strong> サービス選択中</span>
+      <a href="#lp-bulkquote" class="lp-bulk-sticky-cta">▶ 一括見積を依頼</a>
     </div>
   </div>
 </section>
+
+<script>
+  const checks = document.querySelectorAll<HTMLInputElement>('.lp-service-check');
+  const bulkSection = document.getElementById('lp-bulkquote');
+  const bulkSticky = document.getElementById('lp-bulk-sticky');
+  const bulkCount = document.getElementById('lp-bulk-count');
+  const bulkCountMini = document.getElementById('lp-bulk-count-mini');
+  const bulkChips = document.getElementById('lp-bulk-chips');
+  const bulkServiceField = document.getElementById('lp-bulk-service') as HTMLInputElement;
+  const bulkMessageField = document.getElementById('lp-bulk-message') as HTMLInputElement;
+
+  function updateBulkState() {
+    const selected = Array.from(checks).filter((c) => c.checked);
+    const names = selected.map((c) => c.dataset.serviceName || '');
+    const count = selected.length;
+    if (bulkCount) bulkCount.textContent = String(count);
+    if (bulkCountMini) bulkCountMini.textContent = String(count);
+    if (bulkChips) bulkChips.innerHTML = names.map((n) => `<span class="lp-bulk-chip">${n}</span>`).join('');
+    if (bulkServiceField) bulkServiceField.value = names.join('、');
+    if (bulkMessageField) bulkMessageField.value = count
+      ? `【一括見積希望サービス（${count}件）】\n${names.join('、')}\n\n上記サービスについてまとめて見積もり・相場確認を希望します。`
+      : '';
+    if (count > 0) {
+      bulkSection?.removeAttribute('hidden');
+      bulkSticky?.removeAttribute('hidden');
+    } else {
+      bulkSection?.setAttribute('hidden', '');
+      bulkSticky?.setAttribute('hidden', '');
+    }
+    selected.forEach((c) => c.closest('.lp-service-card')?.classList.add('is-picked'));
+    Array.from(checks).filter((c) => !c.checked).forEach((c) => c.closest('.lp-service-card')?.classList.remove('is-picked'));
+  }
+  checks.forEach((c) => c.addEventListener('change', updateBulkState));
+</script>
 
 <!-- ══ 運営方針 ════════════════════════════════════════════════ -->
 <section class="lp-about">
@@ -519,7 +618,77 @@ const featuredColumns = [
 }
 .lp-service-card h3 { font-size: 1rem; font-weight: 700; margin: 0 22px 8px; color: var(--gray-900); }
 .lp-service-card p { font-size: .85rem; color: var(--gray-500); line-height: 1.6; flex: 1; margin: 0 22px 16px; }
-.lp-service-link { font-size: .85rem; font-weight: 700; color: var(--blue); margin: 0 22px; }
+.lp-service-link { font-size: .85rem; font-weight: 700; color: var(--blue); margin: 0 22px; text-decoration: none; }
+.lp-service-link:hover { text-decoration: underline; }
+
+/* チェックボックス（見積リスト追加） */
+.lp-service-card.is-picked { border-color: var(--blue); box-shadow: 0 0 0 2px rgba(29, 78, 216, .15); }
+.lp-service-pick {
+  display: block; margin: 0; padding: 10px 14px;
+  background: #f5f9ff; border-bottom: 1px solid var(--gray-200);
+  cursor: pointer; font-weight: 700; font-size: .85rem;
+  text-align: center; transition: background .15s;
+}
+.lp-service-pick:hover { background: #e0edff; }
+.lp-service-card.is-picked .lp-service-pick { background: var(--blue); color: #fff; }
+.lp-service-check { position: absolute; opacity: 0; pointer-events: none; }
+.lp-service-pick-label .lp-pick-on { display: none; }
+.lp-service-pick-label .lp-pick-off { display: inline; color: var(--blue); }
+.lp-service-card.is-picked .lp-pick-on { display: inline; color: #fff; }
+.lp-service-card.is-picked .lp-pick-off { display: none; }
+
+/* 一括見積フォーム */
+.lp-bulkquote {
+  max-width: 720px; margin: 40px auto 0; padding: 28px 24px;
+  background: #fff; border: 2px solid var(--blue);
+  border-radius: 16px; box-shadow: 0 10px 30px rgba(29, 78, 216, .12);
+}
+.lp-bulkquote[hidden] { display: none; }
+.lp-bulkquote-head { text-align: center; margin-bottom: 18px; }
+.lp-bulkquote-head h3 { font-size: 1.2rem; font-weight: 900; margin: 0 0 6px; color: var(--blue-dark); }
+.lp-bulkquote-count { font-size: .9rem; color: var(--gray-700); margin: 0 0 10px; }
+.lp-bulkquote-count strong { color: var(--blue); font-size: 1.4rem; }
+.lp-bulk-chips { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.lp-bulk-chip {
+  display: inline-block; padding: 4px 10px; border-radius: 999px;
+  background: #e0edff; color: var(--blue-dark); font-size: .75rem; font-weight: 700;
+}
+.lp-bulkquote-form .qf-row { margin-bottom: 14px; }
+.lp-bulkquote-form label { display: block; font-size: .85rem; font-weight: 700; margin-bottom: 5px; }
+.lp-bulkquote-form input, .lp-bulkquote-form select, .lp-bulkquote-form textarea {
+  width: 100%; padding: 11px 14px; border: 1.5px solid var(--gray-200); border-radius: 10px;
+  font-size: 15px; font-family: inherit; box-sizing: border-box;
+}
+.lp-bulkquote-form .qf-req { color: #dc2626; font-size: .7rem; margin-left: 4px; }
+.lp-bulkquote-form .qf-radios { display: flex; gap: 8px; flex-wrap: wrap; }
+.lp-bulkquote-form .qf-radio {
+  flex: 1; min-width: 110px; display: flex; align-items: center; justify-content: center; gap: 6px;
+  border: 1.5px solid var(--gray-200); border-radius: 10px; padding: 11px; font-size: 13px;
+  font-weight: 600; cursor: pointer; margin-bottom: 0;
+}
+.lp-bulkquote-form .qf-radio input { width: auto; }
+.lp-bulkquote-form .qf-honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; }
+.lp-bulkquote-form .qf-agree { display: flex; align-items: flex-start; gap: 8px; font-size: .8rem; margin: 10px 0; }
+.lp-bulkquote-form .qf-agree input { width: auto; margin-top: 3px; }
+.lp-bulkquote-form .qf-submit {
+  width: 100%; background: var(--blue); color: #fff; border: none; border-radius: 12px;
+  padding: 16px; font-size: 16px; font-weight: 900; cursor: pointer; margin-top: 8px;
+}
+.lp-bulkquote-form .qf-submit:hover { background: var(--blue-dark); }
+
+/* 追従サマリー（モバイル用） */
+.lp-bulk-sticky {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 12px 16px; background: rgba(255,255,255,.97); border-top: 1px solid var(--gray-200);
+  box-shadow: 0 -4px 16px rgba(0,0,0,.08); font-size: .9rem; font-weight: 700;
+}
+.lp-bulk-sticky[hidden] { display: none; }
+.lp-bulk-sticky strong { color: var(--blue); font-size: 1.2rem; margin: 0 4px; }
+.lp-bulk-sticky-cta {
+  background: var(--blue); color: #fff; padding: 10px 16px; border-radius: 999px;
+  text-decoration: none; font-weight: 800; font-size: .9rem; white-space: nowrap;
+}
 
 /* ── ロカサポについて ── */
 .lp-about {

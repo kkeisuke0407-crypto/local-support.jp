@@ -1,8 +1,9 @@
 ---
 import type { ServiceData } from '../data/services/_types';
-import { prefectures } from '../data/site';
+import { prefectures, serviceIndex } from '../data/site';
 interface Props { data: ServiceData; }
 const { data } = Astro.props;
+const otherServices = serviceIndex.filter((s) => s.slug !== data.slug);
 ---
 <section class="sd-section form-section" id="contact">
   <div class="sd-container">
@@ -85,6 +86,25 @@ const { data } = Astro.props;
             <label for="qf-message">補足メッセージ・ご要望</label>
             <textarea id="qf-message" name="message" rows="4" placeholder="ご相談内容、現在の状況、複数棟まとめての依頼、特殊な条件など、自由にご記入ください"></textarea>
           </div>
+
+          <div class="qf-row qf-other-services">
+            <details class="qf-other">
+              <summary>
+                <span class="qf-other-title">＋ 他のサービスも一緒に見積もり</span>
+                <span class="qf-other-sub">複数選択OK・1回の依頼でまとめて見積</span>
+              </summary>
+              <p class="qf-other-help">{data.serviceName}とあわせて見積もりを取りたいサービスにチェックしてください。</p>
+              <div class="qf-other-grid">
+                {otherServices.map((s) => (
+                  <label class="qf-other-item">
+                    <input type="checkbox" name="additional_services" value={s.name} class="qf-other-check" data-service-name={s.name} />
+                    <span class="qf-other-name">{s.name}</span>
+                  </label>
+                ))}
+              </div>
+            </details>
+          </div>
+
           <div class="qf-nav">
             <button type="button" class="qf-btn qf-btn-back" data-goto="1">← 戻る</button>
             <button type="button" class="qf-btn qf-btn-next" data-goto="3">次へ</button>
