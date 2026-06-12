@@ -5,9 +5,9 @@ import { AUDIT_SERVICES, FEATURED_SERVICES, FACILITY_LABELS } from '../../lib/au
 import type { FacilityType, ServiceGroup } from '../../lib/audit/types';
 import '../../styles/audit.css';
 
-const title = `施設管理コスト診断（無料・30秒）｜${site.name}`;
+const title = `施設管理コスト診断（無料・約60秒・5問）｜${site.name}`;
 const description =
-  '契約中の施設管理サービスから「見直し優先度」を30秒・4タップで無料診断。消防設備点検・受水槽清掃・害虫駆除などのコスト見直し時期がわかります。個人情報入力なしで結果表示。';
+  '契約中の施設管理サービスから「見直し優先度」を約60秒・5問で無料診断。施設規模も加味して、消防設備点検・受水槽清掃・害虫駆除などのコスト見直し時期がわかります。個人情報入力なしで結果表示。';
 
 const facilityOrder: FacilityType[] = ['kaigo', 'byoin', 'clinic', 'mansion', 'shogyo', 'office', 'kojo', 'other'];
 
@@ -25,7 +25,7 @@ const auditFaq = [
   },
   {
     q: '個人情報を入力しなくても診断できますか？',
-    a: 'できます。施設の種類・気になるサービス・見積取得状況・契約の見直し状況の4問に答えるだけで、見直し優先度スコアが表示されます。会社名や連絡先の入力は、希望する場合の相場確認依頼時のみです。',
+    a: 'できます。施設の種類・気になるサービス・施設規模・見積取得状況・契約の見直し状況の5問に答えるだけで、見直し優先度スコアが表示されます。会社名や連絡先の入力は、希望する場合の相場確認依頼時のみです。',
   },
   {
     q: '診断するとすぐに業者から営業電話が来ますか？',
@@ -37,7 +37,7 @@ const auditFaq = [
   },
   {
     q: '診断にかかる時間はどれくらいですか？',
-    a: '約30秒・4タップで完了します。施設の種類とサービスを選ぶだけなので、移動中やすき間時間でも診断できます。',
+    a: '約60秒・5問で完了します。施設の種類・サービス・規模などを選ぶだけなので、移動中やすき間時間でも診断できます。',
   },
 ];
 
@@ -97,9 +97,9 @@ const webPageLd = JSON.stringify({
 
       <!-- ══ ヒーロー ══ -->
       <div class="audit-hero" id="au-hero">
-        <span class="au-eyebrow">無料・30秒・個人情報不要</span>
+        <span class="au-eyebrow">無料・約60秒・5問・個人情報不要</span>
         <h1>施設管理費、<br />決まった業者に<br class="sp-only" />任せたままで大丈夫？</h1>
-        <p>同業他社の相場と比較して<strong>「見直し優先度」</strong>を判定します。</p>
+        <p>5問の質問から<strong>「見直し優先度」</strong>を診断します。</p>
         <ul class="au-trust-list" aria-label="安心して使える理由">
           <li><span aria-hidden="true">✓</span> 業者からの連絡は<strong>あなたが選ぶまでゼロ</strong></li>
           <li><span aria-hidden="true">✓</span> 診断結果まで<strong>個人情報の入力不要</strong></li>
@@ -111,16 +111,16 @@ const webPageLd = JSON.stringify({
       <div class="audit-assurebar" id="au-assurebar" hidden>
         <strong class="aa-brand">ロカサポ</strong>
         <span class="aa-sep" aria-hidden="true">／</span>
-        <span class="aa-item">無料・30秒</span>
+        <span class="aa-item">無料・約60秒・5問</span>
         <span class="aa-sep" aria-hidden="true">・</span>
         <span class="aa-item">個人情報不要</span>
         <span class="aa-sep" aria-hidden="true">・</span>
         <span class="aa-item">連絡は選んだ業者だけ</span>
       </div>
 
-      <!-- ══ 進捗バー（Q1〜Q3、Q4は廃止） ══ -->
+      <!-- ══ 進捗バー（Q1〜Q5） ══ -->
       <div class="au-progress" id="au-progress" aria-hidden="true">
-        <span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
       </div>
 
       <!-- ══ Q1：施設種別 ══ -->
@@ -176,9 +176,28 @@ const webPageLd = JSON.stringify({
         </div>
       </div>
 
-      <!-- ══ Q3：見積取得状況（旧Q3+Q4をマージ） ══ -->
+      <!-- ══ Q3：施設規模 ══ -->
       <div class="au-step" data-step="3">
-        <p class="au-q">Q3. 最近、相見積もりを比較しましたか？</p>
+        <p class="au-q">Q3. 施設の規模は？</p>
+        <p class="au-q-sub">延床面積の目安をお選びください</p>
+        <div class="au-options" data-single="size">
+          <button type="button" class="au-opt" data-value="xs"><span>〜500㎡（小規模）</span><span class="au-check">✓</span></button>
+          <button type="button" class="au-opt" data-value="s"><span>501〜2,000㎡</span><span class="au-check">✓</span></button>
+          <button type="button" class="au-opt" data-value="m"><span>2,001〜5,000㎡</span><span class="au-check">✓</span></button>
+          <button type="button" class="au-opt" data-value="l"><span>5,001㎡〜（大規模）</span><span class="au-check">✓</span></button>
+          <button type="button" class="au-opt" data-value="unknown"><span>わからない</span><span class="au-check">✓</span></button>
+        </div>
+        <div class="au-actions"><button type="button" class="au-back" data-back>← 戻る</button></div>
+      </div>
+
+      <!-- ══ 共感メッセージ（Q3とQ4の間に挟む同調圧力シグナル） ══ -->
+      <div class="au-empathy" id="au-empathy" hidden>
+        <p class="au-empathy-text">📊 <strong>同業の管理担当者の72%</strong>が「4年以上、相見積もりを取っていない」と回答しています。あと2問で診断完了です。</p>
+      </div>
+
+      <!-- ══ Q4：見積取得状況 ══ -->
+      <div class="au-step" data-step="4">
+        <p class="au-q">Q4. 最近、相見積もりを比較しましたか？</p>
         <p class="au-q-sub">選んだサービス全体について</p>
         <div class="au-options" data-single="quote">
           <button type="button" class="au-opt" data-value="within3y"><span>3年以内に比較した</span><span class="au-check">✓</span></button>
@@ -189,10 +208,14 @@ const webPageLd = JSON.stringify({
         <div class="au-actions"><button type="button" class="au-back" data-back>← 戻る</button></div>
       </div>
 
-      <!-- ══ Q4：契約状況（マージ後は隠しステップ・互換性のため残す） ══ -->
-      <div class="au-step" data-step="4" hidden>
+      <!-- ══ Q5：契約状況 ══ -->
+      <div class="au-step" data-step="5">
+        <p class="au-q">Q5. 現在の契約は？</p>
+        <p class="au-q-sub">これが最後の質問です</p>
         <div class="au-options" data-single="contract">
-          <button type="button" class="au-opt" data-value="unknown" data-auto-select><span>自動選択</span><span class="au-check">✓</span></button>
+          <button type="button" class="au-opt" data-value="reviewed"><span>定期的に見直している</span><span class="au-check">✓</span></button>
+          <button type="button" class="au-opt" data-value="auto"><span>ほぼ自動更新</span><span class="au-check">✓</span></button>
+          <button type="button" class="au-opt" data-value="unknown"><span>わからない</span><span class="au-check">✓</span></button>
         </div>
         <div class="au-actions"><button type="button" class="au-back" data-back>← 戻る</button></div>
       </div>
@@ -295,7 +318,7 @@ const webPageLd = JSON.stringify({
       <div class="aio-inner">
         <p class="aio-label">📋 このページの要点</p>
         <p class="aio-lead">
-          施設管理コスト診断は、契約中の受水槽清掃・消防設備点検・害虫駆除など全{AUDIT_SERVICES.length}種の施設管理サービスについて、施設の種類・サービス選択・見積取得状況・契約状況の4問に答えるだけで「見直し優先度」を100点満点で算出するロカサポの無料セルフチェックツールです。診断結果の表示まで個人情報の入力は不要、所要時間は約30秒です。
+          施設管理コスト診断は、契約中の受水槽清掃・消防設備点検・害虫駆除など全{AUDIT_SERVICES.length}種の施設管理サービスについて、施設の種類・サービス選択・施設規模・見積取得状況・契約状況の5問に答えるだけで「見直し優先度」を100点満点で算出するロカサポの無料セルフチェックツールです。診断結果の表示まで個人情報の入力は不要、所要時間は約60秒です。
         </p>
         <dl class="aio-facts">
           <div class="aio-fact">
@@ -304,7 +327,7 @@ const webPageLd = JSON.stringify({
           </div>
           <div class="aio-fact">
             <dt class="aio-fact-label">所要時間</dt>
-            <dd class="aio-fact-value">約30秒・4タップ</dd>
+            <dd class="aio-fact-value">約60秒・5問</dd>
           </div>
           <div class="aio-fact">
             <dt class="aio-fact-label">対応サービス</dt>
@@ -325,7 +348,7 @@ const webPageLd = JSON.stringify({
       <h2>施設管理コスト診断とは</h2>
       <p>
         施設管理コスト診断は、マンション管理組合・ビル管理会社・介護施設・病院などの管理担当者が、
-        契約中の施設管理サービスについて<strong>「見直し（相見積もり）の優先度」を約30秒・4タップで無料セルフチェック</strong>できるツールです。
+        契約中の施設管理サービスについて<strong>「見直し（相見積もり）の優先度」を約60秒・5問で無料セルフチェック</strong>できるツールです。
         受水槽清掃・消防設備点検・害虫駆除・グリストラップ清掃・アスベスト調査など全{AUDIT_SERVICES.length}種のサービスに対応し、
         個人情報の入力なしでリスクスコア（100点満点）と項目別の見直し優先度が表示されます。
       </p>
@@ -338,10 +361,11 @@ const webPageLd = JSON.stringify({
         <li>複数業者からの一斉営業電話は避けたいが、相場感だけは把握したい</li>
       </ul>
 
-      <h2>診断の流れ（約30秒・4ステップ）</h2>
+      <h2>診断の流れ（約60秒・5ステップ）</h2>
       <ol class="au-static-steps">
         <li><strong>施設の種類を選ぶ</strong>：介護施設・病院・マンション・商業施設など。</li>
         <li><strong>気になるサービスを選ぶ</strong>：契約中・気になるものを複数選択。</li>
+        <li><strong>施設規模を選ぶ</strong>：延床面積の目安（〜500㎡／〜2,000㎡／〜5,000㎡／5,001㎡〜）。</li>
         <li><strong>見積取得状況を答える</strong>：直近で比較したことがあるか。</li>
         <li><strong>契約の見直し状況を答える</strong>：定期見直しか自動更新か。</li>
       </ol>
@@ -378,9 +402,12 @@ const webPageLd = JSON.stringify({
     import { diagnose } from '../../lib/audit/diagnose';
     import { AUDIT_SERVICES, FACILITY_LABELS } from '../../lib/audit/services';
     import { LEVEL_META } from '../../lib/audit/rules';
-    import type { FacilityType, QuoteStatus, ContractStatus, DiagnosisResult } from '../../lib/audit/types';
+    import type { FacilityType, FacilitySize, QuoteStatus, ContractStatus, DiagnosisResult } from '../../lib/audit/types';
 
     const SVC_LABEL: Record<string, string> = Object.fromEntries(AUDIT_SERVICES.map((s) => [s.id, s.label]));
+    const SIZE_LABEL: Record<FacilitySize, string> = {
+      xs: '〜500㎡', s: '501〜2,000㎡', m: '2,001〜5,000㎡', l: '5,001㎡〜', unknown: '規模不明',
+    };
 
     // メール流入時の事前選択用パラメータ（?fac=kaigo&pref=東京都）
     const params = new URLSearchParams(location.search);
@@ -390,6 +417,7 @@ const webPageLd = JSON.stringify({
     const state = {
       facility: '' as FacilityType | '',
       services: new Set<string>(),
+      size: '' as FacilitySize | '',
       quote: '' as QuoteStatus | '',
       contract: '' as ContractStatus | '',
       step: 1,
@@ -404,6 +432,7 @@ const webPageLd = JSON.stringify({
     const progress = $$('#au-progress span');
 
     const assureBar = document.getElementById('au-assurebar');
+    const empathy = document.getElementById('au-empathy');
 
     function showStep(n: number) {
       state.step = n;
@@ -414,6 +443,11 @@ const webPageLd = JSON.stringify({
       if (assureBar) {
         if (n === 1) assureBar.setAttribute('hidden', '');
         else assureBar.removeAttribute('hidden');
+      }
+      // 共感メッセージ（Q3を完了したQ4到達時に1回表示）
+      if (empathy) {
+        if (n === 4) empathy.removeAttribute('hidden');
+        else empathy.setAttribute('hidden', '');
       }
       scrollTop();
     }
@@ -427,12 +461,8 @@ const webPageLd = JSON.stringify({
           btn.classList.add('is-selected');
           const val = (btn as HTMLElement).dataset.value!;
           if (key === 'facility') { state.facility = val as FacilityType; setTimeout(() => showStep(2), 220); }
-          else if (key === 'quote') {
-            state.quote = val as QuoteStatus;
-            // Q4はマージにより廃止。診断結果に必要なcontractはunknown固定で進める
-            state.contract = 'unknown' as ContractStatus;
-            setTimeout(runDiagnosis, 220);
-          }
+          else if (key === 'size') { state.size = val as FacilitySize; setTimeout(() => showStep(4), 220); }
+          else if (key === 'quote') { state.quote = val as QuoteStatus; setTimeout(() => showStep(5), 220); }
           else if (key === 'contract') { state.contract = val as ContractStatus; setTimeout(runDiagnosis, 220); }
         });
       });
@@ -478,6 +508,7 @@ const webPageLd = JSON.stringify({
         const result = diagnose({
           facility: state.facility as FacilityType,
           serviceIds: Array.from(state.services),
+          facilitySize: (state.size || 'unknown') as FacilitySize,
           quoteStatus: state.quote as QuoteStatus,
           contractStatus: state.contract as ContractStatus,
         });
@@ -548,8 +579,10 @@ const webPageLd = JSON.stringify({
       ($('#au-f-service') as HTMLInputElement).value = serviceNames.join('、');
       ($('#au-f-facility') as HTMLInputElement).value = FACILITY_LABELS[state.facility as FacilityType] || '';
 
+      const sizeLabel = state.size ? SIZE_LABEL[state.size as FacilitySize] : '';
       ($('#au-f-message') as HTMLInputElement).value =
         `【AI施設管理診断の結果】\nリスクスコア: ${lastResult.score}/100\n` +
+        (sizeLabel ? `施設規模: ${sizeLabel}\n` : '') +
         lastResult.results.map((r) => `${LEVEL_META[r.level].icon} ${SVC_LABEL[r.id] || r.id}（${LEVEL_META[r.level].label}）`).join('\n') +
         `\n\n【見積希望サービス】\n${serviceNames.join('、')}\n\n上記サービスについて相場確認を希望します。`;
 

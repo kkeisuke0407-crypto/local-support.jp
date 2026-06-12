@@ -44,6 +44,17 @@
 }
 .au-trust-list strong { color: var(--au-blue-dark); font-weight: 700; }
 
+/* ── 共感メッセージ（Q3→Q4遷移時の同調圧力シグナル） ── */
+.au-empathy {
+  margin: 0 0 18px; padding: 12px 16px; border-radius: 12px;
+  background: linear-gradient(135deg, #fffbeb, #fef3c7);
+  border-left: 4px solid var(--au-amber);
+  animation: au-fade .3s ease;
+}
+.au-empathy[hidden] { display: none; }
+.au-empathy-text { margin: 0; font-size: 13px; line-height: 1.6; color: #78350f; font-weight: 500; }
+.au-empathy-text strong { color: #b45309; font-weight: 800; }
+
 /* ── コンパクト安心バー（メール流入でヒーローが消えた時の代替） ── */
 .audit-assurebar {
   display: flex; flex-wrap: wrap; gap: 6px; align-items: center; justify-content: center;
@@ -56,10 +67,13 @@
 .audit-assurebar .aa-sep { color: #93c5fd; }
 .audit-assurebar .aa-item { color: #1e3a8a; font-weight: 600; }
 
-/* ── ステップ進捗 ── */
+/* ── ステップ進捗（5ドット対応） ── */
 .au-progress { display: flex; gap: 6px; justify-content: center; margin: 20px 0 24px; }
 .au-progress span {
-  width: 40px; height: 5px; border-radius: 999px; background: var(--au-line); transition: background .2s;
+  width: 36px; height: 5px; border-radius: 999px; background: var(--au-line); transition: background .2s;
+}
+@media (max-width: 480px) {
+  .au-progress span { width: 30px; }
 }
 .au-progress span.is-done { background: var(--au-blue); }
 

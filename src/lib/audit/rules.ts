@@ -1,24 +1,30 @@
-import type { QuoteStatus, ContractStatus, Level } from './types.ts';
+import type { QuoteStatus, ContractStatus, FacilitySize, Level } from './types.ts';
 
 /**
- * 診断ロジック（4問だけで色分けする仕組み）
+ * 診断ロジック（5問で色分けする仕組み）
  * ------------------------------------------------------------------
- * Q3（見積取得状況）と Q4（契約状況）は全サービス共通で1回だけ聞く。
+ * Q4（見積取得状況）と Q5（契約状況）は全サービス共通で1回だけ聞く。
  * サービスごとの色の違いは AuditService.weight（標準化補正）で生む。
+ * Q3（施設規模）は大規模ほど見直しインパクトが大きいので軽く加点する。
  *
- *   リスク点 = 共通点(Q3,Q4) + サービス補正(weight, 0以下)
+ *   リスク点 = 共通点(Q4,Q5) + 規模補正(Q3) + サービス補正(weight, 0以下)
  */
 
-/** Q3/Q4 から算出する共通リスク点 */
+/** Q4/Q5 から算出する共通リスク点 */
 export function commonPoints(q: QuoteStatus, c: ContractStatus): number {
   const qp = q === 'never' ? 3 : q === 'over4y' ? 2 : q === 'unknown' ? 1 : 0;
   const cp = c === 'auto' ? 2 : c === 'unknown' ? 1 : 0;
   return qp + cp;
 }
 
+/** Q3（施設規模）からの加点。規模が大きいほどコスト差の絶対額が大きい */
+export function sizePoints(size: FacilitySize): number {
+  return size === 'l' ? 1 : size === 'm' ? 0.5 : 0;
+}
+
 /** サービス単位のリスク点（0未満は0に丸める） */
-export function servicePoints(q: QuoteStatus, c: ContractStatus, weight: number): number {
-  return Math.max(0, commonPoints(q, c) + weight);
+export function servicePoints(q: QuoteStatus, c: ContractStatus, weight: number, size: FacilitySize = 'unknown'): number {
+  return Math.max(0, commonPoints(q, c) + sizePoints(size) + weight);
 }
 
 /** リスク点 → 見直し優先度 */
