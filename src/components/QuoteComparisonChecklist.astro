@@ -63,6 +63,11 @@ const lead = prefectureName
       <strong>比較のコツ：</strong>
       1社だけ極端に安い場合は、対象範囲・作業時間・報告書・追加費用のどれかが抜けていることがあります。見積書の項目名が違う場合は、上の表に沿って同じ条件にそろえてから判断してください。
     </p>
+
+    <div class="quote-compare-cta">
+      <p>ロカサポでは、上記の比較項目をふまえて{serviceName}に対応できる業者を最大3社までご紹介します。</p>
+      <a href="#contact">同じ条件で無料見積もりを依頼する</a>
+    </div>
   </div>
 </section>
 
@@ -161,6 +166,43 @@ const lead = prefectureName
     font-size: 0.94rem;
   }
 
+  .quote-compare-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 18px 0 0;
+    padding: 18px;
+    background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+    color: #fff;
+    border-radius: 14px;
+    box-shadow: 0 16px 34px rgba(26, 86, 219, 0.18);
+  }
+
+  .quote-compare-cta p {
+    margin: 0;
+    line-height: 1.7;
+    font-weight: 700;
+  }
+
+  .quote-compare-cta a {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 18px;
+    border-radius: 999px;
+    background: #fff;
+    color: var(--blue-dark);
+    font-weight: 800;
+    text-decoration: none;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.16);
+  }
+
+  .quote-compare-cta a:hover {
+    transform: translateY(-1px);
+  }
+
   @media (max-width: 768px) {
     .quote-compare-points {
       grid-template-columns: 1fr;
@@ -168,6 +210,11 @@ const lead = prefectureName
 
     .quote-compare-table {
       font-size: 0.84rem;
+    }
+
+    .quote-compare-cta {
+      align-items: stretch;
+      flex-direction: column;
     }
   }
 </style>
