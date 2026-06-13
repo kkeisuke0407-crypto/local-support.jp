@@ -171,7 +171,11 @@ const jsonLdBlocks = [breadcrumbLd, serviceLd, webPageLd, faqLd, checklistLd, pr
   jsonLdBlocks={jsonLdBlocks}
   noindex={noindex}
 >
-  <HeroWithForm data={data} />
+  <HeroWithForm
+    data={data}
+    headline={`${prefecture.name}の${data.serviceName}業者を一括比較`}
+    subheadline={`${cityText}など${prefecture.name}内で、資格・許認可を確認した業者から最大3社をご紹介します。`}
+  />
   <Breadcrumb items={[
     { label: 'トップ', href: '/' },
     { label: data.serviceName, href: `/${data.slug}/` },
