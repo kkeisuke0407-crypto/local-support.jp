@@ -23,11 +23,13 @@ import ServiceEntryLinks from '../components/ServiceEntryLinks.astro';
 import { site } from '../data/site';
 import { ogImageUrl } from '../data/ogImage';
 import { quoteComparisonChecklist } from '../data/quoteComparisonChecklist';
+import { buildServiceFaq } from '../data/serviceFaq';
 import type { ServiceData } from '../data/services/_types';
 
 interface Props { data: ServiceData; }
 const { data } = Astro.props;
 const canonical = `${site.domain}/${data.slug}/`;
+const faq = buildServiceFaq(data);
 
 const breadcrumbLd = JSON.stringify({
   '@context': 'https://schema.org',
@@ -102,7 +104,7 @@ const webPageLd = JSON.stringify({
 const faqLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: data.faq.map((f) => ({
+  mainEntity: faq.map((f) => ({
     '@type': 'Question',
     name: f.q,
     acceptedAnswer: { '@type': 'Answer', text: f.a },
@@ -187,7 +189,7 @@ const jsonLdBlocks = [breadcrumbLd, serviceLd, webPageLd, faqLd, checklistLd, qu
   <QuoteComparisonChecklist serviceName={data.serviceName} />
   <ComparisonTipsSection tips={data.comparisonTips} serviceName={data.serviceName} />
   <QuoteFormFull data={data} />
-  <FAQ faq={data.faq} serviceName={data.serviceName} />
+  <FAQ faq={faq} serviceName={data.serviceName} />
 
   {data.relatedColumns && data.relatedColumns.length > 0 && (
     <section class="sd-section section-gray related-columns">

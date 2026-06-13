@@ -25,6 +25,7 @@ import ServiceEntryLinks from '../components/ServiceEntryLinks.astro';
 import { site } from '../data/site';
 import { ogImageUrl } from '../data/ogImage';
 import { quoteComparisonChecklist } from '../data/quoteComparisonChecklist';
+import { buildServiceFaq } from '../data/serviceFaq';
 import type { ServiceData } from '../data/services/_types';
 import type { Prefecture } from '../data/prefectures';
 import { isPrimaryPrefecture } from '../data/prefectures';
@@ -38,8 +39,8 @@ const override = data.prefectureOverrides?.[prefecture.slug];
 const costGuide = override?.costRows
   ? { ...data.costGuide, table: { ...data.costGuide.table, rows: override.costRows } }
   : data.costGuide;
-// 都道府県固有FAQを共通FAQの末尾に追加
-const faq = override?.localFaq ? [...data.faq, ...override.localFaq] : data.faq;
+// 共通FAQに見積比較・費用変動・業者選びのQ&Aを補完し、都道府県固有FAQも末尾に追加
+const faq = buildServiceFaq(data, { prefectureName: prefecture.name, additionalFaq: override?.localFaq });
 
 const canonical = `${site.domain}/${data.slug}/${prefecture.slug}/`;
 const cityText = prefecture.majorCities.slice(0, 3).join('・');
