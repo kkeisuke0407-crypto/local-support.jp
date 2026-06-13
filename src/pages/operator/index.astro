@@ -1,10 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { site } from '../../data/site';
+import { allServices } from '../../data/services';
 
 const title = `運営者情報｜${site.name}`;
 const description = `${site.name} の運営者情報・運営方針・お問い合わせ方法。施設管理の一括見積比較サービスの運営体制と、ご紹介業者の審査基準についてご案内します。`;
 const canonical = `${site.domain}/operator/`;
+const serviceCount = allServices.length;
 
 const breadcrumbLd = JSON.stringify({
   '@context': 'https://schema.org',
@@ -29,7 +31,8 @@ const orgLd = JSON.stringify({
     availableLanguage: ['ja'],
     areaServed: 'JP',
   },
-  description: '施設管理・設備メンテナンスの一括見積比較サービスを運営。受水槽清掃・アスベスト調査・ダクト清掃・シャッター点検など、法令に基づく定期メンテナンスを必要とする施設管理担当者と、登録・資格を有する専門業者をつなぐB2B紹介サービス。',
+  description: `施設管理・設備メンテナンスの一括見積比較サービスを運営。法定点検・衛生清掃・修繕工事・エネルギー設備・防犯設備など${serviceCount}分野で、施設管理担当者と登録・資格を有する専門業者をつなぐB2B紹介サービス。`,
+  knowsAbout: allServices.map((s) => s.serviceName),
   member: {
     '@type': 'Person',
     name: site.author.name,
@@ -57,7 +60,16 @@ const orgLd = JSON.stringify({
             <tr><th>運営組織</th><td>{site.org.legalName}</td></tr>
             <tr><th>事業内容</th><td>施設管理・設備メンテナンス業者の紹介サービス（一括見積比較）</td></tr>
             <tr><th>対応エリア</th><td>全国47都道府県</td></tr>
-            <tr><th>取扱サービス</th><td>受水槽清掃／アスベスト調査・除去／ダクト清掃／シャッター点検・修理／消防設備点検／グリストラップ清掃／業務用エアコン洗浄・修理／害虫駆除（PCO）／看板・屋外広告物点検</td></tr>
+            <tr>
+              <th>取扱サービス</th>
+              <td>
+                <ul class="op-service-list">
+                  {allServices.map((s) => (
+                    <li><a href={`/${s.slug}/`}>{s.serviceName}</a></li>
+                  ))}
+                </ul>
+              </td>
+            </tr>
             <tr><th>利用料金</th><td>完全無料（見積依頼・業者紹介・契約後の手数料はすべて無料）</td></tr>
             <tr><th>お問い合わせ</th><td>各サービスページのお問い合わせフォームよりご連絡ください</td></tr>
           </tbody>
@@ -68,7 +80,7 @@ const orgLd = JSON.stringify({
         <h2 class="op-h2">運営方針</h2>
         <p class="op-lead">
           {site.name} は、<strong>施設管理担当者の業者選び負担を軽減する</strong>ことを目的に運営しています。
-          受水槽清掃やアスベスト調査など、法令上の点検・清掃義務がある分野では、無資格・無登録の業者への発注がそのまま管理者責任に直結します。
+          受水槽清掃やアスベスト調査、消防設備点検など、法令上の点検・清掃義務がある分野では、無資格・無登録の業者への発注がそのまま管理者責任に直結します。
           本サービスでは、法令上の登録・資格要件を確認できる業者のみをご紹介することで、施設管理者が安心して業者を比較・選定できる環境を提供します。
         </p>
       </div>
@@ -98,16 +110,10 @@ const orgLd = JSON.stringify({
         <p class="op-lead">
           サービスに関するお問い合わせは、各サービスのお問い合わせフォーム、または以下からお寄せください。
         </p>
-        <ul class="op-list">
-          <li><a href="/jusuisou-seisou/#contact">受水槽清掃に関するお問い合わせ</a></li>
-          <li><a href="/asbestos/#contact">アスベスト調査・除去に関するお問い合わせ</a></li>
-          <li><a href="/duct/#contact">ダクト清掃に関するお問い合わせ</a></li>
-          <li><a href="/shutter/#contact">シャッター点検・修理に関するお問い合わせ</a></li>
-          <li><a href="/shobo-setsubi/#contact">消防設備点検に関するお問い合わせ</a></li>
-          <li><a href="/grease-trap/#contact">グリストラップ清掃に関するお問い合わせ</a></li>
-          <li><a href="/aircon-business/#contact">業務用エアコン洗浄・修理に関するお問い合わせ</a></li>
-          <li><a href="/pest-control/#contact">害虫駆除（PCO）に関するお問い合わせ</a></li>
-          <li><a href="/signboard-inspection/#contact">看板・屋外広告物点検に関するお問い合わせ</a></li>
+        <ul class="op-contact-list">
+          {allServices.map((s) => (
+            <li><a href={`/${s.slug}/#contact`}>{s.serviceName}に関するお問い合わせ</a></li>
+          ))}
         </ul>
         <p class="op-note">業者掲載のご相談・取材・その他のお問い合わせは、上記いずれかのフォームに「その他のお問い合わせ」とご記入のうえご連絡ください。</p>
       </div>
@@ -146,6 +152,30 @@ const orgLd = JSON.stringify({
 }
 .op-list li { margin-bottom: 8px; }
 .op-list a { color: var(--blue); text-decoration: underline; }
+.op-service-list,
+.op-contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 8px;
+}
+.op-service-list a,
+.op-contact-list a {
+  display: block;
+  padding: 10px 12px;
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  background: var(--gray-100);
+  color: var(--blue);
+  font-size: .88rem;
+  font-weight: 700;
+  line-height: 1.5;
+  text-decoration: none;
+}
+.op-service-list a:hover,
+.op-contact-list a:hover { background: var(--blue-light); }
 .op-note {
   font-size: .82rem;
   color: var(--gray-500);

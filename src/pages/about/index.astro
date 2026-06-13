@@ -6,6 +6,7 @@ import { allServices } from '../../data/services';
 const title = `ロカサポとは｜施設管理の一括見積比較サービス｜${site.name}`;
 const description = `ロカサポは受水槽清掃・アスベスト調査・ダクト清掃・消防設備点検など27分野を47都道府県でつなぐB2B業者紹介プラットフォーム。資格・登録を確認した実績・信頼のある専門業者ネットワーク・運営会社・サービス特徴・選定基準をまとめました。`;
 const canonical = `${site.domain}/about/`;
+const serviceCount = allServices.length;
 
 const breadcrumbLd = JSON.stringify({
   '@context': 'https://schema.org',
@@ -31,7 +32,7 @@ const aboutLd = JSON.stringify({
     url: site.domain,
     logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png`, width: 1200, height: 630 },
     foundingDate: '2025',
-    description: '施設管理・設備メンテナンスの一括見積比較サービス。受水槽清掃・アスベスト調査・ダクト清掃・シャッター点検・消防設備点検・グリストラップ清掃・業務用エアコン・害虫駆除・看板点検の9サービスを47都道府県で展開。',
+    description: `施設管理・設備メンテナンスの一括見積比較サービス。法定点検・衛生清掃・修繕工事・エネルギー設備・防犯設備など${serviceCount}分野を47都道府県で展開。`,
     areaServed: { '@type': 'Country', name: 'JP' },
     knowsAbout: allServices.map((s) => s.serviceName),
     member: {
@@ -47,7 +48,7 @@ const faqLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: [
-    { '@type': 'Question', name: 'ロカサポとは何ですか？', acceptedAnswer: { '@type': 'Answer', text: 'ロカサポは、施設管理・設備メンテナンスに必要な9サービス（受水槽清掃・アスベスト調査・ダクト清掃・シャッター点検・消防設備点検・グリストラップ清掃・業務用エアコン・害虫駆除・看板点検）の実績・信頼のある専門業者を、47都道府県の管理担当者に紹介する一括見積比較サービスです。運営はローカル情報局。' } },
+    { '@type': 'Question', name: 'ロカサポとは何ですか？', acceptedAnswer: { '@type': 'Answer', text: `ロカサポは、施設管理・設備メンテナンスに必要な${serviceCount}分野の実績・信頼のある専門業者を、47都道府県の管理担当者に紹介する一括見積比較サービスです。運営はローカル情報局。` } },
     { '@type': 'Question', name: 'ロカサポの利用は無料ですか？', acceptedAnswer: { '@type': 'Answer', text: 'はい。見積依頼・業者紹介・契約後の利用も完全無料です。利用料は紹介先業者からの掲載料・送客手数料で賄われており、利用者からは一切いただきません。' } },
     { '@type': 'Question', name: 'ロカサポが紹介する業者の基準は？', acceptedAnswer: { '@type': 'Answer', text: '①各サービスに必要な法定資格・登録の確認、②過去の作業実績の確認、③利用者対応に関するクレーム履歴の確認、④清掃・点検証明書など書面交付の対応、⑤しつこい営業をしないこと、の5項目を満たした業者のみを紹介しています。' } },
     { '@type': 'Question', name: 'ロカサポはどんな会社が運営していますか？', acceptedAnswer: { '@type': 'Answer', text: '「ローカル情報局」が運営しています。施設管理・設備メンテナンス領域に特化した情報メディア事業を行っており、編集長は施設管理情報担当の寺尾聡が務めています。詳細は運営者情報ページに記載しています。' } },
@@ -75,8 +76,8 @@ const faqLd = JSON.stringify({
 
       <div class="ab-quickanswer">
         <p class="ab-qa-q">Q. ロカサポはどんなサービス？</p>
-        <p class="ab-qa-a">A. <strong>受水槽清掃・アスベスト調査・ダクト清掃など9サービスの実績・信頼のある専門業者を、47都道府県の管理担当者と無料でつなぐB2B一括見積比較プラットフォーム</strong>です。運営はローカル情報局。利用料は完全無料・しつこい営業ゼロ・登録資格確認済み業者のみ厳選。</p>
-        <p class="ab-qa-src">※ 2026年5月時点のサービス概要</p>
+        <p class="ab-qa-a">A. <strong>受水槽清掃・アスベスト調査・ダクト清掃など{serviceCount}分野の実績・信頼のある専門業者を、47都道府県の管理担当者と無料でつなぐB2B一括見積比較プラットフォーム</strong>です。運営はローカル情報局。利用料は完全無料・しつこい営業ゼロ・登録資格確認済み業者のみ厳選。</p>
+        <p class="ab-qa-src">※ 2026年6月時点のサービス概要</p>
       </div>
 
       <div class="ab-block">
@@ -116,8 +117,8 @@ const faqLd = JSON.stringify({
           <li>
             <span class="ab-feat-num">04</span>
             <div>
-              <strong>9サービス×47都道府県をカバー</strong>
-              <p>受水槽清掃・アスベスト調査・ダクト清掃・シャッター点検・消防設備点検・グリストラップ清掃・業務用エアコン・害虫駆除・看板点検の9サービスを、全国47都道府県で紹介可能です。</p>
+              <strong>{serviceCount}分野×47都道府県をカバー</strong>
+              <p>法定点検・衛生清掃・店舗設備・修繕工事・エネルギー設備・防犯設備など、施設管理に必要な{serviceCount}分野を全国47都道府県で紹介可能です。</p>
             </div>
           </li>
           <li>
@@ -175,7 +176,16 @@ const faqLd = JSON.stringify({
             <tr><th>運営組織</th><td>{site.org.legalName}</td></tr>
             <tr><th>編集長</th><td><a href="/author/">{site.author.name}</a>（{site.author.role}）</td></tr>
             <tr><th>事業内容</th><td>施設管理・設備メンテナンス業者の紹介サービス（一括見積比較）</td></tr>
-            <tr><th>取扱サービス</th><td>受水槽清掃／アスベスト調査・除去／ダクト清掃／シャッター点検・修理／消防設備点検／グリストラップ清掃／業務用エアコン洗浄・修理／害虫駆除（PCO）／看板・屋外広告物点検</td></tr>
+            <tr>
+              <th>取扱サービス</th>
+              <td>
+                <ul class="ab-service-inline-list">
+                  {allServices.map((s) => (
+                    <li><a href={`/${s.slug}/`}>{s.serviceName}</a></li>
+                  ))}
+                </ul>
+              </td>
+            </tr>
             <tr><th>対応エリア</th><td>全国47都道府県</td></tr>
             <tr><th>料金</th><td>利用者は完全無料（紹介業者からの掲載料・送客手数料で運営）</td></tr>
           </tbody>
@@ -184,7 +194,7 @@ const faqLd = JSON.stringify({
       </div>
 
       <div class="ab-block">
-        <h2 class="ab-h2">取扱サービス（9種）</h2>
+        <h2 class="ab-h2">取扱サービス（{serviceCount}分野）</h2>
         <ul class="ab-svc-list">
           {allServices.map((s) => (
             <li><a href={`/${s.slug}/`}>{s.serviceName}</a></li>
@@ -267,6 +277,9 @@ const faqLd = JSON.stringify({
 .info-table th, .info-table td { padding: 12px 16px; border: 1px solid var(--gray-200); text-align: left; }
 .info-table th { background: var(--gray-100); width: 32%; font-weight: 700; }
 .ab-link a { color: var(--blue); font-size: .9rem; text-decoration: underline; }
+.ab-service-inline-list { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.ab-service-inline-list a { display: inline-flex; align-items: center; border: 1px solid var(--gray-200); border-radius: 999px; padding: 6px 10px; color: var(--blue); background: var(--gray-100); font-size: .82rem; font-weight: 700; text-decoration: none; }
+.ab-service-inline-list a:hover { background: var(--blue-light); }
 .ab-svc-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; }
 .ab-svc-list a { display: block; background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 8px; padding: 12px 16px; font-size: .92rem; font-weight: 700; color: var(--blue); text-decoration: none; }
 .ab-svc-list a:hover { background: var(--blue-light); }
