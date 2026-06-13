@@ -16,6 +16,7 @@ import ComparisonTipsSection from '../components/ComparisonTipsSection.astro';
 import QuoteFormFull from '../components/QuoteFormFull.astro';
 import FAQ from '../components/FAQ.astro';
 import RelatedServices from '../components/RelatedServices.astro';
+import ServiceCategoryLinks from '../components/ServiceCategoryLinks.astro';
 import PrefectureGrid from '../components/PrefectureGrid.astro';
 import BottomCTA from '../components/BottomCTA.astro';
 import AIOSummary from '../components/AIOSummary.astro';
@@ -216,6 +217,7 @@ const jsonLdBlocks = [breadcrumbLd, serviceLd, webPageLd, faqLd, checklistLd, qu
   <ComparisonTipsSection tips={data.comparisonTips} serviceName={data.serviceName} />
   <QuoteFormFull data={data} />
   <FAQ faq={faq} serviceName={data.serviceName} />
+  <ServiceCategoryLinks currentSlug={data.slug} serviceName={data.serviceName} prefectureSlug={prefecture.slug} prefectureName={prefecture.name} />
   <PrefectureGrid serviceSlug={data.slug} serviceName={data.serviceName} />
   <RelatedServices currentSlug={data.slug} relatedSlugs={data.relatedServiceSlugs} />
   <BottomCTA serviceName={data.serviceName} />
