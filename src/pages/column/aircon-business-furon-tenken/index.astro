@@ -3,11 +3,11 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
-const title = 'フロン排出抑制法の点検義務ガイド2026｜業務用エアコン管理者が知るべき簡易点検・定期点検の要点';
-const description = '業務用エアコン・冷凍冷蔵機器の管理者に課されるフロン排出抑制法上の点検義務を解説。3か月に1回の簡易点検、規模別の定期点検（7.5kW以上3年・50kW以上1年）、漏洩量算定・国への報告、廃棄時のフロン回収まで、施設管理者向けに整理しました。';
+const title = '空調設備のフロン法点検義務ガイド2026｜業務用エアコン・冷凍冷蔵機器の管理者向け';
+const description = '空調設備・業務用エアコン・冷凍冷蔵機器のフロン排出抑制法上の点検義務を解説。3か月に1回の簡易点検、圧縮機定格出力7.5kW・50kWを基準にした定期点検、記録保存、漏洩量算定、廃棄時のフロン回収まで施設管理者向けに整理しました。';
 const canonical = `${site.domain}/column/aircon-business-furon-tenken/`;
 const published = '2026-05-26';
-const modified = '2026-05-26';
+const modified = '2026-06-14';
 
 const breadcrumbLd = JSON.stringify({
   '@context': 'https://schema.org', '@type': 'BreadcrumbList',
@@ -22,9 +22,9 @@ const articleLd = JSON.stringify({
   '@context': 'https://schema.org', '@type': 'Article',
   headline: title, description, datePublished: published, dateModified: modified,
   inLanguage: 'ja-JP', url: canonical, mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
-  wordCount: 3800,
+  wordCount: 5400,
   articleSection: '法令・義務',
-  keywords: 'フロン排出抑制法,業務用エアコン,簡易点検,定期点検,漏洩量算定,フロン回収,行程管理票,2026',
+  keywords: '空調設備点検,フロン法点検,フロン排出抑制法,業務用エアコン,冷凍冷蔵機器,簡易点検,定期点検,漏洩量算定,フロン回収,行程管理票,2026',
   author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
   publisher: { '@id': `${site.domain}/#organization` },
   image: { '@type': 'ImageObject', url: `${site.domain}/og-aircon-business.png`, width: 1200, height: 630 },
@@ -34,22 +34,64 @@ const articleLd = JSON.stringify({
   ],
 });
 
+const faqItems = [
+  {
+    q: 'フロン排出抑制法の点検は誰が対象ですか？',
+    a: '業務用冷凍空調機器（第一種特定製品）を管理する全ての事業者が対象です。家庭用エアコンや家庭用冷蔵庫は対象外です。飲食店・コンビニ・スーパー・オフィス・倉庫などで業務用機器を所有・使用・占有している事業者が「管理者」になります。',
+  },
+  {
+    q: '空調設備点検とフロン法点検は同じですか？',
+    a: '同じではありません。空調設備点検は清掃・動作確認・フィルター確認などを含む広い点検で、フロン法点検はフロン排出抑制法に基づく冷媒漏えい防止の点検です。業務用エアコンでは、通常の保守点検にフロン法の簡易点検・定期点検・記録保存を組み込んで管理するのが実務的です。',
+  },
+  {
+    q: '簡易点検と定期点検の違いは？',
+    a: '簡易点検は全ての第一種特定製品に3か月に1回以上必要で、外観・異音・油にじみ・霜付きなどを確認します。定期点検は一定規模以上の機器が対象で、業務用エアコンは7.5kW以上50kW未満が3年に1回以上、50kW以上が1年に1回以上、冷凍冷蔵機器は7.5kW以上が1年に1回以上です。',
+  },
+  {
+    q: '7.5kWや50kWはどこで確認できますか？',
+    a: '機器本体の銘板、仕様書、竣工図、保守点検報告書、メーカー型番の仕様表で確認します。室外機が複数あるビルマルチでは系統ごとに圧縮機定格出力を確認する必要があります。不明な場合は、メーカーまたは空調保守業者に型番確認を依頼してください。',
+  },
+  {
+    q: 'フロン定期点検は誰がやるべきですか？',
+    a: '定期点検は、機器の構造・運転方法・冷媒漏えいの点検方法について十分な知見を持つ者が実施します。実務上は第一種冷媒フロン類取扱技術者、冷凍空調関連資格者、メーカー保守会社、空調設備会社などに依頼するケースが一般的です。',
+  },
+  {
+    q: 'フロン漏洩量を国へ報告する義務はありますか？',
+    a: '年間1,000 CO2トン以上のフロン類を漏洩した管理者は、翌年度の7月末までに事業所管大臣へ報告する義務があります。複数店舗・大型冷凍冷蔵設備・高GWP冷媒を扱う事業者は、充填量とGWPから漏洩量を管理してください。',
+  },
+  {
+    q: '点検記録はどれくらい保管しますか？',
+    a: '点検整備記録簿は、機器を廃棄してから3年間保管する義務があります。機器の譲渡時には記録簿も引き継ぎます。記録簿には機器情報、点検実施日、点検結果、修理内容、冷媒充填・回収量などを記載します。',
+  },
+  {
+    q: '廃棄時のフロン回収義務は誰の責任ですか？',
+    a: '機器を廃棄する管理者（第一種特定製品廃棄等実施者）の責任です。第一種フロン類充塡回収業者へ委託し、回収依頼書または委託確認書を交付します。回収後は引取証明書を受け取り、関連書類を3年間保存します。',
+  },
+  {
+    q: '違反時の罰則は？',
+    a: '点検・記録義務が著しく不十分で命令に従わない場合は50万円以下の罰金、行程管理票の記載・保存違反などは30万円以下の罰金、フロン類をみだりに放出した場合は1年以下の懲役または50万円以下の罰金の対象になり得ます。',
+  },
+  {
+    q: 'フロン定期点検の費用はどれくらいですか？',
+    a: '小規模な業務用エアコンで1台あたり5,000〜30,000円程度が目安です。ビルマルチ、大型冷凍冷蔵設備、夜間対応、冷媒漏えい調査、冷媒充填・回収が必要な場合は追加費用が発生します。',
+  },
+  {
+    q: 'フロン定期点検は経費にできますか？',
+    a: '法令義務に基づく維持管理費用として、一般的には修繕費・設備維持管理費などで損金算入できるケースが多いです。ただし、機器更新や大規模改修と一体の支出は資本的支出になる場合があるため、会計処理は税理士に確認してください。',
+  },
+  {
+    q: 'テナント物件では誰が管理者になりますか？',
+    a: '原則として、機器を実際に使用・管理している事業者が管理者になります。ただし、所有者・ビル管理会社・テナントの契約関係で責任分担が変わる場合があるため、賃貸契約書や設備管理契約で点検・記録・廃棄時対応の担当を明確にしてください。',
+  },
+];
+
 const faqLd = JSON.stringify({
   '@context': 'https://schema.org', '@type': 'FAQPage',
-  mainEntity: [
-    { '@type': 'Question', name: 'フロン排出抑制法の点検は誰が対象ですか？', acceptedAnswer: { '@type': 'Answer', text: '業務用冷凍空調機器（第一種特定製品）を管理する全ての事業者が対象です。家庭用エアコンや家庭用冷蔵庫は対象外。飲食店・コンビニ・スーパー・オフィス・倉庫等の業務用機器の所有者・使用者・占有者が「管理者」となります。' } },
-    { '@type': 'Question', name: '簡易点検と定期点検の違いは？', acceptedAnswer: { '@type': 'Answer', text: '簡易点検は全ての第一種特定製品に3か月に1回（目視・異音・水漏れ確認等）が必要で、管理者自身が実施可能。定期点検は圧縮機定格出力7.5kW以上の機器で3年に1回、50kW以上で1年に1回、有資格者（点検実施者）による実施が必要です。' } },
-    { '@type': 'Question', name: 'フロン漏洩量を国へ報告する義務はありますか？', acceptedAnswer: { '@type': 'Answer', text: '年間1,000 CO2トン以上のフロン類を漏洩した管理者は、翌年度の7月末までに事業所管大臣に報告する義務があります。これは比較的大規模な事業者向けですが、漏洩量算定式（漏洩量×GWP）の知識は中小事業者にも必要です。' } },
-    { '@type': 'Question', name: '点検記録はどれくらい保管しますか？', acceptedAnswer: { '@type': 'Answer', text: '点検整備記録簿は、機器を廃棄してから3年間保管する義務があります。機器の譲渡時には記録簿も引き継ぎます。記録簿には機器情報・点検実施日・点検結果・冷媒充填・回収量等を記載します。' } },
-    { '@type': 'Question', name: '廃棄時のフロン回収義務は誰の責任？', acceptedAnswer: { '@type': 'Answer', text: '機器を廃棄する管理者（=排出者）の責任です。第一種フロン類充塡回収業者へ委託し、行程管理票（A〜E票）を発行・保管します。建物の解体時は解体工事業者にも事前確認義務があります。' } },
-    { '@type': 'Question', name: '違反時の罰則は？', acceptedAnswer: { '@type': 'Answer', text: '点検・記録義務違反は50万円以下の罰金。廃棄時の不適正処理（行程管理票不発行・無許可業者への委託等）は1,000万円以下の罰金、漏洩量報告義務違反は10万円以下の過料が科される可能性があります。' } },
-    { '@type': 'Question', name: "フロン排出抑制法の定期点検を怠るとどうなりますか？", acceptedAnswer: { '@type': 'Answer', text: "フロン排出抑制法違反で50万円以下の罰金対象。また機器の冷媒漏えいを放置した場合、地球温暖化への影響として行政指導の対象になります。" } },
-    { '@type': 'Question', name: "フロン定期点検は誰がやるべきですか？", acceptedAnswer: { '@type': 'Answer', text: "7.5kW以上の業務用機器は第一種冷媒フロン類取扱技術者または同等有資格者による点検が必要。7.5kW未満でも簡易点検（3ヶ月ごと）は管理者自身が実施できます。" } },
-    { '@type': 'Question', name: "冷媒フロンが漏えいしているとわかったらどうすればよいですか？", acceptedAnswer: { '@type': 'Answer', text: "直ちに専門業者に連絡し、漏えい箇所の修理と冷媒の回収・充填を依頼してください。漏えい量が1,000t-CO₂以上の場合は行政報告義務が発生します。" } },
-    { '@type': 'Question', name: "フロン定期点検の費用はどれくらいですか？", acceptedAnswer: { '@type': 'Answer', text: "業務用エアコン1台あたり点検費用5,000〜2万円程度。冷媒の補充が必要な場合は冷媒代金（1kg数千〜数万円）が別途かかります。" } },
-    { '@type': 'Question', name: "フロン定期点検は経費にできますか？", acceptedAnswer: { '@type': 'Answer', text: "法令義務に基づく費用として修繕費・維持管理費で損金算入可能です。" } }
-  
-  ],
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
 });
 const webPageLd = JSON.stringify({
   '@context': 'https://schema.org',
@@ -62,7 +104,7 @@ const webPageLd = JSON.stringify({
   isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
   speakable: {
     '@type': 'SpeakableSpecification',
-    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+    cssSelector: ['.cl-quickanswer', '.cl-answer-grid', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
   },
   primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-aircon-business.png` },
 });
@@ -78,13 +120,13 @@ const webPageLd = JSON.stringify({
           <span>フロン排出抑制法の点検義務ガイド</span>
         </nav>
         <span class="cl-cat">法令・義務</span>
-        <h1 class="cl-title">フロン排出抑制法の点検義務ガイド2026｜業務用エアコン管理者が知るべき簡易点検・定期点検の要点</h1>
+        <h1 class="cl-title">空調設備のフロン法点検義務ガイド2026｜業務用エアコン・冷凍冷蔵機器の管理者向け</h1>
         <p class="cl-lead">
-          飲食店・店舗・オフィス・倉庫で使う<strong>業務用エアコン・冷凍冷蔵機器の管理者</strong>には、フロン排出抑制法に基づく定期的な点検・記録・適正廃棄の義務が課されています。「家庭用エアコンと同じ感覚」で管理していると、立入検査での指摘・罰則・取引先からのESG評価低下に直結します。本記事では、対象機器の判定、3か月ごとの簡易点検、規模別の定期点検（7.5kW以上3年・50kW以上1年）、漏洩量算定の考え方、廃棄時のフロン回収まで、施設管理担当者が押さえておくべき要点を整理します。
+          飲食店・店舗・オフィス・倉庫で使う<strong>業務用エアコン・冷凍冷蔵機器の管理者</strong>には、フロン排出抑制法に基づく点検・記録・適正廃棄の義務が課されています。「空調設備点検」と一言でまとめられがちですが、フロン法では3か月に1回以上の簡易点検、圧縮機定格出力に応じた定期点検、点検整備記録簿の保存、廃棄時のフロン回収まで求められます。本記事では、対象機器の判定、業務用エアコンと冷凍冷蔵機器の点検頻度の違い、記録保存、漏洩量算定、業者へ依頼すべき範囲を施設管理担当者向けに整理します。
         </p>
         <div class="cl-meta">
           <time datetime={published}>公開：2026年5月26日</time>
-          <span>最終更新：2026年5月26日</span>
+          <span>最終更新：2026年6月14日</span>
           <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
         </div>
       </div>
@@ -94,8 +136,8 @@ const webPageLd = JSON.stringify({
 
       <div class="cl-quickanswer">
         <p class="cl-qa-q">Q. フロン排出抑制法の定期点検は義務ですか？</p>
-        <p class="cl-qa-a">A. <strong>第一種特定製品（業務用エアコン・冷凍機）は機器の冷媒量に応じて3ヶ月・1年・3年ごとの定期点検が義務</strong>。7.5kW以上は有資格者による点検が必要。</p>
-        <p class="cl-qa-src">※フロン排出抑制法第16条（2026年4月時点）</p>
+        <p class="cl-qa-a">A. <strong>第一種特定製品（業務用エアコン・冷凍冷蔵機器）は、全機器で3か月に1回以上の簡易点検が必要</strong>です。さらに圧縮機定格出力が7.5kW以上の場合は、機器区分に応じて1年または3年に1回以上の定期点検が必要です。</p>
+        <p class="cl-qa-src">※環境省・経済産業省「フロン排出抑制法ポータルサイト」掲載情報をもとに2026年6月時点で整理</p>
       </div>
 
       <ColumnCtaCard serviceSlug="aircon-business" serviceName="業務用エアコン" variant="top" />
@@ -105,13 +147,16 @@ const webPageLd = JSON.stringify({
         <h2 class="cl-toc-h">この記事の目次</h2>
         <ol>
           <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#air-conditioning-inspection">空調設備点検とフロン法点検の違い</a></li>
           <li><a href="#law-overview">フロン排出抑制法の全体像</a></li>
           <li><a href="#target">対象となる機器（第一種特定製品）の判定</a></li>
+          <li><a href="#checklist">管理者が最初に確認すべきチェックリスト</a></li>
           <li><a href="#kani">簡易点検（3か月に1回・自社可）</a></li>
           <li><a href="#teiki">定期点検（規模別・有資格者）</a></li>
           <li><a href="#leakage">漏洩量算定と国への報告</a></li>
-          <li><a href="#disposal">廃棄時のフロン回収と行程管理票</a></li>
+          <li><a href="#disposal">廃棄時のフロン回収と保存書類</a></li>
           <li><a href="#penalty">違反時の罰則</a></li>
+          <li><a href="#sources">公式情報の確認先</a></li>
           <li><a href="#faq">よくある質問</a></li>
         </ol>
       </aside>
@@ -120,11 +165,27 @@ const webPageLd = JSON.stringify({
         <div class="cl-callout">
           <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
           <ul>
-            <li><strong>義務の範囲</strong>：簡易点検（3か月に1回・自社可）＋定期点検（7.5kW以上3年・50kW以上1年・有資格者）＋記録保管＋廃棄時のフロン回収</li>
-            <li><strong>記録保管</strong>：点検整備記録簿は機器廃棄後3年間、行程管理票は5年間保管</li>
-            <li><strong>違反リスク</strong>：点検・記録義務違反50万円以下、廃棄時の不適正処理1,000万円以下の罰金</li>
+            <li><strong>義務の範囲</strong>：全機器で簡易点検（3か月に1回以上）＋一定規模以上で定期点検＋記録保管＋廃棄時のフロン回収</li>
+            <li><strong>頻度の違い</strong>：業務用エアコンは7.5kW以上50kW未満が3年に1回以上、50kW以上が1年に1回以上。冷凍冷蔵機器は7.5kW以上で1年に1回以上</li>
+            <li><strong>記録保管</strong>：点検整備記録簿は機器廃棄後3年間、廃棄時の回収依頼書・委託確認書・引取証明書も3年間保存</li>
           </ul>
         </div>
+      </section>
+
+      <section id="air-conditioning-inspection" class="cl-section">
+        <h2>空調設備点検とフロン法点検の違い</h2>
+        <p>「空調設備点検」は、フィルター清掃、ドレン確認、異音確認、電気系統確認、室外機周辺確認などを含む広い保守点検です。一方で「フロン法点検」は、フロン排出抑制法に基づく冷媒漏えい防止のための点検・記録・廃棄時対応を指します。</p>
+        <div class="cl-answer-grid">
+          <div>
+            <h3>空調設備点検</h3>
+            <p>快適性・故障予防・省エネ・清掃品質を守るための設備保守。法令対応だけでなく、冷暖房効率や故障予兆の確認も含みます。</p>
+          </div>
+          <div>
+            <h3>フロン法点検</h3>
+            <p>第一種特定製品の管理者に課される法令対応。簡易点検・定期点検・点検整備記録簿・漏洩量算定・廃棄時のフロン回収が中心です。</p>
+          </div>
+        </div>
+        <p>施設管理の実務では、空調保守契約の中にフロン法の点検項目が含まれているかを確認し、含まれていなければ別途フロン定期点検を依頼します。見積書では「簡易点検支援」「定期点検」「点検整備記録簿作成」「冷媒漏えい調査」「冷媒充填・回収」の範囲を分けて確認してください。</p>
       </section>
 
       <section id="law-overview" class="cl-section">
@@ -166,6 +227,24 @@ const webPageLd = JSON.stringify({
         </div>
       </section>
 
+      <section id="checklist" class="cl-section">
+        <h2>管理者が最初に確認すべきチェックリスト</h2>
+        <p>空調設備のフロン法対応で最初にやるべきことは、全機器の棚卸しです。点検頻度は機器ごとに変わるため、建物単位ではなく「室外機・冷凍冷蔵機器ごと」に一覧化します。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>フロン法対応で最初に整理する項目</caption>
+            <thead><tr><th scope="col">確認項目</th><th scope="col">見る場所</th><th scope="col">判断に使うポイント</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">機器区分</th><td>銘板・仕様書・型番</td><td>業務用エアコン、冷凍冷蔵機器、家庭用機器のどれか</td></tr>
+              <tr><th scope="row">圧縮機定格出力</th><td>室外機銘板・メーカー仕様表</td><td>7.5kW未満、7.5kW以上、50kW以上の判定</td></tr>
+              <tr><th scope="row">冷媒種類</th><td>銘板・保守報告書</td><td>R410A、R32、R404Aなど。漏洩量算定でGWPを使う</td></tr>
+              <tr><th scope="row">点検履歴</th><td>点検整備記録簿・保守報告書</td><td>3か月ごとの簡易点検、定期点検、修理履歴の抜け漏れ</td></tr>
+              <tr><th scope="row">廃棄・更新予定</th><td>設備更新計画・工事見積</td><td>フロン回収委託と証明書保存が必要になる時期</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
       <section id="kani" class="cl-section">
         <h2>簡易点検（3か月に1回・自社可）</h2>
         <p>全ての第一種特定製品の管理者は、3か月に1回以上の簡易点検を実施する必要があります。資格は不要で、管理者自身（または店舗スタッフ）が実施可能です。</p>
@@ -184,15 +263,16 @@ const webPageLd = JSON.stringify({
 
       <section id="teiki" class="cl-section">
         <h2>定期点検（規模別・有資格者）</h2>
-        <p>圧縮機の定格出力に応じて、有資格者による定期点検（フロン漏洩の検出を含む厳密な点検）が必要です。</p>
+        <p>圧縮機の定格出力と機器区分に応じて、専門知識を持つ点検実施者による定期点検（フロン漏洩の検出を含む厳密な点検）が必要です。業務用エアコンと冷凍冷蔵機器では頻度が異なるため、同じ7.5kW以上でも一律に3年と判断しないでください。</p>
         <div class="cl-table-wrap">
           <table class="cl-table">
             <caption>機器規模別の定期点検頻度</caption>
             <thead><tr><th scope="col">機器区分</th><th scope="col">圧縮機定格出力</th><th scope="col">定期点検頻度</th><th scope="col">実施者</th></tr></thead>
             <tbody>
-              <tr><th scope="row">小型機器</th><td>7.5kW未満</td><td>簡易点検のみ</td><td>管理者・スタッフ</td></tr>
-              <tr><th scope="row">中型機器</th><td>7.5kW以上 50kW未満</td><td>3年に1回以上</td><td>点検実施者（有資格者）</td></tr>
-              <tr><th scope="row">大型機器</th><td>50kW以上</td><td>1年に1回以上</td><td>点検実施者（有資格者）</td></tr>
+              <tr><th scope="row">全ての第一種特定製品</th><td>7.5kW未満を含む全機器</td><td>簡易点検：3か月に1回以上</td><td>管理者・スタッフでも可</td></tr>
+              <tr><th scope="row">業務用エアコン</th><td>7.5kW以上 50kW未満</td><td>定期点検：3年に1回以上</td><td>点検実施者</td></tr>
+              <tr><th scope="row">業務用エアコン</th><td>50kW以上</td><td>定期点検：1年に1回以上</td><td>点検実施者</td></tr>
+              <tr><th scope="row">冷凍冷蔵機器</th><td>7.5kW以上</td><td>定期点検：1年に1回以上</td><td>点検実施者</td></tr>
             </tbody>
           </table>
         </div>
@@ -226,16 +306,15 @@ const webPageLd = JSON.stringify({
       </section>
 
       <section id="disposal" class="cl-section">
-        <h2>廃棄時のフロン回収と行程管理票</h2>
-        <p>機器を廃棄する際は、フロン類の回収を「第一種フロン類充塡回収業者」（都道府県知事登録）に委託し、行程管理票を発行します。</p>
+        <h2>廃棄時のフロン回収と保存書類</h2>
+        <p>機器を廃棄する際は、フロン類の回収を「第一種フロン類充塡回収業者」（都道府県知事登録）に委託し、回収依頼書または委託確認書を交付します。回収後は引取証明書を受け取り、関連書類を保存します。</p>
         <h3>廃棄時の手順</h3>
         <ol>
           <li>充塡回収業者を選定（許可業者リストは都道府県HPで確認可能）</li>
-          <li>行程管理票A票を交付（管理者→充塡回収業者）</li>
-          <li>充塡回収業者がフロン回収、B票・C票を返送</li>
+          <li>回収依頼書または委託確認書を交付（管理者→充塡回収業者）</li>
+          <li>充塡回収業者がフロンを回収し、引取証明書を交付</li>
           <li>機器廃棄・処分業者へ引渡し</li>
-          <li>処分業者からE票（処分完了）の返送を受領</li>
-          <li>行程管理票一式を<strong>5年間保管</strong></li>
+          <li>回収依頼書・委託確認書・引取証明書などを<strong>3年間保存</strong></li>
         </ol>
         <p>解体工事を伴う場合、解体業者にもフロン排出抑制法の事前確認義務（書面交付）があります。解体工事発注時はフロン排出抑制法対応の有無を確認しましょう。</p>
       </section>
@@ -244,11 +323,21 @@ const webPageLd = JSON.stringify({
         <h2>違反時の罰則</h2>
         <ul>
           <li><strong>点検・記録義務違反</strong>：50万円以下の罰金</li>
-          <li><strong>廃棄時の行程管理票不発行・無許可業者への委託</strong>：1,000万円以下の罰金（法人・両罰規定あり）</li>
+          <li><strong>行程管理票の記載・保存違反等</strong>：30万円以下の罰金</li>
           <li><strong>漏洩量報告義務違反</strong>（1,000 CO2トン以上）：10万円以下の過料</li>
-          <li><strong>不適正な冷媒充填・回収</strong>：1年以下の懲役または50万円以下の罰金</li>
+          <li><strong>フロン類のみだり放出</strong>：1年以下の懲役または50万円以下の罰金</li>
         </ul>
         <p>環境省・経済産業省・都道府県は立入検査の権限を持ち、書類確認・現場確認が行われます。社名公表の対象になることもあるため、ESGを重視する企業はとくに注意が必要です。</p>
+      </section>
+
+      <section id="sources" class="cl-section">
+        <h2>公式情報の確認先</h2>
+        <p>フロン排出抑制法は、機器区分・冷媒・廃棄方法によって確認事項が変わります。社内ルールや見積条件を作るときは、以下の公式情報も確認してください。</p>
+        <ul class="cl-source-list">
+          <li><a href="https://www.env.go.jp/earth/furon/" target="_blank" rel="noopener">環境省 フロン排出抑制法ポータルサイト</a></li>
+          <li><a href="https://www.meti.go.jp/policy/chemical_management/ozone/index.html" target="_blank" rel="noopener">経済産業省 オゾン層保護・フロン対策</a></li>
+          <li><a href="https://www.env.go.jp/earth/furon/business/" target="_blank" rel="noopener">環境省 事業者向けフロン類対策情報</a></li>
+        </ul>
       </section>
 
       <div class="cl-cta">
@@ -260,12 +349,9 @@ const webPageLd = JSON.stringify({
       <section id="faq" class="cl-section">
         <h2>よくある質問</h2>
         <dl class="cl-faq">
-          <div class="cl-faq-item"><dt>事務所の壁掛けエアコンも対象ですか？</dt><dd>業務用パッケージエアコン（型番で判定）であれば対象です。家庭用ルームエアコンを事務所で使用している場合は対象外（家電リサイクル法）です。</dd></div>
-          <div class="cl-faq-item"><dt>テナント物件で誰が管理者になりますか？</dt><dd>機器の所有者ではなく、実際に使用・管理している事業者（テナント）が管理者となるのが原則です。賃貸契約・付帯機器の取扱いで明確化することが望ましいです。</dd></div>
-          <div class="cl-faq-item"><dt>3か月に1回の簡易点検は本当に必要？</dt><dd>はい、全ての第一種特定製品が対象です。立入時の記録提示を求められるため、四半期ごとに記録簿に記載するルーチン化が必要です。</dd></div>
-          <div class="cl-faq-item"><dt>定期点検を業者に頼むといくらかかりますか？</dt><dd>機種・規模・所在地で大きく変動しますが、1台あたり5,000〜30,000円程度。複数台一括契約で割引される場合が多いです。</dd></div>
-          <div class="cl-faq-item"><dt>機器の引越し・移設時もフロン回収が必要？</dt><dd>移設で冷媒回収を伴う場合は対象になり、充塡回収業者への委託が必要です。同一敷地内の単純移動でガス回収を伴わない場合は対象外です。</dd></div>
-          <div class="cl-faq-item"><dt>記録簿はExcelで作成してもよい？</dt><dd>はい、記載項目（機器情報・点検日・結果・冷媒情報等）が網羅されていれば様式は自由です。環境省・経済産業省提供のテンプレートを活用すると確実です。</dd></div>
+          {faqItems.map((item) => (
+            <div class="cl-faq-item"><dt>{item.q}</dt><dd>{item.a}</dd></div>
+          ))}
         </dl>
       </section>
 
@@ -346,6 +432,11 @@ const webPageLd = JSON.stringify({
 .cl-callout--warn .cl-callout-h { color: #c2410c; }
 .cl-callout ul { padding-left: 18px; margin: 0; }
 .cl-callout li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-answer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 20px 0 24px; }
+.cl-answer-grid > div { background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; padding: 18px 20px; box-shadow: 0 6px 18px rgba(15, 23, 42, .05); }
+.cl-answer-grid h3 { margin-top: 0; color: var(--blue-dark); }
+.cl-source-list { padding-left: 22px; display: grid; gap: 8px; }
+.cl-source-list a { color: var(--blue); text-decoration: underline; }
 .cl-faq { display: grid; gap: 20px; }
 .cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
 .cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
@@ -359,7 +450,7 @@ const webPageLd = JSON.stringify({
 .cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
 .cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
 .cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
-@media (max-width: 600px) { .cl-header { padding: 32px 0 28px; } .cl-body { padding: 28px 16px 48px; } .cl-section h2 { font-size: 1.15rem; } }
+@media (max-width: 600px) { .cl-header { padding: 32px 0 28px; } .cl-body { padding: 28px 16px 48px; } .cl-section h2 { font-size: 1.15rem; } .cl-answer-grid { grid-template-columns: 1fr; } }
 
 .cl-quickanswer {
   background: #eef6ff;
