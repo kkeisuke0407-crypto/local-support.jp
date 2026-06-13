@@ -21,6 +21,7 @@ import BottomCTA from '../components/BottomCTA.astro';
 import AIOSummary from '../components/AIOSummary.astro';
 import PrefectureLocalSection from '../components/PrefectureLocalSection.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
+import ServiceEntryLinks from '../components/ServiceEntryLinks.astro';
 import { site } from '../data/site';
 import { ogImageUrl } from '../data/ogImage';
 import { quoteComparisonChecklist } from '../data/quoteComparisonChecklist';
@@ -199,6 +200,7 @@ const jsonLdBlocks = [breadcrumbLd, serviceLd, webPageLd, faqLd, checklistLd, qu
     { label: prefecture.name },
   ]} />
   <AIOSummary lead={data.aiSummary.lead} facts={data.aiSummary.facts} serviceName={data.serviceName} />
+  <ServiceEntryLinks data={data} prefectureName={prefecture.name} />
   <TrustStrip />
   <PrefectureIntro prefecture={prefecture} service={data} />
   {override?.localSection && (
