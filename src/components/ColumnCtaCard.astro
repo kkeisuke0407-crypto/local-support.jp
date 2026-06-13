@@ -1,7 +1,7 @@
 ---
 /**
  * コラム記事内に挿入するCTAカード（top: 冒頭直後／bottom: 末尾用）
- * - top: 「30秒コスト診断」＋「サービスの一括見積」の2択
+ * - top: 「約60秒・5問コスト診断」＋「サービスの一括見積」の2択
  * - bottom: 既存の cl-cta があるカラムでは使わない
  */
 import type { ServiceData } from '../data/services/_types';
@@ -53,13 +53,13 @@ function formatPrice(value: number) {
         : <>{serviceName}の<strong>業者選び・見積</strong>はロカサポで</>}
     </p>
     <p class="col-cta-sub">
-      個人情報なしで30秒のコスト診断、または実績・信頼のある専門業者ネットワークから最大3社まで一括見積を依頼できます。<br/>
+      個人情報なしで約60秒・5問のコスト診断、または実績・信頼のある専門業者ネットワークから最大3社まで一括見積を依頼できます。<br/>
       <strong>業者をお選びいただくまで、業者からの連絡は来ません。</strong>
     </p>
   </div>
   <div class="col-cta-btns">
     <a href="/audit/" class="col-cta-btn col-cta-btn--primary" data-track={`column_${variant}_audit`}>
-      まず30秒でコスト診断
+      まず60秒でコスト診断
     </a>
     <a href={`/${serviceSlug}/`} class="col-cta-btn col-cta-btn--secondary" data-track={`column_${variant}_quote`}>
       {serviceName}の一括見積を依頼
