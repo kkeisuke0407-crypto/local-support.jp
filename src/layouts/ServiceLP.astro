@@ -10,6 +10,7 @@ import CostTable from '../components/CostTable.astro';
 import IndustrySection from '../components/IndustrySection.astro';
 import SelectionChecklist from '../components/SelectionChecklist.astro';
 import MistakesSection from '../components/MistakesSection.astro';
+import QuoteComparisonChecklist from '../components/QuoteComparisonChecklist.astro';
 import ComparisonTipsSection from '../components/ComparisonTipsSection.astro';
 import QuoteFormFull from '../components/QuoteFormFull.astro';
 import FAQ from '../components/FAQ.astro';
@@ -20,6 +21,7 @@ import AIOSummary from '../components/AIOSummary.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import { site } from '../data/site';
 import { ogImageUrl } from '../data/ogImage';
+import { quoteComparisonChecklist } from '../data/quoteComparisonChecklist';
 import type { ServiceData } from '../data/services/_types';
 
 interface Props { data: ServiceData; }
@@ -140,7 +142,23 @@ const checklistLd = JSON.stringify({
     description: c.body,
   })),
 });
-const jsonLdBlocks = [breadcrumbLd, serviceLd, webPageLd, faqLd, checklistLd, priceLd].filter(Boolean) as string[];
+
+const quoteComparisonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: `${data.serviceName}の見積比較チェックリスト`,
+  description: `${data.serviceName}の見積書を比較するときに確認すべき${quoteComparisonChecklist.length}項目`,
+  itemListOrder: 'https://schema.org/ItemListOrderAscending',
+  numberOfItems: quoteComparisonChecklist.length,
+  itemListElement: quoteComparisonChecklist.map((item, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: item.label,
+    description: `${item.check}。見落とすと${item.risk}。`,
+  })),
+});
+
+const jsonLdBlocks = [breadcrumbLd, serviceLd, webPageLd, faqLd, checklistLd, quoteComparisonLd, priceLd].filter(Boolean) as string[];
 ---
 <BaseLayout
   title={data.meta.title}
@@ -164,6 +182,7 @@ const jsonLdBlocks = [breadcrumbLd, serviceLd, webPageLd, faqLd, checklistLd, pr
   <IndustrySection industries={data.industries} serviceName={data.serviceName} />
   <SelectionChecklist criteria={data.selectionCriteria} serviceName={data.serviceName} />
   <MistakesSection mistakes={data.mistakes} serviceName={data.serviceName} />
+  <QuoteComparisonChecklist serviceName={data.serviceName} />
   <ComparisonTipsSection tips={data.comparisonTips} serviceName={data.serviceName} />
   <QuoteFormFull data={data} />
   <FAQ faq={data.faq} serviceName={data.serviceName} />
