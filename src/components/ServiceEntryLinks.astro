@@ -1,0 +1,213 @@
+---
+import type { ServiceData } from '../data/services/_types';
+import { serviceBySlug } from '../data/services';
+import { findServiceCategory, getCategoryHref } from '../data/serviceCategories';
+
+interface Props {
+  data: ServiceData;
+  prefectureName?: string;
+}
+
+const { data, prefectureName } = Astro.props;
+const category = findServiceCategory(data.slug);
+const categoryServices = category
+  ? category.serviceSlugs
+      .map((slug) => serviceBySlug[slug])
+      .filter((service): service is ServiceData => Boolean(service) && service.slug !== data.slug)
+      .slice(0, 4)
+  : [];
+const relatedColumns = data.relatedColumns?.slice(0, 3) ?? [];
+const pageContext = prefectureName ? `${prefectureName}の${data.serviceName}` : data.serviceName;
+---
+{category && (
+  <section class="service-entry-links" aria-label={`${pageContext}の関連導線`}>
+    <div class="sd-container">
+      <div class="sel-card">
+        <div class="sel-main">
+          <p class="sel-eyebrow">関連するカテゴリ</p>
+          <h2>{pageContext}を検討中の方へ</h2>
+          <p>
+            {data.serviceName}は
+            <a href={getCategoryHref(category.slug)}>{category.label}</a>
+            に含まれる施設管理サービスです。法令義務・費用相場・見積比較ポイントを、カテゴリ単位でも確認できます。
+          </p>
+          <a class="sel-category-link" href={getCategoryHref(category.slug)}>
+            {category.label}のカテゴリハブを見る
+          </a>
+        </div>
+
+        <div class="sel-side">
+          {categoryServices.length > 0 && (
+            <div class="sel-block">
+              <h3>同じカテゴリのサービス</h3>
+              <ul class="sel-link-list">
+                {categoryServices.map((service) => (
+                  <li><a href={`/${service.slug}/`}>{service.serviceName}</a></li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {relatedColumns.length > 0 && (
+            <div class="sel-block">
+              <h3>見積前に読むコラム</h3>
+              <ul class="sel-column-list">
+                {relatedColumns.map((column) => (
+                  <li>
+                    <a href={column.href}>
+                      <span>{column.category}</span>
+                      <strong>{column.title}</strong>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+)}
+
+<style>
+  .service-entry-links {
+    padding: 28px 0;
+    background: linear-gradient(180deg, #fff 0%, #f8fbff 100%);
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .sel-card {
+    display: grid;
+    grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+    gap: 24px;
+    padding: 24px;
+    border: 1px solid rgba(26, 86, 219, .16);
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, .05);
+  }
+
+  .sel-eyebrow {
+    display: inline-flex;
+    margin: 0 0 8px;
+    color: var(--blue);
+    font-size: .76rem;
+    font-weight: 900;
+    letter-spacing: .08em;
+  }
+
+  .sel-main h2 {
+    margin: 0 0 10px;
+    color: var(--gray-900);
+    font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+    line-height: 1.45;
+  }
+
+  .sel-main p {
+    margin: 0 0 16px;
+    color: var(--gray-700);
+    line-height: 1.85;
+    font-size: .92rem;
+  }
+
+  .sel-main p a,
+  .sel-link-list a,
+  .sel-column-list a {
+    color: var(--blue);
+    text-decoration: none;
+  }
+
+  .sel-main p a:hover,
+  .sel-link-list a:hover,
+  .sel-column-list a:hover {
+    text-decoration: underline;
+  }
+
+  .sel-category-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 16px;
+    border-radius: 999px;
+    background: var(--blue);
+    color: #fff;
+    font-size: .88rem;
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  .sel-category-link:hover { opacity: .9; }
+
+  .sel-side {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .sel-block {
+    padding: 18px;
+    border-radius: 14px;
+    background: var(--gray-100);
+  }
+
+  .sel-block h3 {
+    margin: 0 0 12px;
+    color: var(--gray-900);
+    font-size: .95rem;
+  }
+
+  .sel-link-list,
+  .sel-column-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 8px;
+  }
+
+  .sel-link-list a {
+    display: block;
+    padding: 9px 10px;
+    border-radius: 10px;
+    background: #fff;
+    font-size: .86rem;
+    font-weight: 800;
+  }
+
+  .sel-column-list a {
+    display: block;
+    padding: 10px;
+    border-radius: 10px;
+    background: #fff;
+  }
+
+  .sel-column-list span {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--gray-500);
+    font-size: .72rem;
+    font-weight: 800;
+  }
+
+  .sel-column-list strong {
+    display: -webkit-box;
+    overflow: hidden;
+    color: var(--gray-900);
+    font-size: .82rem;
+    line-height: 1.55;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  @media (max-width: 860px) {
+    .sel-card,
+    .sel-side {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .service-entry-links { padding: 22px 0; }
+    .sel-card { padding: 18px; }
+  }
+</style>
