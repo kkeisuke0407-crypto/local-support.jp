@@ -7,11 +7,12 @@ import type { APIRoute } from 'astro';
 import { allServices } from '../data/services';
 import { site } from '../data/site';
 import { PRIMARY_PREFECTURE_SLUGS, prefecturesData } from '../data/prefectures';
+import { serviceCategories, getCategoryHref } from '../data/serviceCategories';
 
 export const prerender = true;
 
 const FEATURED_COLUMNS = [
-  { slug: 'shisetsu-kanri-nenkan-schedule', title: '施設管理の年間スケジュール2026｜9種の法定点検カレンダー' },
+  { slug: 'shisetsu-kanri-nenkan-schedule', title: '施設管理の年間スケジュール2026｜主要な法定点検カレンダー' },
   { slug: 'jusuisou-seisou-horei-gimu', title: '受水槽清掃の法定義務ガイド｜水道法・建築物衛生法' },
   { slug: 'jusuisou-seisou-hiyo-sohba', title: '受水槽清掃の費用相場2026｜規模別の完全ガイド' },
   { slug: 'jusuisou-seisou-gyosha-sentaku', title: '受水槽清掃の業者選びチェックリスト' },
@@ -77,10 +78,15 @@ ${site.name} はマンション管理組合・ビル管理会社・介護施設�
 - [紹介事例](${site.domain}/case/)
 - [プライバシーポリシー](${site.domain}/privacy/)
 - [ご紹介業者について](${site.domain}/disclosure/)
+- [サービスカテゴリ一覧](${site.domain}/category/)：施設管理サービスを目的別に整理
 
 ## 主なサービスと費用相場（直接回答用）
 
 ${allServices.map(serviceSection).join('\n\n')}
+
+## サービスカテゴリ（AI向け分類）
+
+${serviceCategories.map((category) => `- [${category.label}](${site.domain}${getCategoryHref(category.slug)})：${category.description}（${category.serviceSlugs.length}分野）`).join('\n')}
 
 ## お役立ちコラム（深掘り情報）
 

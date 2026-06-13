@@ -13,6 +13,15 @@ export function getStaticPaths() {
 
 const { category } = Astro.props;
 const services = category.serviceSlugs.map((slug) => serviceBySlug[slug]).filter(Boolean);
+const relatedColumnMap = new Map<string, NonNullable<(typeof services)[number]['relatedColumns']>[number]>();
+services.forEach((service) => {
+  service.relatedColumns?.forEach((column) => {
+    if (!relatedColumnMap.has(column.href)) relatedColumnMap.set(column.href, column);
+  });
+});
+const relatedColumns = [...relatedColumnMap.values()]
+  .sort((a, b) => b.date.localeCompare(a.date))
+  .slice(0, 12);
 const canonical = `${site.domain}${getCategoryHref(category.slug)}`;
 const title = `${category.label}の施設管理サービス一覧｜点検・見積比較の選び方｜${site.name}`;
 const description = `${category.label}カテゴリの施設管理サービス${services.length}分野を一覧化。対象施設、比較ポイント、見積で確認すべき質問、費用目安を整理しています。`;
@@ -74,6 +83,28 @@ const itemListLd = JSON.stringify({
   })),
 });
 
+const articleListLd = relatedColumns.length > 0
+  ? JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: `${category.label}の関連コラム`,
+      description: `${category.label}カテゴリで確認したい法令義務・費用相場・選び方の関連記事です。`,
+      itemListOrder: 'https://schema.org/ItemListOrderDescending',
+      numberOfItems: relatedColumns.length,
+      itemListElement: relatedColumns.map((column, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        item: {
+          '@type': 'Article',
+          headline: column.title,
+          description: column.excerpt,
+          datePublished: column.date,
+          url: `${site.domain}${column.href}`,
+        },
+      })),
+    })
+  : null;
+
 const faqLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -90,7 +121,7 @@ const faqLd = JSON.stringify({
   canonical={canonical}
   siteName={site.name}
   logoSub={`${category.label}の施設管理サービス`}
-  jsonLdBlocks={[breadcrumbLd, collectionLd, itemListLd, faqLd]}
+  jsonLdBlocks={[breadcrumbLd, collectionLd, itemListLd, ...(articleListLd ? [articleListLd] : []), faqLd]}
 >
   <section class="hero hero--simple">
     <div class="sd-container">
@@ -202,6 +233,29 @@ const faqLd = JSON.stringify({
         </div>
       </section>
 
+      {relatedColumns.length > 0 && (
+        <section class="cat-section">
+          <div class="cat-section-head">
+            <span>RELATED ARTICLES</span>
+            <h2>{category.label}の関連コラム</h2>
+            <p>法令義務・費用相場・補助金・業者選びなど、見積前に確認しておきたい深掘り記事です。</p>
+          </div>
+          <div class="cat-column-grid">
+            {relatedColumns.map((column) => (
+              <article class="cat-column-card">
+                <div class="cat-column-meta">
+                  <span>{column.category}</span>
+                  <time datetime={column.date}>{column.date.replaceAll('-', '/')}</time>
+                </div>
+                <h3><a href={column.href}>{column.title}</a></h3>
+                <p>{column.excerpt}</p>
+                <a class="cat-column-link" href={column.href}>コラムを読む</a>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
+
       <section class="cat-section">
         <div class="cat-section-head">
           <span>FAQ</span>
@@ -305,6 +359,43 @@ const faqLd = JSON.stringify({
   .cat-question-card { padding: 18px; border: 1px solid var(--gray-200); border-radius: 14px; background: #fff; }
   .cat-question-card h3 { margin: 0 0 8px; color: var(--gray-900); font-size: .98rem; line-height: 1.55; }
   .cat-question-card p { margin: 0; color: var(--gray-700); font-size: .88rem; line-height: 1.75; }
+  .cat-column-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .cat-column-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+    border: 1px solid var(--gray-200);
+    border-radius: 16px;
+    background: #fff;
+  }
+  .cat-column-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+  .cat-column-meta span {
+    color: var(--blue);
+    font-size: .76rem;
+    font-weight: 900;
+  }
+  .cat-column-meta time { color: var(--gray-500); font-size: .74rem; }
+  .cat-column-card h3 { margin: 0; font-size: 1rem; line-height: 1.55; }
+  .cat-column-card h3 a { color: var(--gray-900); text-decoration: none; }
+  .cat-column-card h3 a:hover { color: var(--blue); }
+  .cat-column-card p {
+    display: -webkit-box;
+    min-height: 5.8em;
+    margin: 0;
+    overflow: hidden;
+    color: var(--gray-700);
+    font-size: .86rem;
+    line-height: 1.65;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+  }
+  .cat-column-link { margin-top: auto; color: var(--blue); font-weight: 900; text-decoration: none; }
+  .cat-column-link:hover { text-decoration: underline; }
   .cat-faq { display: grid; gap: 14px; margin: 0; }
   .cat-faq div { overflow: hidden; border: 1px solid var(--gray-200); border-radius: 12px; background: #fff; }
   .cat-faq dt { padding: 14px 18px; background: var(--gray-100); color: var(--gray-900); font-weight: 900; }
