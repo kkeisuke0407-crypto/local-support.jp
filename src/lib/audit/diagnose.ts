@@ -4,7 +4,7 @@ import { servicePoints, levelOf, LEVEL_META } from './rules.ts';
 import { buildReasons } from './reasons.ts';
 
 /**
- * 4問の入力から診断結果を組み立てる。
+ * 5問の入力から診断結果を組み立てる。
  *  - 各サービスのリスク点 → 優先度（高/中/低）
  *  - 優先度の高い順に並べ替え
  *  - 施設管理リスクスコア（100 = 健全）を算出
