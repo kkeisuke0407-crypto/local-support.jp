@@ -1,7 +1,7 @@
 ---
 import { serviceIndex } from '../data/site';
 import { prefectureBySlug } from '../data/prefectures';
-import { findServiceCategory } from '../data/serviceCategories';
+import { findServiceCategory, getCategoryHref } from '../data/serviceCategories';
 interface Props { currentSlug: string; relatedSlugs: string[]; }
 const { currentSlug, relatedSlugs } = Astro.props;
 const related = relatedSlugs
@@ -44,7 +44,7 @@ const serviceLabel = (service: (typeof serviceIndex)[number]) => prefecture
       {category && categoryRelated.length > 0 && (
         <div class="related-category">
           <div class="related-category-head">
-            <span>{category.label}</span>
+            <a class="related-category-kicker" href={getCategoryHref(category.slug)}>{category.label}</a>
             <h3>{prefecture ? `${prefecture.name}で同じカテゴリのサービス` : '同じカテゴリのサービス'}</h3>
             <p>{category.description}</p>
           </div>
@@ -76,13 +76,18 @@ const serviceLabel = (service: (typeof serviceIndex)[number]) => prefecture
     margin-bottom: 18px;
   }
 
-  .related-category-head span {
+  .related-category-kicker {
     display: inline-flex;
     margin-bottom: 8px;
     color: var(--primary);
     font-size: 13px;
     font-weight: 800;
     letter-spacing: 0.04em;
+    text-decoration: none;
+  }
+
+  .related-category-kicker:hover {
+    text-decoration: underline;
   }
 
   .related-category-head h3 {

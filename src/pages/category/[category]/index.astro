@@ -1,0 +1,327 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { site } from '../../../data/site';
+import { serviceCategories, getCategoryHref } from '../../../data/serviceCategories';
+import { serviceBySlug } from '../../../data/services';
+
+export function getStaticPaths() {
+  return serviceCategories.map((category) => ({
+    params: { category: category.slug },
+    props: { category },
+  }));
+}
+
+const { category } = Astro.props;
+const services = category.serviceSlugs.map((slug) => serviceBySlug[slug]).filter(Boolean);
+const canonical = `${site.domain}${getCategoryHref(category.slug)}`;
+const title = `${category.label}の施設管理サービス一覧｜点検・見積比較の選び方｜${site.name}`;
+const description = `${category.label}カテゴリの施設管理サービス${services.length}分野を一覧化。対象施設、比較ポイント、見積で確認すべき質問、費用目安を整理しています。`;
+
+const yenFormatter = new Intl.NumberFormat('ja-JP');
+const priceText = (service: (typeof services)[number]) => {
+  const fact = service.aiSummary.facts.find((item) => item.label.includes('費用'));
+  if (fact) return fact.value;
+  const range = service.costGuide.priceRange;
+  return range
+    ? `${yenFormatter.format(range.min)}〜${yenFormatter.format(range.max)}円`
+    : service.costGuide.table.rows[0]?.[1] ?? '個別見積';
+};
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'カテゴリ一覧', item: `${site.domain}/category/` },
+    { '@type': 'ListItem', position: 3, name: category.label, item: canonical },
+  ],
+});
+
+const collectionLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@id': `${site.domain}/#website` },
+  publisher: { '@id': `${site.domain}/#organization` },
+  about: category.serviceSlugs.map((slug) => ({
+    '@type': 'Service',
+    name: serviceBySlug[slug]?.serviceName,
+    url: `${site.domain}/${slug}/`,
+  })),
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cat-answer', '.cat-faq dt', '.cat-faq dd'],
+  },
+});
+
+const itemListLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: `${category.label}の施設管理サービス一覧`,
+  description: category.summary,
+  itemListOrder: 'https://schema.org/ItemListOrderAscending',
+  numberOfItems: services.length,
+  itemListElement: services.map((service, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: service.serviceName,
+    description: service.meta.description,
+    url: `${site.domain}/${service.slug}/`,
+  })),
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: category.faq.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+});
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub={`${category.label}の施設管理サービス`}
+  jsonLdBlocks={[breadcrumbLd, collectionLd, itemListLd, faqLd]}
+>
+  <section class="hero hero--simple">
+    <div class="sd-container">
+      <h1 class="hero-h1">{category.label}の施設管理サービス</h1>
+      <p class="hero-sub-simple">{category.description}</p>
+    </div>
+  </section>
+
+  <section class="sd-section section-white">
+    <div class="sd-container cat-detail">
+      <div class="cat-answer">
+        <span class="cat-kicker">CATEGORY GUIDE</span>
+        <p>{category.summary}</p>
+      </div>
+
+      <section class="cat-section">
+        <div class="cat-section-head">
+          <span>{services.length} SERVICES</span>
+          <h2>{category.label}に含まれるサービス</h2>
+          <p>必要な業務が決まっている場合は、各サービスページで費用相場・法令義務・見積比較ポイントを確認できます。</p>
+        </div>
+        <div class="cat-service-grid">
+          {services.map((service) => (
+            <article class="cat-service-card">
+              <div class="cat-service-meta">
+                <span>{service.serviceShortLabel}</span>
+                <time datetime={service.meta.lastUpdated}>更新日 {service.meta.lastUpdated.replaceAll('-', '/')}</time>
+              </div>
+              <h3><a href={`/${service.slug}/`}>{service.serviceName}</a></h3>
+              <p>{service.aiSummary.lead}</p>
+              <dl>
+                <div><dt>費用目安</dt><dd>{priceText(service)}</dd></div>
+                <div><dt>主な確認</dt><dd>{service.selectionCriteria[0]?.title ?? '業者要件・作業範囲の確認'}</dd></div>
+              </dl>
+              <a class="cat-service-link" href={`/${service.slug}/`}>詳しく見る</a>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section class="cat-section">
+        <div class="cat-section-head">
+          <span>COMPARE</span>
+          <h2>サービス選びの比較表</h2>
+          <p>同じカテゴリ内でも、法令上の義務、業者資格、見積で見るべき範囲は異なります。</p>
+        </div>
+        <div class="cat-table-wrap">
+          <table class="cat-table">
+            <thead>
+              <tr>
+                <th>サービス</th>
+                <th>主な用途</th>
+                <th>費用目安</th>
+                <th>確認すべき業者条件</th>
+              </tr>
+            </thead>
+            <tbody>
+              {services.map((service) => (
+                <tr>
+                  <th><a href={`/${service.slug}/`}>{service.serviceName}</a></th>
+                  <td>{service.industries.slice(0, 3).map((item) => item.title).join('・')}</td>
+                  <td>{priceText(service)}</td>
+                  <td>{service.selectionCriteria.slice(0, 2).map((item) => item.title).join('、')}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="cat-section cat-two-col">
+        <div>
+          <div class="cat-section-head">
+            <span>FACILITIES</span>
+            <h2>対象になりやすい施設</h2>
+          </div>
+          <ul class="cat-chip-list">
+            {category.targetFacilities.map((facility) => <li>{facility}</li>)}
+          </ul>
+        </div>
+        <div>
+          <div class="cat-section-head">
+            <span>CHECKPOINTS</span>
+            <h2>比較時の判断ポイント</h2>
+          </div>
+          <ol class="cat-point-list">
+            {category.decisionPoints.map((point) => (
+              <li>
+                <strong>{point.label}</strong>
+                <span>{point.description}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section class="cat-section">
+        <div class="cat-section-head">
+          <span>QUOTE QUESTIONS</span>
+          <h2>見積前に業者へ確認する質問</h2>
+        </div>
+        <div class="cat-question-grid">
+          {category.comparisonQuestions.map((item) => (
+            <div class="cat-question-card">
+              <h3>{item.question}</h3>
+              <p>{item.guidance}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="cat-section">
+        <div class="cat-section-head">
+          <span>FAQ</span>
+          <h2>{category.label}のよくある質問</h2>
+        </div>
+        <dl class="cat-faq">
+          {category.faq.map((item) => (
+            <div>
+              <dt>{item.q}</dt>
+              <dd>{item.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <div class="cat-bottom-cta">
+        <h2>必要なサービスが決まっていない場合も相談できます</h2>
+        <p>施設の種類・設備状況・期限をもとに、該当しやすい点検・清掃・工事を整理してから見積依頼できます。</p>
+        <a href="/#contact">無料で相談する</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .cat-detail { max-width: 1080px; }
+  .cat-answer {
+    margin: 0 auto 44px;
+    padding: 24px 28px;
+    border: 1px solid rgba(26, 86, 219, 0.18);
+    border-radius: 18px;
+    background: linear-gradient(135deg, #eff6ff 0%, #fff 100%);
+  }
+  .cat-kicker,
+  .cat-section-head span {
+    display: inline-flex;
+    margin-bottom: 8px;
+    color: var(--blue);
+    font-size: .76rem;
+    font-weight: 900;
+    letter-spacing: .08em;
+  }
+  .cat-answer p { margin: 0; color: var(--gray-800); line-height: 1.95; font-size: 1rem; }
+  .cat-section { margin-bottom: 56px; }
+  .cat-section-head { max-width: 800px; margin-bottom: 20px; }
+  .cat-section-head h2 { margin: 0 0 8px; color: var(--gray-900); font-size: clamp(1.3rem, 3vw, 1.8rem); }
+  .cat-section-head p { margin: 0; color: var(--gray-700); line-height: 1.8; }
+  .cat-service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 18px;
+  }
+  .cat-service-card {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 22px;
+    border: 1px solid var(--gray-200);
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.05);
+  }
+  .cat-service-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+  .cat-service-meta span { color: var(--blue); font-size: .78rem; font-weight: 900; }
+  .cat-service-meta time { color: var(--gray-500); font-size: .76rem; }
+  .cat-service-card h3 { margin: 0; font-size: 1.05rem; line-height: 1.5; }
+  .cat-service-card h3 a { color: var(--gray-900); text-decoration: none; }
+  .cat-service-card h3 a:hover { color: var(--blue); }
+  .cat-service-card p {
+    display: -webkit-box;
+    min-height: 6.8em;
+    margin: 0;
+    overflow: hidden;
+    color: var(--gray-700);
+    font-size: .88rem;
+    line-height: 1.7;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+  }
+  .cat-service-card dl { display: grid; gap: 8px; margin: 0; }
+  .cat-service-card dl div { padding: 10px 12px; border-radius: 10px; background: var(--gray-100); }
+  .cat-service-card dt { color: var(--gray-500); font-size: .72rem; font-weight: 800; }
+  .cat-service-card dd { margin: 3px 0 0; color: var(--gray-900); font-size: .84rem; font-weight: 700; line-height: 1.6; }
+  .cat-service-link { margin-top: auto; color: var(--blue); font-weight: 900; text-decoration: none; }
+  .cat-service-link:hover { text-decoration: underline; }
+  .cat-table-wrap { overflow-x: auto; border: 1px solid var(--gray-200); border-radius: 14px; }
+  .cat-table { width: 100%; min-width: 780px; border-collapse: collapse; background: #fff; font-size: .88rem; }
+  .cat-table th,
+  .cat-table td { padding: 14px 16px; border-bottom: 1px solid var(--gray-200); text-align: left; vertical-align: top; line-height: 1.65; }
+  .cat-table thead th { background: var(--gray-100); color: var(--gray-700); font-weight: 900; }
+  .cat-table tbody th { width: 24%; font-weight: 900; }
+  .cat-table a { color: var(--blue); text-decoration: none; }
+  .cat-table a:hover { text-decoration: underline; }
+  .cat-two-col { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 28px; }
+  .cat-chip-list { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+  .cat-chip-list li { padding: 9px 12px; border: 1px solid rgba(26, 86, 219, .16); border-radius: 999px; background: #f8fbff; color: var(--gray-800); font-weight: 800; font-size: .86rem; }
+  .cat-point-list { padding-left: 22px; margin: 0; display: grid; gap: 14px; }
+  .cat-point-list li { color: var(--gray-700); line-height: 1.75; }
+  .cat-point-list strong { display: block; color: var(--gray-900); margin-bottom: 3px; }
+  .cat-question-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .cat-question-card { padding: 18px; border: 1px solid var(--gray-200); border-radius: 14px; background: #fff; }
+  .cat-question-card h3 { margin: 0 0 8px; color: var(--gray-900); font-size: .98rem; line-height: 1.55; }
+  .cat-question-card p { margin: 0; color: var(--gray-700); font-size: .88rem; line-height: 1.75; }
+  .cat-faq { display: grid; gap: 14px; margin: 0; }
+  .cat-faq div { overflow: hidden; border: 1px solid var(--gray-200); border-radius: 12px; background: #fff; }
+  .cat-faq dt { padding: 14px 18px; background: var(--gray-100); color: var(--gray-900); font-weight: 900; }
+  .cat-faq dd { margin: 0; padding: 14px 18px; color: var(--gray-700); line-height: 1.85; }
+  .cat-bottom-cta {
+    padding: 32px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%);
+    color: #fff;
+    text-align: center;
+  }
+  .cat-bottom-cta h2 { margin: 0 0 10px; font-size: 1.35rem; }
+  .cat-bottom-cta p { margin: 0 auto 20px; max-width: 760px; opacity: .92; line-height: 1.8; }
+  .cat-bottom-cta a { display: inline-flex; justify-content: center; padding: 12px 22px; border-radius: 999px; background: #fff; color: var(--blue); font-weight: 900; text-decoration: none; }
+  @media (max-width: 720px) {
+    .cat-two-col { grid-template-columns: 1fr; }
+    .cat-answer { padding: 20px; }
+    .cat-bottom-cta { padding: 26px 20px; }
+  }
+</style>

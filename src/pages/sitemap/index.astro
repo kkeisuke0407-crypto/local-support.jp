@@ -3,9 +3,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { site } from '../../data/site';
 import { allServices } from '../../data/services';
 import { prefecturesData } from '../../data/prefectures';
+import { serviceCategories, getCategoryHref } from '../../data/serviceCategories';
 
 const title = `サイトマップ｜${site.name}`;
-const description = `${site.name}の全ページ一覧。9サービス×47都道府県のサービスページ、コラム記事、運営情報など、サイト内すべてのページを一覧で確認できます。`;
+const description = `${site.name}の全ページ一覧。${allServices.length}サービス×47都道府県のサービスページ、カテゴリページ、コラム記事、運営情報など、サイト内すべてのページを一覧で確認できます。`;
 const canonical = `${site.domain}/sitemap/`;
 
 // 地方ブロックでグルーピング
@@ -92,8 +93,18 @@ const breadcrumbLd = JSON.stringify({
       </div>
 
       <div class="sm-block">
+        <h2 class="sm-h2">サービスカテゴリ</h2>
+        <ul class="sm-list sm-list--cols">
+          <li><a href="/category/">カテゴリ一覧</a></li>
+          {serviceCategories.map((category) => (
+            <li><a href={getCategoryHref(category.slug)}>{category.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="sm-block">
         <h2 class="sm-h2">都道府県別サービスページ</h2>
-        <p class="sm-note">9サービス×47都道府県のページがあります。各サービスから地域を選択してください。</p>
+        <p class="sm-note">{allServices.length}サービス×47都道府県のページがあります。各サービスから地域を選択してください。</p>
 
         {allServices.map((s) => (
           <div class="sm-svc">
