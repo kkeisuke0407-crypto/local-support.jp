@@ -2,8 +2,12 @@
 import type { ServiceData } from '../data/services/_types';
 import QuoteFormCompact from './QuoteFormCompact.astro';
 import { site } from '../data/site';
-interface Props { data: ServiceData; }
-const { data } = Astro.props;
+interface Props {
+  data: ServiceData;
+  headline?: string;
+  subheadline?: string;
+}
+const { data, headline = data.hero.headline, subheadline = data.hero.subheadline } = Astro.props;
 const updatedJa = new Date(data.meta.lastUpdated).toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
 const heroImageVersion = '20260529-office-cleanup';
 const heroImage = `/images/services/hero-${data.slug}.webp?v=${heroImageVersion}`;
@@ -12,8 +16,8 @@ const heroImage = `/images/services/hero-${data.slug}.webp?v=${heroImageVersion}
   <div class="sd-container-wide hero-grid">
     <div class="hero-copy">
       <div class="hero-eyebrow">{data.hero.eyebrow}</div>
-      <h1 class="hero-h1">{data.hero.headline}</h1>
-      <h2 class="hero-h2">{data.hero.subheadline}</h2>
+      <h1 class="hero-h1">{headline}</h1>
+      <h2 class="hero-h2">{subheadline}</h2>
       <ul class="hero-bullets">
         {data.hero.bullets.map((b) => (
           <li>
