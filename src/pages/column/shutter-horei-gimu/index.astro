@@ -3,11 +3,69 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
-const title = 'シャッター点検の法令義務ガイド2026｜建築基準法第12条・防火設備検査の要点と罰則';
-const description = '建築基準法第12条に基づく防火シャッターの定期検査義務を施設管理担当者向けに解説。特定建築物の対象範囲、年1回の検査・報告書提出義務、防火設備検査員の資格要件、100万円以下の罰金リスクまで2026年最新版でまとめました。';
+const title = '防火シャッター定期検査報告ガイド2026｜建築基準法第12条・防火設備検査の対象と罰則';
+const description = '建築基準法第12条第3項に基づく防火設備定期検査報告を施設管理担当者向けに解説。防火シャッターが対象になる建物・設備、随時閉鎖式と常時閉鎖式の違い、防火設備検査員の資格要件、消防設備点検との違い、報告なし・虚偽報告時の100万円以下の罰金まで2026年版で整理。';
 const canonical = `${site.domain}/column/shutter-horei-gimu/`;
 const published = '2026-05-27';
-const modified = '2026-05-27';
+const modified = '2026-06-15';
+
+const officialSources = [
+  {
+    title: '建築基準法 第12条・第101条｜e-Gov法令検索',
+    url: 'https://laws.e-gov.go.jp/law/325AC0000000201',
+  },
+  {
+    title: '建築基準法に基づく定期報告制度について｜国土交通省',
+    url: 'https://www.mlit.go.jp/jutakukentiku/build/jutakukentiku_house_tk_000039.html',
+  },
+  {
+    title: 'オンラインを活用した定期報告について｜国土交通省',
+    url: 'https://www.mlit.go.jp/jutakukentiku/build/jutakukentiku_house_tk_000160.html',
+  },
+  {
+    title: '防火設備定期検査報告に関するQ&A｜東京都都市整備局',
+    url: 'https://www.toshiseibi.metro.tokyo.lg.jp/kenchiku_kaihatsu/kenchiku_kakunin/chousa-houkoku/12_2',
+  },
+  {
+    title: '定期報告制度について｜大阪建築防災センター',
+    url: 'https://www.okbc.or.jp/report/owner/',
+  },
+];
+
+const faqItems = [
+  {
+    q: '防火シャッターの定期検査は法律で義務ですか？',
+    a: 'はい。対象建築物に設置された随時閉鎖式または作動できる防火設備は、建築基準法第12条第3項に基づく防火設備定期検査報告の対象です。対象建物・対象設備は所在地の特定行政庁の指定と確認申請書等で確認します。',
+  },
+  {
+    q: 'すべてのシャッターが年1回の法定検査対象ですか？',
+    a: 'いいえ。一般の店舗シャッターや倉庫シャッターが必ず建築基準法第12条の報告対象になるわけではありません。防火区画など建築基準関係規定に基づいて設置された防火シャッターで、対象建築物にあるものを確認します。',
+  },
+  {
+    q: '対象となる防火設備は何ですか？',
+    a: '代表例は、煙や熱を感知して閉鎖する防火扉、防火シャッター、耐火クロススクリーン、ドレンチャー等です。防火ダンパーは建築設備定期検査側の対象で、防煙垂れ壁は防火設備定期検査報告の対象とは扱われません。',
+  },
+  {
+    q: '防火設備検査員とはどのような資格ですか？',
+    a: '防火設備定期検査を行う資格者です。一級建築士・二級建築士も防火設備の検査資格者として扱われます。報告書作成まで依頼する場合は、資格者名・資格番号・提出代行範囲を見積もり時に確認してください。',
+  },
+  {
+    q: '消防設備点検をしていれば防火設備定期検査は不要ですか？',
+    a: '不要にはなりません。消防法に基づく消防設備点検と、建築基準法第12条第3項に基づく防火設備定期検査報告は別制度です。感知器や連動制御盤の確認では連携しますが、提出先・様式・検査者資格が異なります。',
+  },
+  {
+    q: '定期報告をしないとどうなりますか？',
+    a: '建築基準法第101条により、第12条第3項の報告をしない場合や虚偽の報告をした場合は100万円以下の罰金対象です。事故時には維持管理記録の不備が民事責任・刑事責任の争点になる可能性があります。',
+  },
+  {
+    q: '検査で要是正になった場合はどうすればいいですか？',
+    a: '不具合内容を確認し、修理・調整・部品交換などの是正計画を立てます。改善報告の要否や期限は特定行政庁の運用に従うため、報告書提出前後で調査資格者または行政窓口に確認してください。',
+  },
+  {
+    q: '常時閉鎖式の防火扉や防火シャッターも対象ですか？',
+    a: '自治体や設備の状態により扱いが変わります。東京都のQ&Aでは、常時閉鎖した状態で維持管理されている防火設備は定期検査報告の対象外として扱う場合がある一方、図面への記載や使用再開前の確認が求められます。所在地の運用を確認してください。',
+  },
+];
 
 const breadcrumbLd = JSON.stringify({
   '@context': 'https://schema.org',
@@ -15,7 +73,7 @@ const breadcrumbLd = JSON.stringify({
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
     { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
-    { '@type': 'ListItem', position: 3, name: 'シャッター点検の法令義務ガイド', item: canonical },
+    { '@type': 'ListItem', position: 3, name: '防火シャッター定期検査報告ガイド', item: canonical },
   ],
 });
 
@@ -36,29 +94,17 @@ const articleLd = JSON.stringify({
   publisher: { '@id': `${site.domain}/#organization` },
   image: { '@type': 'ImageObject', url: `${site.domain}/og-shutter.png`, width: 1200, height: 630 },
   about: { '@type': 'Service', name: 'シャッター点検・修理' },
-  citation: [
-    { '@type': 'Legislation', name: '建築基準法第12条' },
-    { '@type': 'Legislation', name: '消防法' },
-  ],
+  citation: officialSources.map((source) => source.url),
 });
 
 const faqLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: [
-    { '@type': 'Question', name: '防火シャッターの点検は法律で義務付けられていますか？', acceptedAnswer: { '@type': 'Answer', text: 'はい。建築基準法第12条第3項に基づき、特定建築物に設置された防火設備（防火シャッター・防火扉等）は、1年に1回、防火設備検査員（または一級・二級建築士等）による検査と特定行政庁への報告書提出が義務付けられています。' } },
-    { '@type': 'Question', name: 'どのような建物が対象ですか？', acceptedAnswer: { '@type': 'Answer', text: '不特定多数が利用する「特定建築物」が対象です。具体的には劇場・映画館・病院・ホテル・旅館・百貨店・マーケット・学校・共同住宅等の用途で、一定規模以上のものが対象となります。対象の用途・規模は特定行政庁（都道府県・政令市）が条例で定めているため、所在地の特定行政庁に確認してください。' } },
-    { '@type': 'Question', name: '定期報告を怠るとどうなりますか？', acceptedAnswer: { '@type': 'Answer', text: '建築基準法第101条第1項第4号により、定期報告義務に違反した場合は100万円以下の罰金の対象となります。また、虚偽の報告をした場合も同様の罰則があります。火災時に防火シャッターが作動しなかった場合は管理者の民事責任（損害賠償）も問われます。' } },
-    { '@type': 'Question', name: '防火設備検査員とはどのような資格ですか？', acceptedAnswer: { '@type': 'Answer', text: '防火設備検査員は、建築基準法の改正（2016年6月施行）に伴い新設された国家資格です。一級・二級建築士も資格者として認められます。防火設備の設置や維持保全の技術的知識を持つ者として、国土交通大臣の登録を受けた資格者登録機関が管理しています。' } },
-    { '@type': 'Question', name: '報告書の提出先と提出期限はどこですか？', acceptedAnswer: { '@type': 'Answer', text: '提出先は建物の所在地を管轄する特定行政庁（都道府県または政令市の建築指導担当部署）です。提出期限は各特定行政庁が建物の用途・規模に応じて指定する期間内（通常は建築基準法施行細則等で定める報告時期）となります。期限は自治体によって異なるため、所在地の担当窓口に確認してください。' } },
-    { '@type': 'Question', name: '防火シャッターが点検で不合格になった場合はどうなりますか？', acceptedAnswer: { '@type': 'Answer', text: '「要是正」または「要重点点検」として報告書に記載され、修繕・改善が必要となります。重大な不具合がある場合は特定行政庁から改善命令が出ることがあります。是正を行ったうえで再報告（または翌年度の報告で改善を報告）する手続きとなります。' } },
-    { '@type': 'Question', name: "防火設備の定期報告はどこに提出しますか？", acceptedAnswer: { '@type': 'Answer', text: "特定行政庁（所在の都道府県・市区町村）の建築指導課・開発指導課等に報告書を提出します。提出先・様式は自治体ごとに異なります。" } },
-    { '@type': 'Question', name: "防火設備検査員とはどんな資格ですか？", acceptedAnswer: { '@type': 'Answer', text: "建築基準法に基づく国家資格者。防火シャッター・防火ドア・耐火クロス・煙感知器等の作動確認ができる検査の専門家。2016年の建築基準法改正で設けられた比較的新しい資格です。" } },
-    { '@type': 'Question', name: "建築基準法第12条の定期報告対象の建物はどう調べますか？", acceptedAnswer: { '@type': 'Answer', text: "建物の用途・規模・階数に基づいて自治体が対象を指定します。オフィスビル・商業施設・病院・ホテル等は多くが対象。不明な場合は所在地の特定行政庁（市区町村の建築担当）に確認してください。" } },
-    { '@type': 'Question', name: "定期検査で不適合が発見されたらどうなりますか？", acceptedAnswer: { '@type': 'Answer', text: "報告書に「要是正」として記載し、特定行政庁に報告します。是正完了後に「改善報告書」を提出する義務があります。放置すると行政指導・是正命令の対象になります。" } },
-    { '@type': 'Question', name: "防火シャッター点検費用は管理組合の経費にできますか？", acceptedAnswer: { '@type': 'Answer', text: "はい、マンション・ビルの管理組合・管理会社が負担する場合は修繕費・管理費として経費処理できます。" } }
-  
-  ],
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
 });
 const webPageLd = JSON.stringify({
   '@context': 'https://schema.org',
@@ -94,16 +140,16 @@ const webPageLd = JSON.stringify({
           <span aria-hidden="true">›</span>
           <a href="/column/">コラム</a>
           <span aria-hidden="true">›</span>
-          <span>シャッター点検の法令義務ガイド</span>
+          <span>防火シャッター定期検査報告ガイド</span>
         </nav>
         <span class="cl-cat">法令・義務</span>
-        <h1 class="cl-title">シャッター点検の法令義務ガイド2026｜建築基準法第12条・防火設備検査の要点と罰則</h1>
+        <h1 class="cl-title">防火シャッター定期検査報告ガイド2026｜建築基準法第12条・防火設備検査の対象と罰則</h1>
         <p class="cl-lead">
-          防火シャッターの定期検査は<strong>建築基準法第12条に基づき、特定建築物で年1回の実施・報告が義務</strong>です。定期報告を怠ると<strong>100万円以下の罰金</strong>の対象となり、火災時に作動しなかった場合は民事責任も問われます。本記事では、対象建物・検査資格・報告書の提出先・よくある疑問を2026年版で解説します。
+          防火シャッターは、建築基準法第12条第3項の<strong>防火設備定期検査報告</strong>の対象になる場合があります。ただし、すべての店舗シャッター・倉庫シャッターが一律に対象ではありません。対象建築物、対象設備、報告時期は所在地の特定行政庁と図面・確認申請書で確認します。
         </p>
         <div class="cl-meta">
           <time datetime={published}>公開：2026年5月27日</time>
-          <span>最終更新：2026年5月27日</span>
+          <span>最終更新：2026年6月15日</span>
           <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
         </div>
       </div>
@@ -113,8 +159,8 @@ const webPageLd = JSON.stringify({
 
       <div class="cl-quickanswer">
         <p class="cl-qa-q">Q. シャッターの定期点検は法律で義務ですか？</p>
-        <p class="cl-qa-a">A. <strong>建築基準法第12条により、延床面積3,000m²以上の特定建築物は年1回の防火設備検査が義務</strong>。防火設備検査員（有資格者）が実施し、特定行政庁に報告する義務がある。</p>
-        <p class="cl-qa-src">※建築基準法第12条（2026年4月時点）</p>
+        <p class="cl-qa-a">A. <strong>防火区画などに設置された防火シャッターで、対象建築物にあるものは建築基準法第12条第3項の防火設備定期検査報告の対象</strong>です。一般シャッターまで一律対象ではないため、用途・規模・設備種別・所在地で確認します。</p>
+        <p class="cl-qa-src">※建築基準法第12条・第101条、国土交通省の定期報告制度資料をもとに整理</p>
       </div>
 
       <ColumnCtaCard serviceSlug="shutter" serviceName="シャッター点検・修理" variant="top" />
@@ -140,34 +186,34 @@ const webPageLd = JSON.stringify({
         <div class="cl-callout">
           <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
           <ul>
-            <li><strong>法的義務</strong>：建築基準法第12条第3項に基づく防火設備検査は特定建築物で年1回・特定行政庁への報告が必須</li>
-            <li><strong>資格要件</strong>：防火設備検査員（または一級・二級建築士等）の有資格者による実施が必要</li>
-            <li><strong>罰則</strong>：報告義務違反は建築基準法第101条により100万円以下の罰金、火災時は民事責任も</li>
+            <li><strong>法的義務</strong>：対象建築物の防火設備は、建築基準法第12条第3項に基づく定期検査報告が必要</li>
+            <li><strong>対象確認</strong>：一般シャッターまで一律対象ではなく、防火設備として設置された設備か、特定行政庁の指定対象かを確認する</li>
+            <li><strong>罰則</strong>：報告なし・虚偽報告は建築基準法第101条により100万円以下の罰金対象</li>
           </ul>
         </div>
       </section>
 
       <section id="law12" class="cl-section">
         <h2>建築基準法第12条とは</h2>
-        <p>建築基準法第12条は「定期報告制度」を定めた条文です。建築物・昇降機・防火設備等の安全性を定期的に確認し、特定行政庁に報告することを義務付けています。</p>
+        <p>建築基準法第12条は「定期報告制度」を定めた条文です。建築物・昇降機等・防火設備などの安全性を資格者が定期的に確認し、特定行政庁に報告する仕組みです。</p>
 
         <div class="cl-callout cl-callout--blue">
           <h3 class="cl-callout-h">建築基準法第12条 第3項（防火設備）の概要</h3>
           <ul>
-            <li><strong>対象</strong>：特定建築物に設置された防火設備（防火シャッター・防火扉・防煙シャッター等）</li>
-            <li><strong>頻度</strong>：1年に1回以内（特定行政庁が指定する時期）</li>
+            <li><strong>対象</strong>：対象建築物に設置された防火設備（防火シャッター・防火扉・耐火クロススクリーン等）</li>
+            <li><strong>頻度</strong>：原則毎年の管理が中心（報告時期は特定行政庁が指定）</li>
             <li><strong>実施者</strong>：防火設備検査員等の有資格者</li>
             <li><strong>義務者</strong>：建築物の所有者または管理者</li>
             <li><strong>報告先</strong>：所在地を管轄する特定行政庁（都道府県または政令市）</li>
           </ul>
         </div>
 
-        <p>2016年6月の建築基準法改正で「防火設備」が定期報告の対象として独立した項目となりました（改正前は建築物本体の定期調査に含まれていました）。これにより、より詳細な作動確認が義務付けられています。</p>
+        <p>2016年6月の制度改正以降、防火設備は建築物本体の定期調査とは別に、作動状況を確認する区分として管理されるようになりました。施設側では「建物本体の定期調査」と「防火設備の定期検査報告」を混同しないことが重要です。</p>
       </section>
 
       <section id="target" class="cl-section">
         <h2>対象となる建物・設備</h2>
-        <p>定期報告（防火設備検査）の対象となる建物は、<strong>「特定建築物」に該当するかどうか</strong>で決まります。</p>
+        <p>防火設備定期検査報告の対象は、<strong>建物用途・規模・設備種別・所在地の特定行政庁指定</strong>で決まります。「シャッターがあるから対象」「建物が大きいから必ず対象」と単純には判定できません。</p>
 
         <h3>特定建築物の主な用途</h3>
         <div class="cl-table-wrap">
@@ -198,30 +244,31 @@ const webPageLd = JSON.stringify({
               </tr>
               <tr>
                 <th scope="row">物販・飲食</th>
-                <td>百貨店・マーケット・飲食店（一定規模以上）</td>
+                <td>百貨店・マーケット・飲食店等</td>
               </tr>
               <tr>
                 <th scope="row">事務所</th>
-                <td>オフィスビル（5階建以上かつ延床1,000㎡超等）</td>
+                <td>オフィスビル（自治体指定・複合用途等により対象となる場合）</td>
               </tr>
               <tr>
                 <th scope="row">共同住宅</th>
-                <td>マンション（5階建以上かつ延床1,000㎡超等）</td>
+                <td>共同住宅（自治体指定・共用部設備等により対象となる場合）</td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <p class="cl-note">※ 具体的な対象範囲・規模基準は各特定行政庁が条例・規則で定めています。必ず所在地の自治体（建築指導課等）に確認してください。</p>
+        <p class="cl-note">※ 具体的な対象範囲・報告時期は各特定行政庁が定めます。確認申請書・検査済証・防火区画図・竣工図を確認し、所在地の自治体（建築指導課等）に照会してください。</p>
 
         <h3>対象となる防火設備の種類</h3>
         <ul class="cl-list">
-          <li><strong>防火シャッター</strong>（随時閉鎖式・常時閉鎖式）</li>
-          <li><strong>防火扉</strong>（随時閉鎖式・常時閉鎖式）</li>
-          <li><strong>防煙シャッター・防煙垂れ壁</strong></li>
+          <li><strong>防火シャッター</strong>（主に随時閉鎖式・作動確認が必要なもの）</li>
+          <li><strong>防火扉</strong>（煙感知器等と連動して閉鎖するもの）</li>
+          <li><strong>防煙シャッター</strong>（防火設備として扱われるもの）</li>
           <li><strong>耐火クロススクリーン</strong></li>
           <li><strong>ドレンチャー設備</strong></li>
         </ul>
+        <p class="cl-note">※ 防火ダンパーは建築設備定期検査の対象に分類されるのが通常です。防煙垂れ壁は防火設備定期検査報告の対象とは扱われないため、設備名だけで判断せず図面と自治体運用を確認してください。</p>
       </section>
 
       <section id="qualification" class="cl-section">
@@ -254,7 +301,7 @@ const webPageLd = JSON.stringify({
           </table>
         </div>
 
-        <p>点検・修理を依頼する業者が防火設備検査員の資格者を在籍させているかどうかを<strong>見積もり前に必ず確認</strong>してください。無資格者による検査結果は定期報告書として受理されません。</p>
+        <p>点検・修理を依頼する業者が防火設備検査員または建築士の資格者を在籍させているかどうかを<strong>見積もり前に必ず確認</strong>してください。あわせて、報告書作成・提出代行・是正後の再確認まで契約範囲に含まれるかを明確にします。</p>
       </section>
 
       <section id="report" class="cl-section">
@@ -281,7 +328,7 @@ const webPageLd = JSON.stringify({
               </tr>
               <tr>
                 <th scope="row">提出頻度</th>
-                <td>年1回（建築基準法施行規則に基づく指定時期）</td>
+                <td>原則毎年の管理が中心（具体的な報告月は特定行政庁指定）</td>
               </tr>
               <tr>
                 <th scope="row">報告書類</th>
@@ -291,7 +338,7 @@ const webPageLd = JSON.stringify({
           </table>
         </div>
 
-        <p>提出期限は自治体によって異なります。例えば東京都では建物の用途・地域ごとに報告時期が細かく分けられています。業者に提出代行を依頼する場合も、期限の確認は施設側でも行うことが重要です。</p>
+        <p>提出期限は自治体によって異なります。業者に提出代行を依頼する場合も、期限・提出先・受付控えの受領方法は施設側で確認してください。</p>
       </section>
 
       <section id="penalty" class="cl-section">
@@ -302,14 +349,14 @@ const webPageLd = JSON.stringify({
         <div class="cl-callout">
           <h3 class="cl-callout-h">建築基準法第101条（罰則）</h3>
           <ul>
-            <li>定期報告をしない場合：<strong>100万円以下の罰金</strong></li>
+            <li>第12条第3項の報告をしない場合：<strong>100万円以下の罰金</strong></li>
             <li>虚偽の報告をした場合：<strong>100万円以下の罰金</strong></li>
-            <li>法人の代表者等が違反した場合：法人にも同額の罰金（両罰規定）</li>
+            <li>要是正事項を放置し事故につながった場合：民事責任・刑事上の過失責任が問題になる可能性</li>
           </ul>
         </div>
 
         <h3>検査で不合格（要是正）となった場合</h3>
-        <p>検査で不具合が発見された場合、報告書に「要是正」または「要重点点検」として記載します。その後、<strong>是正工事を実施し、改善結果を特定行政庁に報告</strong>（または次年度の報告で改善を報告）する流れとなります。</p>
+        <p>検査で不具合が発見された場合、報告書に「要是正」等として記載します。その後の改善報告の要否・期限・様式は特定行政庁の運用に従うため、検査者と行政窓口に確認しながら進めます。</p>
 
         <ul class="cl-list">
           <li>シャッターが作動しない・不完全動作：即時修理が必要</li>
@@ -323,15 +370,15 @@ const webPageLd = JSON.stringify({
 
       <section id="fire-law" class="cl-section">
         <h2>消防法との関係</h2>
-        <p>防火シャッターは建築基準法上の「防火設備」として定期報告義務がある一方、<strong>消防法上の「防火対象物の維持管理」</strong>としても適切な状態の保持が求められます。</p>
+        <p>防火シャッターの定期検査報告は建築基準法の制度です。一方で、感知器・連動制御盤・自動火災報知設備などは消防法に基づく消防設備点検と関係するため、現場では両制度を切り分けて管理します。</p>
 
         <ul class="cl-list">
-          <li><strong>消防法第8条の2の2</strong>（防炎規制）：防火設備の設置・維持管理義務</li>
-          <li><strong>消防署の立入検査</strong>：防火設備の状態・記録が確認対象となることがある</li>
-          <li><strong>消防設備点検との連携</strong>：感知器連動型防火シャッターは、消防設備点検（自動火災報知設備）との連動確認も必要</li>
+          <li><strong>建築基準法</strong>：防火シャッター本体、防火扉、耐火クロススクリーン等の作動状況を防火設備定期検査として確認</li>
+          <li><strong>消防法</strong>：自動火災報知設備、感知器、連動制御盤など消防用設備等の点検・報告を管理</li>
+          <li><strong>実務上の連携</strong>：感知器連動型の防火シャッターは、消防設備点検業者と防火設備検査者の作業範囲を事前に分ける</li>
         </ul>
 
-        <p>建築基準法の定期報告と消防法の消防設備点検は別々の制度ですが、<strong>感知器・連動制御盤・シャッターの一体的な確認</strong>を行うため、両者を同時期に実施できる業者を選ぶと効率的です。</p>
+        <p>建築基準法の定期報告と消防法の消防設備点検は別々の制度ですが、<strong>感知器・連動制御盤・シャッター本体を同じ時期に確認</strong>できる体制にすると、不具合の切り分けと是正工事が進めやすくなります。</p>
       </section>
 
       <section id="checklist" class="cl-section">
@@ -361,7 +408,7 @@ const webPageLd = JSON.stringify({
               </tr>
               <tr>
                 <th scope="row">下半期（例：11月）</th>
-                <td>建築基準法第12条定期検査・報告書作成・特定行政庁へ提出</td>
+                <td>防火設備定期検査・報告書作成・特定行政庁へ提出</td>
                 <td>防火設備検査員</td>
               </tr>
               <tr>
@@ -376,24 +423,14 @@ const webPageLd = JSON.stringify({
 
       <section id="faq" class="cl-section">
         <h2>よくある質問（FAQ）</h2>
-
-        <h3>Q1. 防火シャッターの定期検査は義務ですか？</h3>
-        <p>はい。建築基準法第12条第3項に基づき、特定建築物の防火シャッターは年1回の検査・特定行政庁への報告が義務です。</p>
-
-        <h3>Q2. どのような建物が対象ですか？</h3>
-        <p>不特定多数が利用する特定建築物（ホテル・病院・百貨店・学校等）が対象です。具体的な規模基準は特定行政庁が条例で定めているため、所在地の自治体に確認してください。</p>
-
-        <h3>Q3. 定期報告を怠るとどうなりますか？</h3>
-        <p>建築基準法第101条により100万円以下の罰金の対象となります。火災時に防火シャッターが作動しなかった場合は民事責任（損害賠償）も問われます。</p>
-
-        <h3>Q4. 防火設備検査員とは？</h3>
-        <p>2016年の建築基準法改正で新設された国家資格です。一級・二級建築士も資格者として認められています。有資格者に在籍しているかを業者に必ず確認してください。</p>
-
-        <h3>Q5. 報告書の提出期限はいつですか？</h3>
-        <p>各特定行政庁（都道府県・政令市）が建物用途・規模ごとに指定します。所在地の自治体の建築指導担当窓口または業者に確認してください。</p>
-
-        <h3>Q6. 点検で不合格になった場合はどうすればいいですか？</h3>
-        <p>「要是正」として報告書に記載し、是正工事を実施します。工事後に改善結果を特定行政庁に報告（または翌年度の報告に反映）します。重大な不具合は早急な修理が必要です。</p>
+        <dl class="cl-faq">
+          {faqItems.map((item) => (
+            <div class="cl-faq-item">
+              <dt>{item.q}</dt>
+              <dd>{item.a}</dd>
+            </div>
+          ))}
+        </dl>
       </section>
 
       <section class="cl-cta">
@@ -418,6 +455,15 @@ const webPageLd = JSON.stringify({
         </ul>
         <p class="cl-pref-more"><a href="/shutter/">全国47都道府県の対応業者を見る</a></p>
       </div>
+
+      <aside id="sources" class="cl-related">
+        <h2 class="cl-related-h">参考法令・一次資料</h2>
+        <ul>
+          {officialSources.map((source) => (
+            <li><a href={source.url} target="_blank" rel="noopener">{source.title}</a></li>
+          ))}
+        </ul>
+      </aside>
 
       <aside class="cl-related">
         <h2 class="cl-related-h">関連する詳細情報</h2>
@@ -515,6 +561,10 @@ const webPageLd = JSON.stringify({
 .cl-callout li { margin-bottom: 4px; }
 .cl-callout li strong { color: var(--gray-900); }
 .cl-callout p { margin-bottom: 10px; }
+.cl-faq { margin: 0; }
+.cl-faq-item { background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+.cl-faq-item dt { font-weight: 800; color: var(--gray-900); margin-bottom: 8px; }
+.cl-faq-item dd { margin: 0; color: var(--gray-700); font-size: .92rem; line-height: 1.85; }
 .cl-cta { background: linear-gradient(135deg, #0f2742 0%, #1a56db 100%); color: #fff; text-align: center; border-radius: 14px; padding: 40px 28px; margin: 48px 0; }
 .cl-cta h2 { font-size: 1.2rem; font-weight: 800; color: #fff; margin-bottom: 12px; border: none; padding: 0; }
 .cl-cta p { font-size: .92rem; color: #bfdbfe; margin-bottom: 22px; line-height: 1.8; }
