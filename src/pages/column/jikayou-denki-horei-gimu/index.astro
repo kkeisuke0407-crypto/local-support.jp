@@ -3,11 +3,11 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
-const title = '自家用電気工作物の保安点検義務ガイド2026｜電気事業法による設置者責任とキュービクル点検';
-const description = '高圧600V超のキュービクル等を持つ事業所に課された電気事業法の保安規程・電気主任技術者選任・月次点検・年次点検・経済産業省への手続きを整理。違反時の300万円以下の罰金、感電事故時の刑事責任、外部委託承認制度の活用まで2026年最新版で解説。';
+const title = '自家用電気工作物の保安点検義務ガイド2026｜高圧受電・保安規程・主任技術者・外部委託';
+const description = '高圧・特別高圧で受電するキュービクル等の自家用電気工作物について、電気事業法第38条・第42条・第43条に基づく設置者義務を整理。保安規程の使用開始前届出、電気主任技術者の選任、外部委託承認制度、保安規程に基づく点検頻度、年次点検、記録保管、事故時対応まで施設管理担当者向けに解説します。';
 const canonical = `${site.domain}/column/jikayou-denki-horei-gimu/`;
 const published = '2026-06-05';
-const modified = '2026-06-05';
+const modified = '2026-06-15';
 
 const breadcrumbLd = JSON.stringify({
   '@context': 'https://schema.org',
@@ -29,9 +29,9 @@ const articleLd = JSON.stringify({
   inLanguage: 'ja-JP',
   url: canonical,
   mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
-  wordCount: 5500,
+  wordCount: 6800,
   articleSection: '法令・義務',
-  keywords: '自家用電気工作物,電気事業法,キュービクル,保安規程,電気主任技術者,月次点検,年次点検,2026',
+  keywords: '自家用電気工作物,電気事業法,キュービクル,保安規程,電気主任技術者,外部委託承認,電気保安法人,年次点検,2026',
   author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
   publisher: { '@id': `${site.domain}/#organization` },
   image: { '@type': 'ImageObject', url: `${site.domain}/og-jikayou-denki.png`, width: 1200, height: 630 },
@@ -40,24 +40,69 @@ const articleLd = JSON.stringify({
     { '@type': 'Legislation', name: '電気事業法第38条（自家用電気工作物の定義）' },
     { '@type': 'Legislation', name: '電気事業法第42条（保安規程）' },
     { '@type': 'Legislation', name: '電気事業法第43条（主任技術者選任）' },
-    { '@type': 'Legislation', name: '電気事業法第115条（罰則）' },
+    { '@type': 'Legislation', name: '電気事業法第118条等（罰則）' },
   ],
 });
+
+const faqItems = [
+  {
+    q: '自家用電気工作物とは何ですか？',
+    a: '一般用電気工作物や電気事業の用に供する電気工作物以外の電気工作物を指します。実務では、電力会社から高圧・特別高圧で受電するビル、工場、病院、商業施設、学校などの受変電設備や、一定規模を超える発電設備などが代表例です。',
+  },
+  {
+    q: 'キュービクルがあれば自家用電気工作物ですか？',
+    a: '多くの場合は該当します。キュービクルは高圧受電設備を収納する設備であり、高圧で受電している事業所は原則として保安規程の届出、主任技術者の選任または外部委託承認などの対応が必要です。',
+  },
+  {
+    q: '保安規程の届出はいつ必要ですか？',
+    a: '自家用電気工作物の使用開始前に保安規程を定め、経済産業大臣へ届け出る必要があります。変更した場合も遅滞なく変更届出が必要です。新設時は所轄の産業保安監督部の様式と手続きに従います。',
+  },
+  {
+    q: '電気主任技術者は必ず社内で選任しますか？',
+    a: '原則として主任技術者免状を持つ人から選任しますが、一定要件を満たす場合は、電気保安法人または個人の電気管理技術者へ保安管理業務を外部委託し、所轄産業保安監督部長の承認を受けることで、主任技術者を選任しない扱いにできます。',
+  },
+  {
+    q: '外部委託できる需要設備の条件は？',
+    a: '代表的には、電圧7,000V以下で受電する需要設備が外部委託承認の対象です。発電所や蓄電所は出力や連系電圧など別条件があるため、設備種別ごとに確認が必要です。',
+  },
+  {
+    q: '月次点検と年次点検は必ず毎月・毎年ですか？',
+    a: '保安規程、外部委託契約、経済産業省告示に基づく点検頻度で実施します。実務上は月次点検と停電年次点検を基本に組むことが多いですが、設備条件や告示により頻度が変わる場合があります。',
+  },
+  {
+    q: '年次点検では何を確認しますか？',
+    a: '停電または必要な安全措置を取ったうえで、絶縁抵抗、接地抵抗、保護継電器の動作、遮断器との連動、非常用発電装置、蓄電池設備など、月次では確認しにくい項目を確認します。',
+  },
+  {
+    q: '電気保安法人と電気管理技術者の違いは？',
+    a: '電気保安法人は法人として保安管理業務を受託する体制、電気管理技術者は個人として受託する体制です。どちらも要件を満たし、設置者と委託契約を結び、外部委託承認を受ける必要があります。',
+  },
+  {
+    q: '保安ネットで申請できますか？',
+    a: '産業保安監督部では、保安ネットを標準的な電子申請方法としています。利用にはGビズIDが必要で、委託先が代行申請する場合は同意書などの添付が必要です。',
+  },
+  {
+    q: '違反した場合の罰則はありますか？',
+    a: '主任技術者の未選任や保安規程違反などは、電気事業法上の罰則や行政指導の対象になり得ます。悪質な場合は300万円以下の罰金が適用される可能性があるため、未届出・未選任の状態を放置しないことが重要です。',
+  },
+  {
+    q: '低圧受電に切り替えれば義務はなくなりますか？',
+    a: '設備構成や使用電力によっては低圧受電へ切り替えることで、主任技術者選任や保安規程届出が不要になる場合があります。ただし受電設備の改修や電力会社との協議が必要です。',
+  },
+  {
+    q: '点検記録はどのように管理すべきですか？',
+    a: '点検記録、試験成績書、事故報告、是正履歴、保安規程、主任技術者・外部委託承認関係書類を事業場ごとに整理し、立入検査や事故時に提示できる状態にします。保管期間は保安規程や施行規則、委託契約に沿って確認してください。',
+  },
+];
 
 const faqLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: [
-    { '@type': 'Question', name: '自家用電気工作物とは何ですか？', acceptedAnswer: { '@type': 'Answer', text: '電力会社から600V超の高圧・特別高圧で受電する電気設備を所有する事業所の電気設備全般を指します。代表例はキュービクル式高圧受電設備（パッケージ変電所）。ビル・工場・スーパー・コンビニ・大規模マンション・病院・学校など、ある程度の規模の事業所はほぼ該当します。' } },
-    { '@type': 'Question', name: '保安規程の届出はいつ必要ですか？', acceptedAnswer: { '@type': 'Answer', text: '自家用電気工作物の設置工事開始前（送電前）に経済産業大臣（産業保安監督部）への届出が必要です。保安規程には組織体制・点検計画・事故時対応などを記載。設置後の変更時も変更届出が必要です。' } },
-    { '@type': 'Question', name: '電気主任技術者は社内に置く必要がありますか？', acceptedAnswer: { '@type': 'Answer', text: '原則として社内選任（自社雇用）が必要です。ただし「外部委託承認制度」により、要件を満たす場合は電気保安法人（電気管理技術者）への外部委託が認められています。年間複数千万kWh規模の大規模事業所では社内選任、中小規模では外部委託が一般的です。' } },
-    { '@type': 'Question', name: '月次点検と年次点検の違いは？', acceptedAnswer: { '@type': 'Answer', text: '月次点検は毎月（または隔月）の通電状態での目視・測定（計器値・温度・異音等）。年次点検は年1回の停電を伴う精密点検（絶縁抵抗測定・接地抵抗測定・保護継電器試験・遮断器動作試験等）。月次のみ実施・年次未実施は重大な保安違反です。' } },
-    { '@type': 'Question', name: '違反した場合の罰則は？', acceptedAnswer: { '@type': 'Answer', text: '保安規程違反・主任技術者未選任は300万円以下の罰金（電気事業法第115条）。感電死傷事故が発生すれば業務上過失致死傷罪（刑法）の対象。経済産業省の電気事業法上の指導・改善命令も別途あります。重大事故時は責任者個人への刑事責任追及の可能性もあります。' } },
-    { '@type': 'Question', name: 'キュービクルの法定耐用年数はありますか？', acceptedAnswer: { '@type': 'Answer', text: '電気事業法上の明確な耐用年数規定はありませんが、JIS C 4620（キュービクル式高圧受電設備）では更新目安として20年〜25年が示されています。実務的には20年を過ぎたら年次点検結果を見ながら段階的な更新計画を立てるのが標準的。30年超は故障リスクが急増します。' } },
-    { '@type': 'Question', name: '電気主任技術者が辞めたらどうしますか？', acceptedAnswer: { '@type': 'Answer', text: '速やかに後任を選任し、選任届出を経済産業省に提出する必要があります。一時的な不在は許容されません。後任が見つかるまでは外部委託（電気管理技術者契約）への切替も可能です。空白期間は保安リスクが極めて高いため、退職予告から早期の対応が必要です。' } },
-    { '@type': 'Question', name: '記録の保管期間は？', acceptedAnswer: { '@type': 'Answer', text: '保安規程に基づく点検記録・事故報告書・主任技術者の業務日誌は3年間保管が義務（電気事業法施行規則）。電気保安法人に外部委託している場合も、受託業者経由で記録の写しを保管する必要があります。' } },
-    { '@type': 'Question', name: '小規模事業所でも対象ですか？', acceptedAnswer: { '@type': 'Answer', text: '高圧（600V超）で受電している場合は規模を問わず対象。一般家庭・小規模店舗で低圧受電のみの場合は対象外。コンビニ・小規模スーパーでも50kW以上の電力需要があれば高圧受電→自家用電気工作物に該当することが多いです。' } }
-  ],
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
 });
 
 const webPageLd = JSON.stringify({
@@ -71,7 +116,7 @@ const webPageLd = JSON.stringify({
   isPartOf: { '@id': `${site.domain}/#website` },
   speakable: {
     '@type': 'SpeakableSpecification',
-    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+    cssSelector: ['.cl-quickanswer', '.cl-answer-grid', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
   },
   primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-jikayou-denki.png` },
 });
@@ -97,13 +142,13 @@ const webPageLd = JSON.stringify({
           <span>自家用電気工作物の保安点検義務ガイド</span>
         </nav>
         <span class="cl-cat">法令・義務</span>
-        <h1 class="cl-title">自家用電気工作物の保安点検義務ガイド2026｜電気事業法による設置者責任とキュービクル点検</h1>
+        <h1 class="cl-title">自家用電気工作物の保安点検義務ガイド2026｜高圧受電・保安規程・主任技術者・外部委託</h1>
         <p class="cl-lead">
-          高圧（600V超）で受電する事業所のキュービクル等は<strong>「自家用電気工作物」</strong>として、電気事業法による保安規程・電気主任技術者選任・月次点検・年次点検の義務があります。本記事では、対象設備の判定、保安体制の選択肢（社内選任 vs 外部委託）、点検の具体内容、違反時の300万円以下の罰金リスクまで、施設管理担当者向けに2026年版で整理しました。
+          高圧・特別高圧で受電するビル、工場、病院、商業施設などのキュービクル等は<strong>「自家用電気工作物」</strong>として、電気事業法による自主保安体制の整備が必要です。実務で重要なのは、<strong>保安規程の使用開始前届出、電気主任技術者の選任または外部委託承認、保安規程・告示に沿った点検頻度、記録管理</strong>です。本記事では、対象判定から委託先選定まで施設管理担当者向けに整理します。
         </p>
         <div class="cl-meta">
           <time datetime={published}>公開：2026年6月5日</time>
-          <span>最終更新：2026年6月5日</span>
+          <span>最終更新：2026年6月15日</span>
           <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
         </div>
       </div>
@@ -113,8 +158,8 @@ const webPageLd = JSON.stringify({
 
       <div class="cl-quickanswer">
         <p class="cl-qa-q">Q. キュービクル等の自家用電気工作物の保安義務は？</p>
-        <p class="cl-qa-a">A. <strong>保安規程の届出＋電気主任技術者の選任＋月次点検（通電中）＋年次点検（停電伴う精密）が必須</strong>。外部委託（電気保安法人）も可能だが要件あり。違反は300万円以下の罰金。</p>
-        <p class="cl-qa-src">※電気事業法第42条・第43条・第115条（2026年4月時点）</p>
+        <p class="cl-qa-a">A. <strong>技術基準への適合維持、保安規程の届出・遵守、電気主任技術者の選任または外部委託承認</strong>が中心です。点検頻度は保安規程・外部委託契約・経済産業省告示に沿って定め、記録を残します。未届出・未選任の放置は罰則対象になり得ます。</p>
+        <p class="cl-qa-src">※電気事業法第38条・第42条・第43条、電気事業法施行規則第52条等をもとに整理</p>
       </div>
 
       <ColumnCtaCard serviceSlug="jikayou-denki" serviceName="自家用電気工作物点検" variant="top" />
@@ -123,6 +168,7 @@ const webPageLd = JSON.stringify({
         <h2 class="cl-toc-h">この記事の目次</h2>
         <ol>
           <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#checklist">対象判定・保安体制の実務チェック</a></li>
           <li><a href="#scope">対象設備の判定（自家用電気工作物の範囲）</a></li>
           <li><a href="#regulation">保安規程と届出</a></li>
           <li><a href="#engineer">電気主任技術者の選任</a></li>
@@ -131,6 +177,7 @@ const webPageLd = JSON.stringify({
           <li><a href="#annual">年次点検（停電を伴う精密点検）</a></li>
           <li><a href="#penalties">違反時の罰則と監督官庁</a></li>
           <li><a href="#tips">実務上のポイント</a></li>
+          <li><a href="#sources">参考にした公式情報</a></li>
           <li><a href="#faq">よくある質問</a></li>
         </ol>
       </aside>
@@ -139,24 +186,55 @@ const webPageLd = JSON.stringify({
         <div class="cl-callout">
           <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
           <ul>
-            <li><strong>対象</strong>：高圧（600V超）受電のキュービクル・自家発電設備等を持つ事業所すべて</li>
-            <li><strong>義務</strong>：保安規程届出＋主任技術者選任＋月次点検＋年次点検（停電伴う）＋事故報告</li>
-            <li><strong>違反リスク</strong>：300万円以下の罰金、感電事故発生時は業務上過失致死傷罪、経産省の改善命令</li>
+            <li><strong>対象</strong>：電力会社から高圧・特別高圧で受電するビル・工場など、一般用電気工作物以外の自家用電気工作物</li>
+            <li><strong>義務</strong>：技術基準適合維持、保安規程の使用開始前届出・遵守、主任技術者選任または外部委託承認、点検記録の管理</li>
+            <li><strong>実務</strong>：外部委託は電圧7,000V以下で受電する需要設備などが対象。点検頻度は保安規程・告示・委託契約で確認する</li>
           </ul>
+        </div>
+      </section>
+
+      <section id="checklist" class="cl-section">
+        <h2>対象判定・保安体制の実務チェック</h2>
+        <p>自家用電気工作物は「キュービクルがあるか」だけでなく、受電電圧、発電設備、外部委託承認、保安規程、点検記録をセットで確認します。</p>
+        <div class="cl-answer-grid">
+          <div>
+            <h3>受電電圧</h3>
+            <p>高圧・特別高圧で受電しているかを契約書、単線結線図、キュービクル銘板で確認します。</p>
+          </div>
+          <div>
+            <h3>発電設備</h3>
+            <p>太陽光、蓄電所、非常用発電機などは出力・連系電圧により外部委託可否や届出が変わります。</p>
+          </div>
+          <div>
+            <h3>保安規程</h3>
+            <p>使用開始前届出、変更届出、保安規程本文、点検頻度、緊急連絡体制を事業場ごとに確認します。</p>
+          </div>
+          <div>
+            <h3>主任技術者</h3>
+            <p>専任、兼任、選任許可、外部委託承認のどれで保安監督体制を組んでいるか確認します。</p>
+          </div>
+          <div>
+            <h3>点検頻度</h3>
+            <p>月次・年次という呼び方だけで判断せず、保安規程、告示、委託契約、設備条件を確認します。</p>
+          </div>
+          <div>
+            <h3>記録保管</h3>
+            <p>点検記録、試験成績書、事故報告、是正履歴、届出控えを立入検査で提示できる状態にします。</p>
+          </div>
         </div>
       </section>
 
       <section id="scope" class="cl-section">
         <h2>対象設備の判定（自家用電気工作物の範囲）</h2>
-        <p>「自家用電気工作物」は、電気事業法第38条に基づき、<strong>電気事業者（電力会社）以外が設置する電気工作物のうち、一定規模以上のもの</strong>を指します。実務上は<strong>「高圧600V超で受電している事業所すべて」</strong>と理解すれば概ね正しいです。</p>
+        <p>「自家用電気工作物」は、電気事業法第38条に基づき、<strong>一般用電気工作物および電気事業の用に供する電気工作物以外の電気工作物</strong>を指します。実務では、電力会社から高圧・特別高圧で受電するビル・工場などが代表例です。</p>
 
         <h3>典型的な対象設備</h3>
         <ul>
           <li>キュービクル式高圧受電設備（パッケージ変電所）</li>
           <li>受変電設備（受電盤・変圧器・配電盤一式）</li>
           <li>自家発電設備（非常用発電機・コジェネレーション）</li>
-          <li>太陽光発電設備（10kW以上の事業用）</li>
-          <li>蓄電池設備（一定容量以上）</li>
+          <li>小出力発電設備を超える太陽光発電設備・風力発電設備等</li>
+          <li>一定規模以上の蓄電所・蓄電池設備</li>
         </ul>
 
         <h3>典型的な対象事業所</h3>
@@ -174,13 +252,13 @@ const webPageLd = JSON.stringify({
         <ul>
           <li>一般家庭（低圧契約）</li>
           <li>小規模事業所（電力契約50kW未満の低圧受電）</li>
-          <li>小規模太陽光発電（10kW未満）</li>
+          <li>小出力発電設備の範囲に収まる発電設備</li>
         </ul>
       </section>
 
       <section id="regulation" class="cl-section">
         <h2>保安規程と届出</h2>
-        <p>自家用電気工作物の設置者は、<strong>事業所ごとに「保安規程」を作成し、経済産業大臣（産業保安監督部）に届出</strong>する義務があります（電気事業法第42条）。</p>
+        <p>自家用電気工作物の設置者は、<strong>保安規程を定め、使用開始前に経済産業大臣へ届け出る</strong>義務があります（電気事業法第42条）。変更した場合も遅滞なく変更届出が必要です。</p>
 
         <h3>保安規程の記載事項</h3>
         <ol>
@@ -195,14 +273,14 @@ const webPageLd = JSON.stringify({
 
         <h3>届出のタイミング</h3>
         <ul>
-          <li><strong>設置工事開始前</strong>：保安規程の初回届出</li>
+          <li><strong>使用開始前</strong>：保安規程の初回届出</li>
           <li><strong>変更時</strong>：組織変更・点検計画変更時の変更届出</li>
           <li><strong>主任技術者変更時</strong>：選任・解任の届出</li>
-          <li><strong>使用前自主検査</strong>：設備使用開始前の検査結果届出</li>
+          <li><strong>工事計画が必要な場合</strong>：受電電圧1万V以上の需要設備の新設などは、着工30日前までの工事計画届出を確認</li>
         </ul>
 
         <h3>届出書類のテンプレート</h3>
-        <p>経済産業省の各産業保安監督部のWebサイトで標準フォーマットが公開されています。電気保安法人や電気管理技術者に作成を委託するのが実務上は標準で、自社作成は誤記による不受理リスクがあります。</p>
+        <p>各産業保安監督部のWebサイトで様式が公開されています。外部委託を使う場合も、保安規程本文や委託契約書の内容が承認要件に合っているかを委託先と確認してください。</p>
       </section>
 
       <section id="engineer" class="cl-section">
@@ -234,14 +312,14 @@ const webPageLd = JSON.stringify({
 
       <section id="outsource" class="cl-section">
         <h2>外部委託承認制度（電気保安法人）</h2>
-        <p>中小規模の事業所では、社内に電気主任技術者を抱える人件費が大きな負担になります。そこで活用されるのが<strong>「外部委託承認制度」</strong>です。</p>
+        <p>中小規模の事業所で活用されるのが<strong>「外部委託承認制度」</strong>です。一定要件を満たす電気保安法人または個人の電気管理技術者と委託契約を結び、所轄産業保安監督部長の承認を受けると、主任技術者を選任しないことができます。ただし、法令上の履行義務は設置者に残ります。</p>
 
         <h3>外部委託の要件</h3>
         <ul>
-          <li>受電電圧7,000V以下、契約電力2,000kW未満（電気保安法人なら2,000kW以上も可）</li>
-          <li>非常用予備発電設備の出力1,000kW未満</li>
-          <li>太陽電池発電設備の出力2,000kW未満</li>
-          <li>その他、経済産業省令で定める基準を満たすこと</li>
+          <li>電圧7,000V以下で受電する需要設備</li>
+          <li>出力5,000kW未満の太陽電池発電所または蓄電所で、電圧7,000V以下で連系等するもの</li>
+          <li>出力2,000kW未満の水力・火力・風力発電所で、電圧7,000V以下で連系等するもの</li>
+          <li>その他、電気事業法施行規則第52条第2項および関連告示の基準を満たすこと</li>
         </ul>
 
         <h3>委託先の選択肢</h3>
@@ -251,7 +329,7 @@ const webPageLd = JSON.stringify({
         </ul>
 
         <h3>委託料金の相場</h3>
-        <p>受電電力・点検頻度・地域により異なりますが、おおよそ<strong>月額2万円〜10万円</strong>が中心レンジ。社内主任技術者の人件費（年600万円超）と比べると圧倒的に安価なため、中小規模事業所では外部委託が標準となっています。</p>
+        <p>受電電力・点検頻度・地域により異なりますが、おおよそ<strong>月額2万円〜10万円</strong>が中心レンジです。金額だけでなく、緊急時の駆けつけ体制、停電年次点検の扱い、保安ネット申請代行、是正提案の範囲を確認してください。</p>
 
         <h3>外部委託の手続き</h3>
         <ol>
@@ -264,7 +342,7 @@ const webPageLd = JSON.stringify({
 
       <section id="monthly" class="cl-section">
         <h2>月次点検（通電中）</h2>
-        <p>月次点検は<strong>毎月（または保安規程に基づき隔月）に実施する通電中の点検</strong>です。電気を止めずに目視・測定で異常の有無を確認します。</p>
+        <p>月次点検は、保安規程や外部委託契約に基づいて行う通電中の点検です。外部委託の場合、点検頻度は経済産業省告示や設備条件に従って設定されるため、契約書と保安規程で確認します。</p>
 
         <h3>主な点検項目</h3>
         <ol>
@@ -286,7 +364,7 @@ const webPageLd = JSON.stringify({
 
       <section id="annual" class="cl-section">
         <h2>年次点検（停電を伴う精密点検）</h2>
-        <p>年次点検は<strong>年1回、設備を停電させて実施する精密点検</strong>です。月次点検では確認できない絶縁性能・保護動作を詳細に検査します。</p>
+        <p>年次点検は、月次点検では確認しにくい絶縁性能・保護動作などを確認する精密点検です。停電年次点検を基本にする場合が多い一方、設備条件や告示に基づき点検方法・頻度が変わる場合があります。</p>
 
         <h3>主な点検項目</h3>
         <ol>
@@ -320,17 +398,17 @@ const webPageLd = JSON.stringify({
             <caption>電気事業法の主な罰則</caption>
             <thead><tr><th>違反内容</th><th>罰則</th></tr></thead>
             <tbody>
-              <tr><th scope="row">保安規程未届出・主任技術者未選任</th><td>300万円以下の罰金（第115条）</td></tr>
-              <tr><th scope="row">点検義務違反・記録不備</th><td>30万円以下の罰金</td></tr>
-              <tr><th scope="row">事故報告義務違反</th><td>30万円以下の罰金</td></tr>
-              <tr><th scope="row">経産省の改善命令違反</th><td>1年以下の懲役または100万円以下の罰金</td></tr>
-              <tr><th scope="row">感電死傷事故発生</th><td>業務上過失致死傷罪（刑法第211条・5年以下の懲役または100万円以下の罰金）</td></tr>
+              <tr><th scope="row">主任技術者未選任・外部委託未承認</th><td>悪質な場合、電気事業法第118条等により300万円以下の罰金対象になり得る</td></tr>
+              <tr><th scope="row">保安規程未届出・変更未届出</th><td>届出義務違反として、過料・罰則・行政指導の対象になり得る</td></tr>
+              <tr><th scope="row">保安規程の不遵守・点検記録不備</th><td>立入検査での指導、改善要求、事故時の責任追及につながる</td></tr>
+              <tr><th scope="row">電気事故発生時の報告漏れ</th><td>事故報告義務違反として指導・罰則対象になり得る</td></tr>
+              <tr><th scope="row">感電・火災事故発生</th><td>刑事責任・民事賠償責任・営業停止リスクが問題になる</td></tr>
             </tbody>
           </table>
         </div>
 
         <h3>監督官庁</h3>
-        <p>電気事業法の所管は<strong>経済産業省（産業保安監督部）</strong>です。各地域に北海道・東北・関東東北・中部近畿・中国四国・九州・那覇の産業保安監督部があり、所管事業所に対する立入検査・指導を行います。</p>
+        <p>電気事業法の所管は<strong>経済産業省（産業保安監督部）</strong>です。事業場の所在地を管轄する産業保安監督部が、保安規程、主任技術者、外部委託承認、工事計画、事故報告などの手続きを扱います。</p>
 
         <h3>違反発覚のパターン</h3>
         <ul>
@@ -345,50 +423,41 @@ const webPageLd = JSON.stringify({
       <section id="tips" class="cl-section">
         <h2>実務上のポイント</h2>
 
-        <h3>外部委託の選択が中小事業所の現実解</h3>
-        <p>自社で電気主任技術者を雇用する人件費（年600〜1,000万円）を考えると、<strong>中小規模の事業所は外部委託が圧倒的に有利</strong>です。月額2万〜10万円で同等の保安体制が構築できます。電気保安法人は信頼性が高く、廃業リスクも低いため、長期契約に適しています。</p>
+        <h3>外部委託は「安いから」ではなく承認要件で選ぶ</h3>
+        <p>自社で電気主任技術者を雇用しにくい事業所では外部委託が現実的ですが、委託先が電気保安法人または電気管理技術者として要件を満たし、契約書・保安規程・点検頻度が承認基準に合っていることが前提です。金額だけでなく、緊急時対応、停電年次点検、保安ネット申請、是正提案まで比較してください。</p>
 
         <h3>キュービクルの更新計画を立てる</h3>
-        <p>キュービクルの法定耐用年数規定はありませんが、JIS C 4620では更新目安20〜25年が示されています。<strong>築20年以上のキュービクル</strong>は年次点検時に詳細な劣化診断を依頼し、更新計画を立て始めるのが安全です。30年を過ぎると故障による停電リスクが急増し、緊急対応のコストが計画更新の数倍に達する場合もあります。</p>
+        <p>キュービクルの更新時期は、年数だけでなく、絶縁抵抗、接地抵抗、保護継電器、遮断器、変圧器、コンデンサ、PCB含有機器の有無を見て判断します。20年を超える設備は、年次点検結果を使って部品更新・本体更新・停電計画を早めに組むのが安全です。</p>
 
         <h3>停電作業日の業務影響を最小化する</h3>
         <p>年次点検時の停電は事業継続への影響が大きいため、<strong>休日・夜間に実施</strong>するのが基本。多くの電気保安法人は土日・深夜の作業に対応します。割増料金がかかりますが、業務継続への影響と比較すれば妥当な投資です。</p>
 
         <h3>事故報告の迅速化</h3>
-        <p>電気事故が発生した場合、<strong>速報（24時間以内）・詳細報告（30日以内）</strong>を経産省（産業保安監督部）に提出する義務があります。報告遅れは別途違反になるため、事故発生時の連絡体制を保安規程で明確化しておくことが重要です。</p>
+        <p>電気事故が発生した場合は、事故の種類に応じて産業保安監督部への報告が必要になります。報告遅れは別途問題になるため、事故発生時の一次連絡先、委託先、設置者側責任者、電力会社への連絡手順を保安規程と緊急連絡表で明確化しておきます。</p>
+      </section>
+
+      <section id="sources" class="cl-section">
+        <h2>参考にした公式情報</h2>
+        <p>本記事では、対象定義、保安規程、主任技術者、外部委託承認制度を次の公式情報に基づいて整理しています。実際の申請様式・提出先は、事業場所在地を管轄する産業保安監督部で確認してください。</p>
+        <ul class="cl-source-list">
+          <li><a href="https://laws.e-gov.go.jp/law/339AC0000000170/" target="_blank" rel="noopener">電気事業法｜e-Gov法令検索</a></li>
+          <li><a href="https://laws.e-gov.go.jp/law/407M50000400077/" target="_blank" rel="noopener">電気事業法施行規則｜e-Gov法令検索</a></li>
+          <li><a href="https://www.safety-chubu.meti.go.jp/denryoku/jikayou/teigi.html" target="_blank" rel="noopener">自家用電気工作物とは｜中部近畿産業保安監督部</a></li>
+          <li><a href="https://www.safety-kanto.meti.go.jp/electric/jikayou/e_jikayou01.html" target="_blank" rel="noopener">自家用電気工作物を新設する場合｜関東東北産業保安監督部</a></li>
+          <li><a href="https://www.safety-kanto.meti.go.jp/electric/jikayou/e_gaibuitaku.html" target="_blank" rel="noopener">外部委託承認制度｜関東東北産業保安監督部</a></li>
+          <li><a href="https://www.meti.go.jp/policy/safety_security/industrial_safety/law/denjikokuji.html" target="_blank" rel="noopener">電気事業法 告示・内規等｜経済産業省</a></li>
+        </ul>
       </section>
 
       <section id="faq" class="cl-section">
         <h2>よくある質問</h2>
         <dl class="cl-faq">
-          <div class="cl-faq-item">
-            <dt>自家用電気工作物とは何ですか？</dt>
-            <dd>電力会社から600V超の高圧・特別高圧で受電する事業所の電気設備全般。キュービクル・受変電設備・自家発電設備等が該当します。</dd>
-          </div>
-          <div class="cl-faq-item">
-            <dt>保安規程の届出はいつ必要ですか？</dt>
-            <dd>設置工事開始前（送電前）に経済産業大臣（産業保安監督部）への届出が必要です。設置後の変更時も変更届出が必要です。</dd>
-          </div>
-          <div class="cl-faq-item">
-            <dt>電気主任技術者は社内に置く必要がありますか？</dt>
-            <dd>原則は社内選任。ただし外部委託承認制度により電気保安法人・電気管理技術者への委託が可能。中小規模事業所では外部委託が一般的です。</dd>
-          </div>
-          <div class="cl-faq-item">
-            <dt>月次点検と年次点検の違いは？</dt>
-            <dd>月次点検は通電中の目視・測定（計器値・温度・異音）。年次点検は停電を伴う精密点検（絶縁抵抗測定・保護継電器試験等）。</dd>
-          </div>
-          <div class="cl-faq-item">
-            <dt>違反した場合の罰則は？</dt>
-            <dd>保安規程違反・主任技術者未選任は300万円以下の罰金。感電死傷事故が発生すれば業務上過失致死傷罪の対象になります。</dd>
-          </div>
-          <div class="cl-faq-item">
-            <dt>キュービクルの更新時期は？</dt>
-            <dd>法定耐用年数はないが、JIS C 4620では20〜25年が更新目安。30年超は故障リスクが急増するため計画更新が推奨されます。</dd>
-          </div>
-          <div class="cl-faq-item">
-            <dt>記録の保管期間は？</dt>
-            <dd>点検記録・事故報告書・主任技術者業務日誌は3年間保管が義務付けられています。</dd>
-          </div>
+          {faqItems.map((item) => (
+            <div class="cl-faq-item">
+              <dt>{item.q}</dt>
+              <dd>{item.a}</dd>
+            </div>
+          ))}
         </dl>
       </section>
 
@@ -410,14 +479,6 @@ const webPageLd = JSON.stringify({
         <p>電気保安法人・電気管理技術者の登録を確認した業者をご紹介。月次・年次点検から保安規程の作成・届出代行まで対応可能な業者を最大3社まで無料で比較できます。</p>
         <a href="/jikayou-denki/" class="cta-btn-primary">無料で一括見積もりを依頼する</a>
       </div>
-
-      <aside class="cl-related">
-        <h2 class="cl-related-h">参考法令・一次資料</h2>
-        <ul>
-          <li><a href="https://elaws.e-gov.go.jp/document?lawid=339AC0000000170" target="_blank" rel="noopener">電気事業法（昭和39年法律第170号）｜e-Gov</a></li>
-          <li><a href="https://www.meti.go.jp/policy/safety_security/industrial_safety/" target="_blank" rel="noopener">産業保安｜経済産業省</a></li>
-        </ul>
-      </aside>
 
       <aside class="cl-related">
         <h2 class="cl-related-h">関連する詳細情報</h2>
@@ -468,6 +529,10 @@ const webPageLd = JSON.stringify({
 .cl-section strong { color: var(--gray-900); }
 .cl-callout { background: #f0f9ff; border: 1px solid #bae6fd; border-left: 4px solid var(--blue); border-radius: 8px; padding: 18px 22px; margin: 20px 0; }
 .cl-callout-h { font-size: 1rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-answer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 20px 0 24px; }
+.cl-answer-grid > div { background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; padding: 18px 20px; box-shadow: 0 6px 18px rgba(15, 23, 42, .05); }
+.cl-answer-grid h3 { font-size: 1rem; color: var(--blue-dark); margin: 0 0 8px; padding-left: 0; border-left: 0; }
+.cl-answer-grid p { margin: 0; }
 .cl-table-wrap { overflow-x: auto; margin: 16px 0; }
 .cl-table { width: 100%; border-collapse: collapse; font-size: .88rem; border: 1px solid var(--gray-200); }
 .cl-table caption { text-align: left; font-size: .85rem; font-weight: 700; color: var(--gray-700); margin-bottom: 8px; }
@@ -478,6 +543,8 @@ const webPageLd = JSON.stringify({
 .cl-faq-item { border-bottom: 1px solid var(--gray-200); padding: 16px 0; }
 .cl-faq-item dt { font-size: .98rem; font-weight: 700; color: var(--gray-900); margin-bottom: 8px; }
 .cl-faq-item dd { font-size: .92rem; line-height: 1.8; color: var(--gray-700); margin-left: 0; }
+.cl-source-list { padding-left: 22px; display: grid; gap: 8px; }
+.cl-source-list a { color: var(--blue); text-decoration: underline; }
 .cl-pref-links { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin: 32px 0; }
 .cl-pref-h { font-size: .92rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; }
 .cl-pref-list { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin-bottom: 10px; }
@@ -497,5 +564,6 @@ const webPageLd = JSON.stringify({
   .cl-body { padding: 24px 14px 36px; }
   .cl-section h2 { font-size: 1.2rem; }
   .cl-section h3 { font-size: 1rem; }
+  .cl-answer-grid { grid-template-columns: 1fr; }
 }
 </style>
