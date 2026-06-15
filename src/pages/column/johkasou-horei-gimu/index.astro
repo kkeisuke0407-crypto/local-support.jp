@@ -9,6 +9,39 @@ const canonical = `${site.domain}/column/johkasou-horei-gimu/`;
 const published = '2026-06-05';
 const modified = '2026-06-15';
 
+const officialSources = [
+  {
+    label: '浄化槽法（e-Gov法令検索）',
+    url: 'https://laws.e-gov.go.jp/law/358AC1000000043',
+    note: '第7条、第10条、第11条、第12条、第12条の2、第57条、第62条、第66条の2など',
+  },
+  {
+    label: '環境省関係浄化槽法施行規則（e-Gov法令検索）',
+    url: 'https://laws.e-gov.go.jp/law/359M50000100017/',
+    note: '第4条、第6条、第7条、第9条など',
+  },
+  {
+    label: '浄化槽Q&A（回答集）｜環境省',
+    url: 'https://www.env.go.jp/recycle/jokaso/publicity/qa/answer.html',
+    note: '保守点検、清掃、法定検査、記録保管、罰則の実務説明',
+  },
+  {
+    label: '令和6年度における浄化槽の設置状況等について｜環境省',
+    url: 'https://www.env.go.jp/press/press_02896.html',
+    note: '7条検査、保守点検・清掃、11条検査の実施率',
+  },
+  {
+    label: '環境省浄化槽サイト 法令',
+    url: 'https://www.env.go.jp/recycle/jokaso/law/',
+    note: '浄化槽関連の通知・告示・法令情報',
+  },
+  {
+    label: '浄化槽の法定検査の受検率向上に向けた取り組み事例集｜環境省',
+    url: 'https://www.env.go.jp/recycle/jokaso/manual/inspection/pdf/houteikensa-jirei202303.pdf',
+    note: '法定検査の位置づけと受検体制',
+  },
+];
+
 const breadcrumbLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -36,14 +69,7 @@ const articleLd = JSON.stringify({
   publisher: { '@id': `${site.domain}/#organization` },
   image: { '@type': 'ImageObject', url: `${site.domain}/og-johkasou.png`, width: 1200, height: 630 },
   about: { '@type': 'Service', name: '浄化槽清掃・保守点検' },
-  citation: [
-    { '@type': 'Legislation', name: '浄化槽法第7条（設置後の水質検査）' },
-    { '@type': 'Legislation', name: '浄化槽法第10条（保守点検・清掃義務）' },
-    { '@type': 'Legislation', name: '浄化槽法第11条（定期水質検査）' },
-    { '@type': 'Legislation', name: '浄化槽法第12条（改善命令等）' },
-    { '@type': 'Legislation', name: '浄化槽法第62条・第66条の2（罰則・過料）' },
-    { '@type': 'Legislation', name: '環境省関係浄化槽法施行規則第4条・第6条・第7条・第9条' },
-  ],
+  citation: officialSources.map((source) => source.url),
 });
 
 const faqItems = [
@@ -417,12 +443,9 @@ const webPageLd = JSON.stringify({
       <section id="sources" class="cl-section">
         <h2>参考法令・一次資料</h2>
         <ul class="cl-source-list">
-          <li><a href="https://laws.e-gov.go.jp/law/358AC1000000043" target="_blank" rel="noopener">浄化槽法｜e-Gov法令検索</a>：第7条、第10条、第11条、第12条、第12条の2、第57条、第62条、第66条の2など</li>
-          <li><a href="https://laws.e-gov.go.jp/law/359M50000100017/" target="_blank" rel="noopener">環境省関係浄化槽法施行規則｜e-Gov法令検索</a>：第4条、第6条、第7条、第9条など</li>
-          <li><a href="https://www.env.go.jp/recycle/jokaso/publicity/qa/answer.html" target="_blank" rel="noopener">浄化槽Q&A（回答集）｜環境省</a>：保守点検、清掃、法定検査、記録保管、罰則の実務説明</li>
-          <li><a href="https://www.env.go.jp/press/press_02896.html" target="_blank" rel="noopener">令和6年度における浄化槽の設置状況等について｜環境省</a>：7条検査、保守点検・清掃、11条検査の実施率</li>
-          <li><a href="https://www.env.go.jp/recycle/jokaso/law/" target="_blank" rel="noopener">環境省浄化槽サイト 法令</a>：浄化槽関連の通知・告示・法令情報</li>
-          <li><a href="https://www.env.go.jp/recycle/jokaso/manual/inspection/pdf/houteikensa-jirei202303.pdf" target="_blank" rel="noopener">浄化槽の法定検査の受検率向上に向けた取り組み事例集｜環境省</a>：法定検査の位置づけと受検体制</li>
+          {officialSources.map((source) => (
+            <li><a href={source.url} target="_blank" rel="noopener noreferrer">{source.label}</a>：{source.note}</li>
+          ))}
         </ul>
       </section>
 
