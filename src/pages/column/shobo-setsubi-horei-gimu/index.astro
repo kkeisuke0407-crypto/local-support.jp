@@ -3,11 +3,11 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
-const title = '消防設備点検の法定義務ガイド2026｜消防法17条の3の3・報告頻度・有資格者要件';
-const description = '消防法第17条の3の3に基づく消防設備点検の義務を施設管理担当者向けに解説。機器点検（6か月に1回）・総合点検（1年に1回）、特定防火対象物と非特定防火対象物の報告頻度、有資格者要件、報告漏れ時の対応、是正工事の進め方まで整理しました。';
+const title = '消防設備点検の点検・報告義務ガイド2026｜消防法17条の3の3・報告頻度・資格者要件';
+const description = '消防法第17条の3の3に基づく消防用設備等の点検・報告義務を施設管理担当者向けに解説。機器点検（6か月に1回）・総合点検（1年に1回）、特定防火対象物と非特定防火対象物の報告頻度、消防設備士・消防設備点検資格者が必要な建物、報告漏れ時の対応まで整理しました。';
 const canonical = `${site.domain}/column/shobo-setsubi-horei-gimu/`;
 const published = '2026-05-26';
-const modified = '2026-06-14';
+const modified = '2026-06-15';
 
 const breadcrumbLd = JSON.stringify({
   '@context': 'https://schema.org',
@@ -37,9 +37,10 @@ const articleLd = JSON.stringify({
   image: { '@type': 'ImageObject', url: `${site.domain}/og-shobo-setsubi.png`, width: 1200, height: 630 },
   about: { '@type': 'Service', name: '消防設備点検', serviceType: '消防用設備等の点検' },
   citation: [
-    { '@type': 'Legislation', name: '消防法第17条の3の3', url: 'https://elaws.e-gov.go.jp/document?lawid=323AC1000000186' },
-    { '@type': 'Legislation', name: '消防法施行令第36条' },
-    { '@type': 'Legislation', name: '消防法施行規則第31条の6' },
+    { '@type': 'Legislation', name: '消防法第17条の3の3・第44条', url: 'https://laws.e-gov.go.jp/law/323AC1000000186' },
+    { '@type': 'Legislation', name: '消防法施行令第36条', url: 'https://laws.e-gov.go.jp/law/336CO0000000037' },
+    { '@type': 'Legislation', name: '消防法施行規則第31条の6', url: 'https://laws.e-gov.go.jp/law/336M50000008006' },
+    { '@type': 'CreativeWork', name: '消防用設備等の点検基準、点検要領、点検票', url: 'https://www.fdma.go.jp/mission/prevention/post-1.html' },
   ],
 });
 
@@ -78,7 +79,7 @@ const faqItems = [
   },
   {
     q: '点検を怠った場合の罰則は？',
-    a: '点検・報告義務違反は、消防法第44条等により30万円以下の罰金または拘留の対象になり得ます。さらに火災発生時に点検不備が被害拡大の原因と判断されると、刑事責任や民事賠償責任を問われる可能性があります。',
+    a: '消防法第44条では、消防法第17条の3の3に基づく点検結果の報告をしない場合や虚偽報告をした場合に、30万円以下の罰金または拘留の対象になり得るとされています。点検未実施が判明した場合も、結果として報告できない状態になりやすいため、早急に点検・報告・是正予定の整理を行う必要があります。',
   },
   {
     q: '消防設備の改修工事と点検は同じ業者に頼むべきですか？',
@@ -140,13 +141,13 @@ const webPageLd = JSON.stringify({
           <span>消防設備点検の法定義務ガイド</span>
         </nav>
         <span class="cl-cat">法令・義務</span>
-        <h1 class="cl-title">消防設備点検の法定義務ガイド2026｜消防法17条の3の3・報告頻度・有資格者要件</h1>
+        <h1 class="cl-title">消防設備点検の点検・報告義務ガイド2026｜消防法17条の3の3・報告頻度・資格者要件</h1>
         <p class="cl-lead">
-          消防設備点検は<strong>消防法第17条の3の3で義務化</strong>されており、防火対象物の関係者（所有者・管理者・占有者）が対象になります。実務では「点検したか」だけでなく、<strong>管轄消防署へ報告したか</strong>、不良箇所を是正したか、次回点検日を管理しているかまで問われます。本記事では、機器点検・総合点検の頻度、特定防火対象物と非特定防火対象物の報告頻度、有資格者要件、防火対象物点検との違い、報告漏れ時の対応を施設管理担当者向けに整理します。
+          消防設備点検は<strong>消防法第17条の3の3で定められた点検・報告制度</strong>で、防火対象物の関係者（所有者・管理者・占有者）が対象になります。実務では「点検したか」だけでなく、<strong>消防長または消防署長へ結果を報告したか</strong>、不良箇所を是正したか、次回点検日を管理しているかまで問われます。本記事では、機器点検・総合点検の頻度、特定防火対象物と非特定防火対象物の報告頻度、資格者点検が必要な建物、防火対象物点検との違い、報告漏れ時の対応を施設管理担当者向けに整理します。
         </p>
         <div class="cl-meta">
           <time datetime={published}>公開：2026年5月26日</time>
-          <span>最終更新：2026年6月14日</span>
+          <span>最終更新：2026年6月15日</span>
           <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
         </div>
       </div>
@@ -231,8 +232,8 @@ const webPageLd = JSON.stringify({
         <ul>
           <li><strong>消防法（法律）</strong>：第17条の3の3で防火対象物の関係者に点検・報告義務を課す</li>
           <li><strong>消防法施行令（政令）</strong>：第36条で対象建物・点検事項を具体化</li>
-          <li><strong>消防法施行規則（省令）</strong>：第31条の6で点検頻度・報告様式・有資格者要件を規定</li>
-          <li><strong>消防庁告示「点検基準・点検要領」</strong>：具体的な点検項目・判定基準</li>
+          <li><strong>消防法施行規則（省令）</strong>：第31条の6で点検頻度・報告様式・資格者要件を規定</li>
+          <li><strong>消防庁告示「点検基準・点検要領」</strong>：具体的な点検項目・判定基準・報告書様式</li>
           <li><strong>各市町村消防本部の運用</strong>：報告様式・電子報告の取扱い等</li>
         </ul>
         <p>つまり、「消防法」だけを読んでも実務がわからない構造になっています。所轄消防署が公表している運用ガイドや、日本消防設備安全センター発行の点検要領を併せて確認することが実務上の必須プロセスです。</p>
@@ -241,7 +242,7 @@ const webPageLd = JSON.stringify({
           <ul>
             <li>「点検しているから報告しなくていい」→ <strong>点検実施と所轄消防署への報告は別義務</strong>。報告を怠るとそれ自体が違反です。</li>
             <li>「賃借人（テナント）には関係ない」→ 占有者も「関係者」に含まれます。区分所有・テナント保有部分の点検責任は契約で明確化が必要です。</li>
-            <li>「消防署が指摘するまで放置でいい」→ 立入検査で指摘された時点で「悪質」とみなされ罰則の対象になり得ます。</li>
+            <li>「消防署が指摘するまで放置でいい」→ 報告漏れや虚偽報告、維持命令違反として扱われると罰則リスクが高まります。</li>
           </ul>
         </div>
       </section>
@@ -332,7 +333,7 @@ const webPageLd = JSON.stringify({
 
       <section id="houkoku" class="cl-section">
         <h2>所轄消防署への報告サイクル</h2>
-        <p>点検と報告は別の義務です。点検結果は所定の様式（消防法施行規則別記様式第1号の2・第2号）にまとめ、建物所在地を管轄する消防署に提出します。</p>
+        <p>点検と報告は別の義務です。点検結果は消防庁告示で定められた消防用設備等点検結果報告書・総括表・点検者一覧表などの様式にまとめ、建物所在地を管轄する消防署または消防本部に提出します。</p>
         <h3>報告頻度</h3>
         <ul>
           <li><strong>特定防火対象物</strong>（飲食店・ホテル・病院・福祉施設等）：<strong>1年に1回</strong></li>
@@ -370,13 +371,13 @@ const webPageLd = JSON.stringify({
 
       <section id="penalty" class="cl-section">
         <h2>違反時の罰則と火災事故の責任事例</h2>
-        <p>消防法違反は刑事罰の対象であり、火災事故発生時には別途過失責任が問われます。</p>
+        <p>消防設備点検で最も直接的に問題になる罰則は、点検結果を報告しない場合や虚偽報告をした場合です。点検そのものが未実施だと、結果として適正な報告ができず、立入検査・是正指導・命令の流れに進むリスクが高まります。</p>
         <h3>主な罰則</h3>
         <ul>
-          <li><strong>点検・報告義務違反</strong>（消防法第44条）：30万円以下の罰金または拘留</li>
-          <li><strong>立入検査拒否・妨害</strong>：30万円以下の罰金または拘留</li>
-          <li><strong>消防用設備等の設置義務違反</strong>：1年以下の懲役または100万円以下の罰金</li>
-          <li><strong>防火管理者選任義務違反</strong>：6か月以下の懲役または50万円以下の罰金</li>
+          <li><strong>消防設備点検結果を報告しない・虚偽報告をする</strong>（消防法第17条の3の3、第44条）：30万円以下の罰金または拘留</li>
+          <li><strong>立入検査を拒む・妨げる・忌避する</strong>（消防法第4条、第44条等）：30万円以下の罰金または拘留</li>
+          <li><strong>消防用設備等の維持命令に違反する</strong>（消防法第17条の4、第44条）：30万円以下の罰金または拘留</li>
+          <li><strong>法人の業務として違反した場合</strong>：両罰規定により法人側も罰金対象になり得る</li>
         </ul>
         <h3>過去の重大事故と関係者責任</h3>
         <p>消防設備不備が問われた代表的な事故としては、以下のような事例があります（一般報道ベースで整理）。</p>
@@ -432,9 +433,11 @@ const webPageLd = JSON.stringify({
         <p>本記事は、消防法・消防法施行規則・消防庁および消防本部の公開情報をもとに、施設管理の実務で使いやすい形に整理しています。最終的な提出方法や様式は、建物所在地を管轄する消防署の案内を確認してください。</p>
         <ul class="cl-source-list">
           <li><a href="https://laws.e-gov.go.jp/law/323AC1000000186" target="_blank" rel="noopener">消防法｜e-Gov法令検索</a></li>
-          <li><a href="https://shinsei.e-gov.go.jp/recept/procedure/lists/procedureInformation?gtaTetCd=8600010000007" target="_blank" rel="noopener">消防用設備等点検結果報告｜e-Gov電子申請</a></li>
-          <li><a href="https://www.fdma.go.jp/mission/prevention/items/prevention001_19_hutekisetsu_leaflet.pdf" target="_blank" rel="noopener">消防用設備等点検報告制度とは｜総務省消防庁</a></li>
-          <li><a href="https://www.tfd.metro.tokyo.lg.jp/lfe/office_adv/tenken_houkoku.html" target="_blank" rel="noopener">消防用設備等の点検・報告｜東京消防庁</a></li>
+          <li><a href="https://laws.e-gov.go.jp/law/336CO0000000037" target="_blank" rel="noopener">消防法施行令｜e-Gov法令検索</a></li>
+          <li><a href="https://laws.e-gov.go.jp/law/336M50000008006" target="_blank" rel="noopener">消防法施行規則｜e-Gov法令検索</a></li>
+          <li><a href="https://www.fdma.go.jp/mission/prevention/post-1.html" target="_blank" rel="noopener">消防用設備等の点検基準・点検要領・点検票｜総務省消防庁</a></li>
+          <li><a href="https://www.fdma.go.jp/laws/kokuji/assets/h16_kokuji9.pdf" target="_blank" rel="noopener">平成16年消防庁告示第9号｜総務省消防庁</a></li>
+          <li><a href="https://www.tfd.metro.tokyo.lg.jp/lfe/office_adv/tenken_houkoku.html" target="_blank" rel="noopener">消防用設備等点検報告制度｜東京消防庁</a></li>
         </ul>
       </section>
 
