@@ -26,6 +26,8 @@ const FEATURED_COLUMNS = [
   { slug: 'shobo-setsubi-houkokusho', title: '消防設備点検報告書｜様式・提出先・保存・電子申請・届出者' },
   { slug: 'shokaki-tenken', title: '消火器点検｜外観・内部機能・耐圧性能点検の3段階と頻度・費用' },
   { slug: 'grease-trap-horei-gimu', title: 'グリストラップ清掃の法的義務ガイド｜下水道法・HACCP' },
+  { slug: 'grease-trap-souji-jibun-de', title: 'グリストラップの掃除を自分でやる方法｜手順・道具・頻度・業者に頼む境界' },
+  { slug: 'grease-trap-toha', title: 'グリストラップとは｜仕組み・構造・3槽の役割' },
   { slug: 'aircon-business-furon-tenken', title: 'フロン排出抑制法の点検義務ガイド｜業務用エアコン' },
   { slug: 'duct-horei-gimu', title: 'ダクト清掃の法令義務ガイド｜消防法・建築物衛生法' },
   { slug: 'pest-control-haccp', title: 'HACCP対応の害虫管理ガイド' },
