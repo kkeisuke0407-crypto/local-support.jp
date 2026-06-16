@@ -1,0 +1,432 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = '消火器点検2026｜外観・機能・耐圧の3段階と頻度・費用・誰がやる・報告まで';
+const description = '消火器点検の全体像を施設管理者・店舗オーナー向けに解説。外観点検・内部及び機能の点検・耐圧性能点検の3段階、6か月に1回の機器点検と報告サイクル、製造からの年数で変わる点検、誰が点検できるか（有資格者と関係者）、費用の考え方、点検済みシール・廃消火器リサイクルまで整理しました。';
+const canonical = `${site.domain}/column/shokaki-tenken/`;
+const published = '2026-06-16';
+const modified = '2026-06-16';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '消火器点検ガイド', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 5600,
+  articleSection: '消火器点検',
+  keywords: '消火器点検,消火器の点検,外観点検,機能点検,内部点検,耐圧性能点検,消火器点検頻度,消火器点検費用,点検済みシール,消火器リサイクル,2026',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-shobo-setsubi.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '消火器点検', serviceType: '消防用設備等の点検' },
+  citation: [
+    { '@type': 'Legislation', name: '消防法第17条の3の3', url: 'https://laws.e-gov.go.jp/law/323AC1000000186' },
+    { '@type': 'Legislation', name: '消防法施行規則第31条の6', url: 'https://laws.e-gov.go.jp/law/336M50000008006' },
+    { '@type': 'CreativeWork', name: '消防用設備等の点検基準・点検要領（消火器具）', url: 'https://www.fdma.go.jp/mission/prevention/post-1.html' },
+  ],
+});
+
+const faqItems = [
+  {
+    q: '消火器の点検はどのくらいの頻度で必要ですか？',
+    a: '消火器は消防用設備等の一つで、機器点検として6か月に1回の点検が必要です。外観点検はこのサイクルで行い、製造からの年数に応じて内部及び機能の点検（内部点検）、耐圧性能点検が加わります。点検結果の所轄消防署への報告は、特定防火対象物で1年に1回、非特定防火対象物で3年に1回です。',
+  },
+  {
+    q: '消火器点検の3段階（外観・機能・耐圧）とは何ですか？',
+    a: '外観点検は設置状況・本体の腐食変形・圧力ゲージ・安全栓・ホースなどを目視で確認する点検です。内部及び機能の点検は、製造から一定年数を経た消火器の内部や薬剤の状態、放射機能を確認する点検です。耐圧性能点検は、製造から10年を経た消火器の本体容器が圧力に耐えられるかを確認する点検です。年数が進むほど踏み込んだ点検が必要になります。',
+  },
+  {
+    q: '消火器の点検は自分でできますか？',
+    a: '外観点検は関係者でも比較的行いやすい内容です。ただし、内部及び機能の点検や耐圧性能点検は専門的な作業・器具が必要で、有資格者（消防設備士・消防設備点検資格者）に依頼するのが一般的です。また延べ面積1,000㎡以上の特定防火対象物などは、消火器を含む消防用設備全体について有資格者点検が義務づけられています。',
+  },
+  {
+    q: '消火器点検の費用はどのくらいですか？',
+    a: '消火器の外観点検は1本あたり数百円程度から、内部及び機能の点検・耐圧性能点検は別途費用がかかります。一般には、ほかの消防用設備とまとめて年間契約で点検するため、消火器単体の費用というより建物全体の消防設備点検費用に含めて見積もるのが実務的です。本数・設置場所・点検区分で変動します。',
+  },
+  {
+    q: '古い消火器も点検が必要ですか？買い替えとどちらがよいですか？',
+    a: '製造から年数が経った消火器は、内部及び機能の点検や耐圧性能点検の対象になります。点検費用が買い替え費用に近づく場合や、設計標準使用期限（業務用でおおむね10年、住宅用でおおむね5年が目安）を超える場合は、買い替えが合理的なこともあります。点検時に状態と費用を確認して判断してください。',
+  },
+  {
+    q: '点検済みシールは義務ですか？',
+    a: '点検を行った消火器には、点検実施者が点検した時期などを記録したラベル（点検済みを示す表示）を貼付するのが一般的な運用です。これは点検の実施記録として重要で、立入検査や次回点検時の確認に使われます。様式・運用は点検基準や所轄消防署の案内に沿います。',
+  },
+  {
+    q: '消火器点検と消防設備点検は別物ですか？',
+    a: '消火器は消防用設備等の一種なので、消火器点検は消防設備点検の一部です。実務では、消火器・自動火災報知設備・誘導灯・消火栓などをまとめて消防設備点検として実施し、結果を一括で所轄消防署へ報告します。消火器だけを切り出して単独契約することも可能です。',
+  },
+  {
+    q: '使い終わった・古くなった消火器はどう処分しますか？',
+    a: '消火器は一般ごみとして捨てられません。消火器リサイクルの仕組み（特定窓口・指定引取場所・ゆうパック回収など）を利用して処分します。点検を依頼している業者が、買い替え時に古い消火器の引き取りに対応するケースもあります。処分方法は購入店・販売店やリサイクル窓口に確認してください。',
+  },
+];
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-answer-grid', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-shobo-setsubi.png` },
+});
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified}
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a>
+          <span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a>
+          <span aria-hidden="true">›</span>
+          <span>消火器点検ガイド</span>
+        </nav>
+        <span class="cl-cat">消火器点検</span>
+        <h1 class="cl-title">消火器点検2026｜外観・機能・耐圧の3段階と頻度・費用・誰がやる・報告まで</h1>
+        <p class="cl-lead">
+          消火器の点検は、ひとことで言うと<strong>「外観点検」「内部及び機能の点検」「耐圧性能点検」の3段階</strong>で構成され、製造からの年数が進むほど踏み込んだ点検が必要になります。消火器は消防用設備等の一つで、6か月に1回の機器点検と所轄消防署への報告義務の対象です。本記事では、3段階の点検の違い、頻度、費用の考え方、誰が点検できるか、点検済みシール、古い消火器の処分（リサイクル）まで、施設管理者・店舗オーナー向けに整理します。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年6月16日</time>
+          <span>最終更新：2026年6月16日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 消火器点検はどうやる？頻度は？</p>
+        <p class="cl-qa-a">A. 消火器は消防用設備等の一つで、<strong>6か月に1回の機器点検（外観点検）</strong>が基本。さらに<strong>製造から一定年数で「内部及び機能の点検」、製造から10年で「耐圧性能点検」</strong>が加わります。報告は特定防火対象物で1年に1回、非特定で3年に1回。外観は関係者でも確認しやすいですが、内部・耐圧は有資格者依頼が一般的です。</p>
+        <p class="cl-qa-src">※消防法第17条の3の3、消防法施行規則第31条の6、点検基準・点検要領をもとに整理</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="shobo-setsubi" serviceName="消防設備点検" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#three">消火器点検の3段階（早見表）</a></li>
+          <li><a href="#gaikan">外観点検（6か月に1回）</a></li>
+          <li><a href="#naibu">内部及び機能の点検（製造から一定年数）</a></li>
+          <li><a href="#taiatsu">耐圧性能点検（製造から10年）</a></li>
+          <li><a href="#who">誰が点検できるか</a></li>
+          <li><a href="#cost">費用の考え方</a></li>
+          <li><a href="#houkoku">報告・点検済みシール</a></li>
+          <li><a href="#recycle">古い消火器の処分（リサイクル）</a></li>
+          <li><a href="#sources">参考にした公式情報</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>点検は3段階</strong>：外観点検（6か月に1回）→ 内部及び機能の点検（製造から一定年数）→ 耐圧性能点検（製造から10年・以後3年ごと）</li>
+            <li><strong>消火器は消防用設備の一部</strong>。ほかの設備とまとめて点検・報告するのが実務的（特定1年・非特定3年）</li>
+            <li><strong>外観は関係者でも、内部・耐圧は有資格者依頼が一般的</strong>。古い消火器は点検より買い替え＋リサイクルが合理的なことも</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="three" class="cl-section">
+        <h2>消火器点検の3段階（早見表）</h2>
+        <p>消火器の点検は、年数が進むほど確認の深さが増す3段階で考えると整理しやすくなります。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>消火器点検の3段階</caption>
+            <thead>
+              <tr><th scope="col">段階</th><th scope="col">タイミングの目安</th><th scope="col">主な内容</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">外観点検</th><td>6か月に1回（機器点検）</td><td>設置状況・本体の腐食変形・圧力ゲージ・安全栓・ホース・標識の目視確認</td></tr>
+              <tr><th scope="row">内部及び機能の点検</th><td>製造から一定年数を経たもの（加圧式は3年、蓄圧式は5年が目安）</td><td>内部・薬剤の状態、放射機能の確認（抜き取り方式によるものもある）</td></tr>
+              <tr><th scope="row">耐圧性能点検</th><td>製造から10年を経たもの（以後3年ごと）</td><td>本体容器が所定の圧力に耐えられるかの確認（水圧試験）</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>このうち外観点検は6か月ごとの機器点検で行い、内部及び機能の点検・耐圧性能点検は対象となる消火器について追加で実施します。詳細は<a href="/column/shokaki-naibu-tenken/">消火器の内部点検・機能点検</a>、<a href="/column/shokaki-taiatsu-tenken/">消火器の耐圧性能点検（水圧試験）</a>で個別に解説しています。</p>
+      </section>
+
+      <section id="gaikan" class="cl-section">
+        <h2>外観点検（6か月に1回）</h2>
+        <p>外観点検は、消火器が「いざというとき使える状態」にあるかを目視で確認する基本の点検です。機器点検として6か月に1回行います。</p>
+        <h3>主な確認項目</h3>
+        <ul>
+          <li><strong>設置状況</strong>：定位置にあるか、避難の妨げになっていないか、見やすい位置か</li>
+          <li><strong>本体</strong>：錆・腐食・変形・キャップのゆるみがないか</li>
+          <li><strong>圧力ゲージ</strong>（蓄圧式）：指針が緑の正常範囲を指しているか</li>
+          <li><strong>安全栓・封</strong>：脱落・破損がないか</li>
+          <li><strong>ホース・ノズル</strong>：詰まり・ひび割れがないか</li>
+          <li><strong>標識</strong>：「消火器」の表示が見やすく設置されているか</li>
+        </ul>
+        <p>外観点検は関係者でも確認しやすい内容ですが、法定点検として有効にするには点検基準に沿った実施と記録が必要です。</p>
+      </section>
+
+      <section id="naibu" class="cl-section">
+        <h2>内部及び機能の点検（製造から一定年数）</h2>
+        <p>製造から一定年数を経た消火器は、外観だけでなく内部や薬剤の状態、放射機能まで踏み込んだ「内部及び機能の点検」が必要になります。</p>
+        <ul>
+          <li><strong>加圧式消火器</strong>：製造から3年を経過したものが目安</li>
+          <li><strong>蓄圧式消火器</strong>：製造から5年を経過したものが目安</li>
+        </ul>
+        <p>対象本数が多い場合は、同じ種類・製造時期の消火器をまとめて「ロット」とし、その一部を抜き取って確認する抜き取り方式がとられることもあります。専門的な作業を伴うため、有資格業者に依頼するのが一般的です。詳しくは<a href="/column/shokaki-naibu-tenken/">消火器の内部点検・機能点検2026</a>で解説しています。</p>
+      </section>
+
+      <section id="taiatsu" class="cl-section">
+        <h2>耐圧性能点検（製造から10年）</h2>
+        <p>製造から10年を経た消火器は、本体容器が圧力に耐えられるかを確認する「耐圧性能点検（水圧試験）」の対象になります。以後は3年ごとに実施します。</p>
+        <p>古い容器は腐食などで強度が落ちている可能性があり、放射時に破裂すると危険です。耐圧性能点検の費用が買い替え費用に近づくこともあるため、点検か買い替えかを費用と状態で判断します。詳しくは<a href="/column/shokaki-taiatsu-tenken/">消火器の耐圧性能点検（水圧試験）2026</a>で解説しています。</p>
+      </section>
+
+      <section id="who" class="cl-section">
+        <h2>誰が点検できるか</h2>
+        <p>消火器を含む消防用設備の点検を誰が行えるかは、建物の用途・規模で変わります。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>点検を行える人の目安</caption>
+            <thead>
+              <tr><th scope="col">建物の条件</th><th scope="col">点検する人</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">延べ面積1,000㎡以上の特定防火対象物など</th><td>有資格者（消防設備士・消防設備点検資格者）</td></tr>
+              <tr><th scope="row">上記に該当しない建物</th><td>関係者点検も可能（外観点検は行いやすいが、内部・耐圧は有資格者依頼が一般的）</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>外観点検は関係者でも対応しやすい一方、内部及び機能の点検・耐圧性能点検は専門的な作業・器具が必要です。自分でやるか業者に頼むかの判断は、<a href="/column/shobo-setsubi-jibun-de/">消防設備点検は自分でできる？2026</a>もあわせて参考にしてください。</p>
+      </section>
+
+      <section id="cost" class="cl-section">
+        <h2>費用の考え方</h2>
+        <p>消火器点検の費用は、点検の段階（外観／内部・機能／耐圧）と本数で変わります。</p>
+        <ul>
+          <li><strong>外観点検</strong>：1本あたり数百円程度からが目安</li>
+          <li><strong>内部及び機能の点検・耐圧性能点検</strong>：外観点検より高く、別途費用がかかる</li>
+          <li><strong>実務</strong>：消火器単体ではなく、ほかの消防用設備とまとめて年間契約で点検・見積もりするのが一般的</li>
+        </ul>
+        <p>建物全体の消防設備点検費用の相場感は<a href="/column/shobo-setsubi-hiyo-sohba/">消防設備点検の費用相場2026</a>で解説しています。消火器の本数が多い施設は、まとめて見積もりを取ると単価を抑えやすくなります。</p>
+      </section>
+
+      <section id="houkoku" class="cl-section">
+        <h2>報告・点検済みシール</h2>
+        <p>消火器の点検結果は、ほかの消防用設備とまとめて点検結果報告書として所轄消防署へ報告します。報告頻度は特定防火対象物で1年に1回、非特定防火対象物で3年に1回です。</p>
+        <p>点検した消火器には、点検時期などを記録したラベル（点検済みを示す表示）を貼付するのが一般的です。これは点検の実施記録として、立入検査や次回点検時の確認に使われます。報告書の様式・提出方法は<a href="/column/shobo-setsubi-houkokusho/">消防設備点検報告書2026</a>を参照してください。</p>
+      </section>
+
+      <section id="recycle" class="cl-section">
+        <h2>古い消火器の処分（リサイクル）</h2>
+        <p>点検の結果、買い替えが必要になった消火器や使用済みの消火器は、一般ごみとして処分できません。消火器リサイクルの仕組みを使って処分します。</p>
+        <ul>
+          <li><strong>特定窓口・指定引取場所</strong>：消火器販売店・防災業者などの窓口で引き取り</li>
+          <li><strong>ゆうパック回収</strong>：一部地域で利用できる回収方法</li>
+          <li><strong>買い替え時の引き取り</strong>：点検・販売業者が古い消火器の引き取りに対応するケースもある</li>
+        </ul>
+        <p>処分方法は地域・業者によって異なるため、購入店・販売店やリサイクル窓口に確認してください。点検を依頼する業者を選ぶ際、買い替え・処分まで対応できるかも確認しておくと管理がスムーズです。</p>
+      </section>
+
+      <section id="sources" class="cl-section">
+        <h2>参考にした公式情報</h2>
+        <p>本記事は、消防法・消防法施行規則・消防庁の公開情報をもとに、施設管理の実務で使いやすい形に整理しています。点検区分・実施時期の詳細は、消防庁の点検基準・点検要領および所轄消防署の案内を確認してください。</p>
+        <ul class="cl-source-list">
+          <li><a href="https://laws.e-gov.go.jp/law/323AC1000000186" target="_blank" rel="noopener">消防法｜e-Gov法令検索</a></li>
+          <li><a href="https://laws.e-gov.go.jp/law/336M50000008006" target="_blank" rel="noopener">消防法施行規則｜e-Gov法令検索</a></li>
+          <li><a href="https://www.fdma.go.jp/mission/prevention/post-1.html" target="_blank" rel="noopener">消防用設備等の点検基準・点検要領・点検票｜総務省消防庁</a></li>
+          <li><a href="https://www.tfd.metro.tokyo.lg.jp/lfe/office_adv/tenken_houkoku.html" target="_blank" rel="noopener">消防用設備等点検報告制度｜東京消防庁</a></li>
+        </ul>
+      </section>
+
+      <div class="cl-cta">
+        <h2>消火器を含む消防設備点検の業者をお探しなら</h2>
+        <p>有資格者の在籍する専門業者から最大3社の見積もりを<br/>完全無料・約1分で取得できます。消火器の本数が多い施設もまとめてご相談ください</p>
+        <a class="cta-btn-primary" href="/shobo-setsubi/">無料で一括見積もりを依頼する</a>
+      </div>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          {faqItems.map((item) => (
+            <div class="cl-faq-item">
+              <dt>{item.q}</dt>
+              <dd>{item.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別の消防設備点検業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/shobo-setsubi/tokyo/">東京都</a></li>
+          <li><a href="/shobo-setsubi/osaka/">大阪府</a></li>
+          <li><a href="/shobo-setsubi/kanagawa/">神奈川県</a></li>
+          <li><a href="/shobo-setsubi/aichi/">愛知県</a></li>
+          <li><a href="/shobo-setsubi/saitama/">埼玉県</a></li>
+          <li><a href="/shobo-setsubi/chiba/">千葉県</a></li>
+          <li><a href="/shobo-setsubi/hyogo/">兵庫県</a></li>
+          <li><a href="/shobo-setsubi/fukuoka/">福岡県</a></li>
+          <li><a href="/shobo-setsubi/hokkaido/">北海道</a></li>
+          <li><a href="/shobo-setsubi/kyoto/">京都府</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/shobo-setsubi/">全国47都道府県の対応業者を見る</a></p>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連サービス・コラム</h2>
+        <ul>
+          <li><a href="/shobo-setsubi/">消防設備点検の業者を一括見積比較</a></li>
+          <li><a href="/column/shokaki-naibu-tenken/">消火器の内部点検・機能点検2026｜製造から何年で必要？</a></li>
+          <li><a href="/column/shokaki-taiatsu-tenken/">消火器の耐圧性能点検（水圧試験）2026｜10年・3年ごと</a></li>
+          <li><a href="/column/shobo-setsubi-horei-gimu/">消防設備点検の点検・報告義務ガイド2026</a></li>
+          <li><a href="/column/shobo-setsubi-hiyo-sohba/">消防設備点検の費用相場2026</a></li>
+        </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#shobo-ho">消防法</a></li>
+          <li><a href="/glossary/#shobo-setsubishi">消防設備士</a></li>
+          <li><a href="/glossary/#shobo-tenken-shikaku">消防設備点検資格者</a></li>
+          <li><a href="/glossary/#kiki-tenken">機器点検</a></li>
+          <li><a href="/glossary/#tokutei-boka-taisho">特定防火対象物</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集（42語）をすべて見る</a></p>
+      </aside>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header {
+  background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%);
+  color: #fff;
+  padding: 48px 0 40px;
+}
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul, .cl-callout--warn ul { padding-left: 18px; margin: 0; }
+.cl-callout li, .cl-callout--warn li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-answer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 20px 0 24px; }
+.cl-answer-grid > div { background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; padding: 18px 20px; box-shadow: 0 6px 18px rgba(15, 23, 42, .05); }
+.cl-answer-grid h3 { font-size: 1rem; color: var(--blue-dark); margin: 0 0 8px; }
+.cl-answer-grid p { margin: 0; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-source-list { padding-left: 22px; display: grid; gap: 8px; }
+.cl-source-list a { color: var(--blue); text-decoration: underline; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-glossary-block { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 24px; }
+.cl-glossary-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; }
+.cl-glossary-list { padding-left: 18px; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; }
+.cl-glossary-list a { color: var(--blue); text-decoration: underline; font-size: .88rem; }
+.cl-glossary-more { font-size: .85rem; margin: 12px 0 0; }
+.cl-glossary-more a { color: var(--blue); text-decoration: underline; }
+@media (max-width: 600px) {
+  .cl-header { padding: 32px 0 28px; }
+  .cl-body { padding: 28px 16px 48px; }
+  .cl-section h2 { font-size: 1.15rem; }
+  .cl-answer-grid { grid-template-columns: 1fr; }
+}
+
+.cl-quickanswer {
+  background: #eef6ff;
+  border: 1.5px solid #1a56db;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-bottom: 32px;
+}
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+</style>
