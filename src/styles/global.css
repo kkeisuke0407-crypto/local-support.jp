@@ -209,7 +209,7 @@ a { color: inherit; text-decoration: none; }
 .hero-wave svg { width: 100%; }
 
 /* ── Sections ── */
-.sd-section { padding: 56px 0; }
+.sd-section { padding: 56px 0; scroll-margin-top: 76px; }
 .section-white { background: #fff; }
 .section-gray  { background: var(--gray-100); }
 
@@ -1547,6 +1547,11 @@ a { color: inherit; text-decoration: none; }
   margin-right: 8px;
 }
 .legal-basis dd { display: inline; color: var(--gray-700); margin: 0; }
+.legal-basis-link { color: var(--blue); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+.legal-basis-link:hover { color: var(--blue-dark); }
+.legal-basis-ext { font-size: .8em; }
+.legal-basis-note { margin-top: 8px; font-size: .75rem; color: var(--gray-500); }
+.legal-basis-note a { color: var(--gray-600); text-decoration: underline; }
 
 /* =====================================================
    Related services

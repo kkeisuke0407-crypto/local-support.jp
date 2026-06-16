@@ -20,6 +20,7 @@ import BottomCTA from '../components/BottomCTA.astro';
 import AIOSummary from '../components/AIOSummary.astro';
 import PrefectureLocalSection from '../components/PrefectureLocalSection.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
+import Toc from '../components/Toc.astro';
 import { site } from '../data/site';
 import { ogImageUrl } from '../data/ogImage';
 import type { ServiceData } from '../data/services/_types';
@@ -119,6 +120,14 @@ const howToLd = JSON.stringify({
   })),
 });
 
+// 関連法令を e-Gov法令検索の出典としてcitation化（AIO/E-E-A-T強化）
+const isLaw = (n: string) => /法/.test(n) && !/基準|告示|要領|指針|ガイドライン|マニュアル/.test(n);
+const egovUrl = (n: string) =>
+  `https://laws.e-gov.go.jp/search/elawsSearch/elaws_search/lsg0100/?keyword=${encodeURIComponent(n.replace(/第.*$/, '').replace(/（.*?）/g, '').trim())}`;
+const legalCitations = data.legal.legalBasis
+  .filter(isLaw)
+  .map((law) => ({ '@type': 'Legislation', name: law, url: egovUrl(law), jurisdiction: 'JP' }));
+
 const webPageLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'WebPage',
@@ -130,6 +139,7 @@ const webPageLd = JSON.stringify({
   inLanguage: 'ja-JP',
   isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
   about: { '@type': 'Service', name: data.serviceName },
+  ...(legalCitations.length ? { citation: legalCitations } : {}),
   spatialCoverage: { '@type': 'AdministrativeArea', name: prefecture.name },
   reviewedBy: {
     '@type': 'Person',
@@ -181,6 +191,7 @@ const jsonLdBlocks = [breadcrumbLd, serviceLd, webPageLd, faqLd, howToLd, priceL
     { label: prefecture.name },
   ]} />
   <AIOSummary lead={data.aiSummary.lead} facts={data.aiSummary.facts} serviceName={data.serviceName} />
+  <Toc serviceName={data.serviceName} />
   <TrustStrip />
   <PrefectureIntro prefecture={prefecture} service={data} />
   {override?.localSection && (

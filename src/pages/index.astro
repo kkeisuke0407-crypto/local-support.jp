@@ -231,7 +231,7 @@ const featuredColumns = [
     <div class="lp-service-grid">
       {serviceIndex.map((s) => (
         <a href={`/${s.slug}/`} class="lp-service-card">
-          <img class="lp-service-card-img" src={`/images/services/hero-${s.slug}.webp?v=${heroImageVersion}`} width="480" height="270" alt="" loading="lazy" decoding="async" />
+          <img class="lp-service-card-img" src={`/images/services/hero-${s.slug}.webp?v=${heroImageVersion}`} width="480" height="270" alt={`${s.name}のサービスイメージ`} loading="lazy" decoding="async" />
           <span class="lp-service-label">{s.short}</span>
           <h3>{s.name}</h3>
           <p>{s.description}</p>

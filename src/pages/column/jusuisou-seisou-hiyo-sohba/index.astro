@@ -7,7 +7,7 @@ const title = '受水槽清掃の費用相場2026｜規模別の料金・追加�
 const description = '受水槽清掃の費用相場を2026年最新の実勢価格で解説。小規模3〜8万円・中規模8〜30万円・大規模30万円〜の規模別料金と水質検査・排水処理・高所作業などの追加費用、自治体別の運用差、業者選びで失敗しないチェックポイントまでをまとめた施設管理担当者向け完全ガイド。';
 const canonical = `${site.domain}/column/jusuisou-seisou-hiyo-sohba/`;
 const published = '2026-05-26';
-const modified = '2026-05-26';
+const modified = '2026-06-16';
 
 const breadcrumbLd = JSON.stringify({
   '@context': 'https://schema.org',
@@ -76,7 +76,7 @@ const webPageLd = JSON.stringify({
 });
 
 ---
-<BaseLayout
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified}
   title={title}
   description={description}
   canonical={canonical}
@@ -102,7 +102,7 @@ const webPageLd = JSON.stringify({
         </p>
         <div class="cl-meta">
           <time datetime={published}>公開：2025年5月26日</time>
-          <span>最終更新：2026年5月26日</span>
+          <span>最終更新：2026年6月16日</span>
           <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
         </div>
       </div>
@@ -128,6 +128,7 @@ const webPageLd = JSON.stringify({
           <li><a href="#factors">費用が変動する6つの要因</a></li>
           <li><a href="#add-cost">付帯費用の内訳と落とし穴</a></li>
           <li><a href="#region">地域・自治体による費用差</a></li>
+          <li><a href="#annual-cost">清掃費と法定点検費・年間維持費の総額</a></li>
           <li><a href="#law">法定義務と違反時のペナルティ</a></li>
           <li><a href="#select">業者選びで確認すべき5つのポイント</a></li>
           <li><a href="#mistakes">よくある失敗パターン</a></li>
@@ -307,6 +308,32 @@ const webPageLd = JSON.stringify({
         <p>水道法・建築物衛生法の運用は基本的に全国共通ですが、自治体ごとに条例で<strong>10m³以下の小規模貯水槽にも清掃義務を定めている</strong>ケースがあります（東京都・大阪市・神戸市など）。詳細は管轄の保健所または水道局にご確認ください。</p>
 
         <p>地域別の業者情報は<a href="/jusuisou-seisou/">受水槽清掃のサービストップ</a>の都道府県一覧からご確認いただけます。</p>
+      </section>
+
+      <section id="annual-cost" class="cl-section">
+        <h2>清掃費と法定点検費・年間維持費の総額</h2>
+        <p>受水槽の維持費は「清掃費」だけではありません。<strong>清掃</strong>に加えて、簡易専用水道（10m³超）では<strong>登録検査機関による法定検査（点検）費用</strong>がかかります。両者を分けて把握すると、年間の総額が見積もりやすくなります。</p>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>受水槽の年間維持費の内訳（2026年・参考目安）</caption>
+            <thead>
+              <tr>
+                <th scope="col">項目</th>
+                <th scope="col">頻度</th>
+                <th scope="col">費用の目安</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">清掃</th><td>年1回以上</td><td>3〜30万円超（規模による）</td></tr>
+              <tr><th scope="row">清掃後の水質検査</th><td>清掃時</td><td>1〜2.5万円</td></tr>
+              <tr><th scope="row">法定検査（簡易専用水道）</th><td>年1回以上</td><td>1〜2万円程度</td></tr>
+              <tr><th scope="row">日常点検</th><td>毎月など</td><td>管理者対応で原則無料</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>「清掃の費用」と「点検（法定検査）の費用」は別物です。違いと内容は<a href="/column/jusuisou-seisou-tenken/">受水槽の点検・法定検査ガイド</a>、水質検査の範囲は<a href="/column/jusuisou-seisou-suishitsu-kensa/">水質検査ガイド</a>で詳しく解説しています。年間契約で清掃・検査をまとめると、手配の手間と1回あたりの単価を抑えられるケースがあります。</p>
       </section>
 
       <section id="law" class="cl-section">
