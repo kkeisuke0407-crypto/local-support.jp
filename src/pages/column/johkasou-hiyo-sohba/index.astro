@@ -1,0 +1,433 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = '浄化槽の費用相場2026｜保守点検・清掃・法定検査の年間維持費とブロワー電気代まで';
+const description = '浄化槽の費用相場と年間維持費を戸建てオーナー・施設管理者向けに解説。保守点検・清掃・法定検査（11条検査）の費用、ブロワーの電気代、人槽・処理方式による違い、勘定科目・経費の扱い、安い見積もりの注意点までを2026年版で整理しました。';
+const canonical = `${site.domain}/column/johkasou-hiyo-sohba/`;
+const published = '2026-06-16';
+const modified = '2026-06-16';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '浄化槽の費用相場', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 5200,
+  articleSection: '浄化槽',
+  keywords: '浄化槽 費用,維持費,年間費用,保守点検 費用,清掃 料金,法定検査 費用,11条検査 費用,ブロワー 電気代,勘定科目,2026',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-johkasou.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '浄化槽清掃・保守点検', serviceType: '浄化槽の維持管理' },
+  citation: [
+    { '@type': 'Legislation', name: '浄化槽法', url: 'https://laws.e-gov.go.jp/law/358AC1000000043' },
+    { '@type': 'Legislation', name: '浄化槽法施行規則', url: 'https://laws.e-gov.go.jp/law/359M50000100017' },
+  ],
+});
+
+const faqItems = [
+  {
+    q: '浄化槽の年間維持費はいくらくらいですか？',
+    a: '一般的な家庭用の合併処理浄化槽（5〜7人槽）で、保守点検・清掃・法定検査（11条検査）・ブロワーの電気代を合計すると、おおむね年間4万〜8万円程度が目安です。人槽の大きさ・処理方式・地域・業者によって幅があり、大型浄化槽や施設用ではさらに高くなります。自治体によっては保守点検・清掃費の一部に補助がある場合もあります。',
+  },
+  {
+    q: '浄化槽の維持費の内訳を教えてください。',
+    a: '主な内訳は、(1)保守点検費（年数回の点検）、(2)清掃費（年1回以上の汚泥引き抜き）、(3)法定検査手数料（11条検査、年1回）、(4)ブロワー（送風機）の電気代、(5)消毒剤などの消耗品です。このうち清掃費が一度の金額として大きく、ブロワーの電気代は24時間稼働のため年間で意外と効いてきます。',
+  },
+  {
+    q: '浄化槽の清掃費用はどのくらいですか？',
+    a: '家庭用の合併処理浄化槽（5〜7人槽）の清掃（汚泥の引き抜き）は、1回あたりおおむね2万〜4万円程度が目安です。人槽が大きいほど、また汚泥の量が多いほど高くなります。清掃は法律で原則年1回以上（全ばっ気方式は年2回以上）と定められており、毎年発生する費用です。',
+  },
+  {
+    q: '保守点検の費用はどのくらいですか？',
+    a: '保守点検は、1回あたり数千円〜1万円程度で、年間の点検回数によって合計額が変わります。家庭用の合併処理浄化槽は処理方式・人槽に応じて年3〜4回程度の点検が必要なことが多く、年間ではおおむね1万〜2万円台になるケースが一般的です。年間契約でまとめると割安になることがあります。',
+  },
+  {
+    q: '法定検査（11条検査）の費用はどのくらいですか？',
+    a: '11条検査の手数料は都道府県によって異なりますが、家庭用浄化槽でおおむね5,000円前後が目安です。これは毎年1回受ける必要がある検査で、保守点検・清掃とは別の費用です。手数料は指定検査機関・自治体ごとに定められているため、地域の金額を確認してください。',
+  },
+  {
+    q: 'ブロワーの電気代はどのくらいかかりますか？',
+    a: 'ブロワー（送風機）は浄化槽に空気を送り続けるため24時間稼働し、家庭用でおおむね月数百円〜1,000円台、年間で数千円〜1万円程度が目安です。ブロワーの能力（風量）や電気料金単価によって変わります。古く効率の悪いブロワーは電気代が増えるため、買い替えで電気代が下がることもあります。',
+  },
+  {
+    q: '浄化槽の維持費は経費にできますか？勘定科目は？',
+    a: '事業用の建物に設置された浄化槽の保守点検費・清掃費・法定検査手数料は、一般に「修繕費」や「衛生費」「支払手数料」などの勘定科目で必要経費・損金に算入できます。自宅兼事業所などは事業使用割合に応じた按分が必要です。具体的な処理は顧問税理士に確認してください。',
+  },
+  {
+    q: '見積もりが安い業者は大丈夫ですか？',
+    a: '極端に安い見積もりは、清掃で汚泥を全量引き抜かない、必要な点検回数を省く、法定検査が含まれていない、などのケースがあります。比較時は「保守点検（年間回数）＋清掃（汚泥全量引き抜き）＋法定検査の案内」まで含めて条件をそろえ、作業範囲を明示してもらうことが大切です。',
+  },
+];
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-answer-grid', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-johkasou.png` },
+});
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified}
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a>
+          <span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a>
+          <span aria-hidden="true">›</span>
+          <span>浄化槽の費用相場</span>
+        </nav>
+        <span class="cl-cat">浄化槽</span>
+        <h1 class="cl-title">浄化槽の費用相場2026｜保守点検・清掃・法定検査の年間維持費とブロワー電気代まで</h1>
+        <p class="cl-lead">
+          浄化槽の維持費は、<strong>保守点検・清掃・法定検査（11条検査）の3つ＋ブロワーの電気代</strong>で構成されます。家庭用の合併処理浄化槽（5〜7人槽）でおおむね<strong>年間4万〜8万円</strong>が目安です。本記事では、費用の内訳と相場、人槽・処理方式による違い、ブロワー電気代、勘定科目（経費）の扱い、安い見積もりの落とし穴までを戸建てオーナー・施設管理者向けに整理します。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年6月16日</time>
+          <span>最終更新：2026年6月16日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 浄化槽の維持費は年間いくら？</p>
+        <p class="cl-qa-a">A. 家庭用の合併処理浄化槽（5〜7人槽）で<strong>年間おおむね4万〜8万円</strong>が目安。内訳は<strong>保守点検（年1〜2万円台）＋清掃（年1回・2〜4万円）＋法定検査11条（年5千円前後）＋ブロワー電気代（年数千〜1万円）</strong>。人槽・処理方式・地域で変動します。</p>
+        <p class="cl-qa-src">※浄化槽法・浄化槽法施行規則、一般的な料金水準をもとに整理</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="johkasou" serviceName="浄化槽清掃・保守点検" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#breakdown">年間維持費の内訳</a></li>
+          <li><a href="#total">年間維持費の合計目安</a></li>
+          <li><a href="#seiso">清掃費の相場</a></li>
+          <li><a href="#tenken">保守点検費の相場</a></li>
+          <li><a href="#kensa">法定検査（11条検査）の手数料</a></li>
+          <li><a href="#blower">ブロワーの電気代</a></li>
+          <li><a href="#keihi">経費・勘定科目の扱い</a></li>
+          <li><a href="#cheap">安い見積もりの落とし穴</a></li>
+          <li><a href="#sources">参考にした公式情報</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>年間維持費は家庭用でおおむね4万〜8万円</strong>。保守点検＋清掃＋法定検査＋ブロワー電気代の合計</li>
+            <li><strong>一度の金額が大きいのは清掃（年1回・2〜4万円）</strong>、地味に効くのが24時間稼働のブロワー電気代</li>
+            <li><strong>3つの義務（点検・清掃・検査）はそれぞれ別費用</strong>。安い見積もりは作業省略や検査未含みに注意</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="breakdown" class="cl-section">
+        <h2>年間維持費の内訳</h2>
+        <p>浄化槽の維持費は、大きく5つの費目に分かれます。まず全体像を押さえましょう。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>浄化槽の年間維持費の内訳（家庭用5〜7人槽の目安）</caption>
+            <thead>
+              <tr><th scope="col">費目</th><th scope="col">頻度</th><th scope="col">費用の目安</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">保守点検</th><td>年3〜4回程度</td><td>年1万〜2万円台</td></tr>
+              <tr><th scope="row">清掃（汚泥引き抜き）</th><td>年1回以上</td><td>1回2万〜4万円</td></tr>
+              <tr><th scope="row">法定検査（11条検査）</th><td>年1回</td><td>5,000円前後</td></tr>
+              <tr><th scope="row">ブロワー電気代</th><td>24時間稼働</td><td>年数千〜1万円</td></tr>
+              <tr><th scope="row">消毒剤など消耗品</th><td>随時</td><td>年数千円程度</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>「保守点検」「清掃」「法定検査」は浄化槽法で定められた管理者の3つの義務で、それぞれ別の費用です。3つの違いは<a href="/column/johkasou-tenken-seiso-kensa/">浄化槽の保守点検・清掃・法定検査の違い2026</a>で詳しく解説しています。</p>
+      </section>
+
+      <section id="total" class="cl-section">
+        <h2>年間維持費の合計目安</h2>
+        <p>人槽（処理対象人員）の規模別に、年間維持費のおおまかな目安を示します。地域・処理方式・業者で幅があるため、あくまで参考値です。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>規模別の年間維持費の目安</caption>
+            <thead>
+              <tr><th scope="col">規模</th><th scope="col">年間維持費の目安</th><th scope="col">備考</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">家庭用（5〜7人槽）</th><td>4万〜8万円</td><td>戸建て住宅の合併処理浄化槽</td></tr>
+              <tr><th scope="row">中規模（10〜20人槽）</th><td>8万〜20万円</td><td>小規模店舗・小規模施設</td></tr>
+              <tr><th scope="row">大規模（50人槽以上）</th><td>20万円〜（個別見積）</td><td>施設・集合住宅。点検・清掃頻度が増える</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>大型浄化槽は保守点検・清掃の頻度や汚泥量が増えるため、維持費も大きくなります。施設用は個別見積もりが基本です。</p>
+      </section>
+
+      <section id="seiso" class="cl-section">
+        <h2>清掃費の相場</h2>
+        <p>清掃は、浄化槽に溜まった汚泥やスカムを引き抜く作業で、維持費の中でも一度の金額が大きい費目です。</p>
+        <ul>
+          <li><strong>家庭用（5〜7人槽）</strong>：1回あたり2万〜4万円程度</li>
+          <li><strong>頻度</strong>：原則年1回以上（全ばっ気方式は年2回以上）</li>
+          <li><strong>変動要因</strong>：人槽の大きさ、汚泥の量、汲み取り距離・搬出条件</li>
+        </ul>
+        <p>清掃は浄化槽法で頻度が定められた義務です。汚泥を全量引き抜かない簡易的な清掃では、本来の機能が回復せず、臭い・処理不良の原因になります。汲み取り（し尿の引き抜き）との違いは<a href="/column/johkasou-kumitori/">浄化槽の汲み取り2026</a>を参照してください。</p>
+      </section>
+
+      <section id="tenken" class="cl-section">
+        <h2>保守点検費の相場</h2>
+        <p>保守点検は、浄化槽が正常に機能しているかを点検・調整する作業です。年間の点検回数によって合計額が変わります。</p>
+        <ul>
+          <li><strong>1回あたり</strong>：数千円〜1万円程度</li>
+          <li><strong>頻度</strong>：処理方式・人槽に応じて年3〜4回程度が一般的（家庭用合併処理浄化槽）</li>
+          <li><strong>年間合計</strong>：おおむね1万〜2万円台</li>
+        </ul>
+        <p>保守点検の頻度は浄化槽法施行規則で処理方式・人槽別に定められています。年間契約でまとめると1回あたり単価が下がることがあります。</p>
+      </section>
+
+      <section id="kensa" class="cl-section">
+        <h2>法定検査（11条検査）の手数料</h2>
+        <p>法定検査（浄化槽法第11条検査）は、保守点検・清掃が適正に行われ、浄化槽が正常に機能しているかを、都道府県の指定検査機関がチェックする毎年1回の検査です。</p>
+        <ul>
+          <li><strong>手数料</strong>：家庭用でおおむね5,000円前後（都道府県・指定検査機関により異なる）</li>
+          <li><strong>頻度</strong>：年1回</li>
+          <li><strong>注意</strong>：保守点検・清掃とは別の費用・別の手続き</li>
+        </ul>
+        <div class="cl-callout cl-callout--warn">
+          <h3 class="cl-callout-h">「点検しているから検査は不要」は誤解</h3>
+          <p>保守点検（業者）と法定検査（指定検査機関）は別物です。日常的な保守点検を受けていても、年1回の法定検査（11条検査）は別途受ける義務があります。検査手数料は維持費に必ず含めて考えてください。詳しくは<a href="/column/johkasou-tenken-seiso-kensa/">保守点検・清掃・法定検査の違い</a>で解説しています。</p>
+        </div>
+      </section>
+
+      <section id="blower" class="cl-section">
+        <h2>ブロワーの電気代</h2>
+        <p>合併処理浄化槽は、微生物に酸素を送るためブロワー（送風機）が24時間稼働しています。見落とされがちですが、年間で効いてくる費目です。</p>
+        <ul>
+          <li><strong>電気代の目安</strong>：月数百円〜1,000円台、年間で数千円〜1万円程度</li>
+          <li><strong>変動要因</strong>：ブロワーの能力（風量）、電気料金単価、機器の効率</li>
+          <li><strong>節約のヒント</strong>：古く効率の悪いブロワーは買い替えで電気代が下がることがある</li>
+        </ul>
+        <p>ブロワーの異音・故障・電気代・交換については、<a href="/column/johkasou-blower/">浄化槽ブロワー（エアポンプ）の異音・故障・交換2026</a>で詳しく解説しています。</p>
+      </section>
+
+      <section id="keihi" class="cl-section">
+        <h2>経費・勘定科目の扱い</h2>
+        <p>事業用の建物に設置された浄化槽の維持費は、必要経費・損金に算入できます。</p>
+        <ul>
+          <li><strong>保守点検費・清掃費</strong>：「修繕費」「衛生費」などで処理するのが一般的</li>
+          <li><strong>法定検査手数料</strong>：「支払手数料」などで処理</li>
+          <li><strong>ブロワー電気代</strong>：「水道光熱費」</li>
+          <li><strong>自宅兼事業所</strong>：事業使用割合に応じて按分</li>
+        </ul>
+        <p>勘定科目の選び方は会社・事業の方針により異なります。具体的な処理は顧問税理士に確認してください。</p>
+      </section>
+
+      <section id="cheap" class="cl-section">
+        <h2>安い見積もりの落とし穴</h2>
+        <p>極端に安い見積もりには、次のような落とし穴があることがあります。</p>
+        <ul>
+          <li><strong>清掃で汚泥を全量引き抜かない</strong>：上澄みだけ抜いて安く見せる</li>
+          <li><strong>必要な点検回数を省いている</strong>：法定の頻度を満たさない</li>
+          <li><strong>法定検査が含まれていない</strong>：11条検査は別費用だが案内がない</li>
+          <li><strong>消毒剤・部品代が後から追加</strong>：見積もり時に含まれていない</li>
+        </ul>
+        <p>比較するときは、<strong>「保守点検（年間回数）＋清掃（汚泥全量引き抜き）＋法定検査の案内」</strong>まで含めて条件をそろえ、作業範囲を明示してもらいましょう。複数業者で同じ条件の見積もりを取ると、純粋な価格比較ができます。</p>
+      </section>
+
+      <section id="sources" class="cl-section">
+        <h2>参考にした公式情報</h2>
+        <p>本記事は、浄化槽法・浄化槽法施行規則および一般的な料金水準をもとに、維持費の考え方を整理しています。清掃・点検の頻度や11条検査の手数料は地域・指定検査機関で異なるため、お住まいの自治体・指定検査機関の案内も確認してください。</p>
+        <ul class="cl-source-list">
+          <li><a href="https://laws.e-gov.go.jp/law/358AC1000000043" target="_blank" rel="noopener">浄化槽法｜e-Gov法令検索</a></li>
+          <li><a href="https://laws.e-gov.go.jp/law/359M50000100017" target="_blank" rel="noopener">浄化槽法施行規則｜e-Gov法令検索</a></li>
+          <li><a href="https://www.env.go.jp/recycle/jokaso/" target="_blank" rel="noopener">浄化槽サイト（環境省）</a></li>
+        </ul>
+      </section>
+
+      <div class="cl-cta">
+        <h2>浄化槽の保守点検・清掃をまとめて相談したいなら</h2>
+        <p>地域の浄化槽業者から最大3社の見積もりを<br/>完全無料・約1分で取得できます。年間契約の費用比較もご相談ください</p>
+        <a class="cta-btn-primary" href="/johkasou/">無料で一括見積もりを依頼する</a>
+      </div>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          {faqItems.map((item) => (
+            <div class="cl-faq-item">
+              <dt>{item.q}</dt>
+              <dd>{item.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別の浄化槽業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/johkasou/tokyo/">東京都</a></li>
+          <li><a href="/johkasou/osaka/">大阪府</a></li>
+          <li><a href="/johkasou/kanagawa/">神奈川県</a></li>
+          <li><a href="/johkasou/aichi/">愛知県</a></li>
+          <li><a href="/johkasou/saitama/">埼玉県</a></li>
+          <li><a href="/johkasou/chiba/">千葉県</a></li>
+          <li><a href="/johkasou/hyogo/">兵庫県</a></li>
+          <li><a href="/johkasou/fukuoka/">福岡県</a></li>
+          <li><a href="/johkasou/hokkaido/">北海道</a></li>
+          <li><a href="/johkasou/kyoto/">京都府</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/johkasou/">全国47都道府県の対応業者を見る</a></p>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連サービス・コラム</h2>
+        <ul>
+          <li><a href="/johkasou/">浄化槽の保守点検・清掃業者を一括見積比較</a></li>
+          <li><a href="/column/johkasou-tenken-seiso-kensa/">浄化槽の保守点検・清掃・法定検査の違い2026</a></li>
+          <li><a href="/column/johkasou-blower/">浄化槽ブロワーの異音・故障・交換2026</a></li>
+          <li><a href="/column/johkasou-kumitori/">浄化槽の汲み取り2026｜頻度・費用・単独/合併の違い</a></li>
+          <li><a href="/column/johkasou-horei-gimu/">浄化槽法の保守点検・清掃・法定検査ガイド2026</a></li>
+        </ul>
+      </aside>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header {
+  background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%);
+  color: #fff;
+  padding: 48px 0 40px;
+}
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul, .cl-callout--warn ul { padding-left: 18px; margin: 0; }
+.cl-callout li, .cl-callout--warn li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-answer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 20px 0 24px; }
+.cl-answer-grid > div { background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; padding: 18px 20px; box-shadow: 0 6px 18px rgba(15, 23, 42, .05); }
+.cl-answer-grid h3 { font-size: 1rem; color: var(--blue-dark); margin: 0 0 8px; }
+.cl-answer-grid p { margin: 0; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-source-list { padding-left: 22px; display: grid; gap: 8px; }
+.cl-source-list a { color: var(--blue); text-decoration: underline; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-glossary-block { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 24px; }
+.cl-glossary-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; }
+.cl-glossary-list { padding-left: 18px; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; }
+.cl-glossary-list a { color: var(--blue); text-decoration: underline; font-size: .88rem; }
+.cl-glossary-more { font-size: .85rem; margin: 12px 0 0; }
+.cl-glossary-more a { color: var(--blue); text-decoration: underline; }
+@media (max-width: 600px) {
+  .cl-header { padding: 32px 0 28px; }
+  .cl-body { padding: 28px 16px 48px; }
+  .cl-section h2 { font-size: 1.15rem; }
+  .cl-answer-grid { grid-template-columns: 1fr; }
+}
+
+.cl-quickanswer {
+  background: #eef6ff;
+  border: 1.5px solid #1a56db;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-bottom: 32px;
+}
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+</style>

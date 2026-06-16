@@ -1,0 +1,425 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = '浄化槽を使わなくなったら2026｜休止・廃止・撤去・下水道切替の手続きと費用';
+const description = '浄化槽を使わなくなったときの選択肢（休止・廃止・撤去・下水道への切替）を戸建てオーナー向けに解説。それぞれの手続き・届出、撤去費用や下水道切替費用の目安、下水道と浄化槽はどっちが安いか、放置するとどうなるか、補助金の有無までを2026年版で整理しました。';
+const canonical = `${site.domain}/column/johkasou-haishi-gesuido/`;
+const published = '2026-06-16';
+const modified = '2026-06-16';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '浄化槽を使わなくなったら', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 4800,
+  articleSection: '浄化槽',
+  keywords: '浄化槽 使わなくなったら,休止,廃止,撤去,撤去費用,下水道 切り替え,下水道 違い,どっちが安い,補助金,2026',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-johkasou.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '浄化槽清掃・保守点検', serviceType: '浄化槽の維持管理' },
+  citation: [
+    { '@type': 'Legislation', name: '浄化槽法', url: 'https://laws.e-gov.go.jp/law/358AC1000000043' },
+    { '@type': 'Legislation', name: '下水道法', url: 'https://laws.e-gov.go.jp/law/333AC0000000079' },
+  ],
+});
+
+const faqItems = [
+  {
+    q: '浄化槽を使わなくなったら、まず何をすればいいですか？',
+    a: 'まず、今後その建物で浄化槽を使う見込みがあるか（一時的に使わないだけか、完全にやめるか）を整理します。一時的なら「休止」、完全にやめるなら「廃止」の手続きを行います。下水道に接続できる地域なら「下水道への切替」も選択肢です。いずれも自治体への届出が関わるため、お住まいの自治体の窓口に確認するのが第一歩です。',
+  },
+  {
+    q: '休止と廃止はどう違いますか？',
+    a: '休止は、空き家などで一時的に浄化槽を使わない状態にすることで、再び使う可能性を残します。廃止は、浄化槽の使用を完全にやめることです。休止・廃止のいずれも、自治体への届出（使用休止・廃止の届出）が必要になるのが一般的です。手続きの様式や要否は自治体により異なるため確認してください。',
+  },
+  {
+    q: '浄化槽の撤去費用はどのくらいですか？',
+    a: '家庭用浄化槽の撤去費用は、おおむね数万円〜十数万円程度が目安です。撤去せず埋め戻し（内部を清掃・処理して埋設したまま残す）で対応するケースもあり、その場合は撤去より安くなることがあります。槽の大きさ・設置状況・搬出のしやすさ・残置物の処理で費用が変わるため、複数業者の見積もりで比較してください。',
+  },
+  {
+    q: '浄化槽から下水道への切替費用はどのくらいですか？',
+    a: '下水道への切替（接続工事）は、宅内配管の付け替え、浄化槽の撤去または埋め戻し、下水道への接続工事などが必要で、おおむね数十万円程度が目安です。敷地の状況・配管距離・浄化槽の処理方法で大きく変わります。多くの自治体で接続を促す制度（助成・貸付など）があるため、自治体に確認してください。',
+  },
+  {
+    q: '下水道と浄化槽はどっちが安いですか？',
+    a: '一概には言えません。下水道は使用量に応じた下水道使用料がかかり、浄化槽は保守点検・清掃・法定検査・電気代といった維持費がかかります。地域の料金、世帯人数、浄化槽の維持費によって有利・不利が変わります。下水道が利用できる地域では、切替の初期費用と、その後の維持費の差を試算して判断するのが現実的です。',
+  },
+  {
+    q: '使わない浄化槽を放置するとどうなりますか？',
+    a: '使用していなくても、適切な休止・廃止の手続きをしないと、法定検査の受検案内などが続くことがあります。また、内部に汚水・汚泥が残ったまま長期放置すると、悪臭・害虫・蓋の劣化による転落事故などのリスクもあります。使わなくなったら、休止または廃止の手続きと、必要な清掃・処理を行うことが大切です。',
+  },
+  {
+    q: '下水道が来たら必ず切り替えないといけませんか？',
+    a: '下水道が整備された区域（処理区域）では、下水道法により、くみ取り便所の水洗化や排水設備の接続が一定期間内に求められます。浄化槽からの切替についても、自治体が接続を促しているのが一般的です。区域・期限・対象は自治体によって異なるため、下水道部局に確認してください。',
+  },
+  {
+    q: '浄化槽の撤去や下水道切替に補助金はありますか？',
+    a: '自治体によっては、下水道への接続(切替)や、単独処理浄化槽から合併処理浄化槽への転換に対して、助成金・補助金や貸付制度を設けている場合があります。撤去そのものへの補助は地域により異なります。お住まいの自治体の下水道部局・環境部局で、利用できる制度を確認してください。',
+  },
+];
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-answer-grid', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-johkasou.png` },
+});
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified}
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a>
+          <span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a>
+          <span aria-hidden="true">›</span>
+          <span>浄化槽を使わなくなったら</span>
+        </nav>
+        <span class="cl-cat">浄化槽</span>
+        <h1 class="cl-title">浄化槽を使わなくなったら2026｜休止・廃止・撤去・下水道切替の手続きと費用</h1>
+        <p class="cl-lead">
+          空き家になった、下水道が来た、建て替える——浄化槽を使わなくなる場面はさまざまです。選択肢は<strong>「休止」「廃止」「撤去」「下水道への切替」</strong>の4つ。それぞれ手続き・費用・判断基準が異なります。本記事では、4つの選択肢の違いと手続き、撤去費用・下水道切替費用の目安、下水道と浄化槽はどっちが安いか、放置のリスク、補助金までを戸建てオーナー向けに整理します。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年6月16日</time>
+          <span>最終更新：2026年6月16日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 浄化槽を使わなくなったらどうする？</p>
+        <p class="cl-qa-a">A. 一時的に使わないなら<strong>「休止」</strong>、完全にやめるなら<strong>「廃止」</strong>の届出を。下水道が来た地域なら<strong>「下水道への切替」</strong>も選択肢です。撤去費用は家庭用で<strong>数万〜十数万円</strong>、下水道切替は<strong>数十万円</strong>が目安。放置せず手続き＋必要な清掃を行うことが大切です。</p>
+        <p class="cl-qa-src">※浄化槽法・下水道法、一般的な費用水準をもとに整理</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="johkasou" serviceName="浄化槽清掃・保守点検" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#options">4つの選択肢（早見表）</a></li>
+          <li><a href="#kyushi">休止（一時的に使わない）</a></li>
+          <li><a href="#haishi">廃止（完全にやめる）</a></li>
+          <li><a href="#tekkyo">撤去・埋め戻しと費用</a></li>
+          <li><a href="#gesuido">下水道への切替と費用</a></li>
+          <li><a href="#docchi">下水道と浄化槽はどっちが安い？</a></li>
+          <li><a href="#houchi">放置のリスク・補助金</a></li>
+          <li><a href="#sources">参考にした公式情報</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>選択肢は休止・廃止・撤去・下水道切替の4つ</strong>。いずれも自治体への届出が関わる</li>
+            <li><strong>撤去は家庭用で数万〜十数万円、下水道切替は数十万円</strong>が目安。埋め戻しで撤去より安くなることも</li>
+            <li><strong>放置はNG</strong>。手続きをしないと検査案内が続き、汚水残置で悪臭・転落事故のリスクも</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="options" class="cl-section">
+        <h2>4つの選択肢（早見表）</h2>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>浄化槽を使わなくなったときの選択肢</caption>
+            <thead>
+              <tr><th scope="col">選択肢</th><th scope="col">こんなとき</th><th scope="col">主な手続き</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">休止</th><td>空き家など一時的に使わない（再使用の可能性あり）</td><td>使用休止の届出</td></tr>
+              <tr><th scope="row">廃止</th><td>完全に使うのをやめる</td><td>廃止の届出＋内部の清掃</td></tr>
+              <tr><th scope="row">撤去・埋め戻し</th><td>建て替え・更地化・転換など</td><td>清掃のうえ撤去または埋め戻し</td></tr>
+              <tr><th scope="row">下水道への切替</th><td>下水道が利用できるようになった</td><td>接続工事＋浄化槽の廃止・撤去等</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>まず「一時的か・完全にやめるか」「下水道が使えるか」で大きく分かれます。届出の要否・様式は自治体により異なるため、自治体窓口での確認が出発点です。</p>
+      </section>
+
+      <section id="kyushi" class="cl-section">
+        <h2>休止（一時的に使わない）</h2>
+        <p>空き家になった場合など、将来また使う可能性を残して一時的に使用を止めるのが「休止」です。</p>
+        <ul>
+          <li><strong>こんなとき</strong>：空き家、長期不在、再使用の可能性がある</li>
+          <li><strong>手続き</strong>：使用休止の届出（自治体）。休止中の法定検査の扱いは自治体・状況による</li>
+          <li><strong>ポイント</strong>：再使用時にスムーズに戻せるよう、休止前の清掃や状態確認をしておく</li>
+        </ul>
+        <p>「使っていないのに法定検査の案内が来る」という相談は、休止の届出をしていないケースが少なくありません。使わなくなったら、まず届出の要否を自治体に確認してください。</p>
+      </section>
+
+      <section id="haishi" class="cl-section">
+        <h2>廃止（完全にやめる）</h2>
+        <p>浄化槽の使用を完全にやめるのが「廃止」です。下水道切替・建て替え・解体などに伴って行います。</p>
+        <ul>
+          <li><strong>こんなとき</strong>：下水道に切り替えた、建物を解体する、浄化槽を撤去する</li>
+          <li><strong>手続き</strong>：廃止の届出（自治体）。廃止時は内部の汚水・汚泥の清掃（引き抜き）が必要</li>
+          <li><strong>ポイント</strong>：廃止＝書類だけでなく、内部の処理（清掃）とセットで考える</li>
+        </ul>
+        <p>廃止の際は、内部に残った汚水・汚泥を許可業者が清掃（引き抜き）してから、撤去または埋め戻しに進むのが一般的な流れです。</p>
+      </section>
+
+      <section id="tekkyo" class="cl-section">
+        <h2>撤去・埋め戻しと費用</h2>
+        <p>廃止後の浄化槽本体は、撤去するか、埋め戻して残すかの2通りがあります。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>撤去・埋め戻しの費用の目安（家庭用）</caption>
+            <thead>
+              <tr><th scope="col">方法</th><th scope="col">内容</th><th scope="col">費用の目安</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">撤去</th><td>清掃のうえ本体を掘り出して撤去・処分</td><td>数万〜十数万円程度</td></tr>
+              <tr><th scope="row">埋め戻し</th><td>清掃・処理のうえ、本体に穴を開けるなどして埋設したまま残す</td><td>撤去より安くなることがある</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>費用は、槽の大きさ・設置深さ・搬出のしやすさ・残置物処理で変わります。更地化・売却を予定する場合は撤去、当面そのままなら埋め戻し、など状況に応じて選びます。建て替え・解体とあわせて行う場合は、解体業者と一括で相談すると効率的です。<a href="/kaitai/">建物解体</a>を予定している場合は、浄化槽処理を含めて見積もりを取ると漏れがありません。</p>
+      </section>
+
+      <section id="gesuido" class="cl-section">
+        <h2>下水道への切替と費用</h2>
+        <p>下水道が利用できるようになった地域では、浄化槽から下水道への切替が選択肢になります。</p>
+        <ul>
+          <li><strong>主な工事</strong>：宅内配管の付け替え、下水道への接続工事、浄化槽の廃止・撤去または埋め戻し</li>
+          <li><strong>費用の目安</strong>：おおむね数十万円程度（敷地状況・配管距離・浄化槽処理で変動）</li>
+          <li><strong>制度</strong>：多くの自治体が接続を促す助成・貸付制度を設けている</li>
+        </ul>
+        <div class="cl-callout cl-callout--warn">
+          <h3 class="cl-callout-h">下水道区域では接続が求められる</h3>
+          <p>下水道が整備された区域（処理区域）では、下水道法により一定期間内の接続が求められます。浄化槽からの切替についても自治体が接続を促しているのが一般的です。区域・期限・対象・制度は自治体により異なるため、下水道部局に確認してください。</p>
+        </div>
+      </section>
+
+      <section id="docchi" class="cl-section">
+        <h2>下水道と浄化槽はどっちが安い？</h2>
+        <p>「下水道と浄化槽、どっちが安いのか」はよくある疑問ですが、一概には言えません。費用の構造が異なるためです。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>下水道と浄化槽の費用構造の違い</caption>
+            <thead>
+              <tr><th scope="col">項目</th><th scope="col">下水道</th><th scope="col">浄化槽</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">初期費用</th><td>接続工事費（切替時）</td><td>設置費（既設なら不要）</td></tr>
+              <tr><th scope="row">ランニング</th><td>使用量に応じた下水道使用料</td><td>保守点検・清掃・法定検査・電気代</td></tr>
+              <tr><th scope="row">手間</th><td>少ない</td><td>維持管理の手配が必要</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>地域の料金、世帯人数、浄化槽の維持費によって有利・不利が変わります。下水道が使える地域では、<strong>切替の初期費用と、その後の使用料・維持費の差を試算</strong>して判断するのが現実的です。浄化槽の維持費の内訳は<a href="/column/johkasou-hiyo-sohba/">浄化槽の費用相場2026</a>を参照してください。</p>
+      </section>
+
+      <section id="houchi" class="cl-section">
+        <h2>放置のリスク・補助金</h2>
+        <h3>放置のリスク</h3>
+        <ul>
+          <li><strong>検査案内が続く</strong>：休止・廃止の届出をしないと、法定検査の受検案内などが続くことがある</li>
+          <li><strong>悪臭・害虫</strong>：内部に汚水・汚泥が残ったまま放置すると衛生問題が発生</li>
+          <li><strong>転落事故</strong>：蓋の劣化・破損による転落の危険。空き家では特に注意</li>
+        </ul>
+        <h3>補助金</h3>
+        <p>下水道への接続（切替）や、単独処理浄化槽から合併処理浄化槽への転換に、助成・補助・貸付制度を設けている自治体があります。撤去そのものへの補助は地域により異なります。お住まいの自治体の下水道部局・環境部局で確認してください。単独/合併の違いや転換は<a href="/column/johkasou-kumitori/">浄化槽の汲み取り2026（単独/合併の見分け方）</a>で解説しています。</p>
+      </section>
+
+      <section id="sources" class="cl-section">
+        <h2>参考にした公式情報</h2>
+        <p>本記事は、浄化槽法・下水道法および環境省の公開情報、一般的な費用水準をもとに整理しています。届出の要否・様式、切替・撤去の費用、補助制度は自治体で異なるため、お住まいの自治体の窓口で確認してください。</p>
+        <ul class="cl-source-list">
+          <li><a href="https://laws.e-gov.go.jp/law/358AC1000000043" target="_blank" rel="noopener">浄化槽法｜e-Gov法令検索</a></li>
+          <li><a href="https://laws.e-gov.go.jp/law/333AC0000000079" target="_blank" rel="noopener">下水道法｜e-Gov法令検索</a></li>
+          <li><a href="https://www.env.go.jp/recycle/jokaso/" target="_blank" rel="noopener">浄化槽サイト（環境省）</a></li>
+        </ul>
+      </section>
+
+      <div class="cl-cta">
+        <h2>浄化槽の廃止・撤去・清掃を相談したいなら</h2>
+        <p>市町村許可の業者から最大3社の見積もりを<br/>完全無料・約1分で取得できます。廃止時の清掃・撤去もご相談ください</p>
+        <a class="cta-btn-primary" href="/johkasou/">無料で一括見積もりを依頼する</a>
+      </div>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          {faqItems.map((item) => (
+            <div class="cl-faq-item">
+              <dt>{item.q}</dt>
+              <dd>{item.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別の浄化槽業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/johkasou/tokyo/">東京都</a></li>
+          <li><a href="/johkasou/osaka/">大阪府</a></li>
+          <li><a href="/johkasou/kanagawa/">神奈川県</a></li>
+          <li><a href="/johkasou/aichi/">愛知県</a></li>
+          <li><a href="/johkasou/saitama/">埼玉県</a></li>
+          <li><a href="/johkasou/chiba/">千葉県</a></li>
+          <li><a href="/johkasou/hyogo/">兵庫県</a></li>
+          <li><a href="/johkasou/fukuoka/">福岡県</a></li>
+          <li><a href="/johkasou/hokkaido/">北海道</a></li>
+          <li><a href="/johkasou/kyoto/">京都府</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/johkasou/">全国47都道府県の対応業者を見る</a></p>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連サービス・コラム</h2>
+        <ul>
+          <li><a href="/johkasou/">浄化槽の保守点検・清掃業者を一括見積比較</a></li>
+          <li><a href="/column/johkasou-hiyo-sohba/">浄化槽の費用相場2026</a></li>
+          <li><a href="/column/johkasou-kumitori/">浄化槽の汲み取り2026｜頻度・費用・単独/合併の違い</a></li>
+          <li><a href="/column/johkasou-horei-gimu/">浄化槽法の保守点検・清掃・法定検査ガイド2026</a></li>
+          <li><a href="/kaitai/">建物解体の業者を一括見積比較</a></li>
+        </ul>
+      </aside>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header {
+  background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%);
+  color: #fff;
+  padding: 48px 0 40px;
+}
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul, .cl-callout--warn ul { padding-left: 18px; margin: 0; }
+.cl-callout li, .cl-callout--warn li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-answer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 20px 0 24px; }
+.cl-answer-grid > div { background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; padding: 18px 20px; box-shadow: 0 6px 18px rgba(15, 23, 42, .05); }
+.cl-answer-grid h3 { font-size: 1rem; color: var(--blue-dark); margin: 0 0 8px; }
+.cl-answer-grid p { margin: 0; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-source-list { padding-left: 22px; display: grid; gap: 8px; }
+.cl-source-list a { color: var(--blue); text-decoration: underline; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-glossary-block { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 24px; }
+.cl-glossary-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; }
+.cl-glossary-list { padding-left: 18px; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; }
+.cl-glossary-list a { color: var(--blue); text-decoration: underline; font-size: .88rem; }
+.cl-glossary-more { font-size: .85rem; margin: 12px 0 0; }
+.cl-glossary-more a { color: var(--blue); text-decoration: underline; }
+@media (max-width: 600px) {
+  .cl-header { padding: 32px 0 28px; }
+  .cl-body { padding: 28px 16px 48px; }
+  .cl-section h2 { font-size: 1.15rem; }
+  .cl-answer-grid { grid-template-columns: 1fr; }
+}
+
+.cl-quickanswer {
+  background: #eef6ff;
+  border: 1.5px solid #1a56db;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-bottom: 32px;
+}
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+</style>
