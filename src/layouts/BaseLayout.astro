@@ -13,6 +13,9 @@ interface Props {
   noindex?: boolean;
   /** Preload LCP image (typically a CSS background-image not auto-discovered) */
   preloadImage?: string;
+  ogType?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
 }
 
 const {
@@ -25,6 +28,9 @@ const {
   jsonLdBlocks = [],
   noindex = false,
   preloadImage,
+  ogType = 'website',
+  publishedTime,
+  modifiedTime,
 } = Astro.props;
 
 // Always include Organization + WebSite JSON-LD（@id でエンティティを相互連結）
@@ -90,7 +96,7 @@ const allLdBlocks = [...baseLdBlocks, ...jsonLdBlocks];
   <link rel="canonical" href={canonical} />
   {noindex && <meta name="robots" content="noindex,nofollow" />}
 
-  <meta property="og:type"        content="website" />
+  <meta property="og:type"        content={ogType} />
   <meta property="og:title"       content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:url"         content={canonical} />
@@ -101,6 +107,9 @@ const allLdBlocks = [...baseLdBlocks, ...jsonLdBlocks];
   <meta property="og:image:type"  content="image/png" />
   <meta property="og:locale"      content="ja_JP" />
   <meta property="og:site_name"   content={siteName} />
+  {ogType === 'article' && publishedTime && <meta property="article:published_time" content={publishedTime} />}
+  {ogType === 'article' && modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+  {ogType === 'article' && <meta property="article:author" content={site.author.name} />}
   <meta name="twitter:card"        content="summary_large_image" />
   <meta name="twitter:title"       content={title} />
   <meta name="twitter:description" content={description} />

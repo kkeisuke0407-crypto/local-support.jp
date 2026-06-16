@@ -66,3 +66,7 @@ Disallow: /
 Content-Signal: search=no,ai-input=no,ai-train=no
 
 Sitemap: https://local-support.jp/sitemap-index.xml
+
+# LLM / AIエージェント向けサイト要約
+# https://local-support.jp/llms.txt （索引）
+# https://local-support.jp/llms-full.txt （全文版）

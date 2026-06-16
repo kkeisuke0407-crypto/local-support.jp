@@ -265,7 +265,7 @@ const featuredColumns = [
             <input type="checkbox" class="lp-service-check" data-service-name={s.name} />
             <span class="lp-service-pick-label"><span class="lp-pick-off">＋ 見積リストに追加</span><span class="lp-pick-on">✓ 選択中</span></span>
           </label>
-          <img class="lp-service-card-img" src={`/images/services/hero-${s.slug}.webp?v=${heroImageVersion}`} width="480" height="270" alt="" loading="lazy" decoding="async" />
+          <img class="lp-service-card-img" src={`/images/services/hero-${s.slug}.webp?v=${heroImageVersion}`} width="480" height="270" alt={`${s.name}のサービスイメージ`} loading="lazy" decoding="async" />
           <span class="lp-service-label">{s.short}</span>
           <h3>{s.name}</h3>
           <p>{s.description}</p>
