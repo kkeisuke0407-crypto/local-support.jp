@@ -24,6 +24,7 @@ const FEATURED_COLUMNS = [
   { slug: 'shobo-setsubi-horei-gimu', title: '消防設備点検の法定義務ガイド｜機器点検・総合点検' },
   { slug: 'shobo-setsubi-fuzai-tachiai', title: '消防設備点検で入居者が不在・立ち会えないとき｜対応手順とお知らせ文例' },
   { slug: 'shobo-setsubi-houkokusho', title: '消防設備点検報告書｜様式・提出先・保存・電子申請・届出者' },
+  { slug: 'shokaki-tenken', title: '消火器点検｜外観・内部機能・耐圧性能点検の3段階と頻度・費用' },
   { slug: 'grease-trap-horei-gimu', title: 'グリストラップ清掃の法的義務ガイド｜下水道法・HACCP' },
   { slug: 'aircon-business-furon-tenken', title: 'フロン排出抑制法の点検義務ガイド｜業務用エアコン' },
   { slug: 'duct-horei-gimu', title: 'ダクト清掃の法令義務ガイド｜消防法・建築物衛生法' },
