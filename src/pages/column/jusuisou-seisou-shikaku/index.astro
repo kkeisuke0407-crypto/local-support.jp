@@ -1,0 +1,333 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = '貯水槽清掃の資格で見る業者選び2026｜登録・作業監督者・無資格業者の見分け方';
+const description = '貯水槽（受水槽）清掃を依頼する施設管理者向けに、業者が持つべき資格・登録を解説。建築物飲料水貯水槽清掃業の登録、貯水槽清掃作業監督者、作業従事者の要件、無資格業者を見抜くチェック方法までを2026年版でまとめました。';
+const canonical = `${site.domain}/column/jusuisou-seisou-shikaku/`;
+const published = '2026-06-16';
+const modified = '2026-06-16';
+const egov = (n: string) => `https://laws.e-gov.go.jp/search/elawsSearch/elaws_search/lsg0100/?keyword=${encodeURIComponent(n)}`;
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '貯水槽清掃の資格で見る業者選び', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 3000,
+  articleSection: '業者選び',
+  keywords: '貯水槽清掃 資格,作業監督者,建築物飲料水貯水槽清掃業,登録,無資格,業者選び,2026',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@type': 'Organization', name: site.org.legalName, url: site.domain, logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` } },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-jusuisou-seisou.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '受水槽清掃', serviceType: '建築物飲料水貯水槽清掃' },
+  citation: [
+    { '@type': 'Legislation', name: '水道法', url: egov('水道法'), jurisdiction: 'JP' },
+    { '@type': 'Legislation', name: '建築物における衛生的環境の確保に関する法律', url: egov('建築物における衛生的環境の確保に関する法律'), jurisdiction: 'JP' },
+  ],
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: '貯水槽清掃は資格がないと頼めませんか？', acceptedAnswer: { '@type': 'Answer', text: '有効容量10m³超の簡易専用水道の清掃は、都道府県知事等の「建築物飲料水貯水槽清掃業」の登録を受けた業者に依頼する必要があります。発注側（管理者）に資格は不要ですが、登録業者に委託することが管理者責任の観点で重要です。' } },
+    { '@type': 'Question', name: '貯水槽清掃作業監督者とは何ですか？', acceptedAnswer: { '@type': 'Answer', text: '登録の要件として、清掃作業を監督する「貯水槽清掃作業監督者」の配置が求められます。発注者が取得する資格ではなく、依頼先の業者が登録基準を満たしているかを示す指標です。見積もり時に登録番号を確認することで間接的に確認できます。' } },
+    { '@type': 'Question', name: '無資格・無登録業者に頼むとどうなりますか？', acceptedAnswer: { '@type': 'Answer', text: '技術基準に従わない清掃で水質基準を満たせず、再清掃や保健所対応が必要になるリスクがあります。水質事故が起きた場合、無登録業者に委託していた管理者側の責任が問われることもあります。必ず登録番号を確認してください。' } },
+    { '@type': 'Question', name: '業者が登録業者かどうかはどう確認しますか？', acceptedAnswer: { '@type': 'Answer', text: '見積書・契約書に「建築物飲料水貯水槽清掃業」の都道府県知事登録番号を記載してもらうのが基本です。記載がない、求めても提示しない業者は避けてください。所在地の都道府県・保健所で登録状況を確認できる場合もあります。' } },
+  ],
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: { '@type': 'SpeakableSpecification', cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.faq-q', '.faq-a'] },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
+});
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified}
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a>
+          <span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a>
+          <span aria-hidden="true">›</span>
+          <span>貯水槽清掃の資格で見る業者選び</span>
+        </nav>
+        <span class="cl-cat">受水槽清掃</span>
+        <h1 class="cl-title">貯水槽清掃の資格で見る業者選び2026｜登録・無資格業者の見分け方</h1>
+        <p class="cl-lead">
+          貯水槽（受水槽）清掃には<strong>「建築物飲料水貯水槽清掃業」の登録</strong>が必要で、無登録業者への発注は管理者側のリスクになります。本記事は、発注する施設管理者の目線で「業者が持つべき資格・登録」と「無資格業者の見抜き方」を整理しました。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年6月16日</time>
+          <span>最終更新：2026年6月16日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 貯水槽清掃は資格がいる？発注側も必要？</p>
+        <p class="cl-qa-a">A. 清掃する<strong>業者には「建築物飲料水貯水槽清掃業」の登録が必須</strong>（10m³超）。<strong>発注者（管理者）に資格は不要</strong>ですが、登録業者に委託することが責任の観点で重要です。</p>
+        <p class="cl-qa-src">※この記事は資格取得ではなく「業者選び」の観点で解説しています</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="jusuisou-seisou" serviceName="受水槽清掃" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#registration">業者に必要な登録・資格</a></li>
+          <li><a href="#why">なぜ登録業者でないとダメなのか</a></li>
+          <li><a href="#check">登録業者かどうかの確認方法</a></li>
+          <li><a href="#risk">無資格・無登録業者のリスク</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>業者要件</strong>：10m³超の清掃は「建築物飲料水貯水槽清掃業」の都道府県知事登録が必須</li>
+            <li><strong>登録の中身</strong>：貯水槽清掃作業監督者の配置・機械器具・作業従事者の研修などが要件</li>
+            <li><strong>結論</strong>：見積書に登録番号を記載させ、提示しない業者は除外する</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="registration" class="cl-section">
+        <h2>業者に必要な登録・資格</h2>
+        <p>貯水槽清掃を「仕事として請け負う」には、<a href={egov('建築物における衛生的環境の確保に関する法律')} target="_blank" rel="noopener nofollow">建築物衛生法↗</a>に基づく<strong>「建築物飲料水貯水槽清掃業」の登録</strong>（都道府県知事等）が基本になります。登録には、人・設備・作業手順の基準を満たす必要があります。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>貯水槽清掃業者に求められる主な要件（発注者が確認する観点）</caption>
+            <thead>
+              <tr>
+                <th scope="col">要件</th>
+                <th scope="col">内容</th>
+                <th scope="col">発注者の確認ポイント</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">建築物飲料水貯水槽清掃業の登録</th><td>都道府県知事等への登録</td><td>見積書に登録番号があるか</td></tr>
+              <tr><th scope="row">貯水槽清掃作業監督者</th><td>清掃作業を監督する有資格者の配置</td><td>登録要件のため番号で間接確認</td></tr>
+              <tr><th scope="row">作業従事者の研修</th><td>従事者への定期研修</td><td>研修・教育体制の有無</td></tr>
+              <tr><th scope="row">機械器具・設備</th><td>清掃・消毒に必要な器具</td><td>作業内容の説明の具体性</td></tr>
+              <tr><th scope="row">作業従事者の健康管理</th><td>従事者の健康診断等</td><td>衛生管理体制の説明</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>「貯水槽清掃作業監督者」は<strong>業者側が満たす要件</strong>であり、発注者が取得するものではありません。発注者は、これらが満たされている証として<strong>登録番号</strong>を確認すれば十分です。</p>
+      </section>
+
+      <section id="why" class="cl-section">
+        <h2>なぜ登録業者でないとダメなのか</h2>
+        <p>有効容量10m³超の簡易専用水道は、<a href={egov('水道法')} target="_blank" rel="noopener nofollow">水道法↗</a>に基づき適正な管理が義務付けられています。清掃は技術基準に沿って行う必要があり、これを満たす体制の証明が「登録」です。</p>
+        <ul class="cl-list">
+          <li>登録業者は<strong>技術基準・作業手順</strong>に従って清掃・消毒を行う</li>
+          <li>清掃後の<strong>水質確認・報告書発行</strong>まで適切に対応できる</li>
+          <li>万一の事故時も、<strong>管理者が「適正な業者に委託した」</strong>ことを示せる</li>
+        </ul>
+        <p>逆に、相場より極端に安い無登録業者に発注すると、技術基準を満たさない清掃で水質基準を満たせないリスクがあります。費用の考え方は<a href="/column/jusuisou-seisou-hiyo-sohba/">費用相場ガイド</a>を参照してください。</p>
+      </section>
+
+      <section id="check" class="cl-section">
+        <h2>登録業者かどうかの確認方法</h2>
+        <p>難しい知識は不要です。次の手順で確認できます。</p>
+        <div class="cl-callout cl-callout--blue">
+          <p><strong>登録業者の確認 3ステップ</strong></p>
+          <ol>
+            <li>見積書・契約書に<strong>「建築物飲料水貯水槽清掃業 登録番号」</strong>の記載を求める</li>
+            <li>記載がない・提示を渋る業者は<strong>候補から外す</strong></li>
+            <li>必要に応じて<strong>所在地の都道府県・保健所</strong>で登録状況を確認</li>
+          </ol>
+        </div>
+        <p>登録番号に加えて、清掃・水質検査・消毒・報告書発行が見積もりに含まれるかも確認しましょう。確認項目の全体像は<a href="/column/jusuisou-seisou-gyosha-sentaku/">業者選びチェックリスト</a>にまとめています。</p>
+      </section>
+
+      <section id="risk" class="cl-section">
+        <h2>無資格・無登録業者のリスク</h2>
+        <p>登録番号を確認しないまま価格だけで選ぶと、次のようなトラブルにつながります。</p>
+        <ul class="cl-list">
+          <li>清掃後の水質検査で<strong>基準未達</strong> → 再清掃・保健所対応が発生</li>
+          <li><strong>報告書が発行されず</strong>、立入検査時に3年保存義務を満たせない</li>
+          <li>水質事故時に<strong>管理者責任</strong>（損害賠償）を問われる</li>
+        </ul>
+        <p>具体的な失敗事例は<a href="/column/jusuisou-seisou-hiyo-sohba/#mistakes">費用相場ガイドの失敗パターン</a>でも紹介しています。罰則の詳細は<a href="/column/jusuisou-seisou-batsu/">罰則ガイド</a>を参照してください。</p>
+      </section>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問（FAQ）</h2>
+        <h3>Q1. 発注側にも資格は必要ですか？</h3>
+        <p>不要です。必要なのは清掃を行う<strong>業者側の登録</strong>（建築物飲料水貯水槽清掃業）です。管理者は登録業者に委託することが重要です。</p>
+        <h3>Q2. 貯水槽清掃作業監督者とは？</h3>
+        <p>業者が登録要件として配置する有資格者です。発注者が取得するものではなく、<strong>登録番号の確認で間接的に担保</strong>されます。</p>
+        <h3>Q3. 無登録業者に頼むとどうなりますか？</h3>
+        <p>基準未達による再清掃、報告書不発行、事故時の管理者責任などのリスクがあります。必ず登録番号を確認してください。</p>
+        <h3>Q4. 登録業者かどうかの確認方法は？</h3>
+        <p>見積書に登録番号を記載してもらうのが基本です。提示しない業者は避け、必要なら都道府県・保健所で確認してください。</p>
+      </section>
+
+      <section class="cl-cta">
+        <h2>登録を確認済みの業者から選びたいなら</h2>
+        <p>{site.name}では、<strong>建築物飲料水貯水槽清掃業の登録を確認済み</strong>の業者の中から、ご依頼内容に合う先を最大3社ご紹介します。<strong>お見積もり依頼は1分・完全無料</strong>です。</p>
+        <a href="/jusuisou-seisou/" class="cta-btn-primary">無料で一括見積もりを依頼する</a>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別の受水槽清掃業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/jusuisou-seisou/tokyo/">東京都</a></li>
+          <li><a href="/jusuisou-seisou/osaka/">大阪府</a></li>
+          <li><a href="/jusuisou-seisou/kanagawa/">神奈川県</a></li>
+          <li><a href="/jusuisou-seisou/aichi/">愛知県</a></li>
+          <li><a href="/jusuisou-seisou/saitama/">埼玉県</a></li>
+          <li><a href="/jusuisou-seisou/fukuoka/">福岡県</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/jusuisou-seisou/">全国47都道府県の対応業者を見る</a></p>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連する詳細情報</h2>
+        <ul>
+          <li><a href="/column/jusuisou-seisou-gyosha-sentaku/">受水槽清掃の業者選びチェックリスト</a></li>
+          <li><a href="/column/jusuisou-seisou-horei-gimu/">受水槽清掃の法定義務ガイド</a></li>
+          <li><a href="/column/jusuisou-seisou-hiyo-sohba/">受水槽清掃の費用相場2026</a></li>
+          <li><a href="/jusuisou-seisou/#select">業者選びで確認すべきポイント（サービストップ）</a></li>
+        </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#kenchiku-suiso-seisogyo">建築物飲料水貯水槽清掃業</a></li>
+          <li><a href="/glossary/#suido-ho">水道法</a></li>
+          <li><a href="/glossary/#biru-kan-ho">建築物衛生法（ビル管法）</a></li>
+          <li><a href="/glossary/#kanni-senyou-suido">簡易専用水道</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集をすべて見る</a></p>
+      </aside>
+
+      <p class="cl-note">
+        ※ 本記事の登録・資格に関する情報は2026年6月時点のものです。登録要件は法令改正や自治体の運用により異なる場合があります。最終的な判断は管轄行政（保健所・都道府県）の最新情報と、業者への確認に基づいて行ってください。
+      </p>
+
+    </div>
+
+  </article>
+</BaseLayout>
+
+<style>
+.cl-article { color: var(--gray-900); }
+.cl-header { background: linear-gradient(135deg, #0f2742 0%, #1a56db 100%); color: #fff; padding: 48px 0 56px; }
+.cl-crumbs { font-size: .78rem; color: #bfdbfe; margin-bottom: 18px; }
+.cl-crumbs a { color: #bfdbfe; text-decoration: underline; }
+.cl-crumbs span { margin: 0 6px; opacity: .6; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3); color: #e0f2fe; font-size: .76rem; font-weight: 700; padding: 4px 12px; border-radius: 99px; margin-bottom: 14px; letter-spacing: .04em; }
+.cl-title { font-size: clamp(1.4rem, 2.6vw, 2.1rem); font-weight: 900; line-height: 1.4; color: #fff; margin-bottom: 18px; letter-spacing: -.01em; }
+.cl-lead { font-size: 1rem; line-height: 1.85; color: #e0f2fe; margin-bottom: 18px; max-width: 820px; }
+.cl-lead strong { color: #fde68a; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 18px; font-size: .78rem; color: rgba(255,255,255,.65); }
+.cl-meta a { color: rgba(255,255,255,.85); }
+.cl-body { padding: 48px 0 80px; max-width: 880px; }
+.cl-toc { background: var(--gray-100); border-left: 4px solid var(--blue); border-radius: 8px; padding: 24px 28px; margin-bottom: 48px; }
+.cl-toc-h { font-size: .9rem; font-weight: 800; color: var(--gray-900); margin-bottom: 12px; }
+.cl-toc ol { padding-left: 20px; font-size: .9rem; line-height: 1.95; color: var(--gray-700); }
+.cl-toc a { color: var(--blue); text-decoration: underline; }
+.cl-section { margin-bottom: 44px; }
+.cl-section h2 { font-size: 1.35rem; font-weight: 800; color: var(--gray-900); margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid var(--blue); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 700; color: var(--gray-900); margin: 28px 0 12px; }
+.cl-section p { font-size: .95rem; line-height: 1.95; color: var(--gray-700); margin-bottom: 16px; }
+.cl-section p strong { color: var(--gray-900); }
+.cl-section a { color: var(--blue); text-decoration: underline; }
+.cl-list { font-size: .92rem; line-height: 1.95; color: var(--gray-700); padding-left: 22px; margin-bottom: 16px; }
+.cl-list li { margin-bottom: 6px; }
+.cl-list li strong { color: var(--gray-900); }
+.cl-table-wrap { overflow-x: auto; margin-bottom: 20px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .9rem; background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-table caption { text-align: left; font-size: .85rem; color: var(--gray-500); padding-bottom: 8px; caption-side: top; }
+.cl-table th, .cl-table td { padding: 12px 14px; border-bottom: 1px solid var(--gray-200); text-align: left; vertical-align: top; }
+.cl-table thead { background: var(--blue-light); }
+.cl-table thead th { color: var(--blue-dark); font-weight: 800; }
+.cl-table tbody th { font-weight: 700; color: var(--gray-900); white-space: nowrap; }
+.cl-table td { color: var(--gray-700); }
+.cl-table tbody tr:last-child th, .cl-table tbody tr:last-child td { border-bottom: none; }
+.cl-callout { background: var(--gray-100); border-left: 4px solid var(--accent); border-radius: 8px; padding: 24px 28px; margin-bottom: 32px; }
+.cl-callout--blue { border-left-color: var(--blue); }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 10px; padding: 0; border: none; }
+.cl-callout ul, .cl-callout ol { font-size: .92rem; line-height: 1.95; color: var(--gray-700); padding-left: 22px; margin: 0; }
+.cl-callout li { margin-bottom: 4px; }
+.cl-callout li strong { color: var(--gray-900); }
+.cl-callout p { margin-bottom: 10px; }
+.cl-cta { background: linear-gradient(135deg, #0f2742 0%, #1a56db 100%); color: #fff; text-align: center; border-radius: 14px; padding: 40px 28px; margin: 48px 0; }
+.cl-cta h2 { font-size: 1.2rem; font-weight: 800; color: #fff; margin-bottom: 12px; border: none; padding: 0; }
+.cl-cta p { font-size: .92rem; color: #bfdbfe; margin-bottom: 22px; line-height: 1.8; }
+.cl-cta p strong { color: #fde68a; }
+.cl-cta .cta-btn-primary { display: inline-block; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 24px 28px; margin-bottom: 32px; }
+.cl-related-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 12px; }
+.cl-related ul { list-style: none; padding: 0; font-size: .9rem; line-height: 2; }
+.cl-related a { color: var(--blue); text-decoration: underline; }
+.cl-note { font-size: .78rem; color: var(--gray-500); line-height: 1.8; border-top: 1px solid var(--gray-200); padding-top: 20px; margin-top: 24px; }
+.cl-quickanswer { background: #eef6ff; border: 1.5px solid #1a56db; border-radius: 10px; padding: 18px 22px; margin-bottom: 32px; }
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+.cl-glossary-block { background: var(--gray-100); border-radius: 10px; padding: 24px 28px; margin-bottom: 32px; }
+.cl-glossary-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 12px; }
+.cl-glossary-list { list-style: none; padding: 0; margin: 0 0 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+.cl-glossary-list a { display: inline-block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 5px 12px; font-size: .85rem; color: var(--blue); text-decoration: none; }
+.cl-glossary-more { font-size: .87rem; margin: 0; }
+.cl-glossary-more a { color: var(--blue); text-decoration: underline; }
+@media (max-width: 720px) {
+  .cl-header { padding: 36px 0 40px; }
+  .cl-body { padding: 32px 0 60px; }
+  .cl-toc, .cl-callout, .cl-related, .cl-cta { padding: 18px 20px; }
+  .cl-table { font-size: .82rem; }
+  .cl-table th, .cl-table td { padding: 10px 8px; }
+}
+</style>

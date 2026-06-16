@@ -7,7 +7,7 @@ const title = '受水槽清掃の法定義務ガイド2026｜水道法・建築�
 const description = '受水槽（貯水槽水道）の清掃義務を定める水道法第34条の2と、建築物衛生法による特定建築物の追加要件を2026年最新版で解説。年1回の清掃・水質検査の義務内容、違反時の罰則・行政指導事例、管理計画書の整備方法まで施設管理担当者向けにまとめました。';
 const canonical = `${site.domain}/column/jusuisou-seisou-horei-gimu/`;
 const published = '2026-05-26';
-const modified = '2026-05-26';
+const modified = '2026-06-16';
 
 const breadcrumbLd = JSON.stringify({
   '@context': 'https://schema.org',
@@ -119,7 +119,7 @@ const webPageLd = JSON.stringify({
 });
 
 ---
-<BaseLayout
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified}
   title={title}
   description={description}
   canonical={canonical}
@@ -145,7 +145,7 @@ const webPageLd = JSON.stringify({
         </p>
         <div class="cl-meta">
           <time datetime={published}>公開：2026年5月26日</time>
-          <span>最終更新：2026年5月26日</span>
+          <span>最終更新：2026年6月16日</span>
           <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
         </div>
       </div>
@@ -171,6 +171,7 @@ const webPageLd = JSON.stringify({
           <li><a href="#suido-ho">水道法第34条の2の義務内容</a></li>
           <li><a href="#biru-kan">建築物衛生法（特定建築物）の追加要件</a></li>
           <li><a href="#jichitai">自治体条例による上乗せ規制</a></li>
+          <li><a href="#building-type">建物タイプ別の清掃義務（マンション・高架水槽ほか）</a></li>
           <li><a href="#penalty">違反時のペナルティと行政指導事例</a></li>
           <li><a href="#records">保存すべき書類・記録の一覧</a></li>
           <li><a href="#inspection-check">保健所立入検査セルフチェック（実務者向け）</a></li>
@@ -375,6 +376,54 @@ const webPageLd = JSON.stringify({
           </table>
         </div>
         <p class="cl-note">※ 条例は随時改正されます。最新の義務内容は各自治体の水道局・保健所にご確認ください。</p>
+      </section>
+
+      <section id="building-type" class="cl-section">
+        <h2>建物タイプ別の清掃義務（マンション・高架水槽ほか）</h2>
+        <p>義務の有無は「<strong>貯水槽の有効容量</strong>」で決まりますが、建物タイプによって設置形態や管理責任の所在が異なります。代表的なケースを整理します。</p>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>建物タイプ・設備別の清掃義務の考え方</caption>
+            <thead>
+              <tr>
+                <th scope="col">タイプ／設備</th>
+                <th scope="col">義務の根拠</th>
+                <th scope="col">ポイント</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">マンション（10m³超）</th>
+                <td>水道法（簡易専用水道）</td>
+                <td>管理組合・管理会社が管理責任。年1回以上の清掃・法定検査が必要</td>
+              </tr>
+              <tr>
+                <th scope="row">小規模貯水槽（10m³以下）</th>
+                <td>自治体条例</td>
+                <td>多くの自治体で年1回以上の清掃を要請。所在地の条例を確認</td>
+              </tr>
+              <tr>
+                <th scope="row">高架水槽（屋上）</th>
+                <td>受水槽と一体で判断</td>
+                <td>受水槽＋高架水槽の2槽方式は両方が清掃対象。屋上作業で費用増の傾向</td>
+              </tr>
+              <tr>
+                <th scope="row">貯水タンク・貯湯槽</th>
+                <td>用途・容量で判断</td>
+                <td>飲料水系統は同様の管理が必要。給湯系はレジオネラ対策も検討</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>マンションの場合：管理責任は誰にあるか</h3>
+        <p>分譲マンションでは<strong>管理組合</strong>、賃貸では<strong>オーナー・管理会社</strong>が貯水槽の管理責任を負うのが一般的です。管理委託契約の範囲に「受水槽清掃・法定検査の手配」が含まれているかを確認しておくと、義務の抜け漏れを防げます。</p>
+
+        <h3>高架水槽がある場合：2槽まとめて</h3>
+        <p>受水槽（地上・地下）と高架水槽（屋上）の2槽方式では、<strong>両方が清掃・点検の対象</strong>です。屋上作業は安全確保や仮設が必要になり費用が上振れしやすいため、見積もり時に「高架水槽を含むか」を必ず明記してもらいましょう。費用感は<a href="/column/jusuisou-seisou-hiyo-sohba/">費用相場ガイド</a>を参照してください。</p>
+
+        <p>なお、清掃とは別に必要な「点検・法定検査」については<a href="/column/jusuisou-seisou-tenken/">受水槽の点検・法定検査ガイド</a>で詳しく解説しています。</p>
       </section>
 
       <section id="penalty" class="cl-section">

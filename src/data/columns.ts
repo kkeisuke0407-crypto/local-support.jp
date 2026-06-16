@@ -142,6 +142,27 @@ export const columns: ColumnItem[] = [
     date: '2026-05-27',
   },
   {
+    href: '/column/jusuisou-seisou-suishitsu-kensa/',
+    category: '受水槽清掃',
+    title: '受水槽清掃の水質検査2026｜検査項目・義務・清掃後検査の完全ガイド',
+    excerpt: '清掃後の水質検査と簡易専用水道の法定検査の違い、残留塩素・色・濁りなどの検査項目、レジオネラ検査、報告書の3年保存までを施設管理担当者向けに整理。',
+    date: '2026-06-16',
+  },
+  {
+    href: '/column/jusuisou-seisou-tenken/',
+    category: '受水槽清掃',
+    title: '受水槽の点検・法定検査2026｜簡易専用水道検査とは・清掃との違い・頻度・費用',
+    excerpt: '清掃・法定検査（登録検査機関）・日常点検の違いを整理。管理者が行う外観点検のチェック項目、頻度・費用・違反リスクまで解説。',
+    date: '2026-06-16',
+  },
+  {
+    href: '/column/jusuisou-seisou-shikaku/',
+    category: '受水槽清掃',
+    title: '貯水槽清掃の資格で見る業者選び2026｜登録・作業監督者・無資格業者の見分け方',
+    excerpt: '建築物飲料水貯水槽清掃業の登録、貯水槽清掃作業監督者の位置づけ、無資格・無登録業者を見抜くチェック方法を発注者目線で解説。',
+    date: '2026-06-16',
+  },
+  {
     href: '/column/shobo-setsubi-horei-gimu/',
     category: '消防設備点検',
     title: '消防設備点検の点検・報告義務ガイド2026｜消防法17条の3の3・報告頻度・資格者要件',

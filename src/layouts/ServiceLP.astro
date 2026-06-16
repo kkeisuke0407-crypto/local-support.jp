@@ -20,6 +20,7 @@ import BottomCTA from '../components/BottomCTA.astro';
 import AIOSummary from '../components/AIOSummary.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import ServiceEntryLinks from '../components/ServiceEntryLinks.astro';
+import Toc from '../components/Toc.astro';
 import { site } from '../data/site';
 import { ogImageUrl } from '../data/ogImage';
 import { quoteComparisonChecklist } from '../data/quoteComparisonChecklist';
@@ -75,6 +76,14 @@ const serviceLd = JSON.stringify({
   },
 });
 
+// 関連法令を e-Gov法令検索の出典としてcitation化（AIO/E-E-A-T強化）
+const isLaw = (n: string) => /法/.test(n) && !/基準|告示|要領|指針|ガイドライン|マニュアル/.test(n);
+const egovUrl = (n: string) =>
+  `https://laws.e-gov.go.jp/search/elawsSearch/elaws_search/lsg0100/?keyword=${encodeURIComponent(n.replace(/第.*$/, '').replace(/（.*?）/g, '').trim())}`;
+const legalCitations = data.legal.legalBasis
+  .filter(isLaw)
+  .map((law) => ({ '@type': 'Legislation', name: law, url: egovUrl(law), jurisdiction: 'JP' }));
+
 const webPageLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'WebPage',
@@ -88,6 +97,7 @@ const webPageLd = JSON.stringify({
   /* このページの主題は Service エンティティ。AI に「何のページか」を明示する */
   mainEntity: { '@id': `${canonical}#service` },
   about: { '@id': `${canonical}#service` },
+  ...(legalCitations.length ? { citation: legalCitations } : {}),
   reviewedBy: {
     '@type': 'Person',
     name: site.author.name,
@@ -177,6 +187,7 @@ const jsonLdBlocks = [breadcrumbLd, serviceLd, webPageLd, faqLd, checklistLd, qu
   <Breadcrumb items={[{ label: 'トップ', href: '/' }, { label: data.serviceName }]} />
   <AIOSummary lead={data.aiSummary.lead} facts={data.aiSummary.facts} serviceName={data.serviceName} />
   <ServiceEntryLinks data={data} />
+  <Toc serviceName={data.serviceName} />
   <TrustStrip />
   <ProcessSteps serviceName={data.serviceName} />
   <TrustBadges stats={data.trustStats} />
