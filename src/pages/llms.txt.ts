@@ -85,7 +85,7 @@ ${site.name} はマンション管理組合・ビル管理会社・介護施設�
 - [運営者情報](${site.domain}/operator/)
 - [編集方針](${site.domain}/editorial-policy/)
 - [調査方法ポリシー](${site.domain}/research/methodology/)
-- [施設管理用語集（42語）](${site.domain}/glossary/)
+- [施設管理用語集（49語）](${site.domain}/glossary/)
 - [紹介事例](${site.domain}/case/)
 - [プライバシーポリシー](${site.domain}/privacy/)
 - [ご紹介業者について](${site.domain}/disclosure/)
