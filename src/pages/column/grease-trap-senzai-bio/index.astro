@@ -1,0 +1,391 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = 'グリストラップの洗剤・薬剤・バイオ製剤2026｜種類・選び方・鹸化や乳化のデメリット';
+const description = 'グリストラップに使う洗剤・薬剤・バイオ製剤（微生物・バクテリア）の種類と選び方を飲食店オーナー向けに解説。バイオ製剤・鹸化剤・乳化系洗剤・吸着材の違い、油を乳化して流すタイプが下水道の排水基準超過につながる注意点、薬剤は清掃の代わりにならない理由まで整理しました。';
+const canonical = `${site.domain}/column/grease-trap-senzai-bio/`;
+const published = '2026-06-16';
+const modified = '2026-06-16';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: 'グリストラップの洗剤・薬剤・バイオ製剤', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 4800,
+  articleSection: 'グリストラップ清掃',
+  keywords: 'グリストラップ 洗剤,薬剤,バイオ製剤,微生物,バクテリア,鹸化剤,乳化,吸着材,業務用,ノルマルヘキサン,2026',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-grease-trap.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: 'グリストラップ清掃', serviceType: '厨房排水設備の清掃' },
+  citation: [
+    { '@type': 'Legislation', name: '下水道法', url: 'https://laws.e-gov.go.jp/law/333AC0000000079' },
+  ],
+});
+
+const faqItems = [
+  {
+    q: 'グリストラップに使う薬剤にはどんな種類がありますか？',
+    a: '大きく分けて、(1)微生物・酵素で油脂を分解するバイオ製剤、(2)油を石けん状に変えて分離・除去しやすくする鹸化剤、(3)油を細かくして水になじませる乳化系の洗剤、(4)油を吸わせて回収する吸着材、などがあります。それぞれ目的と注意点が異なり、特に油を乳化させて下水へ流すタイプは注意が必要です。',
+  },
+  {
+    q: 'バイオ製剤（微生物・バクテリア）は効果がありますか？',
+    a: 'バイオ製剤は、微生物・酵素の働きで油脂を分解し、臭いや汚れの蓄積をゆるやかに抑えるのに役立ちます。ただし即効性は高くなく、汚泥そのものをゼロにするわけではありません。日常清掃や定期の全槽清掃を補助するものと位置づけ、薬剤だけで清掃を不要にするものではない点に注意してください。',
+  },
+  {
+    q: '油を溶かして流す洗剤を使えば清掃しなくて済みますか？',
+    a: 'おすすめできません。油を乳化させて水になじませ下水へ流すタイプは、グリストラップで油を分離・回収するという本来の目的に反します。乳化した油が下水に流れると、下水道の排水基準（ノルマルヘキサン抽出物質）超過の原因になることがあり、下水道局の指導につながるおそれがあります。',
+  },
+  {
+    q: '鹸化剤とは何ですか？デメリットはありますか？',
+    a: '鹸化剤は、油脂を石けん状（鹸化）に変える薬剤で、油を分離・除去しやすくする目的で使われます。ただし、使い方や製品によっては、鹸化した油分が下水へ流れて排水基準に影響する懸念や、配管への影響を指摘する見解もあります。導入する場合は、下水道の排水基準を満たせるか、清掃の代わりにならないかを確認し、慎重に判断してください。',
+  },
+  {
+    q: '市販のパイプクリーナーや苛性ソーダを使ってもいいですか？',
+    a: '配管用の強力な薬剤や苛性ソーダは、油を溶かして流すことを狙うものが多く、グリストラップの用途には適しません。溶けた油が配管の先で再び固まったり、乳化して排水基準を超過したりするリスクがあります。詰まりや汚れは、薬剤で溶かすより、すくい取る・全槽清掃する・配管高圧洗浄する、が基本です。',
+  },
+  {
+    q: '吸着材・吸着シートは使うべきですか？',
+    a: '油吸着材・吸着シートは、浮上した油（スカム）を吸わせて回収するのに有効です。下水へ流さずに油を取り除けるため、日常清掃の補助として役立ちます。使用後の吸着材は油を含むため、自治体ルールや産業廃棄物の扱いに従って適切に処分してください。',
+  },
+  {
+    q: '薬剤を使えば業者の清掃は不要になりますか？',
+    a: 'なりません。どの薬剤も、汚泥の全量回収（全槽清掃）と産業廃棄物としての処分を代替できません。薬剤・バイオ製剤は、臭い・汚れの蓄積をゆるやかに抑え、清掃間隔を保つための補助です。汚泥は必ず溜まるため、定期的な業者清掃と組み合わせて使うのが正しい使い方です。',
+  },
+];
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-answer-grid', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-grease-trap.png` },
+});
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified}
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a>
+          <span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a>
+          <span aria-hidden="true">›</span>
+          <span>グリストラップの洗剤・薬剤・バイオ製剤</span>
+        </nav>
+        <span class="cl-cat">グリストラップ清掃</span>
+        <h1 class="cl-title">グリストラップの洗剤・薬剤・バイオ製剤2026｜種類・選び方・鹸化や乳化のデメリット</h1>
+        <p class="cl-lead">
+          グリストラップ向けの洗剤・薬剤・バイオ製剤は種類が多く、選び方を誤ると<strong>下水道の排水基準超過</strong>や<strong>清掃の代替にならない</strong>といった落とし穴があります。特に「油を溶かして流す」タイプは要注意です。本記事では、バイオ製剤（微生物・バクテリア）・鹸化剤・乳化系洗剤・吸着材の違いと選び方、乳化・鹸化のデメリット、そして薬剤が清掃の代わりにならない理由を、飲食店オーナー向けに整理します。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年6月16日</time>
+          <span>最終更新：2026年6月16日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. グリストラップの薬剤、どう選ぶ？</p>
+        <p class="cl-qa-a">A. <strong>「油を回収する」発想の製品（バイオ製剤・吸着材）はOK</strong>、<strong>「油を溶かして・乳化して流す」タイプは要注意</strong>です。乳化した油が下水に流れると排水基準（ノルマルヘキサン）超過の原因に。どの薬剤も<strong>汚泥の全槽清掃の代わりにはならず</strong>、あくまで補助と考えてください。</p>
+        <p class="cl-qa-src">※下水道法・自治体の維持管理資料をもとに整理</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="grease-trap" serviceName="グリストラップ清掃" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#types">薬剤の種類（早見表）</a></li>
+          <li><a href="#bio">バイオ製剤（微生物・バクテリア）</a></li>
+          <li><a href="#kenka">鹸化剤・乳化系洗剤の注意点</a></li>
+          <li><a href="#kyuchaku">吸着材・吸着シート</a></li>
+          <li><a href="#choose">選び方の基準</a></li>
+          <li><a href="#limit">薬剤は清掃の代わりにならない</a></li>
+          <li><a href="#sources">参考にした公式情報</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>「回収する」製品（バイオ・吸着材）はOK、「溶かして流す」製品は要注意</strong>。乳化油の流出は排水基準超過の原因</li>
+            <li><strong>バイオ製剤は蓄積をゆるやかに抑える補助</strong>。即効性はなく、汚泥をゼロにはしない</li>
+            <li><strong>どの薬剤も全槽清掃・産廃処分の代わりにはならない</strong>。清掃とセットで使うのが正解</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="types" class="cl-section">
+        <h2>薬剤の種類（早見表）</h2>
+        <p>グリストラップに使われる薬剤・製品は、目的によって大きく4タイプに分けられます。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>グリストラップ向け薬剤・製品のタイプ</caption>
+            <thead>
+              <tr><th scope="col">タイプ</th><th scope="col">仕組み</th><th scope="col">位置づけ</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">バイオ製剤（微生物・酵素）</th><td>微生物・酵素が油脂を分解</td><td>蓄積・臭いを抑える補助。即効性は低い</td></tr>
+              <tr><th scope="row">吸着材・吸着シート</th><td>浮上油を吸わせて回収</td><td>下水に流さず油を取り除ける。日常清掃の補助</td></tr>
+              <tr><th scope="row">鹸化剤</th><td>油を石けん状に変える</td><td>製品・使い方により排水基準への影響に注意</td></tr>
+              <tr><th scope="row">乳化系洗剤・強力薬剤</th><td>油を細かくして水になじませる／溶かす</td><td>下水へ流すと排水基準超過の懸念。用途に不向き</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>選ぶときの基本方針は、<strong>「油を回収する方向」の製品を選び、「油を溶かして下水へ流す方向」の製品は避ける</strong>こと。グリストラップは油を分離・回収する設備なので、流してしまう発想の製品は目的に反します。</p>
+      </section>
+
+      <section id="bio" class="cl-section">
+        <h2>バイオ製剤（微生物・バクテリア）</h2>
+        <p>バイオ製剤は、微生物や酵素の働きで油脂を分解し、汚れ・臭いの蓄積をゆるやかに抑える製品です。定期的に投入して使うタイプが一般的です。</p>
+        <ul>
+          <li><strong>メリット</strong>：臭いの抑制、汚れの蓄積をゆるやかにする、清掃間隔の維持に役立つ</li>
+          <li><strong>限界</strong>：即効性は低い、汚泥そのものをゼロにはしない、投入を続ける必要がある</li>
+          <li><strong>位置づけ</strong>：日常清掃・定期清掃を補助するもの。単独で清掃を不要にはできない</li>
+        </ul>
+        <div class="cl-callout">
+          <h3 class="cl-callout-h">バイオ製剤の正しい期待値</h3>
+          <p>バイオ製剤は「入れておけば掃除しなくていい」魔法の薬ではありません。あくまで蓄積をゆるやかにする補助です。日常清掃と定期の全槽清掃を続けたうえで、臭い・汚れ対策の上乗せとして使うと効果を実感しやすくなります。</p>
+        </div>
+      </section>
+
+      <section id="kenka" class="cl-section">
+        <h2>鹸化剤・乳化系洗剤の注意点</h2>
+        <p>最も注意が必要なのが、油を石けん状にする鹸化剤や、油を乳化させて水になじませる洗剤です。これらは一見「油が消えた」ように見えますが、油が下水へ流れているだけのことがあります。</p>
+        <div class="cl-callout cl-callout--warn">
+          <h3 class="cl-callout-h">「油が消えた」ではなく「流れた」かもしれない</h3>
+          <p>乳化・鹸化で見えなくなった油が下水へ流れると、下水道の排水基準（ノルマルヘキサン抽出物質）の超過につながる可能性があります。下水道局のサンプリング検査で基準超過が判明すれば、改善指導・改善命令の対象になり得ます。「グリストラップがきれいに見える＝排水がきれい」とは限らない点に注意してください。</p>
+        </div>
+        <p>鹸化工法を導入する場合は、(1)下水道の排水基準を満たせるか、(2)清掃の代わりにならないか、(3)配管への影響はないか、を確認し、自治体の排水基準と照らして慎重に判断してください。法令・排水基準の考え方は<a href="/column/grease-trap-horei-gimu/">グリストラップ清掃・維持管理ガイド2026</a>を参照してください。</p>
+      </section>
+
+      <section id="kyuchaku" class="cl-section">
+        <h2>吸着材・吸着シート</h2>
+        <p>油吸着材・吸着シートは、浮上した油（スカム）を吸わせて回収する製品です。油を下水へ流さずに取り除けるため、日常清掃の補助として有効です。</p>
+        <ul>
+          <li><strong>メリット</strong>：油を回収できる（流さない）、手軽に使える、日常清掃の負担軽減</li>
+          <li><strong>注意</strong>：使用後の吸着材は油を含むため、自治体ルール・産業廃棄物の扱いに従って処分する</li>
+        </ul>
+        <p>「回収する方向」の製品なので、グリストラップの目的に沿った使い方ができます。すくい取りと併用すると、スカムの管理が楽になります。</p>
+      </section>
+
+      <section id="choose" class="cl-section">
+        <h2>選び方の基準</h2>
+        <p>製品選びで迷ったら、次の基準で判断してください。</p>
+        <ol>
+          <li><strong>「回収」か「流す」か</strong>：油を回収する製品（バイオ・吸着材）を選び、溶かして流す製品は避ける</li>
+          <li><strong>排水基準に影響しないか</strong>：乳化・鹸化で下水へ油が流れないか確認する</li>
+          <li><strong>清掃の代替をうたっていないか</strong>：「これで掃除不要」をうたう製品は過信しない</li>
+          <li><strong>業務用として実績があるか</strong>：飲食店・施設での使用実績、成分・使用方法の表示を確認</li>
+          <li><strong>処分方法が明確か</strong>：使用後の吸着材・回収油の処分ルールを確認</li>
+        </ol>
+      </section>
+
+      <section id="limit" class="cl-section">
+        <h2>薬剤は清掃の代わりにならない</h2>
+        <p>最も大切な結論です。どの薬剤・バイオ製剤も、<strong>汚泥の全量回収（全槽清掃）と産業廃棄物としての処分を代替できません</strong>。</p>
+        <ul>
+          <li><strong>汚泥は必ず溜まる</strong>：分解・抑制しても、汚泥はゼロにならず蓄積する</li>
+          <li><strong>全槽清掃は別途必要</strong>：定期的な業者清掃で汚泥を取り除く必要がある</li>
+          <li><strong>薬剤は補助</strong>：臭い・汚れの蓄積をゆるやかにし、清掃間隔を保つためのもの</li>
+        </ul>
+        <p>正しい使い方は、「日常清掃＋定期の全槽清掃」を土台にして、その上に薬剤・バイオ製剤を補助として乗せること。薬剤に頼って清掃を省くと、結局トラブル（臭い・虫・詰まり）と高コストの全槽清掃につながります。日常清掃の手順は<a href="/column/grease-trap-souji-jibun-de/">グリストラップの掃除を自分でやる方法2026</a>、トラブル対処は<a href="/column/grease-trap-nioi-mushi/">グリストラップの臭い・虫・詰まり対策2026</a>を参照してください。</p>
+      </section>
+
+      <section id="sources" class="cl-section">
+        <h2>参考にした公式情報</h2>
+        <p>本記事は、下水道法・自治体の維持管理資料をもとに、飲食店の実務で使いやすい形に整理しています。排水基準や薬剤使用の可否は、店舗所在地の自治体・下水道局の案内も確認してください。</p>
+        <ul class="cl-source-list">
+          <li><a href="https://laws.e-gov.go.jp/law/333AC0000000079" target="_blank" rel="noopener">下水道法｜e-Gov法令検索</a></li>
+          <li><a href="https://www.gesui.metro.tokyo.lg.jp/" target="_blank" rel="noopener">東京都下水道局</a></li>
+        </ul>
+      </section>
+
+      <div class="cl-cta">
+        <h2>薬剤だけでは解決しない汚泥は全槽清掃を</h2>
+        <p>全槽清掃・産廃処分・配管洗浄に対応する許可業者から<br/>最大3社の見積もりを完全無料・約1分で取得できます</p>
+        <a class="cta-btn-primary" href="/grease-trap/">無料で一括見積もりを依頼する</a>
+      </div>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          {faqItems.map((item) => (
+            <div class="cl-faq-item">
+              <dt>{item.q}</dt>
+              <dd>{item.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別のグリストラップ清掃業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/grease-trap/tokyo/">東京都</a></li>
+          <li><a href="/grease-trap/osaka/">大阪府</a></li>
+          <li><a href="/grease-trap/kanagawa/">神奈川県</a></li>
+          <li><a href="/grease-trap/aichi/">愛知県</a></li>
+          <li><a href="/grease-trap/saitama/">埼玉県</a></li>
+          <li><a href="/grease-trap/chiba/">千葉県</a></li>
+          <li><a href="/grease-trap/hyogo/">兵庫県</a></li>
+          <li><a href="/grease-trap/fukuoka/">福岡県</a></li>
+          <li><a href="/grease-trap/hokkaido/">北海道</a></li>
+          <li><a href="/grease-trap/kyoto/">京都府</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/grease-trap/">全国47都道府県の対応業者を見る</a></p>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連サービス・コラム</h2>
+        <ul>
+          <li><a href="/grease-trap/">グリストラップ清掃の業者を一括見積比較</a></li>
+          <li><a href="/column/grease-trap-souji-jibun-de/">グリストラップの掃除を自分でやる方法2026</a></li>
+          <li><a href="/column/grease-trap-nioi-mushi/">グリストラップの臭い・虫・詰まり対策2026</a></li>
+          <li><a href="/column/grease-trap-toha/">グリストラップとは2026｜仕組み・構造・3槽の役割</a></li>
+          <li><a href="/column/grease-trap-horei-gimu/">グリストラップ清掃・維持管理ガイド2026</a></li>
+        </ul>
+      </aside>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header {
+  background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%);
+  color: #fff;
+  padding: 48px 0 40px;
+}
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul, .cl-callout--warn ul { padding-left: 18px; margin: 0; }
+.cl-callout li, .cl-callout--warn li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-answer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 20px 0 24px; }
+.cl-answer-grid > div { background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; padding: 18px 20px; box-shadow: 0 6px 18px rgba(15, 23, 42, .05); }
+.cl-answer-grid h3 { font-size: 1rem; color: var(--blue-dark); margin: 0 0 8px; }
+.cl-answer-grid p { margin: 0; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-source-list { padding-left: 22px; display: grid; gap: 8px; }
+.cl-source-list a { color: var(--blue); text-decoration: underline; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-glossary-block { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 24px; }
+.cl-glossary-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; }
+.cl-glossary-list { padding-left: 18px; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; }
+.cl-glossary-list a { color: var(--blue); text-decoration: underline; font-size: .88rem; }
+.cl-glossary-more { font-size: .85rem; margin: 12px 0 0; }
+.cl-glossary-more a { color: var(--blue); text-decoration: underline; }
+@media (max-width: 600px) {
+  .cl-header { padding: 32px 0 28px; }
+  .cl-body { padding: 28px 16px 48px; }
+  .cl-section h2 { font-size: 1.15rem; }
+  .cl-answer-grid { grid-template-columns: 1fr; }
+}
+
+.cl-quickanswer {
+  background: #eef6ff;
+  border: 1.5px solid #1a56db;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-bottom: 32px;
+}
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+</style>
