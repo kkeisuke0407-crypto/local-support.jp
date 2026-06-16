@@ -6,3 +6,6 @@ dist/
 *.service-account.json
 .gsc-token.json
 .DS_Store
+
+# 営業ツール（見込み客リスト・電話番号・ログ等。公開リポジトリに含めない）
+tools/
