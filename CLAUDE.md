@@ -91,6 +91,22 @@ src/data/
 
 `src/pages/column/[slug]/index.astro` を手動で作成する。既存の `jusuisou-seisou-hiyo-sohba` を参考にする。`ServiceData.relatedColumns[]` に `{ href, category, title, excerpt, date }` を追加すると、サービスLPの「関連コラム」セクションに自動表示される。
 
+### コンテンツSEO ルーティン（重要）
+
+週1〜2本のペースでロングテール記事を追加する運用。`docs/content-backlog.md` に優先度順のKWリストがある。
+
+**半自動執筆**:
+- スラッシュコマンド `/write-next-column` を実行すると、バックログの最上位⬜項目を1本書いて feature branch（`claude/great-brown-UbJCt`）に push まで実施
+- 強制テーマ指定: `/write-next-column 受水槽 撤去 直結増圧` のように引数を渡せる
+- 1セッション = 1本のみ（質を担保）
+- **main へのマージは人間レビュー必須** → ユーザーが「マージして」と返信した時点でClaudeが main マージ＋push を実施（デプロイ）
+
+**Claude Code on the web スケジュール推奨**:
+- 週2回（月・金 9:00 など）にスケジュール起動を設定 → 安定したコンテンツ追加が走る
+- セッションのプロンプトに `/write-next-column` だけ書いておけばOK
+
+**テンプレ実装**: `src/pages/column/jusuisou-seisou-mansion/index.astro` を雛形とする（Article + FAQPage + BreadcrumbList + WebPage の4つの構造化データ完備）
+
 ## 重要な運用ルール
 
 - **横展開は受水槽清掃が「勝ち筋（70点以上を3ヶ月連続）」になってから**。他サービスを先に強化しない。
@@ -100,4 +116,9 @@ src/data/
 
 ## 開発ブランチ
 
-作業ブランチ：`claude/sweet-babbage-VYZHd`（Claudeの作業用）→ `main` にマージで Cloudflare Pages が自動デプロイ。
+作業ブランチ：`claude/great-brown-UbJCt`（Claudeの作業用）→ `main` にマージで Cloudflare Pages が自動デプロイ。
+
+ブランチ運用フロー:
+1. `claude/great-brown-UbJCt` で作業（必要なら `git checkout -B claude/great-brown-UbJCt origin/main` でリベース）
+2. コミット → `git push -u origin claude/great-brown-UbJCt`
+3. `git checkout main && git merge --no-ff claude/great-brown-UbJCt -m "Merge ..."` → push
