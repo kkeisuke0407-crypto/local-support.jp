@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/jusuisou-tekkyo-chokketsu-zoatsu/',
+    category: '受水槽清掃',
+    title: '受水槽の撤去・直結増圧方式への切り替え費用2026｜マンション・ビルの工事相場と補助金',
+    excerpt: '受水槽を撤去して直結増圧給水方式に切り替える費用相場を戸数・規模別に整理。中規模マンションで150〜300万円、配管更新込み200〜400万円が目安。自治体補助金、メリット・デメリット、切替不可な建物条件、工事の流れまで解説。',
+    date: '2026-06-18',
+  },
+  {
     href: '/column/jusuisou-pump-haikan-kokan-hiyo/',
     category: '受水槽清掃',
     title: '受水槽のポンプ・配管交換 費用相場2026｜給水加圧ポンプ・配管腐食の見積もり内訳',
