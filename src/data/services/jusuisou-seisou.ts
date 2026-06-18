@@ -306,6 +306,20 @@ const data: ServiceData = {
 
   relatedColumns: [
     {
+      href: '/column/jusuisou-seisou-mansion/',
+      category: 'マンション施設管理',
+      title: '受水槽清掃のマンション向け完全ガイド2026｜管理組合の責任・費用相場・業者選び',
+      excerpt: 'マンション管理組合・賃貸オーナー向けに年間スケジュール、戸数別の費用相場、理事会承認、住民周知の文例、業者選定で確認すべき書類まで実務目線で整理。',
+      date: '2026-06-14',
+    },
+    {
+      href: '/column/jusuisou-pump-haikan-kokan-hiyo/',
+      category: '設備更新',
+      title: '受水槽のポンプ・配管交換 費用相場2026｜給水加圧ポンプ・配管腐食の見積もり内訳',
+      excerpt: '給水加圧ポンプ単体15〜40万円、配管含む全更新60〜200万円が相場。故障の前兆、緊急対応の費用差、相見積もりで確認すべき項目まで解説。',
+      date: '2026-06-14',
+    },
+    {
       href: '/column/jusuisou-seisou-hiyo-sohba/',
       category: '費用相場',
       title: '受水槽清掃の費用相場2026｜規模別の料金・追加費用・業者選びの完全ガイド',

@@ -1,0 +1,351 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = "受水槽清掃のマンション向け完全ガイド2026｜管理組合の責任・費用相場・業者選びの実務";
+const description = "マンション管理組合・賃貸オーナー向けに受水槽清掃の年間スケジュール、戸数別の費用相場、理事会承認の進め方、住民周知の文例、業者選定で確認すべき書類まで実務目線で整理。10〜200戸規模の実例費用も掲載。";
+const canonical = `${site.domain}/column/jusuisou-seisou-mansion/`;
+const published = '2026-06-14';
+const modified = '2026-06-14';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: 'マンション向け受水槽清掃ガイド', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 5800,
+  articleSection: 'マンション施設管理',
+  keywords: '受水槽清掃,マンション,管理組合,費用,戸数,理事会,賃貸,2026',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-jusuisou-seisou.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '受水槽清掃' },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: 'マンション50戸の受水槽清掃費用はいくらが相場ですか？', acceptedAnswer: { '@type': 'Answer', text: '受水槽容量5〜10m³（50戸前後）が一般的で、清掃と水質検査込みで6〜10万円が相場です。高架水槽がある場合は+2〜4万円、ポンプ点検をセットにすると+1〜2万円が目安。地域・業者で20〜30%の差が出ます。' } },
+    { '@type': 'Question', name: '清掃中の断水時間はどれくらいですか？', acceptedAnswer: { '@type': 'Answer', text: '通常5〜8時間程度。完全断水は2〜4時間程度で、午前9時開始〜午後4時完了が一般的なスケジュールです。住民周知は最低1週間前、できれば2〜3週間前に書面で告知してください。' } },
+    { '@type': 'Question', name: '理事会承認なしで清掃発注しても問題ないですか？', acceptedAnswer: { '@type': 'Answer', text: '法定義務である年1回の清掃自体は承認なしでも実施可能（善管注意義務）ですが、業者選定・費用支出は理事会決議が原則です。同額・同業者で継続なら包括承認、新規業者なら相見積もり3社の比較資料を理事会に提示するのが安全。' } },
+    { '@type': 'Question', name: '管理委託している場合、組合が確認すべき書類は？', acceptedAnswer: { '@type': 'Answer', text: '清掃証明書、水質検査結果書、業者の都道府県知事登録証の3点が必須。管理会社が「実施しました」と口頭報告するだけで書類を引き渡さないケースがあるため、理事会に毎年原本（またはコピー）を提示させるのが原則です。' } },
+    { '@type': 'Question', name: '受水槽の老朽化が気になる場合、清掃時に診断してもらえますか？', acceptedAnswer: { '@type': 'Answer', text: 'はい。清掃時の目視診断は無料で実施する業者が多く、FRP・ステンレス槽の劣化、ボルト腐食、内部塗装剥離、配管接続部の漏水跡などを点検。劣化が進行している場合は更新（200〜400万円）見積もりにつながります。' } },
+    { '@type': 'Question', name: '管理組合が変わった（理事改選後）、過去の清掃履歴はどう確認すれば？', acceptedAnswer: { '@type': 'Answer', text: '管理会社経由なら過去5年分の清掃証明書・水質検査結果書を請求してください。自主管理の場合は前理事会の書類引き継ぎ簿を確認。記録が見つからない場合は、当時の業者に問い合わせれば実施記録（保存義務5年）が残っていることが多いです。' } },
+    { '@type': 'Question', name: '築古マンションで配管も劣化していると言われました。受水槽だけ交換しても大丈夫？', acceptedAnswer: { '@type': 'Answer', text: '基本的に配管と受水槽は同時期に劣化が進行するため、受水槽更新時に配管・ポンプも合わせて点検・更新を検討するのが合理的です。受水槽だけ新品にしても配管から赤水が出れば意味がなく、結果的に二重投資になります。' } },
+  ],
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-jusuisou-seisou.png` },
+});
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  ogImage={`${site.domain}/og-jusuisou-seisou.png`}
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>マンション向け受水槽清掃ガイド</span>
+        </nav>
+        <span class="cl-cat">受水槽清掃</span>
+        <h1 class="cl-title">受水槽清掃のマンション向け完全ガイド2026｜管理組合の責任・費用相場・業者選びの実務</h1>
+        <p class="cl-lead">マンション管理組合・賃貸オーナーが知っておくべき<strong>年1回の法定清掃</strong>を、戸数別の費用相場・理事会承認の進め方・住民周知文例・業者選定の必須書類まで実務目線でまとめました。<strong>50戸前後で6〜10万円</strong>が相場の目安です。</p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年6月14日</time>
+          <span>最終更新：2026年6月14日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. マンションの受水槽清掃、何をいつ・いくらでやればいい？</p>
+        <p class="cl-qa-a">A. <strong>年1回・登録業者・50戸で6〜10万円</strong>が基本。理事会で「相見積もり3社・登録番号確認」を決議し、清掃証明書と水質検査結果を組合で保管。</p>
+        <p class="cl-qa-src">※建築物衛生法・水道法（簡易専用水道：受水槽10m³超）に基づく</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="jusuisou-seisou" serviceName="受水槽清掃" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#why">なぜマンション特有の論点があるのか</a></li>
+          <li><a href="#cost">戸数別・費用相場（10〜200戸）</a></li>
+          <li><a href="#schedule">年間スケジュールと住民周知</a></li>
+          <li><a href="#riji">理事会承認の進め方</a></li>
+          <li><a href="#docs">業者選定で確認すべき書類</a></li>
+          <li><a href="#kanri">管理委託している場合のチェック項目</a></li>
+          <li><a href="#trouble">よくあるトラブルと対処</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <h2>3行サマリ</h2>
+        <div class="cl-callout">
+          <ul>
+            <li><strong>費用</strong>：50戸前後で6〜10万円（高架水槽あり＋2〜4万円）</li>
+            <li><strong>頻度</strong>：年1回以上（受水槽10m³超は水道法、それ以下は建築物衛生法準拠が一般的）</li>
+            <li><strong>必須書類</strong>：登録番号入り見積書、清掃証明書、水質検査結果書（5年保管）</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="why" class="cl-section">
+        <h2>なぜマンション特有の論点があるのか</h2>
+        <p>マンションの受水槽清掃は、戸建てや単独テナントビルと異なり<strong>「区分所有者全員の共有財産」を扱う</strong>性質があります。このため、以下の3点が他施設にない論点になります。</p>
+        <ol>
+          <li><strong>意思決定の煩雑さ</strong>：理事会承認・総会決議・住民同意が絡む</li>
+          <li><strong>住民への影響配慮</strong>：清掃日の断水で在宅住民が困る、子育て世帯・高齢世帯への個別配慮が必要</li>
+          <li><strong>管理委託の責任分界</strong>：管理会社が「業者選定→発注→記録保管」まで行うが、最終責任は組合に残る</li>
+        </ol>
+        <p>結果として、業者選定の良否が直接「住民満足度・組合運営の信頼」に影響します。コスト最適化だけでなく、<strong>住民周知の丁寧さ・清掃証明書の管理体制</strong>まで含めて業者を選ぶ視点が必要です。</p>
+      </section>
+
+      <section id="cost" class="cl-section">
+        <h2>戸数別・費用相場（10〜200戸）</h2>
+        <p>マンションの受水槽容量は<strong>「戸数 × 0.2〜0.25m³」</strong>が目安です。1日1人250〜300L、世帯2.5人として算出されることが多く、これに高架水槽（屋上に補助タンク）の有無で総費用が変動します。</p>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>マンション戸数別・受水槽清掃費用の相場（2026年6月時点）</caption>
+            <thead><tr><th>戸数</th><th>受水槽容量目安</th><th>清掃+水質検査</th><th>高架水槽あり</th><th>ポンプ点検込み</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">10〜20戸</th><td>3〜5m³</td><td>4〜6万円</td><td>+2万円</td><td>+1〜2万円</td></tr>
+              <tr><th scope="row">30〜50戸</th><td>5〜10m³</td><td>6〜10万円</td><td>+2〜3万円</td><td>+1〜2万円</td></tr>
+              <tr><th scope="row">50〜100戸</th><td>10〜20m³</td><td>9〜14万円</td><td>+3〜5万円</td><td>+2〜3万円</td></tr>
+              <tr><th scope="row">100〜200戸</th><td>20〜40m³</td><td>13〜22万円</td><td>+4〜7万円</td><td>+2〜4万円</td></tr>
+              <tr><th scope="row">200戸以上</th><td>40m³〜</td><td>20万円〜</td><td>個別見積</td><td>個別見積</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="cl-note"><small>※都市部（東京・大阪・名古屋）は人件費・処理場までの距離で+10〜20%、地方は -10〜15% の地域差。詳細な相場は <a href="/jusuisou-seisou/">受水槽清掃サービスページ</a> および <a href="/column/jusuisou-seisou-hiyo-sohba/">受水槽清掃の費用相場2026</a> をご参照ください。</small></p>
+
+        <h3>「安すぎる見積」に潜むワナ</h3>
+        <p>50戸クラスで<strong>3万円台の見積</strong>が出てきた場合、以下のいずれかが抜けている可能性が高いです。</p>
+        <ul>
+          <li>水質検査が含まれていない（残留塩素のみ・項目数が少ない）</li>
+          <li>清掃証明書が発行されない／簡易書式のみ</li>
+          <li>清掃後の塩素消毒・水張りが別料金扱い</li>
+          <li>業者の登録番号が記載されていない（=無登録業者の可能性）</li>
+        </ul>
+        <p>建築物衛生法対象施設で<strong>無登録業者に発注</strong>すると、組合側にも管理責任が問われます。総額だけでなく「項目」と「登録番号」を必ず確認してください。</p>
+      </section>
+
+      <section id="schedule" class="cl-section">
+        <h2>年間スケジュールと住民周知</h2>
+        <p>受水槽清掃の年間スケジュールは、<strong>気温が高い6〜9月（藻類・雑菌繁殖期）を避けた春・秋</strong>に組むのが理想です。多くのマンションでは以下のサイクルが定着しています。</p>
+
+        <h3>標準的な年間スケジュール</h3>
+        <ol>
+          <li><strong>1〜2月</strong>：業者選定・理事会承認・予算確保</li>
+          <li><strong>3月</strong>：年間契約書締結・清掃日決定</li>
+          <li><strong>4〜5月</strong>：清掃実施（春の代表的な実施月）</li>
+          <li><strong>6〜9月</strong>：水質検査結果の確認・組合保管</li>
+          <li><strong>10〜11月</strong>：簡易点検（無償が多い）・翌年予算検討</li>
+        </ol>
+
+        <h3>住民周知のテンプレート（書面文例）</h3>
+        <p>清掃日の<strong>2〜3週間前</strong>に書面で告知するのが原則です。エレベーター内・各戸ポスト投函の両方が望ましく、特に在宅勤務世帯が増えている近年は丁寧な告知が重要です。</p>
+
+        <div class="cl-callout">
+          <p><strong>【受水槽清掃のお知らせ（文例）】</strong></p>
+          <p>○○マンション管理組合<br/>令和8年4月吉日</p>
+          <p>居住者各位</p>
+          <p>受水槽清掃の実施について（重要）</p>
+          <p>下記の通り受水槽清掃を実施いたします。当日は<strong>断水時間帯</strong>がございますので、ご理解とご協力をお願いします。</p>
+          <ul>
+            <li>実施日：令和8年5月15日（土）</li>
+            <li>作業時間：9:00〜16:00（うち完全断水 11:00〜14:00）</li>
+            <li>清掃業者：株式会社○○（都道府県知事登録 第○○号）</li>
+            <li>清掃後：水質検査を実施、結果は事務所で閲覧可能</li>
+            <li>ご準備のお願い：飲料水・調理用の水を前日に汲み置きください（目安2L／人）</li>
+          </ul>
+          <p>ご不明点は理事会または管理事務所までお問い合わせください。</p>
+        </div>
+      </section>
+
+      <section id="riji" class="cl-section">
+        <h2>理事会承認の進め方</h2>
+        <p>受水槽清掃は<strong>法定義務である清掃自体には承認不要</strong>ですが、業者選定・費用支出は組合の意思決定マターです。以下のフローで進めるのが標準的です。</p>
+
+        <h3>新規業者を選ぶ場合（3社比較）</h3>
+        <ol>
+          <li>管理会社（または直接3社）から相見積もりを取得</li>
+          <li>登録番号・実施項目・追加費用条件の比較表を作成</li>
+          <li>理事会で提案 → 決議 → 議事録に「業者名・登録番号・金額」を記録</li>
+          <li>翌期総会で「業務発注事項」として報告（細則による）</li>
+        </ol>
+
+        <h3>同業者で継続する場合（前期と同条件）</h3>
+        <ol>
+          <li>前年実績と当年見積を比較し、増額があれば理由を確認</li>
+          <li>理事会の<strong>包括承認決議</strong>（「○年度の清掃業務は前年同業者に発注」）</li>
+          <li>議事録への記録は不可欠（保管期間：10年が目安）</li>
+        </ol>
+
+        <h3>理事会で必ず確認すべき5項目</h3>
+        <ul>
+          <li>業者の都道府県知事登録番号と有効期限</li>
+          <li>清掃後の水質検査の項目数（最低限：残留塩素・pH・濁度・色度・一般細菌）</li>
+          <li>清掃証明書・作業報告書の提出時期と保管担当</li>
+          <li>断水時間と住民周知の責任分界（業者がチラシ作成代行するか）</li>
+          <li>不具合発見時の連絡フロー（業者→管理会社→組合）</li>
+        </ul>
+      </section>
+
+      <section id="docs" class="cl-section">
+        <h2>業者選定で確認すべき書類</h2>
+        <p>業者の信頼性は<strong>「書類で証明できるか」</strong>で判断するのが最も確実です。口頭の説明や営業トークではなく、以下4種を必ず書面で確認してください。</p>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>業者選定時の必須書類4種</caption>
+            <thead><tr><th>書類</th><th>確認ポイント</th><th>無いとどうなるか</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">都道府県知事登録証</th><td>「建築物飲料水貯水槽清掃業」の登録、有効期限内であること</td><td>無登録業者発注で組合に管理責任</td></tr>
+              <tr><th scope="row">作業者の資格証</th><td>「貯水槽清掃作業監督者」等の有資格者の在籍証明</td><td>作業品質・水質事故時の責任追及困難</td></tr>
+              <tr><th scope="row">賠償責任保険</th><td>清掃中の事故・水質汚染への保険適用（1事故○万円以上）</td><td>水質事故時に組合が全額負担</td></tr>
+              <tr><th scope="row">過去の実績一覧</th><td>同規模マンションでの清掃実績件数・年数</td><td>判断材料不足（高額化のリスク）</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>見積書の必須記載項目</h3>
+        <p>見積書の体裁が整っていない業者は、業務管理体制も不十分なことが多いです。以下を満たしているか確認してください。</p>
+        <ul>
+          <li>業者名・住所・連絡先・登録番号</li>
+          <li>清掃対象（受水槽の容量・場所・台数）</li>
+          <li>作業項目（排水→洗浄→塩素消毒→水張り→水質検査）の内訳</li>
+          <li>水質検査の項目数（5項目以上が標準）</li>
+          <li>追加費用が発生する条件の明記</li>
+          <li>清掃証明書・水質検査結果書の発行有無</li>
+          <li>有効期限・支払い条件</li>
+        </ul>
+      </section>
+
+      <section id="kanri" class="cl-section">
+        <h2>管理委託している場合のチェック項目</h2>
+        <p>マンションの約7割は管理会社に業務委託しており、受水槽清掃も<strong>管理会社が業者選定・発注・記録保管まで一括代行</strong>するのが一般的です。ただし、組合側で確認しないと「実施漏れ」「不要な追加費用」が発生するケースがあります。</p>
+
+        <h3>管理会社経由でも組合が確認すべき5項目</h3>
+        <ol>
+          <li><strong>毎年原本確認</strong>：清掃証明書・水質検査結果書を理事会で実物確認（コピーで可）</li>
+          <li><strong>業者の交代理由</strong>：前年と異なる業者の場合は理由をヒアリング（管理会社の系列会社化＝割高化の可能性）</li>
+          <li><strong>請求金額の妥当性</strong>：管理会社マージンが上乗せされていないか、3年に1回は相見積もりで検証</li>
+          <li><strong>水質検査の項目数</strong>：「実施しました」だけでなく結果書で項目を確認（最低5項目）</li>
+          <li><strong>不具合報告の有無</strong>：清掃時に発見された劣化・腐食などの口頭報告も議事録化</li>
+        </ol>
+
+        <h3>管理会社を変えずに費用を下げる方法</h3>
+        <p>管理会社を変えるのは負担が大きいですが、<strong>個別業務（受水槽清掃・消防点検・エレベーター点検等）の見直し</strong>は組合主導で可能です。3年に1回、相見積もりを取って交渉材料にするだけでも、年間数万〜数十万円のコスト削減効果が出る事例があります。</p>
+      </section>
+
+      <section id="trouble" class="cl-section">
+        <h2>よくあるトラブルと対処</h2>
+
+        <h3>① 清掃当日、業者が現れない／遅刻</h3>
+        <p>断水告知済みで業者が現れないと、住民への信頼失墜が一気に進みます。対策は<strong>「契約時に遅延・キャンセル時の補償条項を入れる」</strong>こと。実際に2時間以上遅刻した場合は、住民への謝罪文（業者作成）と次回清掃費用の減額（10〜20%）を協定書で取り決めるのが望ましいです。</p>
+
+        <h3>② 水質検査結果が基準値ぎりぎり</h3>
+        <p>残留塩素・濁度が「基準値ぎりぎり」で出た場合、すぐの再清掃ではなく<strong>原因の特定が先</strong>です。配管劣化、給水ポンプの不具合、テナント側の水使用量変動など、複数要因が絡みます。業者に「次回清掃の前倒し」「中間検査の追加」を提案してもらいましょう。</p>
+
+        <h3>③ 高架水槽・受水槽の劣化が判明</h3>
+        <p>清掃時に内部塗装の剥離・ボルト腐食・FRP樹脂の白化などが発見された場合、<strong>長期修繕計画への組み込み</strong>が必要です。更新費用は規模により200〜500万円。修繕積立金からの取り崩しか、特別徴収かを総会決議で確定します。</p>
+
+        <h3>④ 過去の清掃証明書が見当たらない</h3>
+        <p>理事会の引継ぎで証明書が紛失している場合、保健所立入検査で「実施されていない」と判断されるリスクがあります。業者は<strong>清掃記録を5年間保管義務</strong>があるため、過去の業者に問い合わせれば原本コピーを再発行してもらえることが多いです。</p>
+      </section>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          <div class="cl-faq-item">
+            <dt>マンション50戸の受水槽清掃費用はいくらが相場ですか？</dt>
+            <dd>受水槽容量5〜10m³（50戸前後）が一般的で、清掃と水質検査込みで<strong>6〜10万円</strong>が相場です。高架水槽がある場合は+2〜4万円、ポンプ点検をセットにすると+1〜2万円が目安。地域・業者で20〜30%の差が出ます。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>清掃中の断水時間はどれくらいですか？</dt>
+            <dd>通常5〜8時間程度。完全断水は2〜4時間程度で、午前9時開始〜午後4時完了が一般的なスケジュールです。住民周知は最低1週間前、できれば2〜3週間前に書面で告知してください。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>理事会承認なしで清掃発注しても問題ないですか？</dt>
+            <dd>法定義務である年1回の清掃自体は承認なしでも実施可能ですが、業者選定・費用支出は理事会決議が原則です。同額・同業者で継続なら包括承認、新規業者なら相見積もり3社の比較資料を理事会に提示するのが安全。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>管理委託している場合、組合が確認すべき書類は？</dt>
+            <dd>清掃証明書、水質検査結果書、業者の都道府県知事登録証の3点が必須。管理会社が口頭報告だけで書類を引き渡さないケースがあるため、理事会に毎年原本（またはコピー）を提示させるのが原則です。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>受水槽の老朽化が気になる場合、清掃時に診断してもらえますか？</dt>
+            <dd>はい。清掃時の目視診断は無料で実施する業者が多く、FRP・ステンレス槽の劣化、ボルト腐食、内部塗装剥離、配管接続部の漏水跡などを点検。劣化が進行している場合は更新（200〜400万円）見積もりにつながります。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>管理組合が変わった（理事改選後）、過去の清掃履歴はどう確認すれば？</dt>
+            <dd>管理会社経由なら過去5年分の清掃証明書・水質検査結果書を請求してください。自主管理の場合は前理事会の書類引き継ぎ簿を確認。記録が見つからない場合は、当時の業者に問い合わせれば実施記録（保存義務5年）が残っていることが多いです。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>築古マンションで配管も劣化していると言われました。受水槽だけ交換しても大丈夫？</dt>
+            <dd>基本的に配管と受水槽は同時期に劣化が進行するため、受水槽更新時に配管・ポンプも合わせて点検・更新を検討するのが合理的です。受水槽だけ新品にしても配管から赤水が出れば意味がなく、結果的に二重投資になります。</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="cl-section">
+        <h2>関連記事</h2>
+        <ul class="cl-related">
+          <li><a href="/column/jusuisou-seisou-horei-gimu/">受水槽清掃の法定義務ガイド2026｜水道法・建築物衛生法の要点と違反ペナルティ</a></li>
+          <li><a href="/column/jusuisou-seisou-hiyo-sohba/">受水槽清掃の費用相場2026｜容量別・項目別の内訳</a></li>
+          <li><a href="/column/jusuisou-seisou-gyosha-sentaku/">受水槽清掃の業者選び完全ガイド2026｜10のチェックポイント</a></li>
+          <li><a href="/column/jusuisou-seisou-batsu/">受水槽清掃を怠るとどうなる？水道法違反の罰則・事例</a></li>
+          <li><a href="/column/shisetsu-kanri-nenkan-schedule/">施設管理の年間スケジュール2026｜9種の法定点検カレンダー</a></li>
+        </ul>
+      </section>
+
+      <ColumnCtaCard serviceSlug="jusuisou-seisou" serviceName="受水槽清掃" variant="bottom" />
+
+    </div>
+  </article>
+</BaseLayout>
