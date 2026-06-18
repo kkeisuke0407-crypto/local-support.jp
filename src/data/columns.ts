@@ -9,6 +9,20 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/jusuisou-pump-haikan-kokan-hiyo/',
+    category: '受水槽清掃',
+    title: '受水槽のポンプ・配管交換 費用相場2026｜給水加圧ポンプ・配管腐食の見積もり内訳',
+    excerpt: '受水槽の給水加圧ポンプ・配管の交換費用を機種別・規模別に整理。ポンプ単体15〜40万円、配管含む全更新で60〜200万円が相場。故障の前兆、緊急対応の費用差、相見積もりで確認すべき項目まで実務目線で解説。',
+    date: '2026-06-14',
+  },
+  {
+    href: '/column/jusuisou-seisou-mansion/',
+    category: '受水槽清掃',
+    title: '受水槽清掃のマンション向け完全ガイド2026｜管理組合の責任・費用相場・業者選びの実務',
+    excerpt: 'マンション管理組合・賃貸オーナー向けに受水槽清掃の年間スケジュール、戸数別の費用相場、理事会承認の進め方、住民周知の文例、業者選定で確認すべき書類まで実務目線で整理。10〜200戸規模の実例費用も掲載。',
+    date: '2026-06-14',
+  },
+  {
     href: '/column/tokushu-kenchiku-horei-gimu/',
     category: '特殊建築物',
     title: '特殊建築物定期調査の法定義務ガイド2026｜建築基準法第12条第1項と所有者責任',

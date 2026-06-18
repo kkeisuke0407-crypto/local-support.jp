@@ -1,0 +1,393 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = "受水槽のポンプ・配管交換 費用相場2026｜給水加圧ポンプ・配管腐食の見積もり内訳";
+const description = "受水槽の給水加圧ポンプ・配管の交換費用を機種別・規模別に整理。ポンプ単体15〜40万円、配管含む全更新で60〜200万円が相場。故障の前兆、緊急対応の費用差、相見積もりで確認すべき項目まで実務目線で解説。";
+const canonical = `${site.domain}/column/jusuisou-pump-haikan-kokan-hiyo/`;
+const published = '2026-06-14';
+const modified = '2026-06-14';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '受水槽ポンプ・配管交換 費用相場', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 5400,
+  articleSection: '受水槽 設備更新',
+  keywords: '受水槽,ポンプ,配管,交換,費用,給水ポンプ,加圧ポンプ,寿命,2026',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-jusuisou-seisou.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '受水槽清掃' },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: '受水槽のポンプ交換の費用相場はいくらですか？', acceptedAnswer: { '@type': 'Answer', text: 'マンション中規模（30〜80戸）の給水加圧ポンプ単体交換で15〜40万円が相場です。インバータ制御モデル・並列2台運転の場合は40〜80万円。配管接続部の腐食改修を含めるとさらに+5〜15万円が一般的です。' } },
+    { '@type': 'Question', name: '給水ポンプの寿命はどれくらいですか？', acceptedAnswer: { '@type': 'Answer', text: '一般的なポンプの設計寿命は10〜15年。実運用では15〜20年使われることもありますが、運転音の変化・吐出圧の低下・始動失敗が増えてきたら更新時期です。20年超は突発故障による断水リスクが急上昇するため計画更新を推奨。' } },
+    { '@type': 'Question', name: 'ポンプ故障で水が出ないとき、緊急対応費はどれくらいかかりますか？', acceptedAnswer: { '@type': 'Answer', text: '夜間・休日の緊急対応は通常費用の1.5〜2倍。応急処置（一時運転再開）で5〜10万円、即日ポンプ交換で30〜60万円が相場です。計画更新であれば同条件で20〜40万円に抑えられるため、20年経過時点での予防交換が経済合理的です。' } },
+    { '@type': 'Question', name: '配管の交換も同時にすべきですか？', acceptedAnswer: { '@type': 'Answer', text: 'ポンプ周辺の配管（吐出管・吸込管・バルブ類）は同時更新が原則です。古い配管に新品ポンプを接続すると、接合部の腐食水漏れや異物詰まりで早期再故障の原因に。全配管更新は60〜200万円ですが、メイン配管のみの部分更新（30〜60万円）も選択肢です。' } },
+    { '@type': 'Question', name: '配管の赤水・濁り水が出るようになりました。何を疑うべきですか？', acceptedAnswer: { '@type': 'Answer', text: '築20〜30年の建物では亜鉛メッキ鋼管（白ガス管）の腐食が主因です。受水槽より上流（給水本管側）の問題か、下流（給水配管側）の問題かを切り分け、塩素系洗浄か全更新かを判断。一時的改善でも数ヶ月で再発するケースが多く、根本対策として配管更新を検討してください。' } },
+    { '@type': 'Question', name: 'ポンプ交換だけ業者に頼めますか？相場より安くする方法は？', acceptedAnswer: { '@type': 'Answer', text: '可能です。ただし、ポンプ単体販売の業者は工事保証が短い（半年〜1年）ことが多く、施工不良時のリスクは依頼側が負います。給水加圧ポンプは安全弁・逆止弁・配管接続が複雑なため、3社相見積もりで施工保証2年以上の業者を選ぶのが結果的に安価になります。' } },
+    { '@type': 'Question', name: 'マンション全体の給水システムを更新する際、補助金はありますか？', acceptedAnswer: { '@type': 'Answer', text: '自治体によっては「鉛配管更新補助金」「給水管改修補助金」「マンション省エネ改修補助金」が用意されています。直結増圧方式への切替（受水槽撤去）と組み合わせると東京都・大阪府等で20〜100万円規模の補助対象になる場合あり。自治体公式サイトで「給水 補助金」で検索を。' } },
+  ],
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-jusuisou-seisou.png` },
+});
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  ogImage={`${site.domain}/og-jusuisou-seisou.png`}
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>受水槽ポンプ・配管交換 費用相場</span>
+        </nav>
+        <span class="cl-cat">受水槽清掃</span>
+        <h1 class="cl-title">受水槽のポンプ・配管交換 費用相場2026｜給水加圧ポンプ・配管腐食の見積もり内訳</h1>
+        <p class="cl-lead">受水槽の給水加圧ポンプ・配管は<strong>10〜15年で寿命</strong>を迎え、放置すると突発断水・水漏れ事故につながります。本記事では機種別・規模別の交換費用、故障の前兆、緊急対応との費用差、相見積もりで失敗しない確認項目まで実務目線でまとめました。</p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年6月14日</time>
+          <span>最終更新：2026年6月14日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 受水槽のポンプ・配管交換、いくらかかる？</p>
+        <p class="cl-qa-a">A. <strong>ポンプ単体で15〜40万円、ポンプ+主要配管で60〜200万円</strong>。緊急対応は通常費の1.5〜2倍、計画更新なら同条件で30〜40%安く抑えられる。</p>
+        <p class="cl-qa-src">※2026年6月時点・マンション中規模（30〜80戸）想定</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="jusuisou-seisou" serviceName="受水槽清掃" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#parts">受水槽の主要設備と寿命</a></li>
+          <li><a href="#pump-cost">給水加圧ポンプ交換の費用相場</a></li>
+          <li><a href="#pipe-cost">配管交換の費用相場</a></li>
+          <li><a href="#signs">故障の前兆と判定基準</a></li>
+          <li><a href="#emergency">緊急対応と計画更新の費用差</a></li>
+          <li><a href="#estimate">相見積もりで確認すべき項目</a></li>
+          <li><a href="#subsidy">使える補助金・自治体支援</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <h2>3行サマリ</h2>
+        <div class="cl-callout">
+          <ul>
+            <li><strong>ポンプ</strong>：単体交換15〜40万円、インバータ・並列運転で40〜80万円</li>
+            <li><strong>配管</strong>：主要配管のみ30〜60万円、全更新60〜200万円</li>
+            <li><strong>緊急対応</strong>：計画更新の1.5〜2倍。20年経過時点の予防交換が経済合理的</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="parts" class="cl-section">
+        <h2>受水槽の主要設備と寿命</h2>
+        <p>受水槽システムは「受水槽本体」「給水加圧ポンプ」「配管・バルブ類」「制御盤」の4要素で構成されています。それぞれ寿命が異なるため、<strong>更新タイミングが分散しがち</strong>で、結果的に「ポンプは新しいが配管は古い」というアンバランスな状態になりやすいのが現場の実情です。</p>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>受水槽システムの主要部品と寿命</caption>
+            <thead><tr><th>部位</th><th>設計寿命</th><th>実運用寿命</th><th>更新の目安</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">受水槽本体（FRP）</th><td>20〜25年</td><td>25〜30年</td><td>内部塗装剥離・ボルト腐食</td></tr>
+              <tr><th scope="row">受水槽本体（ステンレス）</th><td>30〜40年</td><td>40年以上</td><td>溶接部の腐食・ピンホール</td></tr>
+              <tr><th scope="row">給水加圧ポンプ</th><td>10〜15年</td><td>15〜20年</td><td>運転音変化・吐出圧低下</td></tr>
+              <tr><th scope="row">配管（亜鉛メッキ鋼管）</th><td>20〜25年</td><td>25〜30年</td><td>赤水・濁り水・継手腐食</td></tr>
+              <tr><th scope="row">配管（ステンレス・樹脂）</th><td>30〜40年</td><td>40年以上</td><td>接合部のシール劣化</td></tr>
+              <tr><th scope="row">制御盤</th><td>15〜20年</td><td>20〜25年</td><td>誤動作・部品供給終了</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="cl-note"><small>※部位ごとに更新タイミングを揃えるのが理想ですが、コスト負担の観点から「ポンプと制御盤」「受水槽と配管」をセットで更新する事例が一般的です。</small></p>
+      </section>
+
+      <section id="pump-cost" class="cl-section">
+        <h2>給水加圧ポンプ交換の費用相場</h2>
+        <p>給水加圧ポンプは<strong>受水槽の水をマンション・ビル各階に圧送する</strong>心臓部で、戸数・階層・必要水圧で機種が決まります。費用は本体価格に「撤去・設置工事費」「電気配線工事費」「試運転・調整費」が加算されます。</p>
+
+        <h3>機種別・規模別の費用</h3>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>給水加圧ポンプ交換費用（2026年6月時点）</caption>
+            <thead><tr><th>規模</th><th>機種タイプ</th><th>本体費用</th><th>工事費込み総額</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">小規模（10〜30戸）</th><td>定速ポンプ単体</td><td>5〜10万円</td><td>15〜25万円</td></tr>
+              <tr><th scope="row">小規模（10〜30戸）</th><td>インバータ式単体</td><td>10〜20万円</td><td>25〜40万円</td></tr>
+              <tr><th scope="row">中規模（30〜80戸）</th><td>定速 並列2台</td><td>15〜25万円</td><td>30〜50万円</td></tr>
+              <tr><th scope="row">中規模（30〜80戸）</th><td>インバータ 並列2台</td><td>25〜40万円</td><td>40〜80万円</td></tr>
+              <tr><th scope="row">大規模（80戸以上）</th><td>インバータ 並列3台</td><td>40〜70万円</td><td>70〜150万円</td></tr>
+              <tr><th scope="row">商業ビル・ホテル</th><td>専用設計</td><td>個別見積</td><td>100〜300万円</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>費用に影響する要因</h3>
+        <ul>
+          <li><strong>設置場所のアクセス性</strong>：地下機械室・搬入経路が狭い場合は+10〜30%</li>
+          <li><strong>電気容量の不足</strong>：インバータ化で電源工事が必要なら+5〜15万円</li>
+          <li><strong>既存配管の状態</strong>：腐食が進んでいると接続部修繕で+5〜15万円</li>
+          <li><strong>制御盤の同時更新</strong>：別途10〜30万円</li>
+          <li><strong>夜間・休日工事</strong>：人件費割増で+20〜40%</li>
+        </ul>
+
+        <h3>定速ポンプ vs インバータポンプ</h3>
+        <p>初期投資は<strong>インバータ式が30〜50%高い</strong>ですが、運用面で以下のメリットがあります。判断の決め手は「電気代回収期間」と「住民の使用快適性」です。</p>
+        <ul>
+          <li><strong>電気代削減</strong>：使用量に応じた回転数制御で年間20〜40%の削減事例あり</li>
+          <li><strong>水圧の安定</strong>：時間帯による水圧変動がなく、シャワー・洗濯の快適性が向上</li>
+          <li><strong>ポンプ寿命</strong>：低負荷運転で長寿命化（実運用で20年超の事例あり）</li>
+          <li><strong>騒音低減</strong>：機械室の音響レベルが大幅に下がる</li>
+        </ul>
+        <p>50戸規模で初期投資差15万円、年間電気代削減3〜5万円なら<strong>3〜5年で回収</strong>。15年使うなら明確にインバータ式が経済的です。</p>
+      </section>
+
+      <section id="pipe-cost" class="cl-section">
+        <h2>配管交換の費用相場</h2>
+        <p>配管交換は<strong>「どこからどこまでやるか」</strong>で費用が大きく変わります。受水槽周辺の主要配管のみか、各戸内まで含めた全更新かで10倍以上の差が出ます。</p>
+
+        <h3>更新範囲別の費用</h3>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>受水槽周辺・建物全体の配管更新費用（マンション50戸クラス）</caption>
+            <thead><tr><th>更新範囲</th><th>費用目安</th><th>工期</th><th>住民影響</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">受水槽周辺のみ</th><td>30〜60万円</td><td>1〜2日</td><td>当日断水のみ</td></tr>
+              <tr><th scope="row">縦管（共用部のみ）</th><td>60〜150万円</td><td>3〜7日</td><td>系統別の断水</td></tr>
+              <tr><th scope="row">縦管+横管（共用部）</th><td>100〜250万円</td><td>1〜2週間</td><td>系統別の断水</td></tr>
+              <tr><th scope="row">全更新（各戸内含む）</th><td>200〜500万円</td><td>1〜2ヶ月</td><td>各戸の作業立会必要</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>配管材質と寿命</h3>
+        <ul>
+          <li><strong>亜鉛メッキ鋼管（白ガス管）</strong>：1970〜90年代に多用。25〜30年で腐食が顕在化。赤水・濁り水・継手漏水の主因</li>
+          <li><strong>硬質塩化ビニル管（HIVP）</strong>：1980年代以降に普及。30〜40年使用可能</li>
+          <li><strong>ステンレス管（SUS）</strong>：1990年代以降の高仕様建物。40年以上の長寿命</li>
+          <li><strong>架橋ポリエチレン管・ポリブテン管</strong>：2000年代以降の主流。サヤ管ヘッダ工法で40〜50年</li>
+        </ul>
+
+        <h3>赤水・濁り水の応急対策</h3>
+        <p>配管全更新は費用負担が大きいため、まず<strong>応急策で延命</strong>するケースも多いです。</p>
+        <ul>
+          <li><strong>配管内塩素洗浄</strong>：5〜15万円。効果は数ヶ月〜1年程度の延命</li>
+          <li><strong>磁気活水処理装置</strong>：10〜30万円。赤水軽減の補助的効果</li>
+          <li><strong>給水管ライニング工法</strong>：50〜150万円。配管内部に樹脂塗装で10〜15年延命</li>
+        </ul>
+      </section>
+
+      <section id="signs" class="cl-section">
+        <h2>故障の前兆と判定基準</h2>
+        <p>給水加圧ポンプ・配管の故障は<strong>突然起こるように見えて、必ず前兆があります</strong>。以下のサインを月例点検でチェックしておくと、計画更新で対応でき、緊急対応の割増費を回避できます。</p>
+
+        <h3>給水加圧ポンプの故障前兆</h3>
+        <ul>
+          <li><strong>運転音の変化</strong>：ガラガラ音・キーン音・断続音は軸受劣化のサイン</li>
+          <li><strong>吐出圧の低下</strong>：上階で水圧が弱くなる・シャワーがチョロチョロ</li>
+          <li><strong>始動失敗・頻繁な再始動</strong>：自動運転で起動しない／何度も再始動を繰り返す</li>
+          <li><strong>異常停止</strong>：制御盤に「過負荷」「過熱」エラーが頻発</li>
+          <li><strong>水漏れ</strong>：ポンプ本体・接続フランジからのにじみ・滴下</li>
+          <li><strong>振動増加</strong>：軸ブレ・芯出し不良によるベース架台の振動</li>
+        </ul>
+
+        <h3>配管の故障前兆</h3>
+        <ul>
+          <li><strong>赤水・濁り水</strong>：朝一番の水・しばらく使わなかった後の水で発生</li>
+          <li><strong>水圧変動</strong>：時間帯で水圧がバラつく（共用配管の流量不足）</li>
+          <li><strong>異音</strong>：通水時に「シャー」「ゴー」と異常音が共用部から</li>
+          <li><strong>継手の白い結晶</strong>：配管継手部分に水垢・結晶が付着（漏水跡）</li>
+          <li><strong>水道料金の急増</strong>：使用量が変わらないのに料金が増加（漏水の可能性）</li>
+        </ul>
+
+        <h3>「あと何年もつか」の判定基準</h3>
+        <p>厳密な余寿命予測は難しいですが、業者が判断材料にする項目は以下です。</p>
+        <ol>
+          <li>設置からの経過年数（15年超で警戒、20年超は予防交換推奨）</li>
+          <li>過去5年の故障・修繕履歴（年1回以上の修繕は寿命近い）</li>
+          <li>運転状態の数値変化（吐出圧・振動値・電流値）</li>
+          <li>製造メーカーの部品供給状況（供給終了で計画更新を前倒し）</li>
+          <li>制御盤の制御ロジック（旧式は故障時の特殊対応が必要）</li>
+        </ol>
+      </section>
+
+      <section id="emergency" class="cl-section">
+        <h2>緊急対応と計画更新の費用差</h2>
+        <p>突発故障は<strong>「夜間・休日対応の割増」「住民への迷惑」「応急処置→正規工事の二重費用」</strong>の3つでコスト超過しがちです。計画更新と比較した実例を示します。</p>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>マンション50戸・給水加圧ポンプ更新の費用比較（実例）</caption>
+            <thead><tr><th>対応パターン</th><th>初期費用</th><th>追加費用</th><th>合計</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">計画更新（平日昼間）</th><td>30万円</td><td>0</td><td>30万円</td></tr>
+              <tr><th scope="row">緊急対応（夜間応急 → 翌日交換）</th><td>応急7万円</td><td>+本工事35万円</td><td>42万円</td></tr>
+              <tr><th scope="row">緊急対応（休日即時交換）</th><td>50〜60万円</td><td>+住民対応費用</td><td>60万円以上</td></tr>
+              <tr><th scope="row">大故障（受水槽損傷併発）</th><td>応急15万円</td><td>+受水槽更新300万円</td><td>315万円</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="cl-note"><small>※ 同じマンション・同じポンプ機種でも、計画的に進めるか緊急対応かで2〜10倍の費用差が出る現実があります。20年経過時点での計画更新が経済合理的な理由がここにあります。</small></p>
+      </section>
+
+      <section id="estimate" class="cl-section">
+        <h2>相見積もりで確認すべき項目</h2>
+        <p>給水設備は<strong>業者によって見積項目の粒度が大きく異なる</strong>領域です。安い見積に飛びつくと「必要な工事が含まれていない」「保証期間が短い」などのワナがあります。3社以上の相見積もりで以下を必ず比較してください。</p>
+
+        <h3>見積書の必須内訳</h3>
+        <ol>
+          <li><strong>ポンプ本体</strong>：メーカー・型番・能力（吐出量L/min・全揚程m）</li>
+          <li><strong>撤去工事費</strong>：既存ポンプの撤去・搬出・産廃処理費</li>
+          <li><strong>設置工事費</strong>：芯出し・固定・水平調整</li>
+          <li><strong>配管接続工事費</strong>：フランジ・バルブ類・継手の交換有無</li>
+          <li><strong>電気配線工事費</strong>：制御盤との接続・絶縁試験</li>
+          <li><strong>試運転・調整費</strong>：圧力設定・吐出量確認・運転データ取得</li>
+          <li><strong>諸経費</strong>：現場管理費・運搬費・廃材処分費</li>
+          <li><strong>保証期間</strong>：本体保証（1〜3年）と施工保証（1〜2年）の明記</li>
+        </ol>
+
+        <h3>「安すぎ見積」の特徴</h3>
+        <p>マンション中規模で<strong>20万円を切る</strong>見積が出てきた場合、以下のいずれかが抜けています。</p>
+        <ul>
+          <li>本体が国内メーカー品でない（部品供給・保証で不安）</li>
+          <li>撤去・廃材処分費が別計上</li>
+          <li>配管接続部の修繕費が別計上（後で「配管が劣化していました」と追加請求）</li>
+          <li>試運転調整費が別計上</li>
+          <li>施工保証が半年以下、または「現状渡し」扱い</li>
+        </ul>
+
+        <h3>業者選定の優先順位</h3>
+        <ol>
+          <li><strong>給水加圧ポンプの実績件数</strong>：年間50件以上が安心の目安</li>
+          <li><strong>メーカー認定店</strong>：荏原・グルンドフォス・テラル等の認定店なら部品供給が安定</li>
+          <li><strong>夜間・休日の緊急対応</strong>：24時間対応窓口の有無（更新後の保険）</li>
+          <li><strong>施工保証2年以上</strong>：1年保証は施工不良リスクのカバーが不十分</li>
+          <li><strong>水質検査・受水槽清掃の同時対応</strong>：別業者を呼ぶ手間と費用を削減</li>
+        </ol>
+      </section>
+
+      <section id="subsidy" class="cl-section">
+        <h2>使える補助金・自治体支援</h2>
+        <p>受水槽周辺の設備更新は、自治体レベルで複数の補助金対象になっている場合があります。「給水管更新」「鉛配管解消」「マンション省エネ改修」の3系統を確認してみてください。</p>
+
+        <h3>確認したい補助金</h3>
+        <ul>
+          <li><strong>鉛給水管解消支援</strong>（多くの自治体）：5〜30万円。鉛配管がある場合限定</li>
+          <li><strong>直結増圧切替補助</strong>（東京都・大阪市等）：20〜100万円。受水槽撤去→直結配管化</li>
+          <li><strong>マンション省エネ改修補助</strong>（自治体・独立行政法人）：給水ポンプのインバータ化が対象に</li>
+          <li><strong>耐震改修補助</strong>（自治体）：受水槽の架台補強・配管耐震化が対象に</li>
+        </ul>
+
+        <h3>補助金申請の落とし穴</h3>
+        <ul>
+          <li><strong>事前申請</strong>：工事着工後の申請は対象外がほとんど</li>
+          <li><strong>受付期間</strong>：年度予算消化型で締切前に終了することあり</li>
+          <li><strong>業者指定</strong>：自治体登録業者のみ対象の補助金あり</li>
+          <li><strong>書類負担</strong>：見積書・契約書・写真・領収書の整理が必要</li>
+        </ul>
+        <p>申請支援に慣れた業者を選ぶと、書類負担が大幅に軽減されます。詳細は <a href="/column/jusuisou-seisou-hojokin/">受水槽清掃・更新の補助金活用ガイド</a> もご参照ください。</p>
+      </section>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          <div class="cl-faq-item">
+            <dt>受水槽のポンプ交換の費用相場はいくらですか？</dt>
+            <dd>マンション中規模（30〜80戸）の給水加圧ポンプ単体交換で<strong>15〜40万円</strong>が相場です。インバータ制御モデル・並列2台運転の場合は40〜80万円。配管接続部の腐食改修を含めるとさらに+5〜15万円が一般的です。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>給水ポンプの寿命はどれくらいですか？</dt>
+            <dd>一般的なポンプの設計寿命は<strong>10〜15年</strong>。実運用では15〜20年使われることもありますが、運転音の変化・吐出圧の低下・始動失敗が増えてきたら更新時期です。20年超は突発故障による断水リスクが急上昇するため計画更新を推奨。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>ポンプ故障で水が出ないとき、緊急対応費はどれくらいかかりますか？</dt>
+            <dd>夜間・休日の緊急対応は通常費用の<strong>1.5〜2倍</strong>。応急処置（一時運転再開）で5〜10万円、即日ポンプ交換で30〜60万円が相場です。計画更新であれば同条件で20〜40万円に抑えられるため、20年経過時点での予防交換が経済合理的です。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>配管の交換も同時にすべきですか？</dt>
+            <dd>ポンプ周辺の配管（吐出管・吸込管・バルブ類）は同時更新が原則です。古い配管に新品ポンプを接続すると、接合部の腐食水漏れや異物詰まりで早期再故障の原因に。全配管更新は60〜200万円ですが、メイン配管のみの部分更新（30〜60万円）も選択肢です。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>配管の赤水・濁り水が出るようになりました。何を疑うべきですか？</dt>
+            <dd>築20〜30年の建物では<strong>亜鉛メッキ鋼管（白ガス管）の腐食</strong>が主因です。受水槽より上流（給水本管側）の問題か、下流（給水配管側）の問題かを切り分け、塩素系洗浄か全更新かを判断。一時的改善でも数ヶ月で再発するケースが多く、根本対策として配管更新を検討してください。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>ポンプ交換だけ業者に頼めますか？相場より安くする方法は？</dt>
+            <dd>可能です。ただし、ポンプ単体販売の業者は工事保証が短い（半年〜1年）ことが多く、施工不良時のリスクは依頼側が負います。給水加圧ポンプは安全弁・逆止弁・配管接続が複雑なため、3社相見積もりで施工保証2年以上の業者を選ぶのが結果的に安価になります。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>マンション全体の給水システムを更新する際、補助金はありますか？</dt>
+            <dd>自治体によっては「鉛配管更新補助金」「給水管改修補助金」「マンション省エネ改修補助金」が用意されています。直結増圧方式への切替（受水槽撤去）と組み合わせると東京都・大阪府等で<strong>20〜100万円</strong>規模の補助対象になる場合あり。自治体公式サイトで「給水 補助金」で検索を。</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="cl-section">
+        <h2>関連記事</h2>
+        <ul class="cl-related">
+          <li><a href="/column/jusuisou-seisou-mansion/">受水槽清掃のマンション向け完全ガイド2026｜管理組合の責任・費用相場・業者選び</a></li>
+          <li><a href="/column/jusuisou-seisou-hiyo-sohba/">受水槽清掃の費用相場2026｜容量別・項目別の内訳</a></li>
+          <li><a href="/column/jusuisou-seisou-hojokin/">受水槽清掃・更新の補助金活用ガイド</a></li>
+          <li><a href="/column/jusuisou-seisou-horei-gimu/">受水槽清掃の法定義務ガイド2026</a></li>
+          <li><a href="/column/shisetsu-kanri-nenkan-schedule/">施設管理の年間スケジュール2026｜9種の法定点検カレンダー</a></li>
+        </ul>
+      </section>
+
+      <ColumnCtaCard serviceSlug="jusuisou-seisou" serviceName="受水槽清掃" variant="bottom" />
+
+    </div>
+  </article>
+</BaseLayout>
