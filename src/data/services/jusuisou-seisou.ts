@@ -306,6 +306,13 @@ const data: ServiceData = {
 
   relatedColumns: [
     {
+      href: '/column/jusuisou-tekkyo-chokketsu-zoatsu/',
+      category: '設備更新',
+      title: '受水槽の撤去・直結増圧方式への切り替え費用2026｜マンション・ビルの工事相場と補助金',
+      excerpt: '中規模マンションで150〜300万円、配管更新込み200〜400万円が目安。自治体補助金、メリット・デメリット、切替不可な建物条件、工事の流れまで実務目線で解説。',
+      date: '2026-06-18',
+    },
+    {
       href: '/column/jusuisou-seisou-mansion/',
       category: 'マンション施設管理',
       title: '受水槽清掃のマンション向け完全ガイド2026｜管理組合の責任・費用相場・業者選び',
