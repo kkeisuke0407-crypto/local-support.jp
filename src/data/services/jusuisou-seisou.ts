@@ -306,6 +306,13 @@ const data: ServiceData = {
 
   relatedColumns: [
     {
+      href: '/column/jusuisou-seisou-gyosha-tokyo/',
+      category: '業者選び',
+      title: '東京で受水槽清掃の業者を選ぶ完全ガイド2026｜23区・多摩の相場・保健所事情・夜間作業',
+      excerpt: '23区都心は全国平均1.1〜1.3倍、多摩は概ね平均水準。東京都条例の追加要件、保健所運用、タワー物件の搬入制約、夜間作業の割増まで実務解説。',
+      date: '2026-06-19',
+    },
+    {
       href: '/column/jusuisou-tekkyo-chokketsu-zoatsu/',
       category: '設備更新',
       title: '受水槽の撤去・直結増圧方式への切り替え費用2026｜マンション・ビルの工事相場と補助金',
