@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/pest-control-inshokuten-hindo-gimu/',
+    category: '害虫駆除',
+    title: '飲食店の害虫駆除 頻度・法的義務 完全ガイド2026｜食品衛生法・HACCP・保健所立入の実務',
+    excerpt: '飲食店・食品事業者の害虫駆除を業態別に整理。食品衛生法・HACCP・保健所立入で求められる記録、一般飲食 月1回〜2か月に1回、食品工場 月1〜2回など業種別の標準頻度、季節別の重点害虫、業者選び7項目、費用相場まで実務目線で解説。',
+    date: '2026-06-19',
+  },
+  {
     href: '/column/jusuisou-seisou-gyosha-tokyo/',
     category: '受水槽清掃',
     title: '東京で受水槽清掃の業者を選ぶ完全ガイド2026｜23区・多摩エリアの相場・保健所事情・夜間作業の実情',
