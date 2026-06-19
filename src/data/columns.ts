@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/jusuisou-seisou-gyosha-tokyo/',
+    category: '受水槽清掃',
+    title: '東京で受水槽清掃の業者を選ぶ完全ガイド2026｜23区・多摩エリアの相場・保健所事情・夜間作業の実情',
+    excerpt: '東京都内の受水槽清掃業者選びを地域別に整理。23区と多摩エリアの相場差、都の建築物環境衛生管理条例、保健所運用の特徴、都心高層マンションの搬入制約、夜間・休日対応の費用、東京都登録業者の調べ方まで実務目線で解説。',
+    date: '2026-06-19',
+  },
+  {
     href: '/column/jusuisou-tekkyo-chokketsu-zoatsu/',
     category: '受水槽清掃',
     title: '受水槽の撤去・直結増圧方式への切り替え費用2026｜マンション・ビルの工事相場と補助金',
