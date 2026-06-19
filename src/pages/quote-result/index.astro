@@ -1,0 +1,405 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../data/site';
+
+const title = '業者比較ページ｜ロカサポ';
+const description = 'ロカサポからご案内した業者の見積もり比較ページです。';
+const canonical = `${site.domain}/quote-result/`;
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="業者比較・選定ページ"
+  noindex={true}
+>
+  <section class="qr-section">
+    <div class="sd-container">
+
+      <!-- データ読み込み中・データなし表示 -->
+      <div class="qr-empty" id="qr-empty">
+        <h1>業者比較ページ</h1>
+        <p>このページは、ロカサポからお送りしたメール内のリンクからアクセスしてください。</p>
+        <p>URLが正しく開けない場合は <a href="mailto:support@local-support.jp">support@local-support.jp</a> までご連絡ください。</p>
+      </div>
+
+      <!-- メインビュー（JSが描画） -->
+      <div class="qr-main" id="qr-main" hidden>
+
+        <!-- ヘッダー：依頼情報サマリ -->
+        <header class="qr-header">
+          <p class="qr-eyebrow">業者比較・選定</p>
+          <h1 id="qr-h1">業者比較ページ</h1>
+          <p class="qr-lead">
+            ご依頼の<strong id="qr-service"></strong>について、<strong id="qr-count">--</strong>社の業者から見積もりが届きました。<br/>
+            ご希望の業者を<strong>1〜3社</strong>選んで「選択した業者に連絡を依頼する」をクリックしてください。
+          </p>
+          <dl class="qr-meta">
+            <div><dt>案件ID</dt><dd id="qr-id"></dd></div>
+            <div><dt>ご依頼者</dt><dd id="qr-requester"></dd></div>
+            <div><dt>地域</dt><dd id="qr-prefecture"></dd></div>
+            <div><dt>有効期限</dt><dd id="qr-expires"></dd></div>
+          </dl>
+        </header>
+
+        <!-- 業者カード一覧 -->
+        <div class="qr-vendor-list" id="qr-vendor-list"></div>
+
+        <!-- 選択カウンタ -->
+        <div class="qr-selected-bar" id="qr-selected-bar">
+          <span>選択中：<strong id="qr-selected-count">0</strong> / 最大3社</span>
+          <button type="button" class="qr-clear-btn" id="qr-clear-btn" hidden>選択をクリア</button>
+        </div>
+
+        <!-- 送信フォーム -->
+        <form class="qr-submit-form" id="qr-form" novalidate>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" class="qr-honeypot" aria-hidden="true" />
+
+          <div class="qr-form-row">
+            <label for="qr-message">業者へのご要望・補足メッセージ（任意）</label>
+            <textarea id="qr-message" name="message" rows="3" placeholder="連絡可能な時間帯・追加で確認したい事項・特に重視する条件などがあればご記入ください"></textarea>
+          </div>
+
+          <div class="qr-form-row qr-confirm">
+            <label class="qr-checkbox">
+              <input type="checkbox" id="qr-agree" name="agree" required />
+              <span>選択した業者に、ご依頼者の連絡先（メール・電話）が共有されることに同意します</span>
+            </label>
+          </div>
+
+          <button type="submit" class="qr-submit-btn" id="qr-submit-btn" disabled>
+            選択した業者に連絡を依頼する
+          </button>
+          <p class="qr-submit-note">送信後、ロカサポ運営事務局でご紹介プロセスを開始します。選択していない業者には連絡先は共有されません。</p>
+          <p class="qr-error" id="qr-error" hidden></p>
+        </form>
+
+        <!-- 完了表示 -->
+        <div class="qr-done" id="qr-done" hidden>
+          <div class="qr-done-icon">✓</div>
+          <h2>選択を受け付けました</h2>
+          <p>選択された業者へ、ロカサポ運営事務局から順次ご連絡先をお伝えします。<br/>業者から直接ご依頼者様へ詳細見積のご連絡が入りますので、しばらくお待ちください。</p>
+          <p class="qr-done-note">ご質問は <a href="mailto:support@local-support.jp">support@local-support.jp</a> までご連絡ください。</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    // ───────────────────────────────────────────────
+    // データ読み込み：URL hash の #data=base64json から復元
+    // ───────────────────────────────────────────────
+    (function(){
+      const $ = (id) => document.getElementById(id);
+      const main = $('qr-main');
+      const empty = $('qr-empty');
+
+      function b64uDecode(s) {
+        const b64 = s.replace(/-/g,'+').replace(/_/g,'/');
+        const pad = b64.length % 4 === 0 ? '' : '='.repeat(4 - (b64.length % 4));
+        return atob(b64 + pad);
+      }
+
+      let data = null;
+      try {
+        const hash = location.hash.startsWith('#') ? location.hash.slice(1) : '';
+        const params = new URLSearchParams(hash);
+        const raw = params.get('data');
+        if (raw) {
+          const json = decodeURIComponent(escape(b64uDecode(raw)));
+          data = JSON.parse(json);
+        }
+      } catch (e) {
+        console.error('[quote-result] hash parse error', e);
+      }
+
+      if (!data || !data.id || !Array.isArray(data.vendors) || data.vendors.length === 0) {
+        empty.hidden = false;
+        main.hidden = true;
+        return;
+      }
+
+      empty.hidden = true;
+      main.hidden = false;
+      renderView(data);
+    })();
+
+    // ───────────────────────────────────────────────
+    // 描画
+    // ───────────────────────────────────────────────
+    function escapeHtml(s) {
+      return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function renderView(data) {
+      const $ = (id) => document.getElementById(id);
+      const STORAGE_KEY = 'ls_quote_result_' + data.id;
+
+      // ヘッダー
+      $('qr-h1').textContent = (data.service || '見積もり') + 'の業者比較';
+      $('qr-service').textContent = data.service || '見積もり依頼';
+      $('qr-count').textContent = data.vendors.length;
+      $('qr-id').textContent = data.id;
+      $('qr-requester').textContent = (data.requester && data.requester.name) || '—';
+      $('qr-prefecture').textContent = data.prefecture || '—';
+      $('qr-expires').textContent = data.expiresAt || '—';
+
+      // タイトル更新
+      document.title = (data.service || '業者比較') + '｜ロカサポ業者比較ページ';
+
+      // 業者カード描画
+      const listEl = $('qr-vendor-list');
+      listEl.innerHTML = data.vendors.map((v, i) => {
+        const vid = escapeHtml(v.id || ('v' + (i+1)));
+        const creds = (v.credentials || []).map((c) => `<li>${escapeHtml(c)}</li>`).join('');
+        const highlights = (v.highlights || []).map((h) => `<span class="qr-tag">${escapeHtml(h)}</span>`).join('');
+        return `
+          <div class="qr-vendor-card" data-vendor-id="${vid}">
+            <label class="qr-vendor-label">
+              <input type="checkbox" class="qr-vendor-check" data-vendor-id="${vid}" />
+              <div class="qr-vendor-body">
+                <div class="qr-vendor-head">
+                  <h2>${escapeHtml(v.name || ('業者 ' + (i+1)))}</h2>
+                  <div class="qr-vendor-prices">
+                    ${v.estimatedPrice ? `<div class="qr-price-line"><span>概算見積</span><strong>${escapeHtml(v.estimatedPrice)}</strong></div>` : ''}
+                    ${v.annualPrice ? `<div class="qr-price-line qr-price-line--sub"><span>年額換算</span><strong>${escapeHtml(v.annualPrice)}</strong></div>` : ''}
+                  </div>
+                </div>
+                ${v.proposal ? `<p class="qr-vendor-proposal">${escapeHtml(v.proposal)}</p>` : ''}
+                ${highlights ? `<div class="qr-vendor-tags">${highlights}</div>` : ''}
+                ${creds ? `<ul class="qr-vendor-creds">${creds}</ul>` : ''}
+                <dl class="qr-vendor-facts">
+                  ${v.experience ? `<div><dt>実績</dt><dd>${escapeHtml(v.experience)}</dd></div>` : ''}
+                  ${v.haccp ? `<div><dt>HACCP対応</dt><dd>${escapeHtml(v.haccp)}</dd></div>` : ''}
+                  ${v.responseTime ? `<div><dt>対応スピード</dt><dd>${escapeHtml(v.responseTime)}</dd></div>` : ''}
+                </dl>
+                <div class="qr-vendor-pick-state"><span class="qr-pick-off">この業者を選ぶ</span><span class="qr-pick-on">✓ 選択中</span></div>
+              </div>
+            </label>
+          </div>`;
+      }).join('');
+
+      // 選択状態を localStorage から復元
+      const saved = loadSelection(STORAGE_KEY);
+      saved.selected.forEach((vid) => {
+        const cb = listEl.querySelector(`.qr-vendor-check[data-vendor-id="${vid}"]`);
+        if (cb) cb.checked = true;
+      });
+      if (saved.message) $('qr-message').value = saved.message;
+      if (saved.agree) $('qr-agree').checked = true;
+      updateState();
+
+      // 選択変更ハンドラ
+      listEl.addEventListener('change', (e) => {
+        const target = e.target;
+        if (target && target.classList.contains('qr-vendor-check')) {
+          const selected = getSelectedIds();
+          if (selected.length > 3) {
+            target.checked = false;
+            alert('選択できるのは最大3社までです。');
+            return;
+          }
+          persistSelection(STORAGE_KEY);
+          updateState();
+        }
+      });
+
+      $('qr-message').addEventListener('input', () => persistSelection(STORAGE_KEY));
+      $('qr-agree').addEventListener('change', () => { persistSelection(STORAGE_KEY); updateState(); });
+
+      $('qr-clear-btn').addEventListener('click', () => {
+        listEl.querySelectorAll('.qr-vendor-check').forEach((cb) => cb.checked = false);
+        $('qr-message').value = '';
+        $('qr-agree').checked = false;
+        persistSelection(STORAGE_KEY);
+        updateState();
+      });
+
+      // 送信
+      $('qr-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        submitSelection(data);
+      });
+    }
+
+    // ───────────────────────────────────────────────
+    // 状態管理
+    // ───────────────────────────────────────────────
+    function getSelectedIds() {
+      return Array.from(document.querySelectorAll('.qr-vendor-check:checked')).map((cb) => cb.dataset.vendorId);
+    }
+
+    function loadSelection(key) {
+      try {
+        const raw = localStorage.getItem(key);
+        if (raw) return JSON.parse(raw);
+      } catch(e) {}
+      return { selected: [], message: '', agree: false };
+    }
+
+    function persistSelection(key) {
+      const state = {
+        selected: getSelectedIds(),
+        message: document.getElementById('qr-message').value,
+        agree: document.getElementById('qr-agree').checked,
+        ts: Date.now(),
+      };
+      try { localStorage.setItem(key, JSON.stringify(state)); } catch(e) {}
+    }
+
+    function updateState() {
+      const count = getSelectedIds().length;
+      document.getElementById('qr-selected-count').textContent = count;
+      document.getElementById('qr-clear-btn').hidden = count === 0;
+      const agree = document.getElementById('qr-agree').checked;
+      document.getElementById('qr-submit-btn').disabled = !(count >= 1 && agree);
+      document.querySelectorAll('.qr-vendor-card').forEach((card) => {
+        const cb = card.querySelector('.qr-vendor-check');
+        card.classList.toggle('is-picked', cb && cb.checked);
+      });
+    }
+
+    // ───────────────────────────────────────────────
+    // 送信
+    // ───────────────────────────────────────────────
+    async function submitSelection(data) {
+      const $ = (id) => document.getElementById(id);
+      const honey = document.querySelector('.qr-honeypot');
+      if (honey && honey.value) return;
+
+      const selectedIds = getSelectedIds();
+      if (selectedIds.length < 1 || selectedIds.length > 3) {
+        showError('1〜3社を選択してください');
+        return;
+      }
+      const selected = data.vendors.filter((v) => selectedIds.includes(v.id));
+
+      const btn = $('qr-submit-btn');
+      const originalLabel = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = '送信中...';
+      $('qr-error').hidden = true;
+
+      const payload = {
+        request_id: data.id,
+        service: data.service,
+        prefecture: data.prefecture,
+        requester_name: (data.requester && data.requester.name) || '',
+        requester_email: (data.requester && data.requester.email) || '',
+        requester_tel: (data.requester && data.requester.tel) || '',
+        message: $('qr-message').value,
+        selected_vendors: selected.map((v) => ({ id: v.id, name: v.name, estimatedPrice: v.estimatedPrice || '' })),
+        all_vendor_ids: data.vendors.map((v) => v.id),
+      };
+
+      try {
+        const resp = await fetch('/api/select-vendor', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const result = await resp.json().catch(() => ({ ok: resp.ok }));
+        if (!result.ok) throw new Error(result.error || '送信に失敗しました');
+
+        document.getElementById('qr-form').hidden = true;
+        document.getElementById('qr-vendor-list').hidden = true;
+        document.getElementById('qr-selected-bar').hidden = true;
+        document.getElementById('qr-done').hidden = false;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = originalLabel;
+        showError(err.message || '送信中にエラーが発生しました。お手数ですが support@local-support.jp までご連絡ください');
+      }
+    }
+
+    function showError(msg) {
+      const el = document.getElementById('qr-error');
+      el.textContent = msg;
+      el.hidden = false;
+    }
+  </script>
+
+  <style>
+    .qr-section { padding: 32px 0 64px; background: #f8fafc; min-height: 100vh; }
+    .qr-empty { max-width: 720px; margin: 60px auto; padding: 40px 32px; background: #fff; border: 1px solid #e5e7eb; border-radius: 14px; text-align: center; line-height: 1.8; }
+    .qr-empty h1 { font-size: 1.4rem; font-weight: 800; margin: 0 0 16px; color: #1f2937; }
+    .qr-empty p { color: #4b5563; }
+
+    .qr-main { max-width: 920px; margin: 0 auto; }
+    .qr-header { background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; padding: 28px 32px; margin-bottom: 24px; }
+    .qr-eyebrow { display: inline-block; font-size: 0.78rem; font-weight: 800; color: #1d4ed8; background: #eff6ff; padding: 4px 12px; border-radius: 999px; margin: 0 0 12px; }
+    .qr-header h1 { font-size: 1.5rem; font-weight: 900; margin: 0 0 12px; color: #1f2937; }
+    .qr-lead { font-size: 0.95rem; color: #374151; line-height: 1.8; margin: 0 0 18px; }
+    .qr-lead strong { color: #1d4ed8; }
+    .qr-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 0; padding: 16px; background: #f9fafb; border-radius: 10px; }
+    .qr-meta > div { margin: 0; }
+    .qr-meta dt { font-size: 0.72rem; color: #6b7280; font-weight: 700; margin-bottom: 4px; }
+    .qr-meta dd { font-size: 0.9rem; color: #1f2937; font-weight: 600; margin: 0; }
+
+    .qr-vendor-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
+    .qr-vendor-card { background: #fff; border: 2px solid #e5e7eb; border-radius: 14px; overflow: hidden; transition: border-color .15s, box-shadow .15s; }
+    .qr-vendor-card.is-picked { border-color: #1d4ed8; box-shadow: 0 8px 24px rgba(29,78,216,.15); }
+    .qr-vendor-label { display: block; cursor: pointer; padding: 20px 24px; margin: 0; }
+    .qr-vendor-check { position: absolute; opacity: 0; pointer-events: none; }
+    .qr-vendor-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 14px; }
+    .qr-vendor-head h2 { font-size: 1.1rem; font-weight: 800; margin: 0; color: #1f2937; }
+    .qr-vendor-prices { text-align: right; }
+    .qr-price-line { display: flex; align-items: baseline; gap: 8px; justify-content: flex-end; }
+    .qr-price-line span { font-size: 0.72rem; color: #6b7280; }
+    .qr-price-line strong { font-size: 1rem; color: #1d4ed8; font-weight: 800; }
+    .qr-price-line--sub strong { font-size: 0.82rem; color: #6b7280; font-weight: 600; }
+    .qr-vendor-proposal { font-size: 0.88rem; color: #374151; line-height: 1.7; margin: 0 0 12px; padding: 12px; background: #f9fafb; border-left: 3px solid #1d4ed8; border-radius: 4px; }
+    .qr-vendor-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+    .qr-tag { display: inline-block; font-size: 0.72rem; font-weight: 700; color: #1e3a8a; background: #dbeafe; padding: 3px 10px; border-radius: 999px; }
+    .qr-vendor-creds { list-style: none; padding: 0; margin: 0 0 12px; display: flex; flex-direction: column; gap: 4px; }
+    .qr-vendor-creds li { font-size: 0.82rem; color: #374151; padding-left: 18px; position: relative; }
+    .qr-vendor-creds li::before { content: '✓'; position: absolute; left: 0; color: #059669; font-weight: 800; }
+    .qr-vendor-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin: 0 0 14px; padding: 10px 12px; background: #f9fafb; border-radius: 8px; }
+    .qr-vendor-facts > div { margin: 0; }
+    .qr-vendor-facts dt { font-size: 0.7rem; color: #6b7280; font-weight: 700; margin-bottom: 2px; }
+    .qr-vendor-facts dd { font-size: 0.82rem; color: #1f2937; margin: 0; font-weight: 500; }
+    .qr-vendor-pick-state { padding: 8px 14px; background: #f3f4f6; border-radius: 8px; text-align: center; font-weight: 700; font-size: 0.88rem; color: #6b7280; transition: background .15s, color .15s; }
+    .qr-vendor-card.is-picked .qr-vendor-pick-state { background: #1d4ed8; color: #fff; }
+    .qr-pick-on { display: none; }
+    .qr-vendor-card.is-picked .qr-pick-on { display: inline; }
+    .qr-vendor-card.is-picked .qr-pick-off { display: none; }
+
+    .qr-selected-bar { position: sticky; bottom: 0; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 14px 20px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 -4px 16px rgba(0,0,0,.05); font-size: 0.9rem; }
+    .qr-selected-bar strong { color: #1d4ed8; font-size: 1.2rem; margin: 0 4px; }
+    .qr-clear-btn { background: none; border: 1px solid #e5e7eb; color: #6b7280; font-size: 0.82rem; padding: 6px 12px; border-radius: 6px; cursor: pointer; }
+    .qr-clear-btn:hover { background: #f3f4f6; }
+
+    .qr-submit-form { background: #fff; border: 1px solid #e5e7eb; border-radius: 14px; padding: 24px 28px; }
+    .qr-form-row { margin-bottom: 16px; }
+    .qr-form-row label { display: block; font-size: 0.88rem; font-weight: 700; color: #374151; margin-bottom: 8px; }
+    .qr-form-row textarea { width: 100%; padding: 12px 14px; border: 1.5px solid #e5e7eb; border-radius: 10px; font-size: 0.95rem; font-family: inherit; box-sizing: border-box; resize: vertical; }
+    .qr-confirm { padding: 14px 16px; background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; }
+    .qr-checkbox { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; margin: 0; font-weight: 600; }
+    .qr-checkbox input { width: 18px; height: 18px; margin-top: 3px; accent-color: #1d4ed8; flex-shrink: 0; }
+    .qr-checkbox span { font-size: 0.86rem; color: #78350f; line-height: 1.6; font-weight: 500; }
+    .qr-submit-btn { display: block; width: 100%; background: #1d4ed8; color: #fff; border: none; border-radius: 12px; padding: 16px; font-size: 1rem; font-weight: 900; cursor: pointer; margin-top: 8px; transition: background .15s; }
+    .qr-submit-btn:hover:not(:disabled) { background: #1e3a8a; }
+    .qr-submit-btn:disabled { background: #cbd5e1; cursor: not-allowed; }
+    .qr-submit-note { font-size: 0.75rem; color: #6b7280; text-align: center; margin: 10px 0 0; }
+    .qr-error { color: #dc2626; font-size: 0.85rem; text-align: center; margin: 12px 0 0; padding: 10px; background: #fef2f2; border-radius: 8px; }
+    .qr-honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; }
+
+    .qr-done { background: #fff; border: 2px solid #059669; border-radius: 16px; padding: 40px 32px; text-align: center; }
+    .qr-done-icon { width: 64px; height: 64px; margin: 0 auto 16px; background: #059669; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 900; }
+    .qr-done h2 { font-size: 1.3rem; font-weight: 800; color: #065f46; margin: 0 0 12px; }
+    .qr-done p { color: #374151; line-height: 1.8; margin: 0 0 8px; }
+    .qr-done-note { font-size: 0.85rem; color: #6b7280; margin-top: 16px; }
+
+    @media (max-width: 600px) {
+      .qr-header { padding: 20px; }
+      .qr-vendor-label { padding: 16px; }
+      .qr-vendor-head { flex-direction: column; gap: 8px; }
+      .qr-vendor-prices { text-align: left; }
+      .qr-price-line { justify-content: flex-start; }
+      .qr-submit-form { padding: 18px 20px; }
+    }
+  </style>
+</BaseLayout>
