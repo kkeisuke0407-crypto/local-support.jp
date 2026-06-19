@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { site } from '../../data/site';
 
 const title = `ご利用の流れ｜${site.name}`;
-const description = '一括見積依頼から業者紹介・契約までの流れを詳しくご案内します。完全無料・最大3社を厳選紹介。';
+const description = '一括見積依頼から業者紹介・契約までの6ステップをご案内します。完全無料・最大5社の見積もりを比較ページで確認・選定できます。';
 const canonical = `${site.domain}/flow/`;
 
 const breadcrumbLd = JSON.stringify({
@@ -17,12 +17,20 @@ const breadcrumbLd = JSON.stringify({
 
 const flowFaq = [
   {
-    q: '一括見積依頼から業者紹介までどれくらいかかりますか？',
-    a: 'フォーム送信後、通常1営業日以内にこちらから実績・信頼のある専門業者を厳選し、業者から直接ご連絡が入ります。お急ぎの場合はフォーム内の「緊急度」欄で当日対応希望を選択してください。',
+    q: '見積もりが揃って業者比較ページが届くまで、どれくらいかかりますか？',
+    a: '通常 3〜7営業日 が目安です。ご依頼内容の複雑さや業者側の現地確認の要否によって変動します。お急ぎの場合はフォーム内の「緊急度」欄でその旨をお知らせください。早期回答が可能な業者から優先的にお声がけします。',
   },
   {
-    q: '業者からの連絡は何社から、どのような形で届きますか？',
-    a: '対応可能な実績・信頼のある専門業者を最大3社まで厳選してご紹介します。業者からは原則メールでのご連絡となり、お電話を希望される場合はフォーム送信時にご指定ください。複数社から連絡が入った後、見積もり内容を比較してご契約先をお選びいただけます。',
+    q: '業者からの連絡はいつ来ますか？',
+    a: 'ご依頼者さまが業者比較ページで業者を選定されるまで、業者からの直接のご連絡は一切ありません。比較ページで業者をお選びいただいた後、ロカサポが選定業者に連絡先を共有し、1〜3営業日以内に選定業者からご連絡が入ります。',
+  },
+  {
+    q: '何社から見積もりが届きますか？',
+    a: '対応可能と回答した実績・信頼のある専門業者から、最大5社を厳選してご紹介します。比較ページ上で業者の概算見積・実績・資格情報をまとめて確認いただけます。',
+  },
+  {
+    q: '業者比較ページで何社まで選べますか？',
+    a: '1〜3社をお選びいただけます。選択した業者にのみ、ご依頼者さまの連絡先（メール・電話）が共有されます。選択しなかった業者には連絡先は共有されません。',
   },
   {
     q: '見積もり依頼後、必ず契約しなければなりませんか？',
@@ -38,7 +46,7 @@ const flowFaq = [
   },
   {
     q: '土日祝にも対応してもらえますか？',
-    a: 'フォーム自体は24時間受付ています。土日祝のお申し込みは翌営業日以降の対応となります。緊急対応が必要な場合は、業者から直接ご連絡が入る形でできる限り早く対応します。',
+    a: 'フォームは24時間受け付けています。土日祝のお申し込みは翌営業日以降の対応開始となります。緊急対応が必要な場合は、フォームの「緊急度」欄でお知らせください。',
   },
 ];
 
@@ -55,38 +63,45 @@ const faqLd = JSON.stringify({
 const steps = [
   {
     num: '01',
-    title: 'フォームで依頼を送信',
-    body: '施設情報・ご要件・連絡先を入力するだけ。所要時間は約1分です。難しい操作は一切不要で、3ステップのフォームに沿って入力するだけで完了します。',
+    title: 'ご依頼（無料・約1分）',
+    body: 'サービスを選んで、施設情報と連絡先を入力します。3ステップのフォームに沿って入力するだけで完了します。費用は一切かかりません。',
     note: '所要時間：約1分',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
   },
   {
     num: '02',
-    title: 'こちらで業者を厳選',
-    body: '頂いた情報をもとに、登録資格・実績・対応エリアを確認のうえ、最適な実績・信頼のある専門業者を最大3社選定します。通常1営業日以内にご案内します。',
-    note: '目安：1営業日以内',
+    title: 'ロカサポが実績・信頼のある専門業者へ打診',
+    body: 'ご依頼内容に合致する実績・信頼のある専門業者へ、ロカサポからお声がけします。資格・登録・実績の確認を経た業者のみに打診します。ご依頼者さまの連絡先は業者には一切渡しません。',
+    note: '目安：1営業日以内に打診開始',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
   },
   {
     num: '03',
-    title: '業者から直接ご連絡',
-    body: '厳選した業者から直接メールまたはお電話でご連絡が届きます。条件・スケジュール・詳細要件についてのヒアリングが行われます。',
-    note: '業者から直接連絡',
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`,
+    title: '手を挙げた業者から最大5社を選定',
+    body: '対応可能と回答した業者の中から、資格・実績・対応エリア・案件適合度を確認のうえ、最大5社を選定します。業者側で見積もり作成や現地調査が必要な場合があるため、お時間をいただきます。',
+    note: '目安：3〜7営業日',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>`,
   },
   {
     num: '04',
-    title: '見積もりを比較',
-    body: '複数業者から届いた見積もりを比較します。費用・対応範囲・実績・スケジュールなどを総合的に確認してください。当サイトへの手数料は一切かかりません。',
-    note: '完全無料',
+    title: '概算見積・実績を一覧でご確認',
+    body: '各社の概算見積・対応実績・資格情報を専用の業者比較ページでまとめてご覧いただけます。比較ページのURLはご依頼者さまのメールアドレスへお送りします。ここまで業者からの直接のご連絡は一切ありません。',
+    note: '比較ページのURLをメール送付',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>`,
   },
   {
     num: '05',
-    title: 'ご契約・施工',
-    body: '納得いただける業者とご契約のうえ施工を実施します。施工後のアフターフォローについても業者に直接ご確認ください。',
-    note: '業者と直接ご契約',
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>`,
+    title: 'お選びいただいた業者だけが連絡',
+    body: '詳細な見積・打ち合わせをしたい業者を1〜3社お選びください。選定された業者にのみご連絡先を共有し、業者からご依頼者さまへ直接ご連絡が入ります。選ばなかった業者には連絡先は共有されません。',
+    note: '選定後 1〜3営業日以内に業者から連絡',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`,
+  },
+  {
+    num: '06',
+    title: '比較してご契約',
+    body: '最終見積を比較し、納得いただける業者とご契約ください。契約しない場合も費用はかかりません。施工後のアフターフォローについては業者と直接ご相談ください。',
+    note: '完全無料・契約義務なし',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`,
   },
 ];
 ---
@@ -95,12 +110,20 @@ const steps = [
   <section class="hero hero--simple">
     <div class="sd-container">
       <h1 class="hero-h1">ご利用の流れ</h1>
-      <p class="hero-sub-simple">一括見積依頼から業者ご紹介まで、5ステップで完結します。完全無料でご利用いただけます。</p>
+      <p class="hero-sub-simple">ご依頼から契約まで6ステップ。<strong>業者をお選びいただくまで、業者からの連絡は一切来ません。</strong></p>
     </div>
   </section>
 
   <section class="sd-section section-white">
     <div class="sd-container">
+
+      <div class="flow-intro">
+        <p>
+          ロカサポでは「ご依頼の瞬間に業者から一斉に電話が鳴る」一般的な一括見積サイトとは異なる仕組みを採用しています。
+          <strong>ご依頼者さまが業者比較ページで業者を選定されるまで、業者にご依頼者さまの連絡先は一切共有しません。</strong>
+        </p>
+      </div>
+
       <ol class="flow-steps">
         {steps.map((s) => (
           <li class="flow-step">
@@ -121,6 +144,11 @@ const steps = [
           </li>
         ))}
       </ol>
+
+      <div class="flow-timeline">
+        <h3>所要期間の目安</h3>
+        <p>ご依頼から業者比較ページ到着まで <strong>通常 3〜7営業日</strong>、選定後の業者連絡まで含めると <strong>合計 1〜2週間</strong> が目安です。お急ぎの場合はフォームの「緊急度」欄でその旨お知らせください。早期対応可能な業者から優先的にお声がけします。</p>
+      </div>
 
       <div class="flow-cta">
         <p>まずはサービスを選んで、無料で一括見積もりを依頼してください。</p>
@@ -150,10 +178,21 @@ const steps = [
 </BaseLayout>
 
 <style>
+.flow-intro {
+  max-width: 760px;
+  padding: 18px 22px;
+  background: #eff6ff;
+  border-left: 4px solid var(--blue);
+  border-radius: 10px;
+  margin-bottom: 36px;
+}
+.flow-intro p { margin: 0; font-size: .92rem; color: var(--gray-800); line-height: 1.8; }
+.flow-intro strong { color: var(--blue-dark); }
+
 .flow-steps {
   list-style: none;
   padding: 0;
-  margin: 0 0 48px;
+  margin: 0 0 36px;
   max-width: 760px;
 }
 .flow-step {
@@ -234,6 +273,29 @@ const steps = [
   padding: 3px 10px;
   border-radius: 99px;
 }
+
+.flow-timeline {
+  max-width: 760px;
+  padding: 20px 24px;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 12px;
+  margin-bottom: 36px;
+}
+.flow-timeline h3 {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #92400e;
+  margin: 0 0 8px;
+}
+.flow-timeline p {
+  font-size: .9rem;
+  color: #78350f;
+  line-height: 1.8;
+  margin: 0;
+}
+.flow-timeline strong { color: #b45309; }
+
 .flow-cta {
   text-align: center;
   padding: 40px;

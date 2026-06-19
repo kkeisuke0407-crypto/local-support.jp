@@ -105,8 +105,8 @@ function buildUserConfirmHtml(p: SelectVendorPayload): string {
 
 <h3 style="font-size:15px;margin-top:24px;color:#1f2937;">今後の流れ</h3>
 <ol style="padding-left:20px;font-size:14px;">
-  <li>ロカサポ運営事務局より、選定された業者へ連絡先（メール・電話）をお伝えします（通常1営業日以内）。</li>
-  <li>業者から直接ご連絡が入りますので、詳細なご要件をご相談ください。</li>
+  <li>ロカサポ運営事務局より、選定された業者へ連絡先（メール・電話）をお伝えします（1営業日以内）。</li>
+  <li>業者からご依頼者さまへ直接ご連絡が入ります（通常 1〜3営業日以内）。詳細なご要件をご相談ください。</li>
   <li>最終見積を比較し、納得いただける業者とご契約ください。</li>
 </ol>
 
