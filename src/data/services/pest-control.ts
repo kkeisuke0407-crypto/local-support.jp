@@ -307,6 +307,13 @@ const data: ServiceData = {
 
   relatedColumns: [
     {
+      href: '/column/pest-control-inshokuten-hindo-gimu/',
+      category: '法令・義務',
+      title: '飲食店の害虫駆除 頻度・法的義務 完全ガイド2026｜食品衛生法・HACCP・保健所立入の実務',
+      excerpt: '一般飲食 月1回〜2か月に1回、食品工場 月1〜2回が標準。保健所立入で求められる記録4点、業態別の標準頻度、業者選び7項目を実務目線で整理。',
+      date: '2026-06-19',
+    },
+    {
       href: '/column/pest-control-hiyo-sohba/',
       category: '費用相場',
       title: '業務用害虫駆除（PCO）の費用相場2026｜業種別・契約形態別の料金ガイド',
