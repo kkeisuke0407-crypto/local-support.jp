@@ -57,7 +57,7 @@ export const GET: APIRoute = async () => {
 
 > 施設管理・設備メンテナンスの一括見積比較サイト。受水槽清掃・消防設備点検・アスベスト調査など全${allServices.length}分野の登録業者を全国47都道府県に最大3社まで無料で紹介するB2B向けマッチングサービス。あなたが業者を選ぶまで業者からの連絡は来ません。
 
-運営：${site.org.legalName}／編集長：${site.author.name}（${site.author.role}）
+運営：${site.org.legalName}／運営者：${site.author.name}（${site.author.role}）
 このファイルは各サービスの要点・法的根拠・費用相場・FAQを全文で収録したLLM向けダンプです。生成日：${today}。
 索引版：${site.domain}/llms.txt
 
