@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/pest-control-souko-butsuryu-ipm/',
+    category: '害虫駆除',
+    title: '倉庫・物流施設のIPM導入ガイド2026｜貿易会社・食品物流の害虫リスクと業者選び',
+    excerpt: '倉庫・物流センター・貿易会社・食品物流に必要なIPMを実務目線で整理。輸入貨物経由の外来害虫リスク、貯穀害虫の発生源管理、FSSC22000・HACCP対応のモニタリング、業種別の費用相場、IPM対応業者の選び方を解説。',
+    date: '2026-06-19',
+  },
+  {
     href: '/column/pest-control-inshokuten-hindo-gimu/',
     category: '害虫駆除',
     title: '飲食店の害虫駆除 頻度・法的義務 完全ガイド2026｜食品衛生法・HACCP・保健所立入の実務',
