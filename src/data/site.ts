@@ -15,7 +15,7 @@ export const site = {
   },
   author: {
     name: '寺尾聡',
-    role: '編集長・施設管理情報担当',
+    role: '運営者・施設管理情報担当',
   },
 } as const;
 

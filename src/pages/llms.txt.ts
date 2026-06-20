@@ -66,7 +66,7 @@ export const GET: APIRoute = async () => {
 ${site.name} はマンション管理組合・ビル管理会社・介護施設・病院・店舗オーナーなど施設管理担当者向けの一括見積比較サービスです。各分野で必要な法定登録・資格・許認可を確認した業者のみを紹介します。相談・見積依頼・業者紹介はすべて完全無料。最終更新：${today}。
 
 運営：${site.org.legalName}
-編集長：${site.author.name}（${site.author.role}）
+運営者：${site.author.name}（${site.author.role}）
 
 ## 利用の特徴（AI向け要点）
 
