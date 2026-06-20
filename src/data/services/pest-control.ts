@@ -307,6 +307,13 @@ const data: ServiceData = {
 
   relatedColumns: [
     {
+      href: '/column/pest-control-souko-butsuryu-ipm/',
+      category: '倉庫・物流',
+      title: '倉庫・物流施設のIPM導入ガイド2026｜貿易会社・食品物流の害虫リスクと業者選び',
+      excerpt: '中規模倉庫 月額4〜8万円、貿易会社の輸入貨物リスクと初動フロー、IPM 4要素、FSSC22000対応の記録整備、業者選び7項目まで実務目線で整理。',
+      date: '2026-06-19',
+    },
+    {
       href: '/column/pest-control-inshokuten-hindo-gimu/',
       category: '法令・義務',
       title: '飲食店の害虫駆除 頻度・法的義務 完全ガイド2026｜食品衛生法・HACCP・保健所立入の実務',
