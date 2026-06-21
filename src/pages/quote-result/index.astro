@@ -149,6 +149,16 @@ const canonical = `${site.domain}/quote-result/`;
       // タイトル更新
       document.title = (data.service || '業者比較') + '｜ロカサポ業者比較ページ';
 
+      // 送信済みなら完了画面を表示（古い選択を残さず、二重送信も防ぐ）
+      const priorState = loadSelection(STORAGE_KEY);
+      if (priorState && priorState.submitted) {
+        $('qr-vendor-list').hidden = true;
+        $('qr-selected-bar').hidden = true;
+        $('qr-form').hidden = true;
+        $('qr-done').hidden = false;
+        return;
+      }
+
       // 業者カード描画
       const listEl = $('qr-vendor-list');
       listEl.innerHTML = data.vendors.map((v, i) => {
@@ -303,6 +313,8 @@ const canonical = `${site.domain}/quote-result/`;
         const result = await resp.json().catch(() => ({ ok: resp.ok }));
         if (!result.ok) throw new Error(result.error || '送信に失敗しました');
 
+        // 送信済みフラグに置き換え（再オープン時は古い選択を残さず完了画面を表示）
+        try { localStorage.setItem('ls_quote_result_' + data.id, JSON.stringify({ submitted: true, ts: Date.now() })); } catch(e) {}
         document.getElementById('qr-form').hidden = true;
         document.getElementById('qr-vendor-list').hidden = true;
         document.getElementById('qr-selected-bar').hidden = true;

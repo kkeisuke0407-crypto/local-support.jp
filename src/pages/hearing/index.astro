@@ -213,6 +213,14 @@ const canonical = `${site.domain}/hearing/`;
       $('hr-requester').textContent = (data.requester && data.requester.name) || '—';
       document.title = (data.service || 'ヒアリング') + '｜ロカサポ事前ヒアリング';
 
+      // 送信済みなら完了画面を表示（古い選択を残さず、二重送信も防ぐ）
+      const prior = load(KEY);
+      if (prior && prior.submitted) {
+        $('hr-form').hidden = true;
+        $('hr-done').hidden = false;
+        return;
+      }
+
       // 作業時間帯：特定施設のみ必須表示
       const worktimeFacilities = ['食品工場・セントラルキッチン','スーパー・物販店','ホテル・旅館','病院・福祉施設','学校・保育施設'];
       const showWorktime = worktimeFacilities.some((f) => facility.indexOf(f) >= 0)
@@ -328,6 +336,8 @@ const canonical = `${site.domain}/hearing/`;
         });
         const result = await resp.json().catch(() => ({ ok: resp.ok }));
         if (!result.ok) throw new Error(result.error || '送信に失敗しました');
+        // 送信済みフラグに置き換え（再オープン時は古い選択を残さず完了画面を表示）
+        try { localStorage.setItem('ls_hearing_' + data.id, JSON.stringify({ submitted: true, ts: Date.now() })); } catch(e) {}
         $('hr-form').hidden = true;
         $('hr-done').hidden = false;
         window.scrollTo({ top: 0, behavior: 'smooth' });
