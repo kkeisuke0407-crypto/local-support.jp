@@ -36,6 +36,7 @@ export default defineConfig({
       filter: (page) => {
         if (page.includes('/thanks/')) return false;
         if (page.includes('/quote-result/')) return false;
+        if (page.includes('/hearing/')) return false;
         const m = page.match(PREF_PAGE_RE);
         if (m && !PRIMARY_PREFS.includes(m[2])) return false;
         return true;
