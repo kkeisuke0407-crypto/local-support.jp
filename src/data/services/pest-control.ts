@@ -307,6 +307,13 @@ const data: ServiceData = {
 
   relatedColumns: [
     {
+      href: '/column/pest-control-gyosha-fukuoka/',
+      category: '業者選び（福岡）',
+      title: '福岡で害虫駆除業者を選ぶ完全ガイド2026｜中洲・天神の飲食店向け 費用・資格・夜間対応',
+      excerpt: '中洲・天神の飲食密集エリアの害虫事情、建築物防除業の登録・協会会員の確認、IPM・HACCP対応の防除記録、定期契約とスポットの違い、夜間対応、費用相場、業者選び7項目まで。',
+      date: '2026-06-21',
+    },
+    {
       href: '/column/pest-control-souko-butsuryu-ipm/',
       category: '倉庫・物流',
       title: '倉庫・物流施設のIPM導入ガイド2026｜貿易会社・食品物流の害虫リスクと業者選び',
