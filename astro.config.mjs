@@ -3,11 +3,20 @@ import sitemap from '@astrojs/sitemap';
 import { allServices } from './src/data/services/index.ts';
 import { PRIMARY_PREFECTURE_SLUGS } from './src/data/prefectures.ts';
 
-// 主要都府県のみ sitemap に含める（noindex の都道府県を除外）
+// 主要都府県（全サービス共通）と、サービス別の追加インデックス県のみ sitemap に含める
 const PRIMARY_PREFS = [...PRIMARY_PREFECTURE_SLUGS];
 const SERVICE_SLUGS = allServices.map((s) => s.slug);
+// サービス別の追加インデックス県（例：害虫の千葉・兵庫・北海道・京都）
+const ADDITIONAL_INDEXED_BY_SERVICE = Object.fromEntries(
+  allServices.map((s) => [s.slug, s.additionalIndexedPrefectures || []]),
+);
 const PREF_PAGE_RE = new RegExp(`\\/(${SERVICE_SLUGS.join('|')})\\/([^/]+)\\/`);
 const SERVICE_TOP_RE = new RegExp(`^https:\\/\\/local-support\\.jp\\/(${SERVICE_SLUGS.join('|')})\\/$`);
+
+function isIndexedPrefPage(serviceSlug, prefSlug) {
+  if (PRIMARY_PREFS.includes(prefSlug)) return true;
+  return (ADDITIONAL_INDEXED_BY_SERVICE[serviceSlug] || []).includes(prefSlug);
+}
 
 // サービスごとの最終更新日を URL から引けるようにする（sitemap の lastmod に使う）
 const LASTMOD_BY_SLUG = Object.fromEntries(
@@ -38,7 +47,7 @@ export default defineConfig({
         if (page.includes('/quote-result/')) return false;
         if (page.includes('/hearing/')) return false;
         const m = page.match(PREF_PAGE_RE);
-        if (m && !PRIMARY_PREFS.includes(m[2])) return false;
+        if (m && !isIndexedPrefPage(m[1], m[2])) return false;
         return true;
       },
       serialize: (item) => {
