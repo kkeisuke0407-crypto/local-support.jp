@@ -57,6 +57,7 @@ src/data/
 - `trailingSlash: 'always'` — 内部リンク末尾スラッシュ必須
 - 公開日は `datePublished`/`dateModified` 両方にISO日付。基準年は **2026年**
 - 旧表記禁止: `編集長`（→運営者）/ `30秒・4問`（→60秒・5問）/ `4タップ`
+- **タイトルへの年号付与禁止**（例: `〜2026`）。鮮度は本文の「※YYYY年M月時点」注記で担保。例外: 補助金・法令年度版記事は `〜2026年度版` 可
 
 ## ブランチ運用
 作業: `claude/great-brown-UbJCt` → main マージで Cloudflare 自動デプロイ
