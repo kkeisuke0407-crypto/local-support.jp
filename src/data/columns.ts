@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/pest-control-teiki-spot-hikaku/',
+    category: '害虫駆除',
+    title: '害虫駆除の定期契約とスポット駆除を徹底比較｜PCOの契約形態の選び方',
+    excerpt: '業務用害虫駆除（PCO）の「定期管理契約」と「スポット（単発）駆除」を費用・効果・HACCP対応・リスクの4軸で徹底比較。年間コストの損益分岐点（年4回前後）、業種別の推奨契約形態、契約書で確認すべき7項目、途中での契約変更まで施設管理者向けに整理。',
+    date: '2026-06-22',
+  },
+  {
     href: '/column/pest-control-gyosha-fukuoka/',
     category: '害虫駆除',
     title: '福岡で害虫駆除業者を選ぶ完全ガイド｜中洲・天神の飲食店向け 費用相場・資格・夜間対応',
