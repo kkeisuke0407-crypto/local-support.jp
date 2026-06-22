@@ -519,6 +519,11 @@ const data: ServiceData = {
       ],
     },
   },
+
+  // 害虫駆除は初CV（2026-06-19 福岡）を起点に勝ち筋構築中。
+  // 第2陣として千葉・兵庫・北海道・京都を追加インデックス（2026-06-22 解放）。
+  // 解放県は prefectures.ts で priceFactor / localFactors を拡充済み。
+  additionalIndexedPrefectures: ['chiba', 'hyogo', 'hokkaido', 'kyoto'],
 };
 
 export default data;

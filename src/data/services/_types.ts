@@ -95,4 +95,12 @@ export interface ServiceData {
       localFaq?: { q: string; a: string }[];
     };
   };
+
+  /**
+   * このサービスに限ってインデックス対象に追加する都道府県スラグ。
+   * PRIMARY_PREFECTURE_SLUGS（全サービス共通）に上乗せして、勝ち筋サービスだけ
+   * 第2陣・第3陣の県を段階的に解放するための仕組み。
+   * 追加する県は prefectures.ts で priceFactor / localFactors を拡充済みであること。
+   */
+  additionalIndexedPrefectures?: string[];
 }
