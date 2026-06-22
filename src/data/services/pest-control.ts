@@ -307,6 +307,13 @@ const data: ServiceData = {
 
   relatedColumns: [
     {
+      href: '/column/pest-control-teiki-spot-hikaku/',
+      category: '契約形態',
+      title: '害虫駆除の定期契約とスポット駆除を徹底比較｜PCOの契約形態の選び方',
+      excerpt: '定期管理契約とスポット駆除を費用・効果・HACCP対応・リスクで比較。損益分岐点は年4回前後、食品取扱い・監査対応の有無が最大の分岐点。契約書チェック7項目まで。',
+      date: '2026-06-22',
+    },
+    {
       href: '/column/pest-control-gyosha-fukuoka/',
       category: '業者選び（福岡）',
       title: '福岡で害虫駆除業者を選ぶ完全ガイド｜中洲・天神の飲食店向け 費用・資格・夜間対応',
