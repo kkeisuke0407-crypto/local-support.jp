@@ -14,17 +14,16 @@ const canonical = `${site.domain}/hearing/`;
   logoSub="お見積もり事前ヒアリング"
   noindex={true}
 >
+  <link rel="stylesheet" href="/css/hearing.css" slot="head" />
   <section class="hr-section">
     <div class="sd-container">
 
-      <!-- データなし表示 -->
       <div class="hr-empty" id="hr-empty">
         <h1>お見積もり事前ヒアリング</h1>
         <p>このページは、ロカサポからお送りしたメール内のリンクからアクセスしてください。</p>
         <p>URLが正しく開けない場合は <a href="mailto:support@local-support.jp">support@local-support.jp</a> までご連絡ください。</p>
       </div>
 
-      <!-- メインビュー（JSが描画） -->
       <div class="hr-main" id="hr-main" hidden>
 
         <header class="hr-header">
@@ -45,11 +44,9 @@ const canonical = `${site.domain}/hearing/`;
         <form class="hr-form" id="hr-form" novalidate>
           <input type="text" name="website" tabindex="-1" autocomplete="off" class="hr-honeypot" aria-hidden="true" />
 
-          <!-- 必須セクション -->
           <div class="hr-group">
             <p class="hr-group-title">必須項目（5問）</p>
 
-            <!-- Q1 延床面積 -->
             <fieldset class="hr-q">
               <legend>Q1. 建物のおおよその延床面積は？ <span class="hr-req">必須</span></legend>
               <div class="hr-options" data-key="floor_area">
@@ -59,7 +56,6 @@ const canonical = `${site.domain}/hearing/`;
               </div>
             </fieldset>
 
-            <!-- Q2 建物階数 -->
             <fieldset class="hr-q">
               <legend>Q2. 建物は何階建てですか？ <span class="hr-req">必須</span></legend>
               <div class="hr-options" data-key="floors">
@@ -69,7 +65,6 @@ const canonical = `${site.domain}/hearing/`;
               </div>
             </fieldset>
 
-            <!-- Q3 管理したいエリア（複数） -->
             <fieldset class="hr-q">
               <legend>Q3. 管理したい場所は？（複数選択可） <span class="hr-req">必須</span></legend>
               <div class="hr-options hr-options--multi" data-key="areas">
@@ -79,7 +74,6 @@ const canonical = `${site.domain}/hearing/`;
               </div>
             </fieldset>
 
-            <!-- Q4 希望点検頻度 -->
             <fieldset class="hr-q">
               <legend>Q4. ご希望の点検・訪問頻度は？ <span class="hr-req">必須</span></legend>
               <div class="hr-options" data-key="frequency">
@@ -89,7 +83,6 @@ const canonical = `${site.domain}/hearing/`;
               </div>
             </fieldset>
 
-            <!-- Q5 現在の契約状況 -->
             <fieldset class="hr-q">
               <legend>Q5. 現在、害虫駆除・防虫管理サービスを利用していますか？ <span class="hr-req">必須</span></legend>
               <div class="hr-options" data-key="contract_status">
@@ -97,7 +90,6 @@ const canonical = `${site.domain}/hearing/`;
                   <label class="hr-opt"><input type="radio" name="contract_status" value={o} required /> <span>{o}</span></label>
                 ))}
               </div>
-              <!-- 条件分岐：利用中のみ表示 -->
               <div class="hr-conditional" id="hr-cost-wrap" hidden>
                 <p class="hr-sub-q">現在の年間契約費用は？</p>
                 <div class="hr-options" data-key="current_cost">
@@ -108,7 +100,6 @@ const canonical = `${site.domain}/hearing/`;
               </div>
             </fieldset>
 
-            <!-- 条件付き：作業時間帯（特定施設のみ） -->
             <fieldset class="hr-q" id="hr-worktime-wrap" hidden>
               <legend>Q6. 作業可能な時間帯は？ <span class="hr-req">必須</span></legend>
               <div class="hr-options" data-key="work_time">
@@ -119,7 +110,6 @@ const canonical = `${site.domain}/hearing/`;
             </fieldset>
           </div>
 
-          <!-- 任意セクション -->
           <div class="hr-group hr-group--optional">
             <p class="hr-group-title">任意項目（精度がさらに上がります）</p>
 
@@ -161,7 +151,6 @@ const canonical = `${site.domain}/hearing/`;
           <p class="hr-error" id="hr-error" hidden></p>
         </form>
 
-        <!-- 完了表示 -->
         <div class="hr-done" id="hr-done" hidden>
           <div class="hr-done-icon">✓</div>
           <h2>ご回答ありがとうございました</h2>
@@ -173,237 +162,5 @@ const canonical = `${site.domain}/hearing/`;
     </div>
   </section>
 
-  <script is:inline>
-    (function(){
-      const $ = (id) => document.getElementById(id);
-      function b64uDecode(s) {
-        const b64 = s.replace(/-/g,'+').replace(/_/g,'/');
-        const pad = b64.length % 4 === 0 ? '' : '='.repeat(4 - (b64.length % 4));
-        return atob(b64 + pad);
-      }
-      let data = null;
-      try {
-        const hash = location.hash.startsWith('#') ? location.hash.slice(1) : '';
-        const params = new URLSearchParams(hash);
-        const raw = params.get('data');
-        if (raw) data = JSON.parse(decodeURIComponent(escape(b64uDecode(raw))));
-      } catch (e) { console.error('[hearing] parse error', e); }
-
-      if (!data || !data.id) {
-        $('hr-empty').hidden = false;
-        $('hr-main').hidden = true;
-        return;
-      }
-      $('hr-empty').hidden = true;
-      $('hr-main').hidden = false;
-      renderView(data);
-    })();
-
-    function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-
-    function renderView(data) {
-      const $ = (id) => document.getElementById(id);
-      const KEY = 'ls_hearing_' + data.id;
-      const facility = data.facilityType || '';
-
-      $('hr-h1').textContent = (data.service || '見積もり') + ' 事前ヒアリング';
-      $('hr-service').textContent = data.service || '—';
-      $('hr-facility').textContent = facility || '—';
-      $('hr-id').textContent = data.id;
-      $('hr-requester').textContent = (data.requester && data.requester.name) || '—';
-      document.title = (data.service || 'ヒアリング') + '｜ロカサポ事前ヒアリング';
-
-      // 送信済みなら完了画面を表示（古い選択を残さず、二重送信も防ぐ）
-      const prior = load(KEY);
-      if (prior && prior.submitted) {
-        $('hr-form').hidden = true;
-        $('hr-done').hidden = false;
-        return;
-      }
-
-      // 作業時間帯：特定施設のみ必須表示
-      const worktimeFacilities = ['食品工場・セントラルキッチン','スーパー・物販店','ホテル・旅館','病院・福祉施設','学校・保育施設'];
-      const showWorktime = worktimeFacilities.some((f) => facility.indexOf(f) >= 0)
-        || facility.indexOf('工場') >= 0 || facility.indexOf('倉庫') >= 0 || facility.indexOf('物流') >= 0;
-      if (showWorktime) {
-        const wt = $('hr-worktime-wrap');
-        wt.hidden = false;
-        wt.querySelectorAll('input').forEach((i) => i.required = true);
-      }
-
-      // 現在費用：利用中のみ表示
-      const csRadios = document.querySelectorAll('input[name="contract_status"]');
-      csRadios.forEach((r) => r.addEventListener('change', () => {
-        const isUsing = r.value.indexOf('利用中') >= 0 && r.checked;
-        $('hr-cost-wrap').hidden = !isUsing;
-        persist(KEY);
-      }));
-
-      // localStorage 復元
-      const saved = load(KEY);
-      restore(saved);
-      if (saved.contract_status && saved.contract_status.indexOf('利用中') >= 0) $('hr-cost-wrap').hidden = false;
-
-      // 入力変化を保存
-      $('hr-form').addEventListener('change', () => persist(KEY));
-      $('hr-free').addEventListener('input', () => persist(KEY));
-
-      // 選択時のハイライト
-      $('hr-form').addEventListener('change', updateHighlights);
-      updateHighlights();
-
-      // 送信
-      $('hr-form').addEventListener('submit', (e) => { e.preventDefault(); submit(data); });
-    }
-
-    function collectAnswers() {
-      const form = document.getElementById('hr-form');
-      const fd = new FormData(form);
-      const single = (k) => fd.get(k) || '';
-      const areas = fd.getAll('areas');
-      return {
-        floor_area: single('floor_area'),
-        floors: single('floors'),
-        areas: areas,
-        frequency: single('frequency'),
-        contract_status: single('contract_status'),
-        current_cost: single('current_cost'),
-        work_time: single('work_time'),
-        occurrence: single('occurrence'),
-        haccp: single('haccp'),
-        building_age: single('building_age'),
-        free_text: single('free_text'),
-      };
-    }
-
-    function restore(saved) {
-      Object.keys(saved).forEach((k) => {
-        const v = saved[k];
-        if (k === 'areas' && Array.isArray(v)) {
-          v.forEach((val) => {
-            const cb = document.querySelector('input[name="areas"][value="'+CSS.escape(val)+'"]');
-            if (cb) cb.checked = true;
-          });
-        } else if (k === 'free_text') {
-          const ta = document.getElementById('hr-free'); if (ta) ta.value = v;
-        } else if (typeof v === 'string' && v) {
-          const r = document.querySelector('input[name="'+k+'"][value="'+CSS.escape(v)+'"]');
-          if (r) r.checked = true;
-        }
-      });
-    }
-
-    function load(key){ try { const r = localStorage.getItem(key); if (r) return JSON.parse(r); } catch(e){} return {}; }
-    function persist(key){ try { localStorage.setItem(key, JSON.stringify(collectAnswers())); } catch(e){} }
-
-    function updateHighlights() {
-      document.querySelectorAll('.hr-opt').forEach((label) => {
-        const inp = label.querySelector('input');
-        label.classList.toggle('is-checked', inp && inp.checked);
-      });
-    }
-
-    async function submit(data) {
-      const $ = (id) => document.getElementById(id);
-      const honey = document.querySelector('.hr-honeypot');
-      if (honey && honey.value) return;
-      const form = $('hr-form');
-      if (!form.checkValidity()) { form.reportValidity(); return; }
-      const ans = collectAnswers();
-      if (ans.areas.length === 0) { showError('「管理したい場所」を1つ以上選択してください'); return; }
-
-      const btn = $('hr-submit');
-      const orig = btn.textContent;
-      btn.disabled = true; btn.textContent = '送信中...';
-      $('hr-error').hidden = true;
-
-      const payload = {
-        request_id: data.id,
-        service: data.service,
-        facility_type: data.facilityType || '',
-        prefecture: data.prefecture || '',
-        requester_name: (data.requester && data.requester.name) || '',
-        requester_email: (data.requester && data.requester.email) || '',
-        requester_tel: (data.requester && data.requester.tel) || '',
-        answers: ans,
-      };
-
-      try {
-        const resp = await fetch('/api/hearing', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
-        const result = await resp.json().catch(() => ({ ok: resp.ok }));
-        if (!result.ok) throw new Error(result.error || '送信に失敗しました');
-        // 送信済みフラグに置き換え（再オープン時は古い選択を残さず完了画面を表示）
-        try { localStorage.setItem('ls_hearing_' + data.id, JSON.stringify({ submitted: true, ts: Date.now() })); } catch(e) {}
-        $('hr-form').hidden = true;
-        $('hr-done').hidden = false;
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } catch (err) {
-        btn.disabled = false; btn.textContent = orig;
-        showError(err.message || '送信中にエラーが発生しました。お手数ですが support@local-support.jp までご連絡ください');
-      }
-    }
-
-    function showError(msg){ const el = document.getElementById('hr-error'); el.textContent = msg; el.hidden = false; }
-  </script>
-
-  <style is:global>
-    .hr-section { padding: 32px 0 64px; background: #f8fafc; min-height: 100vh; }
-    .hr-empty { max-width: 720px; margin: 60px auto; padding: 40px 32px; background: #fff; border: 1px solid #e5e7eb; border-radius: 14px; text-align: center; line-height: 1.8; }
-    .hr-empty h1 { font-size: 1.4rem; font-weight: 800; margin: 0 0 16px; color: #1f2937; }
-    .hr-empty p { color: #4b5563; }
-
-    .hr-main { max-width: 760px; margin: 0 auto; }
-    .hr-header { background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; padding: 28px 32px; margin-bottom: 20px; }
-    .hr-eyebrow { display: inline-block; font-size: 0.78rem; font-weight: 800; color: #1d4ed8; background: #eff6ff; padding: 4px 12px; border-radius: 999px; margin: 0 0 12px; }
-    .hr-header h1 { font-size: 1.4rem; font-weight: 900; margin: 0 0 12px; color: #1f2937; }
-    .hr-lead { font-size: 0.92rem; color: #374151; line-height: 1.8; margin: 0 0 18px; }
-    .hr-lead strong { color: #1d4ed8; }
-    .hr-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 0; padding: 16px; background: #f9fafb; border-radius: 10px; }
-    .hr-meta > div { margin: 0; }
-    .hr-meta dt { font-size: 0.72rem; color: #6b7280; font-weight: 700; margin-bottom: 4px; }
-    .hr-meta dd { font-size: 0.88rem; color: #1f2937; font-weight: 600; margin: 0; }
-
-    .hr-group { background: #fff; border: 1px solid #e5e7eb; border-radius: 14px; padding: 22px 24px; margin-bottom: 16px; }
-    .hr-group--optional { border-style: dashed; background: #fcfcfd; }
-    .hr-group-title { font-size: 0.92rem; font-weight: 800; color: #1d4ed8; margin: 0 0 16px; padding-bottom: 10px; border-bottom: 2px solid #eff6ff; }
-    .hr-group--optional .hr-group-title { color: #6b7280; border-bottom-color: #f3f4f6; }
-
-    .hr-q { border: none; margin: 0 0 22px; padding: 0; }
-    .hr-q:last-child { margin-bottom: 0; }
-    .hr-q legend { font-size: 0.95rem; font-weight: 700; color: #1f2937; margin-bottom: 10px; padding: 0; line-height: 1.5; }
-    .hr-req { display: inline-block; font-size: 0.68rem; font-weight: 800; color: #dc2626; background: #fef2f2; padding: 2px 7px; border-radius: 4px; margin-left: 4px; vertical-align: middle; }
-    .hr-sub-q { font-size: 0.88rem; font-weight: 700; color: #374151; margin: 14px 0 8px; }
-    .hr-conditional { margin-top: 8px; padding: 14px; background: #f0f9ff; border-radius: 10px; }
-
-    .hr-options { display: flex; flex-wrap: wrap; gap: 8px; }
-    .hr-opt { display: inline-flex; align-items: center; gap: 7px; padding: 9px 14px; border: 1.5px solid #e5e7eb; border-radius: 10px; font-size: 0.86rem; cursor: pointer; transition: border-color .15s, background .15s; margin: 0; background: #fff; }
-    .hr-opt:hover { border-color: #93c5fd; }
-    .hr-opt.is-checked { border-color: #1d4ed8; background: #eff6ff; font-weight: 700; }
-    .hr-opt input { width: 16px; height: 16px; accent-color: #1d4ed8; flex-shrink: 0; }
-
-    .hr-form textarea { width: 100%; padding: 12px 14px; border: 1.5px solid #e5e7eb; border-radius: 10px; font-size: 0.95rem; font-family: inherit; box-sizing: border-box; resize: vertical; }
-    .hr-honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; }
-
-    .hr-submit { display: block; width: 100%; background: #1d4ed8; color: #fff; border: none; border-radius: 12px; padding: 16px; font-size: 1rem; font-weight: 900; cursor: pointer; margin-top: 4px; transition: background .15s; }
-    .hr-submit:hover:not(:disabled) { background: #1e3a8a; }
-    .hr-submit:disabled { background: #cbd5e1; cursor: not-allowed; }
-    .hr-submit-note { font-size: 0.75rem; color: #6b7280; text-align: center; margin: 10px 0 0; line-height: 1.6; }
-    .hr-error { color: #dc2626; font-size: 0.85rem; text-align: center; margin: 12px 0 0; padding: 10px; background: #fef2f2; border-radius: 8px; }
-
-    .hr-done { background: #fff; border: 2px solid #059669; border-radius: 16px; padding: 40px 32px; text-align: center; }
-    .hr-done-icon { width: 64px; height: 64px; margin: 0 auto 16px; background: #059669; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 900; }
-    .hr-done h2 { font-size: 1.3rem; font-weight: 800; color: #065f46; margin: 0 0 12px; }
-    .hr-done p { color: #374151; line-height: 1.8; margin: 0 0 8px; }
-    .hr-done-note { font-size: 0.85rem; color: #6b7280; margin-top: 16px; }
-
-    @media (max-width: 600px) {
-      .hr-header { padding: 20px; }
-      .hr-group { padding: 18px 16px; }
-      .hr-opt { font-size: 0.82rem; padding: 8px 12px; }
-    }
-  </style>
+  <script is:inline src="/js/hearing.js"></script>
 </BaseLayout>
