@@ -46,7 +46,7 @@ n=1だが実需要シグナルは数値より重い。受水槽は CODEX が並�
 | ✅2026-06-19 | 業務用害虫駆除の飲食店向け頻度・法的義務ガイド | 害虫駆除 飲食店 頻度 義務 | `/column/pest-control-inshokuten-hindo-gimu/` |
 | ✅2026-06-19 | 倉庫・物流施設のIPM導入ガイド｜貿易会社・食品物流向け | 害虫駆除 倉庫 物流 IPM | `/column/pest-control-souko-butsuryu-ipm/` |
 | ✅2026-06-22 | PCO定期契約 vs スポット駆除の比較ガイド | PCO 定期契約 スポット 比較 | `/column/pest-control-teiki-spot-hikaku/` |
-| ⬜ | マンション管理組合の害虫駆除 費用・契約ガイド | 害虫駆除 マンション 管理組合 | 管理組合向け |
+| ✅2026-06-24 | マンション管理組合の害虫駆除 費用・契約ガイド | 害虫駆除 マンション 管理組合 | `/column/pest-control-mansion-kanri-kumiai/` |
 | ✅2026-06-21 | 福岡で害虫駆除業者を選ぶ完全ガイド | 害虫駆除 業者 福岡 | `/column/pest-control-gyosha-fukuoka/`（実CV福岡LP補強） |
 | ⬜ | ゴキブリ駆除 業務用 業者の選び方 | ゴキブリ駆除 業務用 業者 | 単体害虫KW |
 | ⬜ | ネズミ駆除 飲食店 緊急対応の費用相場 | ネズミ駆除 飲食店 緊急 | 緊急高CV |

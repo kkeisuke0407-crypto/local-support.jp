@@ -307,6 +307,13 @@ const data: ServiceData = {
 
   relatedColumns: [
     {
+      href: '/column/pest-control-mansion-kanri-kumiai/',
+      category: 'マンション管理',
+      title: 'マンション管理組合の害虫駆除｜費用・契約・業者選びの実務ガイド',
+      excerpt: '管理組合・賃貸オーナー向けに害虫駆除の法的根拠・費用相場・契約形態の選び方・業者選定実務を整理。共用部と専有部の責任分界、建築物衛生法の特定建築物要件、理事会承認の進め方まで。',
+      date: '2026-06-24',
+    },
+    {
       href: '/column/pest-control-teiki-spot-hikaku/',
       category: '契約形態',
       title: '害虫駆除の定期契約とスポット駆除を徹底比較｜PCOの契約形態の選び方',
