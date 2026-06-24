@@ -13,6 +13,15 @@
     if (raw) data = JSON.parse(decodeURIComponent(escape(b64uDecode(raw))));
   } catch (e) { console.error('[hearing] parse error', e); }
 
+  // ?reset=1 が付いている場合は localStorage を消してから通常表示へ
+  // URLからは reset=1 を取り除く（誤って再リセットされないように）
+  if (new URLSearchParams(location.search).get('reset') === '1') {
+    if (data && data.id) {
+      try { localStorage.removeItem('ls_hearing_' + data.id); } catch(e) {}
+    }
+    history.replaceState(null, '', location.pathname + location.hash);
+  }
+
   if (!data || !data.id) {
     $('hr-empty').hidden = false;
     $('hr-main').hidden = true;

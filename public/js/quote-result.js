@@ -22,6 +22,14 @@
     console.error('[quote-result] hash parse error', e);
   }
 
+  // ?reset=1 が付いている場合は localStorage を消してから通常表示へ
+  if (new URLSearchParams(location.search).get('reset') === '1') {
+    if (data && data.id) {
+      try { localStorage.removeItem('ls_quote_result_' + data.id); } catch(e) {}
+    }
+    history.replaceState(null, '', location.pathname + location.hash);
+  }
+
   if (!data || !data.id || !Array.isArray(data.vendors) || data.vendors.length === 0) {
     empty.hidden = false;
     main.hidden = true;
