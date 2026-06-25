@@ -307,6 +307,13 @@ const data: ServiceData = {
 
   relatedColumns: [
     {
+      href: '/column/pest-control-gokiburi-gyosha/',
+      category: '業者選び',
+      title: '業務用ゴキブリ駆除の業者選び完全ガイド｜飲食店・食品工場・オフィスの比較ポイント',
+      excerpt: '登録確認・IPMアプローチ・HACCP記録対応の3点を核心に、業者選定7項目・費用相場・見積もり時の質問リストを実務目線で解説。',
+      date: '2026-06-25',
+    },
+    {
       href: '/column/pest-control-mansion-kanri-kumiai/',
       category: 'マンション管理',
       title: 'マンション管理組合の害虫駆除｜費用・契約・業者選びの実務ガイド',
