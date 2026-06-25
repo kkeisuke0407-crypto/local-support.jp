@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/pest-control-gokiburi-gyosha/',
+    category: '害虫駆除',
+    title: '業務用ゴキブリ駆除の業者選び完全ガイド｜飲食店・食品工場・オフィスの比較ポイント',
+    excerpt: '飲食店・食品工場・ホテル・オフィスの業務用ゴキブリ駆除（PCO）業者を選ぶ7つのチェックポイントを解説。登録番号の確認方法、IPMアプローチ、費用相場、スポット駆除と定期契約の違い、見積もり時に必ず聞くべき質問まで実務目線で整理。',
+    date: '2026-06-25',
+  },
+  {
     href: '/column/pest-control-mansion-kanri-kumiai/',
     category: '害虫駆除',
     title: 'マンション管理組合の害虫駆除｜費用・契約・業者選びの実務ガイド',
