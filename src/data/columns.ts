@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/pest-control-nezumi-inshokuten/',
+    category: '害虫駆除',
+    title: '飲食店のネズミ駆除｜緊急対応の費用相場・保健所対応・再発防止まで',
+    excerpt: '飲食店でネズミが出たときの初動手順（発見から48時間）、PCO業者への依頼費用相場（深夜割増含む）、保健所対応と営業停止リスク、侵入封鎖・食料管理・定期点検による再発防止の三本柱を実務目線で解説。',
+    date: '2026-06-26',
+  },
+  {
     href: '/column/pest-control-gokiburi-gyosha/',
     category: '害虫駆除',
     title: '業務用ゴキブリ駆除の業者選び完全ガイド｜飲食店・食品工場・オフィスの比較ポイント',
