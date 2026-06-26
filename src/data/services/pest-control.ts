@@ -307,6 +307,13 @@ const data: ServiceData = {
 
   relatedColumns: [
     {
+      href: '/column/pest-control-nezumi-inshokuten/',
+      category: '緊急対応',
+      title: '飲食店のネズミ駆除｜緊急対応の費用相場・保健所対応・再発防止まで',
+      excerpt: '初動手順・費用相場（深夜割増含む）・保健所対応・営業停止リスク・再発防止の三本柱を実務目線で整理。',
+      date: '2026-06-26',
+    },
+    {
       href: '/column/pest-control-gokiburi-gyosha/',
       category: '業者選び',
       title: '業務用ゴキブリ駆除の業者選び完全ガイド｜飲食店・食品工場・オフィスの比較ポイント',
