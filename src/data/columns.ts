@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/pest-control-tokojirami-shukuhaku/',
+    category: '害虫駆除',
+    title: 'トコジラミ駆除 宿泊施設の対応マニュアル｜発見時の初動・客室封鎖・費用相場',
+    excerpt: 'ホテル・旅館・民泊でトコジラミ（南京虫）が発見されたときの初動手順・客室隔離の進め方、加熱処理と薬剤処理の違い、費用相場、風評・賠償リスクと記録整備、インバウンド時代の再発防止策まで宿泊施設運営者向けに整理。',
+    date: '2026-06-27',
+  },
+  {
     href: '/column/pest-control-nezumi-inshokuten/',
     category: '害虫駆除',
     title: '飲食店のネズミ駆除｜緊急対応の費用相場・保健所対応・再発防止まで',
