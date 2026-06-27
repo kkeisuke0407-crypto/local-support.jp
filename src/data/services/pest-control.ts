@@ -307,6 +307,13 @@ const data: ServiceData = {
 
   relatedColumns: [
     {
+      href: '/column/pest-control-tokojirami-shukuhaku/',
+      category: '宿泊施設',
+      title: 'トコジラミ駆除 宿泊施設の対応マニュアル｜発見時の初動・客室封鎖・費用相場',
+      excerpt: 'ホテル・旅館・民泊向けに発見時の初動・客室隔離、加熱処理と薬剤処理の違い、費用相場、風評・賠償リスクと記録整備、再発防止策を整理。',
+      date: '2026-06-27',
+    },
+    {
       href: '/column/pest-control-nezumi-inshokuten/',
       category: '緊急対応',
       title: '飲食店のネズミ駆除｜緊急対応の費用相場・保健所対応・再発防止まで',
