@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/pest-control-shokuhin-koujou-boumushi/',
+    category: '害虫駆除',
+    title: '食品工場の防虫設計｜FSSC22000対応のPCO業者を選ぶポイント',
+    excerpt: 'FSSC22000・ISO22000・HACCPが求める防虫管理を解説。侵入防止・環境整備・検知の三層構造、ゾーニングと捕虫器配置の設計、モニタリングとトレンド分析、認証対応業者を選ぶ5つのポイント、費用相場まで品質管理担当者向けに整理。',
+    date: '2026-06-28',
+  },
+  {
     href: '/column/pest-control-tokojirami-shukuhaku/',
     category: '害虫駆除',
     title: 'トコジラミ駆除 宿泊施設の対応マニュアル｜発見時の初動・客室封鎖・費用相場',
