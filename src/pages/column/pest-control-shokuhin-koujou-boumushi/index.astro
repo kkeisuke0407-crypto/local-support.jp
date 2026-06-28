@@ -1,0 +1,441 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = '食品工場の防虫設計｜FSSC22000対応のPCO業者を選ぶポイント';
+const description = '食品工場の防虫設計（ペストコントロール）を解説。FSSC22000・ISO22000・HACCPが求める防虫管理、ゾーニング・捕虫器配置・モニタリングの設計、防虫対応業者の選び方、トレンド分析や是正の文書化まで、品質管理担当者向けに実務目線で整理。';
+const canonical = `${site.domain}/column/pest-control-shokuhin-koujou-boumushi/`;
+const published = '2026-06-28';
+const modified = '2026-06-28';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '食品工場の防虫設計ガイド', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 5900,
+  articleSection: '害虫駆除',
+  keywords: '食品工場,防虫設計,FSSC22000,ISO22000,HACCP,ペストコントロール,捕虫器,ゾーニング,モニタリング,業者選び',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-pest-control.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '害虫駆除' },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: 'FSSC22000では防虫管理にどんな対応が求められますか？', acceptedAnswer: { '@type': 'Answer', text: 'FSSC22000は前提条件プログラム（PRP）としてISO/TS22002-1を参照しており、その中で「有害生物の防除（ペストコントロール）」が要求事項として明確に位置づけられています。具体的には、ペスト管理プログラムの文書化、施設の防虫構造（侵入防止）、捕虫器・トラップの適切な配置とモニタリング、捕獲データの傾向分析（トレンド分析）、是正措置の記録、薬剤の管理などが求められます。認証審査では「計画通り運用され記録が整備されているか」が確認されます。' } },
+    { '@type': 'Question', name: '食品工場の防虫設計で最も重要な考え方は何ですか？', acceptedAnswer: { '@type': 'Answer', text: '「侵入させない（防虫構造）」「定着させない（環境整備）」「早期に検知する（モニタリング）」の三層構造が基本です。特に重要なのは、薬剤による駆除に頼るのではなく、まず物理的に虫を入れない建物構造（防虫設計）を整えることです。出入口のエアカーテン・シャッター、窓の網戸、排水口のトラップ、配管貫通部の封鎖、照明の誘虫対策（防虫灯・捕虫器の配置設計）などをゾーニングに応じて設計します。これがIPM（総合的有害生物管理）の根幹です。' } },
+    { '@type': 'Question', name: '捕虫器（ライトトラップ）はどのように配置すればよいですか？', acceptedAnswer: { '@type': 'Answer', text: '捕虫器は「外部から飛来する虫を製造エリアに入れる前に捕獲する」ことを目的に配置します。基本は、出入口付近の内側に設置して侵入する飛翔昆虫を捕獲しつつ、捕虫器の光が屋外に漏れて逆に虫を呼び込まないよう、外から見えない位置に配置します。製造ラインの直上は捕獲した虫が製品に落下するリスクがあるため避けます。設置高さ・間隔・清掃頻度も重要で、専門業者がゾーニングと飛翔昆虫の動線を踏まえて設計します。' } },
+    { '@type': 'Question', name: 'モニタリングデータのトレンド分析とは何ですか？', acceptedAnswer: { '@type': 'Answer', text: '捕虫器・トラップで捕獲された虫の種類・数を継続的に記録し、時系列・エリア別に傾向を分析することです。FSSC22000等の認証では、単に捕獲記録をつけるだけでなく「データから何が読み取れ、どう対策に活かしたか」が問われます。例えば特定エリアで飛翔昆虫が増加傾向にあれば、侵入経路の点検や環境整備の強化につなげます。閾値（アクションレベル）を設定し、それを超えたら是正措置を取る仕組みを文書化することが重要です。' } },
+    { '@type': 'Question', name: '防虫対応の業者を選ぶときのポイントは？', acceptedAnswer: { '@type': 'Answer', text: '①食品工場・FSSC22000/ISO22000認証施設での実績、②IPMに基づく防虫設計の提案力（薬剤散布だけでない）、③モニタリングデータの記録・トレンド分析・レポートの質、④認証審査に対応できる文書整備の支援力、⑤「建築物ねずみ昆虫等防除業」の登録、の5点を確認します。食品工場の防虫は単なる駆除作業ではなく品質保証システムの一部であるため、認証の要求事項を理解した業者を選ぶことが不可欠です。' } },
+    { '@type': 'Question', name: '食品工場の防虫管理の費用相場はいくらですか？', acceptedAnswer: { '@type': 'Answer', text: '工場の規模・ゾーニングの複雑さ・捕虫器の設置数・訪問頻度によって大きく変わります。中規模の食品工場で月次のモニタリング・トレンド分析・レポートを含む定期管理契約で月額50,000〜200,000円程度が一つの目安です。大規模工場や複数棟の場合はこれを超えます。初期の防虫構造の改修工事（網戸・エアカーテン・封鎖工事など）は別途見積もりとなり、規模により数十万〜数百万円規模になることもあります。' } },
+    { '@type': 'Question', name: '異物混入として虫が見つかった場合、どう対応すべきですか？', acceptedAnswer: { '@type': 'Answer', text: '製品への虫の異物混入が判明した場合は、HACCP・FSSC22000の手順に従い、①該当ロットの隔離・出荷停止の判断、②混入経路の調査（どの工程で・どの種類の虫が）、③根本原因の特定と是正措置、④記録の整備、を行います。捕虫器のモニタリングデータや防虫業者の記録が原因究明の重要な手がかりになります。再発防止策を文書化し、必要に応じて防虫設計の見直しにつなげます。日頃からモニタリング体制を整えておくことが、異物混入時の迅速な原因究明に直結します。' } },
+  ],
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-pest-control.png` },
+});
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  ogImage={`${site.domain}/og-pest-control.png`}
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>食品工場の防虫設計ガイド</span>
+        </nav>
+        <span class="cl-cat">害虫駆除</span>
+        <h1 class="cl-title">食品工場の防虫設計｜FSSC22000対応のPCO業者を選ぶポイント</h1>
+        <p class="cl-lead">食品工場の防虫は、単なる「虫の駆除」ではなく<strong>品質保証システムの一部</strong>です。FSSC22000・ISO22000・HACCPは、薬剤散布ではなく「侵入させない設計」と「データに基づく管理」を求めます。本記事では認証が要求する防虫管理の中身、ゾーニング・捕虫器配置・モニタリングの設計、そして認証対応できるPCO業者の選び方を、品質管理担当者向けに整理します。※2026年6月時点の情報をもとに執筆。</p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年6月28日</time>
+          <span>最終更新：2026年6月28日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 食品工場の防虫管理でまず押さえるべきことは？</p>
+        <p class="cl-qa-a">A. <strong>①「侵入させない（防虫構造）」「定着させない（環境整備）」「早期に検知する（モニタリング）」の三層構造、②捕獲データのトレンド分析と是正措置の文書化、③FSSC22000/ISO22000の要求事項を理解した業者の選定</strong>の3点。食品工場の防虫は薬剤駆除ではなく品質保証システムの一部であり、認証審査では「計画通り運用され記録が整備されているか」が問われる。IPM（総合的有害生物管理）の考え方が根幹。</p>
+        <p class="cl-qa-src">※FSSC22000（ISO/TS22002-1のペストコントロール要求）・食品衛生法（HACCP制度化）に基づく</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="pest-control" serviceName="害虫駆除" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#standard">FSSC22000・ISO22000が求める防虫管理</a></li>
+          <li><a href="#three">防虫設計の三層構造｜侵入防止・環境整備・検知</a></li>
+          <li><a href="#zoning">ゾーニングと捕虫器配置の設計</a></li>
+          <li><a href="#monitoring">モニタリングとトレンド分析の実務</a></li>
+          <li><a href="#gyosha">FSSC22000対応業者を選ぶ5つのポイント</a></li>
+          <li><a href="#cost">費用相場と契約の考え方</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <h2>3行サマリ</h2>
+        <div class="cl-callout">
+          <ul>
+            <li><strong>認証が求めるのは「設計とデータ」</strong>：FSSC22000はISO/TS22002-1を通じてペストコントロールを要求事項に明記。文書化されたペスト管理プログラム・防虫構造・モニタリング・トレンド分析・是正措置の記録が必須</li>
+            <li><strong>防虫設計の核心は三層構造</strong>：侵入させない（防虫構造）→定着させない（環境整備）→早期に検知する（モニタリング）。薬剤駆除は最後の手段であり、IPMの考え方が根幹</li>
+            <li><strong>業者選びは認証理解が前提</strong>：食品工場・認証施設での実績、IPM提案力、トレンド分析を含むレポートの質、文書整備の支援力、防除業の登録の5点を確認。単なる駆除業者では認証対応は難しい</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="standard" class="cl-section">
+        <h2>FSSC22000・ISO22000が求める防虫管理</h2>
+        <p>食品安全の国際認証は、防虫管理を「やっていればよい」ではなく「設計され、運用され、記録され、改善される」一連のシステムとして求めます。それぞれの規格の関係を整理します。</p>
+
+        <h3>規格の関係性</h3>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>食品安全規格と防虫管理の位置づけ</caption>
+            <thead><tr><th>規格</th><th>概要</th><th>防虫管理の扱い</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">HACCP（食品衛生法）</th><td>2021年6月に制度化。原則すべての食品事業者が対象</td><td>一般衛生管理の「そ族・昆虫の防除」として実施・記録が必要</td></tr>
+              <tr><th scope="row">ISO22000</th><td>食品安全マネジメントシステムの国際規格</td><td>前提条件プログラム（PRP）の一つとして防虫管理を要求</td></tr>
+              <tr><th scope="row">ISO/TS22002-1</th><td>食品製造業向けPRPの具体的要求事項</td><td>「有害生物の防除（ペストコントロール）」を独立した要求項目として規定</td></tr>
+              <tr><th scope="row">FSSC22000</th><td>ISO22000＋ISO/TS22002-1＋追加要求。GFSI承認スキーム</td><td>ISO/TS22002-1のペストコントロール要求を含む。審査で重点的に確認される</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>具体的に求められる要素</h3>
+        <p>FSSC22000の審査で防虫管理について確認される主な要素は以下の通りです。</p>
+        <ul>
+          <li><strong>文書化されたペスト管理プログラム</strong>：誰が・何を・どの頻度で実施するかの計画</li>
+          <li><strong>防虫構造（侵入防止措置）</strong>：建物の防虫設計が機能しているか</li>
+          <li><strong>捕虫器・トラップの配置とマップ</strong>：設置位置の図面・管理番号</li>
+          <li><strong>モニタリングの実施と記録</strong>：定期点検・捕獲データの記録</li>
+          <li><strong>トレンド分析</strong>：捕獲データの傾向分析と評価</li>
+          <li><strong>アクションレベルと是正措置</strong>：閾値を超えた場合の対応の文書化</li>
+          <li><strong>使用薬剤の管理</strong>：薬剤リスト・SDS・使用記録・保管管理</li>
+          <li><strong>業者の力量</strong>：委託業者の資格・力量の評価</li>
+        </ul>
+
+        <div class="cl-callout">
+          <p><strong>「記録があること」と「機能していること」は別</strong><br/>
+          認証審査でよくある指摘は、「捕虫器の記録はあるが、データが分析されておらず対策に活かされていない」というものです。FSSC22000はPDCA（計画・実行・評価・改善）を求めるため、捕獲データを集めるだけでなく、傾向を読み取り是正につなげるサイクルが運用されていることが重要です。この点で、トレンド分析とレポートの質が高い業者を選ぶことが認証維持に直結します。</p>
+        </div>
+      </section>
+
+      <section id="three" class="cl-section">
+        <h2>防虫設計の三層構造｜侵入防止・環境整備・検知</h2>
+        <p>食品工場の防虫は、薬剤に頼らず<strong>「そもそも虫を入れない・住まわせない・早く見つける」</strong>という三層構造で設計します。これはIPM（総合的有害生物管理）の中核的な考え方です。</p>
+
+        <h3>第1層：侵入させない（防虫構造）</h3>
+        <p>最も重要かつ費用対効果が高いのが、物理的に虫を入れない建物構造です。</p>
+        <ul>
+          <li><strong>出入口対策</strong>：エアカーテン、高速シャッター、二重扉、ドアの隙間封鎖（防虫ブラシ）</li>
+          <li><strong>窓・開口部</strong>：網戸（目の細かいもの）、開閉ルールの徹底</li>
+          <li><strong>排水・配管</strong>：排水口のトラップ・防虫目皿、配管貫通部の封鎖</li>
+          <li><strong>照明・誘虫対策</strong>：屋外照明を防虫灯（誘虫性の低い波長）に、窓から光が漏れない設計</li>
+          <li><strong>外周環境</strong>：建物周囲に雑草・水たまり・ゴミを置かない（虫の発生源を断つ）</li>
+        </ul>
+
+        <h3>第2層：定着させない（環境整備）</h3>
+        <p>侵入した虫が繁殖・定着できない環境を維持します。</p>
+        <ul>
+          <li><strong>清掃の徹底</strong>：食品残渣・粉塵・こぼれた原料を残さない。清掃しやすい構造・什器配置</li>
+          <li><strong>整理整頓（5S）</strong>：段ボール・パレットの放置を避ける（隠れ場所・産卵場所になる）</li>
+          <li><strong>原材料・廃棄物管理</strong>：原料の検品（搬入時の虫の持ち込みチェック）、廃棄物の密閉・定時回収</li>
+          <li><strong>湿気・水分管理</strong>：チョウバエ等は湿った有機物で繁殖するため、水回りの管理を徹底</li>
+        </ul>
+
+        <h3>第3層：早期に検知する（モニタリング）</h3>
+        <p>侵入・発生を早期に発見する仕組みです。</p>
+        <ul>
+          <li><strong>捕虫器（ライトトラップ）</strong>：飛翔昆虫を捕獲・計数</li>
+          <li><strong>粘着トラップ・フェロモントラップ</strong>：歩行性害虫・貯穀害虫のモニタリング</li>
+          <li><strong>毒餌ステーション・トラップ</strong>：ねずみのモニタリング（建物外周〜内部）</li>
+          <li><strong>定期目視点検</strong>：従業員の日常点検と業者の専門点検</li>
+        </ul>
+
+        <div class="cl-callout cl-callout--warn">
+          <p class="cl-callout-h">⚠ 薬剤散布に依存する設計は審査で評価されない</p>
+          <p>「定期的に薬剤を散布しているから大丈夫」という管理は、食品工場の防虫としては不十分です。製造エリアでの無計画な薬剤散布は食品汚染リスクを生むため、むしろ嫌われます。薬剤はモニタリングで発生を確認した箇所にピンポイントで、養生を徹底して使うのが原則。設計の重点は第1層・第2層に置くべきです。</p>
+        </div>
+      </section>
+
+      <section id="zoning" class="cl-section">
+        <h2>ゾーニングと捕虫器配置の設計</h2>
+        <p>食品工場では、清浄度に応じて区域（ゾーン）を分け、ゾーンごとに防虫レベルを設計します。これを<strong>ゾーニング</strong>と呼びます。</p>
+
+        <h3>ゾーニングの基本的な考え方</h3>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>清浄度ゾーニングと防虫管理レベル（一般的な考え方）</caption>
+            <thead><tr><th>ゾーン区分</th><th>例</th><th>防虫管理の重点</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">汚染区域（外部寄り）</th><td>外周・搬入口・廃棄物置場・前室</td><td>侵入を水際で食い止める。捕虫器・トラップを集中配置。ねずみの外周管理</td></tr>
+              <tr><th scope="row">準清潔区域</th><td>原料保管・包装室・通路</td><td>侵入防止構造の維持、モニタリングによる傾向把握</td></tr>
+              <tr><th scope="row">清潔区域（製造の中核）</th><td>調合・充填・盛付などの製造エリア</td><td>虫の存在ゼロを目指す。捕虫器は製品落下リスクを避けて配置、薬剤は極力使わない</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>捕虫器（ライトトラップ）配置の原則</h3>
+        <p>捕虫器は「設置すればよい」のではなく、配置設計が効果を左右します。</p>
+        <ul>
+          <li><strong>水際で捕獲する</strong>：出入口の内側に設置し、製造エリアに入る前の飛翔昆虫を捕獲する</li>
+          <li><strong>光を屋外に漏らさない</strong>：捕虫器の光が外から見えると逆に虫を呼び込む。外部開口部から見えない位置に配置</li>
+          <li><strong>製造ライン直上を避ける</strong>：捕獲した虫が製品に落下するリスクを避け、ラインから離れた壁面等に設置</li>
+          <li><strong>設置高さ・間隔の最適化</strong>：飛翔昆虫の動線・高さを踏まえて設計（専門業者の知見が必要）</li>
+          <li><strong>定期清掃・ランプ交換</strong>：捕獲虫の堆積は新たな虫の発生源になる。ランプは誘虫力が落ちる前に交換</li>
+        </ul>
+
+        <p>捕虫器の管理番号・設置位置を図面（トラップマップ）に落とし込み、各トラップの捕獲データを管理することがFSSC22000対応の基本です。</p>
+      </section>
+
+      <section id="monitoring" class="cl-section">
+        <h2>モニタリングとトレンド分析の実務</h2>
+        <p>FSSC22000対応で最も差がつくのが、モニタリングデータの活用です。記録を取るだけでなく「分析して改善につなげる」サイクルが審査で評価されます。</p>
+
+        <h3>モニタリングの基本サイクル</h3>
+        <ol>
+          <li><strong>定点観測</strong>：捕虫器・トラップごとに定期的に捕獲数・種類を記録</li>
+          <li><strong>データ集計</strong>：エリア別・時系列・虫種別に集計</li>
+          <li><strong>トレンド分析</strong>：増減傾向・季節変動・特定エリアの異常を読み取る</li>
+          <li><strong>アクションレベル判定</strong>：あらかじめ設定した閾値を超えたかを評価</li>
+          <li><strong>是正措置</strong>：閾値超過時に侵入経路点検・環境整備強化・必要時の駆除を実施</li>
+          <li><strong>記録・報告</strong>：分析結果・対応を文書化し、品質会議等で共有</li>
+        </ol>
+
+        <h3>アクションレベル（閾値）の設定</h3>
+        <p>「捕獲数がいくつになったら対策を取るか」という閾値（アクションレベル）をあらかじめ設定し、文書化しておくことが重要です。閾値は施設の状況・過去データをもとに設定し、超過時の対応手順とセットで定めます。これにより「異常を客観的に判断し、対応した記録」が残り、認証審査での説明が容易になります。</p>
+
+        <div class="cl-callout">
+          <p><strong>トレンド分析が異物混入対応の基盤になる</strong><br/>
+          製品への虫の異物混入が発生した際、日頃のモニタリングデータがあれば「いつ・どのエリアで・どの種類が増えていたか」を遡って原因究明できます。逆に記録がなければ原因特定は困難です。トレンド分析は認証要求であると同時に、異物混入というリスクへの実務的な備えでもあります。混入時の対応手順については後述のFAQも参照してください。</p>
+        </div>
+
+        <h3>業者レポートの確認ポイント</h3>
+        <p>委託業者から提出されるレポートが、以下を満たしているかを確認します。</p>
+        <ul>
+          <li>捕虫器・トラップごとの捕獲データ（種類・数）が記録されているか</li>
+          <li>時系列・エリア別のトレンドがグラフ等で可視化されているか</li>
+          <li>異常箇所の指摘と是正提案が含まれているか</li>
+          <li>前回提案の改善状況がフォローされているか</li>
+          <li>認証審査でそのまま提示できる体裁になっているか</li>
+        </ul>
+      </section>
+
+      <section id="gyosha" class="cl-section">
+        <h2>FSSC22000対応業者を選ぶ5つのポイント</h2>
+        <p>食品工場の防虫は、一般的な害虫駆除業者では認証対応が難しいことがあります。以下の5点を満たす業者を選定してください。</p>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>FSSC22000対応PCO業者の選定チェックリスト</caption>
+            <thead><tr><th>確認項目</th><th>何を見るか</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">① 認証施設での実績</th><td>食品工場・FSSC22000/ISO22000認証施設での防虫管理実績。同業種の対応経験</td></tr>
+              <tr><th scope="row">② IPM提案力</th><td>薬剤散布だけでなく、防虫構造・環境整備・モニタリングを含む設計提案ができるか</td></tr>
+              <tr><th scope="row">③ データ分析・レポート</th><td>トレンド分析・トラップマップ・是正提案を含む、審査で使えるレポートを提供できるか</td></tr>
+              <tr><th scope="row">④ 文書整備の支援力</th><td>ペスト管理プログラム・アクションレベル設定・是正記録など認証文書の整備を支援できるか</td></tr>
+              <tr><th scope="row">⑤ 登録・資格</th><td>「建築物ねずみ昆虫等防除業」の登録、ペストコントロール技術者等の有資格者在籍</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>審査前のサポート体制も確認する</h3>
+        <p>FSSC22000の更新審査・サーベイランス審査の前には、防虫管理に関する書類確認や現地点検のサポートが必要になることがあります。<strong>審査対応の経験が豊富な業者</strong>であれば、審査員が確認するポイントを踏まえた事前点検や、過去の指摘事項への対応支援が期待できます。契約前に「審査対応のサポート範囲」を確認しておくと安心です。</p>
+
+        <p>業者選定の基本的な考え方（登録確認・IPM対応・記録整備）は <a href="/column/pest-control-gokiburi-gyosha/">業務用ゴキブリ駆除の業者選び完全ガイド</a> でも解説しています。食品工場の場合はこれに加えて「認証の要求事項を理解しているか」が決定的に重要です。倉庫・物流施設のIPMについては <a href="/column/pest-control-souko-butsuryu-ipm/">倉庫・物流施設のIPM導入ガイド</a> も参考になります。</p>
+      </section>
+
+      <section id="cost" class="cl-section">
+        <h2>費用相場と契約の考え方</h2>
+        <p>食品工場の防虫管理費用は、工場規模・ゾーニングの複雑さ・捕虫器設置数・訪問頻度・レポートの内容によって大きく変わります。以下は<strong>2026年6月時点の市場相場の目安</strong>です。</p>
+
+        <h3>定期管理契約の費用目安</h3>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>食品工場の防虫定期管理契約 費用目安（月額）</caption>
+            <thead><tr><th>工場規模</th><th>月額目安</th><th>訪問頻度</th><th>内容</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">小規模工場（単一棟・小規模ライン）</th><td>30,000〜80,000円</td><td>月1〜2回</td><td>捕虫器管理・モニタリング・基本レポート</td></tr>
+              <tr><th scope="row">中規模工場</th><td>50,000〜200,000円</td><td>月2回以上</td><td>ゾーニング管理・トレンド分析・是正提案・認証文書支援</td></tr>
+              <tr><th scope="row">大規模・複数棟工場</th><td>200,000円〜</td><td>個別協議（週次対応も）</td><td>全棟管理・常駐的対応・詳細レポート・審査サポート</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>初期費用（防虫構造の改修）</h3>
+        <p>定期管理契約とは別に、防虫構造を整える初期工事が必要になることがあります。</p>
+        <ul>
+          <li><strong>エアカーテン・高速シャッター設置</strong>：出入口の侵入防止</li>
+          <li><strong>網戸・防虫ブラシ・隙間封鎖</strong>：開口部・扉の対策</li>
+          <li><strong>排水口トラップ・配管貫通部封鎖</strong>：侵入経路の遮断</li>
+          <li><strong>捕虫器の新規設置</strong>：ゾーニングに応じた台数</li>
+        </ul>
+        <p>これらは規模・内容により数十万〜数百万円規模になることもあります。最初に防虫診断を受け、優先順位をつけて段階的に整備するのが現実的です。</p>
+
+        <div class="cl-callout">
+          <p><strong>「最安値」より「認証を維持できるか」で選ぶ</strong><br/>
+          食品工場の防虫委託は、価格だけで選ぶと認証審査で指摘を受け、結果的に高くつくことがあります。トレンド分析・文書整備・審査サポートまで含めて、自社の品質保証システムを支えられる業者かどうかで判断することが、長期的なコスト最適化につながります。複数社から提案を受け、レポートのサンプルと支援範囲を比較してください。</p>
+        </div>
+
+        <p class="cl-note"><small>※費用相場の詳細は <a href="/column/pest-control-hiyo-sohba/">業務用害虫駆除（PCO）の費用相場ガイド</a> も参照ください。</small></p>
+      </section>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          <div class="cl-faq-item">
+            <dt>FSSC22000では防虫管理にどんな対応が求められますか？</dt>
+            <dd>FSSC22000は前提条件プログラム（PRP）としてISO/TS22002-1を参照し、その中で「有害生物の防除（ペストコントロール）」を要求事項として明記しています。文書化されたペスト管理プログラム、防虫構造、捕虫器・トラップの配置とモニタリング、捕獲データのトレンド分析、是正措置の記録、薬剤管理などが求められます。審査では「計画通り運用され記録が整備されているか」が確認されます。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>食品工場の防虫設計で最も重要な考え方は何ですか？</dt>
+            <dd>「侵入させない（防虫構造）」「定着させない（環境整備）」「早期に検知する（モニタリング）」の三層構造が基本です。薬剤駆除に頼るのではなく、まず物理的に虫を入れない建物構造を整えることが重要です。エアカーテン・網戸・排水トラップ・配管封鎖・誘虫対策などをゾーニングに応じて設計します。これがIPM（総合的有害生物管理）の根幹です。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>捕虫器（ライトトラップ）はどのように配置すればよいですか？</dt>
+            <dd>外部から飛来する虫を製造エリアに入れる前に捕獲することを目的に配置します。出入口の内側に設置しつつ、捕虫器の光が屋外に漏れて逆に虫を呼び込まないよう外から見えない位置に置きます。製造ライン直上は捕獲した虫の製品落下リスクがあるため避けます。設置高さ・間隔・清掃頻度も重要で、専門業者が飛翔昆虫の動線を踏まえて設計します。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>モニタリングデータのトレンド分析とは何ですか？</dt>
+            <dd>捕虫器・トラップで捕獲した虫の種類・数を継続記録し、時系列・エリア別に傾向を分析することです。認証では「データから何が読み取れ、どう対策に活かしたか」が問われます。特定エリアで飛翔昆虫が増加傾向なら侵入経路点検や環境整備強化につなげます。アクションレベル（閾値）を設定し、超過時に是正措置を取る仕組みを文書化することが重要です。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>防虫対応の業者を選ぶときのポイントは？</dt>
+            <dd>①食品工場・FSSC22000/ISO22000認証施設での実績、②IPMに基づく防虫設計の提案力、③モニタリングデータの記録・トレンド分析・レポートの質、④認証審査に対応できる文書整備の支援力、⑤「建築物ねずみ昆虫等防除業」の登録、の5点を確認します。食品工場の防虫は品質保証システムの一部であるため、認証の要求事項を理解した業者選定が不可欠です。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>食品工場の防虫管理の費用相場はいくらですか？</dt>
+            <dd>工場規模・ゾーニング・捕虫器設置数・訪問頻度で大きく変わります。中規模工場で月次のモニタリング・トレンド分析・レポートを含む定期管理契約で月額50,000〜200,000円程度が一つの目安です。大規模・複数棟はこれを超えます。防虫構造の初期改修工事（網戸・エアカーテン・封鎖など）は別途で、規模により数十万〜数百万円規模になることもあります。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>異物混入として虫が見つかった場合、どう対応すべきですか？</dt>
+            <dd>HACCP・FSSC22000の手順に従い、①該当ロットの隔離・出荷停止判断、②混入経路の調査（どの工程で・どの種類が）、③根本原因の特定と是正措置、④記録の整備、を行います。捕虫器のモニタリングデータや防虫業者の記録が原因究明の重要な手がかりになります。再発防止策を文書化し、必要に応じて防虫設計の見直しにつなげます。日頃のモニタリング体制が迅速な原因究明に直結します。</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="cl-section">
+        <h2>関連記事</h2>
+        <ul class="cl-related">
+          <li><a href="/column/pest-control-souko-butsuryu-ipm/">倉庫・物流施設のIPM導入ガイド｜貿易会社・食品物流の害虫リスクと業者選び</a></li>
+          <li><a href="/column/pest-control-haccp/">HACCP制度化で必須になった害虫対策ガイド｜飲食・食品事業者の防除記録の作り方</a></li>
+          <li><a href="/column/pest-control-gokiburi-gyosha/">業務用ゴキブリ駆除の業者選び完全ガイド｜飲食店・食品工場・オフィスの比較ポイント</a></li>
+          <li><a href="/column/pest-control-inshokuten-hindo-gimu/">飲食店の害虫駆除 頻度・法的義務 完全ガイド｜食品衛生法・HACCP・保健所立入の実務</a></li>
+          <li><a href="/column/pest-control-hiyo-sohba/">業務用害虫駆除（PCO）の費用相場｜業種別・契約形態別の料金ガイド</a></li>
+        </ul>
+      </section>
+
+      <ColumnCtaCard serviceSlug="pest-control" serviceName="害虫駆除" variant="bottom" />
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-note { font-size: .82rem; color: var(--gray-500); font-style: italic; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-callout li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+@media (max-width: 600px) { .cl-header { padding: 32px 0 28px; } .cl-body { padding: 28px 16px 48px; } .cl-section h2 { font-size: 1.15rem; } }
+.cl-quickanswer { background: #eef6ff; border: 1.5px solid #1a56db; border-radius: 10px; padding: 18px 22px; margin-bottom: 32px; }
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+</style>

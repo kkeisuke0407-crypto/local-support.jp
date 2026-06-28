@@ -307,6 +307,13 @@ const data: ServiceData = {
 
   relatedColumns: [
     {
+      href: '/column/pest-control-shokuhin-koujou-boumushi/',
+      category: '食品工場',
+      title: '食品工場の防虫設計｜FSSC22000対応のPCO業者を選ぶポイント',
+      excerpt: 'FSSC22000が求める防虫管理、三層構造の防虫設計、ゾーニングと捕虫器配置、モニタリングとトレンド分析、認証対応業者の選び方を整理。',
+      date: '2026-06-28',
+    },
+    {
       href: '/column/pest-control-tokojirami-shukuhaku/',
       category: '宿泊施設',
       title: 'トコジラミ駆除 宿泊施設の対応マニュアル｜発見時の初動・客室封鎖・費用相場',
