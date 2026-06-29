@@ -1,0 +1,438 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = '大阪で害虫駆除業者を選ぶ完全ガイド｜ミナミ・キタの飲食店向け 費用相場・資格・夜間対応';
+const description = '大阪で害虫駆除（PCO）業者を選ぶポイントを飲食店・施設管理者向けに解説。難波・道頓堀・梅田の飲食密集エリアの害虫事情、ゴキブリ・ネズミ・トコジラミ対策、建築物ねずみ昆虫等防除業の登録やペストコントロール協会会員の確認、IPM・HACCP対応、定期契約とスポットの違い、夜間対応、費用相場、業者選び7項目までまとめました。';
+const canonical = `${site.domain}/column/pest-control-gyosha-osaka/`;
+const published = '2026-06-29';
+const modified = '2026-06-29';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '大阪で害虫駆除業者を選ぶ完全ガイド', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 5300,
+  articleSection: '害虫駆除',
+  keywords: '害虫駆除 業者 大阪,大阪 PCO,難波 害虫駆除,道頓堀 ゴキブリ駆除,梅田 ネズミ駆除,飲食店 害虫駆除 大阪,HACCP,IPM',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-pest-control.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '害虫駆除', serviceType: '建築物の害虫防除（PCO）' },
+  citation: [
+    { '@type': 'Legislation', name: '食品衛生法（HACCP制度化）', url: 'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000098735.html' },
+    { '@type': 'Legislation', name: '建築物における衛生的環境の確保に関する法律（建築物衛生法）', url: 'https://laws.e-gov.go.jp/law/345AC0000000020' },
+  ],
+});
+
+const faqItems = [
+  {
+    q: '大阪で害虫駆除業者を選ぶとき、最初に確認すべきことは？',
+    a: 'まず「資格・登録」と「業態別の実績」です。特定建築物の防除を業として行うには建築物ねずみ昆虫等防除業の登録（都道府県知事登録）が目安になり、信頼性の面では公益社団法人日本ペストコントロール協会の会員かどうかも確認材料になります。あわせて、飲食店・食品工場・ホテルなど自社の業態での施工実績と、IPM（総合的有害生物管理）・HACCP対応の記録を出せるかを確認してください。',
+  },
+  {
+    q: 'ミナミ（難波・道頓堀）やキタ（梅田）の飲食店は害虫リスクが高いですか？',
+    a: '飲食店が高密度に集積するエリアは、建物間でゴキブリ・ネズミが移動しやすく、1店舗だけ対策しても再侵入しやすい傾向があります。難波・道頓堀・梅田のような繁華街は特にこの傾向が出やすいため、自店の清掃・侵入経路対策に加えて、定期モニタリングで早期に気づける体制が有効です。地下街・地下飲食フロアが多い点も大阪の特徴で、湿気と暗所がネズミ・チョウバエの温床になりやすい点に注意が必要です。',
+  },
+  {
+    q: '大阪の害虫駆除の費用相場はどのくらいですか？',
+    a: '業態・面積・契約形態で変わります。一般的には、飲食店の定期モニタリング契約で1回あたり数千円〜、スポットのゴキブリ駆除で1万円台〜、ネズミ駆除や広い施設はそれ以上が目安です。大阪は業者数が多く相見積もりが取りやすいエリアなので、同条件で複数社を比較すると適正価格を把握しやすくなります。費用の詳細は害虫駆除の費用相場の記事もあわせてご確認ください。',
+  },
+  {
+    q: '定期契約とスポット駆除はどちらがよいですか？',
+    a: '飲食店・食品施設など「発生させてはいけない」業態は、月1回〜2か月に1回の定期モニタリング契約が基本です。発生源を継続的に管理でき、HACCP上の記録も残せます。一方、家庭や一時的な発生はスポット駆除で足りることもあります。大阪の繁華街・地下飲食フロアの飲食店は、再侵入リスクが高いため定期契約が向いています。',
+  },
+  {
+    q: 'HACCP対応で害虫の記録が必要と言われました。大阪の業者は対応できますか？',
+    a: '2021年6月から原則すべての食品事業者にHACCPに沿った衛生管理が義務化され、一般衛生管理の項目として「そ族・昆虫対策」と防除記録が求められます。大阪でも、月次モニタリングの結果報告書・防除記録を発行できる業者を選べば、保健所立入時に提示できる記録が整います。見積時に「記録様式の発行有無」を確認してください。',
+  },
+  {
+    q: 'ミナミの飲食店ですが、営業後の夜間に作業してもらえますか？',
+    a: '難波・道頓堀のような深夜営業エリアでは、閉店後の夜間・早朝作業に対応する業者が多くあります。営業中の施工が難しい飲食店では、夜間対応の可否と追加料金の有無を事前に確認しておくと安心です。複数店舗を持つ場合は、まとめて夜間巡回してもらう契約でコストを抑えられることがあります。',
+  },
+  {
+    q: 'トコジラミ（南京虫）の相談も大阪の業者にできますか？',
+    a: 'はい。トコジラミはインバウンドが集中する宿泊施設を中心に相談が増えており、対応する業者があります。トコジラミは通常のゴキブリ・ネズミ駆除とは手法が異なり、加熱処理や薬剤抵抗性への対応など専門性が必要です。宿泊施設・ゲストハウス・寮などは、トコジラミの施工実績がある業者を選ぶことが重要です。',
+  },
+  {
+    q: '大阪市内だけでなく堺市や北摂・近隣の店舗もまとめて頼めますか？',
+    a: '大阪市内を拠点とする業者は、堺市・東大阪市・北摂エリアなど近隣への出張や、複数店舗の一括契約に対応するケースが多くあります。チェーン店・多店舗運営の場合は、本部一括契約で施工品質と記録管理を統一でき、コスト面でもスケールメリットが出やすくなります。対応エリアと拠点からの距離を見積時に確認してください。',
+  },
+];
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  spatialCoverage: { '@type': 'AdministrativeArea', name: '大阪府' },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-answer-grid', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-pest-control.png` },
+});
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified}
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  ogImage={`${site.domain}/og-pest-control.png`}
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a>
+          <span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a>
+          <span aria-hidden="true">›</span>
+          <span>大阪で害虫駆除業者を選ぶ完全ガイド</span>
+        </nav>
+        <span class="cl-cat">害虫駆除</span>
+        <h1 class="cl-title">大阪で害虫駆除業者を選ぶ完全ガイド｜ミナミ・キタの飲食店向け 費用相場・資格・夜間対応</h1>
+        <p class="cl-lead">
+          大阪は<strong>難波・道頓堀・梅田に飲食店が密集</strong>し、地下街・地下飲食フロアも多いため、害虫リスクが通年で高いエリアです。この記事では、大阪で害虫駆除（PCO）業者を選ぶときに見ておきたい点——<strong>資格・登録、IPM・HACCP対応、定期契約とスポットの違い、夜間対応、費用相場、業者選び7項目</strong>——を、飲食店オーナーや施設管理担当者向けにまとめます。※2026年6月時点の情報をもとに整理。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年6月29日</time>
+          <span>最終更新：2026年6月29日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 大阪で害虫駆除業者を選ぶコツは？</p>
+        <p class="cl-qa-a">A. <strong>①建築物ねずみ昆虫等防除業の登録／ペストコントロール協会会員、②IPM・HACCP対応（防除記録の発行）、③自社業態の実績、④定期かスポットか契約明確化、⑤ミナミ等の夜間対応</strong>を確認。大阪は業者が多く相見積もりが取りやすいので、同条件で複数社を比較するのが失敗しないコツです。</p>
+        <p class="cl-qa-src">※食品衛生法（HACCP）・建築物衛生法、害虫管理の一般的知見をもとに整理</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="pest-control" serviceName="害虫駆除" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#osaka">大阪の害虫事情（ミナミ・キタ・地下街）</a></li>
+          <li><a href="#check">業者選び7つのチェックポイント</a></li>
+          <li><a href="#cost">費用相場の考え方</a></li>
+          <li><a href="#teiki">定期契約 vs スポット駆除</a></li>
+          <li><a href="#haccp">HACCP・保健所対応と防除記録</a></li>
+          <li><a href="#area">対応エリア（大阪市・堺・北摂・近隣）</a></li>
+          <li><a href="#sources">参考にした公式情報</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>資格・登録＋業態実績＋IPM/HACCP対応</strong>が業者選びの土台。協会会員・防除記録の発行可否を確認</li>
+            <li><strong>繁華街・地下飲食フロアの飲食店は定期モニタリング契約が基本</strong>。再侵入リスクが高く、スポットだけでは追いつかない</li>
+            <li><strong>大阪は業者が多く相見積もりが取りやすい</strong>。同条件で複数社を比較し、夜間対応・記録発行まで揃えて判断</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="osaka" class="cl-section">
+        <h2>大阪の害虫事情（ミナミ・キタ・地下街）</h2>
+        <p>大阪は西日本最大の飲食集積地で、ミナミ（難波・道頓堀・心斎橋）とキタ（梅田）の二大繁華街を中心に飲食店が密集しています。害虫対策の観点では、次のような特徴があります。</p>
+        <ul>
+          <li><strong>飲食店の高密度集積</strong>：建物間でゴキブリ・ネズミが移動しやすく、1店舗だけ対策しても再侵入しやすい</li>
+          <li><strong>地下街・地下飲食フロアの多さ</strong>：梅田・難波などの地下空間は湿気・暗所が多く、ネズミ・チョウバエが定着しやすい</li>
+          <li><strong>温暖な気候</strong>：害虫の活動期間が長く、通年での管理が必要</li>
+          <li><strong>深夜営業エリア（ミナミ）</strong>：営業時間外の夜間・早朝作業が前提になりやすい</li>
+          <li><strong>インバウンド宿泊施設のトコジラミ相談</strong>：訪日客が集中するため、宿泊施設でのトコジラミ対応ニーズも増加傾向</li>
+        </ul>
+        <p>つまり大阪では、「発生してから駆除」よりも、<strong>定期モニタリングで早期に気づき、発生源と侵入経路を継続管理する</strong>体制が効果的です。特に地下フロアの店舗は、排水・配管経由の侵入に注意が必要です。</p>
+      </section>
+
+      <section id="check" class="cl-section">
+        <h2>業者選び7つのチェックポイント</h2>
+        <p>大阪で害虫駆除業者を比較するときに確認したい7項目です。</p>
+        <div class="cl-answer-grid">
+          <div>
+            <h3>① 資格・登録</h3>
+            <p>建築物ねずみ昆虫等防除業の登録（都道府県知事登録）が目安。特定建築物の防除では特に重要。</p>
+          </div>
+          <div>
+            <h3>② 協会会員かどうか</h3>
+            <p>公益社団法人日本ペストコントロール協会の会員は、技術基準・倫理面の一つの信頼材料になる。</p>
+          </div>
+          <div>
+            <h3>③ 業態別の実績</h3>
+            <p>飲食店・食品工場・ホテル・福祉施設など、自社と同じ業態での施工実績があるか。</p>
+          </div>
+          <div>
+            <h3>④ IPM・HACCP対応</h3>
+            <p>薬剤散布に頼りすぎないIPM、HACCP対応の防除記録・報告書を発行できるか。</p>
+          </div>
+          <div>
+            <h3>⑤ 契約形態の明確さ</h3>
+            <p>定期モニタリングかスポットか、回数・範囲・対象害虫・追加料金の条件が明確か。</p>
+          </div>
+          <div>
+            <h3>⑥ 夜間・緊急対応</h3>
+            <p>ミナミ等の飲食店は閉店後作業が前提。夜間対応・緊急出動の可否と料金を確認。</p>
+          </div>
+          <div>
+            <h3>⑦ 見積の透明性</h3>
+            <p>作業内容・薬剤・回数・記録発行が見積に明記され、相見積もりで比較できるか。</p>
+          </div>
+        </div>
+        <p>業者選びの一般的な考え方は<a href="/column/pest-control-gokiburi-gyosha/">業務用ゴキブリ駆除の業者選び完全ガイド</a>、協会会員と登録の違いは<a href="/column/pest-control-kyokai-kaiin/">ペストコントロール協会の会員業者を見分ける方法</a>もあわせてご覧ください。</p>
+      </section>
+
+      <section id="cost" class="cl-section">
+        <h2>費用相場の考え方</h2>
+        <p>害虫駆除の費用は、業態・面積・契約形態・対象害虫で変わります。大阪での目安として、次のように考えます。</p>
+        <ul>
+          <li><strong>飲食店の定期モニタリング契約</strong>：1回あたり数千円〜（面積・頻度で変動）</li>
+          <li><strong>スポットのゴキブリ駆除</strong>：1万円台〜</li>
+          <li><strong>ネズミ駆除・広い施設・トコジラミ</strong>：上記より高く、個別見積もり</li>
+        </ul>
+        <p>大阪は業者数が多く、<strong>相見積もりでコストを最適化しやすいエリア</strong>です。同じ条件（対象害虫・回数・記録発行の有無）で複数社を比較してください。業種別・契約形態別の詳しい相場は<a href="/column/pest-control-hiyo-sohba/">業務用害虫駆除（PCO）の費用相場ガイド</a>で解説しています。</p>
+      </section>
+
+      <section id="teiki" class="cl-section">
+        <h2>定期契約 vs スポット駆除</h2>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>定期モニタリング契約とスポット駆除の比較</caption>
+            <thead>
+              <tr><th scope="col">項目</th><th scope="col">定期モニタリング契約</th><th scope="col">スポット駆除</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">向くケース</th><td>飲食店・食品施設など発生を防ぎたい業態</td><td>家庭・一時的な発生</td></tr>
+              <tr><th scope="row">頻度</th><td>月1回〜2か月に1回など継続</td><td>発生時に都度</td></tr>
+              <tr><th scope="row">記録</th><td>防除記録・報告書が残る（HACCP対応）</td><td>都度の作業記録</td></tr>
+              <tr><th scope="row">再侵入対策</th><td>発生源・侵入経路を継続管理</td><td>その時の駆除が中心</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>難波・梅田のような飲食密集エリアや地下飲食フロアは再侵入リスクが高いため、飲食店・食品施設は<strong>定期モニタリング契約が基本</strong>です。HACCP対応の記録も継続的に残せます。定期とスポットの損益分岐などの詳細は<a href="/column/pest-control-teiki-spot-hikaku/">害虫駆除の定期契約とスポット駆除を徹底比較</a>をご覧ください。</p>
+      </section>
+
+      <section id="haccp" class="cl-section">
+        <h2>HACCP・保健所対応と防除記録</h2>
+        <p>2021年6月から、原則すべての食品事業者にHACCPに沿った衛生管理が義務化され、一般衛生管理の項目として「そ族・昆虫対策」と防除記録が求められます。</p>
+        <ul>
+          <li><strong>必要なもの</strong>：月次モニタリングの結果報告書、防除記録、使用薬剤の記録</li>
+          <li><strong>保健所立入時</strong>：これらの記録を提示できる状態にしておく</li>
+          <li><strong>業者選びの条件</strong>：記録様式を発行できる業者を選ぶ</li>
+        </ul>
+        <div class="cl-callout">
+          <h3 class="cl-callout-h">「駆除して終わり」ではなく「記録まで」</h3>
+          <p>HACCP対応では、害虫を駆除した事実だけでなく<strong>記録として残すこと</strong>が重要です。見積段階で「防除記録・報告書を発行できるか」を必ず確認してください。記録が出せる業者を選んでおくと、保健所立入や本部監査の際にスムーズです。飲食店の頻度・義務の全体像は<a href="/column/pest-control-inshokuten-hindo-gimu/">飲食店の害虫駆除 頻度・法的義務 完全ガイド</a>で解説しています。</p>
+        </div>
+      </section>
+
+      <section id="area" class="cl-section">
+        <h2>対応エリア（大阪市・堺・北摂・近隣）</h2>
+        <p>大阪市内（ミナミ・キタなど）を拠点とする業者は、堺市・東大阪市・北摂エリアや近隣府県への出張、複数店舗の一括契約に対応するケースが多くあります。</p>
+        <ul>
+          <li><strong>大阪市内</strong>：難波・道頓堀・心斎橋・梅田の飲食店、ホテル、商業施設、地下街テナント</li>
+          <li><strong>堺市・東大阪市・北摂</strong>：大阪市内業者の出張対応が可能なことが多い</li>
+          <li><strong>多店舗・チェーン</strong>：本部一括契約で施工品質・記録管理を統一</li>
+        </ul>
+        <p>大阪府内で害虫駆除業者を探すなら、対応エリア・拠点からの距離・夜間対応をまとめて確認できる一括見積もりが便利です。<a href="/pest-control/osaka/">大阪府の害虫駆除業者を一括比較</a>から、条件に合う業者を最大3社ご紹介します。</p>
+      </section>
+
+      <section id="sources" class="cl-section">
+        <h2>参考にした公式情報</h2>
+        <p>本記事は、食品衛生法（HACCP制度化）・建築物衛生法および害虫管理の一般的な知見をもとに、大阪の飲食店・施設管理の実務で使いやすい形に整理しています。登録・資格の要件は所管行政の案内も確認してください。</p>
+        <ul class="cl-source-list">
+          <li><a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000098735.html" target="_blank" rel="noopener">HACCPに沿った衛生管理の制度化｜厚生労働省</a></li>
+          <li><a href="https://laws.e-gov.go.jp/law/345AC0000000020" target="_blank" rel="noopener">建築物衛生法｜e-Gov法令検索</a></li>
+          <li><a href="https://www.pestcontrol.or.jp/" target="_blank" rel="noopener">公益社団法人 日本ペストコントロール協会</a></li>
+        </ul>
+      </section>
+
+      <div class="cl-cta">
+        <h2>大阪で害虫駆除業者をお探しなら</h2>
+        <p>建築物防除業の登録・HACCP対応の記録発行に対応する業者から<br/>最大3社の見積もりを完全無料・約1分で取得できます</p>
+        <a class="cta-btn-primary" href="/pest-control/osaka/">無料で一括見積もりを依頼する</a>
+      </div>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          {faqItems.map((item) => (
+            <div class="cl-faq-item">
+              <dt>{item.q}</dt>
+              <dd>{item.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別の害虫駆除業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/pest-control/osaka/">大阪府</a></li>
+          <li><a href="/pest-control/tokyo/">東京都</a></li>
+          <li><a href="/pest-control/fukuoka/">福岡県</a></li>
+          <li><a href="/pest-control/kanagawa/">神奈川県</a></li>
+          <li><a href="/pest-control/aichi/">愛知県</a></li>
+          <li><a href="/pest-control/saitama/">埼玉県</a></li>
+          <li><a href="/pest-control/hyogo/">兵庫県</a></li>
+          <li><a href="/pest-control/hokkaido/">北海道</a></li>
+          <li><a href="/pest-control/kyoto/">京都府</a></li>
+          <li><a href="/pest-control/chiba/">千葉県</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/pest-control/">全国47都道府県の対応業者を見る</a></p>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連サービス・コラム</h2>
+        <ul>
+          <li><a href="/pest-control/osaka/">大阪府の害虫駆除業者を一括見積比較</a></li>
+          <li><a href="/column/pest-control-gokiburi-gyosha/">業務用ゴキブリ駆除の業者選び完全ガイド</a></li>
+          <li><a href="/column/pest-control-nezumi-inshokuten/">飲食店のネズミ駆除｜緊急対応の費用相場・保健所対応・再発防止まで</a></li>
+          <li><a href="/column/pest-control-hiyo-sohba/">業務用害虫駆除（PCO）の費用相場ガイド</a></li>
+          <li><a href="/column/pest-control-kyokai-kaiin/">ペストコントロール協会の会員業者を見分ける方法</a></li>
+        </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#haccp">HACCP</a></li>
+          <li><a href="/glossary/#shokuhin-eisei-ho-haccp">食品衛生法（HACCP）</a></li>
+          <li><a href="/glossary/#ipm">IPM（総合的有害生物管理）</a></li>
+          <li><a href="/glossary/#kenchikubutsu-nezumi-konchu-bojogyo">建築物ねずみ昆虫等防除業</a></li>
+          <li><a href="/glossary/#biru-kan-ho">建築物衛生法</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集（49語）をすべて見る</a></p>
+      </aside>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header {
+  background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%);
+  color: #fff;
+  padding: 48px 0 40px;
+}
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul, .cl-callout--warn ul { padding-left: 18px; margin: 0; }
+.cl-callout li, .cl-callout--warn li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-answer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 20px 0 24px; }
+.cl-answer-grid > div { background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; padding: 18px 20px; box-shadow: 0 6px 18px rgba(15, 23, 42, .05); }
+.cl-answer-grid h3 { font-size: 1rem; color: var(--blue-dark); margin: 0 0 8px; }
+.cl-answer-grid p { margin: 0; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-source-list { padding-left: 22px; display: grid; gap: 8px; }
+.cl-source-list a { color: var(--blue); text-decoration: underline; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-glossary-block { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 24px; }
+.cl-glossary-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; }
+.cl-glossary-list { padding-left: 18px; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; }
+.cl-glossary-list a { color: var(--blue); text-decoration: underline; font-size: .88rem; }
+.cl-glossary-more { font-size: .85rem; margin: 12px 0 0; }
+.cl-glossary-more a { color: var(--blue); text-decoration: underline; }
+@media (max-width: 600px) {
+  .cl-header { padding: 32px 0 28px; }
+  .cl-body { padding: 28px 16px 48px; }
+  .cl-section h2 { font-size: 1.15rem; }
+  .cl-answer-grid { grid-template-columns: 1fr; }
+}
+
+.cl-quickanswer {
+  background: #eef6ff;
+  border: 1.5px solid #1a56db;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-bottom: 32px;
+}
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+</style>
