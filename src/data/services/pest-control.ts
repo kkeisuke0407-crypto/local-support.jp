@@ -307,6 +307,13 @@ const data: ServiceData = {
 
   relatedColumns: [
     {
+      href: '/column/pest-control-guide/',
+      category: '完全ガイド',
+      title: '業務用害虫駆除（PCO）完全ガイド｜法的義務・費用・業者選び・害虫別対策の総まとめ',
+      excerpt: '害虫駆除の法的義務・費用・契約・害虫別対策・業種別ガイド・業者選び・地域別ガイドを目的別に整理したハブ記事。まずここから。',
+      date: '2026-06-29',
+    },
+    {
       href: '/column/pest-control-gyosha-osaka/',
       category: '業者選び（大阪）',
       title: '大阪で害虫駆除業者を選ぶ完全ガイド｜ミナミ・キタの飲食店向け 費用相場・資格・夜間対応',

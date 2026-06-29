@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/pest-control-guide/',
+    category: '害虫駆除',
+    title: '業務用害虫駆除（PCO）完全ガイド｜法的義務・費用・業者選び・害虫別対策の総まとめ',
+    excerpt: '飲食店・食品工場・ホテル・マンション・倉庫の業務用害虫駆除（PCO）を体系的に整理したハブ記事。HACCP・建築物衛生法の法的義務、費用相場と契約形態、ゴキブリ・ネズミ・トコジラミの害虫別対策、業種別ガイド、業者選び、地域別ガイドへの入口をまとめました。',
+    date: '2026-06-29',
+  },
+  {
     href: '/column/pest-control-gyosha-osaka/',
     category: '害虫駆除',
     title: '大阪で害虫駆除業者を選ぶ完全ガイド｜ミナミ・キタの飲食店向け 費用相場・資格・夜間対応',
