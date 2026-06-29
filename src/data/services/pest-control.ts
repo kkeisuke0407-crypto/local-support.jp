@@ -307,6 +307,13 @@ const data: ServiceData = {
 
   relatedColumns: [
     {
+      href: '/column/pest-control-gyosha-osaka/',
+      category: '業者選び（大阪）',
+      title: '大阪で害虫駆除業者を選ぶ完全ガイド｜ミナミ・キタの飲食店向け 費用相場・資格・夜間対応',
+      excerpt: '難波・道頓堀・梅田の飲食密集エリアと地下飲食フロアの害虫事情、登録・協会会員の確認、IPM・HACCP対応、定期契約とスポット、夜間対応、費用相場、業者選び7項目を整理。',
+      date: '2026-06-29',
+    },
+    {
       href: '/column/pest-control-kyokai-kaiin/',
       category: '業者選び',
       title: 'ペストコントロール協会の会員業者を見分ける方法｜信頼できるPCO業者の確認ポイント',

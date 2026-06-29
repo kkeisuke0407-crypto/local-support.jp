@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/pest-control-gyosha-osaka/',
+    category: '害虫駆除',
+    title: '大阪で害虫駆除業者を選ぶ完全ガイド｜ミナミ・キタの飲食店向け 費用相場・資格・夜間対応',
+    excerpt: '大阪で害虫駆除（PCO）業者を選ぶポイントを解説。難波・道頓堀・梅田の飲食密集エリアと地下飲食フロアの害虫事情、建築物ねずみ昆虫等防除業の登録・協会会員の確認、IPM・HACCP対応の防除記録、定期契約とスポットの違い、夜間対応、費用相場、業者選び7項目まで。',
+    date: '2026-06-29',
+  },
+  {
     href: '/column/pest-control-kyokai-kaiin/',
     category: '害虫駆除',
     title: 'ペストコントロール協会の会員業者を見分ける方法｜信頼できるPCO業者の確認ポイント',
