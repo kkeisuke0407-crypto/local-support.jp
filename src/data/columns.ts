@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/pest-control-kyokai-kaiin/',
+    category: '害虫駆除',
+    title: 'ペストコントロール協会の会員業者を見分ける方法｜信頼できるPCO業者の確認ポイント',
+    excerpt: '日本ペストコントロール協会・都道府県協会の会員業者とは何かを解説。協会会員と「建築物ねずみ昆虫等防除業の登録」の違い、関連資格、会員かどうかの確認方法、会員業者を選ぶ利点と注意点、総合的な業者選びのチェックリストまで発注者目線で整理。',
+    date: '2026-06-29',
+  },
+  {
     href: '/column/pest-control-shokuhin-koujou-boumushi/',
     category: '害虫駆除',
     title: '食品工場の防虫設計｜FSSC22000対応のPCO業者を選ぶポイント',

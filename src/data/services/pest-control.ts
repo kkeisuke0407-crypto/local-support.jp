@@ -307,6 +307,13 @@ const data: ServiceData = {
 
   relatedColumns: [
     {
+      href: '/column/pest-control-kyokai-kaiin/',
+      category: '業者選び',
+      title: 'ペストコントロール協会の会員業者を見分ける方法｜信頼できるPCO業者の確認ポイント',
+      excerpt: '協会会員と「建築物ねずみ昆虫等防除業の登録」の違い、関連資格、会員の確認方法、会員業者を選ぶ利点と注意点を発注者目線で整理。',
+      date: '2026-06-29',
+    },
+    {
       href: '/column/pest-control-shokuhin-koujou-boumushi/',
       category: '食品工場',
       title: '食品工場の防虫設計｜FSSC22000対応のPCO業者を選ぶポイント',
