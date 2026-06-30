@@ -12,6 +12,12 @@ const description = 'お見積もり依頼を受け付けました。担当者�
   siteName={site.name}
   noindex
 >
+  <script is:inline>
+    if (new URLSearchParams(location.search).get('source') === 'contact' && typeof gtag === 'function') {
+      gtag('event', 'generate_lead', { value: 1, currency: 'JPY' });
+    }
+  </script>
+
   <section class="sd-section thanks-section">
     <div class="sd-container">
       <div class="thanks-card">
