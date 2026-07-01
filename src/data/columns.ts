@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/pest-control-horei-gimu/',
+    category: '害虫駆除',
+    title: '害虫駆除の法的義務ガイド｜建築物衛生法・食品衛生法(HACCP)の防除義務と罰則',
+    excerpt: '業務用害虫駆除（PCO）の法的義務を体系的に解説。特定建築物に6か月ごとの生息状況調査を課す建築物衛生法、食品事業者にそ族・昆虫対策を求める食品衛生法(HACCP)、建築物ねずみ昆虫等防除業の登録、違反時の罰則、5年間の記録保存義務まで施設管理担当者向けにまとめました。',
+    date: '2026-07-01',
+  },
+  {
     href: '/column/pest-control-guide/',
     category: '害虫駆除',
     title: '業務用害虫駆除（PCO）完全ガイド｜法的義務・費用・業者選び・害虫別対策の総まとめ',

@@ -307,6 +307,13 @@ const data: ServiceData = {
 
   relatedColumns: [
     {
+      href: '/column/pest-control-horei-gimu/',
+      category: '法令・義務',
+      title: '害虫駆除の法的義務ガイド｜建築物衛生法・食品衛生法(HACCP)の防除義務と罰則',
+      excerpt: '特定建築物に6か月ごとの生息調査を課す建築物衛生法、食品事業者にそ族・昆虫対策を求めるHACCP、防除業の登録、罰則、5年間の記録保存義務までを整理。',
+      date: '2026-07-01',
+    },
+    {
       href: '/column/pest-control-guide/',
       category: '完全ガイド',
       title: '業務用害虫駆除（PCO）完全ガイド｜法的義務・費用・業者選び・害虫別対策の総まとめ',
