@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/pest-control-gyosha-tokyo/',
+    category: '害虫駆除',
+    title: '東京で害虫駆除業者を選ぶ完全ガイド｜新宿・渋谷の飲食店向け 費用相場・資格・夜間対応',
+    excerpt: '東京で害虫駆除（PCO）業者を選ぶポイントを解説。新宿・渋谷・銀座・池袋の飲食密集エリアと雑居ビルの害虫事情、建築物ねずみ昆虫等防除業の登録・協会会員の確認、IPM・HACCP対応の防除記録、定期契約とスポットの違い、夜間対応、費用相場、業者選び7項目まで。',
+    date: '2026-07-05',
+  },
+  {
     href: '/column/pest-control-horei-gimu/',
     category: '害虫駆除',
     title: '害虫駆除の法的義務ガイド｜建築物衛生法・食品衛生法(HACCP)の防除義務と罰則',

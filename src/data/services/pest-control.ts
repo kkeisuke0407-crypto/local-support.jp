@@ -307,6 +307,13 @@ const data: ServiceData = {
 
   relatedColumns: [
     {
+      href: '/column/pest-control-gyosha-tokyo/',
+      category: '業者選び（東京）',
+      title: '東京で害虫駆除業者を選ぶ完全ガイド｜新宿・渋谷の飲食店向け 費用相場・資格・夜間対応',
+      excerpt: '新宿・渋谷・銀座・池袋の飲食密集エリアと雑居ビルの害虫事情、登録・協会会員の確認、IPM・HACCP対応、定期契約とスポット、夜間対応、費用相場、業者選び7項目を整理。',
+      date: '2026-07-05',
+    },
+    {
       href: '/column/pest-control-horei-gimu/',
       category: '法令・義務',
       title: '害虫駆除の法的義務ガイド｜建築物衛生法・食品衛生法(HACCP)の防除義務と罰則',
