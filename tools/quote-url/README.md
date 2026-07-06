@@ -20,10 +20,11 @@
 ## 使い方
 
 ```bash
-# 1) sample.json をコピー
-cp sample.json my-request.json
+# 1) template.json をコピー（ひな形。全比較項目つき）
+cp template.json my-request.json
 
 # 2) my-request.json を編集（業者情報・依頼者情報を入れる）
+#    ※依頼者メール/電話などPIIを含むため、このファイルはコミットしない
 
 # 3) URL生成
 node generate.mjs my-request.json
@@ -32,7 +33,25 @@ node generate.mjs my-request.json
 node generate.mjs my-request.json --domain=http://localhost:4321
 ```
 
-出力されたURLを依頼者にメールで送る。
+出力されたURLを依頼者にメールで送る。メール本文には長い生URLを貼らず、
+**「▼ お見積もり比較ページを開く」等のリンク（アンカー）にする**と体裁がよい。
+
+## 比較のために各社そろえて埋める項目チェックリスト
+
+比較ページ（`/quote-result/`）が表示するのは以下の項目。**依頼者が横並びで比較できるよう、全業者で同じ項目を埋める**（1社だけ空欄だと比較にならない）。値が未確定なら「現地調査後に提示」等と明記する。
+
+- [ ] `name` … 会社名＋拠点（実社名OK。ただし**電話・メール等の連絡先は書かない**＝選定後に運営が共有）
+- [ ] `company` … 会社紹介・強み（創業/実績規模/対応施設/認証/得意分野を2〜3文）
+- [ ] `estimatedPrice` … 概算見積（税抜/税込を明記）
+- [ ] `annualPrice` … 年額換算
+- [ ] `credentials[]` … 登録・資格・協会会員・記録発行可否
+- [ ] `experience` … 実績（業態・件数など）
+- [ ] `haccp` … HACCP対応可否・内容
+- [ ] `responseTime` … 対応スピード
+- [ ] `proposal` … 提案概要（初期費用・現地調査の要否/費用まで）
+- [ ] `highlights[]` … 要点タグ2〜3個
+
+雛形は `template.json`（全項目つき）。`sample.json` は記入例（架空3社）。
 
 ## データ仕様
 

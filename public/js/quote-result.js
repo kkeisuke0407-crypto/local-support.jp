@@ -84,6 +84,7 @@ function renderView(data) {
                 ${v.annualPrice ? `<div class="qr-price-line qr-price-line--sub"><span>年額換算</span><strong>${escapeHtml(v.annualPrice)}</strong></div>` : ''}
               </div>
             </div>
+            ${v.company ? `<p class="qr-vendor-company">${escapeHtml(v.company)}</p>` : ''}
             ${v.proposal ? `<p class="qr-vendor-proposal">${escapeHtml(v.proposal)}</p>` : ''}
             ${highlights ? `<div class="qr-vendor-tags">${highlights}</div>` : ''}
             ${creds ? `<ul class="qr-vendor-creds">${creds}</ul>` : ''}
