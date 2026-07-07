@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/pest-control-kaigo-fukushi/',
+    category: '害虫駆除',
+    title: '介護・福祉施設の害虫駆除ガイド｜入居者に配慮した衛生管理と業者選び',
+    excerpt: '特別養護老人ホーム・デイサービス・グループホームなど介護・福祉施設の害虫駆除を解説。高齢入居者・給食・24時間居住ゆえの感染症/食中毒リスク、薬剤散布に頼らない低毒性IPM、食品衛生法(HACCP)・運営基準との関係、入居者がいる中での安全な施工、業者選び7項目、費用相場まで。',
+    date: '2026-07-07',
+  },
+  {
     href: '/column/pest-control-gyosha-tokyo/',
     category: '害虫駆除',
     title: '東京で害虫駆除業者を選ぶ完全ガイド｜新宿・渋谷の飲食店向け 費用相場・資格・夜間対応',

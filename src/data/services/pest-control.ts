@@ -307,6 +307,13 @@ const data: ServiceData = {
 
   relatedColumns: [
     {
+      href: '/column/pest-control-kaigo-fukushi/',
+      category: '業種別（介護・福祉）',
+      title: '介護・福祉施設の害虫駆除ガイド｜入居者に配慮した衛生管理と業者選び',
+      excerpt: '高齢入居者・給食・24時間居住ゆえのリスク、薬剤散布に頼らない低毒性IPM、HACCP・運営基準との関係、入居者がいる中での安全な施工、業者選び7項目、費用相場を整理。',
+      date: '2026-07-07',
+    },
+    {
       href: '/column/pest-control-gyosha-tokyo/',
       category: '業者選び（東京）',
       title: '東京で害虫駆除業者を選ぶ完全ガイド｜新宿・渋谷の飲食店向け 費用相場・資格・夜間対応',
