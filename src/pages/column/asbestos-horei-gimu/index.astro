@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
-const title = 'アスベスト法令義務ガイド2026｜大気汚染防止法・石綿障害予防規則の要点と違反ペナルティ';
+const title = 'アスベスト法令義務ガイド｜大気汚染防止法・石綿障害予防規則の要点と違反ペナルティ';
 const description = '2022年4月の大気汚染防止法改正で報告義務化、2023年10月で有資格者必須に。アスベスト調査・除去を規制する大防法・石綿障害予防規則・建築物石綿含有建材調査者制度を施設管理担当者向けに整理。違反時の罰則・届出書類・労基署対応のポイントまで2026年最新版で解説します。';
 const canonical = `${site.domain}/column/asbestos-horei-gimu/`;
 const published = '2026-05-27';
@@ -32,12 +33,7 @@ const articleLd = JSON.stringify({
   articleSection: '法令・義務',
   keywords: 'アスベスト,石綿,大気汚染防止法,石綿障害予防規則,建築物石綿含有建材調査者,事前調査,法定義務,2026',
   author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
-  publisher: {
-    '@type': 'Organization',
-    name: site.org.legalName,
-    url: site.domain,
-    logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
-  },
+  publisher: { '@id': `${site.domain}/#organization` },
   image: { '@type': 'ImageObject', url: `${site.domain}/og-asbestos.png`, width: 1200, height: 630 },
   about: { '@type': 'Service', name: 'アスベスト調査・除去' },
   citation: [
@@ -56,16 +52,38 @@ const faqLd = JSON.stringify({
     { '@type': 'Question', name: '違反した場合の罰則は？', acceptedAnswer: { '@type': 'Answer', text: '大気汚染防止法違反では作業基準遵守違反で3か月以下の懲役または30万円以下の罰金、報告義務違反では30万円以下の罰金。石綿障害予防規則・労働安全衛生法違反では6か月以下の懲役または50万円以下の罰金が科される可能性があります。重大な飛散事故では業務上過失致傷罪・損害賠償責任に発展する例もあります。' } },
     { '@type': 'Question', name: 'みなし含有での除去は法令違反になりませんか？', acceptedAnswer: { '@type': 'Answer', text: 'なりません。事前調査で「分析を行わずアスベスト含有とみなして除去する」ことは大防法・石綿則上認められています。ただし、その場合の除去工法・養生・廃棄物処理はアスベスト含有を前提とした基準を満たす必要があり、結果として工事費が上振れする傾向があります。' } },
     { '@type': 'Question', name: '記録の保存期間はどれくらいですか？', acceptedAnswer: { '@type': 'Answer', text: '事前調査結果記録（写真・記録書類）は工事終了後3年間、石綿則による作業記録は40年間（労働者の健康管理のため長期保存）が義務付けられています。発注者側も、解体・改修工事の事前調査記録は所有期間中の保管が望ましいとされます。' } },
+    { '@type': 'Question', name: "アスベスト事前調査の結果報告はどこに提出しますか？", acceptedAnswer: { '@type': 'Answer', text: "解体・改修工事の発注者は調査結果を書面で工事業者に提供する義務があります。また工事規模によっては都道府県知事・労働基準監督署への届出が必要です。" } },
+    { '@type': 'Question', name: "2023年改正大気汚染防止法で何が変わりましたか？", acceptedAnswer: { '@type': 'Answer', text: "2023年10月から、解体・改修工事前に建築物石綿含有建材調査者等の有資格者による事前調査が義務化されました。調査結果の記録・保存・発注者への説明義務も強化されています。" } },
+    { '@type': 'Question', name: "アスベスト工事の届出義務はいつ必要ですか？", acceptedAnswer: { '@type': 'Answer', text: "大気汚染防止法により、特定粉じん排出等作業（吹付け石綿等レベル1・2の除去）は工事開始の14日前までに都道府県知事への届出が必要です。労働安全衛生法上の届出義務も別途発生します。" } },
+    { '@type': 'Question', name: "小規模工事でもアスベスト調査は必要ですか？", acceptedAnswer: { '@type': 'Answer', text: "解体・改修の規模を問わず、アスベスト含有が疑われる建材がある場合は事前調査が必要です。「小規模だから不要」という例外規定はありません。" } },
+    { '@type': 'Question', name: "自分でアスベスト除去はできますか？", acceptedAnswer: { '@type': 'Answer', text: "レベル1・2（吹付け石綿・断熱材等）は専門業者による施工が法令上義務付けられています。無資格者が取り扱うと大気汚染防止法・労働安全衛生法違反になります。レベル3でも廃棄物処理法上の特別管理産業廃棄物として適正処理が必要です。" } }
+  
   ],
 });
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-asbestos.png` },
+});
+
 ---
-<BaseLayout
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified}
   title={title}
   description={description}
   canonical={canonical}
   siteName={site.name}
   logoSub="施設管理の一括見積比較"
-  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
 >
   <article class="cl-article">
 
@@ -79,7 +97,7 @@ const faqLd = JSON.stringify({
           <span>アスベスト法令義務ガイド</span>
         </nav>
         <span class="cl-cat">法令・義務</span>
-        <h1 class="cl-title">アスベスト法令義務ガイド2026｜大気汚染防止法・石綿障害予防規則の要点と違反ペナルティ</h1>
+        <h1 class="cl-title">アスベスト法令義務ガイド｜大気汚染防止法・石綿障害予防規則の要点と違反ペナルティ</h1>
         <p class="cl-lead">
           アスベスト規制は<strong>2022年4月で報告義務化、2023年10月で有資格者による調査が必須</strong>となり、急速に厳格化が進んでいます。本記事では大気汚染防止法・石綿障害予防規則・建築物石綿含有建材調査者制度の要点と、違反時の罰則・届出書類・労基署対応までを施設管理担当者向けに整理しました。
         </p>
@@ -98,6 +116,9 @@ const faqLd = JSON.stringify({
         <p class="cl-qa-a">A. <strong>2023年10月の大気汚染防止法改正により、解体・改修工事前の事前調査が義務</strong>。有資格者（建築物石綿含有建材調査者）が実施し、結果を発注者に書面提出する義務がある。</p>
         <p class="cl-qa-src">※大気汚染防止法第18条の15（2026年4月時点）</p>
       </div>
+
+      <ColumnCtaCard serviceSlug="asbestos" serviceName="アスベスト調査・除去" variant="top" />
+
 
 
       <aside class="cl-toc" aria-label="目次">
@@ -441,7 +462,7 @@ const faqLd = JSON.stringify({
       <section class="cl-cta">
         <h2>アスベスト調査・除去の業者を無料で一括比較</h2>
         <p>法令遵守を確実にするには、建築物石綿含有建材調査者の在籍と作業記録保管体制を備えた業者選定が必須です。一度の入力で最大3社から見積もりを取り寄せ、有資格者の体制を比較できます。</p>
-        <a href="/asbestos/" class="cta-btn-primary">無料で一括見積もりを依頼する →</a>
+        <a href="/asbestos/" class="cta-btn-primary">無料で一括見積もりを依頼する</a>
       </section>
 
             <div class="cl-pref-links">
@@ -458,8 +479,17 @@ const faqLd = JSON.stringify({
           <li><a href="/asbestos/hokkaido/">北海道</a></li>
           <li><a href="/asbestos/kyoto/">京都府</a></li>
         </ul>
-        <p class="cl-pref-more"><a href="/asbestos/">全国47都道府県の対応業者を見る →</a></p>
+        <p class="cl-pref-more"><a href="/asbestos/">全国47都道府県の対応業者を見る</a></p>
       </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">参考法令・一次資料</h2>
+        <ul>
+          <li><a href="https://elaws.e-gov.go.jp/document?lawid=343AC0000000097" target="_blank" rel="noopener">大気汚染防止法（昭和43年法律第97号）｜e-Gov</a></li>
+          <li><a href="https://elaws.e-gov.go.jp/document?lawid=417M60000100021" target="_blank" rel="noopener">石綿障害予防規則（厚生労働省令第21号）｜e-Gov</a></li>
+          <li><a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/sekimen/index.html" target="_blank" rel="noopener">石綿（アスベスト）対策｜厚生労働省</a></li>
+        </ul>
+      </aside>
 
       <aside class="cl-related">
         <h2 class="cl-related-h">関連する詳細情報</h2>
@@ -470,6 +500,18 @@ const faqLd = JSON.stringify({
           <li><a href="/column/shutter-horei-gimu/">シャッター点検の法令義務ガイド2026｜建築基準法第12条の定期報告制度</a></li>
           <li><a href="/flow/">一括見積依頼から契約までの流れ</a></li>
         </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#taikiosen-boshi-ho">大気汚染防止法</a></li>
+          <li><a href="/glossary/#sekimen-soku">石綿障害予防規則（石綿則）</a></li>
+          <li><a href="/glossary/#kenchiku-sekimen-chosasha">建築物石綿含有建材調査者</a></li>
+          <li><a href="/glossary/#sekimen-sagyo-shunin">石綿作業主任者</a></li>
+          <li><a href="/glossary/#jizen-chosa">事前調査（アスベスト）</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集（49語）をすべて見る</a></p>
       </aside>
 
     </div>

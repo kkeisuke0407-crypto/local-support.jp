@@ -1,0 +1,13 @@
+company_name,segment,prefecture,address,website_url,contact_email,contact_form_url,phone,industry,employee_count,managed_property_count,facility_count,sales_refused
+サンプル管理サービス株式会社A,mansion_kanri,東京都,東京都千代田区丸の内1-1-1,https://a.example.co.jp/,info@a.example.co.jp,,03-1000-0001,マンション管理業,180,420,,
+サンプル管理サービス株式会社B,mansion_kanri,東京都,東京都新宿区西新宿2-2-2,https://b.example.co.jp/,taro.yamada@b.example.co.jp,,03-1000-0002,マンション管理業,60,120,,
+サンプル不動産管理株式会社C,fudosan_kanri,東京都,東京都港区赤坂3-3-3,https://c.example.co.jp/,,https://c.example.co.jp/contact/,03-1000-0003,ビル・不動産管理,95,80,,
+サンプル不動産管理株式会社D,fudosan_kanri,神奈川県,神奈川県横浜市西区4-4-4,https://d.example.co.jp/,office@d.example.co.jp,,045-1000-0004,不動産管理,40,35,,
+サンプル介護サービス株式会社E,kaigo,東京都,東京都世田谷区5-5-5,https://e.example.co.jp/,info@e.example.co.jp,,03-1000-0005,介護施設運営,520,,28,
+サンプルケア株式会社F,kaigo,東京都,東京都練馬区6-6-6,,,,03-1000-0006,介護施設運営,75,,6,
+サンプル商業施設運営株式会社G,shogyo_shisetsu,東京都,東京都渋谷区7-7-7,https://g.example.co.jp/,contact@g.example.co.jp,,03-1000-0007,商業施設運営,310,,12,
+サンプル病院グループH,byoin,東京都,東京都文京区8-8-8,https://h.example.or.jp/,,https://h.example.or.jp/inquiry/,03-1000-0008,医療法人,640,,5,
+サンプルクリニックI,clinic,東京都,東京都中央区9-9-9,https://i.example.clinic/,,,03-1000-0009,診療所,12,,1,
+サンプルビルメンテナンス株式会社J,bilmen,東京都,東京都品川区10-10-10,https://j.example.co.jp/,info@j.example.co.jp,,03-1000-0010,ビルメンテナンス,200,,,
+サンプル管理株式会社K,mansion_kanri,東京都,東京都台東区11-11-11,https://k.example.co.jp/,info@k.example.co.jp,,03-1000-0011,マンション管理業,50,90,,true
+サンプル管理株式会社L,mansion_kanri,埼玉県,埼玉県さいたま市12-12-12,,,,,マンション管理業,30,40,,

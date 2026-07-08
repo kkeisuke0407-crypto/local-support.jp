@@ -1,0 +1,374 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = '受水槽清掃の水質検査｜検査項目・5項目/11項目の違い・義務・清掃後検査の完全ガイド';
+const description = '受水槽・貯水槽清掃の水質検査を施設管理担当者向けに解説。清掃後の自主検査と簡易専用水道の法定検査（年1回）の違い、検査項目（残留塩素・色・濁り・臭い・味ほか）、レジオネラ検査、報告書の保存期間までを2026年版でまとめました。';
+const canonical = `${site.domain}/column/jusuisou-seisou-suishitsu-kensa/`;
+const published = '2026-06-16';
+const modified = '2026-06-16';
+const egov = (n: string) => `https://laws.e-gov.go.jp/search/elawsSearch/elaws_search/lsg0100/?keyword=${encodeURIComponent(n)}`;
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '受水槽清掃の水質検査', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 3200,
+  articleSection: '水質検査',
+  keywords: '受水槽清掃,水質検査,検査項目,11項目,簡易専用水道,残留塩素,レジオネラ,報告書,2026',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: {
+    '@type': 'Organization',
+    name: site.org.legalName,
+    url: site.domain,
+    logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
+  },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-jusuisou-seisou.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '受水槽清掃', serviceType: '建築物飲料水貯水槽清掃' },
+  citation: [
+    { '@type': 'Legislation', name: '水道法', url: egov('水道法'), jurisdiction: 'JP' },
+    { '@type': 'Legislation', name: '水道法施行規則', url: egov('水道法施行規則'), jurisdiction: 'JP' },
+  ],
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: '受水槽清掃の水質検査は義務ですか？', acceptedAnswer: { '@type': 'Answer', text: '有効容量10m³超の簡易専用水道は、水道法により毎年1回以上の清掃と、登録検査機関による定期検査（法定検査）が義務付けられています。これとは別に、清掃直後に水が安全に使えるかを確認する清掃後の水質検査も一般的に行われます。' } },
+    { '@type': 'Question', name: '水質検査の項目には何がありますか？', acceptedAnswer: { '@type': 'Answer', text: '清掃後に確認する基本項目は残留塩素・色・濁り・臭い・味などです。施設用途やリスクに応じて一般細菌・大腸菌・pH・有機物などを加えた検査を行う場合があります。正確な項目は水道法施行規則や依頼する登録検査機関の検査メニューで確認してください。' } },
+    { '@type': 'Question', name: 'レジオネラ検査は必要ですか？', acceptedAnswer: { '@type': 'Answer', text: '法定の必須項目ではありませんが、病院・介護施設・浴場・高齢者が利用する施設では、レジオネラ症の重篤化リスクが高いため、追加でレジオネラ属菌検査を行うことを強く推奨します。' } },
+    { '@type': 'Question', name: '水質検査の報告書はどれくらい保存しますか？', acceptedAnswer: { '@type': 'Answer', text: '清掃・検査の記録は行政の立入検査時に提示を求められるため、3年間以上の保存が必要です。清掃証明書・水質検査結果・写真付き作業報告書をセットで保管してください。' } },
+    { '@type': 'Question', name: '清掃と水質検査は同じ業者に頼めますか？', acceptedAnswer: { '@type': 'Answer', text: '清掃は建築物飲料水貯水槽清掃業の登録業者、簡易専用水道の法定検査は登録検査機関が行います。多くの清掃業者は提携機関を通じて検査までワンストップで手配できますが、見積もりで検査の範囲・費用・報告書発行が含まれるかを確認してください。' } },
+  ],
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: { '@type': 'SpeakableSpecification', cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.faq-q', '.faq-a'] },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
+});
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified}
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a>
+          <span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a>
+          <span aria-hidden="true">›</span>
+          <span>受水槽清掃の水質検査</span>
+        </nav>
+        <span class="cl-cat">受水槽清掃</span>
+        <h1 class="cl-title">受水槽清掃の水質検査｜検査項目・義務・清掃後検査の完全ガイド</h1>
+        <p class="cl-lead">
+          受水槽の水質検査には、<strong>清掃後に水の安全を確認する検査</strong>と、<strong>簡易専用水道の年1回の法定検査</strong>の2種類があります。本記事では、施設管理担当者が押さえるべき検査の種類・項目・義務・報告書の保存までを、2026年時点の制度に沿って整理しました。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年6月16日</time>
+          <span>最終更新：2026年6月16日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 受水槽清掃の水質検査はどこまで必要？</p>
+        <p class="cl-qa-a">A. <strong>清掃後に残留塩素・色・濁り・臭い・味などを確認</strong>。さらに有効容量10m³超の<strong>簡易専用水道は年1回の法定検査（登録検査機関）</strong>が義務です。</p>
+        <p class="cl-qa-src">※正確な検査項目は水道法施行規則・登録検査機関のメニューでご確認ください</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="jusuisou-seisou" serviceName="受水槽清掃" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#kinds">水質検査の2種類（清掃後検査と法定検査）</a></li>
+          <li><a href="#items">検査項目の考え方（基本項目と拡張項目）</a></li>
+          <li><a href="#law">法的根拠と検査の頻度</a></li>
+          <li><a href="#legionella">レジオネラ検査が要る施設</a></li>
+          <li><a href="#report">報告書の発行と保存期間</a></li>
+          <li><a href="#select">検査込みで依頼するときの確認点</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>2種類ある</strong>：①清掃後の水質確認 ②簡易専用水道の年1回の法定検査（登録検査機関）</li>
+            <li><strong>基本項目</strong>：残留塩素・色・濁り・臭い・味。用途により一般細菌・大腸菌・レジオネラ等を追加</li>
+            <li><strong>結論</strong>：清掃見積もりに「水質検査の範囲・報告書発行」が含まれるか必ず確認し、記録は3年以上保存する</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="kinds" class="cl-section">
+        <h2>水質検査の2種類（清掃後検査と法定検査）</h2>
+        <p>「受水槽の水質検査」とひとことで言っても、目的の異なる2つの検査があります。混同すると、必要な検査が抜けたり二重に費用がかかったりするため、まず整理しておきましょう。</p>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>受水槽にかかわる2種類の水質検査</caption>
+            <thead>
+              <tr>
+                <th scope="col">区分</th>
+                <th scope="col">① 清掃後の水質検査</th>
+                <th scope="col">② 簡易専用水道の法定検査</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">目的</th><td>清掃直後に水が安全に使えるかの確認</td><td>水道の管理状態を第三者が点検</td></tr>
+              <tr><th scope="row">実施者</th><td>清掃業者（登録業者）</td><td>登録検査機関（厚生労働大臣等の登録）</td></tr>
+              <tr><th scope="row">タイミング</th><td>清掃の直後</td><td>毎年1回以上（定期）</td></tr>
+              <tr><th scope="row">主な内容</th><td>残留塩素・色・濁り・臭い・味 など</td><td>書類検査・施設検査・給水栓水の検査</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>清掃を依頼すると①は通常セットで実施されますが、②の<strong>法定検査は別手配が必要</strong>なことがあります。多くの清掃業者は提携する登録検査機関を通じてワンストップで手配できるため、見積もり時に「法定検査まで含むか」を確認するとスムーズです。</p>
+      </section>
+
+      <section id="items" class="cl-section">
+        <h2>検査項目の考え方（基本項目と拡張項目）</h2>
+        <p>「5項目」「11項目」といった呼び方を見かけますが、<strong>項目の組み合わせは検査の目的・施設用途・依頼する検査機関のメニューによって変わります</strong>。ここでは考え方を整理します。正確な項目は<a href={egov('水道法施行規則')} target="_blank" rel="noopener nofollow">水道法施行規則（e-Gov法令検索）↗</a>および依頼先の登録検査機関でご確認ください。</p>
+
+        <h3>基本項目（清掃後に確認されることが多い）</h3>
+        <ul class="cl-list">
+          <li><strong>残留塩素</strong>：消毒効果が残っているか（安全な水の最重要指標）</li>
+          <li><strong>色・濁り</strong>：赤錆・スケール・汚れの混入がないか</li>
+          <li><strong>臭い・味</strong>：異臭・異味がないか</li>
+        </ul>
+
+        <h3>拡張項目（リスク・用途に応じて追加）</h3>
+        <ul class="cl-list">
+          <li><strong>一般細菌・大腸菌</strong>：微生物汚染の有無（飲用安全の確認）</li>
+          <li><strong>pH・有機物（全有機炭素など）</strong>：水質の総合的な状態</li>
+          <li><strong>レジオネラ属菌</strong>：病院・介護・浴場系で推奨（後述）</li>
+        </ul>
+
+        <div class="cl-callout cl-callout--blue">
+          <p><strong>ポイント：</strong>項目数の多さより「<strong>自施設のリスクに合った項目</strong>」が選べているかが重要です。医療・介護・食品を扱う施設は基本項目だけで終えず、微生物・レジオネラまで含めるか検査機関に相談しましょう。</p>
+        </div>
+      </section>
+
+      <section id="law" class="cl-section">
+        <h2>法的根拠と検査の頻度</h2>
+        <p>受水槽の管理義務は、貯水槽の規模で根拠が分かれます。</p>
+        <ul class="cl-list">
+          <li><strong>簡易専用水道（有効容量10m³超）</strong>：<a href={egov('水道法')} target="_blank" rel="noopener nofollow">水道法↗</a>に基づき、毎年1回以上の清掃と、登録検査機関による定期検査が義務。</li>
+          <li><strong>小規模貯水槽水道（10m³以下）</strong>：法律ではなく<strong>自治体の条例</strong>で清掃・検査を求めている場合が多い。管轄の水道局・保健所に確認を。</li>
+          <li><strong>特定建築物</strong>：<a href={egov('建築物における衛生的環境の確保に関する法律')} target="_blank" rel="noopener nofollow">建築物衛生法↗</a>の管理基準も併せて適用される。</li>
+        </ul>
+        <p>清掃の頻度・義務の詳細は<a href="/column/jusuisou-seisou-horei-gimu/">受水槽清掃の法定義務ガイド</a>でも解説しています。</p>
+      </section>
+
+      <section id="legionella" class="cl-section">
+        <h2>レジオネラ検査が要る施設</h2>
+        <p>レジオネラ属菌は、高齢者や免疫力の低下した人が感染すると重篤な肺炎（レジオネラ症）を起こすことがあります。法定の必須項目ではありませんが、次のような施設では<strong>追加でのレジオネラ検査を強く推奨</strong>します。</p>
+        <ul class="cl-list">
+          <li>病院・診療所・介護施設・高齢者向け住宅</li>
+          <li>浴場・温浴施設・スパ・プールを併設する施設</li>
+          <li>給水・給湯設備が複雑、または使用量が変動しやすい施設</li>
+        </ul>
+        <p>万一の水質事故時、適切な検査を行っていたかは管理者責任の判断に影響します。リスクの高い施設ほど検査範囲を広げておくのが安全です。</p>
+      </section>
+
+      <section id="report" class="cl-section">
+        <h2>報告書の発行と保存期間</h2>
+        <p>清掃と水質検査は「実施した記録が残っていること」までが管理義務です。行政の立入検査では記録の提示を求められます。</p>
+        <ul class="cl-list">
+          <li><strong>清掃証明書・写真付き作業報告書</strong>：清掃業者が発行</li>
+          <li><strong>水質検査結果</strong>：検査機関が発行</li>
+          <li><strong>保存期間</strong>：<strong>3年間以上</strong>の保管が必要</li>
+        </ul>
+        <p>報告書が発行されない・口頭報告のみ、という業者は法令遵守の観点でリスクがあります。見積もり段階で「報告書発行が費用に含まれるか」を必ず確認してください。書類管理の詳細は<a href="/column/jusuisou-seisou-horei-gimu/">法定義務ガイド</a>も参照してください。</p>
+      </section>
+
+      <section id="select" class="cl-section">
+        <h2>検査込みで依頼するときの確認点</h2>
+        <p>清掃と水質検査をまとめて依頼する際、見積書で次の点を確認しておくと、後からの追加費用や検査漏れを防げます。</p>
+        <ul class="cl-list">
+          <li>清掃後の水質検査が<strong>費用に含まれているか</strong>（別料金か）</li>
+          <li>検査項目（基本のみか、微生物・レジオネラまで含むか）</li>
+          <li>簡易専用水道の<strong>法定検査（登録検査機関）まで手配できるか</strong></li>
+          <li>結果報告書・清掃証明書が発行されるか</li>
+          <li>水質基準を満たさなかった場合の<strong>再対応の取り扱い</strong></li>
+        </ul>
+        <p>業者選びの全体像は<a href="/column/jusuisou-seisou-gyosha-sentaku/">業者選びチェックリスト</a>、費用感は<a href="/column/jusuisou-seisou-hiyo-sohba/">費用相場ガイド</a>で確認できます。</p>
+      </section>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問（FAQ）</h2>
+        <h3>Q1. 受水槽清掃の水質検査は義務ですか？</h3>
+        <p>有効容量10m³超の簡易専用水道は、水道法により<strong>毎年1回以上の清掃と登録検査機関による定期検査</strong>が義務です。加えて、清掃直後に水の安全を確認する清掃後検査も一般的に行われます。</p>
+        <h3>Q2. 「5項目」「11項目」はどう違いますか？</h3>
+        <p>項目の組み合わせは検査の目的・施設用途・検査機関のメニューで変わります。基本は残留塩素・色・濁り・臭い・味で、必要に応じて一般細菌・大腸菌・pH等を加えます。<strong>正確な項目は水道法施行規則と依頼先の検査機関で確認</strong>してください。</p>
+        <h3>Q3. レジオネラ検査は必須ですか？</h3>
+        <p>法定の必須項目ではありませんが、病院・介護・浴場系では重篤化リスクが高いため<strong>強く推奨</strong>します。</p>
+        <h3>Q4. 報告書はどれくらい保存しますか？</h3>
+        <p>立入検査での提示に備え、清掃証明書・水質検査結果を<strong>3年間以上</strong>保管してください。</p>
+      </section>
+
+      <section class="cl-cta">
+        <h2>受水槽清掃・水質検査をまとめて依頼したいなら</h2>
+        <p>{site.name}では、建築物飲料水貯水槽清掃業の登録を確認済みの業者から、清掃・水質検査・報告書発行まで対応できる先を最大3社ご紹介します。<strong>お見積もり依頼は1分・完全無料</strong>です。</p>
+        <a href="/jusuisou-seisou/" class="cta-btn-primary">無料で一括見積もりを依頼する</a>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別の受水槽清掃業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/jusuisou-seisou/tokyo/">東京都</a></li>
+          <li><a href="/jusuisou-seisou/osaka/">大阪府</a></li>
+          <li><a href="/jusuisou-seisou/kanagawa/">神奈川県</a></li>
+          <li><a href="/jusuisou-seisou/aichi/">愛知県</a></li>
+          <li><a href="/jusuisou-seisou/saitama/">埼玉県</a></li>
+          <li><a href="/jusuisou-seisou/fukuoka/">福岡県</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/jusuisou-seisou/">全国47都道府県の対応業者を見る</a></p>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連する詳細情報</h2>
+        <ul>
+          <li><a href="/column/jusuisou-seisou-horei-gimu/">受水槽清掃の法定義務ガイド（水道法・建築物衛生法）</a></li>
+          <li><a href="/column/jusuisou-seisou-hiyo-sohba/">受水槽清掃の費用相場2026</a></li>
+          <li><a href="/column/jusuisou-seisou-gyosha-sentaku/">受水槽清掃の業者選びチェックリスト</a></li>
+          <li><a href="/jusuisou-seisou/#legal">受水槽清掃の法的義務（サービストップ）</a></li>
+        </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#suido-ho">水道法</a></li>
+          <li><a href="/glossary/#kanni-senyou-suido">簡易専用水道</a></li>
+          <li><a href="/glossary/#jusuisou">受水槽／貯水槽</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集をすべて見る</a></p>
+      </aside>
+
+      <p class="cl-note">
+        ※ 本記事の法令・検査に関する情報は2026年6月時点のものです。検査項目・頻度は法令改正や自治体条例、依頼する登録検査機関により異なる場合があります。最終的な判断は管轄行政（保健所・水道局）の最新情報と、登録検査機関・業者への確認に基づいて行ってください。
+      </p>
+
+    </div>
+
+  </article>
+</BaseLayout>
+
+<style>
+.cl-article { color: var(--gray-900); }
+.cl-header { background: linear-gradient(135deg, #0f2742 0%, #1a56db 100%); color: #fff; padding: 48px 0 56px; }
+.cl-crumbs { font-size: .78rem; color: #bfdbfe; margin-bottom: 18px; }
+.cl-crumbs a { color: #bfdbfe; text-decoration: underline; }
+.cl-crumbs span { margin: 0 6px; opacity: .6; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3); color: #e0f2fe; font-size: .76rem; font-weight: 700; padding: 4px 12px; border-radius: 99px; margin-bottom: 14px; letter-spacing: .04em; }
+.cl-title { font-size: clamp(1.4rem, 2.6vw, 2.1rem); font-weight: 900; line-height: 1.4; color: #fff; margin-bottom: 18px; letter-spacing: -.01em; }
+.cl-lead { font-size: 1rem; line-height: 1.85; color: #e0f2fe; margin-bottom: 18px; max-width: 820px; }
+.cl-lead strong { color: #fde68a; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 18px; font-size: .78rem; color: rgba(255,255,255,.65); }
+.cl-meta a { color: rgba(255,255,255,.85); }
+.cl-body { padding: 48px 0 80px; max-width: 880px; }
+.cl-toc { background: var(--gray-100); border-left: 4px solid var(--blue); border-radius: 8px; padding: 24px 28px; margin-bottom: 48px; }
+.cl-toc-h { font-size: .9rem; font-weight: 800; color: var(--gray-900); margin-bottom: 12px; }
+.cl-toc ol { padding-left: 20px; font-size: .9rem; line-height: 1.95; color: var(--gray-700); }
+.cl-toc a { color: var(--blue); text-decoration: underline; }
+.cl-section { margin-bottom: 44px; }
+.cl-section h2 { font-size: 1.35rem; font-weight: 800; color: var(--gray-900); margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid var(--blue); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 700; color: var(--gray-900); margin: 28px 0 12px; }
+.cl-section p { font-size: .95rem; line-height: 1.95; color: var(--gray-700); margin-bottom: 16px; }
+.cl-section p strong { color: var(--gray-900); }
+.cl-section a { color: var(--blue); text-decoration: underline; }
+.cl-list { font-size: .92rem; line-height: 1.95; color: var(--gray-700); padding-left: 22px; margin-bottom: 16px; }
+.cl-list li { margin-bottom: 6px; }
+.cl-list li strong { color: var(--gray-900); }
+.cl-table-wrap { overflow-x: auto; margin-bottom: 20px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .9rem; background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-table caption { text-align: left; font-size: .85rem; color: var(--gray-500); padding-bottom: 8px; caption-side: top; }
+.cl-table th, .cl-table td { padding: 12px 14px; border-bottom: 1px solid var(--gray-200); text-align: left; vertical-align: top; }
+.cl-table thead { background: var(--blue-light); }
+.cl-table thead th { color: var(--blue-dark); font-weight: 800; }
+.cl-table tbody th { font-weight: 700; color: var(--gray-900); white-space: nowrap; }
+.cl-table td { color: var(--gray-700); }
+.cl-table tbody tr:last-child th, .cl-table tbody tr:last-child td { border-bottom: none; }
+.cl-callout { background: var(--gray-100); border-left: 4px solid var(--accent); border-radius: 8px; padding: 24px 28px; margin-bottom: 32px; }
+.cl-callout--blue { border-left-color: var(--blue); }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 10px; padding: 0; border: none; }
+.cl-callout ul, .cl-callout ol { font-size: .92rem; line-height: 1.95; color: var(--gray-700); padding-left: 22px; margin: 0; }
+.cl-callout li { margin-bottom: 4px; }
+.cl-callout li strong { color: var(--gray-900); }
+.cl-callout p { margin-bottom: 10px; }
+.cl-cta { background: linear-gradient(135deg, #0f2742 0%, #1a56db 100%); color: #fff; text-align: center; border-radius: 14px; padding: 40px 28px; margin: 48px 0; }
+.cl-cta h2 { font-size: 1.2rem; font-weight: 800; color: #fff; margin-bottom: 12px; border: none; padding: 0; }
+.cl-cta p { font-size: .92rem; color: #bfdbfe; margin-bottom: 22px; line-height: 1.8; }
+.cl-cta p strong { color: #fde68a; }
+.cl-cta .cta-btn-primary { display: inline-block; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 24px 28px; margin-bottom: 32px; }
+.cl-related-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 12px; }
+.cl-related ul { list-style: none; padding: 0; font-size: .9rem; line-height: 2; }
+.cl-related a { color: var(--blue); text-decoration: underline; }
+.cl-note { font-size: .78rem; color: var(--gray-500); line-height: 1.8; border-top: 1px solid var(--gray-200); padding-top: 20px; margin-top: 24px; }
+.cl-quickanswer { background: #eef6ff; border: 1.5px solid #1a56db; border-radius: 10px; padding: 18px 22px; margin-bottom: 32px; }
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+.cl-glossary-block { background: var(--gray-100); border-radius: 10px; padding: 24px 28px; margin-bottom: 32px; }
+.cl-glossary-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 12px; }
+.cl-glossary-list { list-style: none; padding: 0; margin: 0 0 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+.cl-glossary-list a { display: inline-block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 5px 12px; font-size: .85rem; color: var(--blue); text-decoration: none; }
+.cl-glossary-more { font-size: .87rem; margin: 0; }
+.cl-glossary-more a { color: var(--blue); text-decoration: underline; }
+@media (max-width: 720px) {
+  .cl-header { padding: 36px 0 40px; }
+  .cl-body { padding: 32px 0 60px; }
+  .cl-toc, .cl-callout, .cl-related, .cl-cta { padding: 18px 20px; }
+  .cl-table { font-size: .82rem; }
+  .cl-table th, .cl-table td { padding: 10px 8px; }
+}
+</style>

@@ -78,4 +78,29 @@ export interface ServiceData {
     excerpt: string;
     date: string;
   }[];
+
+  /**
+   * サービス × 都道府県の固有コンテンツ（キー = 都道府県slug）。
+   * 都道府県ページが地名置換だけの重複（doorway）にならないよう、
+   * インデックス対象の主要都府県にだけ固有の本文・相場表・FAQを持たせる。
+   * 未設定の都道府県は共通コンテンツのみで描画する。
+   */
+  prefectureOverrides?: {
+    [prefectureSlug: string]: {
+      /** 都道府県固有の解説セクション（H2見出し + 段落本文） */
+      localSection?: { title: string; paragraphs: string[] };
+      /** 地域補正済みの費用相場表（共通 costGuide.table.rows を丸ごと置き換える） */
+      costRows?: string[][];
+      /** 共通FAQの末尾に追加する都道府県固有のFAQ */
+      localFaq?: { q: string; a: string }[];
+    };
+  };
+
+  /**
+   * このサービスに限ってインデックス対象に追加する都道府県スラグ。
+   * PRIMARY_PREFECTURE_SLUGS（全サービス共通）に上乗せして、勝ち筋サービスだけ
+   * 第2陣・第3陣の県を段階的に解放するための仕組み。
+   * 追加する県は prefectures.ts で priceFactor / localFactors を拡充済みであること。
+   */
+  additionalIndexedPrefectures?: string[];
 }

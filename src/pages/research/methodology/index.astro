@@ -1,0 +1,222 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { site } from '../../../data/site';
+
+const title = '「ロカサポ調査」の調査方法・データ品質ポリシー';
+const description = 'ロカサポが各サービスの費用相場として掲載している「ロカサポ調査」について、調査対象・サンプル取得方法・更新サイクル・データの限界をまとめています。記事内の数値の根拠と前提を確認できます。';
+const canonical = `${site.domain}/research/methodology/`;
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: '調査方法ポリシー', item: canonical },
+  ],
+});
+
+const policyLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: title,
+  description,
+  url: canonical,
+  inLanguage: 'ja-JP',
+  publisher: { '@type': 'Organization', name: site.org.legalName, url: site.domain },
+});
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="調査方法ポリシー"
+  jsonLdBlocks={[breadcrumbLd, policyLd]}
+>
+  <section class="rm-hero">
+    <div class="sd-container">
+      <nav class="rm-crumbs" aria-label="パンくず">
+        <a href="/">トップ</a><span aria-hidden="true">›</span><span>調査方法ポリシー</span>
+      </nav>
+      <h1 class="rm-h1">「ロカサポ調査」の調査方法・データ品質ポリシー</h1>
+      <p class="rm-lead">
+        ロカサポの各サービスページやコラムに載せている「ロカサポ調査」表記の費用相場データについて、<strong>何を・どうやって調べているか、データの限界、更新サイクル</strong>をまとめました。掲載数値の根拠を確認したい施設管理担当者・メディア関係者の方向けです。
+      </p>
+      <p class="rm-meta">最終更新：2026年5月26日</p>
+    </div>
+  </section>
+
+  <section class="sd-section rm-section">
+    <div class="sd-container rm-container">
+
+      <article class="rm-article">
+
+        <h2>1. 調査の目的</h2>
+        <p>
+          施設管理サービスの費用相場は、業者・地域・契約条件で大きく変わるうえ、公開情報が少なく依頼者側が判断材料を得にくいのが実態です。<strong>「ロカサポ調査」は、依頼の前に判断するための価格の目安をわかりやすく示すこと</strong>を目的に、複数の情報源から費用データを集めて定期的に集計しています。
+        </p>
+
+        <h2>2. 調査対象サービス</h2>
+        <p>
+          ロカサポが運営する次の9分野について、それぞれ費用相場データを集めています。
+        </p>
+        <ul>
+          <li><a href="/jusuisou-seisou/">受水槽清掃</a></li>
+          <li><a href="/asbestos/">アスベスト調査・除去</a></li>
+          <li><a href="/duct/">ダクト清掃</a></li>
+          <li><a href="/shutter/">シャッター点検・修理</a></li>
+          <li><a href="/shobo-setsubi/">消防設備点検</a></li>
+          <li><a href="/grease-trap/">グリストラップ清掃</a></li>
+          <li><a href="/aircon-business/">業務用エアコン洗浄・修理</a></li>
+          <li><a href="/pest-control/">害虫駆除（業務用PCO）</a></li>
+          <li><a href="/signboard-inspection/">看板・屋外広告物点検</a></li>
+        </ul>
+
+        <h2>3. データの集め方</h2>
+        <p>掲載している費用相場は、次の3種類の情報源を組み合わせて作っています。</p>
+
+        <h3>3-1. 業者見積もりデータの集計</h3>
+        <p>
+          サービス分野ごとに、実績・信頼のある専門業者や取材協力業者から、典型的な施設条件での見積データを書面・メール・ヒアリングで集めています。各サービス記事の「ロカサポ編集部による相場調査」は、編集部がこの方法で集めた見積データを集計したものです。
+        </p>
+        <ul>
+          <li>集め方：書面アンケート、メールでの見積依頼、対面・オンラインでのヒアリング</li>
+          <li>まとめ方：地域・施設規模ごとに、中央値を相場として算出</li>
+          <li>表示の形：「最小〜最大」の幅で表記（極端な外れ値は除く）</li>
+        </ul>
+
+        <h3>3-2. 公開資料・統計データ</h3>
+        <p>業界団体や官公庁が公表している、次のような資料も補助的に参照しています。</p>
+        <ul>
+          <li>業界団体の白書・年次レポート（日本ペストコントロール協会、日本サイン協会、消防設備保守協会 など）</li>
+          <li>所管省庁の公表データ（厚生労働省、消防庁、環境省、経済産業省、国土交通省）</li>
+          <li>自治体の屋外広告物条例・下水道条例などの運用通達</li>
+          <li>建設物価調査会・経済調査会などの建設関連物価データ</li>
+        </ul>
+
+        <h3>3-3. 取材ヒアリング</h3>
+        <p>
+          編集部が業界関係者に直接取材して、見積データだけでは見えにくい<strong>「最近の価格の動き」「業界で起きている変化」「追加費用が発生しやすい条件」</strong>などを補足情報として取得しています。
+        </p>
+
+        <h2>4. 集計の前提と限界</h2>
+
+        <h3>4-1. 数値は「目安の幅」です</h3>
+        <p>
+          掲載している数値は<strong>あくまで施設管理担当者が「金額が妥当かどうかを判断するための目安」</strong>であり、特定の業者・特定の物件に対して保証された価格ではありません。最終的な金額は、必ず複数業者からの相見積もりで確認してください。
+        </p>
+
+        <h3>4-2. サンプルに偏りがあります</h3>
+        <ul>
+          <li>実績・信頼のある専門業者や取材協力業者から集めた数値が中心なので、無登録業者や極端な低価格業者のデータは含まれていません</li>
+          <li>東京・大阪・名古屋・福岡など主要都市圏のデータが多く、地方部のサンプルは少なめです</li>
+          <li>マンション管理組合の定型契約や、公共施設の入札案件は集計対象に入りにくい傾向があります</li>
+        </ul>
+
+        <h3>4-3. 調査時点を明記</h3>
+        <p>
+          各記事の「ロカサポ編集部による相場調査」表記には<strong>調査期間</strong>を併記しています（例：「2026年1〜4月」）。それ以降の物価変動や法改正は、まだ反映されていない場合があります。
+        </p>
+
+        <h2>5. 更新サイクル</h2>
+        <ul>
+          <li><strong>主要サービスの相場データ</strong>：四半期ごとに見直し</li>
+          <li><strong>その他のサービス</strong>：半年〜年1回の見直し</li>
+          <li><strong>法令改正・税制変更</strong>：判明したらすぐ反映</li>
+          <li>更新したときは、記事末尾の「最終更新日」もあわせて修正します</li>
+        </ul>
+
+        <h2>6. 利益相反の開示</h2>
+        <p>
+          ロカサポは業者紹介を主な事業にしています（詳しくは <a href="/editorial-policy/">編集方針ページ</a>）。費用相場データが事業の都合で歪まないように、次のルールで運用しています。
+        </p>
+        <ul>
+          <li>特定業者の見積を相場として大きく目立たせたり、逆に隠したりしない</li>
+          <li>業者からお金を受け取って掲載数値を変えることはしない</li>
+          <li>サンプル業者の選び方は「サービス分野・対応エリア・登録資格」を基準にし、紹介手数料の条件などを理由に業者を外すことはしない</li>
+        </ul>
+
+        <h2>7. データに関するお問い合わせ・引用</h2>
+        <p>
+          本データは、出典として「local-support.jp（ロカサポ）調査」と明記し、本ページへリンクしていただければ、メディア・研究目的で引用していただけます。引用の範囲を超える転載・改変・商用利用については、お問い合わせフォームからご相談ください。
+        </p>
+        <p>
+          掲載数値の根拠・追加情報・取材のご希望も、お問い合わせフォームから「種別：取材依頼」を選んでご連絡ください。
+        </p>
+        <p>
+          <a href="/#contact" class="rm-cta-link">取材・引用に関するお問い合わせフォームへ</a>
+        </p>
+
+        <h2>8. 関連情報</h2>
+        <ul>
+          <li><a href="/editorial-policy/">編集方針・取材ポリシー</a></li>
+          <li><a href="/glossary/">施設管理用語集（49語）</a></li>
+          <li><a href="/operator/">運営者情報</a></li>
+          <li><a href="/privacy/">プライバシーポリシー</a></li>
+        </ul>
+
+      </article>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.rm-hero { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.rm-crumbs { font-size: .78rem; opacity: .85; margin-bottom: 16px; display: flex; gap: 6px; align-items: center; }
+.rm-crumbs a { color: #fff; text-decoration: none; }
+.rm-crumbs a:hover { text-decoration: underline; }
+.rm-h1 { font-size: clamp(1.4rem, 3.2vw, 2rem); font-weight: 900; line-height: 1.4; margin-bottom: 14px; }
+.rm-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 760px; }
+.rm-lead strong { color: #fff; }
+.rm-meta { font-size: .78rem; opacity: .7; margin-top: 18px; }
+
+.rm-section { padding: 48px 0 64px; background: #fff; }
+.rm-container { max-width: 820px; }
+.rm-article h2 {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--gray-900, #111827);
+  border-bottom: 2px solid var(--blue-light, #dbeafe);
+  padding-bottom: 8px;
+  margin: 36px 0 14px;
+}
+.rm-article h2:first-of-type { margin-top: 0; }
+.rm-article h3 {
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: var(--gray-800, #1f2937);
+  margin: 22px 0 10px;
+}
+.rm-article p {
+  font-size: .94rem;
+  line-height: 1.9;
+  color: var(--gray-700, #374151);
+  margin-bottom: 14px;
+}
+.rm-article ul {
+  padding-left: 22px;
+  margin: 8px 0 18px;
+}
+.rm-article li {
+  font-size: .92rem;
+  line-height: 1.85;
+  color: var(--gray-700, #374151);
+  margin-bottom: 6px;
+}
+.rm-article a { color: var(--blue, #1d4ed8); text-decoration: underline; }
+.rm-article strong { color: var(--gray-900, #111827); font-weight: 700; }
+
+.rm-cta-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-weight: 700;
+  color: var(--blue, #1d4ed8);
+}
+
+@media (max-width: 640px) {
+  .rm-hero { padding: 36px 0 30px; }
+  .rm-section { padding: 32px 0 48px; }
+  .rm-article h2 { font-size: 1.1rem; }
+}
+</style>

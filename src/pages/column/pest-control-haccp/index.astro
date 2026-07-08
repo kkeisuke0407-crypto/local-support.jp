@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
-const title = 'HACCP制度化で必須になった害虫対策ガイド2026｜飲食・食品事業者の防除記録の作り方';
+const title = 'HACCP制度化で必須になった害虫対策ガイド｜飲食・食品事業者の防除記録の作り方';
 const description = '2021年6月から原則すべての食品事業者にHACCPに沿った衛生管理が義務化されました。本記事では、HACCP一般衛生管理の一項目「そ族・昆虫対策」について、月次モニタリング・記録様式・保健所立入時に求められる書類の整え方を、飲食店・食品工場・福祉施設の管理者向けに整理します。';
 const canonical = `${site.domain}/column/pest-control-haccp/`;
 const published = '2026-05-26';
@@ -25,7 +26,7 @@ const articleLd = JSON.stringify({
   articleSection: '法令・義務',
   keywords: 'HACCP,害虫対策,そ族昆虫,食品衛生法,IPM,月次モニタリング,防除記録,2026',
   author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
-  publisher: { '@type': 'Organization', name: site.org.legalName, url: site.domain, logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` } },
+  publisher: { '@id': `${site.domain}/#organization` },
   image: { '@type': 'ImageObject', url: `${site.domain}/og-pest-control.png`, width: 1200, height: 630 },
   about: { '@type': 'Service', name: '害虫駆除（業務用PCO）' },
   citation: [
@@ -39,14 +40,36 @@ const faqLd = JSON.stringify({
   mainEntity: [
     { '@type': 'Question', name: '小さな飲食店もHACCP対応が必要ですか？', acceptedAnswer: { '@type': 'Answer', text: 'はい。2021年6月から食品衛生法の改正により、原則すべての食品事業者にHACCPに沿った衛生管理が義務化されました。小規模事業者（取扱量が少ない・従業員50人未満等）は簡略化された「HACCPの考え方を取り入れた衛生管理」が認められますが、害虫対策の記録は必要です。' } },
     { '@type': 'Question', name: '害虫対策の記録は何を残せばいいですか？', acceptedAnswer: { '@type': 'Answer', text: 'モニタリング日・場所・確認した害虫・改善措置・実施者・写真等を月次で記録します。業者のモニタリング報告書をそのままHACCP記録として活用するのが効率的です。記録は最低1年以上、できれば3年保管が推奨されます。' } },
-    { '@type': 'Question', name: '特定建築物のねずみ等防除義務との関係は？', acceptedAnswer: { '@type': 'Answer', text: '延べ床面積3,000㎡以上の特定建築物（事務所等は8,000㎡）は建築物衛生法により、ねずみ等の生息状況調査を2か月に1回実施することが義務付けられています。HACCP対応とは独立した別義務で、両方の対応が必要なケースもあります。' } },
+    { '@type': 'Question', name: '特定建築物のねずみ等防除義務との関係は？', acceptedAnswer: { '@type': 'Answer', text: '特定用途部分の延べ床面積が3,000㎡以上の特定建築物（学校教育法第1条の学校のみ8,000㎡以上）は建築物衛生法により、ねずみ等の生息状況調査を2か月に1回実施することが義務付けられています。HACCP対応とは独立した別義務で、両方の対応が必要なケースもあります。' } },
     { '@type': 'Question', name: 'IPM（総合的有害生物管理）とは？', acceptedAnswer: { '@type': 'Answer', text: '薬剤散布だけに頼らず、物理的駆除（捕獲・侵入経路封鎖）、環境改善（清掃・乾燥・整理整頓）、生物学的駆除等を組み合わせて、薬剤使用を最小化する管理手法です。食品事業者・福祉施設・医療機関で標準的な考え方となっています。' } },
     { '@type': 'Question', name: '保健所立入時に何を提示しますか？', acceptedAnswer: { '@type': 'Answer', text: 'HACCPプラン（一般的衛生管理＋HACCP管理）、月次モニタリング記録、害虫発生時の対応記録、薬剤使用記録、業者契約書等です。直近1年分が提示できる状態にしておくのが標準です。' } },
     { '@type': 'Question', name: '違反するとどうなりますか？', acceptedAnswer: { '@type': 'Answer', text: 'HACCP制度化の違反は直ちに罰則が科されるわけではなく、まず保健所からの改善指導・改善命令が行われます。命令違反や、害虫混入・食中毒事故発生時の管理不備が判明した場合は、営業停止処分や食品衛生法違反としての罰則の対象となります。' } },
+    { '@type': 'Question', name: "HACCPの書類はどのくらい保管が必要ですか？", acceptedAnswer: { '@type': 'Answer', text: "食品衛生法では1年間以上の保管が原則とされていますが、実務上は2〜3年の保管が推奨されます。害虫管理の記録（点検票・施工報告書）もセットで保管してください。" } },
+    { '@type': 'Question', name: "小さな飲食店もHACCPに対応する必要がありますか？", acceptedAnswer: { '@type': 'Answer', text: "はい。2021年6月に全事業者（規模問わず）にHACCPに沿った衛生管理が義務付けられました。小規模事業者は「HACCPの考え方を取り入れた衛生管理」の実施で対応できます。" } },
+    { '@type': 'Question', name: "保健所の立入検査ではHACCP記録のどこを見られますか？", acceptedAnswer: { '@type': 'Answer', text: "①衛生管理計画書の作成有無、②日常点検記録（清掃・消毒・害虫対策）の継続性、③問題発生時の対処記録、が主に確認されます。" } },
+    { '@type': 'Question', name: "害虫が出たら即日営業停止になりますか？", acceptedAnswer: { '@type': 'Answer', text: "即日停止は通常しませんが、保健所から改善指示・是正期限が設定されます。繰り返し指摘された場合や重大な衛生違反と判断された場合は営業停止処分の対象になります。" } },
+    { '@type': 'Question', name: "HACCP対応の害虫駆除業者とそうでない業者の違いは？", acceptedAnswer: { '@type': 'Answer', text: "HACCP対応業者は①施工記録の発行・管理支援、②モニタリング（継続監視）体制、③食品衛生法適合薬剤の使用、④立入検査対応のサポートが可能です。" } }
+  
   ],
 });
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-pest-control.png` },
+});
+
 ---
-<BaseLayout title={title} description={description} canonical={canonical} siteName={site.name} logoSub="施設管理の一括見積比較" jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}>
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified} title={title} description={description} canonical={canonical} siteName={site.name} logoSub="施設管理の一括見積比較" jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}>
   <article class="cl-article">
     <header class="cl-header">
       <div class="sd-container">
@@ -56,9 +79,9 @@ const faqLd = JSON.stringify({
           <span>HACCP制度化で必須になった害虫対策ガイド</span>
         </nav>
         <span class="cl-cat">法令・義務</span>
-        <h1 class="cl-title">HACCP制度化で必須になった害虫対策ガイド2026｜飲食・食品事業者の防除記録の作り方</h1>
+        <h1 class="cl-title">HACCP制度化で必須になった害虫対策ガイド｜飲食・食品事業者の防除記録の作り方</h1>
         <p class="cl-lead">
-          2021年6月、食品衛生法改正により<strong>原則すべての食品事業者にHACCPに沿った衛生管理が義務化</strong>されました。HACCPは「危害分析と重要管理点」の管理手法ですが、その前提となる「一般的な衛生管理」の一項目に<strong>「そ族（ねずみ）・昆虫対策」</strong>が明記されています。保健所立入時に「害虫対策の記録を見せてください」と求められて慌てる事業者は今も多く、「やっているつもり」を「記録で示せる」状態にすることが急務です。本記事では、HACCP上の害虫対策の位置づけ、記録の作り方、保健所対応、業者選定までを整理します。
+          2021年6月の食品衛生法改正で、<strong>原則すべての食品事業者にHACCPに沿った衛生管理が義務化</strong>されました。HACCPは「危害分析と重要管理点」の管理手法ですが、その土台となる「一般的な衛生管理」のひとつとして<strong>「そ族（ねずみ）・昆虫対策」</strong>が明記されています。保健所の立入で「害虫対策の記録を見せてください」と言われて慌てる事業者はいまも多く、「やっているつもり」を「記録で示せる」状態に持っていけるかが分かれ目。この記事では、HACCP上の害虫対策の位置づけ、記録の作り方、保健所対応、業者選定までを順にまとめます。
         </p>
         <div class="cl-meta">
           <time datetime={published}>公開：2026年5月26日</time>
@@ -75,6 +98,9 @@ const faqLd = JSON.stringify({
         <p class="cl-qa-a">A. <strong>2021年6月のHACCP義務化（食品衛生法改正）により、飲食店・食品工場では害虫の侵入防止・管理が法的に求められる</strong>。保健所の立入検査で管理記録の提示が求められるケースが増加。</p>
         <p class="cl-qa-src">※食品衛生法（HACCP制度化）2021年6月完全施行</p>
       </div>
+
+      <ColumnCtaCard serviceSlug="pest-control" serviceName="害虫駆除" variant="top" />
+
 
       <aside class="cl-toc" aria-label="目次">
         <h2 class="cl-toc-h">この記事の目次</h2>
@@ -160,12 +186,12 @@ const faqLd = JSON.stringify({
         <h2>特定建築物のねずみ等防除義務</h2>
         <p>HACCPとは別の法令ですが、建築物衛生法でも害虫対策が義務付けられています。</p>
         <h3>建築物衛生法の特定建築物</h3>
-        <p>延べ床面積<strong>3,000㎡以上</strong>の興行場・百貨店・店舗・遊技場・図書館・博物館・美術館等、または<strong>8,000㎡以上</strong>の事務所が「特定建築物」に該当します。</p>
+        <p>興行場・百貨店・店舗・事務所・遊技場・図書館・博物館・美術館等の「特定用途」に使われる部分の延べ床面積が<strong>3,000㎡以上</strong>の建築物が「特定建築物」に該当します（学校教育法第1条に規定する学校のみ<strong>8,000㎡以上</strong>）。</p>
         <h3>ねずみ等防除の義務</h3>
         <ul>
           <li>2か月に1回以上の発生状況調査</li>
           <li>調査結果に基づく防除計画の作成・実施</li>
-          <li>調査・防除の記録を3年間保管</li>
+          <li>調査・防除の記録（帳簿書類）を5年間保管</li>
           <li>調査・防除を行う者は「ねずみ昆虫等防除業」登録業者であることが望ましい</li>
         </ul>
         <p>特定建築物の飲食テナント・厨房等は、HACCP対応と建築物衛生法対応の両方の対象となるため、業者選定時には「両方対応可能」を条件にすることが効率的です。</p>
@@ -194,7 +220,7 @@ const faqLd = JSON.stringify({
         <h3>記録の保管期間</h3>
         <ul>
           <li>HACCP上は明確な期限はないが、最低1年、できれば3年保管</li>
-          <li>特定建築物の場合は3年保管が義務</li>
+          <li>特定建築物の場合は建築物衛生法（施行規則第20条）により帳簿書類を5年保管が義務</li>
           <li>食中毒事故発生時の証拠・反証としても重要</li>
         </ul>
       </section>
@@ -252,7 +278,7 @@ const faqLd = JSON.stringify({
       <div class="cl-cta">
         <h2>害虫駆除（PCO）業者選びでお悩みなら</h2>
         <p>HACCP対応の有資格業者から最大3社の見積もりを<br/>完全無料・約1分で取得できます</p>
-        <a class="cta-btn-primary" href="/pest-control/">無料で一括見積もりを依頼する →</a>
+        <a class="cta-btn-primary" href="/pest-control/">無料で一括見積もりを依頼する</a>
       </div>
 
       <section id="faq" class="cl-section">
@@ -260,7 +286,7 @@ const faqLd = JSON.stringify({
         <dl class="cl-faq">
           <div class="cl-faq-item"><dt>個人経営の小さな飲食店もHACCP対応必須ですか？</dt><dd>はい、対象です。ただし「HACCPの考え方を取り入れた衛生管理」の簡略化された形でよく、業界団体の手引書（日本食品衛生協会の業種別手引書等）に沿って実施します。害虫対策の記録も簡易な様式で構いません。</dd></div>
           <div class="cl-faq-item"><dt>害虫対策を自社でやってもよい？</dt><dd>はい、必須ではありません。ただし日常の予防（清掃・侵入経路封鎖）と業者による月次モニタリングを組み合わせるのが現実的です。発生時の対応は専門知識・薬剤管理が必要なため業者依頼が一般的です。</dd></div>
-          <div class="cl-faq-item"><dt>モニタリング報告書の保管期間は？</dt><dd>HACCP上は明確な期限なしですが、最低1年、できれば3年保管が推奨されます。特定建築物の場合は建築物衛生法で3年保管が義務です。</dd></div>
+          <div class="cl-faq-item"><dt>モニタリング報告書の保管期間は？</dt><dd>HACCP上は明確な期限なしですが、最低1年、できれば3年保管が推奨されます。特定建築物の場合は建築物衛生法（施行規則第20条）で帳簿書類を5年保管が義務です。</dd></div>
           <div class="cl-faq-item"><dt>業者依頼の費用はどのくらい？</dt><dd>小規模飲食店の月次モニタリング契約で月8,000〜15,000円、中規模で15,000〜30,000円、食品工場で50,000円〜が目安です。スポット駆除は1回30,000〜100,000円が一般的です。</dd></div>
           <div class="cl-faq-item"><dt>HACCP対応の業者かどうかをどう判断する？</dt><dd>「HACCP対応報告書を発行できる」「IPMアプローチを採用している」「業種別の手引書を理解している」「保健所立入経験がある」等のキーワードで確認します。報告書サンプルを取り寄せるのが最確実です。</dd></div>
           <div class="cl-faq-item"><dt>営業中に薬剤散布されると困りますが？</dt><dd>食品事業者・福祉施設では営業中の薬剤散布は厳禁です。業務終了後の散布対応、低毒性製剤の選定、客室・厨房での散布制限等、施設用途への配慮ができる業者を選びましょう。</dd></div>
@@ -281,12 +307,13 @@ const faqLd = JSON.stringify({
           <li><a href="/pest-control/hokkaido/">北海道</a></li>
           <li><a href="/pest-control/kyoto/">京都府</a></li>
         </ul>
-        <p class="cl-pref-more"><a href="/pest-control/">全国47都道府県の対応業者を見る →</a></p>
+        <p class="cl-pref-more"><a href="/pest-control/">全国47都道府県の対応業者を見る</a></p>
       </div>
 
       <aside class="cl-related">
         <h2 class="cl-related-h">関連サービス・コラム</h2>
         <ul>
+          <li><a href="/column/pest-control-guide/">業務用害虫駆除（PCO）完全ガイド｜法的義務・費用・業者選び・害虫別対策の総まとめ</a></li>
           <li><a href="/pest-control/">害虫駆除（業務用PCO）の業者を一括見積比較</a></li>
           <li><a href="/grease-trap/">グリストラップ清掃の業者を比較</a></li>
           <li><a href="/duct/">ダクト清掃の業者を比較</a></li>
@@ -294,6 +321,19 @@ const faqLd = JSON.stringify({
           <li><a href="/column/aircon-business-hiyo-sohba/">業務用エアコン洗浄・修理の費用相場2026｜施設衛生管理の関連サービス</a></li>
           <li><a href="/flow/">ご利用の流れ・3ステップで業者紹介</a></li>
         </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#shokuhin-eisei-ho-haccp">食品衛生法（HACCP制度化）</a></li>
+          <li><a href="/glossary/#biru-kan-ho">建築物衛生法（ビル管法）</a></li>
+          <li><a href="/glossary/#kenchikubutsu-nezumi-konchu-bojogyo">建築物ねずみ昆虫等防除業</a></li>
+          <li><a href="/glossary/#tokutei-kenchikubutsu">特定建築物</a></li>
+          <li><a href="/glossary/#ipm">IPM（総合的有害生物管理）</a></li>
+          <li><a href="/glossary/#haccp">HACCP</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集（49語）をすべて見る</a></p>
       </aside>
     </div>
   </article>

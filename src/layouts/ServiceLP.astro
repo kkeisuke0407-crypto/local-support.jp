@@ -10,6 +10,7 @@ import CostTable from '../components/CostTable.astro';
 import IndustrySection from '../components/IndustrySection.astro';
 import SelectionChecklist from '../components/SelectionChecklist.astro';
 import MistakesSection from '../components/MistakesSection.astro';
+import QuoteComparisonChecklist from '../components/QuoteComparisonChecklist.astro';
 import ComparisonTipsSection from '../components/ComparisonTipsSection.astro';
 import QuoteFormFull from '../components/QuoteFormFull.astro';
 import FAQ from '../components/FAQ.astro';
@@ -18,12 +19,18 @@ import PrefectureGrid from '../components/PrefectureGrid.astro';
 import BottomCTA from '../components/BottomCTA.astro';
 import AIOSummary from '../components/AIOSummary.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
+import ServiceEntryLinks from '../components/ServiceEntryLinks.astro';
+import Toc from '../components/Toc.astro';
 import { site } from '../data/site';
+import { ogImageUrl } from '../data/ogImage';
+import { quoteComparisonChecklist } from '../data/quoteComparisonChecklist';
+import { buildServiceFaq } from '../data/serviceFaq';
 import type { ServiceData } from '../data/services/_types';
 
 interface Props { data: ServiceData; }
 const { data } = Astro.props;
 const canonical = `${site.domain}/${data.slug}/`;
+const faq = buildServiceFaq(data);
 
 const breadcrumbLd = JSON.stringify({
   '@context': 'https://schema.org',
@@ -37,16 +44,19 @@ const breadcrumbLd = JSON.stringify({
 const serviceLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'Service',
+  '@id': `${canonical}#service`,
   name: `${data.serviceName}の一括見積比較`,
   serviceType: data.serviceName,
   description: data.meta.description,
   url: canonical,
+  brand: { '@type': 'Brand', name: site.name },
   areaServed: { '@type': 'Country', name: 'Japan' },
-  provider: {
-    '@type': 'Organization',
-    name: site.org.legalName,
-    url: site.domain,
+  audience: {
+    '@type': 'BusinessAudience',
+    audienceType: 'マンション管理組合・ビル管理会社・施設管理担当者',
   },
+  /* Organizationエンティティは BaseLayout で @id 付き定義済み。ここでは参照のみ */
+  provider: { '@id': `${site.domain}/#organization` },
   termsOfService: `${site.domain}/disclosure/`,
   category: data.serviceName,
   offers: {
@@ -54,6 +64,8 @@ const serviceLd = JSON.stringify({
     price: '0',
     priceCurrency: 'JPY',
     description: '一括見積依頼・業者紹介は完全無料',
+    availability: 'https://schema.org/InStock',
+    eligibleRegion: { '@type': 'Country', name: 'Japan' },
   },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
@@ -64,6 +76,14 @@ const serviceLd = JSON.stringify({
   },
 });
 
+// 関連法令を e-Gov法令検索の出典としてcitation化（AIO/E-E-A-T強化）
+const isLaw = (n: string) => /法/.test(n) && !/基準|告示|要領|指針|ガイドライン|マニュアル/.test(n);
+const egovUrl = (n: string) =>
+  `https://laws.e-gov.go.jp/search/elawsSearch/elaws_search/lsg0100/?keyword=${encodeURIComponent(n.replace(/第.*$/, '').replace(/（.*?）/g, '').trim())}`;
+const legalCitations = data.legal.legalBasis
+  .filter(isLaw)
+  .map((law) => ({ '@type': 'Legislation', name: law, url: egovUrl(law), jurisdiction: 'JP' }));
+
 const webPageLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'WebPage',
@@ -73,34 +93,31 @@ const webPageLd = JSON.stringify({
   description: data.meta.description,
   dateModified: data.meta.lastUpdated,
   inLanguage: 'ja-JP',
-  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  isPartOf: { '@id': `${site.domain}/#website` },
+  /* このページの主題は Service エンティティ。AI に「何のページか」を明示する */
+  mainEntity: { '@id': `${canonical}#service` },
+  about: { '@id': `${canonical}#service` },
+  ...(legalCitations.length ? { citation: legalCitations } : {}),
+  reviewedBy: {
+    '@type': 'Person',
+    name: site.author.name,
+    jobTitle: site.author.role,
+    url: `${site.domain}/author/`,
+  },
   speakable: {
     '@type': 'SpeakableSpecification',
     cssSelector: ['.aio-summary', '.faq-q', '.faq-a'],
   },
-  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/images/services/hero-${data.slug}.webp` },
 });
 
 const faqLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: data.faq.map((f) => ({
+  mainEntity: faq.map((f) => ({
     '@type': 'Question',
     name: f.q,
     acceptedAnswer: { '@type': 'Answer', text: f.a },
-  })),
-});
-
-const howToLd = JSON.stringify({
-  '@context': 'https://schema.org',
-  '@type': 'HowTo',
-  name: `${data.serviceName}の業者選びで確認すべきポイント`,
-  description: `${data.serviceName}業者を選ぶ際の確認手順`,
-  step: data.selectionCriteria.map((c, i) => ({
-    '@type': 'HowToStep',
-    position: i + 1,
-    name: c.title,
-    text: c.body,
   })),
 });
 
@@ -120,7 +137,41 @@ const priceLd = data.costGuide.priceRange ? JSON.stringify({
   },
 }) : null;
 
-const jsonLdBlocks = [breadcrumbLd, serviceLd, webPageLd, faqLd, howToLd, priceLd].filter(Boolean) as string[];
+/* HowTo schema は 2023年以降 Google が「料理・DIY・修理」など物理的な
+   手順に限定したため、業務手順（見積依頼の流れ等）には不適格。
+   代替として ItemList で「業者選びチェックリスト」を構造化する。
+   ItemList はHowToと違い汎用で、AI Overview の引用にも使われる。 */
+const checklistLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: `${data.serviceName}の業者選びチェックリスト`,
+  description: `${data.serviceName}の業者を選ぶときに確認すべき${data.selectionCriteria.length}項目`,
+  itemListOrder: 'https://schema.org/ItemListOrderAscending',
+  numberOfItems: data.selectionCriteria.length,
+  itemListElement: data.selectionCriteria.map((c, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: c.title,
+    description: c.body,
+  })),
+});
+
+const quoteComparisonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: `${data.serviceName}の見積比較チェックリスト`,
+  description: `${data.serviceName}の見積書を比較するときに確認すべき${quoteComparisonChecklist.length}項目`,
+  itemListOrder: 'https://schema.org/ItemListOrderAscending',
+  numberOfItems: quoteComparisonChecklist.length,
+  itemListElement: quoteComparisonChecklist.map((item, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: item.label,
+    description: `${item.check}。見落とすと${item.risk}。`,
+  })),
+});
+
+const jsonLdBlocks = [breadcrumbLd, serviceLd, webPageLd, faqLd, checklistLd, quoteComparisonLd, priceLd].filter(Boolean) as string[];
 ---
 <BaseLayout
   title={data.meta.title}
@@ -128,12 +179,15 @@ const jsonLdBlocks = [breadcrumbLd, serviceLd, webPageLd, faqLd, howToLd, priceL
   canonical={canonical}
   siteName={data.siteName}
   logoSub="施設管理の一括見積比較"
-  ogImage={`${site.domain}/og-${data.slug}.png`}
+  ogImage={ogImageUrl(data.slug)}
+  preloadImage={`/images/services/hero-${data.slug}.webp?v=20260529-office-cleanup`}
   jsonLdBlocks={jsonLdBlocks}
 >
   <HeroWithForm data={data} />
   <Breadcrumb items={[{ label: 'トップ', href: '/' }, { label: data.serviceName }]} />
   <AIOSummary lead={data.aiSummary.lead} facts={data.aiSummary.facts} serviceName={data.serviceName} />
+  <ServiceEntryLinks data={data} />
+  <Toc serviceName={data.serviceName} />
   <TrustStrip />
   <ProcessSteps serviceName={data.serviceName} />
   <TrustBadges stats={data.trustStats} />
@@ -143,9 +197,10 @@ const jsonLdBlocks = [breadcrumbLd, serviceLd, webPageLd, faqLd, howToLd, priceL
   <IndustrySection industries={data.industries} serviceName={data.serviceName} />
   <SelectionChecklist criteria={data.selectionCriteria} serviceName={data.serviceName} />
   <MistakesSection mistakes={data.mistakes} serviceName={data.serviceName} />
+  <QuoteComparisonChecklist serviceName={data.serviceName} />
   <ComparisonTipsSection tips={data.comparisonTips} serviceName={data.serviceName} />
   <QuoteFormFull data={data} />
-  <FAQ faq={data.faq} serviceName={data.serviceName} />
+  <FAQ faq={faq} serviceName={data.serviceName} />
 
   {data.relatedColumns && data.relatedColumns.length > 0 && (
     <section class="sd-section section-gray related-columns">
@@ -162,7 +217,7 @@ const jsonLdBlocks = [breadcrumbLd, serviceLd, webPageLd, faqLd, howToLd, priceL
                 </div>
                 <h3 class="rcol-title">{col.title}</h3>
                 <p class="rcol-excerpt">{col.excerpt}</p>
-                <span class="rcol-arrow">詳しく読む →</span>
+                <span class="rcol-arrow">詳しく読む</span>
               </a>
             </li>
           ))}

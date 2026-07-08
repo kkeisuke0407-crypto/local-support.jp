@@ -1,0 +1,452 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = 'トコジラミ駆除 宿泊施設の対応マニュアル｜発見時の初動・客室封鎖・費用相場';
+const description = 'ホテル・旅館・民泊でトコジラミ（南京虫）が発見されたときの対応手順を解説。客室隔離・荷物検査・駆除業者への依頼費用相場、加熱処理と薬剤処理の違い、口コミ被害・風評リスクへの備え、インバウンド時代の予防策まで宿泊施設運営者向けに整理。';
+const canonical = `${site.domain}/column/pest-control-tokojirami-shukuhaku/`;
+const published = '2026-06-27';
+const modified = '2026-06-27';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: 'トコジラミ駆除 宿泊施設マニュアル', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 5900,
+  articleSection: '害虫駆除',
+  keywords: 'トコジラミ,南京虫,駆除,宿泊施設,ホテル,旅館,民泊,費用,加熱処理,インバウンド',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-pest-control.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '害虫駆除' },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: 'ホテルでトコジラミが発見されたら、まず何をすべきですか？', acceptedAnswer: { '@type': 'Answer', text: 'まず該当客室の使用を即時停止し、隣室・上下階も含めて隔離します。次に専門の駆除業者に連絡し、発見状況（虫体・血痕・脱皮殻の場所）を写真記録します。重要なのは、慌てて市販の殺虫スプレーを撒かないことです。中途半端な薬剤散布はトコジラミを別の部屋へ拡散させ、被害を拡大させる原因になります。発見客室の寝具・カーテン・荷物は密閉して隔離し、業者の指示を待つのが基本です。' } },
+    { '@type': 'Question', name: 'トコジラミ駆除の費用相場はいくらですか？', acceptedAnswer: { '@type': 'Answer', text: '宿泊施設の客室1室あたりのスポット駆除で、薬剤処理の場合30,000〜80,000円、加熱処理（ヒートトリートメント）の場合は1室50,000〜150,000円が目安です。トコジラミは再発しやすく複数回の処理が必要なため、初回処理＋2〜3週間後の再処理を含むパッケージになることが多くあります。被害が複数室に及ぶ場合や、フロア単位での対応が必要な場合は数十万円〜数百万円規模になることもあります。' } },
+    { '@type': 'Question', name: '加熱処理と薬剤処理はどちらが効果的ですか？', acceptedAnswer: { '@type': 'Answer', text: '加熱処理（室温を約60℃前後まで上げる）は卵を含めて一度で死滅させられる利点があり、薬剤抵抗性を持つトコジラミにも有効です。ただし設備費・電気代がかかり費用は高めです。薬剤処理は費用が抑えられますが、卵には効きにくく複数回の処理が必要で、近年は薬剤抵抗性（スーパー・トコジラミ）の問題もあります。被害が深刻な場合や確実性を求める場合は加熱処理、軽度な場合は薬剤処理と、状況に応じた使い分けまたは併用が一般的です。' } },
+    { '@type': 'Question', name: 'トコジラミは法律上、宿泊施設にどんな義務がありますか？', acceptedAnswer: { '@type': 'Answer', text: '旅館業法に基づき、宿泊施設には換気・採光・照明・防湿・清潔等の衛生上必要な措置を講じる義務があります。トコジラミの発生は「清潔保持義務」に関わる問題として、都道府県等の指導対象になり得ます。また建築物衛生法の特定建築物（延床3,000㎡以上で特定用途のホテル等）に該当する場合は、ねずみ・昆虫等の生息状況調査を2か月に1回以上実施する義務があり、トコジラミもその対象に含まれます。' } },
+    { '@type': 'Question', name: '宿泊客からトコジラミ被害を訴えられた場合、賠償責任はありますか？', acceptedAnswer: { '@type': 'Answer', text: '宿泊施設が清潔保持義務を怠っていた場合、刺咬被害の治療費や持ち帰り被害（自宅への拡散）について損害賠償責任を問われる可能性があります。一方、宿泊客自身が外部から持ち込んだことが明らかな場合は施設側の責任が限定されることもあります。重要なのは、日頃から定期点検・清掃記録・駆除対応記録を整備しておくことです。これらの記録は「衛生管理を適切に行っていた」証拠となり、紛争時の施設側の立場を守ります。' } },
+    { '@type': 'Question', name: 'トコジラミはどこから持ち込まれるのですか？', acceptedAnswer: { '@type': 'Answer', text: '最も多い経路は宿泊客のスーツケース・衣類・カバンに付着しての持ち込みです。トコジラミは旅行者の荷物に紛れて世界中を移動します。インバウンド需要の回復で海外からの持ち込みリスクが高まっているほか、国内の他施設からの持ち込みもあります。客室の清掃スタッフが他室へ媒介してしまうケース、リネン類を介した拡散もあるため、清掃動線・リネン管理のルール整備が予防の鍵になります。' } },
+    { '@type': 'Question', name: 'トコジラミの再発を防ぐにはどうすればよいですか？', acceptedAnswer: { '@type': 'Answer', text: '①客室清掃時のベッドフレーム・マットレス継ぎ目・ヘッドボード裏の定期目視点検、②モニタリング（トラップ設置）による早期発見、③客室間のトコジラミ移動を防ぐ隙間封鎖、④清掃スタッフの教育（発見時の報告ルール・媒介防止）、⑤リネンの高温洗濯・乾燥の徹底が再発防止の柱です。駆除後も最低1〜2か月はモニタリングを継続し、卵から孵化した個体の有無を確認することが重要です。PCO業者との定期点検契約も有効です。' } },
+  ],
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-pest-control.png` },
+});
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  ogImage={`${site.domain}/og-pest-control.png`}
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>トコジラミ駆除 宿泊施設マニュアル</span>
+        </nav>
+        <span class="cl-cat">害虫駆除</span>
+        <h1 class="cl-title">トコジラミ駆除 宿泊施設の対応マニュアル｜発見時の初動・客室封鎖・費用相場</h1>
+        <p class="cl-lead">トコジラミ（南京虫）は一度持ち込まれると拡散が早く、<strong>口コミ・SNSでの風評被害が経営を直撃</strong>する害虫です。インバウンド需要の回復で宿泊施設の持ち込みリスクは高まっています。本記事では発見時の初動手順、客室隔離の進め方、加熱処理と薬剤処理の違い、費用相場、賠償リスクと記録整備、再発防止策まで、ホテル・旅館・民泊運営者向けに整理します。※2026年6月時点の情報をもとに執筆。</p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年6月27日</time>
+          <span>最終更新：2026年6月27日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. ホテルでトコジラミが見つかったら最初に何をすべきですか？</p>
+        <p class="cl-qa-a">A. <strong>①該当客室の使用を即時停止し隣室・上下階も含めて隔離、②専門のPCO業者に連絡、③虫体・血痕・脱皮殻の発見箇所を写真記録、④寝具・荷物を密閉隔離</strong>する。<strong>市販の殺虫スプレーを撒くのは厳禁</strong>——中途半端な薬剤はトコジラミを他室へ逃がし被害を拡大させる。トコジラミは卵に薬剤が効きにくく再発しやすいため、自己対処ではなく専門業者による徹底処理（加熱処理または複数回の薬剤処理）が原則。</p>
+        <p class="cl-qa-src">※旅館業法（清潔保持義務）・建築物衛生法（特定建築物のねずみ昆虫等防除）に基づく</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="pest-control" serviceName="害虫駆除" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#whats">トコジラミとは｜宿泊施設で問題になる理由</a></li>
+          <li><a href="#signs">発見のサインと点検すべき場所</a></li>
+          <li><a href="#emergency">発見時の初動マニュアル｜客室封鎖の手順</a></li>
+          <li><a href="#method">駆除方法｜加熱処理と薬剤処理の違い</a></li>
+          <li><a href="#cost">費用相場｜客室規模・処理方法別</a></li>
+          <li><a href="#risk">風評・賠償リスクと記録整備</a></li>
+          <li><a href="#prevention">再発防止とインバウンド時代の予防策</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <h2>3行サマリ</h2>
+        <div class="cl-callout">
+          <ul>
+            <li><strong>初動の鉄則</strong>：発見客室を即時隔離 → 市販スプレーは撒かない（拡散の原因）→ 専門業者へ連絡 → 発見箇所を写真記録。トコジラミは卵に薬剤が効きにくく再発しやすいため、自己対処は被害拡大を招きやすい</li>
+            <li><strong>費用と処理</strong>：客室1室のスポット駆除で薬剤処理30,000〜80,000円、加熱処理50,000〜150,000円が目安。加熱処理は卵まで一度で死滅・薬剤抵抗性にも有効だが高め。再処理込みのパッケージが基本</li>
+            <li><strong>経営リスク</strong>：トコジラミ被害は口コミ・SNSで拡散し風評被害が深刻。清潔保持義務違反による賠償リスクもあるため、定期点検・清掃・駆除対応の記録整備が施設防衛の要</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="whats" class="cl-section">
+        <h2>トコジラミとは｜宿泊施設で問題になる理由</h2>
+        <p>トコジラミ（学名 Cimex lectularius など、別名「南京虫」「ベッドバグ」）は、人や動物の血を吸う体長5〜8mm程度の扁平な昆虫です。羽はなく自力で長距離移動はできませんが、<strong>人の荷物・衣類に紛れて移動</strong>することで世界中に拡散しています。宿泊施設にとって特に厄介な理由は以下の通りです。</p>
+
+        <h3>① 発見が遅れやすく拡散が早い</h3>
+        <p>トコジラミは夜行性で、日中はベッドフレームの継ぎ目・マットレスの縫い目・ヘッドボードの裏など<strong>狭い隙間に潜伏</strong>します。1〜2匹の侵入時点では気づきにくく、気づいたときには繁殖が進んでいることが多いです。1匹のメスが生涯に200〜500個程度の卵を産むとされ、放置すると急速に増殖します。</p>
+
+        <h3>② 薬剤抵抗性（スーパー・トコジラミ）の問題</h3>
+        <p>近年、従来のピレスロイド系殺虫剤が効きにくい「薬剤抵抗性トコジラミ（スーパー・トコジラミ）」が国内でも広がっています。市販の殺虫剤や従来薬剤では駆除しきれないケースが増えており、<strong>専門業者による加熱処理や抵抗性に対応した薬剤の使い分け</strong>が必要になっています。</p>
+
+        <h3>③ 風評被害が経営を直撃する</h3>
+        <p>トコジラミ被害は宿泊客の刺咬被害（強いかゆみ・赤い発疹）に加え、<strong>口コミサイト・SNSでの拡散</strong>による予約への影響が深刻です。「あのホテルは虫が出る」という評判は一度立つと回復に時間がかかります。さらに宿泊客が自宅に持ち帰り、二次被害が発生すると賠償問題に発展するリスクもあります。</p>
+
+        <div class="cl-callout">
+          <p><strong>インバウンド回復でリスクが上昇</strong><br/>
+          訪日外国人観光客の増加に伴い、海外からのトコジラミ持ち込みリスクが高まっています。トコジラミは世界的に再流行しており、宿泊施設では「いつ持ち込まれてもおかしくない」前提での予防・早期発見体制の構築が求められています。発生してから対処するのではなく、平時からのモニタリングが被害最小化の鍵です。</p>
+        </div>
+      </section>
+
+      <section id="signs" class="cl-section">
+        <h2>発見のサインと点検すべき場所</h2>
+        <p>トコジラミの早期発見には、清掃スタッフが日常清掃の中で確認できる「サイン」を知っておくことが重要です。以下の痕跡が見られた場合はトコジラミの存在を疑います。</p>
+
+        <h3>トコジラミ発生の5つのサイン</h3>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>トコジラミ発生のサインと特徴</caption>
+            <thead><tr><th>サイン</th><th>特徴</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">血糞（黒いシミ）</th><td>シーツ・マットレス・壁に点状〜線状の黒い染み。吸血後の排泄物。最も発見されやすいサイン</td></tr>
+              <tr><th scope="row">虫体（成虫・幼虫）</th><td>体長5〜8mmの扁平な赤茶色の虫。幼虫はより小さく半透明。継ぎ目に潜む</td></tr>
+              <tr><th scope="row">脱皮殻</th><td>成長過程で脱皮した抜け殻。半透明の殻が隙間に残る</td></tr>
+              <tr><th scope="row">卵・卵殻</th><td>1mm程度の白い楕円形の卵。隙間に塊で産みつけられる</td></tr>
+              <tr><th scope="row">特有の臭気</th><td>多数生息すると甘酸っぱい独特の臭いがする。大量発生のサイン</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>重点的に点検すべき場所</h3>
+        <p>トコジラミは「人が眠る場所の近くの暗い隙間」を好みます。客室清掃時に以下を重点的に目視点検します。</p>
+        <ul>
+          <li><strong>マットレスの縫い目・タグ・裏面</strong>：最も多い潜伏場所。継ぎ目を指で広げて確認</li>
+          <li><strong>ベッドフレーム・ヘッドボードの裏・継ぎ目</strong>：ネジ穴・木材の割れ目に潜む</li>
+          <li><strong>ボックススプリングの内部・布の裏</strong>：見落とされやすい潜伏場所</li>
+          <li><strong>ベッド周辺の家具（ナイトテーブル・ソファ）の隙間</strong>：ベッドから移動して定着する</li>
+          <li><strong>カーテンの縫い目・巾木の隙間・壁紙の剥がれ</strong>：被害が進むとベッドから離れた場所にも拡散</li>
+          <li><strong>コンセントカバーの裏・額縁の裏</strong>：重度被害時の潜伏場所</li>
+        </ul>
+
+        <div class="cl-callout cl-callout--warn">
+          <p class="cl-callout-h">⚠ 宿泊客からの指摘は最重要シグナル</p>
+          <p>「身体がかゆい」「赤い発疹が複数できた」という宿泊客からの申し出は、トコジラミ被害の最も重要なシグナルです。クレームとして処理するだけでなく、必ず当該客室を点検し、疑いがあれば隔離・調査を行ってください。対応の遅れが被害拡大と風評の決定的な分かれ目になります。</p>
+        </div>
+      </section>
+
+      <section id="emergency" class="cl-section">
+        <h2>発見時の初動マニュアル｜客室封鎖の手順</h2>
+        <p>トコジラミを発見した、または強く疑われる場合の初動を時系列で整理します。<strong>初動の質が被害規模を決める</strong>といっても過言ではありません。</p>
+
+        <h3>STEP1：該当客室の即時使用停止と隔離</h3>
+        <ol>
+          <li>当該客室の販売を即時停止（予約システムで「清掃中」「整備中」に設定）</li>
+          <li>客室のドアを閉め、出入りを最小限に制限。清掃スタッフの不用意な出入りを止める</li>
+          <li><strong>隣室・上下階も点検対象に</strong>：トコジラミは壁の配線・配管を伝って隣室へ移動する。発見室だけの問題と考えない</li>
+        </ol>
+
+        <h3>STEP2：拡散防止と記録</h3>
+        <ol>
+          <li><strong>市販の殺虫スプレーを撒かない</strong>：中途半端な薬剤はトコジラミを刺激して他室へ逃がす。専門業者の処理を待つ</li>
+          <li>発見した虫体・血糞・脱皮殻を<strong>写真で記録</strong>（日付・客室番号・発見場所を明記）。業者対応・賠償紛争時の記録になる</li>
+          <li>当該室の寝具・リネン・カーテンは密閉袋に入れて隔離（移動時に廊下で振り落とさない）</li>
+          <li>清掃スタッフの衣類・清掃用具を介した媒介を防ぐため、当該室の清掃用具は分離する</li>
+        </ol>
+
+        <h3>STEP3：専門業者への連絡</h3>
+        <ol>
+          <li>トコジラミ駆除の実績がある専門業者に連絡（一般の害虫駆除業者でもトコジラミ未対応の場合があるため確認）</li>
+          <li>「いつ・どこで・何を発見したか」を伝え、最短の現地調査日程を確保</li>
+          <li>被害範囲の調査を依頼し、加熱処理か薬剤処理かの提案を受ける</li>
+        </ol>
+
+        <h3>STEP4：宿泊客対応（被害申告があった場合）</h3>
+        <p>宿泊客から刺咬被害の申し出があった場合は、誠実な初期対応が風評リスクを左右します。</p>
+        <ul>
+          <li>申し出を真摯に受け止め、客室変更・返金等の対応を検討</li>
+          <li>医療機関の受診が必要な場合の案内</li>
+          <li>持ち帰り防止のため、宿泊客の荷物のチェック・必要に応じた衣類の高温乾燥の案内</li>
+          <li>対応内容を記録（後の賠償・紛争に備える）</li>
+        </ul>
+      </section>
+
+      <section id="method" class="cl-section">
+        <h2>駆除方法｜加熱処理と薬剤処理の違い</h2>
+        <p>トコジラミ駆除の主な方法は「加熱処理」と「薬剤処理」の2つです。それぞれの特徴を理解し、被害状況に応じて選択（または併用）することが効果的な駆除につながります。</p>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>加熱処理と薬剤処理の比較</caption>
+            <thead><tr><th>比較項目</th><th>加熱処理（ヒートトリートメント）</th><th>薬剤処理</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">原理</th><td>室温を約60℃前後まで上げ、卵・成虫を一度に死滅</td><td>殺虫剤を潜伏箇所に処理して駆除</td></tr>
+              <tr><th scope="row">卵への効果</th><td>◎ 卵にも有効</td><td>△ 卵には効きにくく再処理が必要</td></tr>
+              <tr><th scope="row">薬剤抵抗性への対応</th><td>◎ 抵抗性に関係なく死滅</td><td>△ スーパー・トコジラミに効きにくい場合がある</td></tr>
+              <tr><th scope="row">処理回数</th><td>1回で完了することが多い</td><td>2〜3回（2〜3週間間隔）が一般的</td></tr>
+              <tr><th scope="row">費用</th><td>高め（設備・電気代）</td><td>抑えめ</td></tr>
+              <tr><th scope="row">客室の使用停止期間</th><td>処理当日（短い）</td><td>複数回処理のため断続的</td></tr>
+              <tr><th scope="row">注意点</th><td>熱に弱い什器・電子機器の養生が必要</td><td>薬剤抵抗性・再発リスク・養生が必要</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>使い分けの考え方</h3>
+        <ul>
+          <li><strong>被害が深刻・確実性を最優先</strong>：加熱処理が有力。卵を含めて一度に死滅させられるため再発リスクが低い</li>
+          <li><strong>軽度・初期発見・費用を抑えたい</strong>：薬剤処理。ただし複数回の処理と経過観察が前提</li>
+          <li><strong>併用</strong>：加熱処理で一気に死滅させた後、残存リスクのある箇所に薬剤で残効処理を行う組み合わせも効果的</li>
+        </ul>
+
+        <div class="cl-callout">
+          <p><strong>スチーム・掃除機・物理的除去も併用される</strong><br/>
+          専門業者はスチーム（高温蒸気）による継ぎ目の処理、掃除機での虫体・卵の物理的除去、潜伏箇所の隙間封鎖なども組み合わせます。トコジラミ駆除は「単一の方法で一発完了」が難しく、複数手法の組み合わせと経過観察が成功の鍵です。業者選定時は「トコジラミ駆除の実績」と「処理後のモニタリング・保証の有無」を必ず確認してください。</p>
+        </div>
+      </section>
+
+      <section id="cost" class="cl-section">
+        <h2>費用相場｜客室規模・処理方法別</h2>
+        <p>トコジラミ駆除の費用は、被害範囲・処理方法・客室数によって大きく変わります。以下は<strong>2026年6月時点の市場相場の目安</strong>です。トコジラミは再発しやすく再処理が前提となるため、見積もりは「再処理・経過観察を含むパッケージか」を確認することが重要です。</p>
+
+        <h3>客室単位のスポット駆除費用目安</h3>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>トコジラミ駆除のスポット対応費用目安（客室1室あたり）</caption>
+            <thead><tr><th>処理方法</th><th>費用目安（1室）</th><th>処理回数</th><th>備考</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">薬剤処理</th><td>30,000〜80,000円</td><td>2〜3回（再処理込み）</td><td>軽度〜中度の被害向け。卵対策で複数回必要</td></tr>
+              <tr><th scope="row">加熱処理（ヒート）</th><td>50,000〜150,000円</td><td>1回が中心</td><td>卵まで死滅・確実性高め。設備搬入が必要</td></tr>
+              <tr><th scope="row">薬剤＋加熱の併用</th><td>80,000〜200,000円</td><td>状況による</td><td>深刻な被害・確実性最優先のケース</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>費用が上振れする要因</h3>
+        <ul>
+          <li><strong>被害の複数室への拡大</strong>：1室の問題が隣室・上下階に広がっていると、対象室数に比例して費用が増える</li>
+          <li><strong>フロア・館全体への波及</strong>：重度の場合は共用部・廊下・リネン庫の処理も必要になり、数十万〜数百万円規模になることもある</li>
+          <li><strong>什器・寝具の廃棄・交換</strong>：被害が深刻なマットレス等は廃棄・交換が必要になり別途費用が発生</li>
+          <li><strong>営業損失</strong>：客室の使用停止期間中の機会損失も実質的なコストとして考慮が必要</li>
+        </ul>
+
+        <div class="cl-callout">
+          <p><strong>「早期発見・小規模対処」が最大のコスト削減策</strong><br/>
+          トコジラミ被害は拡大するほど費用が指数関数的に増えます。1室で食い止められれば数万円〜十数万円ですが、館全体に広がると数百万円規模になることもあります。日常清掃での点検とモニタリングによる早期発見が、結果的に最大のコスト削減になります。</p>
+        </div>
+
+        <p class="cl-note"><small>※費用相場の詳細は <a href="/column/pest-control-hiyo-sohba/">業務用害虫駆除（PCO）の費用相場ガイド</a> も参照ください。</small></p>
+      </section>
+
+      <section id="risk" class="cl-section">
+        <h2>風評・賠償リスクと記録整備</h2>
+        <p>トコジラミ問題は駆除費用以上に、<strong>風評被害と賠償リスク</strong>という経営インパクトが大きい点が特徴です。</p>
+
+        <h3>旅館業法上の衛生管理義務</h3>
+        <p>旅館業法では、宿泊施設に換気・採光・照明・防湿・清潔等の衛生上必要な措置を講じる義務が定められています。トコジラミの発生は「清潔保持義務」に関わる問題として、都道府県等の保健衛生部門の指導対象になり得ます。また、延床3,000㎡以上で特定用途に該当するホテル等は<strong>建築物衛生法の特定建築物</strong>として、ねずみ・昆虫等の生息状況調査を2か月に1回以上実施する義務があり、トコジラミもこの対象に含まれます。</p>
+
+        <h3>宿泊客への賠償リスク</h3>
+        <p>宿泊施設が清潔保持義務を怠っていた場合、刺咬被害の治療費や、宿泊客が自宅に持ち帰った場合の駆除費用について損害賠償責任を問われる可能性があります。一方、被害の発生源・経路の立証は難しく、宿泊客自身の持ち込みが明らかな場合は施設側の責任が限定されることもあります。いずれにせよ<strong>「適切な衛生管理を行っていた」ことを示す記録</strong>が施設側の立場を守る鍵になります。</p>
+
+        <h3>整備しておくべき記録</h3>
+        <div class="cl-callout">
+          <ul>
+            <li><strong>定期点検記録</strong>：客室清掃時のトコジラミ点検実施記録（日付・客室・点検者・異常の有無）</li>
+            <li><strong>モニタリング記録</strong>：トラップ設置・確認の記録</li>
+            <li><strong>駆除対応記録</strong>：発見から駆除完了までの対応履歴・業者の作業報告書</li>
+            <li><strong>清掃・リネン管理記録</strong>：高温洗濯・乾燥の実施記録</li>
+            <li><strong>宿泊客対応記録</strong>：被害申告があった場合の対応内容・経緯</li>
+          </ul>
+        </div>
+        <p>これらの記録は、保健所等の指導対応・賠償紛争・口コミへの説明責任のいずれの局面でも施設を守ります。PCO業者と定期点検契約を結んでいれば、業者の報告書がそのまま記録の主体になります。</p>
+      </section>
+
+      <section id="prevention" class="cl-section">
+        <h2>再発防止とインバウンド時代の予防策</h2>
+        <p>トコジラミは「ゼロにする」より「持ち込まれても早期に発見・封じ込める」体制の構築が現実的です。インバウンド需要が回復するなか、以下の予防策を平時から組み込むことが重要です。</p>
+
+        <h3>① 客室清掃ルーティンへの点検組み込み</h3>
+        <p>清掃スタッフが日常清掃の中でベッドフレーム・マットレス継ぎ目・ヘッドボード裏を目視点検するルーティンを設けます。発見時の報告ルール（誰に・どう報告するか）を明文化し、スタッフ教育を行うことが早期発見の基盤になります。</p>
+
+        <h3>② モニタリング（トラップ）による早期発見</h3>
+        <p>トコジラミ用のモニタリングトラップをベッド脚・客室の隅に設置し、定期確認することで侵入を早期に検知できます。特に客室回転の高い施設・インバウンド客の多い施設では有効です。</p>
+
+        <h3>③ 客室間移動を防ぐ隙間封鎖</h3>
+        <p>トコジラミは壁の配線・配管・巾木の隙間を伝って隣室へ移動します。客室間の隙間・配管貫通部を封鎖することで、万一の発生時の拡散を抑えられます。</p>
+
+        <h3>④ 清掃動線・リネン管理の徹底</h3>
+        <ul>
+          <li>清掃スタッフが他室へ媒介しないよう、清掃用具・カートの管理ルールを整備</li>
+          <li>リネン類は高温洗濯（60℃以上が目安）・高温乾燥でトコジラミ・卵を死滅させる</li>
+          <li>使用済みリネンは客室内で密閉袋に入れ、廊下で振り落とさない動線にする</li>
+        </ul>
+
+        <h3>⑤ PCO業者との定期点検契約</h3>
+        <p>特に客室数の多い施設・インバウンド比率の高い施設では、PCO業者による定期点検・モニタリング契約が有効です。専門家の目による早期発見と、発生時の迅速な対応体制、そして記録整備の三つを同時に確保できます。</p>
+
+        <p>業者選定の基本的なポイントは <a href="/column/pest-control-gokiburi-gyosha/">業務用ゴキブリ駆除の業者選び完全ガイド</a> で解説した「登録確認・IPM対応・記録整備」が共通します。トコジラミの場合はこれに加えて<strong>「トコジラミ駆除の実績」と「加熱処理の可否」</strong>を確認してください。</p>
+      </section>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          <div class="cl-faq-item">
+            <dt>ホテルでトコジラミが発見されたら、まず何をすべきですか？</dt>
+            <dd>該当客室の使用を即時停止し、隣室・上下階も含めて隔離します。専門の駆除業者に連絡し、虫体・血痕・脱皮殻の発見箇所を写真記録します。<strong>市販の殺虫スプレーは撒かないこと</strong>が重要です。中途半端な薬剤散布はトコジラミを別の部屋へ拡散させ被害を拡大させます。寝具・荷物は密閉して隔離し、業者の指示を待ちます。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>トコジラミ駆除の費用相場はいくらですか？</dt>
+            <dd>客室1室あたりのスポット駆除で、薬剤処理30,000〜80,000円、加熱処理（ヒートトリートメント）50,000〜150,000円が目安です。トコジラミは再発しやすく複数回の処理が必要なため、初回＋再処理を含むパッケージになることが多くあります。複数室・フロア単位の被害では数十万〜数百万円規模になることもあります。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>加熱処理と薬剤処理はどちらが効果的ですか？</dt>
+            <dd>加熱処理（約60℃前後）は卵を含めて一度で死滅させられ、薬剤抵抗性トコジラミにも有効ですが費用は高めです。薬剤処理は費用を抑えられますが卵に効きにくく複数回の処理が必要で、近年は薬剤抵抗性の問題もあります。深刻な被害や確実性を求める場合は加熱処理、軽度なら薬剤処理と、状況に応じた使い分けまたは併用が一般的です。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>トコジラミは法律上、宿泊施設にどんな義務がありますか？</dt>
+            <dd>旅館業法により、宿泊施設には換気・清潔等の衛生上必要な措置を講じる義務があります。トコジラミの発生は「清潔保持義務」に関わる問題として指導対象になり得ます。また延床3,000㎡以上で特定用途のホテル等は建築物衛生法の特定建築物として、ねずみ・昆虫等の生息状況調査を2か月に1回以上実施する義務があり、トコジラミも対象に含まれます。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>宿泊客からトコジラミ被害を訴えられた場合、賠償責任はありますか？</dt>
+            <dd>清潔保持義務を怠っていた場合、刺咬被害の治療費や持ち帰り被害について損害賠償責任を問われる可能性があります。一方、宿泊客自身の持ち込みが明らかな場合は施設側の責任が限定されることもあります。重要なのは定期点検・清掃・駆除対応の記録を整備しておくことで、これらが「衛生管理を適切に行っていた」証拠となり施設側の立場を守ります。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>トコジラミはどこから持ち込まれるのですか？</dt>
+            <dd>最も多いのは宿泊客のスーツケース・衣類・カバンに付着しての持ち込みです。トコジラミは旅行者の荷物に紛れて移動します。インバウンド需要の回復で海外からの持ち込みリスクが高まっています。清掃スタッフが他室へ媒介するケースやリネンを介した拡散もあるため、清掃動線・リネン管理のルール整備が予防の鍵です。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>トコジラミの再発を防ぐにはどうすればよいですか？</dt>
+            <dd>①客室清掃時のベッド周辺の定期目視点検、②モニタリング（トラップ）による早期発見、③客室間移動を防ぐ隙間封鎖、④清掃スタッフ教育（報告ルール・媒介防止）、⑤リネンの高温洗濯・乾燥が再発防止の柱です。駆除後も最低1〜2か月はモニタリングを継続し、卵から孵化した個体の有無を確認します。PCO業者との定期点検契約も有効です。</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="cl-section">
+        <h2>関連記事</h2>
+        <ul class="cl-related">
+          <li><a href="/column/pest-control-guide/">業務用害虫駆除（PCO）完全ガイド｜法的義務・費用・業者選び・害虫別対策の総まとめ</a></li>
+          <li><a href="/column/pest-control-nezumi-inshokuten/">飲食店のネズミ駆除｜緊急対応の費用相場・保健所対応・再発防止まで</a></li>
+          <li><a href="/column/pest-control-gokiburi-gyosha/">業務用ゴキブリ駆除の業者選び完全ガイド｜飲食店・食品工場・オフィスの比較ポイント</a></li>
+          <li><a href="/column/pest-control-teiki-spot-hikaku/">害虫駆除の定期契約とスポット駆除を徹底比較｜PCOの契約形態の選び方</a></li>
+          <li><a href="/column/pest-control-hiyo-sohba/">業務用害虫駆除（PCO）の費用相場｜業種別・契約形態別の料金ガイド</a></li>
+          <li><a href="/column/pest-control-haccp/">HACCP制度化で必須になった害虫対策ガイド｜飲食・食品事業者の防除記録の作り方</a></li>
+        </ul>
+      </section>
+
+      <ColumnCtaCard serviceSlug="pest-control" serviceName="害虫駆除" variant="bottom" />
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-note { font-size: .82rem; color: var(--gray-500); font-style: italic; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-callout li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+@media (max-width: 600px) { .cl-header { padding: 32px 0 28px; } .cl-body { padding: 28px 16px 48px; } .cl-section h2 { font-size: 1.15rem; } }
+.cl-quickanswer { background: #eef6ff; border: 1.5px solid #1a56db; border-radius: 10px; padding: 18px 22px; margin-bottom: 32px; }
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+</style>

@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
-const title = 'ダクト清掃の費用相場2026｜厨房5〜30万円・空調10〜100万円を規模・種別ごとに解説';
+const title = 'ダクト清掃の費用相場｜厨房5〜30万円・空調10〜100万円を規模・種別ごとに解説';
 const description = '厨房排気ダクト・空調ダクト清掃の費用相場を2026年最新版で解説。厨房5〜30万円、空調10〜100万円をベースに、店舗規模・ダクト延長・清掃工法の違い、付帯費用の内訳、業者選びのポイントまで施設管理担当者向けにまとめました。';
 const canonical = `${site.domain}/column/duct-hiyo-sohba/`;
 const published = '2026-05-27';
@@ -32,12 +33,7 @@ const articleLd = JSON.stringify({
   articleSection: '費用相場',
   keywords: 'ダクト清掃,費用相場,厨房ダクト,空調ダクト,グリス除去,消防法,2026',
   author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
-  publisher: {
-    '@type': 'Organization',
-    name: site.org.legalName,
-    url: site.domain,
-    logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
-  },
+  publisher: { '@id': `${site.domain}/#organization` },
   image: { '@type': 'ImageObject', url: `${site.domain}/og-duct.png`, width: 1200, height: 630 },
   about: { '@type': 'Service', name: 'ダクト清掃' },
 });
@@ -51,16 +47,38 @@ const faqLd = JSON.stringify({
     { '@type': 'Question', name: '清掃頻度はどのくらいが適切ですか？', acceptedAnswer: { '@type': 'Answer', text: '厨房排気ダクトは年1〜2回（油脂の蓄積量により判断）、空調ダクトは2〜3年に1回が業界標準です。消防法上の防火管理義務の観点からも、厨房ダクトは消防署の立入検査で清掃記録の確認対象となります。' } },
     { '@type': 'Question', name: '業者によって費用が大きく違うのはなぜですか？', acceptedAnswer: { '@type': 'Answer', text: 'ダクト延長・汚染度の事前確認方法、高圧洗浄か手作業かの工法、廃液・廃棄物の処分方法、清掃後の動作確認範囲が業者ごとに異なるためです。「フード清掃のみ」と「ダクト全長の清掃」を同じ見積もり条件で比較できていないケースも多いため、施工範囲の明示が重要です。' } },
     { '@type': 'Question', name: '火災保険の観点でダクト清掃は必要ですか？', acceptedAnswer: { '@type': 'Answer', text: 'はい。厨房ダクト内の油脂蓄積が原因で火災が発生した場合、清掃を怠っていたとみなされると火災保険の免責事由に該当するケースがあります。清掃業者から「清掃証明書」を受領して保管することが重要です。' } },
+    { '@type': 'Question', name: "ダクト清掃は自分でできますか？", acceptedAnswer: { '@type': 'Answer', text: "ファン・フィルターの表面清掃は可能ですが、ダクト内部の油脂除去は専門機材・高圧洗浄が必要です。消防署の立入検査で内部清掃の記録を求められるため、業者依頼が事実上必須です。" } },
+    { '@type': 'Question', name: "ダクト清掃の頻度はどれくらいが適切ですか？", acceptedAnswer: { '@type': 'Answer', text: "厨房ダクトは使用頻度・油料理の量によりますが年1〜2回が推奨。空調ダクトは2〜3年に1回が一般的です。消防署の指導・建築物衛生法の管理基準に従ってください。" } },
+    { '@type': 'Question', name: "ダクト清掃は経費にできますか？", acceptedAnswer: { '@type': 'Answer', text: "法令義務に基づく費用として修繕費・維持管理費で損金算入可能です。火災予防の防火管理費用としても認められます。" } },
+    { '@type': 'Question', name: "ダクト清掃をしないとどうなりますか？", acceptedAnswer: { '@type': 'Answer', text: "グリース（油脂）が蓄積して厨房火災の直接原因になります。消防署の立入検査で清掃記録の不備が指摘され、是正命令の対象になる可能性があります。火災時には火災保険の免責事由になるリスクも。" } },
+    { '@type': 'Question', name: "ダクト清掃の業者選びで確認すべきことは？", acceptedAnswer: { '@type': 'Answer', text: "①清掃証明書（写真付き作業報告書）の発行可否、②廃棄物（グリース）の適正処理方法、③高所・屋外ダクトへの対応力、④消防法対応の経験年数、の4点を確認してください。" } }
+  
   ],
 });
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-duct.png` },
+});
+
 ---
-<BaseLayout
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified}
   title={title}
   description={description}
   canonical={canonical}
   siteName={site.name}
   logoSub="施設管理の一括見積比較"
-  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
 >
   <article class="cl-article">
 
@@ -74,7 +92,7 @@ const faqLd = JSON.stringify({
           <span>ダクト清掃の費用相場</span>
         </nav>
         <span class="cl-cat">ダクト清掃</span>
-        <h1 class="cl-title">ダクト清掃の費用相場2026｜厨房5〜30万円・空調10〜100万円を規模・種別ごとに解説</h1>
+        <h1 class="cl-title">ダクト清掃の費用相場｜厨房5〜30万円・空調10〜100万円を規模・種別ごとに解説</h1>
         <p class="cl-lead">
           ダクト清掃の費用は、<strong>厨房排気ダクトで5〜30万円、空調ダクトで10〜100万円</strong>が目安ですが、規模・延長・汚染度によって大きく変動します。本記事では、2026年時点の実勢価格を店舗規模別・ダクト種別に整理し、付帯費用の内訳、清掃頻度の判断基準、業者選びのポイントまでを解説します。
         </p>
@@ -91,8 +109,11 @@ const faqLd = JSON.stringify({
       <div class="cl-quickanswer">
         <p class="cl-qa-q">Q. ダクト清掃の費用はいくらですか？</p>
         <p class="cl-qa-a">A. <strong>厨房ダクト1系統5〜30万円・空調ダクト10〜100万円</strong>が目安。飲食店の厨房ダクトは油脂量・ダクト延長・高所作業の有無で変動する。</p>
-        <p class="cl-qa-src">※ロカサポ調査（2026年1〜4月・全国36社の見積データ）</p>
+        <p class="cl-qa-src">※ロカサポ編集部による相場調査（2026年1〜4月）</p>
       </div>
+
+      <ColumnCtaCard serviceSlug="duct" serviceName="ダクト清掃" variant="top" />
+
 
 
       <aside class="cl-toc" aria-label="目次">
@@ -420,7 +441,7 @@ const faqLd = JSON.stringify({
       <section class="cl-cta">
         <h2>ダクト清掃の業者選びでお困りなら</h2>
         <p>{site.name}では、清掃証明書の発行・廃棄物の適正処理に対応した業者の中から、ご依頼内容に応じて最大3社を厳選してご紹介します。<strong>お見積もり依頼は1分・完全無料</strong>です。</p>
-        <a href="/duct/" class="cta-btn-primary">無料で一括見積もりを依頼する →</a>
+        <a href="/duct/" class="cta-btn-primary">無料で一括見積もりを依頼する</a>
       </section>
 
             <div class="cl-pref-links">
@@ -437,17 +458,31 @@ const faqLd = JSON.stringify({
           <li><a href="/duct/hokkaido/">北海道</a></li>
           <li><a href="/duct/kyoto/">京都府</a></li>
         </ul>
-        <p class="cl-pref-more"><a href="/duct/">全国47都道府県の対応業者を見る →</a></p>
+        <p class="cl-pref-more"><a href="/duct/">全国47都道府県の対応業者を見る</a></p>
       </div>
 
       <aside class="cl-related">
         <h2 class="cl-related-h">関連する詳細情報</h2>
         <ul>
-          <li><a href="/column/duct-horei-gimu/">ダクト清掃の法令義務ガイド2026｜消防法・建築物衛生法の要点</a></li>
+          <li><a href="/column/duct-horei-gimu/">ダクト清掃の法令義務ガイド（消防法・建築物衛生法の要点）</a></li>
+          <li><a href="/column/duct-keihi/">清掃の費用は経費にできる？厨房・空調別の仕訳・損金算入</a></li>
+          <li><a href="/column/duct-hojokin/">ダクト清掃に使える補助金・助成金まとめ</a></li>
+          <li><a href="/column/duct-batsu/">怠ると…厨房火災と消防法違反のリスク・火災事例</a></li>
           <li><a href="/duct/">ダクト清掃のサービストップ</a></li>
           <li><a href="/flow/">一括見積依頼から契約までの流れ</a></li>
-          <li><a href="/operator/">運営者情報・ご紹介業者の審査基準</a></li>
         </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#shobo-ho">消防法</a></li>
+          <li><a href="/glossary/#biru-kan-ho">建築物衛生法（ビル管法）</a></li>
+          <li><a href="/glossary/#duct">ダクト</a></li>
+          <li><a href="/glossary/#tokutei-kenchikubutsu">特定建築物</a></li>
+          <li><a href="/glossary/#tokutei-boka-taisho">特定防火対象物</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集（49語）をすべて見る</a></p>
       </aside>
 
       <p class="cl-note">

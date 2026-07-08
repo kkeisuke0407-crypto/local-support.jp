@@ -1,0 +1,427 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = '浄化槽ブロワー（エアポンプ）の異音・故障・交換｜うるさい・電気代・寿命・止まったときの対処';
+const description = '浄化槽ブロワー（ブロアー・送風機）のトラブルを戸建てオーナー向けに解説。うるさい騒音の原因と対策、止まった・故障したときの対処、寿命・耐用年数、交換費用の目安、電気代、買い替えの判断、放置するとどうなるかまで2026年版で整理しました。';
+const canonical = `${site.domain}/column/johkasou-blower/`;
+const published = '2026-06-16';
+const modified = '2026-06-16';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '浄化槽ブロワーの異音・故障・交換', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 4800,
+  articleSection: '浄化槽',
+  keywords: '浄化槽ブロワー,ブロアー,エアポンプ,送風機,うるさい,騒音,故障,寿命,耐用年数,交換費用,電気代,2026',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-johkasou.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '浄化槽清掃・保守点検', serviceType: '浄化槽の維持管理' },
+  citation: [
+    { '@type': 'Legislation', name: '浄化槽法', url: 'https://laws.e-gov.go.jp/law/358AC1000000043' },
+  ],
+});
+
+const faqItems = [
+  {
+    q: '浄化槽ブロワーがうるさいのですが、原因は何ですか？',
+    a: '主な原因は、(1)ダイヤフラム（空気を送る膜）の劣化、(2)内部の部品摩耗、(3)設置場所の共振（地面や壁に振動が伝わる）、(4)ほこり詰まり、などです。古くなると振動・異音が大きくなりやすく、ダイヤフラムなどの部品交換で改善することがあります。改善しない場合や本体が古い場合は、ブロワー本体の交換を検討します。',
+  },
+  {
+    q: '浄化槽ブロワーが止まったらどうすればいいですか？',
+    a: 'まず電源（コンセント・ブレーカー）が入っているかを確認します。電源が正常でも動かない場合は故障の可能性が高いです。ブロワーが止まると浄化槽内の微生物に酸素が届かず、処理機能が低下して臭い・水質悪化につながります。長時間放置せず、早めに保守点検業者や販売店に連絡して点検・交換を依頼してください。',
+  },
+  {
+    q: '浄化槽ブロワーの寿命・耐用年数はどのくらいですか？',
+    a: '一般的に、浄化槽ブロワーの寿命はおおむね5〜10年程度が目安とされます。使用環境や機種によって幅があり、ダイヤフラムなどの消耗部品はそれより早く交換が必要になることがあります。異音・振動・風量低下が出てきたら、寿命のサインとして点検・交換を検討してください。',
+  },
+  {
+    q: 'ブロワーの交換費用はどのくらいですか？',
+    a: '家庭用の浄化槽ブロワーは、本体価格がおおむね1万〜3万円程度、これに交換作業費が加わるのが一般的です。風量（毎分の送風量）や機種、合併処理浄化槽用の2口タイプなどで価格が変わります。ダイヤフラムなどの部品交換だけで済む場合は、本体交換より安くなります。',
+  },
+  {
+    q: 'ブロワーは自分で交換できますか？',
+    a: 'コンセント式で、同じ風量・接続規格の機種に入れ替えるだけなら、自分で交換できる場合もあります。ただし、適合する風量・機種の選定を誤ると処理能力に影響します。合併処理浄化槽は機種選定が重要なため、保守点検業者に適合機種を確認してから交換するのが安心です。電気配線が伴う場合は専門業者に依頼してください。',
+  },
+  {
+    q: 'ブロワーの電気代はどのくらいですか？',
+    a: 'ブロワーは24時間稼働するため、家庭用でおおむね月数百円〜1,000円台、年間で数千円〜1万円程度が目安です。風量が大きい機種ほど電気代も高くなります。古く効率の悪いブロワーは電気代が増えるため、省エネ機種への買い替えで電気代が下がることもあります。',
+  },
+  {
+    q: 'ブロワーを止めたり、雨よけのカバーをかけても大丈夫ですか？',
+    a: 'ブロワーを止めると微生物に酸素が届かず処理機能が低下するため、基本的に止めてはいけません。カバーについては、ブロワーは吸排気を行うため、吸気口・排気口をふさぐと故障や能力低下の原因になります。雨よけが必要な場合は、通気を確保した専用カバーを使い、自己流で密閉しないよう注意してください。',
+  },
+  {
+    q: 'ブロワーの故障を放置するとどうなりますか？',
+    a: 'ブロワーが止まったまま放置すると、浄化槽内の好気性微生物が酸欠になり、汚れを分解できなくなります。その結果、放流水質の悪化、強い臭いの発生、浄化槽の機能低下を招きます。回復には時間がかかることもあるため、止まったら早急に交換・復旧することが重要です。',
+  },
+];
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-answer-grid', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-johkasou.png` },
+});
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified}
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a>
+          <span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a>
+          <span aria-hidden="true">›</span>
+          <span>浄化槽ブロワーの異音・故障・交換</span>
+        </nav>
+        <span class="cl-cat">浄化槽</span>
+        <h1 class="cl-title">浄化槽ブロワー（エアポンプ）の異音・故障・交換｜うるさい・電気代・寿命・止まったときの対処</h1>
+        <p class="cl-lead">
+          浄化槽ブロワー（ブロアー・送風機・エアポンプ）は、浄化槽の微生物に酸素を送り続ける<strong>24時間稼働の心臓部</strong>です。「うるさい」「止まった」「電気代が気になる」といったトラブルは戸建てオーナーに多い悩み。本記事では、騒音の原因と対策、止まった・故障したときの対処、寿命・耐用年数、交換費用の目安、電気代、放置するとどうなるかまでを整理します。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年6月16日</time>
+          <span>最終更新：2026年6月16日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 浄化槽ブロワーが「うるさい」「止まった」どうする？</p>
+        <p class="cl-qa-a">A. うるさい原因は<strong>ダイヤフラム劣化・部品摩耗・共振</strong>が多く、部品交換や設置調整で改善することがあります。止まったら<strong>電源を確認→ダメなら早急に交換</strong>。止まったまま放置すると微生物が酸欠になり水質悪化・臭いの原因に。寿命は<strong>おおむね5〜10年</strong>が目安です。</p>
+        <p class="cl-qa-src">※浄化槽法・一般的な機器知見をもとに整理</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="johkasou" serviceName="浄化槽清掃・保守点検" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#role">ブロワーの役割（なぜ24時間動くのか）</a></li>
+          <li><a href="#noise">うるさい・異音の原因と対策</a></li>
+          <li><a href="#stop">止まった・故障したときの対処</a></li>
+          <li><a href="#life">寿命・耐用年数</a></li>
+          <li><a href="#cost">交換費用の目安</a></li>
+          <li><a href="#denki">電気代と省エネ</a></li>
+          <li><a href="#caution">止めない・密閉しない（注意点）</a></li>
+          <li><a href="#sources">参考にした公式情報</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>うるさい原因はダイヤフラム劣化・部品摩耗・共振</strong>。部品交換や設置調整で改善することがある</li>
+            <li><strong>止まったら早急に交換</strong>。放置すると微生物が酸欠になり水質悪化・臭いに直結</li>
+            <li><strong>寿命は5〜10年が目安、交換費用は本体1万〜3万円＋作業費</strong>。古い機種は省エネ買い替えで電気代減も</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="role" class="cl-section">
+        <h2>ブロワーの役割（なぜ24時間動くのか）</h2>
+        <p>合併処理浄化槽は、微生物の働きで汚れを分解します。その微生物が活動するには酸素が必要で、ブロワー（送風機）が浄化槽内に空気を送り続けています。</p>
+        <ul>
+          <li><strong>役割</strong>：浄化槽内の好気性微生物に酸素を供給する</li>
+          <li><strong>稼働</strong>：処理を止めないため24時間連続運転</li>
+          <li><strong>止まると</strong>：微生物が酸欠になり、処理機能が低下する</li>
+        </ul>
+        <p>つまりブロワーは浄化槽の「心臓部」。止まったり弱ったりすると、浄化槽全体の処理に影響します。だからこそ、異音・停止には早く気づいて対応することが大切です。</p>
+      </section>
+
+      <section id="noise" class="cl-section">
+        <h2>うるさい・異音の原因と対策</h2>
+        <p>「ブロワーがうるさい」は最も多い悩みです。原因ごとに対策を整理します。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>騒音・異音の原因と対策</caption>
+            <thead>
+              <tr><th scope="col">原因</th><th scope="col">症状の例</th><th scope="col">対策</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">ダイヤフラムの劣化</th><td>ビリビリ・ガタガタ音、風量低下</td><td>ダイヤフラム等の部品交換</td></tr>
+              <tr><th scope="row">内部部品の摩耗</th><td>異音・振動の増大</td><td>部品交換、または本体交換</td></tr>
+              <tr><th scope="row">設置場所の共振</th><td>低い振動音が建物に伝わる</td><td>防振ゴム・設置面の調整</td></tr>
+              <tr><th scope="row">ほこり・目詰まり</th><td>こもった音、能力低下</td><td>吸気口の清掃</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>古いブロワーは振動・異音が大きくなりやすく、ダイヤフラムなどの部品交換で改善することがあります。改善しない場合や本体が寿命に近い場合は、本体交換が現実的です。寝室の近くなど騒音が気になる位置では、防振対策も有効です。</p>
+      </section>
+
+      <section id="stop" class="cl-section">
+        <h2>止まった・故障したときの対処</h2>
+        <p>ブロワーが動いていない・風が出ていないと気づいたら、次の順で確認します。</p>
+        <ol>
+          <li><strong>電源を確認</strong>：コンセントが抜けていないか、ブレーカーが落ちていないか</li>
+          <li><strong>復電しても動かない</strong>：本体故障の可能性が高い</li>
+          <li><strong>早めに連絡</strong>：保守点検業者・販売店に連絡し、点検・部品交換または本体交換を依頼</li>
+          <li><strong>放置しない</strong>：止まったままにすると微生物が酸欠になり処理機能が低下する</li>
+        </ol>
+        <div class="cl-callout cl-callout--warn">
+          <h3 class="cl-callout-h">止まったまま放置は厳禁</h3>
+          <p>ブロワーが止まると、浄化槽内の好気性微生物が酸欠になり、汚れを分解できなくなります。放流水質の悪化・強い臭いにつながり、回復に時間がかかることもあります。停止に気づいたら、できるだけ早く復旧してください。</p>
+        </div>
+      </section>
+
+      <section id="life" class="cl-section">
+        <h2>寿命・耐用年数</h2>
+        <p>浄化槽ブロワーの寿命は、おおむね5〜10年程度が目安とされます。ただし使用環境や機種で幅があります。</p>
+        <ul>
+          <li><strong>本体寿命</strong>：おおむね5〜10年が目安</li>
+          <li><strong>消耗部品（ダイヤフラム等）</strong>：本体より早く交換が必要になることがある</li>
+          <li><strong>寿命のサイン</strong>：異音・振動の増大、風量低下、頻繁な停止</li>
+        </ul>
+        <p>これらのサインが出てきたら、部品交換で延命するか、本体を交換するかを検討するタイミングです。</p>
+      </section>
+
+      <section id="cost" class="cl-section">
+        <h2>交換費用の目安</h2>
+        <p>交換には、部品交換と本体交換の2パターンがあります。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>交換費用の目安（家庭用）</caption>
+            <thead>
+              <tr><th scope="col">区分</th><th scope="col">費用の目安</th><th scope="col">備考</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">ダイヤフラム等の部品交換</th><td>部品代＋作業費（本体交換より安い）</td><td>劣化が部品にとどまる場合</td></tr>
+              <tr><th scope="row">本体交換</th><td>本体1万〜3万円程度＋作業費</td><td>風量・機種・2口タイプで変動</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>合併処理浄化槽は、適合する風量・機種の選定が処理能力に影響します。機種選定を誤らないよう、保守点検業者に適合機種を確認してから交換するのが安心です。費用全体の位置づけは<a href="/column/johkasou-hiyo-sohba/">浄化槽の費用相場2026</a>を参照してください。</p>
+      </section>
+
+      <section id="denki" class="cl-section">
+        <h2>電気代と省エネ</h2>
+        <p>ブロワーは24時間稼働するため、電気代が年間で効いてきます。</p>
+        <ul>
+          <li><strong>電気代の目安</strong>：月数百円〜1,000円台、年間で数千円〜1万円程度</li>
+          <li><strong>変動要因</strong>：風量（大きいほど高い）、電気料金単価、機器の効率</li>
+          <li><strong>省エネのヒント</strong>：古く効率の悪い機種は、省エネ機種への買い替えで電気代が下がることがある</li>
+        </ul>
+        <p>「電気代が上がった気がする」場合、ブロワーの劣化で効率が落ちている可能性もあります。交換のタイミングで省エネ機種を選ぶと、ランニングコストの低減につながります。</p>
+      </section>
+
+      <section id="caution" class="cl-section">
+        <h2>止めない・密閉しない（注意点）</h2>
+        <p>ブロワーの扱いで特に注意したい2点です。</p>
+        <ul>
+          <li><strong>止めない</strong>：節電や騒音対策で止めると、微生物が酸欠になり処理機能が低下する。基本的に常時運転する</li>
+          <li><strong>密閉しない</strong>：ブロワーは吸排気を行うため、吸気口・排気口をふさぐと故障・能力低下の原因になる。雨よけは通気を確保した専用カバーを使う</li>
+        </ul>
+        <p>「うるさいから夜だけ止める」「箱で囲って音を消す」といった自己流の対処は、故障や処理不良を招くため避けてください。騒音は防振や機種選びで対処するのが正解です。</p>
+      </section>
+
+      <section id="sources" class="cl-section">
+        <h2>参考にした公式情報</h2>
+        <p>本記事は、浄化槽法および一般的な機器の知見をもとに、戸建てオーナー向けに整理しています。適合機種・交換方法は、保守点検業者や販売店に確認してください。</p>
+        <ul class="cl-source-list">
+          <li><a href="https://laws.e-gov.go.jp/law/358AC1000000043" target="_blank" rel="noopener">浄化槽法｜e-Gov法令検索</a></li>
+          <li><a href="https://www.env.go.jp/recycle/jokaso/" target="_blank" rel="noopener">浄化槽サイト（環境省）</a></li>
+        </ul>
+      </section>
+
+      <div class="cl-cta">
+        <h2>ブロワー交換・浄化槽の保守をまとめて相談</h2>
+        <p>地域の浄化槽業者から最大3社の見積もりを<br/>完全無料・約1分で取得できます。適合機種の相談もOK</p>
+        <a class="cta-btn-primary" href="/johkasou/">無料で一括見積もりを依頼する</a>
+      </div>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          {faqItems.map((item) => (
+            <div class="cl-faq-item">
+              <dt>{item.q}</dt>
+              <dd>{item.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別の浄化槽業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/johkasou/tokyo/">東京都</a></li>
+          <li><a href="/johkasou/osaka/">大阪府</a></li>
+          <li><a href="/johkasou/kanagawa/">神奈川県</a></li>
+          <li><a href="/johkasou/aichi/">愛知県</a></li>
+          <li><a href="/johkasou/saitama/">埼玉県</a></li>
+          <li><a href="/johkasou/chiba/">千葉県</a></li>
+          <li><a href="/johkasou/hyogo/">兵庫県</a></li>
+          <li><a href="/johkasou/fukuoka/">福岡県</a></li>
+          <li><a href="/johkasou/hokkaido/">北海道</a></li>
+          <li><a href="/johkasou/kyoto/">京都府</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/johkasou/">全国47都道府県の対応業者を見る</a></p>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連サービス・コラム</h2>
+        <ul>
+          <li><a href="/johkasou/">浄化槽の保守点検・清掃業者を一括見積比較</a></li>
+          <li><a href="/column/johkasou-hiyo-sohba/">浄化槽の費用相場2026</a></li>
+          <li><a href="/column/johkasou-tenken-seiso-kensa/">浄化槽の保守点検・清掃・法定検査の違い2026</a></li>
+          <li><a href="/column/johkasou-kumitori/">浄化槽の汲み取り2026｜頻度・費用・単独/合併の違い</a></li>
+          <li><a href="/column/johkasou-horei-gimu/">浄化槽法の保守点検・清掃・法定検査ガイド2026</a></li>
+        </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#blower">ブロワー（送風機）</a></li>
+          <li><a href="/glossary/#jokaso-ho">浄化槽法</a></li>
+          <li><a href="/glossary/#gappei-shori-jokaso">合併処理浄化槽</a></li>
+          <li><a href="/glossary/#jokaso-kanrishi">浄化槽管理士</a></li>
+          <li><a href="/glossary/#jokaso-hoteikensa">法定検査（7条・11条）</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集（49語）をすべて見る</a></p>
+      </aside>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header {
+  background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%);
+  color: #fff;
+  padding: 48px 0 40px;
+}
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul, .cl-callout--warn ul { padding-left: 18px; margin: 0; }
+.cl-callout li, .cl-callout--warn li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-answer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 20px 0 24px; }
+.cl-answer-grid > div { background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; padding: 18px 20px; box-shadow: 0 6px 18px rgba(15, 23, 42, .05); }
+.cl-answer-grid h3 { font-size: 1rem; color: var(--blue-dark); margin: 0 0 8px; }
+.cl-answer-grid p { margin: 0; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-source-list { padding-left: 22px; display: grid; gap: 8px; }
+.cl-source-list a { color: var(--blue); text-decoration: underline; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-glossary-block { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 24px; }
+.cl-glossary-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; }
+.cl-glossary-list { padding-left: 18px; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; }
+.cl-glossary-list a { color: var(--blue); text-decoration: underline; font-size: .88rem; }
+.cl-glossary-more { font-size: .85rem; margin: 12px 0 0; }
+.cl-glossary-more a { color: var(--blue); text-decoration: underline; }
+@media (max-width: 600px) {
+  .cl-header { padding: 32px 0 28px; }
+  .cl-body { padding: 28px 16px 48px; }
+  .cl-section h2 { font-size: 1.15rem; }
+  .cl-answer-grid { grid-template-columns: 1fr; }
+}
+
+.cl-quickanswer {
+  background: #eef6ff;
+  border: 1.5px solid #1a56db;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-bottom: 32px;
+}
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+</style>

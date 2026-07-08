@@ -1,0 +1,379 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = "ダクト清掃の費用は経費にできる？厨房・空調別の仕訳・損金算入の実務";
+const description = "厨房ダクト・空調ダクト清掃費用の会計処理を解説。法令義務に基づく費用として全額損金算入が可能、仕訳例・消費税・大規模清掃と通常清掃の判定基準・税理士からよくある質問まで2026年税制対応で実務解説。";
+const canonical = `${site.domain}/column/duct-keihi/`;
+const published = '2026-05-27';
+const modified = '2026-05-27';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: "ダクト清掃の経費計上", item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 4400,
+  articleSection: "会計・経費",
+  keywords: "ダクト清掃,経費,損金算入,修繕費,衛生管理費,仕訳,2026",
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-duct.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: "ダクト清掃" },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: "グリスフィルターの交換費用も経費にできますか？", acceptedAnswer: { '@type': 'Answer', text: "はい、消耗品費・修繕費として全額損金算入できます。定期交換が必要な消耗品なので、年間予算に組み込むのが一般的です。" } },
+    { '@type': 'Question', name: "清掃と修理を同時実施した場合は？", acceptedAnswer: { '@type': 'Answer', text: "清掃部分は修繕費、修理部分も少額・通常修理であれば修繕費。大規模交換や用途変更を伴う改修は資本的支出として固定資産計上が必要です。請求書で内訳を明確に。" } },
+    { '@type': 'Question', name: "飲食店オーナーの個人事業の処理は？", acceptedAnswer: { '@type': 'Answer', text: "事業所得の必要経費として「修繕費」または「消耗品費」勘定で計上します。賃借物件の場合は原状回復義務の有無で資本的支出か修繕費かが分かれます。" } },
+    { '@type': 'Question', name: "テナント物件の清掃費用負担は？", acceptedAnswer: { '@type': 'Answer', text: "賃貸借契約により異なります。一般的に厨房ダクトはテナント負担、共用空調ダクトはビルオーナー負担。契約書で清掃義務の帰属を確認してください。" } },
+    { '@type': 'Question', name: "清掃証明書をなくした場合の対応は？", acceptedAnswer: { '@type': 'Answer', text: "業者に再発行を依頼します。万一火災が発生した場合、清掃証明書がないと火災保険の支払いに影響するため、デジタル化（PDF保管）も並行して行うことを推奨します。" } },
+    { '@type': 'Question', name: "消費税のインボイス対応はどう確認しますか？", acceptedAnswer: { '@type': 'Answer', text: "請求書に「適格請求書発行事業者登録番号」（T+13桁）が記載されているか確認してください。記載がない業者は免税事業者の可能性があり、仕入税額控除に制限が生じます。" } }
+  ],
+});
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-duct.png` },
+});
+
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified}
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  ogImage={`${site.domain}/og-duct.png`}
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>ダクト清掃の経費計上</span>
+        </nav>
+        <span class="cl-cat">ダクト清掃</span>
+        <h1 class="cl-title">ダクト清掃の費用は経費にできる？厨房・空調別の仕訳・損金算入の実務</h1>
+        <p class="cl-lead">ダクト清掃の費用は<strong>原則として全額損金算入が可能</strong>です。本記事では飲食店・ビル管理それぞれの仕訳例、消費税の取扱い、書類保管期間まで2026年版で実務解説します。</p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年5月27日</time>
+          <span>最終更新：2026年5月27日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. ダクト清掃は経費にできますか？</p>
+        <p class="cl-qa-a">A. <strong>法令義務に基づく費用として全額損金算入が可能</strong>。勘定科目は修繕費・衛生管理費が一般的、火災予防対策費としても認められます。</p>
+        <p class="cl-qa-src">※法人税法上の損金規定（2026年4月時点）</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="duct" serviceName="ダクト清掃" variant="top" />
+
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#principle">損金算入の基本ルール</a></li>
+          <li><a href="#shiwake">主体別の仕訳例</a></li>
+          <li><a href="#shouhizei">消費税の取扱い</a></li>
+          <li><a href="#large">大規模清掃の判定</a></li>
+          <li><a href="#records">書類の保管期間</a></li>
+          <li><a href="#invoice">インボイス対応の確認ポイント</a></li>
+          <li><a href="#bcp">BCP（事業継続計画）と経費処理</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <h2>3行サマリ</h2>
+        <div class="cl-callout">
+          <ul>
+            <li><strong>損金算入</strong>：法令義務（消防法防火管理義務）に基づく費用として全額損金算入</li>
+            <li><strong>勘定科目</strong>：修繕費・衛生管理費・防火管理費が一般的</li>
+            <li><strong>保管書類</strong>：清掃証明書・領収書・廃棄物マニフェストを5年間保管</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="principle" class="cl-section">
+        <h2>損金算入の基本ルール</h2>
+        <p>ダクト清掃の費用は、消防法の防火管理義務に基づく法令対応として、原則として<strong>全額損金算入が可能</strong>です。建物の通常の維持管理に必要な費用として、支払時に一括費用化できます。</p>
+        <p>火災予防の観点では、清掃を怠ると<strong>火災保険の免責事由</strong>になるリスクもあり、定期清掃の記録は経費処理と保険適用の両面で重要です。</p>
+      </section>
+
+      <section id="shiwake" class="cl-section">
+        <h2>主体別の仕訳例</h2>
+        <h3>飲食店（厨房ダクト清掃）</h3>
+        <p>勘定科目は<strong>「修繕費」または「衛生管理費」「防火管理費」</strong>を使用します。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>仕訳例（厨房ダクト清掃 132,000円・消費税込み）</caption>
+            <thead><tr><th>借方</th><th>金額</th><th>貸方</th><th>金額</th></tr></thead>
+            <tbody>
+              <tr><td>修繕費</td><td>120,000円</td><td>普通預金</td><td>132,000円</td></tr>
+              <tr><td>仮払消費税</td><td>12,000円</td><td></td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>ビル管理（空調ダクト清掃）</h3>
+        <p>建築物衛生法の対象施設では「特別修繕費」「設備管理費」として処理することも一般的です。複数年に1回の大規模清掃の場合は計画的な予算化が必要です。</p>
+
+        <h3>マンション管理組合</h3>
+        <p>共用部の換気ダクトは管理費会計から、専用部分は区分所有者負担として処理。理事会決議で工事範囲・費用負担を明確化しておきましょう。</p>
+      </section>
+
+      <section id="shouhizei" class="cl-section">
+        <h2>消費税の取扱い</h2>
+        <p>ダクト清掃費用は消費税課税取引です。インボイス制度に対応した適格請求書発行事業者からの請求書受領を確認してください。</p>
+        <ul>
+          <li>インボイス対応業者：仕入税額控除が可能</li>
+          <li>免税事業者：2026年9月までは控除80%</li>
+          <li>廃棄物処理費（産廃マニフェスト）も同じく課税取引</li>
+        </ul>
+      </section>
+
+      <section id="large" class="cl-section">
+        <h2>大規模清掃の判定</h2>
+        <p>通常の定期清掃は修繕費（損金算入）として処理しますが、ダクト本体の交換・大規模改修を伴う場合は資本的支出になる可能性があります。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>ダクト清掃・工事の会計処理判定</caption>
+            <thead><tr><th>工事内容</th><th>金額目安</th><th>処理</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">定期清掃（年1〜2回）</th><td>5〜30万円</td><td>修繕費</td></tr>
+              <tr><th scope="row">大規模特別清掃</th><td>50〜200万円</td><td>修繕費</td></tr>
+              <tr><th scope="row">ダクト一部交換</th><td>100万円〜</td><td>資本的支出の検討対象</td></tr>
+              <tr><th scope="row">ダクト全面更新</th><td>500万円〜</td><td>資本的支出（資産計上）</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="records" class="cl-section">
+        <h2>書類の保管期間</h2>
+        <ul>
+          <li><strong>領収書・請求書</strong>：7年間（法人税法・所得税法）</li>
+          <li><strong>清掃証明書（写真付き作業報告書）</strong>：5年間（消防法上の防火管理記録として推奨）</li>
+          <li><strong>廃棄物マニフェスト</strong>：5年間（廃棄物処理法）</li>
+          <li><strong>業者の許可証コピー</strong>：契約期間中</li>
+          <li><strong>火災保険書類との突合</strong>：保険契約期間中保管</li>
+        </ul>
+      </section>
+
+      <section id="invoice" class="cl-section">
+        <h2>インボイス対応の確認ポイント</h2>
+        <p>ダクト清掃は<strong>店舗・小規模事業者ベースで個人業者が対応するケースが多く</strong>、インボイス制度（適格請求書等保存方式）対応状況は業者間でばらつきがあります。仕入税額控除を確実に受けるための実務確認を整理します。</p>
+
+        <h3>業者発注前のチェック</h3>
+        <ol>
+          <li>業者名で<strong>適格請求書発行事業者公表サイト</strong>（国税庁）を検索</li>
+          <li>登録番号（T+13桁）の有効期限を確認</li>
+          <li>登録番号の取消・失効の有無を確認</li>
+          <li>請求書に必要記載項目（登録番号・税率別合計・消費税額）が記載されるか業者に事前確認</li>
+        </ol>
+
+        <h3>免税事業者との取引の経過措置</h3>
+        <p>地元の個人ダクト清掃業者は免税事業者（年商1,000万円以下）の場合があります。免税事業者からの仕入れは、以下の経過措置で仕入税額控除できます。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>免税事業者との取引の経過措置</caption>
+            <thead><tr><th>期間</th><th>控除割合</th></tr></thead>
+            <tbody>
+              <tr><td>2023年10月〜2026年9月</td><td>80%</td></tr>
+              <tr><td>2026年10月〜2029年9月</td><td>50%</td></tr>
+              <tr><td>2029年10月以降</td><td>0%（控除不可）</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>2026年現在の選択肢</h3>
+        <p>2026年は経過措置の最終年度。来年度（2026年10月以降）は50%に減額されるため、長期年間契約を結ぶ業者の選定では「インボイス登録の有無」を重要視する時期です。免税事業者でも価格優位性が大きければ採用可能ですが、税抜価格＋実質負担額（控除差額）で比較してください。</p>
+      </section>
+
+      <section id="bcp" class="cl-section">
+        <h2>BCP（事業継続計画）の文脈での経費処理</h2>
+        <p>ダクト清掃を「単なる維持管理費」ではなく「<strong>事業継続のための投資</strong>」として位置づけると、より積極的な経費処理・補助金活用の可能性が広がります。</p>
+
+        <h3>事業継続力強化計画認定との連動</h3>
+        <p>中小企業庁の「事業継続力強化計画」認定を受けると、災害・火災等のリスク低減対策として実施するダクト清掃・防火設備強化は<strong>「事業継続のための投資」</strong>として位置づけられます。認定計画書にダクト清掃の実施計画を明記しておくと、税制優遇（中小企業防災・減災投資促進税制：取得価額の20%即時償却または7%税額控除）の適用対象になる場合があります。</p>
+
+        <h3>事業継続強化資金との関係</h3>
+        <p>事業継続力強化計画認定事業者は、日本政策金融公庫から低利融資（基準金利-0.9%）を受けることができ、設備投資資金として活用可能です。大規模なダクト改修・防火設備強化を計画する場合、補助金併用＋低利融資の組み合わせで初期投資の負担を大きく軽減できます。</p>
+
+        <h3>火災保険料の見直し効果</h3>
+        <p>定期的なダクト清掃の実施記録を保有していると、火災保険料の更新時に<strong>「適正な維持管理」の証拠</strong>として保険料割引の対象になる場合があります。保険会社によっては「リスクマネジメント割引」「優良管理割引」として5〜15%程度の保険料割引を適用するため、清掃証明書を保険会社に提出する習慣をつけると年間数万円の保険料削減に直結します。</p>
+      </section>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          <div class="cl-faq-item">
+            <dt>グリスフィルターの交換費用も経費にできますか？</dt>
+            <dd>はい、消耗品費・修繕費として全額損金算入できます。定期交換が必要な消耗品なので、年間予算に組み込むのが一般的です。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>清掃と修理を同時実施した場合は？</dt>
+            <dd>清掃部分は修繕費、修理部分も少額・通常修理であれば修繕費。大規模交換や用途変更を伴う改修は資本的支出として固定資産計上が必要です。請求書で内訳を明確に。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>飲食店オーナーの個人事業の処理は？</dt>
+            <dd>事業所得の必要経費として「修繕費」または「消耗品費」勘定で計上します。賃借物件の場合は原状回復義務の有無で資本的支出か修繕費かが分かれます。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>テナント物件の清掃費用負担は？</dt>
+            <dd>賃貸借契約により異なります。一般的に厨房ダクトはテナント負担、共用空調ダクトはビルオーナー負担。契約書で清掃義務の帰属を確認してください。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>清掃証明書をなくした場合の対応は？</dt>
+            <dd>業者に再発行を依頼します。万一火災が発生した場合、清掃証明書がないと火災保険の支払いに影響するため、デジタル化（PDF保管）も並行して行うことを推奨します。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>消費税のインボイス対応はどう確認しますか？</dt>
+            <dd>請求書に「適格請求書発行事業者登録番号」（T+13桁）が記載されているか確認してください。記載がない業者は免税事業者の可能性があり、仕入税額控除に制限が生じます。</dd>
+          </div>
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別のダクト清掃業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/duct/tokyo/">東京都</a></li>
+          <li><a href="/duct/osaka/">大阪府</a></li>
+          <li><a href="/duct/kanagawa/">神奈川県</a></li>
+          <li><a href="/duct/aichi/">愛知県</a></li>
+          <li><a href="/duct/saitama/">埼玉県</a></li>
+          <li><a href="/duct/chiba/">千葉県</a></li>
+          <li><a href="/duct/hyogo/">兵庫県</a></li>
+          <li><a href="/duct/fukuoka/">福岡県</a></li>
+          <li><a href="/duct/hokkaido/">北海道</a></li>
+          <li><a href="/duct/kyoto/">京都府</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/duct/">全国47都道府県の対応業者を見る</a></p>
+      </div>
+
+      <div class="cl-cta" id="contact">
+        <h2>ダクト清掃の業者選びでお困りなら</h2>
+        <p>清掃証明書発行・廃棄物適正処理・適格請求書発行に対応する業者から最大3社を無料でご紹介します。</p>
+        <a href="/duct/" class="cta-btn-primary">無料で一括見積もりを依頼する</a>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連する詳細情報</h2>
+        <ul>
+          <li><a href="/column/duct-hiyo-sohba/">ダクト清掃の費用相場2026</a></li>
+          <li><a href="/column/duct-horei-gimu/">ダクト清掃の法令義務ガイド2026</a></li>
+          <li><a href="/column/duct-batsu/">ダクト清掃を怠ったときの罰則・火災事例2026</a></li>
+        </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#shobo-ho">消防法</a></li>
+          <li><a href="/glossary/#biru-kan-ho">建築物衛生法（ビル管法）</a></li>
+          <li><a href="/glossary/#duct">ダクト</a></li>
+          <li><a href="/glossary/#tokutei-kenchikubutsu">特定建築物</a></li>
+          <li><a href="/glossary/#tokutei-boka-taisho">特定防火対象物</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集（49語）をすべて見る</a></p>
+      </aside>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-author-link { color: #fff; text-decoration: underline; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-quickanswer { background: #eef6ff; border: 1.5px solid #1a56db; border-radius: 10px; padding: 18px 22px; margin-bottom: 32px; }
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-faq { display: grid; gap: 14px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 32px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 32px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; list-style: none; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+</style>

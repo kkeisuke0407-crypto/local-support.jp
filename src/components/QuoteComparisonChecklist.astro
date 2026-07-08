@@ -1,0 +1,220 @@
+---
+import { quoteComparisonChecklist } from '../data/quoteComparisonChecklist';
+
+interface Props {
+  serviceName: string;
+  prefectureName?: string;
+}
+
+const { serviceName, prefectureName } = Astro.props;
+const title = prefectureName
+  ? `${prefectureName}の${serviceName}見積比較チェック表`
+  : `${serviceName}の見積比較チェック表`;
+const lead = prefectureName
+  ? `${prefectureName}で${serviceName}業者を比較するときは、総額だけでなく作業範囲・追加費用・報告書・再対応条件まで同じ基準で確認することが重要です。`
+  : `${serviceName}業者を比較するときは、総額だけでなく作業範囲・追加費用・報告書・再対応条件まで同じ基準で確認することが重要です。`;
+---
+<section class="sd-section section-gray quote-compare" id="quote-compare">
+  <div class="sd-container">
+    <div class="section-head">
+      <span class="kicker">QUOTE CHECK</span>
+      <h2>{title}</h2>
+      <p>{lead}</p>
+    </div>
+
+    <div class="quote-compare-points" aria-label="見積比較で先に確認する3つの要点">
+      <div>
+        <strong>同じ条件で比べる</strong>
+        <span>対象範囲・数量・作業時間をそろえる</span>
+      </div>
+      <div>
+        <strong>総額で比べる</strong>
+        <span>追加費用・交通費・廃棄費まで見る</span>
+      </div>
+      <div>
+        <strong>納品物で比べる</strong>
+        <span>報告書・写真・是正提案の有無を確認</span>
+      </div>
+    </div>
+
+    <div class="quote-compare-table-wrap">
+      <table class="quote-compare-table">
+        <caption>{title}</caption>
+        <thead>
+          <tr>
+            <th scope="col">比較項目</th>
+            <th scope="col">確認する内容</th>
+            <th scope="col">見落とした場合のリスク</th>
+          </tr>
+        </thead>
+        <tbody>
+          {quoteComparisonChecklist.map((row) => (
+            <tr>
+              <th scope="row">{row.label}</th>
+              <td>{row.check}</td>
+              <td>{row.risk}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <p class="quote-compare-note">
+      <strong>比較のコツ：</strong>
+      1社だけ極端に安い場合は、対象範囲・作業時間・報告書・追加費用のどれかが抜けていることがあります。見積書の項目名が違う場合は、上の表に沿って同じ条件にそろえてから判断してください。
+    </p>
+
+    <div class="quote-compare-cta">
+      <p>ロカサポでは、上記の比較項目をふまえて{serviceName}に対応できる業者を最大3社までご紹介します。</p>
+      <a href="#contact">同じ条件で無料見積もりを依頼する</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .quote-compare-points {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin: 0 0 22px;
+  }
+
+  .quote-compare-points div {
+    padding: 16px;
+    background: #fff;
+    border: 1px solid var(--gray-200);
+    border-radius: 12px;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+  }
+
+  .quote-compare-points strong,
+  .quote-compare-points span {
+    display: block;
+  }
+
+  .quote-compare-points strong {
+    color: var(--blue-dark);
+    font-size: 1rem;
+    margin-bottom: 6px;
+  }
+
+  .quote-compare-points span {
+    color: var(--gray-700);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .quote-compare-table-wrap {
+    overflow-x: auto;
+    background: #fff;
+    border: 1px solid var(--gray-200);
+    border-radius: 14px;
+    box-shadow: 0 14px 34px rgba(15, 23, 42, 0.06);
+  }
+
+  .quote-compare-table {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+  }
+
+  .quote-compare-table caption {
+    text-align: left;
+    padding: 16px 18px;
+    font-weight: 700;
+    color: var(--blue-dark);
+    caption-side: top;
+  }
+
+  .quote-compare-table thead th {
+    background: var(--blue-dark);
+    color: #fff;
+    font-size: 0.86rem;
+    letter-spacing: 0.03em;
+    text-align: left;
+  }
+
+  .quote-compare-table th,
+  .quote-compare-table td {
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--gray-200);
+    vertical-align: top;
+    line-height: 1.75;
+  }
+
+  .quote-compare-table tbody th {
+    width: 18%;
+    color: var(--blue-dark);
+    background: #f8fafc;
+    font-weight: 700;
+  }
+
+  .quote-compare-table tbody tr:last-child th,
+  .quote-compare-table tbody tr:last-child td {
+    border-bottom: 0;
+  }
+
+  .quote-compare-note {
+    margin: 18px 0 0;
+    padding: 14px 16px;
+    border-left: 4px solid var(--blue);
+    background: #fff;
+    border-radius: 10px;
+    color: var(--gray-800);
+    line-height: 1.8;
+    font-size: 0.94rem;
+  }
+
+  .quote-compare-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 18px 0 0;
+    padding: 18px;
+    background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+    color: #fff;
+    border-radius: 14px;
+    box-shadow: 0 16px 34px rgba(26, 86, 219, 0.18);
+  }
+
+  .quote-compare-cta p {
+    margin: 0;
+    line-height: 1.7;
+    font-weight: 700;
+  }
+
+  .quote-compare-cta a {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 18px;
+    border-radius: 999px;
+    background: #fff;
+    color: var(--blue-dark);
+    font-weight: 800;
+    text-decoration: none;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.16);
+  }
+
+  .quote-compare-cta a:hover {
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 768px) {
+    .quote-compare-points {
+      grid-template-columns: 1fr;
+    }
+
+    .quote-compare-table {
+      font-size: 0.84rem;
+    }
+
+    .quote-compare-cta {
+      align-items: stretch;
+      flex-direction: column;
+    }
+  }
+</style>

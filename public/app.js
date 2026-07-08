@@ -1,9 +1,6 @@
 /* local-support.jp – app.js */
 
-console.log('[local-support] app.js loaded');
-
 document.addEventListener('DOMContentLoaded', function () {
-  console.log('[local-support] DOMContentLoaded');
 
   /* ── FAQ accordion ── */
   document.querySelectorAll('.faq-q').forEach(function (q) {
@@ -135,8 +132,9 @@ document.addEventListener('DOMContentLoaded', function () {
         submitBtn.textContent = '送信中...';
       }
       var redirect = form.getAttribute('data-redirect') || '/thanks/';
+      var endpoint = form.getAttribute('action') || '/api/quote';
 
-      fetch('/api/quote', {
+      fetch(endpoint, {
         method: 'POST',
         body: new FormData(form),
       }).then(function (resp) {
@@ -168,6 +166,40 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
   });
+
+  /* ── Contact method toggle ── */
+  (function initContactMethod() {
+    document.querySelectorAll('form.qf').forEach(function (form) {
+      var methodInputs = form.querySelectorAll('input[name="contact_method"]');
+      if (!methodInputs.length) return;
+
+      var emailRow = form.querySelector('.qf-contact-email');
+      var telRow   = form.querySelector('.qf-contact-tel');
+      var emailEl  = emailRow && emailRow.querySelector('input[name="email"]');
+      var telEl    = telRow   && telRow.querySelector('input[name="tel"]');
+
+      function applyMethod(method) {
+        if (method === 'メール') {
+          if (emailRow) { emailRow.hidden = false; if (emailEl) emailEl.required = true; }
+          if (telRow)   { telRow.hidden   = true;  if (telEl)   { telEl.required = false; telEl.value = ''; } }
+        } else if (method === '電話') {
+          if (emailRow) { emailRow.hidden = true;  if (emailEl) { emailEl.required = false; emailEl.value = ''; } }
+          if (telRow)   { telRow.hidden   = false; if (telEl)   telEl.required = true; }
+        } else { // どちらでも
+          if (emailRow) { emailRow.hidden = false; if (emailEl) emailEl.required = false; }
+          if (telRow)   { telRow.hidden   = false; if (telEl)   telEl.required = false; }
+        }
+      }
+
+      // JS有効時：初期状態は両方非表示
+      if (emailRow) emailRow.hidden = true;
+      if (telRow)   telRow.hidden   = true;
+
+      methodInputs.forEach(function (input) {
+        input.addEventListener('change', function () { applyMethod(this.value); });
+      });
+    });
+  })();
 
   /* ── Cookie consent banner ── */
   var banner = document.getElementById('cookie-banner');
@@ -215,6 +247,10 @@ document.addEventListener('DOMContentLoaded', function () {
   /* ── Hide sticky CTA over footer ── */
   var stickyCta = document.querySelector('.sticky-cta');
   if (stickyCta) {
+    /* href="/audit/" + data-scroll-to="#contact" means:
+       - on pages WITH #contact form → smooth-scroll handler intercepts
+       - on pages WITHOUT → href takes over and navigates to /audit/
+       so no JS rewrite is needed here. */
     var footer = document.querySelector('.sd-footer');
     if (footer && 'IntersectionObserver' in window) {
       var obs = new IntersectionObserver(function (entries) {

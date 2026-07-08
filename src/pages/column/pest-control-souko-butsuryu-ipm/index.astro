@@ -1,0 +1,429 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = "倉庫・物流施設のIPM導入ガイド｜貿易会社・食品物流の害虫リスクと業者選び";
+const description = "倉庫・物流センター・貿易会社・食品物流施設に必要なIPM（総合防除）を実務目線で整理。輸入貨物経由の外来害虫リスク、貯穀害虫の発生源管理、FSSC22000・HACCP対応のモニタリング、業種別の費用相場、IPM対応業者の選び方を解説。";
+const canonical = `${site.domain}/column/pest-control-souko-butsuryu-ipm/`;
+const published = '2026-06-19';
+const modified = '2026-06-19';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '倉庫・物流のIPM導入', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 5700,
+  articleSection: '害虫駆除 倉庫・物流',
+  keywords: '害虫駆除,倉庫,物流,IPM,貿易会社,貯穀害虫,FSSC22000,2026',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-pest-control.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '害虫駆除（業務用PCO）' },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: '倉庫・物流施設になぜIPMが必要なのですか？', acceptedAnswer: { '@type': 'Answer', text: '倉庫は「広域・高所・人の出入りが少ない」という特性で、薬剤散布だけでは効果が限定的かつ食品・商品の汚染リスクがあります。IPMは「侵入経路の遮断・モニタリング・構造改善・必要最小限の薬剤」を組み合わせた手法で、貯穀害虫やネズミの定着を予防し、食品衛生法・HACCP・FSSC22000に対応した記録も整備できます。' } },
+    { '@type': 'Question', name: '貿易会社で気をつけるべき害虫リスクは何ですか？', acceptedAnswer: { '@type': 'Answer', text: '輸入貨物経由で侵入する外来種害虫が主要リスクです。トコジラミ・コクヌストモドキ・ノシメマダラメイガ・ヒラタチャタテ等が代表例で、コンテナ・段ボール・パレット・梱包材を介して侵入します。貨物の検査・隔離・初動防除のフローを業者と擦り合わせておくことが重要です。' } },
+    { '@type': 'Question', name: '物流倉庫の害虫駆除費用相場はどれくらいですか？', acceptedAnswer: { '@type': 'Answer', text: '中規模物流倉庫（〜3,000㎡）でIPM定期契約 月額40,000〜80,000円、大規模（3,000㎡〜）で月額80,000〜200,000円が目安です。食品物流・FSSC22000対応倉庫は記録整備・モニタリング強化で+20〜40%。スポット駆除は1回100,000〜300,000円。' } },
+    { '@type': 'Question', name: 'IPM対応業者かどうかをどう見分ければいいですか？', acceptedAnswer: { '@type': 'Answer', text: '①公益社団法人 日本ペストコントロール協会会員であること、②防除作業監督者の在籍、③倉庫・物流の実績件数（年間20件以上が安心）、④モニタリングトラップの種類と運用設計、⑤侵入経路調査の事前提案、⑥薬剤使用量の削減実績、⑦報告書のサンプル提示 — の7項目を確認してください。' } },
+    { '@type': 'Question', name: 'FSSC22000認証取得を目指す場合、害虫対策はどう変わりますか？', acceptedAnswer: { '@type': 'Answer', text: 'FSSC22000は前提条件プログラム（PRP）として「そ族・昆虫の防除」を要求しており、HACCPより厳格な記録・改善措置・トレンド分析が必要です。月次モニタリングシートのデジタル化、年間予防計画書、薬剤SDSの完備、年1回の侵入経路再評価などが標準で、対応業者の選定が認証取得の成否を左右します。' } },
+    { '@type': 'Question', name: 'ネズミ侵入の防止策で効果的なのは？', acceptedAnswer: { '@type': 'Answer', text: 'シャッター下端の隙間封鎖（5mm以上はネズミ通過）、配管貫通部のシール、排水溝の防護グリッド、巡回パトロールの記録化が基本です。屋外側でも防護ベルト・電気式忌避装置・捕獲器の組み合わせが有効。倉庫は人の出入りが少ない夜間に活動するため、IPMの専門家が設計したモニタリング配置が重要です。' } },
+    { '@type': 'Question', name: '入出荷を止めずに作業できますか？', acceptedAnswer: { '@type': 'Answer', text: '可能です。IPMの基本は「営業時間中の通常モニタリング+月次の集中防除」で、入出荷スケジュールに合わせて作業時間を分散させます。集中防除は閉庫日（土日・祝日・連休）に組むのが一般的で、3PL・倉庫運営会社の業務影響を最小化できます。年間契約時に「閉庫日リスト」を業者へ共有しておくとスムーズです。' } },
+  ],
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-pest-control.png` },
+});
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  ogImage={`${site.domain}/og-pest-control.png`}
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>倉庫・物流のIPM導入</span>
+        </nav>
+        <span class="cl-cat">害虫駆除</span>
+        <h1 class="cl-title">倉庫・物流施設のIPM導入ガイド｜貿易会社・食品物流の害虫リスクと業者選び</h1>
+        <p class="cl-lead">倉庫・物流センター・貿易会社・食品物流は、<strong>輸入貨物経由の外来種害虫・貯穀害虫・ネズミ</strong>のリスクが集中しやすい現場です。この記事ではIPM（総合防除）の導入手順、業種別の費用相場、FSSC22000・HACCP対応の記録、業者選びの実務まで通しでまとめます。目安は<strong>中規模倉庫で月額40,000〜80,000円</strong>です。</p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年6月19日</time>
+          <span>最終更新：2026年6月19日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 倉庫・物流施設の害虫対策、何をどう設計する？</p>
+        <p class="cl-qa-a">A. <strong>IPM（総合防除）を基本に、侵入経路遮断・モニタリング・必要最小限の薬剤を組み合わせる</strong>。中規模倉庫で月額4〜8万円、貿易会社は輸入貨物リスクへの初動フロー設計が肝。</p>
+        <p class="cl-qa-src">※公益社団法人 日本ペストコントロール協会 IPM基準・FSSC22000 PRP対応</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="pest-control" serviceName="害虫駆除" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#why">なぜ倉庫・物流にIPMが必要なのか</a></li>
+          <li><a href="#trade">貿易会社特有の害虫リスク</a></li>
+          <li><a href="#pests">倉庫で問題になる代表的な害虫</a></li>
+          <li><a href="#ipm">IPMの4要素と導入ステップ</a></li>
+          <li><a href="#cost">業種別・規模別の費用相場</a></li>
+          <li><a href="#fssc">FSSC22000・HACCP対応の記録整備</a></li>
+          <li><a href="#choose">業者選びで確認すべき7項目</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <h2>3行サマリ</h2>
+        <div class="cl-callout">
+          <ul>
+            <li><strong>必要性</strong>：広域・高所の倉庫は薬剤散布だけでは限界。IPMで侵入経路遮断＋モニタリング＋必要最小限の薬剤</li>
+            <li><strong>費用</strong>：中規模倉庫 月額4〜8万円、大規模 月額8〜20万円。FSSC22000対応は+20〜40%</li>
+            <li><strong>業者選定</strong>：協会会員・防除作業監督者・倉庫実績年20件以上が安心の目安</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="why" class="cl-section">
+        <h2>なぜ倉庫・物流にIPMが必要なのか</h2>
+        <p>倉庫・物流施設は飲食店と異なり、以下の<strong>3つの構造的特性</strong>を持ちます。これがIPMが必須となる理由です。</p>
+
+        <h3>① 広域・高所・人の出入りが少ない</h3>
+        <p>1,000〜10,000㎡規模の床面積を持つ倉庫では、薬剤散布の薬剤量が膨大になり、コスト・環境負荷・商品汚染リスクが上がります。さらに天井裏・パレット陰・ラック上段など<strong>人の目が届きにくい場所が多く</strong>、定期的なモニタリングなしでは害虫の早期発見が困難です。</p>
+
+        <h3>② 商品・食材を扱うため薬剤汚染リスクが高い</h3>
+        <p>食品物流・3PL倉庫では、商品への薬剤付着が即座に営業損失・回収リスクに直結します。IPMは「薬剤を最小限に抑えつつ、構造改善とモニタリングで予防」する設計のため、商品汚染リスクを大幅に下げられます。</p>
+
+        <h3>③ 認証取得・取引先要件への対応が必要</h3>
+        <p>食品物流ではFSSC22000・ISO22000・取引先（大手食品メーカー・小売）の独自監査基準に対応する必要があります。「月次モニタリング記録」「侵入経路調査報告」「改善措置トレンド」がIPM対応業者から提供されると、認証取得・更新がスムーズです。</p>
+      </section>
+
+      <section id="trade" class="cl-section">
+        <h2>貿易会社特有の害虫リスク</h2>
+        <p>輸入貨物を扱う貿易会社・通関倉庫・保税倉庫は、<strong>「外来種害虫の入口」</strong>として一般倉庫より高いリスクを抱えています。代表的な侵入経路と対策を整理します。</p>
+
+        <h3>主な侵入経路</h3>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>輸入貨物経由の害虫侵入経路（2026年6月時点）</caption>
+            <thead><tr><th>侵入経路</th><th>主な害虫</th><th>初動対応</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">コンテナ内部</th><td>トコジラミ・ゴキブリ・蜘蛛</td><td>開梱前の燻蒸・トラップ設置</td></tr>
+              <tr><th scope="row">段ボール・梱包材</th><td>ヒラタチャタテ・コクヌストモドキ</td><td>開梱エリアでの初動モニタリング</td></tr>
+              <tr><th scope="row">木製パレット（IPPC刻印確認）</th><td>木材害虫・コクヌストモドキ</td><td>熱処理・燻蒸済みパレットのみ使用</td></tr>
+              <tr><th scope="row">輸入食材・穀物</th><td>ノシメマダラメイガ・コクゾウムシ</td><td>原料庫の温度・湿度管理</td></tr>
+              <tr><th scope="row">海外作業員の作業着</th><td>トコジラミ・ノミ</td><td>更衣室の動線設計・定期点検</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>貿易会社向けIPM初動フロー</h3>
+        <ol>
+          <li><strong>コンテナ着荷時</strong>：外観・コンテナ内部の目視点検、害虫の有無を作業員チェックリストで記録</li>
+          <li><strong>開梱エリア</strong>：開梱前トラップを24〜48時間設置し、初動モニタリング</li>
+          <li><strong>害虫発見時</strong>：隔離 → 業者連絡 → 隔離エリア集中防除 → 影響範囲の特定</li>
+          <li><strong>定期報告</strong>：着荷件数・害虫発見件数・対応内容を月次レポートに記録</li>
+          <li><strong>振り返り</strong>：四半期ごとに「リスクのある仕入先・国別傾向」を分析</li>
+        </ol>
+
+        <p class="cl-note"><small>※コンテナ燻蒸は植物検疫法・船舶燻蒸の法令対応が必要です。専門業者へ事前に相談してください。</small></p>
+      </section>
+
+      <section id="pests" class="cl-section">
+        <h2>倉庫で問題になる代表的な害虫</h2>
+        <p>倉庫・物流施設で問題になる害虫は、飲食店と異なる種類が中心です。業者の対応能力もこれらの害虫への対応経験で測れます。</p>
+
+        <h3>貯穀害虫（食品・穀物を扱う倉庫）</h3>
+        <ul>
+          <li><strong>ノシメマダラメイガ</strong>：穀物・小麦粉・米・ナッツに発生。製品への混入が苦情の主因</li>
+          <li><strong>コクヌストモドキ</strong>：穀粉・乾燥食品。商品の中で繁殖し追跡が困難</li>
+          <li><strong>コクゾウムシ</strong>：玄米・小麦の最大の敵。一度発生すると駆除が長期化</li>
+          <li><strong>タバコシバンムシ</strong>：乾燥植物・タバコ・茶葉。意外な商品でも発生</li>
+        </ul>
+
+        <h3>侵入害虫（一般倉庫共通）</h3>
+        <ul>
+          <li><strong>ゴキブリ</strong>：暖房された倉庫・休憩所・トイレ周辺に定着</li>
+          <li><strong>ネズミ（クマネズミ・ハツカネズミ）</strong>：商品への糞尿汚染・配線被害の主因</li>
+          <li><strong>ハト・スズメ</strong>：屋外害鳥。倉庫の換気口・破損ガラスから侵入</li>
+          <li><strong>蜘蛛・ヤスデ・ムカデ</strong>：屋外からの侵入。多湿環境で増加</li>
+        </ul>
+
+        <h3>外来害虫（貿易会社・国際物流）</h3>
+        <ul>
+          <li><strong>トコジラミ</strong>：海外作業員の荷物・古着・家具経由で侵入</li>
+          <li><strong>ヒラタチャタテ</strong>：高湿度の段ボール・古紙に発生</li>
+          <li><strong>アルゼンチンアリ</strong>：国内一部に定着・侵入経路特定が困難</li>
+        </ul>
+      </section>
+
+      <section id="ipm" class="cl-section">
+        <h2>IPMの4要素と導入ステップ</h2>
+        <p>IPM（Integrated Pest Management・総合防除）は、薬剤散布に頼らず、施設の構造改善・侵入防止・モニタリング・必要最小限の薬剤使用を組み合わせた防除手法です。導入は<strong>「現状調査 → 計画策定 → 実施 → 評価」</strong>の4段で進めます。</p>
+
+        <h3>IPMの4要素</h3>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>IPM 4要素と倉庫での具体策</caption>
+            <thead><tr><th>要素</th><th>目的</th><th>倉庫での具体策</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">侵入防止（Exclusion）</th><td>害虫を物理的に入れない</td><td>シャッター下端封鎖・配管貫通部シール・防虫網・エアカーテン</td></tr>
+              <tr><th scope="row">発生源管理（Sanitation）</th><td>繁殖環境を作らない</td><td>清掃・廃棄物管理・湿度コントロール・5S徹底</td></tr>
+              <tr><th scope="row">モニタリング（Monitoring）</th><td>早期発見・トレンド把握</td><td>粘着トラップ・捕獲器・フェロモントラップの計画配置</td></tr>
+              <tr><th scope="row">必要最小限の防除（Treatment）</th><td>発生時の的確な処置</td><td>残効性薬剤・ベイト剤・物理的捕獲・燻蒸（最後の手段）</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>導入の標準ステップ</h3>
+        <ol>
+          <li><strong>現状調査（1〜2週間）</strong>：施設構造・侵入経路・既存害虫・在庫品の調査。リスクマップ作成</li>
+          <li><strong>計画策定（2〜4週間）</strong>：年間IPMプラン・モニタリング配置図・薬剤使用方針・記録フォーマット決定</li>
+          <li><strong>導入・初期駆除（1か月）</strong>：既存害虫の駆除と侵入経路の物理的改修</li>
+          <li><strong>定期運用（継続）</strong>：月次モニタリング・改善措置・トレンド分析の継続</li>
+          <li><strong>年次見直し（年1回）</strong>：捕獲数推移・侵入経路再評価・薬剤効果の見直し</li>
+        </ol>
+      </section>
+
+      <section id="cost" class="cl-section">
+        <h2>業種別・規模別の費用相場</h2>
+        <p>倉庫・物流施設の害虫駆除費用は、<strong>面積・取扱品目・FSSC22000等の認証対応・モニタリングポイント数</strong>で決まります。</p>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>倉庫・物流施設の害虫駆除 月額費用相場（2026年6月時点）</caption>
+            <thead><tr><th>施設タイプ</th><th>規模</th><th>定期契約月額</th><th>スポット駆除1回</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">一般倉庫（雑貨・工業品）</th><td>〜1,000㎡</td><td>20,000〜40,000円</td><td>50,000〜120,000円</td></tr>
+              <tr><th scope="row">一般倉庫</th><td>1,000〜3,000㎡</td><td>30,000〜60,000円</td><td>80,000〜180,000円</td></tr>
+              <tr><th scope="row">食品物流倉庫</th><td>〜3,000㎡</td><td>40,000〜80,000円</td><td>100,000〜250,000円</td></tr>
+              <tr><th scope="row">食品物流倉庫</th><td>3,000〜10,000㎡</td><td>80,000〜200,000円</td><td>200,000〜500,000円</td></tr>
+              <tr><th scope="row">貿易会社・通関倉庫</th><td>〜3,000㎡</td><td>50,000〜100,000円</td><td>個別見積</td></tr>
+              <tr><th scope="row">保税倉庫（食品）</th><td>〜5,000㎡</td><td>80,000〜180,000円</td><td>個別見積</td></tr>
+              <tr><th scope="row">FSSC22000対応倉庫</th><td>規模問わず</td><td>標準+20〜40%</td><td>個別見積</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>費用に影響する主な要因</h3>
+        <ul>
+          <li><strong>モニタリングポイント数</strong>：粘着トラップ20か所基本、面積100㎡につき1か所追加が目安</li>
+          <li><strong>取扱品目の機密性</strong>：医薬品・電子部品など特殊な防除設計が必要な場合は+30%</li>
+          <li><strong>夜間・休日対応の頻度</strong>：閉庫日作業中心の契約は通常+10〜20%</li>
+          <li><strong>記録のデジタル化</strong>：オンラインダッシュボードでのモニタリング報告は+5〜10%</li>
+          <li><strong>侵入経路改修工事</strong>：物理対策（シール・パッキン・防護グリッド）は別途見積</li>
+        </ul>
+
+        <p class="cl-note"><small>※詳細な業種別費用と契約モデルは <a href="/column/pest-control-hiyo-sohba/">業務用害虫駆除（PCO）の費用相場2026</a> もご参照ください。</small></p>
+      </section>
+
+      <section id="fssc" class="cl-section">
+        <h2>FSSC22000・HACCP対応の記録整備</h2>
+        <p>FSSC22000認証取得・更新を目指す食品物流倉庫では、<strong>害虫対策はPRP（前提条件プログラム）の重要項目</strong>です。認証審査で求められる記録は通常のHACCPより詳細で、IPM対応業者の選定が成否を分けます。</p>
+
+        <h3>FSSC22000で求められる害虫対策の記録</h3>
+        <ol>
+          <li><strong>年間IPM計画書</strong>：施設マップ・モニタリング配置・薬剤使用方針</li>
+          <li><strong>月次モニタリング記録</strong>：トラップ位置・捕獲数・トレンド分析グラフ</li>
+          <li><strong>改善措置記録</strong>：発見時の対応・原因分析・再発防止策</li>
+          <li><strong>侵入経路調査報告</strong>：年1回の施設点検結果と改修推奨事項</li>
+          <li><strong>使用薬剤のSDS</strong>：全薬剤の安全データシート</li>
+          <li><strong>業者の有資格者リスト</strong>：防除作業監督者・PCO技術者の名簿</li>
+          <li><strong>緊急対応マニュアル</strong>：大量発生時のエスカレーション・回収プロセス</li>
+        </ol>
+
+        <h3>HACCPとの違い</h3>
+        <ul>
+          <li><strong>記録の頻度</strong>：HACCPは月次、FSSC22000はトレンド分析含む詳細記録</li>
+          <li><strong>改善措置</strong>：HACCPは是正措置、FSSC22000は予防処置（再発防止）まで</li>
+          <li><strong>業者の関与</strong>：HACCPは作業のみ、FSSC22000は計画策定・教育まで</li>
+        </ul>
+
+        <p>HACCP対応記録の作成方法は <a href="/column/pest-control-haccp/">HACCP制度化で必須になった害虫対策ガイド2026</a> もご参照ください。</p>
+      </section>
+
+      <section id="choose" class="cl-section">
+        <h2>業者選びで確認すべき7項目</h2>
+        <p>倉庫・物流向けの害虫駆除業者選定は、飲食店向けと異なる軸で評価する必要があります。<strong>「IPM設計能力・大規模施設実績・記録品質」</strong>の3軸が中心です。</p>
+
+        <ol>
+          <li><strong>公益社団法人 日本ペストコントロール協会 会員</strong>：協会の倫理規定・苦情対応窓口、IPM教育の標準化</li>
+          <li><strong>防除作業監督者・PCO技術者の在籍数</strong>：5名以上が大規模対応の安心ライン</li>
+          <li><strong>倉庫・物流施設の実績件数</strong>：年間20件以上、特に同規模物件の経験</li>
+          <li><strong>FSSC22000・HACCP対応実績</strong>：認証取得支援の事例数</li>
+          <li><strong>モニタリング報告のサンプル</strong>：トラップ配置図・捕獲推移グラフ・改善提案の質</li>
+          <li><strong>侵入経路調査の事前提案</strong>：物理的改修と防除を組み合わせた包括提案ができるか</li>
+          <li><strong>賠償責任保険</strong>：1事故あたり3,000万円以上が大規模物件で望ましい</li>
+        </ol>
+
+        <h3>「安すぎ見積」の特徴</h3>
+        <p>業界平均より<strong>30%以上安い見積</strong>が出てきた場合、以下のいずれかが抜けています。</p>
+        <ul>
+          <li>モニタリングポイント数が極端に少ない（20か所未満）</li>
+          <li>薬剤散布のみで構造改善・侵入経路調査が含まれない</li>
+          <li>月次報告が簡易（トレンド分析・改善提案なし）</li>
+          <li>FSSC22000・HACCP対応への追加費用を別途請求</li>
+          <li>緊急対応に法外な追加費用（24時間対応なし）</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          <div class="cl-faq-item">
+            <dt>倉庫・物流施設になぜIPMが必要なのですか？</dt>
+            <dd>倉庫は「広域・高所・人の出入りが少ない」という特性で、薬剤散布だけでは効果が限定的かつ食品・商品の汚染リスクがあります。IPMは「侵入経路の遮断・モニタリング・構造改善・必要最小限の薬剤」を組み合わせた手法で、貯穀害虫やネズミの定着を予防し、食品衛生法・HACCP・FSSC22000に対応した記録も整備できます。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>貿易会社で気をつけるべき害虫リスクは何ですか？</dt>
+            <dd>輸入貨物経由で侵入する<strong>外来種害虫</strong>が主要リスクです。トコジラミ・コクヌストモドキ・ノシメマダラメイガ・ヒラタチャタテ等が代表例で、コンテナ・段ボール・パレット・梱包材を介して侵入します。貨物の検査・隔離・初動防除のフローを業者と擦り合わせておくことが重要です。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>物流倉庫の害虫駆除費用相場はどれくらいですか？</dt>
+            <dd>中規模物流倉庫（〜3,000㎡）でIPM定期契約 月額<strong>40,000〜80,000円</strong>、大規模（3,000㎡〜）で月額80,000〜200,000円が目安です。食品物流・FSSC22000対応倉庫は記録整備・モニタリング強化で+20〜40%。スポット駆除は1回100,000〜300,000円。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>IPM対応業者かどうかをどう見分ければいいですか？</dt>
+            <dd>①公益社団法人 日本ペストコントロール協会会員であること、②防除作業監督者の在籍、③倉庫・物流の実績件数（年間20件以上が安心）、④モニタリングトラップの種類と運用設計、⑤侵入経路調査の事前提案、⑥薬剤使用量の削減実績、⑦報告書のサンプル提示 — の7項目を確認してください。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>FSSC22000認証取得を目指す場合、害虫対策はどう変わりますか？</dt>
+            <dd>FSSC22000は前提条件プログラム（PRP）として「そ族・昆虫の防除」を要求しており、HACCPより厳格な記録・改善措置・トレンド分析が必要です。月次モニタリングシートのデジタル化、年間予防計画書、薬剤SDSの完備、年1回の侵入経路再評価などが標準で、対応業者の選定が認証取得の成否を左右します。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>ネズミ侵入の防止策で効果的なのは？</dt>
+            <dd>シャッター下端の隙間封鎖（<strong>5mm以上はネズミ通過</strong>）、配管貫通部のシール、排水溝の防護グリッド、巡回パトロールの記録化が基本です。屋外側でも防護ベルト・電気式忌避装置・捕獲器の組み合わせが有効。倉庫は人の出入りが少ない夜間に活動するため、IPMの専門家が設計したモニタリング配置が重要です。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>入出荷を止めずに作業できますか？</dt>
+            <dd>可能です。IPMの基本は「営業時間中の通常モニタリング+月次の集中防除」で、入出荷スケジュールに合わせて作業時間を分散させます。集中防除は閉庫日（土日・祝日・連休）に組むのが一般的で、3PL・倉庫運営会社の業務影響を最小化できます。年間契約時に「閉庫日リスト」を業者へ共有しておくとスムーズです。</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="cl-section">
+        <h2>関連記事</h2>
+        <ul class="cl-related">
+          <li><a href="/column/pest-control-guide/">業務用害虫駆除（PCO）完全ガイド｜法的義務・費用・業者選び・害虫別対策の総まとめ</a></li>
+          <li><a href="/column/pest-control-inshokuten-hindo-gimu/">飲食店の害虫駆除 頻度・法的義務 完全ガイド2026｜食品衛生法・HACCP・保健所立入の実務</a></li>
+          <li><a href="/column/pest-control-hiyo-sohba/">業務用害虫駆除（PCO）の費用相場2026｜業種別・契約形態別の料金ガイド</a></li>
+          <li><a href="/column/pest-control-haccp/">HACCP制度化で必須になった害虫対策ガイド2026｜飲食・食品事業者の防除記録の作り方</a></li>
+          <li><a href="/pest-control/">害虫駆除（業務用PCO）の一括見積比較</a></li>
+          <li><a href="/column/shisetsu-kanri-nenkan-schedule/">施設管理の年間スケジュール2026｜9種の法定点検カレンダー</a></li>
+        </ul>
+      </section>
+
+      <ColumnCtaCard serviceSlug="pest-control" serviceName="害虫駆除" variant="bottom" />
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-note { font-size: .82rem; color: var(--gray-500); font-style: italic; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-callout li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+@media (max-width: 600px) { .cl-header { padding: 32px 0 28px; } .cl-body { padding: 28px 16px 48px; } .cl-section h2 { font-size: 1.15rem; } }
+.cl-quickanswer { background: #eef6ff; border: 1.5px solid #1a56db; border-radius: 10px; padding: 18px 22px; margin-bottom: 32px; }
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+</style>

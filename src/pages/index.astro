@@ -1,10 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { site, serviceIndex } from '../data/site';
+import ContactFormGeneric from '../components/ContactFormGeneric.astro';
+import { site, serviceIndex, prefectures } from '../data/site';
 
-const PAGE_TITLE = `${site.name}｜施設管理の一括見積比較サービス`;
-const PAGE_DESC  = '受水槽清掃・アスベスト調査・ダクト清掃・シャッター点検など、施設管理に必要な専門業者を一括見積で比較。登録済みの資格・許認可を持つ地元業者を最大3社ご紹介します。完全無料。';
+const PAGE_TITLE = `施設管理の業者選び・コスト見直し｜${site.name}（一括見積・無料）`;
+const PAGE_DESC  = '受水槽清掃・消防設備点検・アスベスト調査など27分野・全国47都道府県の実績・信頼のある専門業者から最大3社を無料で一括見積比較。約60秒・5問のコスト診断つき。マンション管理組合・ビル管理会社・施設管理担当者向け。業者をお選びいただくまで業者から連絡は来ません。';
 const CANONICAL  = `${site.domain}/`;
+const heroImageVersion = '20260529-office-cleanup';
 
 const websiteLd = JSON.stringify({
   '@context': 'https://schema.org',
@@ -26,7 +28,7 @@ const orgLd = JSON.stringify({
 const itemListLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: '施設管理の一括見積比較サービス一覧',
+  name: 'ロカサポが運営する施設管理サービス一覧',
   itemListElement: serviceIndex.map((s, i) => ({
     '@type': 'ListItem',
     position: i + 1,
@@ -34,196 +36,431 @@ const itemListLd = JSON.stringify({
     name: s.name,
   })),
 });
+
+// ご依頼前のよくある不安（HTMLの dl.lp-uncertainty-list と同期して管理）
+const topFaq = [
+  { q: 'しつこい営業電話は来ませんか？', a: '業者をお選びいただくまで、業者からの連絡は一切来ません。選んだ後も、実績・信頼のある専門業者には「しつこい営業の禁止」を規約で義務付けています。違反があった場合は登録解除します。' },
+  { q: 'なぜ無料で利用できるのですか？', a: 'ご契約が成立した際に、業者側から紹介手数料をいただく仕組みです。依頼者の方からは一切費用をいただきません。契約しなかった場合も無料です。' },
+  { q: '何社から連絡が来ますか？', a: 'ご依頼者が選んだ業者のみ（最大3社まで指定可能）。一般的な一括見積サイトのように「依頼直後に5〜10社から一斉に電話」ということはありません。' },
+  { q: '個人情報・施設情報はどう扱われますか？', a: '業者をお選びいただくまで、連絡先は業者に開示しません。お選びいただいた後も、選定された業者のみに必要最小限の情報を共有します。' },
+  { q: 'どんな業者を紹介してくれますか？', a: '各分野で必要な登録・資格・許認可を確認した業者のみ。例：受水槽清掃なら「建築物飲料水貯水槽清掃業」の都道府県知事登録、アスベストなら「事前調査者」資格を必須としています。' },
+  { q: '見積を取っただけで契約は強制されませんか？', a: '強制されません。見積取得・比較のみで終了することも可能です。違約金・キャンセル料は一切かかりません。' },
+];
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: topFaq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  url: CANONICAL,
+  name: PAGE_TITLE,
+  description: PAGE_DESC,
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.lp-hero-h1', '.lp-section-lead', '.lp-uncertainty-item dt', '.lp-uncertainty-item dd'],
+  },
+});
+
+// TOPページで紹介する代表コラム（7本ピックアップ）
+const featuredColumns = [
+  {
+    href: '/column/shisetsu-kanri-nenkan-schedule/',
+    category: '施設管理ガイド',
+    title: '施設管理の年間スケジュール2026｜マンション・ビル管理担当者向け 9種の法定点検カレンダー',
+    excerpt: '受水槽清掃・消防設備点検・アスベスト調査など9種の法定点検を月別カレンダーで整理。マンション管理組合・ビル管理向けピラー記事。',
+  },
+  {
+    href: '/column/pest-control-guide/',
+    category: '害虫駆除',
+    title: '業務用害虫駆除（PCO）完全ガイド｜法的義務・費用・業者選び・害虫別対策の総まとめ',
+    excerpt: '飲食店・食品工場・ホテル・マンション・倉庫の害虫駆除を体系化したハブ記事。HACCP・建築物衛生法の義務、費用相場、ゴキブリ・ネズミ・トコジラミの害虫別対策、業者選びまで目的別に整理。',
+  },
+  {
+    href: '/column/jusuisou-seisou-horei-gimu/',
+    category: '受水槽清掃',
+    title: '受水槽清掃の法定義務ガイド2026｜水道法・建築物衛生法の要点と違反ペナルティ',
+    excerpt: '水道法第34条の2が定める年1回以上の清掃義務、建築物衛生法の追加要件、違反時の100万円以下の罰金まで施設管理担当者向けに整理。',
+  },
+  {
+    href: '/column/asbestos-batsu/',
+    category: 'アスベスト調査・除去',
+    title: 'アスベスト法令違反の罰則2026｜大防法・石綿則・刑事責任の事例と回避策',
+    excerpt: '事前調査未実施・無届工事・記録未提出の罰則、労働者死傷時の業務上過失致死傷罪、損害賠償事例を2026年版で整理。',
+  },
+  {
+    href: '/column/shobo-setsubi-horei-gimu/',
+    category: '消防設備点検',
+    title: '消防設備点検の法定義務ガイド2026｜機器点検・総合点検の頻度と罰則',
+    excerpt: '消防法第17条の3の3に基づく義務内容、機器点検（半年）・総合点検（年1）の違い、所轄消防署への報告サイクル、有資格者要件まで。',
+  },
+  {
+    href: '/column/grease-trap-horei-gimu/',
+    category: 'グリストラップ清掃',
+    title: 'グリストラップ清掃の法的義務ガイド2026｜下水道法・建築基準法・廃棄物処理法の要点',
+    excerpt: '下水道法（n-Hex 30mg/L）・建築基準法（阻集器の機能維持）・廃掃法（産廃マニフェスト）の3層で実質的に求められる義務を解説。',
+  },
+  {
+    href: '/column/aircon-business-furon-tenken/',
+    category: '業務用エアコン',
+    title: 'フロン排出抑制法の点検義務ガイド2026｜業務用エアコン管理者が知るべき要点',
+    excerpt: '簡易点検（3か月に1回）・定期点検（7.5kW以上3年／50kW以上1年）、漏洩量算定、廃棄時のフロン回収まで整理。罰則は最大1,000万円。',
+  },
+];
 ---
 <BaseLayout
   title={PAGE_TITLE}
   description={PAGE_DESC}
   canonical={CANONICAL}
   siteName={site.name}
-  logoSub="施設管理の一括見積比較"
-  jsonLdBlocks={[websiteLd, orgLd, itemListLd]}
+  logoSub="施設管理の業者紹介サイトを27分野で運営"
+  preloadImage={`/images/brand/hero-local-support-top.webp?v=${heroImageVersion}`}
+  jsonLdBlocks={[websiteLd, orgLd, itemListLd, faqLd, webPageLd]}
 >
 
 <!-- ══ HERO ════════════════════════════════════════════════════ -->
-<section class="lp-hero">
+<section class="lp-hero" style={`--top-hero-image: url('/images/brand/hero-local-support-top.webp?v=${heroImageVersion}')`}>
   <div class="sd-container lp-hero-inner">
-    <p class="lp-hero-kicker">B2B施設管理の一括見積比較サービス</p>
-    <h1 class="lp-hero-h1">施設管理の業者探しを、<br/>もっとかんたんに。</h1>
-    <p class="lp-hero-desc">
-      受水槽清掃・アスベスト調査・ダクト清掃・シャッター点検など、<br class="pc-only"/>
-      施設管理に必要な専門業者を一括見積で比較できるサービスです。<br class="pc-only"/>
-      登録資格を確認済みの地元業者を最大3社ご紹介。完全無料でご利用いただけます。
-    </p>
-    <a href="/jusuisou-seisou/" class="lp-hero-cta">無料で一括見積もりを依頼する →</a>
-    <ul class="lp-hero-badges">
-      <li>完全無料</li>
-      <li>最大3社を厳選紹介</li>
-      <li>全国47都道府県対応</li>
-      <li>登録資格確認済み業者のみ</li>
-    </ul>
+    <div class="lp-hero-copy">
+      <p class="lp-hero-kicker">マンション管理組合・ビル管理会社・施設管理担当者の方へ</p>
+      <h1 class="lp-hero-h1">施設管理の業者選び・<br class="sp-only"/>コスト見直しを、<br/><span class="lp-hero-h1-sub">実績・信頼のある専門業者の一括見積で。完全無料。</span></h1>
+      <p class="lp-hero-desc">
+        受水槽清掃・消防設備点検・アスベスト調査など、<br class="pc-only"/>
+        <strong>27分野・全国47都道府県の実績・信頼のある専門業者</strong>から最大3社を無料でご紹介。<br class="pc-only"/>
+        <strong>業者をお選びいただくまで、業者からの連絡は一切来ません。</strong>
+      </p>
+      <div class="lp-hero-ctas">
+        <a href="/audit/" class="lp-hero-cta" data-track="hero_cta_audit">
+          まず60秒で<br class="sp-only"/>コスト診断（個人情報なし）
+        </a>
+        <a href="#services" class="lp-hero-cta-secondary" data-track="hero_cta_services">
+          サービスを選んで<br class="sp-only"/>一括見積を依頼
+        </a>
+      </div>
+      <ul class="lp-hero-badges">
+        <li>運営サービス：27分野</li>
+        <li>全国47都道府県に対応</li>
+        <li>資格・許認可を確認した業者のみ紹介</li>
+        <li>運営：ローカル情報局</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 6ステップ安心フロー ════════════════════════════════════════ -->
+<section class="lp-flow" id="contact">
+  <div class="sd-container">
+    <div class="lp-section-head">
+      <span class="lp-section-kicker">HOW IT WORKS</span>
+      <h2 class="lp-section-title">ご依頼から契約までの流れ</h2>
+      <p class="lp-section-lead">
+        <strong>業者をお選びいただくまで、業者からの連絡は一切来ません。</strong><br/>
+        他社の一括見積サイトと違って、「依頼した瞬間に5社から電話が鳴る」ことはありません。
+      </p>
+    </div>
+    <ol class="lp-flow-steps">
+      <li class="lp-flow-step">
+        <span class="lp-flow-num">1</span>
+        <div>
+          <h3>ご依頼（無料・約1分）</h3>
+          <p>サービスを選んで、施設情報と連絡先を入力します。費用は一切かかりません。</p>
+        </div>
+      </li>
+      <li class="lp-flow-step">
+        <span class="lp-flow-num">2</span>
+        <div>
+          <h3>ロカサポが実績・信頼のある専門業者へ打診</h3>
+          <p>ご依頼内容に合致する実績・信頼のある専門業者へ、ロカサポからお声がけします。ご依頼者さまの連絡先は業者には渡しません。</p>
+        </div>
+      </li>
+      <li class="lp-flow-step">
+        <span class="lp-flow-num">3</span>
+        <div>
+          <h3>手を挙げた業者から最大5社を選定</h3>
+          <p>対応可能と回答した業者の中から、資格・実績・対応エリアを確認のうえ最大5社を選定します。</p>
+        </div>
+      </li>
+      <li class="lp-flow-step">
+        <span class="lp-flow-num">4</span>
+        <div>
+          <h3>概算見積・実績を一覧でご確認</h3>
+          <p>各社の概算見積・対応実績・資格情報を専用ページでまとめてご覧いただけます。<strong>ここまで業者からの連絡はありません。</strong></p>
+        </div>
+      </li>
+      <li class="lp-flow-step">
+        <span class="lp-flow-num">5</span>
+        <div>
+          <h3>お選びいただいた業者だけが連絡</h3>
+          <p>詳細な見積・打ち合わせをしたい業者を選んでください（1〜3社まで）。選定された業者だけがご依頼者さまへ直接ご連絡します。</p>
+        </div>
+      </li>
+      <li class="lp-flow-step">
+        <span class="lp-flow-num">6</span>
+        <div>
+          <h3>比較してご契約</h3>
+          <p>最終見積を比較し、納得いただける業者とご契約ください。契約しない場合も費用はかかりません。</p>
+        </div>
+      </li>
+    </ol>
+    <div class="lp-flow-ctas">
+      <a href="/audit/" class="lp-flow-cta-primary" data-track="flow_cta_audit">まず60秒でコスト診断（個人情報なし）</a>
+      <a href="#services" class="lp-flow-cta-secondary" data-track="flow_cta_services">サービスを選んで一括見積</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ご依頼前のよくある不安 ════════════════════════════════════ -->
+<section class="lp-uncertainty">
+  <div class="sd-container">
+    <div class="lp-section-head">
+      <span class="lp-section-kicker">CONCERNS</span>
+      <h2 class="lp-section-title">ご依頼前のよくある不安</h2>
+      <p class="lp-section-lead">施設管理担当者の方から寄せられるご質問にお答えします。</p>
+    </div>
+    <dl class="lp-uncertainty-list">
+      <div class="lp-uncertainty-item">
+        <dt>Q. しつこい営業電話は来ませんか？</dt>
+        <dd>A. <strong>業者をお選びいただくまで、業者からの連絡は一切来ません。</strong>選んだ後も、実績・信頼のある専門業者には「しつこい営業の禁止」を規約で義務付けています。違反があった場合は登録解除します。</dd>
+      </div>
+      <div class="lp-uncertainty-item">
+        <dt>Q. なぜ無料で利用できるのですか？</dt>
+        <dd>A. ご契約が成立した際に、業者側から紹介手数料をいただく仕組みです。<strong>依頼者の方からは一切費用をいただきません。</strong>契約しなかった場合も無料です。</dd>
+      </div>
+      <div class="lp-uncertainty-item">
+        <dt>Q. 何社から連絡が来ますか？</dt>
+        <dd>A. ご依頼者が選んだ業者のみ（最大3社まで指定可能）。一般的な一括見積サイトのように「依頼直後に5〜10社から一斉に電話」ということはありません。</dd>
+      </div>
+      <div class="lp-uncertainty-item">
+        <dt>Q. 個人情報・施設情報はどう扱われますか？</dt>
+        <dd>A. 業者をお選びいただくまで、連絡先は業者に開示しません。お選びいただいた後も、選定された業者のみに必要最小限の情報を共有します。詳細は<a href="/privacy/">プライバシーポリシー</a>。</dd>
+      </div>
+      <div class="lp-uncertainty-item">
+        <dt>Q. どんな業者を紹介してくれますか？</dt>
+        <dd>A. 各分野で必要な<strong>登録・資格・許認可を確認した業者のみ</strong>。例：受水槽清掃なら「建築物飲料水貯水槽清掃業」の都道府県知事登録、アスベストなら「事前調査者」資格を必須としています。</dd>
+      </div>
+      <div class="lp-uncertainty-item">
+        <dt>Q. 見積を取っただけで契約は強制されませんか？</dt>
+        <dd>A. 強制されません。<strong>見積取得・比較のみで終了することも可能です。</strong>違約金・キャンセル料は一切かかりません。</dd>
+      </div>
+    </dl>
   </div>
 </section>
 
 <!-- ══ サービス一覧 ════════════════════════════════════════════ -->
-<section class="lp-services">
+<section class="lp-services" id="services">
   <div class="sd-container">
-    <h2 class="lp-section-title">取り扱いサービス</h2>
+    <div class="lp-section-head">
+      <span class="lp-section-kicker">SERVICES</span>
+      <h2 class="lp-section-title">サービスを選んで一括見積を依頼</h2>
+      <p class="lp-section-lead">
+        <strong>複数選択OK</strong> ✓ 気になるサービスにチェックを入れて、まとめて一括見積を依頼できます。<br/>
+        どのサービスを依頼すべきか分からない方は <a href="/audit/"><strong>約60秒・5問のコスト診断</strong></a> をご利用ください。
+      </p>
+    </div>
     <div class="lp-service-grid">
       {serviceIndex.map((s) => (
-        <a href={`/${s.slug}/`} class="lp-service-card">
+        <div class="lp-service-card" data-service-slug={s.slug} data-service-name={s.name}>
+          <label class="lp-service-pick">
+            <input type="checkbox" class="lp-service-check" data-service-name={s.name} />
+            <span class="lp-service-pick-label"><span class="lp-pick-off">＋ 見積リストに追加</span><span class="lp-pick-on">✓ 選択中</span></span>
+          </label>
+          <img class="lp-service-card-img" src={`/images/services/hero-${s.slug}.webp?v=${heroImageVersion}`} width="480" height="270" alt={`${s.name}のサービスイメージ`} loading="lazy" decoding="async" />
           <span class="lp-service-label">{s.short}</span>
           <h3>{s.name}</h3>
           <p>{s.description}</p>
-          <span class="lp-service-link">無料で見積依頼 →</span>
-        </a>
+          <a href={`/${s.slug}/`} class="lp-service-link">サービス詳細・単独で依頼 →</a>
+        </div>
       ))}
     </div>
-  </div>
-</section>
 
-<!-- ══ 3ステップ ═══════════════════════════════════════════════ -->
-<section class="lp-steps">
-  <div class="sd-container">
-    <h2 class="lp-section-title">3ステップで業者紹介</h2>
-    <ol class="lp-step-list">
-      <li>
-        <span class="lp-step-num">01</span>
-        <h3>フォームで依頼</h3>
-        <p>施設情報・要件を入力するだけ。約1分で完了します。</p>
-      </li>
-      <li>
-        <span class="lp-step-num">02</span>
-        <h3>業者を厳選紹介</h3>
-        <p>資格・対応エリア・実績を確認のうえ、最大3社をご提案します。</p>
-      </li>
-      <li>
-        <span class="lp-step-num">03</span>
-        <h3>比較・ご契約</h3>
-        <p>複数社の見積もりを比較して、納得のいく業者を選んでください。</p>
-      </li>
-    </ol>
-  </div>
-</section>
-
-<!-- ══ 費用相場まとめ（AIO直接回答用） ════════════════════════ -->
-<section class="lp-cost-summary">
-  <div class="sd-container">
-    <h2 class="lp-section-title">サービス別の費用相場</h2>
-    <p class="lp-cost-lead">
-      各サービスの一般的な費用レンジを一覧で比較できます。実際の金額は施設規模・地域・業者により変動します。
-    </p>
-    <div class="lp-cost-table-wrap">
-      <table class="lp-cost-table">
-        <thead>
-          <tr>
-            <th scope="col">サービス</th>
-            <th scope="col">費用相場</th>
-            <th scope="col">主な義務・推奨頻度</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row"><a href="/jusuisou-seisou/">受水槽清掃</a></th>
-            <td>3万円〜30万円<br/><small>＋水質検査1〜2.5万円</small></td>
-            <td>水道法で年1回以上義務（10m³超）</td>
-          </tr>
-          <tr>
-            <th scope="row"><a href="/asbestos/">アスベスト調査・除去</a></th>
-            <td>事前調査5〜20万円<br/>除去工事1〜10万円／㎡</td>
-            <td>解体・改修工事前に有資格者調査が義務</td>
-          </tr>
-          <tr>
-            <th scope="row"><a href="/duct/">ダクト清掃</a></th>
-            <td>厨房ダクト5〜30万円<br/>空調ダクト10〜100万円</td>
-            <td>厨房年1〜2回／空調2〜3年に1回推奨</td>
-          </tr>
-          <tr>
-            <th scope="row"><a href="/shutter/">シャッター点検・修理</a></th>
-            <td>点検1台1〜3万円<br/>修理2万円〜</td>
-            <td>建築基準法で防火シャッター年1回義務</td>
-          </tr>
-          <tr>
-            <th scope="row"><a href="/shobo-setsubi/">消防設備点検</a></th>
-            <td>機器点検2〜5万円〜<br/>総合点検3〜10万円〜</td>
-            <td>消防法で年2回（機器点検）・2年に1回（総合点検）義務</td>
-          </tr>
-          <tr>
-            <th scope="row"><a href="/grease-trap/">グリストラップ清掃</a></th>
-            <td>1〜5万円／回</td>
-            <td>下水道法・各自治体条例で定期清掃が必要</td>
-          </tr>
-          <tr>
-            <th scope="row"><a href="/aircon-business/">業務用エアコン洗浄・修理</a></th>
-            <td>洗浄1台2〜8万円<br/>修理3万円〜</td>
-            <td>建築物衛生法対象施設は空調管理義務あり</td>
-          </tr>
-          <tr>
-            <th scope="row"><a href="/pest-control/">害虫駆除（業務用PCO）</a></th>
-            <td>スポット1〜5万円<br/>月次契約1〜3万円／月</td>
-            <td>食品営業施設はHACCP対応・保健所指導対象</td>
-          </tr>
-          <tr>
-            <th scope="row"><a href="/signboard-inspection/">看板・屋外広告物点検</a></th>
-            <td>1台1〜3万円〜<br/>高所作業車込み別途</td>
-            <td>屋外広告物条例・建築基準法で定期点検が必要</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="lp-cost-note">
-      上記は2026年時点の一般的な相場目安です。最新かつ正確な金額は、複数業者からの見積もりでご確認ください。
-    </p>
-  </div>
-</section>
-
-<!-- ══ 選ばれる理由 ════════════════════════════════════════════ -->
-<section class="lp-why">
-  <div class="sd-container">
-    <h2 class="lp-section-title">{site.name} が選ばれる理由</h2>
-    <div class="lp-why-grid">
-      <div class="lp-why-card">
-        <h3>登録業者のみ紹介</h3>
-        <p>各分野で必要な登録・資格・許認可を確認済みの業者のみ紹介。無資格業者への発注リスクを回避できます。</p>
+    <!-- ══ 複数選択一括見積フォーム ══ -->
+    <div class="lp-bulkquote" id="lp-bulkquote" hidden>
+      <div class="lp-bulkquote-head">
+        <h3>選択したサービスで一括見積</h3>
+        <p class="lp-bulkquote-count"><strong id="lp-bulk-count">0</strong> サービス選択中</p>
+        <div id="lp-bulk-chips" class="lp-bulk-chips"></div>
       </div>
-      <div class="lp-why-card">
+      <form class="qf lp-bulkquote-form" action="/api/quote" method="POST" data-redirect="/thanks/?from=bulk" novalidate>
+        <input type="hidden" name="service" id="lp-bulk-service" value="" />
+        <input type="hidden" name="message" id="lp-bulk-message" value="" />
+        <input type="text" name="website" tabindex="-1" autocomplete="off" class="qf-honeypot" aria-hidden="true" />
+
+        <div class="qf-row">
+          <label for="lp-bulk-company">会社名・施設名 <span class="qf-req">必須</span></label>
+          <input id="lp-bulk-company" name="company" type="text" required placeholder="例：◯◯ビル管理組合" autocomplete="organization" />
+        </div>
+        <div class="qf-row">
+          <label for="lp-bulk-prefecture">所在地（都道府県） <span class="qf-req">必須</span></label>
+          <select id="lp-bulk-prefecture" name="prefecture" required autocomplete="address-level1">
+            <option value="">選択してください</option>
+            {prefectures.map((p) => (<option value={p}>{p}</option>))}
+          </select>
+        </div>
+        <div class="qf-row">
+          <label>希望の連絡方法 <span class="qf-req">必須</span></label>
+          <div class="qf-radios">
+            <label class="qf-radio"><input type="radio" name="contact_method" value="メール" required /> メール</label>
+            <label class="qf-radio"><input type="radio" name="contact_method" value="電話" /> 電話</label>
+            <label class="qf-radio"><input type="radio" name="contact_method" value="どちらでも" /> どちらでも</label>
+          </div>
+        </div>
+        <div class="qf-row">
+          <label for="lp-bulk-email">連絡先メール</label>
+          <input id="lp-bulk-email" name="email" type="email" placeholder="例：info@example.com" autocomplete="email" />
+        </div>
+        <div class="qf-row">
+          <label for="lp-bulk-tel">連絡先電話</label>
+          <input id="lp-bulk-tel" name="tel" type="tel" placeholder="例：03-0000-0000" autocomplete="tel" />
+        </div>
+        <div class="qf-row">
+          <label for="lp-bulk-name">ご担当者名（任意）</label>
+          <input id="lp-bulk-name" name="name" type="text" placeholder="例：山田" autocomplete="name" />
+        </div>
+        <div class="qf-row">
+          <label for="lp-bulk-note">補足メッセージ（任意）</label>
+          <textarea id="lp-bulk-note" name="note" rows="3" placeholder="複数棟まとめての依頼・特殊な条件などご記入ください"></textarea>
+        </div>
+        <label class="qf-agree">
+          <input type="checkbox" name="agree" value="1" required />
+          <span><a href="/privacy/" target="_blank" rel="noopener">プライバシーポリシー</a>に同意して送信します</span>
+        </label>
+        <button type="submit" class="qf-submit" data-track="bulk_quote_submit">選択したサービスで無料一括見積を依頼</button>
+      </form>
+    </div>
+
+    <!-- スクロール追従：選択サマリー -->
+    <div class="lp-bulk-sticky" id="lp-bulk-sticky" hidden>
+      <span><strong id="lp-bulk-count-mini">0</strong> サービス選択中</span>
+      <a href="#lp-bulkquote" class="lp-bulk-sticky-cta">▶ 一括見積を依頼</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  const checks = document.querySelectorAll<HTMLInputElement>('.lp-service-check');
+  const bulkSection = document.getElementById('lp-bulkquote');
+  const bulkSticky = document.getElementById('lp-bulk-sticky');
+  const bulkCount = document.getElementById('lp-bulk-count');
+  const bulkCountMini = document.getElementById('lp-bulk-count-mini');
+  const bulkChips = document.getElementById('lp-bulk-chips');
+  const bulkServiceField = document.getElementById('lp-bulk-service') as HTMLInputElement;
+  const bulkMessageField = document.getElementById('lp-bulk-message') as HTMLInputElement;
+
+  function updateBulkState() {
+    const selected = Array.from(checks).filter((c) => c.checked);
+    const names = selected.map((c) => c.dataset.serviceName || '');
+    const count = selected.length;
+    if (bulkCount) bulkCount.textContent = String(count);
+    if (bulkCountMini) bulkCountMini.textContent = String(count);
+    if (bulkChips) bulkChips.innerHTML = names.map((n) => `<span class="lp-bulk-chip">${n}</span>`).join('');
+    if (bulkServiceField) bulkServiceField.value = names.join('、');
+    if (bulkMessageField) bulkMessageField.value = count
+      ? `【一括見積希望サービス（${count}件）】\n${names.join('、')}\n\n上記サービスについてまとめて見積もり・相場確認を希望します。`
+      : '';
+    if (count > 0) {
+      bulkSection?.removeAttribute('hidden');
+      bulkSticky?.removeAttribute('hidden');
+    } else {
+      bulkSection?.setAttribute('hidden', '');
+      bulkSticky?.setAttribute('hidden', '');
+    }
+    selected.forEach((c) => c.closest('.lp-service-card')?.classList.add('is-picked'));
+    Array.from(checks).filter((c) => !c.checked).forEach((c) => c.closest('.lp-service-card')?.classList.remove('is-picked'));
+  }
+  checks.forEach((c) => c.addEventListener('change', updateBulkState));
+</script>
+
+<!-- ══ 運営方針 ════════════════════════════════════════════════ -->
+<section class="lp-about">
+  <div class="sd-container">
+    <div class="lp-section-head">
+      <span class="lp-section-kicker">ABOUT</span>
+      <h2 class="lp-section-title">{site.name}について</h2>
+      <p class="lp-section-lead">
+        マンション管理組合・ビル管理会社・店舗オーナーが業者選びで迷わないように、運営者の責任で情報を発信しています。
+      </p>
+    </div>
+    <div class="lp-about-grid">
+      <div class="lp-about-card">
+        <h3>実績・信頼のある専門業者のみ紹介</h3>
+        <p>各分野で必要な登録・資格・許認可を確認した業者だけを紹介。無資格業者にうっかり依頼してしまうリスクを避けられます。</p>
+      </div>
+      <div class="lp-about-card">
         <h3>一括見積で最大3社を比較</h3>
-        <p>一度の入力で複数業者の見積もりが届きます。費用の妥当性確認と過剰請求の防止に役立ちます。</p>
+        <p>一度の入力で複数業者の見積もりが届きます。金額が妥当かどうか、相見積もりで判断しやすくなります。</p>
       </div>
-      <div class="lp-why-card">
+      <div class="lp-about-card">
         <h3>全国対応・地元業者ネットワーク</h3>
-        <p>全国47都道府県に対応。施設所在地に近い地元業者を優先紹介するため、出張費を抑えた対応が期待できます。</p>
+        <p>全国47都道府県に対応。施設の近くの業者を優先して紹介するので、出張費を抑えやすいのもメリットです。</p>
       </div>
-      <div class="lp-why-card">
+      <div class="lp-about-card">
         <h3>完全無料・しつこい営業なし</h3>
-        <p>依頼から紹介まですべて無料。紹介した業者には過度な営業を禁じており、安心してご利用いただけます。</p>
+        <p>依頼から紹介まで無料。紹介した業者にはしつこい営業を禁止しているので、安心してお使いいただけます。</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ Bottom CTA ═════════════════════════════════════════════ -->
-<section class="lp-cta">
-  <div class="sd-container lp-cta-inner">
-    <h2>まずはサービスを選んで<br/>無料一括見積</h2>
-    <p>所要時間は約1分。登録業者から最大3社をご紹介します。</p>
-    <div class="lp-cta-btns">
-      {serviceIndex.map((s) => (
-        <a href={`/${s.slug}/`} class="lp-cta-btn">{s.name}の見積依頼 →</a>
-      ))}
+<!-- ══ 最新コラム ══════════════════════════════════════════════ -->
+<section class="lp-columns">
+  <div class="sd-container">
+    <div class="lp-section-head">
+      <span class="lp-section-kicker">COLUMN</span>
+      <h2 class="lp-section-title">お役立ち情報・コラム</h2>
+      <p class="lp-section-lead">
+        施設管理にまつわる法令・費用相場・業者選びの実務をまとめたコラムです。
+      </p>
     </div>
-    <p class="lp-cta-note">完全無料 ／ 最大3社を厳選紹介 ／ 全国47都道府県対応</p>
+    <ul class="lp-column-list">
+      {featuredColumns.map((c) => (
+        <li class="lp-column-item">
+          <a href={c.href} class="lp-column-link">
+            <span class="lp-column-cat">{c.category}</span>
+            <h3 class="lp-column-title">{c.title}</h3>
+            <p class="lp-column-excerpt">{c.excerpt}</p>
+            <span class="lp-column-arrow">続きを読む</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <div class="lp-columns-more">
+      <a href="/column/" class="lp-columns-more-link">コラム一覧をすべて見る</a>
+    </div>
   </div>
 </section>
+
+<!-- ══ 取材・提携のお問い合わせ（フッターからの導線） ══════════════ -->
+<ContactFormGeneric sectionId="press" />
 
 </BaseLayout>
 
 <style>
 /* ── Hero ── */
 .lp-hero {
-  background: linear-gradient(135deg, var(--blue-dark) 0%, #1a3a6b 100%);
+  background:
+    linear-gradient(90deg, rgba(10, 31, 68, .94) 0%, rgba(10, 31, 68, .88) 42%, rgba(10, 31, 68, .48) 74%, rgba(10, 31, 68, .28) 100%),
+    linear-gradient(180deg, rgba(10, 31, 68, .24) 0%, rgba(10, 31, 68, .68) 100%),
+    var(--top-hero-image) right center / cover no-repeat,
+    var(--blue-dark);
   color: #fff;
-  padding: 80px 0 72px;
-  text-align: center;
+  padding: 96px 0;
+  overflow: hidden;
+}
+.lp-hero-inner {
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+}
+.lp-hero-copy {
+  max-width: 760px;
+  text-align: left;
 }
 .lp-hero-kicker {
   font-size: .8rem;
@@ -239,11 +476,26 @@ const itemListLd = JSON.stringify({
   line-height: 1.3;
   margin-bottom: 24px;
 }
+.lp-hero-h1-sub {
+  display: block;
+  font-size: clamp(0.95rem, 2vw, 1.2rem);
+  font-weight: 600;
+  color: #cbe1ff;
+  margin-top: 8px;
+}
 .lp-hero-desc {
   font-size: 1rem;
   line-height: 1.8;
   color: #bfdbfe;
   margin-bottom: 32px;
+}
+.lp-hero-desc strong { color: #fff; }
+.lp-hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: flex-start;
+  margin-bottom: 24px;
 }
 .lp-hero-cta {
   display: inline-block;
@@ -251,19 +503,33 @@ const itemListLd = JSON.stringify({
   color: #1a202c;
   font-weight: 700;
   font-size: 1.05rem;
-  padding: 16px 40px;
+  padding: 14px 32px;
   border-radius: 8px;
   transition: opacity .2s;
-  margin-bottom: 24px;
+  text-decoration: none;
 }
 .lp-hero-cta:hover { opacity: .85; }
+.lp-hero-cta-secondary {
+  display: inline-block;
+  background: transparent;
+  color: #fff;
+  border: 1.5px solid rgba(255,255,255,.6);
+  font-weight: 600;
+  font-size: .98rem;
+  padding: 13px 28px;
+  border-radius: 8px;
+  transition: background .2s;
+  text-decoration: none;
+}
+.lp-hero-cta-secondary:hover { background: rgba(255,255,255,.12); }
 .lp-hero-badges {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 8px;
   list-style: none;
-  margin-top: 8px;
+  margin: 8px 0 0;
+  padding: 0;
 }
 .lp-hero-badges li {
   background: rgba(255,255,255,.12);
@@ -273,166 +539,392 @@ const itemListLd = JSON.stringify({
   padding: 4px 12px;
   border-radius: 99px;
 }
+/* ── Section共通 ── */
+.lp-section-head {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.lp-section-kicker {
+  display: inline-block;
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  color: var(--blue);
+  margin-bottom: 8px;
+}
+.lp-section-title {
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-weight: 900;
+  color: var(--gray-900);
+  margin-bottom: 12px;
+}
+.lp-section-lead {
+  font-size: .95rem;
+  color: var(--gray-700);
+  line-height: 1.8;
+  max-width: 720px;
+  margin: 0 auto;
+}
 
-/* ── 費用相場まとめ ── */
-.lp-cost-summary {
-  padding: 64px 0;
+/* ── サービス一覧 ── */
+.lp-services {
+  padding: 72px 0;
   background: #fff;
 }
-.lp-cost-lead {
-  text-align: center;
-  color: var(--gray-700);
-  font-size: .95rem;
-  margin: -16px auto 28px;
-  max-width: 720px;
-  line-height: 1.8;
-}
-.lp-cost-table-wrap {
-  max-width: 900px;
+.lp-service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  max-width: 1100px;
   margin: 0 auto;
-  overflow-x: auto;
 }
-.lp-cost-table {
+.lp-service-card {
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  padding: 0 0 22px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: box-shadow .2s, transform .2s, border-color .2s;
+}
+.lp-service-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); border-color: var(--blue-light); }
+.lp-service-card-img {
   width: 100%;
-  border-collapse: collapse;
-  font-size: .92rem;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--gray-100);
+  margin-bottom: 18px;
+}
+.lp-service-label {
+  display: inline-block;
+  background: var(--blue-light);
+  color: var(--blue-dark);
+  font-size: .72rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 99px;
+  letter-spacing: .04em;
+  width: fit-content;
+  margin: 0 22px 12px;
+}
+.lp-service-card h3 { font-size: 1rem; font-weight: 700; margin: 0 22px 8px; color: var(--gray-900); }
+.lp-service-card p { font-size: .85rem; color: var(--gray-500); line-height: 1.6; flex: 1; margin: 0 22px 16px; }
+.lp-service-link { font-size: .85rem; font-weight: 700; color: var(--blue); margin: 0 22px; text-decoration: none; }
+.lp-service-link:hover { text-decoration: underline; }
+
+/* チェックボックス（見積リスト追加） */
+.lp-service-card.is-picked { border-color: var(--blue); box-shadow: 0 0 0 2px rgba(29, 78, 216, .15); }
+.lp-service-pick {
+  display: block; margin: 0; padding: 10px 14px;
+  background: #f5f9ff; border-bottom: 1px solid var(--gray-200);
+  cursor: pointer; font-weight: 700; font-size: .85rem;
+  text-align: center; transition: background .15s;
+}
+.lp-service-pick:hover { background: #e0edff; }
+.lp-service-card.is-picked .lp-service-pick { background: var(--blue); color: #fff; }
+.lp-service-check { position: absolute; opacity: 0; pointer-events: none; }
+.lp-service-pick-label .lp-pick-on { display: none; }
+.lp-service-pick-label .lp-pick-off { display: inline; color: var(--blue); }
+.lp-service-card.is-picked .lp-pick-on { display: inline; color: #fff; }
+.lp-service-card.is-picked .lp-pick-off { display: none; }
+
+/* 一括見積フォーム */
+.lp-bulkquote {
+  max-width: 720px; margin: 40px auto 0; padding: 28px 24px;
+  background: #fff; border: 2px solid var(--blue);
+  border-radius: 16px; box-shadow: 0 10px 30px rgba(29, 78, 216, .12);
+}
+.lp-bulkquote[hidden] { display: none; }
+.lp-bulkquote-head { text-align: center; margin-bottom: 18px; }
+.lp-bulkquote-head h3 { font-size: 1.2rem; font-weight: 900; margin: 0 0 6px; color: var(--blue-dark); }
+.lp-bulkquote-count { font-size: .9rem; color: var(--gray-700); margin: 0 0 10px; }
+.lp-bulkquote-count strong { color: var(--blue); font-size: 1.4rem; }
+.lp-bulk-chips { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.lp-bulk-chip {
+  display: inline-block; padding: 4px 10px; border-radius: 999px;
+  background: #e0edff; color: var(--blue-dark); font-size: .75rem; font-weight: 700;
+}
+.lp-bulkquote-form .qf-row { margin-bottom: 14px; }
+.lp-bulkquote-form label { display: block; font-size: .85rem; font-weight: 700; margin-bottom: 5px; }
+.lp-bulkquote-form input, .lp-bulkquote-form select, .lp-bulkquote-form textarea {
+  width: 100%; padding: 11px 14px; border: 1.5px solid var(--gray-200); border-radius: 10px;
+  font-size: 15px; font-family: inherit; box-sizing: border-box;
+}
+.lp-bulkquote-form .qf-req { color: #dc2626; font-size: .7rem; margin-left: 4px; }
+.lp-bulkquote-form .qf-radios { display: flex; gap: 8px; flex-wrap: wrap; }
+.lp-bulkquote-form .qf-radio {
+  flex: 1; min-width: 110px; display: flex; align-items: center; justify-content: center; gap: 6px;
+  border: 1.5px solid var(--gray-200); border-radius: 10px; padding: 11px; font-size: 13px;
+  font-weight: 600; cursor: pointer; margin-bottom: 0;
+}
+.lp-bulkquote-form .qf-radio input { width: auto; }
+.lp-bulkquote-form .qf-honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; }
+.lp-bulkquote-form .qf-agree { display: flex; align-items: flex-start; gap: 8px; font-size: .8rem; margin: 10px 0; }
+.lp-bulkquote-form .qf-agree input { width: auto; margin-top: 3px; }
+.lp-bulkquote-form .qf-submit {
+  width: 100%; background: var(--blue); color: #fff; border: none; border-radius: 12px;
+  padding: 16px; font-size: 16px; font-weight: 900; cursor: pointer; margin-top: 8px;
+}
+.lp-bulkquote-form .qf-submit:hover { background: var(--blue-dark); }
+
+/* 追従サマリー（モバイル用） */
+.lp-bulk-sticky {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 12px 16px; background: rgba(255,255,255,.97); border-top: 1px solid var(--gray-200);
+  box-shadow: 0 -4px 16px rgba(0,0,0,.08); font-size: .9rem; font-weight: 700;
+}
+.lp-bulk-sticky[hidden] { display: none; }
+.lp-bulk-sticky strong { color: var(--blue); font-size: 1.2rem; margin: 0 4px; }
+.lp-bulk-sticky-cta {
+  background: var(--blue); color: #fff; padding: 10px 16px; border-radius: 999px;
+  text-decoration: none; font-weight: 800; font-size: .9rem; white-space: nowrap;
+}
+
+/* ── ロカサポについて ── */
+.lp-about {
+  padding: 72px 0;
+  background: var(--gray-100);
+}
+.lp-about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.lp-about-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px 22px;
+  border: 1px solid var(--gray-200);
+}
+.lp-about-card h3 {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--gray-900);
+  margin-bottom: 10px;
+}
+.lp-about-card p { font-size: .88rem; line-height: 1.75; color: var(--gray-700); }
+
+/* ── コラム ── */
+.lp-columns {
+  padding: 72px 0;
+  background: #fff;
+}
+.lp-column-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 1000px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+.lp-column-item {
   background: #fff;
   border: 1px solid var(--gray-200);
   border-radius: 12px;
   overflow: hidden;
-}
-.lp-cost-table thead { background: var(--blue-light); }
-.lp-cost-table th, .lp-cost-table td {
-  padding: 16px 18px;
-  text-align: left;
-  border-bottom: 1px solid var(--gray-200);
-  vertical-align: top;
-}
-.lp-cost-table thead th { color: var(--blue-dark); font-weight: 800; }
-.lp-cost-table tbody th { width: 200px; font-weight: 700; }
-.lp-cost-table tbody th a { color: var(--blue); text-decoration: underline; }
-.lp-cost-table td { color: var(--gray-700); line-height: 1.65; }
-.lp-cost-table td small { font-size: .82em; color: var(--gray-500); }
-.lp-cost-table tbody tr:last-child th,
-.lp-cost-table tbody tr:last-child td { border-bottom: none; }
-.lp-cost-note {
-  text-align: center;
-  font-size: .82rem;
-  color: var(--gray-500);
-  margin-top: 18px;
-}
-@media (max-width: 640px) {
-  .lp-cost-table { font-size: .85rem; }
-  .lp-cost-table th, .lp-cost-table td { padding: 12px 10px; }
-  .lp-cost-table tbody th { width: 30%; }
-}
-
-/* ── Section共通 ── */
-.lp-section-title {
-  font-size: 1.4rem;
-  font-weight: 800;
-  text-align: center;
-  margin-bottom: 36px;
-  color: var(--gray-900);
-}
-
-/* ── Services ── */
-.lp-services {
-  padding: 64px 0;
-  background: var(--gray-100);
-}
-.lp-service-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-}
-.lp-service-card {
-  display: flex;
-  flex-direction: column;
-  background: #fff;
-  border-radius: var(--radius);
-  padding: 28px 24px;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--gray-200);
   transition: box-shadow .2s, transform .2s;
 }
-.lp-service-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-.lp-service-label {
-  font-size: .72rem;
-  font-weight: 700;
-  color: var(--blue);
+.lp-column-item:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.lp-column-link {
+  display: block;
+  padding: 20px 22px;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+.lp-column-cat {
+  display: inline-block;
   background: var(--blue-light);
+  color: var(--blue-dark);
+  font-size: .7rem;
+  font-weight: 700;
   padding: 3px 10px;
   border-radius: 99px;
-  align-self: flex-start;
+  letter-spacing: .04em;
+  margin-bottom: 10px;
+}
+.lp-column-title {
+  font-size: .98rem;
+  font-weight: 800;
+  color: var(--gray-900);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+.lp-column-excerpt {
+  font-size: .85rem;
+  color: var(--gray-600);
+  line-height: 1.7;
   margin-bottom: 12px;
 }
-.lp-service-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: var(--gray-900); }
-.lp-service-card p { font-size: .85rem; color: var(--gray-500); line-height: 1.6; flex: 1; margin-bottom: 16px; }
-.lp-service-link { font-size: .85rem; font-weight: 700; color: var(--blue); margin-top: auto; }
-
-/* ── Steps ── */
-.lp-steps { padding: 64px 0; background: #fff; }
-.lp-step-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 32px;
-  list-style: none;
-  counter-reset: none;
-  text-align: center;
-}
-.lp-step-num {
-  display: block;
-  font-size: 2.5rem;
-  font-weight: 900;
-  color: var(--blue-light);
-  line-height: 1;
-  margin-bottom: 12px;
-}
-.lp-step-list h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
-.lp-step-list p { font-size: .875rem; color: var(--gray-500); line-height: 1.7; }
-
-/* ── Why ── */
-.lp-why { padding: 64px 0; background: var(--gray-100); }
-.lp-why-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-}
-.lp-why-card {
-  background: #fff;
-  border-radius: var(--radius);
-  padding: 28px 24px;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--gray-200);
-}
-.lp-why-card h3 { font-size: .95rem; font-weight: 700; margin-bottom: 8px; color: var(--blue-dark); }
-.lp-why-card p { font-size: .85rem; color: var(--gray-500); line-height: 1.7; }
-
-/* ── CTA ── */
-.lp-cta {
-  background: var(--blue-dark);
-  padding: 64px 0;
-  color: #fff;
-  text-align: center;
-}
-.lp-cta-inner h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: 12px; }
-.lp-cta-inner > p { color: #bfdbfe; margin-bottom: 28px; font-size: .95rem; }
-.lp-cta-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 16px; }
-.lp-cta-btn {
-  background: rgba(255,255,255,.12);
-  border: 1px solid rgba(255,255,255,.3);
-  color: #fff;
-  font-size: .9rem;
+.lp-column-arrow {
+  font-size: .82rem;
   font-weight: 700;
-  padding: 12px 24px;
-  border-radius: 8px;
+  color: var(--blue);
+}
+.lp-columns-more {
+  text-align: center;
+  margin-top: 32px;
+}
+.lp-columns-more-link {
+  display: inline-block;
+  padding: 12px 28px;
+  background: var(--gray-100);
+  border: 1px solid var(--gray-200);
+  border-radius: 99px;
+  color: var(--gray-800);
+  font-weight: 700;
+  font-size: .92rem;
+  text-decoration: none;
   transition: background .2s;
 }
-.lp-cta-btn:hover { background: rgba(255,255,255,.22); }
-.lp-cta-note { font-size: .78rem; color: #93c5fd; }
+.lp-columns-more-link:hover { background: var(--gray-200); }
 
-/* ── Util ── */
-.pc-only { display: none; }
-@media (min-width: 768px) { .pc-only { display: inline; } }
+/* ── 6ステップ安心フロー ── */
+.lp-flow {
+  padding: 72px 0;
+  background: linear-gradient(180deg, #fff 0%, var(--gray-100) 100%);
+}
+.lp-flow-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 880px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+.lp-flow-step {
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  padding: 22px 22px 22px 64px;
+  position: relative;
+}
+.lp-flow-num {
+  position: absolute;
+  top: 22px;
+  left: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: #fff;
+  font-weight: 900;
+  font-size: 1rem;
+}
+.lp-flow-step h3 {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--gray-900);
+  margin: 0 0 8px;
+  line-height: 1.4;
+}
+.lp-flow-step p {
+  font-size: .88rem;
+  color: var(--gray-700);
+  line-height: 1.7;
+  margin: 0;
+}
+.lp-flow-step p strong { color: var(--blue-dark); }
+.lp-flow-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 40px;
+}
+.lp-flow-cta-primary {
+  display: inline-block;
+  background: var(--accent);
+  color: #1a202c;
+  font-weight: 800;
+  font-size: 1rem;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: opacity .2s;
+}
+.lp-flow-cta-primary:hover { opacity: .88; }
+.lp-flow-cta-secondary {
+  display: inline-block;
+  background: var(--blue);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1rem;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: opacity .2s;
+}
+.lp-flow-cta-secondary:hover { opacity: .88; }
+
+/* ── ご依頼前のよくある不安 ── */
+.lp-uncertainty {
+  padding: 72px 0;
+  background: #fff;
+}
+.lp-uncertainty-list {
+  max-width: 880px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 14px;
+}
+.lp-uncertainty-item {
+  background: var(--gray-100);
+  border-left: 4px solid var(--blue);
+  border-radius: 8px;
+  padding: 18px 22px;
+}
+.lp-uncertainty-item dt {
+  font-size: .95rem;
+  font-weight: 800;
+  color: var(--gray-900);
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+.lp-uncertainty-item dd {
+  font-size: .88rem;
+  color: var(--gray-700);
+  line-height: 1.75;
+  margin: 0;
+}
+.lp-uncertainty-item dd strong { color: var(--blue-dark); }
+.lp-uncertainty-item dd a { color: var(--blue); text-decoration: underline; }
+
+/* ── 表示切替ユーティリティ ── */
+.pc-only { display: inline; }
+.sp-only { display: none; }
+@media (max-width: 640px) {
+  .pc-only { display: none; }
+  .sp-only { display: inline; }
+}
+
+@media (max-width: 640px) {
+  .lp-hero {
+    padding: 64px 0 56px;
+    background:
+      linear-gradient(180deg, rgba(10, 31, 68, .92) 0%, rgba(10, 31, 68, .86) 56%, rgba(10, 31, 68, .74) 100%),
+      var(--top-hero-image) center center / cover no-repeat,
+      var(--blue-dark);
+  }
+  .lp-hero-inner { min-height: auto; }
+  .lp-hero-copy { text-align: center; }
+  .lp-hero-badges { justify-content: center; }
+  .lp-services, .lp-about, .lp-columns, .lp-flow, .lp-uncertainty { padding: 48px 0; }
+  .lp-hero-ctas { flex-direction: column; align-items: stretch; }
+  .lp-hero-cta, .lp-hero-cta-secondary { text-align: center; }
+  .lp-flow-ctas { flex-direction: column; align-items: stretch; }
+  .lp-flow-cta-primary, .lp-flow-cta-secondary { text-align: center; }
+}
 </style>

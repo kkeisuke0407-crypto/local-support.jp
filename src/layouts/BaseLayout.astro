@@ -1,5 +1,5 @@
 ---
-import { site } from '../data/site';
+import { site, serviceIndex } from '../data/site';
 import '../styles/global.css';
 
 interface Props {
@@ -11,6 +11,11 @@ interface Props {
   ogImage?: string;
   jsonLdBlocks?: string[];
   noindex?: boolean;
+  /** Preload LCP image (typically a CSS background-image not auto-discovered) */
+  preloadImage?: string;
+  ogType?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
 }
 
 const {
@@ -22,18 +27,33 @@ const {
   ogImage = 'https://local-support.jp/og-default.png',
   jsonLdBlocks = [],
   noindex = false,
+  preloadImage,
+  ogType = 'website',
+  publishedTime,
+  modifiedTime,
 } = Astro.props;
 
-// Always include Organization + WebSite JSON-LD
+// Always include Organization + WebSite JSON-LD（@id でエンティティを相互連結）
+const orgId = `${site.domain}/#organization`;
+const siteId = `${site.domain}/#website`;
+const authorId = `${site.domain}/author/#person`;
 const baseLdBlocks = [
   JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': orgId,
     name: site.org.legalName,
     alternateName: site.name,
     url: site.domain,
-    logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png`, width: 1200, height: 630 },
+    logo: {
+      '@type': 'ImageObject',
+      url: `${site.domain}/logo-mark.svg`,
+    },
+    description: site.description,
     areaServed: { '@type': 'Country', name: 'JP' },
+    knowsAbout: serviceIndex.map((s) => s.name),
+    founder: { '@id': authorId },
+    employee: { '@id': authorId },
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'customer service',
@@ -41,20 +61,27 @@ const baseLdBlocks = [
       availableLanguage: 'Japanese',
       url: `${site.domain}/`,
     },
-    sameAs: [],
+  }),
+  JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': authorId,
+    name: site.author.name,
+    jobTitle: site.author.role,
+    url: `${site.domain}/author/`,
+    worksFor: { '@id': orgId },
+    knowsAbout: serviceIndex.map((s) => s.name),
   }),
   JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'WebSite',
+    '@id': siteId,
     name: site.name,
     url: site.domain,
     inLanguage: 'ja-JP',
     description: site.description,
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: { '@type': 'EntryPoint', urlTemplate: `${site.domain}/?q={search_term_string}` },
-      'query-input': 'required name=search_term_string',
-    },
+    publisher: { '@id': orgId },
+    /* potentialAction: SearchAction は実サイト内検索の実装がないため記載しない（虚偽防止） */
   }),
 ];
 const allLdBlocks = [...baseLdBlocks, ...jsonLdBlocks];
@@ -69,26 +96,41 @@ const allLdBlocks = [...baseLdBlocks, ...jsonLdBlocks];
   <link rel="canonical" href={canonical} />
   {noindex && <meta name="robots" content="noindex,nofollow" />}
 
-  <meta property="og:type"        content="website" />
+  <meta property="og:type"        content={ogType} />
   <meta property="og:title"       content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:url"         content={canonical} />
   <meta property="og:image"       content={ogImage} />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt"   content={title} />
+  <meta property="og:image:type"  content="image/png" />
   <meta property="og:locale"      content="ja_JP" />
   <meta property="og:site_name"   content={siteName} />
-  <meta name="twitter:card"       content="summary_large_image" />
+  {ogType === 'article' && publishedTime && <meta property="article:published_time" content={publishedTime} />}
+  {ogType === 'article' && modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+  {ogType === 'article' && <meta property="article:author" content={site.author.name} />}
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image"       content={ogImage} />
 
   <meta name="theme-color" content="#1a56db" />
-  <link rel="icon" type="image/svg+xml" href="/og-default.svg" />
-  <link rel="apple-touch-icon" href="/og-default.svg" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/logo-mark.svg" />
+  <link rel="alternate" type="application/rss+xml" title={`${siteName} コラムRSS`} href="/feed.xml" />
 
-  <!-- Fonts: preconnect + preload critical weight -->
+  {preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />}
+
+  <!-- Fonts: preconnect + non-blocking load (media swap pattern) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&display=swap" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" />
   <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
   <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="dns-prefetch" href="https://www.clarity.ms" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" rel="stylesheet" /></noscript>
 
   <!-- Google tag (gtag.js) — Consent Mode v2 default: denied, granted on user consent -->
   <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-KS0PVE3PY5"></script>
@@ -107,6 +149,24 @@ const allLdBlocks = [...baseLdBlocks, ...jsonLdBlocks];
     gtag('config', 'G-KS0PVE3PY5');
   </script>
 
+  <!-- Speculation Rules: ホバー/フォーカス時に次ページを先読み（Chromiumブラウザのみ） -->
+  <script is:inline type="speculationrules">
+  {
+    "prerender": [
+      {
+        "where": {
+          "and": [
+            { "href_matches": "/*" },
+            { "not": { "href_matches": ["/thanks/*", "/api/*"] } },
+            { "not": { "selector_matches": "[rel~=external]" } }
+          ]
+        },
+        "eagerness": "moderate"
+      }
+    ]
+  }
+  </script>
+
   <!-- Microsoft Clarity -->
   <script is:inline type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -119,58 +179,100 @@ const allLdBlocks = [...baseLdBlocks, ...jsonLdBlocks];
   {allLdBlocks.map((block) => (
     <Fragment set:html={`<script type="application/ld+json">${block}</script>`} />
   ))}
+
+  <slot name="head" />
 </head>
 <body>
+
+<a href="#main" class="sd-skip-link">本文へスキップ</a>
 
 <!-- ══ HEADER ══════════════════════════════════════════════════ -->
 <header class="sd-header">
   <div class="sd-header-inner">
     <a href="/" class="sd-logo">
       <div class="sd-logo-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <img src="/logo-mark.svg" width="36" height="36" alt="" decoding="async" />
       </div>
       <div class="sd-logo-wrap">
         <span>{siteName}</span>
         <span class="sd-logo-sub">{logoSub}</span>
       </div>
     </a>
-    <a href="#contact" class="sd-header-cta" data-scroll-to="#contact" data-track="header_contact">
-      無料で一括見積 ›
-    </a>
+    <nav class="sd-header-nav" aria-label="主要メニュー">
+      <a href="/audit/" class="sd-header-link" data-track="header_audit">60秒コスト診断</a>
+      <a href="/audit/" class="sd-header-cta" data-scroll-to="#contact" data-track="header_contact">無料で一括見積</a>
+    </nav>
   </div>
 </header>
 
-<main id="main">
+<main id="main" aria-label="本文">
   <slot />
 </main>
 
 <!-- ══ FOOTER ════════════════════════════════════════════════ -->
 <footer class="sd-footer">
   <div class="sd-footer-inner">
-    <div class="sd-footer-logo">{siteName}</div>
-    <p class="sd-footer-desc">
-      施設管理・設備メンテナンスの一括見積比較サイト。受水槽清掃・アスベスト調査・ダクト清掃・シャッター点検など、登録業者から最大3社を無料でご紹介します。
-      掲載情報は公開時点のものです。最新の法令・費用は各機関・業者の公式情報をご確認ください。
-    </p>
-    <div class="sd-footer-links">
-      <a href="/">トップ</a>
-      <a href="/about/">ロカサポとは</a>
-      <a href="/case/">紹介事例</a>
-      <a href="/flow/">ご利用の流れ</a>
-      <a href="/column/">コラム</a>
-      <a href="/author/">運営者プロフィール</a>
-      <a href="/operator/">運営者情報</a>
-      <a href="/privacy/">プライバシーポリシー</a>
-      <a href="/disclosure/">ご紹介業者について</a>
-      <a href="/sitemap/">サイトマップ</a>
+    <div class="sd-footer-top">
+      <div class="sd-footer-brand">
+        <div class="sd-footer-logo">{siteName}</div>
+        <p class="sd-footer-desc">
+          施設管理・設備メンテナンスの一括見積比較サイト。受水槽清掃・アスベスト調査・消防設備点検など27分野の実績・信頼のある専門業者から最大3社を無料でご紹介します。
+        </p>
+      </div>
+      <div class="sd-footer-cols">
+        <div class="sd-footer-col">
+          <h3 class="sd-footer-col-h">無料ツール</h3>
+          <ul>
+            <li><a href="/audit/">60秒コスト診断</a></li>
+            <li><a href="/#contact">ご依頼の流れ</a></li>
+            <li><a href="/flow/">ご利用ガイド</a></li>
+          </ul>
+        </div>
+        <div class="sd-footer-col">
+          <h3 class="sd-footer-col-h">主要サービス</h3>
+          <ul>
+            <li><a href="/jusuisou-seisou/">受水槽清掃</a></li>
+            <li><a href="/shobo-setsubi/">消防設備点検</a></li>
+            <li><a href="/asbestos/">アスベスト調査・除去</a></li>
+            <li><a href="/duct/">ダクト清掃</a></li>
+            <li><a href="/pest-control/">害虫駆除</a></li>
+            <li><a href="/grease-trap/">グリストラップ清掃</a></li>
+            <li><a href="/category/">カテゴリから探す</a></li>
+            <li><a href="/">全27サービスを見る</a></li>
+          </ul>
+        </div>
+        <div class="sd-footer-col">
+          <h3 class="sd-footer-col-h">運営情報</h3>
+          <ul>
+            <li><a href="/about/">ロカサポとは</a></li>
+            <li><a href="/case/">紹介事例</a></li>
+            <li><a href="/author/">運営者プロフィール</a></li>
+            <li><a href="/operator/">運営会社情報</a></li>
+            <li><a href="/editorial-policy/">編集方針</a></li>
+            <li><a href="/research/methodology/">調査方法</a></li>
+          </ul>
+        </div>
+        <div class="sd-footer-col">
+          <h3 class="sd-footer-col-h">お役立ち</h3>
+          <ul>
+            <li><a href="/column/">コラム</a></li>
+            <li><a href="/glossary/">施設管理用語集</a></li>
+            <li><a href="/disclosure/">ご紹介業者について</a></li>
+            <li><a href="/for-partners/">業者・施工会社の方へ</a></li>
+            <li><a href="/privacy/">プライバシーポリシー</a></li>
+            <li><a href="/sitemap/">サイトマップ</a></li>
+            <li><a href="/#press">取材・提携のお問い合わせ</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <p class="sd-footer-copy">© 2026 {siteName}. All rights reserved.</p>
+    <p class="sd-footer-copy">© 2026 {siteName}（運営：{site.org.legalName}）. All rights reserved.</p>
   </div>
 </footer>
 
 <!-- ══ Sticky CTA（スマホ） ════════════════════════════════════ -->
 <div class="sticky-cta">
-  <a href="#contact" class="sticky-btn-primary" data-scroll-to="#contact" data-track="sticky_form">無料で一括見積もり依頼 →</a>
+  <a href="/audit/" class="sticky-btn-primary" data-scroll-to="#contact" data-track="sticky_form">無料で一括見積もり依頼</a>
 </div>
 
 <!-- ══ Cookie同意バナー ════════════════════════════════════════ -->
@@ -184,6 +286,6 @@ const allLdBlocks = [...baseLdBlocks, ...jsonLdBlocks];
   </div>
 </div>
 
-<script is:inline src={`/app.js?v=${import.meta.env.BUILD_ID || Date.now()}`}></script>
+<script is:inline defer src={`/app.js?v=${import.meta.env.BUILD_ID || Date.now()}`}></script>
 </body>
 </html>

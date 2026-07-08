@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
-const title = 'グリストラップ清掃の費用相場2026｜店舗規模別・頻度別の料金ガイドと追加コストの見抜き方';
+const title = 'グリストラップ清掃の費用相場｜店舗規模別・頻度別の料金ガイドと追加コストの見抜き方';
 const description = 'グリストラップ清掃の費用相場を店舗規模別・清掃頻度別に整理。バスケット清掃・スカム除去・全槽清掃・配管高圧洗浄の単価、汚泥産廃処分費の内訳、月間契約と単発のコスト差、ホテル・食品工場の大型設備費用まで施設運営者向けに解説します。';
 const canonical = `${site.domain}/column/grease-trap-hiyo-sohba/`;
 const published = '2026-05-26';
@@ -25,7 +26,7 @@ const articleLd = JSON.stringify({
   articleSection: '費用相場',
   keywords: 'グリストラップ清掃,費用相場,店舗規模別,配管高圧洗浄,産廃処分,月次契約,飲食店,2026',
   author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
-  publisher: { '@type': 'Organization', name: site.org.legalName, url: site.domain, logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` } },
+  publisher: { '@id': `${site.domain}/#organization` },
   image: { '@type': 'ImageObject', url: `${site.domain}/og-grease-trap.png`, width: 1200, height: 630 },
   about: { '@type': 'Service', name: 'グリストラップ清掃' },
 });
@@ -39,10 +40,32 @@ const faqLd = JSON.stringify({
     { '@type': 'Question', name: '配管高圧洗浄もセットでお願いすべき？', acceptedAnswer: { '@type': 'Answer', text: 'はい、配管詰まり予防には半年〜年1回の配管高圧洗浄が推奨されます。グリストラップ清掃とセットで実施すると効率的（20,000〜80,000円程度の追加）。詰まり発生時の緊急対応は10万円以上になるケースもあるため、予防が経済的です。' } },
     { '@type': 'Question', name: '深夜・早朝対応の料金はどのくらい増?', acceptedAnswer: { '@type': 'Answer', text: '通常時間帯（昼間）に比べて25〜50%程度の割増が一般的です。22時以降の深夜は50%以上の割増になるケースもあります。営業時間外作業の必要性は事前に伝えて見積比較しましょう。' } },
     { '@type': 'Question', name: 'チェーン店一括契約での割引は？', acceptedAnswer: { '@type': 'Answer', text: '5店舗以上の一括契約で10〜25%程度の割引が一般的です。エリア集中度（同一都市内に集まっているか）で割引率が変動します。本部一括発注は、店舗ごとの管理工数削減のメリットも大きいです。' } },
+    { '@type': 'Question', name: "グリストラップ清掃は自分でできますか？", acceptedAnswer: { '@type': 'Answer', text: "バスケット（ゴミ受け）の清掃は自分でも可能です。ただし水槽内の油脂・汚泥の除去（産業廃棄物として処理必要）は許可業者による処理が法令上必要です。" } },
+    { '@type': 'Question', name: "グリストラップ清掃の頻度はどれくらいが適切ですか？", acceptedAnswer: { '@type': 'Answer', text: "バスケットは毎日〜週1回、水面の油脂すくいは週1〜3回、全槽清掃（業者依頼）は月1〜3回が目安。使用頻度・料理の種類・グリストラップの容量で変わります。" } },
+    { '@type': 'Question', name: "グリストラップ清掃は経費にできますか？", acceptedAnswer: { '@type': 'Answer', text: "法令義務に基づく費用として全額損金算入可能です。飲食店の管理費・清掃費として計上します。" } },
+    { '@type': 'Question', name: "グリストラップを放置するとどうなりますか？", acceptedAnswer: { '@type': 'Answer', text: "排水管の詰まり・悪臭・排水基準超過（下水道法違反）・ゴキブリ・ハエの発生源になります。保健所の立入検査で指導対象になり、最悪の場合は営業停止処分のリスクもあります。" } },
+    { '@type': 'Question', name: "グリストラップ清掃の廃棄物はどう処理されますか？", acceptedAnswer: { '@type': 'Answer', text: "回収した油脂・汚泥は産業廃棄物（廃油・汚泥）として産業廃棄物許可業者が処理します。業者が産廃マニフェストを発行し、適正処理の証明ができる業者を選んでください。" } }
+  
   ],
 });
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-grease-trap.png` },
+});
+
 ---
-<BaseLayout title={title} description={description} canonical={canonical} siteName={site.name} logoSub="施設管理の一括見積比較" jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}>
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified} title={title} description={description} canonical={canonical} siteName={site.name} logoSub="施設管理の一括見積比較" jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}>
   <article class="cl-article">
     <header class="cl-header">
       <div class="sd-container">
@@ -52,7 +75,7 @@ const faqLd = JSON.stringify({
           <span>グリストラップ清掃の費用相場ガイド</span>
         </nav>
         <span class="cl-cat">費用相場</span>
-        <h1 class="cl-title">グリストラップ清掃の費用相場2026｜店舗規模別・頻度別の料金ガイドと追加コストの見抜き方</h1>
+        <h1 class="cl-title">グリストラップ清掃の費用相場｜店舗規模別・頻度別の料金ガイドと追加コストの見抜き方</h1>
         <p class="cl-lead">
           グリストラップ清掃の費用は、<strong>店舗規模・清掃区分（バスケット／スカム／全槽／配管）・頻度・営業時間外対応</strong>の組み合わせで大きく変わります。「月いくらが妥当か」「単発と契約のどちらが得か」「産廃処分費は別請求になるのか」といった疑問にお答えするため、本記事では小規模飲食店からホテル・食品工場まで、店舗規模別の月額・年額の目安、配管高圧洗浄の追加費用、深夜対応の割増、チェーン店一括契約の割引まで実態に即して整理しました。
         </p>
@@ -69,8 +92,11 @@ const faqLd = JSON.stringify({
       <div class="cl-quickanswer">
         <p class="cl-qa-q">Q. グリストラップ清掃の費用はいくらですか？</p>
         <p class="cl-qa-a">A. <strong>小型（飲食店一般）1〜2万円/回、中型2〜3万円/回、大型3〜5万円/回</strong>が目安。バスケット清掃（週1回）は業者契約で月1〜2万円程度。</p>
-        <p class="cl-qa-src">※ロカサポ調査（2026年1〜4月・全国32社の見積データ）</p>
+        <p class="cl-qa-src">※ロカサポ編集部による相場調査（2026年1〜4月）</p>
       </div>
+
+      <ColumnCtaCard serviceSlug="grease-trap" serviceName="グリストラップ清掃" variant="top" />
+
 
       <aside class="cl-toc" aria-label="目次">
         <h2 class="cl-toc-h">この記事の目次</h2>
@@ -225,7 +251,7 @@ const faqLd = JSON.stringify({
       <div class="cl-cta">
         <h2>グリストラップ清掃の見積比較なら</h2>
         <p>許可確認済みの業者から最大3社の見積もりを<br/>完全無料・約1分で取得できます</p>
-        <a class="cta-btn-primary" href="/grease-trap/">無料で一括見積もりを依頼する →</a>
+        <a class="cta-btn-primary" href="/grease-trap/">無料で一括見積もりを依頼する</a>
       </div>
 
       <section id="faq" class="cl-section">
@@ -254,7 +280,7 @@ const faqLd = JSON.stringify({
           <li><a href="/grease-trap/hokkaido/">北海道</a></li>
           <li><a href="/grease-trap/kyoto/">京都府</a></li>
         </ul>
-        <p class="cl-pref-more"><a href="/grease-trap/">全国47都道府県の対応業者を見る →</a></p>
+        <p class="cl-pref-more"><a href="/grease-trap/">全国47都道府県の対応業者を見る</a></p>
       </div>
 
       <aside class="cl-related">
@@ -265,6 +291,21 @@ const faqLd = JSON.stringify({
           <li><a href="/duct/">厨房ダクト清掃の業者を比較</a></li>
           <li><a href="/flow/">ご利用の流れ・3ステップで業者紹介</a></li>
         </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#gesuido-ho">下水道法</a></li>
+          <li><a href="/glossary/#haikibutsu-shori-ho">廃棄物処理法（廃掃法）</a></li>
+          <li><a href="/glossary/#shokuhin-eisei-ho-haccp">食品衛生法（HACCP）</a></li>
+          <li><a href="/glossary/#grease-trap">グリストラップ（阻集器）</a></li>
+          <li><a href="/glossary/#scum">スカム</a></li>
+          <li><a href="/glossary/#n-hex">ノルマルヘキサン抽出物質（n-Hex）</a></li>
+          <li><a href="/glossary/#manifest">マニフェスト（産業廃棄物管理票）</a></li>
+          <li><a href="/glossary/#sanpai-shushu-unpan-gyo">産業廃棄物収集運搬業</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集（49語）をすべて見る</a></p>
       </aside>
     </div>
   </article>

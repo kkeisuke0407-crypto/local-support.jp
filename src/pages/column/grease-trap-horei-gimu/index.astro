@@ -1,12 +1,79 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
-const title = 'グリストラップ清掃の法的義務ガイド2026｜下水道法・建築基準法・廃棄物処理法の要点';
-const description = '飲食店・厨房施設のグリストラップ清掃を規制する下水道法・水質汚濁防止法・建築基準法・廃棄物処理法を整理。清掃頻度の業界標準、産業廃棄物の取扱い、マニフェスト発行・保管義務、違反時のリスクまで施設運営者向けに解説します。';
+const title = 'グリストラップ清掃・維持管理ガイド｜下水道法・阻集器・産廃処理の要点';
+const description = '飲食店・厨房施設のグリストラップ清掃について、清掃頻度そのものを全国一律で定める単一条文はない点、下水道法の排水基準、建築基準法施行令の阻集器、産業廃棄物処理とマニフェスト、自治体の維持管理指導を整理します。';
 const canonical = `${site.domain}/column/grease-trap-horei-gimu/`;
 const published = '2026-05-26';
-const modified = '2026-05-26';
+const modified = '2026-06-15';
+
+const officialSources = [
+  {
+    label: '下水道法（e-Gov法令検索）',
+    url: 'https://laws.e-gov.go.jp/law/333AC0000000079',
+  },
+  {
+    label: '下水道法施行令（e-Gov法令検索）',
+    url: 'https://laws.e-gov.go.jp/law/334CO0000000147/',
+  },
+  {
+    label: '建築基準法施行令（e-Gov法令検索）',
+    url: 'https://laws.e-gov.go.jp/law/325CO0000000338/',
+  },
+  {
+    label: '廃棄物処理法（e-Gov法令検索）',
+    url: 'https://laws.e-gov.go.jp/law/345AC0000000137',
+  },
+  {
+    label: '飲食店のみなさまへお願い（東京都下水道局）',
+    url: 'https://www.gesui.metro.tokyo.lg.jp/living/sonota/oil/food_onegai',
+  },
+  {
+    label: 'グリーストラップの設置と使い方（熊本市上下水道局）',
+    url: 'https://www.kumamoto-waterworks.jp/waterworks_article/15720/',
+  },
+  {
+    label: 'マニフェストの管理運用（全国産業資源循環連合会）',
+    url: 'https://www.zensanpairen.or.jp/disposal/manifest/management/',
+  },
+];
+
+const faqItems = [
+  {
+    q: 'グリストラップ清掃は法律で義務ですか？',
+    a: '清掃頻度そのものを全国一律で指定する単一条文はありません。ただし、阻集器を機能させて油脂を下水に流さないこと、下水道法・条例の排水基準を守ること、引き上げた汚泥・廃油を産業廃棄物として適正処理することが求められるため、実務上は定期清掃が必要です。',
+  },
+  {
+    q: '清掃の適切な頻度は？',
+    a: '自治体や設備規模で変わります。目安として、バスケット内のごみは毎日、浮上油脂は週1回以上、槽内汚泥の引き抜きは月1回以上を案内する自治体があります。油脂量が多い業態では頻度を上げてください。',
+  },
+  {
+    q: '汚泥や廃油の処理を業者に頼まずに済ませることはできますか？',
+    a: '日常的なバスケット清掃や浮上油脂の簡易除去は店舗で行えますが、引き上げた汚泥・廃油を事業活動に伴う廃棄物として処理する場合は、許可業者への委託とマニフェスト管理が必要になるケースがあります。自治体の廃棄物担当にも確認してください。',
+  },
+  {
+    q: 'マニフェストとは何ですか？必須ですか？',
+    a: '産業廃棄物管理票のことです。産業廃棄物の処理を委託する排出事業者は、廃棄物処理法に基づきマニフェストを交付し、処理状況を確認します。紙マニフェストには5年間の保存義務があります。',
+  },
+  {
+    q: '清掃を怠った場合のリスクは？',
+    a: '油脂が下水へ流出すると、排水基準超過、下水管の閉塞、悪臭、害虫発生、店舗内への汚水逆流が起きます。下水道管理者から改善指導・改善命令を受ける可能性もあります。',
+  },
+  {
+    q: '飲食店開業時にグリストラップは必須ですか？',
+    a: '油脂を含む排水を出す厨房では、建築・排水設備・自治体下水道条例の観点からグリース阻集器の設置を求められるのが一般的です。新設・改修時は建築士、設備業者、自治体窓口に確認してください。',
+  },
+  {
+    q: 'HACCPとグリストラップ管理はどう関係しますか？',
+    a: 'HACCPに沿った衛生管理では、施設・設備の清掃や衛生管理の記録が重要です。グリストラップは悪臭・害虫・異物混入リスクに関係するため、清掃記録を残しておくと保健所対応でも説明しやすくなります。',
+  },
+  {
+    q: 'テナントビルの場合、グリストラップ清掃責任は誰が負いますか？',
+    a: '原則は厨房を使用し、油脂を含む排水を出す事業者が日常清掃・適正処理を担います。ただし共用排水設備やビル側設備に接続している場合は、賃貸借契約・管理規約でオーナーとテナントの責任範囲を明確にしてください。',
+  },
+];
 
 const breadcrumbLd = JSON.stringify({
   '@context': 'https://schema.org',
@@ -30,33 +97,43 @@ const articleLd = JSON.stringify({
   mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
   wordCount: 4100,
   articleSection: '法令・義務',
-  keywords: 'グリストラップ,下水道法,建築基準法,廃棄物処理法,水質汚濁防止法,産業廃棄物,マニフェスト,2026',
+  keywords: 'グリストラップ,下水道法,建築基準法,廃棄物処理法,産業廃棄物,マニフェスト,2026',
   author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
-  publisher: { '@type': 'Organization', name: site.org.legalName, url: site.domain, logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` } },
+  publisher: { '@id': `${site.domain}/#organization` },
   image: { '@type': 'ImageObject', url: `${site.domain}/og-grease-trap.png`, width: 1200, height: 630 },
   about: { '@type': 'Service', name: 'グリストラップ清掃' },
   citation: [
-    { '@type': 'Legislation', name: '下水道法第12条' },
-    { '@type': 'Legislation', name: '水質汚濁防止法' },
-    { '@type': 'Legislation', name: '建築基準法施行令第129条の2の4' },
-    { '@type': 'Legislation', name: '廃棄物処理法' },
+    ...officialSources.map((source) => source.url),
   ],
 });
 
 const faqLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: [
-    { '@type': 'Question', name: 'グリストラップ清掃は法律で義務ですか？', acceptedAnswer: { '@type': 'Answer', text: '直接「清掃しなさい」と書く単一の条文はありませんが、下水道法第12条等が定める排水基準（ノルマルヘキサン抽出物質30mg/L以下）を維持する義務、建築基準法施行令第129条の2の4による阻集器の機能維持義務、廃棄物処理法による産業廃棄物の適正処理義務を組み合わせて事実上の清掃義務となります。' } },
-    { '@type': 'Question', name: '清掃の適切な頻度は？', acceptedAnswer: { '@type': 'Answer', text: 'バスケット（残渣回収）清掃は毎日〜週1回、スカム（浮上油脂）除去は週1〜月1回、汚泥沈殿物の全量回収（全槽清掃）は2〜6か月に1回が業界標準。業態（揚げ物・中華・焼肉等の高油脂業態）はより高頻度が必要です。' } },
-    { '@type': 'Question', name: '汚泥や廃油の処理を業者に頼まずに済ませることはできますか？', acceptedAnswer: { '@type': 'Answer', text: 'グリストラップから引き上げた汚泥・廃油は産業廃棄物（汚泥・廃油）に該当します。運搬・処分には都道府県知事の許可業者への委託が必須で、マニフェスト発行・5年保管も義務です。発注者自身が処理することは現実的でなく、無許可業者への委託は排出事業者責任が問われます。' } },
-    { '@type': 'Question', name: '清掃を怠った場合のペナルティは？', acceptedAnswer: { '@type': 'Answer', text: '下水道法違反（排水基準超過）は6か月以下の懲役または30万円以下の罰金。改善命令違反はさらに重い罰則。廃棄物処理法違反（不法投棄・不適正処理）は5年以下の懲役または1,000万円以下の罰金が排出事業者にも適用されます。' } },
-    { '@type': 'Question', name: 'マニフェストとは何ですか？必須ですか？', acceptedAnswer: { '@type': 'Answer', text: '産業廃棄物管理票（A〜E票）のことで、排出事業者・収集運搬業者・処分業者の責任範囲を明確にする伝票です。廃棄物処理法で発行と5年保管が義務化されています。電子マニフェスト（JWNET）対応業者を利用すると管理工数を大幅に削減できます。' } },
-    { '@type': 'Question', name: '保健所と下水道局、どちらが立入検査に来ますか？', acceptedAnswer: { '@type': 'Answer', text: '両方が来る可能性があります。保健所は食品衛生法上の衛生管理（害虫・異物混入リスク含む）、下水道局は排水基準遵守の観点で立入を行います。地方自治体によっては合同立入もあり、清掃記録・マニフェストの提示を求められます。' } },
-  ],
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
 });
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-grease-trap.png` },
+});
+
 ---
-<BaseLayout title={title} description={description} canonical={canonical} siteName={site.name} logoSub="施設管理の一括見積比較" jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}>
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified} title={title} description={description} canonical={canonical} siteName={site.name} logoSub="施設管理の一括見積比較" jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}>
   <article class="cl-article">
     <header class="cl-header">
       <div class="sd-container">
@@ -66,13 +143,13 @@ const faqLd = JSON.stringify({
           <span>グリストラップ清掃の法的義務ガイド</span>
         </nav>
         <span class="cl-cat">法令・義務</span>
-        <h1 class="cl-title">グリストラップ清掃の法的義務ガイド2026｜下水道法・建築基準法・廃棄物処理法の要点</h1>
+        <h1 class="cl-title">グリストラップ清掃・維持管理ガイド｜下水道法・阻集器・産廃処理の要点</h1>
         <p class="cl-lead">
-          グリストラップ清掃の義務は<strong>「これ1本」という単独法ではなく、下水道法・水質汚濁防止法・建築基準法・廃棄物処理法の組み合わせ</strong>で実質的に求められています。「うちは小さい店だから関係ない」「何となく業者に任せている」では、下水道局の改善命令や保健所の指導、排出事業者責任での産廃トラブルにつながりかねません。本記事では、適用される法令の全体像、業界標準の清掃頻度、汚泥・廃油の取扱い、違反時のリスク、業者選定のチェックポイントまで施設運営者向けに整理しました。
+          グリストラップ清掃は、<strong>清掃頻度そのものを全国一律で定める単一条文があるわけではありません</strong>。ただし、油脂を下水へ流さないための阻集器の機能維持、下水道法・自治体条例の排水基準、汚泥・廃油の産業廃棄物処理を守るには、実務上の定期清掃が欠かせません。本記事では、適用される法令の全体像、自治体が示す清掃目安、汚泥・廃油の取扱い、違反時のリスク、業者選定のチェックポイントまで施設運営者向けに整理しました。
         </p>
         <div class="cl-meta">
           <time datetime={published}>公開：2026年5月26日</time>
-          <span>最終更新：2026年5月26日</span>
+          <span>最終更新：2026年6月15日</span>
           <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
         </div>
       </div>
@@ -82,9 +159,12 @@ const faqLd = JSON.stringify({
 
       <div class="cl-quickanswer">
         <p class="cl-qa-q">Q. グリストラップ清掃は法律で義務ですか？</p>
-        <p class="cl-qa-a">A. <strong>下水道法・各自治体条例および食品衛生法（HACCP）により、飲食店・食品工場に定期清掃が義務</strong>。頻度の基準はバスケット週1回・水槽月1〜3回が目安とされる。</p>
-        <p class="cl-qa-src">※下水道法・食品衛生法・HACCP制度（2026年4月時点）</p>
+        <p class="cl-qa-a">A. <strong>全国一律の清掃頻度を定める単一条文はありません</strong>。ただし、阻集器の機能維持、下水道の排水基準、産業廃棄物の適正処理を守るため、飲食店・厨房施設では定期清掃と記録管理が実務上必要です。</p>
+        <p class="cl-qa-src">※下水道法・下水道法施行令・建築基準法施行令・廃棄物処理法・自治体下水道局資料（2026年6月時点）</p>
       </div>
+
+      <ColumnCtaCard serviceSlug="grease-trap" serviceName="グリストラップ清掃" variant="top" />
+
 
       <aside class="cl-toc" aria-label="目次">
         <h2 class="cl-toc-h">この記事の目次</h2>
@@ -92,12 +172,13 @@ const faqLd = JSON.stringify({
           <li><a href="#summary">3行サマリ</a></li>
           <li><a href="#law-overview">グリストラップを規制する法令の全体像</a></li>
           <li><a href="#kenchiku">建築基準法 — 阻集器の設置・機能維持</a></li>
-          <li><a href="#gesuido">下水道法・水質汚濁防止法 — 排水基準遵守</a></li>
+          <li><a href="#gesuido">下水道法・自治体条例 — 排水基準遵守</a></li>
           <li><a href="#sanpai">廃棄物処理法 — 汚泥・廃油は産業廃棄物</a></li>
-          <li><a href="#frequency">業界標準の清掃頻度</a></li>
+          <li><a href="#frequency">清掃頻度の目安</a></li>
           <li><a href="#penalty">違反時のリスクと事例</a></li>
           <li><a href="#vendor">業者選定で確認すべきこと</a></li>
           <li><a href="#faq">よくある質問</a></li>
+          <li><a href="#sources">参照した公的情報</a></li>
         </ol>
       </aside>
 
@@ -105,52 +186,51 @@ const faqLd = JSON.stringify({
         <div class="cl-callout">
           <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
           <ul>
-            <li><strong>義務の根拠</strong>：建築基準法（阻集器の機能維持）＋下水道法（排水基準n-Hex 30mg/L以下）＋廃棄物処理法（産廃の適正処理）の3層</li>
-            <li><strong>清掃頻度の業界標準</strong>：バスケット毎日〜週1、スカム週1〜月1、全槽清掃2〜6か月に1回</li>
-            <li><strong>違反リスク</strong>：下水道法違反で30万円以下の罰金、不法投棄に加担すると排出事業者責任で1,000万円以下の罰金</li>
+            <li><strong>義務の構造</strong>：清掃頻度の全国一律ルールではなく、阻集器の機能維持・排水基準・産廃処理を守るために定期清掃が必要</li>
+            <li><strong>清掃頻度の目安</strong>：自治体資料では、バスケット毎日、浮上油脂は週1回以上、汚泥引き抜きは月1回以上などの例が示されている</li>
+            <li><strong>違反リスク</strong>：排水基準超過、改善指導・命令、配管閉塞、悪臭・害虫、産廃委託不備による排出事業者責任が問題になる</li>
           </ul>
         </div>
       </section>
 
       <section id="law-overview" class="cl-section">
         <h2>グリストラップを規制する法令の全体像</h2>
-        <p>グリストラップ清掃には「これだけ守ればOK」という単独法はありません。複数の法令が役割分担しており、それぞれが間接的に「清掃しないと違反になる」状況を作っています。</p>
+        <p>グリストラップ清掃には「何日に1回清掃しなければならない」と全国一律で定める単独法はありません。複数の法令・条例が役割分担しており、油脂を下水へ流さない状態を維持するために清掃が必要になります。</p>
         <div class="cl-table-wrap">
           <table class="cl-table">
             <caption>グリストラップに関わる主要法令</caption>
             <thead><tr><th scope="col">法令</th><th scope="col">求めること</th><th scope="col">違反時の効果</th></tr></thead>
             <tbody>
-              <tr><th scope="row">建築基準法施行令第129条の2の4</th><td>油脂類を扱う流しに「阻集器（グリストラップ）」の設置と機能維持</td><td>阻集器の機能不全による排水トラブル時に管理責任</td></tr>
-              <tr><th scope="row">下水道法第12条・第12条の2</th><td>下水道に排水する事業所の排水基準遵守（n-Hex 30mg/L以下等）</td><td>改善命令→違反で30万円以下の罰金、悪質な場合6か月以下の懲役</td></tr>
-              <tr><th scope="row">水質汚濁防止法</th><td>特定事業場の排水基準遵守（公共用水域）</td><td>改善命令・罰金</td></tr>
-              <tr><th scope="row">廃棄物処理法</th><td>汚泥・廃油を産業廃棄物として許可業者に委託、マニフェスト発行・5年保管</td><td>不法投棄関与で5年以下の懲役または1,000万円以下の罰金</td></tr>
-              <tr><th scope="row">食品衛生法</th><td>HACCP対応の衛生管理（害虫・異物混入リスクの管理）</td><td>保健所の改善指導・営業停止</td></tr>
-              <tr><th scope="row">各自治体の下水道条例</th><td>地域固有の規制（除害施設設置基準等）</td><td>条例違反として行政指導・命令</td></tr>
+              <tr><th scope="row">建築基準法施行令</th><td>油脂類等が排水に混入するおそれのある流しに阻集器を設ける考え方</td><td>新設・改修時の設備計画、排水設備トラブル時の管理責任</td></tr>
+              <tr><th scope="row">下水道法・下水道法施行令</th><td>公共下水道へ排除する下水の水質基準を守ること</td><td>改善指導・改善命令、条例に基づく使用制限等</td></tr>
+              <tr><th scope="row">各自治体の下水道条例・取扱要綱</th><td>阻集器の設置、維持管理、清掃目安、届出・指導を具体化</td><td>自治体による指導・改善要求</td></tr>
+              <tr><th scope="row">廃棄物処理法</th><td>事業活動で生じる汚泥・廃油等を適正処理し、委託時はマニフェストを管理</td><td>無許可委託・不法投棄・マニフェスト不備の排出事業者責任</td></tr>
+              <tr><th scope="row">食品衛生法・HACCP</th><td>施設・設備の衛生管理、害虫・悪臭・異物混入リスクの管理</td><td>保健所の改善指導、衛生管理上の指摘</td></tr>
             </tbody>
           </table>
         </div>
-        <p>これらが組み合わさることで、「グリストラップを設置し、機能を維持し、汚泥・油脂を許可業者に委託して適正処理する」という一連の責任が事業者に課されています。</p>
+        <p>つまり、法令対応として見るべきなのは「清掃頻度の暗記」ではなく、排水基準を守れているか、阻集器が機能しているか、回収物を適正処理しているか、記録を残しているかです。</p>
       </section>
 
       <section id="kenchiku" class="cl-section">
         <h2>建築基準法 — 阻集器の設置・機能維持</h2>
-        <p>建築基準法施行令第129条の2の4は、油脂類・砂・毛髪等が排水に混入する流しには「阻集器（trap interceptor）」を設けると規定しています。グリストラップはこの油脂阻集器に該当します。</p>
+        <p>建築基準法施行令は、汚水・雑排水を排出する設備に対して、衛生上支障がない構造や有効な排水措置を求めています。油脂類を扱う厨房では、自治体の排水設備基準や下水道局の取扱要綱でグリース阻集器の設置・維持管理を求められるのが一般的です。</p>
         <ul>
-          <li>厨房を持つ建物の新築・改修時に阻集器の設置が建築確認の対象</li>
-          <li>設置後は「機能を維持」する責任が所有者・管理者に発生</li>
+          <li>厨房を持つ建物の新築・改修時に阻集器の設置を求められる場合がある</li>
+          <li>設置後は阻集器が油脂を分離できる状態を維持する必要がある</li>
           <li>機能を失った阻集器を放置すると、排水トラブル・漏水・近隣被害時の責任追及につながる</li>
         </ul>
         <h3>「機能維持」の解釈</h3>
-        <p>建築基準法は具体的な清掃頻度を定めていませんが、「機能を失わない状態」を維持する義務があるため、結果として定期清掃が事実上必要となります。下水道局・保健所からの指摘も「機能維持義務違反」を根拠にされるケースが一般的です。</p>
+        <p>建築・排水設備のルールは具体的な清掃頻度を全国一律には定めていません。ただし、阻集器に油脂や汚泥が溜まりすぎると分離能力が落ちるため、定期清掃をしなければ「機能維持」ができません。</p>
       </section>
 
       <section id="gesuido" class="cl-section">
-        <h2>下水道法・水質汚濁防止法 — 排水基準遵守</h2>
-        <p>下水道に排水を流す事業所は、下水道法第12条等で水質基準の遵守義務があります。グリストラップ清掃を怠ると、油脂類が下水に流出し、ノルマルヘキサン抽出物質の濃度が基準を超えます。</p>
+        <h2>下水道法・自治体条例 — 排水基準遵守</h2>
+        <p>下水道に排水を流す事業所は、下水道法・下水道法施行令・自治体条例で定める水質基準を守る必要があります。グリストラップ清掃を怠ると、油脂類が下水に流出し、ノルマルヘキサン抽出物質の濃度が基準を超えるリスクがあります。</p>
         <h3>主な排水基準</h3>
         <div class="cl-table-wrap">
           <table class="cl-table">
-            <caption>下水道法・水質汚濁防止法の主な排水基準（一般的な値）</caption>
+            <caption>下水道法・自治体条例の主な排水基準（一般的な値）</caption>
             <thead><tr><th scope="col">項目</th><th scope="col">基準値</th><th scope="col">超過時のリスク</th></tr></thead>
             <tbody>
               <tr><th scope="row">ノルマルヘキサン抽出物質（鉱油類）</th><td>5mg/L以下</td><td>機械油の混入が疑われる</td></tr>
@@ -160,54 +240,54 @@ const faqLd = JSON.stringify({
             </tbody>
           </table>
         </div>
-        <p>自治体下水道局のサンプリング検査でn-Hex（動植物油脂類）が30mg/Lを超過していると、改善命令→是正されない場合は除害施設の設置命令や罰則対象となります。</p>
+        <p>動植物油脂類のノルマルヘキサン抽出物質は、一般的な基準として30mg/L以下が示されます。ただし、特定事業場か、除害施設扱いか、自治体の上乗せ基準があるかで扱いは変わるため、所在地の下水道管理者の基準を確認してください。</p>
         <div class="cl-callout cl-callout--warn">
           <h3 class="cl-callout-h">基準超過の典型シナリオ</h3>
-          <p>揚げ物中心の飲食店で、バスケット清掃のみ毎日実施、全槽清掃を半年に1回しか行わず、夏場に汚泥腐敗で大量の油脂流出。下水道局のサンプリングでn-Hex 80mg/L検出、改善命令を受け緊急清掃と除害施設検討を迫られる、というケースが各地で発生しています。</p>
+          <p>バスケットだけを清掃し、槽内の浮上油脂や沈殿汚泥を放置すると、阻集器の分離能力が落ちます。夏場は腐敗・悪臭も強くなり、下水道管の詰まりやサンプリング検査での基準超過につながりやすくなります。</p>
         </div>
       </section>
 
       <section id="sanpai" class="cl-section">
         <h2>廃棄物処理法 — 汚泥・廃油は産業廃棄物</h2>
-        <p>グリストラップから引き上げる汚泥・廃油は「産業廃棄物」に分類され、廃棄物処理法（廃掃法）の適正処理ルールが適用されます。</p>
+        <p>グリストラップから引き上げる汚泥・廃油は、事業活動に伴って発生する廃棄物です。自治体も、事業活動に伴って発生した油脂や汚泥は産業廃棄物として許可業者に依頼するよう案内しています。</p>
         <h3>排出事業者責任とは</h3>
         <p>「排出事業者責任」とは、産廃を排出した事業者（＝飲食店等）が、収集運搬・処分業者の許可確認・マニフェスト発行・適正処理確認まで責任を負う、という考え方です。「業者にお任せ」で済まないのが特徴です。</p>
         <ul>
           <li>運搬は「産業廃棄物収集運搬業」許可業者へ委託</li>
           <li>処分は「産業廃棄物処分業」許可業者へ委託</li>
-          <li>委託時には<strong>マニフェスト（A〜E票）の発行</strong>と<strong>5年保管</strong>が義務</li>
+          <li>産業廃棄物処理を委託する場合は<strong>マニフェストの交付</strong>と処理状況の確認が必要</li>
           <li>無許可業者への委託は「排出事業者責任」で発注側も罰則対象</li>
         </ul>
         <h3>電子マニフェスト（JWNET）のススメ</h3>
-        <p>電子マニフェストは紙より管理工数が大幅に減り、紛失リスクもなく、保健所立入時の提示も容易です。多店舗運営事業者は電子マニフェスト対応業者を選ぶことを強く推奨します。</p>
+        <p>紙マニフェストは5年間の保存義務があります。電子マニフェストを使うと、紙の保管や返送確認の手間を減らせるため、多店舗運営事業者は電子対応業者を優先すると管理が楽になります。</p>
       </section>
 
       <section id="frequency" class="cl-section">
-        <h2>業界標準の清掃頻度</h2>
-        <p>法令上は具体的頻度の定めはないものの、業界標準としては以下のサイクルが推奨されます。</p>
+        <h2>清掃頻度の目安</h2>
+        <p>法令上の全国一律頻度ではありませんが、自治体の案内では以下のような維持管理目安が示されています。油脂量、営業時間、槽容量で必要頻度は変わります。</p>
         <div class="cl-table-wrap">
           <table class="cl-table">
-            <caption>グリストラップ清掃の業界標準頻度</caption>
+            <caption>自治体資料を踏まえた清掃頻度の目安</caption>
             <thead><tr><th scope="col">清掃区分</th><th scope="col">作業内容</th><th scope="col">標準頻度</th></tr></thead>
             <tbody>
-              <tr><th scope="row">バスケット清掃</th><td>残渣を篩で除去</td><td>毎日〜週1回（店舗自社対応可）</td></tr>
-              <tr><th scope="row">スカム除去</th><td>浮上した油脂層を回収</td><td>週1〜月1回</td></tr>
-              <tr><th scope="row">全槽清掃（汚泥引抜）</th><td>沈殿汚泥を全量回収、産廃処理</td><td>2〜6か月に1回（業者依頼）</td></tr>
-              <tr><th scope="row">配管高圧洗浄</th><td>配管内蓄積油脂を除去</td><td>半年〜年1回</td></tr>
+              <tr><th scope="row">バスケット清掃</th><td>残渣を取り除く</td><td>毎日1回を目安</td></tr>
+              <tr><th scope="row">浮上油脂の回収</th><td>水面の油脂層をすくい取る</td><td>週1回以上、油脂が多い場合は高頻度</td></tr>
+              <tr><th scope="row">槽内汚泥の引き抜き</th><td>沈殿汚泥を回収し適正処理</td><td>月1回以上を目安</td></tr>
+              <tr><th scope="row">流し・流出口・配管の清掃</th><td>油脂詰まりを予防</td><td>2〜3か月に1回以上など</td></tr>
             </tbody>
           </table>
         </div>
-        <p>揚げ物・中華・焼肉等の高油脂業態では全槽清掃を月1回まで頻度を上げるケースもあります。逆にカフェ・寿司店等の油脂排出が少ない業態は2〜3か月サイクルでも十分な場合があります。</p>
+        <p>揚げ物・中華・焼肉等の高油脂業態では、週1回以上の浮上油脂回収や月1回の全槽清掃が現実的です。逆に油脂排出が少ない業態でも、悪臭・害虫・詰まりが出る前に記録付きで定期管理することが重要です。</p>
       </section>
 
       <section id="penalty" class="cl-section">
         <h2>違反時のリスクと事例</h2>
-        <h3>下水道法違反</h3>
-        <p>排水基準超過 → 改善命令 → 命令違反で<strong>6か月以下の懲役または30万円以下の罰金</strong>。継続違反は除害施設の設置命令（数百万〜数千万円規模の投資）に発展。</p>
-        <h3>廃棄物処理法違反</h3>
-        <p>無許可業者への委託、マニフェスト不発行 → 排出事業者責任で<strong>5年以下の懲役または1,000万円以下の罰金</strong>。不法投棄に関与すれば法人にも重い罰則。</p>
+        <h3>下水道・排水設備のリスク</h3>
+        <p>排水基準超過や下水管閉塞が起きると、下水道管理者から改善指導・改善命令を受ける可能性があります。油脂詰まりが店舗内へ逆流すれば、休業、修繕費、近隣・他テナントへの損害対応も発生します。</p>
+        <h3>廃棄物処理法上のリスク</h3>
+        <p>無許可業者への委託、マニフェスト不備、不法投棄への関与は、排出事業者側にも責任が及びます。安さだけで業者を選ぶと、清掃後の処理で大きな法務リスクを抱えます。</p>
         <h3>保健所からの指導</h3>
-        <p>害虫発生・配管詰まり由来の悪臭等で保健所の改善指導 → 是正されない場合は営業停止処分の対象。飲食事業者にとって致命的な事業影響です。</p>
+        <p>害虫発生・配管詰まり由来の悪臭等は、保健所から衛生管理上の改善指導を受けるきっかけになります。是正が遅れると、営業上の信用・継続運営に大きな影響が出ます。</p>
         <h3>民事的なリスク</h3>
         <ul>
           <li>配管詰まりによる店舗浸水での営業損失（休業数日〜数週間）</li>
@@ -225,24 +305,24 @@ const faqLd = JSON.stringify({
           <li><strong>処分先の開示</strong>：最終処分場・中間処理施設の情報、運搬距離</li>
           <li><strong>緊急対応・夜間対応の条件</strong>：年契約の中身、スポット駆けつけ単価</li>
         </ol>
-        <p>とくに「<strong>全槽清掃と称してスカムだけ除去する</strong>」「<strong>マニフェストを発行しない</strong>」業者は法令違反スレスレのため、必ず排除すべき選定基準です。</p>
+        <p>とくに「<strong>全槽清掃と称してスカムだけ除去する</strong>」「<strong>産廃処理の許可・処分先・マニフェストを説明できない</strong>」業者は避けるべきです。</p>
       </section>
 
       <div class="cl-cta">
         <h2>グリストラップ清掃の業者選びでお悩みなら</h2>
         <p>許可確認済みの業者から最大3社の見積もりを<br/>完全無料・約1分で取得できます</p>
-        <a class="cta-btn-primary" href="/grease-trap/">無料で一括見積もりを依頼する →</a>
+        <a class="cta-btn-primary" href="/grease-trap/">無料で一括見積もりを依頼する</a>
       </div>
 
       <section id="faq" class="cl-section">
         <h2>よくある質問</h2>
         <dl class="cl-faq">
-          <div class="cl-faq-item"><dt>小さな飲食店でも清掃義務はありますか？</dt><dd>はい。法令は店舗規模で適用が変わるものではなく、グリストラップが設置されている全ての施設が対象です。むしろ規模が小さい店舗ほど清掃を怠りがちで、配管詰まり・近隣クレームのリスクが高い傾向です。</dd></div>
-          <div class="cl-faq-item"><dt>清掃を自社（店舗スタッフ）でできますか？</dt><dd>バスケット清掃・スカム除去のような日常清掃はスタッフで対応可能ですが、汚泥（産業廃棄物）の運搬・処分は許可業者への委託が必須です。日常清掃と業者清掃を組み合わせる運用が一般的です。</dd></div>
-          <div class="cl-faq-item"><dt>マニフェストを業者がくれません。どうしたらいい？</dt><dd>マニフェスト発行は廃棄物処理法上の義務であり、業者交代を強く推奨します。電子マニフェスト（JWNET）対応業者であれば自動的にデジタル管理されます。</dd></div>
-          <div class="cl-faq-item"><dt>下水道局の立入はどんな頻度？</dt><dd>自治体・業種・規模により異なりますが、定期サンプリング検査は数年に1回程度、苦情・通報があれば随時実施されます。サンプリング検査で基準超過が判明すると改善命令の対象となります。</dd></div>
-          <div class="cl-faq-item"><dt>清掃費用は経費にできますか？</dt><dd>事業上必要な清掃費用なので、損金算入可能です。マニフェスト・領収書・清掃記録を5年保管しておけば税務上も問題ありません。</dd></div>
-          <div class="cl-faq-item"><dt>テナント物件の場合、誰が清掃責任を持つ？</dt><dd>原則として実際に厨房を使う事業者（テナント）が清掃義務を負います。賃貸契約・管理規約で清掃の負担区分（テナント／オーナー）を明確化することがトラブル防止になります。</dd></div>
+          {faqItems.map((item) => (
+            <div class="cl-faq-item">
+              <dt>{item.q}</dt>
+              <dd>{item.a}</dd>
+            </div>
+          ))}
         </dl>
       </section>
 
@@ -260,8 +340,17 @@ const faqLd = JSON.stringify({
           <li><a href="/grease-trap/hokkaido/">北海道</a></li>
           <li><a href="/grease-trap/kyoto/">京都府</a></li>
         </ul>
-        <p class="cl-pref-more"><a href="/grease-trap/">全国47都道府県の対応業者を見る →</a></p>
+        <p class="cl-pref-more"><a href="/grease-trap/">全国47都道府県の対応業者を見る</a></p>
       </div>
+
+      <aside class="cl-related">
+        <h2 id="sources" class="cl-related-h">参照した公的情報</h2>
+        <ul>
+          {officialSources.map((source) => (
+            <li><a href={source.url} target="_blank" rel="noopener noreferrer">{source.label}</a></li>
+          ))}
+        </ul>
+      </aside>
 
       <aside class="cl-related">
         <h2 class="cl-related-h">関連サービス・コラム</h2>
@@ -273,6 +362,21 @@ const faqLd = JSON.stringify({
           <li><a href="/column/duct-horei-gimu/">ダクト清掃の法令義務ガイド2026｜厨房ダクトの消防法義務と清掃頻度</a></li>
           <li><a href="/flow/">ご利用の流れ・3ステップで業者紹介</a></li>
         </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#gesuido-ho">下水道法</a></li>
+          <li><a href="/glossary/#haikibutsu-shori-ho">廃棄物処理法（廃掃法）</a></li>
+          <li><a href="/glossary/#shokuhin-eisei-ho-haccp">食品衛生法（HACCP）</a></li>
+          <li><a href="/glossary/#grease-trap">グリストラップ（阻集器）</a></li>
+          <li><a href="/glossary/#scum">スカム</a></li>
+          <li><a href="/glossary/#n-hex">ノルマルヘキサン抽出物質（n-Hex）</a></li>
+          <li><a href="/glossary/#manifest">マニフェスト（産業廃棄物管理票）</a></li>
+          <li><a href="/glossary/#sanpai-shushu-unpan-gyo">産業廃棄物収集運搬業</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集（49語）をすべて見る</a></p>
       </aside>
     </div>
   </article>

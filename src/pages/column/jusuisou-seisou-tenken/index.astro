@@ -1,0 +1,361 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = '受水槽の点検・法定検査｜簡易専用水道検査とは・清掃との違い・頻度・費用';
+const description = '受水槽の点検と法定検査を施設管理担当者向けに整理。簡易専用水道の法定検査（年1回・登録検査機関）の内容、清掃との違い、管理者が行う日常点検のチェック項目、頻度・費用・違反リスクまでを2026年版で解説します。';
+const canonical = `${site.domain}/column/jusuisou-seisou-tenken/`;
+const published = '2026-06-16';
+const modified = '2026-06-16';
+const egov = (n: string) => `https://laws.e-gov.go.jp/search/elawsSearch/elaws_search/lsg0100/?keyword=${encodeURIComponent(n)}`;
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '受水槽の点検・法定検査', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 3000,
+  articleSection: '点検',
+  keywords: '受水槽点検,簡易専用水道検査,法定検査,清掃との違い,水道法,点検費用,頻度,2026',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@type': 'Organization', name: site.org.legalName, url: site.domain, logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` } },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-jusuisou-seisou.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '受水槽清掃', serviceType: '建築物飲料水貯水槽清掃' },
+  citation: [
+    { '@type': 'Legislation', name: '水道法', url: egov('水道法'), jurisdiction: 'JP' },
+    { '@type': 'Legislation', name: '水道法施行規則', url: egov('水道法施行規則'), jurisdiction: 'JP' },
+  ],
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: '受水槽の点検と清掃は何が違いますか？', acceptedAnswer: { '@type': 'Answer', text: '清掃は槽内を空にして洗浄・消毒する作業、点検は設備や水の状態を確認する行為です。簡易専用水道では、年1回以上の清掃に加えて、登録検査機関による法定検査（書類検査・施設検査・給水栓水の検査）が義務付けられています。さらに管理者自身が行う日常的な外観点検も推奨されます。' } },
+    { '@type': 'Question', name: '簡易専用水道の法定検査は誰が行いますか？', acceptedAnswer: { '@type': 'Answer', text: '厚生労働大臣等の登録を受けた登録検査機関が行います。清掃業者とは別の主体ですが、多くの清掃業者は提携機関を通じて手配を代行できます。' } },
+    { '@type': 'Question', name: '受水槽の点検頻度はどれくらいですか？', acceptedAnswer: { '@type': 'Answer', text: '簡易専用水道（10m³超）は法定検査・清掃ともに年1回以上が義務です。加えて、ふた・防虫網・ひび割れ・水漏れなどの外観点検は、管理者が日常的（毎月など）に行うことが望ましいとされています。' } },
+    { '@type': 'Question', name: '10m³以下の受水槽も点検は必要ですか？', acceptedAnswer: { '@type': 'Answer', text: '10m³以下の小規模貯水槽水道は水道法の対象外ですが、多くの自治体が条例で清掃・管理を求めています。管轄の水道局・保健所で取り扱いを確認してください。' } },
+    { '@type': 'Question', name: '法定検査を受けないとどうなりますか？', acceptedAnswer: { '@type': 'Answer', text: '簡易専用水道の管理義務違反は、改善指導・命令の対象となり、悪質な場合は罰金等の対象になることがあります。水質事故が起きた場合は管理者の損害賠償責任にもつながります。' } },
+  ],
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: { '@type': 'SpeakableSpecification', cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.faq-q', '.faq-a'] },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
+});
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified}
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a>
+          <span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a>
+          <span aria-hidden="true">›</span>
+          <span>受水槽の点検・法定検査</span>
+        </nav>
+        <span class="cl-cat">受水槽清掃</span>
+        <h1 class="cl-title">受水槽の点検・法定検査｜簡易専用水道検査とは・清掃との違い</h1>
+        <p class="cl-lead">
+          受水槽の管理には、<strong>清掃</strong>のほかに、<strong>年1回の法定検査（簡易専用水道検査）</strong>と、<strong>管理者が日常的に行う外観点検</strong>があります。本記事では、混同しやすいこの3つを整理し、頻度・費用・違反リスクまでを施設管理担当者向けにまとめました。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年6月16日</time>
+          <span>最終更新：2026年6月16日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 受水槽の「点検」と「清掃」は違うの？</p>
+        <p class="cl-qa-a">A. 違います。<strong>清掃＝槽内の洗浄・消毒</strong>、<strong>法定検査＝登録検査機関による年1回の確認</strong>、<strong>日常点検＝管理者による外観チェック</strong>。10m³超は清掃も法定検査も毎年義務です。</p>
+        <p class="cl-qa-src">※小規模（10m³以下）は自治体条例の扱いを要確認</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="jusuisou-seisou" serviceName="受水槽清掃" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#difference">点検・法定検査・清掃の違い</a></li>
+          <li><a href="#houtei">簡易専用水道の法定検査とは</a></li>
+          <li><a href="#daily">管理者が行う日常点検チェック項目</a></li>
+          <li><a href="#freq">頻度・費用の目安</a></li>
+          <li><a href="#risk">受けなかった場合のリスク</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>3つを区別</strong>：清掃（洗浄・消毒）／法定検査（登録検査機関・年1回）／日常点検（管理者の外観確認）</li>
+            <li><strong>10m³超は義務</strong>：清掃も法定検査も毎年1回以上。10m³以下は自治体条例を確認</li>
+            <li><strong>結論</strong>：清掃と法定検査はセットで年間計画化し、日常点検を月次で回すのが安全</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="difference" class="cl-section">
+        <h2>点検・法定検査・清掃の違い</h2>
+        <p>「受水槽点検」と検索すると、内容の異なる複数の行為が混ざって出てきます。まずは3つを区別しましょう。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>受水槽にかかわる3つの管理行為</caption>
+            <thead>
+              <tr>
+                <th scope="col">行為</th>
+                <th scope="col">内容</th>
+                <th scope="col">実施者</th>
+                <th scope="col">頻度</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">清掃</th><td>槽内を空にして洗浄・消毒</td><td>登録清掃業者</td><td>年1回以上</td></tr>
+              <tr><th scope="row">法定検査</th><td>書類・施設・給水栓水の確認</td><td>登録検査機関</td><td>年1回以上</td></tr>
+              <tr><th scope="row">日常点検</th><td>ふた・防虫網・ひび・水漏れ等の外観確認</td><td>施設管理者</td><td>日常的（毎月など）</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>清掃の費用や進め方は<a href="/column/jusuisou-seisou-hiyo-sohba/">費用相場ガイド</a>、検査項目は<a href="/column/jusuisou-seisou-suishitsu-kensa/">水質検査ガイド</a>で詳しく解説しています。</p>
+      </section>
+
+      <section id="houtei" class="cl-section">
+        <h2>簡易専用水道の法定検査とは</h2>
+        <p>有効容量10m³超の受水槽は「簡易専用水道」に該当し、<a href={egov('水道法')} target="_blank" rel="noopener nofollow">水道法↗</a>により設置者（管理者）に管理義務が課されます。その中核が、<strong>登録検査機関による年1回以上の定期検査（法定検査）</strong>です。検査は主に次の3つで構成されます。</p>
+        <ul class="cl-list">
+          <li><strong>書類検査</strong>：清掃記録・水質検査結果などの管理状況を確認</li>
+          <li><strong>施設検査</strong>：受水槽・高架水槽・配管などの外観を点検（ふた・防虫網・劣化・汚染のおそれ）</li>
+          <li><strong>給水栓水の検査</strong>：実際の蛇口で色・濁り・臭い・残留塩素などを確認</li>
+        </ul>
+        <p>この法定検査は、清掃業者が行う作業とは別の「第三者による確認」です。詳細な手続きは<a href={egov('水道法施行規則')} target="_blank" rel="noopener nofollow">水道法施行規則↗</a>に定められています。清掃と検査を別々に手配する手間を避けたい場合は、両方を一括手配できる業者に依頼すると管理が楽になります。</p>
+      </section>
+
+      <section id="daily" class="cl-section">
+        <h2>管理者が行う日常点検チェック項目</h2>
+        <p>年1回の清掃・法定検査だけでなく、管理者による日常的な外観点検が、水質事故の早期発見につながります。特別な資格は不要で、目視で確認できる項目が中心です。</p>
+        <div class="cl-callout cl-callout--blue">
+          <p><strong>日常点検チェックリスト（外観・目視）</strong></p>
+          <ol>
+            <li>受水槽・高架水槽の<strong>ふたが施錠され、すき間がない</strong>か</li>
+            <li><strong>防虫網</strong>が破れていないか（虫・小動物の侵入防止）</li>
+            <li>槽本体・配管に<strong>ひび割れ・漏水・さび</strong>がないか</li>
+            <li>オーバーフロー管・通気管の防虫網に<strong>異常</strong>がないか</li>
+            <li>周囲に<strong>汚水・薬品・ごみ</strong>など汚染源がないか</li>
+            <li>蛇口の水に<strong>色・濁り・異臭</strong>がないか</li>
+          </ol>
+        </div>
+        <p>異常が見つかった場合は、清掃・補修を早めに手配しましょう。放置すると水質事故や設備劣化につながります。</p>
+      </section>
+
+      <section id="freq" class="cl-section">
+        <h2>頻度・費用の目安</h2>
+        <p>義務の頻度と、費用のおおまかな目安は次のとおりです。費用は規模・地域・依頼内容で変動するため、必ず複数社で比較してください。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>受水槽の管理：頻度と費用の目安（2026年・参考）</caption>
+            <thead>
+              <tr>
+                <th scope="col">項目</th>
+                <th scope="col">頻度</th>
+                <th scope="col">費用の目安</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">清掃</th><td>年1回以上</td><td>3〜30万円超（規模による）</td></tr>
+              <tr><th scope="row">法定検査（簡易専用水道）</th><td>年1回以上</td><td>1〜2万円程度</td></tr>
+              <tr><th scope="row">日常点検</th><td>毎月など</td><td>管理者対応で原則無料</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>清掃費用の内訳・規模別の詳細は<a href="/column/jusuisou-seisou-hiyo-sohba/">受水槽清掃の費用相場2026</a>をご覧ください。</p>
+      </section>
+
+      <section id="risk" class="cl-section">
+        <h2>受けなかった場合のリスク</h2>
+        <p>清掃・法定検査を怠ると、衛生面だけでなく法的・経済的なリスクが生じます。</p>
+        <ul class="cl-list">
+          <li>管理基準違反による<strong>改善指導・命令</strong></li>
+          <li>悪質な場合の<strong>罰金等</strong>の対象</li>
+          <li>水質事故発生時の<strong>損害賠償責任</strong>（入居者・利用者への賠償）</li>
+          <li>保健所の<strong>立入検査・公表</strong>による信頼失墜</li>
+        </ul>
+        <p>罰則の詳細は<a href="/column/jusuisou-seisou-batsu/">受水槽清掃の罰則ガイド</a>、義務の全体像は<a href="/column/jusuisou-seisou-horei-gimu/">法定義務ガイド</a>で確認できます。</p>
+      </section>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問（FAQ）</h2>
+        <h3>Q1. 点検と清掃は違いますか？</h3>
+        <p>違います。<strong>清掃＝槽内の洗浄・消毒</strong>、<strong>法定検査＝登録検査機関による年1回の確認</strong>、<strong>日常点検＝管理者の外観チェック</strong>です。10m³超は清掃も法定検査も毎年義務です。</p>
+        <h3>Q2. 法定検査は誰が行いますか？</h3>
+        <p>登録検査機関が行います。清掃業者とは別主体ですが、提携機関を通じて一括手配できる業者が多いです。</p>
+        <h3>Q3. 10m³以下も必要ですか？</h3>
+        <p>水道法の対象外ですが、多くの自治体が条例で清掃・管理を求めています。管轄の水道局・保健所で確認してください。</p>
+        <h3>Q4. 受けないとどうなりますか？</h3>
+        <p>改善指導・命令、悪質な場合は罰金等の対象です。水質事故時は管理者の損害賠償責任にもつながります。</p>
+      </section>
+
+      <section class="cl-cta">
+        <h2>清掃・法定検査をまとめて手配したいなら</h2>
+        <p>{site.name}では、建築物飲料水貯水槽清掃業の登録を確認済みの業者から、清掃・法定検査・報告書発行まで対応できる先を最大3社ご紹介します。<strong>お見積もり依頼は1分・完全無料</strong>です。</p>
+        <a href="/jusuisou-seisou/" class="cta-btn-primary">無料で一括見積もりを依頼する</a>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別の受水槽清掃業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/jusuisou-seisou/tokyo/">東京都</a></li>
+          <li><a href="/jusuisou-seisou/osaka/">大阪府</a></li>
+          <li><a href="/jusuisou-seisou/kanagawa/">神奈川県</a></li>
+          <li><a href="/jusuisou-seisou/aichi/">愛知県</a></li>
+          <li><a href="/jusuisou-seisou/saitama/">埼玉県</a></li>
+          <li><a href="/jusuisou-seisou/fukuoka/">福岡県</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/jusuisou-seisou/">全国47都道府県の対応業者を見る</a></p>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連する詳細情報</h2>
+        <ul>
+          <li><a href="/column/jusuisou-seisou-horei-gimu/">受水槽清掃の法定義務ガイド</a></li>
+          <li><a href="/column/jusuisou-seisou-suishitsu-kensa/">受水槽清掃の水質検査ガイド</a></li>
+          <li><a href="/column/jusuisou-seisou-batsu/">受水槽清掃の罰則ガイド</a></li>
+          <li><a href="/jusuisou-seisou/#legal">受水槽清掃の法的義務（サービストップ）</a></li>
+        </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#suido-ho">水道法</a></li>
+          <li><a href="/glossary/#kanni-senyou-suido">簡易専用水道</a></li>
+          <li><a href="/glossary/#jusuisou">受水槽／貯水槽</a></li>
+          <li><a href="/glossary/#koukasuisou">高架水槽</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集をすべて見る</a></p>
+      </aside>
+
+      <p class="cl-note">
+        ※ 本記事の法令情報は2026年6月時点のものです。点検・検査の頻度や扱いは法令改正・自治体条例により異なる場合があります。最終的な判断は管轄行政（保健所・水道局）の最新情報と、登録検査機関・業者への確認に基づいて行ってください。
+      </p>
+
+    </div>
+
+  </article>
+</BaseLayout>
+
+<style>
+.cl-article { color: var(--gray-900); }
+.cl-header { background: linear-gradient(135deg, #0f2742 0%, #1a56db 100%); color: #fff; padding: 48px 0 56px; }
+.cl-crumbs { font-size: .78rem; color: #bfdbfe; margin-bottom: 18px; }
+.cl-crumbs a { color: #bfdbfe; text-decoration: underline; }
+.cl-crumbs span { margin: 0 6px; opacity: .6; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3); color: #e0f2fe; font-size: .76rem; font-weight: 700; padding: 4px 12px; border-radius: 99px; margin-bottom: 14px; letter-spacing: .04em; }
+.cl-title { font-size: clamp(1.4rem, 2.6vw, 2.1rem); font-weight: 900; line-height: 1.4; color: #fff; margin-bottom: 18px; letter-spacing: -.01em; }
+.cl-lead { font-size: 1rem; line-height: 1.85; color: #e0f2fe; margin-bottom: 18px; max-width: 820px; }
+.cl-lead strong { color: #fde68a; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 18px; font-size: .78rem; color: rgba(255,255,255,.65); }
+.cl-meta a { color: rgba(255,255,255,.85); }
+.cl-body { padding: 48px 0 80px; max-width: 880px; }
+.cl-toc { background: var(--gray-100); border-left: 4px solid var(--blue); border-radius: 8px; padding: 24px 28px; margin-bottom: 48px; }
+.cl-toc-h { font-size: .9rem; font-weight: 800; color: var(--gray-900); margin-bottom: 12px; }
+.cl-toc ol { padding-left: 20px; font-size: .9rem; line-height: 1.95; color: var(--gray-700); }
+.cl-toc a { color: var(--blue); text-decoration: underline; }
+.cl-section { margin-bottom: 44px; }
+.cl-section h2 { font-size: 1.35rem; font-weight: 800; color: var(--gray-900); margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid var(--blue); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 700; color: var(--gray-900); margin: 28px 0 12px; }
+.cl-section p { font-size: .95rem; line-height: 1.95; color: var(--gray-700); margin-bottom: 16px; }
+.cl-section p strong { color: var(--gray-900); }
+.cl-section a { color: var(--blue); text-decoration: underline; }
+.cl-list { font-size: .92rem; line-height: 1.95; color: var(--gray-700); padding-left: 22px; margin-bottom: 16px; }
+.cl-list li { margin-bottom: 6px; }
+.cl-list li strong { color: var(--gray-900); }
+.cl-table-wrap { overflow-x: auto; margin-bottom: 20px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .9rem; background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-table caption { text-align: left; font-size: .85rem; color: var(--gray-500); padding-bottom: 8px; caption-side: top; }
+.cl-table th, .cl-table td { padding: 12px 14px; border-bottom: 1px solid var(--gray-200); text-align: left; vertical-align: top; }
+.cl-table thead { background: var(--blue-light); }
+.cl-table thead th { color: var(--blue-dark); font-weight: 800; }
+.cl-table tbody th { font-weight: 700; color: var(--gray-900); white-space: nowrap; }
+.cl-table td { color: var(--gray-700); }
+.cl-table tbody tr:last-child th, .cl-table tbody tr:last-child td { border-bottom: none; }
+.cl-callout { background: var(--gray-100); border-left: 4px solid var(--accent); border-radius: 8px; padding: 24px 28px; margin-bottom: 32px; }
+.cl-callout--blue { border-left-color: var(--blue); }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 10px; padding: 0; border: none; }
+.cl-callout ul, .cl-callout ol { font-size: .92rem; line-height: 1.95; color: var(--gray-700); padding-left: 22px; margin: 0; }
+.cl-callout li { margin-bottom: 4px; }
+.cl-callout li strong { color: var(--gray-900); }
+.cl-callout p { margin-bottom: 10px; }
+.cl-cta { background: linear-gradient(135deg, #0f2742 0%, #1a56db 100%); color: #fff; text-align: center; border-radius: 14px; padding: 40px 28px; margin: 48px 0; }
+.cl-cta h2 { font-size: 1.2rem; font-weight: 800; color: #fff; margin-bottom: 12px; border: none; padding: 0; }
+.cl-cta p { font-size: .92rem; color: #bfdbfe; margin-bottom: 22px; line-height: 1.8; }
+.cl-cta p strong { color: #fde68a; }
+.cl-cta .cta-btn-primary { display: inline-block; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 24px 28px; margin-bottom: 32px; }
+.cl-related-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 12px; }
+.cl-related ul { list-style: none; padding: 0; font-size: .9rem; line-height: 2; }
+.cl-related a { color: var(--blue); text-decoration: underline; }
+.cl-note { font-size: .78rem; color: var(--gray-500); line-height: 1.8; border-top: 1px solid var(--gray-200); padding-top: 20px; margin-top: 24px; }
+.cl-quickanswer { background: #eef6ff; border: 1.5px solid #1a56db; border-radius: 10px; padding: 18px 22px; margin-bottom: 32px; }
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+.cl-glossary-block { background: var(--gray-100); border-radius: 10px; padding: 24px 28px; margin-bottom: 32px; }
+.cl-glossary-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 12px; }
+.cl-glossary-list { list-style: none; padding: 0; margin: 0 0 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+.cl-glossary-list a { display: inline-block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 5px 12px; font-size: .85rem; color: var(--blue); text-decoration: none; }
+.cl-glossary-more { font-size: .87rem; margin: 0; }
+.cl-glossary-more a { color: var(--blue); text-decoration: underline; }
+@media (max-width: 720px) {
+  .cl-header { padding: 36px 0 40px; }
+  .cl-body { padding: 32px 0 60px; }
+  .cl-toc, .cl-callout, .cl-related, .cl-cta { padding: 18px 20px; }
+  .cl-table { font-size: .82rem; }
+  .cl-table th, .cl-table td { padding: 10px 8px; }
+}
+</style>

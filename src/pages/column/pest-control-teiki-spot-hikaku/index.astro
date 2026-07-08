@@ -1,0 +1,377 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = '害虫駆除の定期契約とスポット駆除を徹底比較｜PCOの契約形態の選び方';
+const description = '業務用害虫駆除（PCO）の「定期管理契約」と「スポット（単発）駆除」を費用・効果・HACCP対応・リスクの観点で徹底比較。飲食店・食品工場・倉庫・オフィスなど業種別にどちらを選ぶべきかの判断基準、年間コストの損益分岐点、契約書チェックポイントまで施設管理者向けに整理しました。';
+const canonical = `${site.domain}/column/pest-control-teiki-spot-hikaku/`;
+const published = '2026-06-22';
+const modified = '2026-06-22';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '害虫駆除 定期契約とスポットの比較ガイド', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'Article',
+  headline: title, description, datePublished: published, dateModified: modified,
+  inLanguage: 'ja-JP', url: canonical, mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 5600,
+  articleSection: '契約形態',
+  keywords: 'PCO,定期契約,スポット駆除,害虫駆除,契約形態,比較,損益分岐点,HACCP,IPM',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-pest-control.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '害虫駆除（業務用PCO）' },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: '定期契約とスポット駆除はどちらが安いですか？', acceptedAnswer: { '@type': 'Answer', text: '年間に必要な対応回数で決まります。スポット駆除は1回3〜10万円が目安で、年4回以上必要なら月額1〜3万円の定期契約のほうが総額で安くなるのが一般的です。年1〜2回で済む環境ならスポットのほうが割安です。' } },
+    { '@type': 'Question', name: '飲食店はどちらを選ぶべきですか？', acceptedAnswer: { '@type': 'Answer', text: '飲食店・食品事業者は定期管理契約が原則です。HACCP記録の継続性、保健所立入時の証跡、ブランド毀損リスクの予防という点で、発生してから対応するスポットでは不十分なためです。' } },
+    { '@type': 'Question', name: 'スポット駆除でもHACCP対応はできますか？', acceptedAnswer: { '@type': 'Answer', text: 'スポット駆除は単発対応のため、HACCPで求められる「継続的なモニタリング記録」を満たせません。HACCP対応が必要な施設は、定期的な巡回・記録・改善提案がセットになった管理契約が必要です。' } },
+    { '@type': 'Question', name: '定期契約の縛り（最低契約期間）はありますか？', acceptedAnswer: { '@type': 'Answer', text: '多くの業者は1年契約・自動更新が標準です。契約前に最低契約期間・中途解約金・更新条件を必ず書面で確認してください。短期で見直したい場合は半年契約や3か月単位の業者を選ぶ方法もあります。' } },
+    { '@type': 'Question', name: 'まず発生してからスポットで呼ぶのは間違いですか？', acceptedAnswer: { '@type': 'Answer', text: '一概に間違いではありません。発生リスクが低いオフィス・小規模物販などは、年1〜2回の予防点検＋発生時スポットで十分な場合があります。ただし食品を扱う施設は発生してからでは手遅れになりやすく、定期契約が安全です。' } },
+    { '@type': 'Question', name: '定期契約で発生時の追加対応は無料ですか？', acceptedAnswer: { '@type': 'Answer', text: '業者・プランにより異なります。「定期訪問内の通常対応は契約料に含むが、大量発生時の緊急出動は別料金」とする業者が多いです。緊急対応の単価・回数上限を契約時に確認しておきましょう。' } },
+    { '@type': 'Question', name: '倉庫・物流施設はどちらが向いていますか？', acceptedAnswer: { '@type': 'Answer', text: '食品・輸入品を扱う倉庫はIPM（総合的有害生物管理）ベースの定期契約が向いています。荷の汚染や取引先監査への対応が必要なためです。常温の資材倉庫など発生リスクが低い場合はスポット併用も選択肢です。' } },
+    { '@type': 'Question', name: '契約形態を途中で変更できますか？', acceptedAnswer: { '@type': 'Answer', text: '可能です。スポットで状況を把握してから定期契約へ移行する、逆に発生が落ち着いたら頻度を下げる、といった見直しは一般的です。年1回の契約更新時に訪問頻度・対象エリアを再設計するとコスト最適化できます。' } },
+    { '@type': 'Question', name: '定期契約の費用は経費にできますか？', acceptedAnswer: { '@type': 'Answer', text: 'はい。衛生管理費・修繕費として損金算入できます。月額の定期契約は毎月の経費として平準化しやすく、HACCP関連費用としてモニタリング報告書とあわせて保管しておくと税務・監査の両面で有利です。' } },
+    { '@type': 'Question', name: '相見積もりで契約形態をそろえる必要はありますか？', acceptedAnswer: { '@type': 'Answer', text: 'あります。A社は月次定期、B社は隔月＋スポット、というように前提が違うと総額を比較できません。訪問頻度・対象エリア・報告書品質・緊急対応条件をそろえた同一条件で見積もりを取ると正しく比較できます。' } }
+  ],
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-pest-control.png` },
+});
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified} title={title} description={description} canonical={canonical} siteName={site.name} logoSub="施設管理の一括見積比較" jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}>
+  <article class="cl-article">
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>害虫駆除 定期契約とスポットの比較</span>
+        </nav>
+        <span class="cl-cat">契約形態</span>
+        <h1 class="cl-title">害虫駆除の定期契約とスポット駆除を徹底比較｜PCOの契約形態の選び方</h1>
+        <p class="cl-lead">
+          業務用害虫駆除（PCO）を頼むとき、最初に迷うのは<strong>「毎月の定期契約にするか、出たときだけスポットで呼ぶか」</strong>です。毎月の定期契約とスポット駆除は、<strong>料金の構造もリスクへの効き方もまったく別物</strong>。この記事では費用・効果・HACCP対応・リスクの4つに分けて違いを並べ、業種別の選び方、年間コストが逆転するライン、契約書で押さえておきたい点までをまとめます。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年6月22日</time>
+          <span>最終更新：2026年6月22日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 害虫駆除は定期契約とスポット、どちらを選ぶべき？</p>
+        <p class="cl-qa-a">A. <strong>食品を扱う施設（飲食店・食品工場・厨房付き施設）は定期契約が原則</strong>。発生リスクの低いオフィス・小規模物販は予防点検＋スポットでも可。<strong>年4回以上の対応が必要なら定期契約のほうが総額で安い</strong>のが目安。</p>
+        <p class="cl-qa-src">※ロカサポ調べ（2026年4〜6月の業者ヒアリングと相場調査をもとに整理）</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="pest-control" serviceName="害虫駆除" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#whatis">定期契約とスポット駆除の違い</a></li>
+          <li><a href="#compare">4軸での比較表</a></li>
+          <li><a href="#cost">費用構造と年間コスト</a></li>
+          <li><a href="#bep">損益分岐点はどこか</a></li>
+          <li><a href="#gyoshu">業種別・どちらを選ぶべきか</a></li>
+          <li><a href="#haccp">HACCP・監査対応の観点</a></li>
+          <li><a href="#contract">契約書で確認すべき7項目</a></li>
+          <li><a href="#switch">途中で契約形態を変える</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>定期契約</strong>：月1〜3万円で継続管理。HACCP記録・予防・リスク低減に強く、食品系は事実上これ一択</li>
+            <li><strong>スポット駆除</strong>：1回3〜10万円の単発。発生時の即応・低リスク施設の単発対応に向くが記録の継続性はない</li>
+            <li><strong>判断軸</strong>：年4回以上必要なら定期が割安。食品取扱い・監査対応の有無が最大の分岐点</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="whatis" class="cl-section">
+        <h2>定期契約とスポット駆除の違い</h2>
+        <p>まず両者が「何を買う契約なのか」を押さえると判断がぶれません。</p>
+        <h3>定期管理契約（モニタリング契約）</h3>
+        <p>月1回〜隔月などの頻度で業者が定期巡回し、<strong>生息調査・トラップ設置・必要な処理・モニタリング報告書の発行</strong>までを継続的に行う契約です。「駆除」そのものより<strong>「発生させない状態を維持する管理」</strong>を買うイメージで、IPM（総合的有害生物管理）やHACCP対応の土台になります。</p>
+        <h3>スポット（単発）駆除</h3>
+        <p>ゴキブリやネズミが「出てしまった」ときに、その都度依頼して駆除してもらう単発対応です。1回ごとに費用が発生し、<strong>調査→処理→（必要なら）再処理</strong>で完結します。継続的なモニタリングや記録は基本的に含まれません。</p>
+        <div class="cl-callout cl-callout--warn">
+          <h3 class="cl-callout-h">最大の違いは「記録が残るか」</h3>
+          <p>定期契約は毎回の点検結果が報告書として蓄積され、保健所立入や取引先監査の証跡になります。スポットは「その日駆除した」記録しか残らないため、継続的な衛生管理を求められる施設では決定的に不利です。</p>
+        </div>
+      </section>
+
+      <section id="compare" class="cl-section">
+        <h2>4軸での比較表</h2>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>定期管理契約 vs スポット駆除（費用・効果・記録・リスク）</caption>
+            <thead><tr><th scope="col">比較軸</th><th scope="col">定期管理契約</th><th scope="col">スポット駆除</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">費用構造</th><td>月額固定（1〜3万円/月が目安）</td><td>1回ごと（3〜10万円/回が目安）</td></tr>
+              <tr><th scope="row">主な目的</th><td>予防・継続管理・記録</td><td>発生時の駆除・即応</td></tr>
+              <tr><th scope="row">HACCP記録</th><td>○ 継続的に蓄積</td><td>× 単発記録のみ</td></tr>
+              <tr><th scope="row">再発防止</th><td>○ 侵入経路・環境改善まで</td><td>△ その場の処理が中心</td></tr>
+              <tr><th scope="row">即応性</th><td>○ 契約業者にすぐ相談可</td><td>△ 都度の手配が必要</td></tr>
+              <tr><th scope="row">向く施設</th><td>飲食・食品工場・倉庫・福祉・医療</td><td>オフィス・低リスク物販・一時的発生</td></tr>
+              <tr><th scope="row">コスト平準化</th><td>○ 毎月一定で予算化しやすい</td><td>× 発生時に突発的支出</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="cl-note">○＝強い／△＝条件次第／×＝不向き。あくまで一般的な傾向の整理です。</p>
+      </section>
+
+      <section id="cost" class="cl-section">
+        <h2>費用構造と年間コスト</h2>
+        <p>「結局どちらが安いのか」は、年間に必要な対応回数で逆転します。代表的なケースで年間コストを比較します。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>小〜中規模飲食店を想定した年間コスト比較（税込目安）</caption>
+            <thead><tr><th scope="col">年間の対応回数</th><th scope="col">スポット駆除（5万円/回想定）</th><th scope="col">定期契約（1.5万円/月想定）</th><th scope="col">有利なのは</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">年1回</th><td>約5万円</td><td>約18万円</td><td>スポット</td></tr>
+              <tr><th scope="row">年2回</th><td>約10万円</td><td>約18万円</td><td>スポット</td></tr>
+              <tr><th scope="row">年4回</th><td>約20万円</td><td>約18万円</td><td>ほぼ同等</td></tr>
+              <tr><th scope="row">年6回</th><td>約30万円</td><td>約18万円</td><td>定期契約</td></tr>
+              <tr><th scope="row">年12回（毎月）</th><td>約60万円</td><td>約18万円</td><td>定期契約</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>上の試算では、<strong>年4回前後が損益分岐</strong>になり、それ以上の頻度で対応が必要な環境では定期契約が明確に安くなります。さらに定期契約には「発生そのものを減らす予防効果」があるため、実際にはスポットで年6回呼ぶような状況自体を避けられる点も見逃せません。</p>
+        <div class="cl-callout">
+          <h3 class="cl-callout-h">見落としがちな「隠れコスト」</h3>
+          <ul>
+            <li><strong>営業損失</strong>：害虫発生による休業・客離れ・口コミ被害は駆除費用より大きい</li>
+            <li><strong>緊急出動の割増</strong>：スポットは深夜・即日対応で割増になりやすい</li>
+            <li><strong>再発による再依頼</strong>：単発処理は再発しやすく、結局複数回かかる</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="bep" class="cl-section">
+        <h2>損益分岐点はどこか</h2>
+        <p>金額だけの損益分岐は前述のとおり「年4回前後」ですが、実務では金額以外の要素が判断を左右します。次の条件に1つでも当てはまるなら、回数が少なくても定期契約を選ぶ価値があります。</p>
+        <ul>
+          <li><strong>食品・飲料を扱う</strong>（厨房・製造・保管がある）</li>
+          <li><strong>保健所の立入・取引先の衛生監査</strong>を受ける立場にある</li>
+          <li><strong>ブランド・口コミの毀損</strong>が売上に直結する（飲食・宿泊・物販）</li>
+          <li><strong>過去に発生履歴がある</strong>、または周辺環境のリスクが高い（飲食ビル・繁華街・水回りが多い）</li>
+          <li><strong>建物が大きく侵入経路が多い</strong>（倉庫・工場・複合施設）</li>
+        </ul>
+        <p>逆に、これらに当てはまらない<strong>小規模オフィスや常温の資材倉庫</strong>などは、年1回の予防点検＋発生時スポットでコストを抑えるのが合理的です。</p>
+      </section>
+
+      <section id="gyoshu" class="cl-section">
+        <h2>業種別・どちらを選ぶべきか</h2>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>業種別の推奨契約形態</caption>
+            <thead><tr><th scope="col">業種・施設</th><th scope="col">推奨</th><th scope="col">理由</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">飲食店・厨房付き施設</th><td>定期契約</td><td>HACCP記録・保健所対応・ブランド保護</td></tr>
+              <tr><th scope="row">食品工場・セントラルキッチン</th><td>定期契約（包括）</td><td>FSSC22000等の認証維持・監査対応</td></tr>
+              <tr><th scope="row">食品・輸入品倉庫／物流</th><td>定期契約（IPM）</td><td>荷の汚染防止・取引先監査</td></tr>
+              <tr><th scope="row">ホテル・旅館</th><td>定期契約</td><td>客室＋厨房、トコジラミ早期発見体制</td></tr>
+              <tr><th scope="row">病院・福祉施設</th><td>定期契約（低毒性）</td><td>利用者保護・IPMによる薬剤最小化</td></tr>
+              <tr><th scope="row">スーパー・物販店</th><td>定期契約</td><td>商品・バックヤードの衛生管理</td></tr>
+              <tr><th scope="row">一般オフィス</th><td>スポット〜年数回点検</td><td>発生リスクが比較的低い</td></tr>
+              <tr><th scope="row">常温の資材倉庫</th><td>スポット併用</td><td>食品なし・発生リスク低</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>ポイントは<strong>「食品を扱うか」「第三者の監査・立入があるか」</strong>の2点です。どちらかが該当する施設は、コスト比較を待たず定期契約が前提になります。</p>
+      </section>
+
+      <section id="haccp" class="cl-section">
+        <h2>HACCP・監査対応の観点</h2>
+        <p>2021年6月のHACCP完全義務化以降、食品等事業者は<strong>有害生物（ペスト）の防除を含む衛生管理計画と、その実施記録</strong>が求められています。ここでスポット駆除には構造的な弱点があります。</p>
+        <ul>
+          <li><strong>記録の継続性がない</strong>：HACCPは「いつ・どこを・どう管理し、結果どうだったか」の継続記録を求める。単発駆除では満たせない</li>
+          <li><strong>モニタリングの概念がない</strong>：トラップによる生息状況の定点観測・トレンド分析は定期契約の前提機能</li>
+          <li><strong>改善提案が残らない</strong>：侵入経路の封鎖・環境改善といった是正措置の履歴が証跡にならない</li>
+        </ul>
+        <p>このため、HACCP対応や取引先監査が関わる施設では、<strong>「定期管理契約＋HACCP対応報告書」</strong>がほぼ必須の組み合わせになります。詳しくは<a href="/column/pest-control-haccp/">HACCP制度化で必須になった害虫対策ガイド</a>もあわせてご確認ください。</p>
+      </section>
+
+      <section id="contract" class="cl-section">
+        <h2>契約書で確認すべき7項目</h2>
+        <p>定期契約を結ぶ際は、月額の安さだけでなく以下を書面で確認しておくと、後のトラブルや「思っていた対応と違う」を防げます。</p>
+        <ol>
+          <li><strong>訪問頻度と対象エリア</strong>：月何回・どの範囲（厨房／倉庫／外周など）を含むか</li>
+          <li><strong>報告書の品質</strong>：HACCP対応か、生息マップ・改善提案・トレンド分析の有無</li>
+          <li><strong>緊急・大量発生時の扱い</strong>：契約料に含むか別料金か、単価と回数上限</li>
+          <li><strong>使用薬剤とIPM方針</strong>：低毒性・食品適合か、薬剤最小化の方針があるか</li>
+          <li><strong>最低契約期間と中途解約金</strong>：1年縛り・自動更新の有無</li>
+          <li><strong>作業時間帯</strong>：営業時間外（深夜・早朝）対応の可否と割増条件</li>
+          <li><strong>資格・登録</strong>：建築物ねずみ昆虫等防除業の登録、ペストコントロール技術者の有無</li>
+        </ol>
+        <div class="cl-callout cl-callout--warn">
+          <h3 class="cl-callout-h">「安い定期契約」の落とし穴</h3>
+          <p>極端に安い月額は、訪問頻度が隔月・報告書が簡易チェックリストのみ・緊急対応が高額別料金、といった条件であることが多いです。総額と対応範囲をそろえて比較しないと、結局スポットより割高になることもあります。</p>
+        </div>
+      </section>
+
+      <section id="switch" class="cl-section">
+        <h2>途中で契約形態を変える</h2>
+        <p>契約形態は固定ではありません。状況に応じて次のような見直しが一般的です。</p>
+        <ul>
+          <li><strong>スポット→定期</strong>：一度スポットで生息状況を把握し、リスクが分かった段階で定期契約へ移行</li>
+          <li><strong>定期の頻度を下げる</strong>：発生が落ち着いたら月1→隔月へ。年1回の更新時に再設計</li>
+          <li><strong>エリアの絞り込み</strong>：全館一律ではなく、リスクの高い厨房・搬入口に重点配分してコスト最適化</li>
+        </ul>
+        <p>新規に業者を探す段階なら、複数業者から<strong>同一条件（頻度・対象・報告書・緊急対応）でそろえた見積もり</strong>を取り、定期とスポットの両プランを併記してもらうと比較しやすくなります。倉庫・物流施設の契約設計は<a href="/column/pest-control-souko-butsuryu-ipm/">倉庫・物流施設のIPM導入ガイド</a>、飲食店の頻度・義務は<a href="/column/pest-control-inshokuten-hindo-gimu/">飲食店の害虫駆除 頻度・法的義務ガイド</a>が参考になります。</p>
+      </section>
+
+      <div class="cl-cta">
+        <h2>定期契約・スポットの料金を比較するなら</h2>
+        <p>HACCP対応の有資格業者から最大3社の見積もりを<br/>完全無料・約1分で取得できます</p>
+        <a class="cta-btn-primary" href="/pest-control/">無料で一括見積もりを依頼する</a>
+      </div>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          <div class="cl-faq-item"><dt>定期契約とスポット駆除はどちらが安いですか？</dt><dd>年間の対応回数で決まります。スポットは1回3〜10万円が目安で、年4回以上必要なら月額1〜3万円の定期契約のほうが総額で安くなるのが一般的です。年1〜2回で済む環境ならスポットのほうが割安です。</dd></div>
+          <div class="cl-faq-item"><dt>飲食店はどちらを選ぶべきですか？</dt><dd>飲食店・食品事業者は定期管理契約が原則です。HACCP記録の継続性、保健所立入時の証跡、ブランド毀損リスクの予防という点で、発生してから対応するスポットでは不十分なためです。</dd></div>
+          <div class="cl-faq-item"><dt>スポット駆除でもHACCP対応はできますか？</dt><dd>スポットは単発対応のため、HACCPで求められる「継続的なモニタリング記録」を満たせません。HACCP対応が必要な施設は、定期的な巡回・記録・改善提案がセットの管理契約が必要です。</dd></div>
+          <div class="cl-faq-item"><dt>定期契約に最低契約期間はありますか？</dt><dd>多くの業者は1年契約・自動更新が標準です。契約前に最低契約期間・中途解約金・更新条件を必ず書面で確認してください。短期で見直したいなら半年・3か月単位の業者を選ぶ方法もあります。</dd></div>
+          <div class="cl-faq-item"><dt>定期契約で発生時の追加対応は無料ですか？</dt><dd>業者・プランにより異なります。通常対応は契約料に含むが、大量発生時の緊急出動は別料金とする業者が多いです。緊急対応の単価・回数上限を契約時に確認しておきましょう。</dd></div>
+          <div class="cl-faq-item"><dt>契約形態は途中で変更できますか？</dt><dd>可能です。スポットで状況を把握してから定期へ移行する、発生が落ち着いたら頻度を下げる、といった見直しは一般的です。年1回の更新時に頻度・対象エリアを再設計するとコストを最適化できます。</dd></div>
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別の害虫駆除（業務用PCO）業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/pest-control/tokyo/">東京都</a></li>
+          <li><a href="/pest-control/osaka/">大阪府</a></li>
+          <li><a href="/pest-control/kanagawa/">神奈川県</a></li>
+          <li><a href="/pest-control/aichi/">愛知県</a></li>
+          <li><a href="/pest-control/saitama/">埼玉県</a></li>
+          <li><a href="/pest-control/fukuoka/">福岡県</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/pest-control/">全国47都道府県の対応業者を見る</a></p>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連サービス・コラム</h2>
+        <ul>
+          <li><a href="/column/pest-control-guide/">業務用害虫駆除（PCO）完全ガイド｜法的義務・費用・業者選び・害虫別対策の総まとめ</a></li>
+          <li><a href="/pest-control/">害虫駆除（業務用PCO）の業者を一括見積比較</a></li>
+          <li><a href="/column/pest-control-hiyo-sohba/">業務用害虫駆除（PCO）の費用相場ガイド</a></li>
+          <li><a href="/column/pest-control-inshokuten-hindo-gimu/">飲食店の害虫駆除 頻度・法的義務ガイド</a></li>
+          <li><a href="/column/pest-control-haccp/">HACCP制度化で必須になった害虫対策ガイド</a></li>
+          <li><a href="/flow/">ご利用の流れ・3ステップで業者紹介</a></li>
+        </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#ipm">IPM（総合的有害生物管理）</a></li>
+          <li><a href="/glossary/#haccp">HACCP</a></li>
+          <li><a href="/glossary/#shokuhin-eisei-ho-haccp">食品衛生法（HACCP制度化）</a></li>
+          <li><a href="/glossary/#kenchikubutsu-nezumi-konchu-bojogyo">建築物ねずみ昆虫等防除業</a></li>
+          <li><a href="/glossary/#biru-kan-ho">建築物衛生法（ビル管法）</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集をすべて見る</a></p>
+      </aside>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-note { font-size: .82rem; color: var(--gray-500); font-style: italic; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-callout li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+@media (max-width: 600px) { .cl-header { padding: 32px 0 28px; } .cl-body { padding: 28px 16px 48px; } .cl-section h2 { font-size: 1.15rem; } }
+
+.cl-quickanswer { background: #eef6ff; border: 1.5px solid #1a56db; border-radius: 10px; padding: 18px 22px; margin-bottom: 32px; }
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+</style>

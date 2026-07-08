@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
-const title = '業務用エアコン洗浄・修理の費用相場2026｜分解洗浄・修理・入替の判断基準';
+const title = '業務用エアコン洗浄・修理の費用相場｜分解洗浄・修理・入替の判断基準';
 const description = '業務用エアコンの洗浄・修理・入替の費用相場を機種・規模別に解説。フィルター清掃・熱交換器洗浄・完全分解洗浄の単価、修理（軽微〜重整備）の費用レンジ、入替判断基準、緊急修理の追加コスト、年間契約の割引まで施設管理担当者向けに整理します。';
 const canonical = `${site.domain}/column/aircon-business-hiyo-sohba/`;
 const published = '2026-05-26';
@@ -25,7 +26,7 @@ const articleLd = JSON.stringify({
   articleSection: '費用相場',
   keywords: '業務用エアコン,洗浄費用,修理費用,分解洗浄,入替判断,フロン回収,年間契約,2026',
   author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
-  publisher: { '@type': 'Organization', name: site.org.legalName, url: site.domain, logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` } },
+  publisher: { '@id': `${site.domain}/#organization` },
   image: { '@type': 'ImageObject', url: `${site.domain}/og-aircon-business.png`, width: 1200, height: 630 },
   about: { '@type': 'Service', name: '業務用エアコン洗浄・修理' },
 });
@@ -39,10 +40,32 @@ const faqLd = JSON.stringify({
     { '@type': 'Question', name: '緊急修理の追加料金はどのくらい？', acceptedAnswer: { '@type': 'Answer', text: '夏季・冬季のピーク時の緊急対応は通常料金の25〜50%増、夜間・休日対応はさらに50%増になることが一般的です。当日対応が必要な場合は他業者との競合で割増される傾向があります。' } },
     { '@type': 'Question', name: '年間契約のメリットは？', acceptedAnswer: { '@type': 'Answer', text: '点検＋洗浄＋緊急対応がセットで10〜25%割安になるケースが一般的。緊急修理時の優先対応、部品調達優先、フロン点検記録の自動管理等のメリットがあります。多店舗・複数台保有事業者は年間契約のコスト効率が高いです。' } },
     { '@type': 'Question', name: 'フロン回収費用は別ですか？', acceptedAnswer: { '@type': 'Answer', text: '機器廃棄・入替時のフロン回収は別途料金（1台5,000〜30,000円）です。フロン排出抑制法に基づく行程管理票の発行も含まれます。回収費を含まない見積は法令違反の可能性があるため避けるべきです。' } },
+    { '@type': 'Question', name: "業務用エアコン洗浄は自分でできますか？", acceptedAnswer: { '@type': 'Answer', text: "フィルター清掃は自分で可能ですが、熱交換器の高圧洗浄・ファンの分解洗浄は専門機材が必要で業者依頼が適切です。フロン冷媒の充填が必要な場合は第一種冷媒フロン類取扱技術者の資格が必要です。" } },
+    { '@type': 'Question', name: "業務用エアコン洗浄の効果はどれくらいですか？", acceptedAnswer: { '@type': 'Answer', text: "汚れたエアコンは消費電力が10〜30%増加するとされており、洗浄後の省エネ効果で初期費用を回収できるケースが多いです。冷暖房効率の改善・臭い解消・機器寿命延長の効果もあります。" } },
+    { '@type': 'Question', name: "業務用エアコン洗浄は経費にできますか？", acceptedAnswer: { '@type': 'Answer', text: "修繕費・維持管理費として損金算入可能です。大規模な修理・改修は資本的支出と判断されるケースがあるため、税理士に確認してください。" } },
+    { '@type': 'Question', name: "業務用エアコンの寿命はどれくらいですか？", acceptedAnswer: { '@type': 'Answer', text: "定期洗浄・適切なメンテナンスを実施した場合、15〜20年が目安です。放置した場合は10年程度で故障リスクが高まります。" } },
+    { '@type': 'Question', name: "フロン排出抑制法の定期点検と洗浄は同じ業者に頼めますか？", acceptedAnswer: { '@type': 'Answer', text: "はい、第一種冷媒フロン類取扱技術者の在籍業者であれば洗浄・修理・法定点検の一括依頼が可能です。ロカサポでは両方対応可能な業者を紹介しています。" } }
+  
   ],
 });
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-aircon-business.png` },
+});
+
 ---
-<BaseLayout title={title} description={description} canonical={canonical} siteName={site.name} logoSub="施設管理の一括見積比較" jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}>
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified} title={title} description={description} canonical={canonical} siteName={site.name} logoSub="施設管理の一括見積比較" jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}>
   <article class="cl-article">
     <header class="cl-header">
       <div class="sd-container">
@@ -52,7 +75,7 @@ const faqLd = JSON.stringify({
           <span>業務用エアコンの費用相場ガイド</span>
         </nav>
         <span class="cl-cat">費用相場</span>
-        <h1 class="cl-title">業務用エアコン洗浄・修理の費用相場2026｜分解洗浄・修理・入替の判断基準</h1>
+        <h1 class="cl-title">業務用エアコン洗浄・修理の費用相場｜分解洗浄・修理・入替の判断基準</h1>
         <p class="cl-lead">
           業務用エアコンの費用は<strong>「洗浄」「修理」「入替」のどれを選ぶか</strong>で大きく変わります。「夏直前に冷えなくなった、修理か買い替えか」「電気代が上がっているから洗浄したい」「フロン回収費用は別請求になるのか」といった判断に必要な情報を、機種・規模別の費用相場、修理内容別の単価、入替判断基準、緊急対応の追加コスト、年間契約のメリットまで整理しました。
         </p>
@@ -69,8 +92,11 @@ const faqLd = JSON.stringify({
       <div class="cl-quickanswer">
         <p class="cl-qa-q">Q. 業務用エアコン洗浄・修理の費用はいくらですか？</p>
         <p class="cl-qa-a">A. <strong>洗浄は1台あたり2〜8万円、修理は3万円〜（部品代別途）</strong>。建築物衛生法の対象施設では複数台まとめて年間契約にすると1台あたり単価が下がる。</p>
-        <p class="cl-qa-src">※ロカサポ調査（2026年1〜4月・全国39社の見積データ）</p>
+        <p class="cl-qa-src">※ロカサポ編集部による相場調査（2026年1〜4月）</p>
       </div>
+
+      <ColumnCtaCard serviceSlug="aircon-business" serviceName="業務用エアコン" variant="top" />
+
 
       <aside class="cl-toc" aria-label="目次">
         <h2 class="cl-toc-h">この記事の目次</h2>
@@ -231,7 +257,7 @@ const faqLd = JSON.stringify({
       <div class="cl-cta">
         <h2>業務用エアコン洗浄・修理の見積比較なら</h2>
         <p>フロン法対応の有資格業者から最大3社の見積もりを<br/>完全無料・約1分で取得できます</p>
-        <a class="cta-btn-primary" href="/aircon-business/">無料で一括見積もりを依頼する →</a>
+        <a class="cta-btn-primary" href="/aircon-business/">無料で一括見積もりを依頼する</a>
       </div>
 
       <section id="faq" class="cl-section">
@@ -260,7 +286,7 @@ const faqLd = JSON.stringify({
           <li><a href="/aircon-business/hokkaido/">北海道</a></li>
           <li><a href="/aircon-business/kyoto/">京都府</a></li>
         </ul>
-        <p class="cl-pref-more"><a href="/aircon-business/">全国47都道府県の対応業者を見る →</a></p>
+        <p class="cl-pref-more"><a href="/aircon-business/">全国47都道府県の対応業者を見る</a></p>
       </div>
 
       <aside class="cl-related">
@@ -271,6 +297,18 @@ const faqLd = JSON.stringify({
           <li><a href="/duct/">空調ダクト清掃の業者を比較</a></li>
           <li><a href="/flow/">ご利用の流れ・3ステップで業者紹介</a></li>
         </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#furon-haishutsu-yokusei-ho">フロン排出抑制法</a></li>
+          <li><a href="/glossary/#daiichishu-furon-toriatsukai-gijutsusha">第一種冷媒フロン類取扱技術者</a></li>
+          <li><a href="/glossary/#daiichishu-furon-juten-kaishu-gyosha">第一種フロン類充塡回収業者</a></li>
+          <li><a href="/glossary/#koutei-kanri-hyo">行程管理票</a></li>
+          <li><a href="/glossary/#biru-kan-ho">建築物衛生法（ビル管法）</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集（49語）をすべて見る</a></p>
       </aside>
     </div>
   </article>

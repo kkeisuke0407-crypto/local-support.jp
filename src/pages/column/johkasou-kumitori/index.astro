@@ -1,0 +1,418 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = '浄化槽の汲み取り｜頻度・費用・汲み取り式トイレとの違い・単独/合併の見分け方';
+const description = '浄化槽の汲み取り（清掃）の頻度・費用を戸建てオーナー向けに解説。浄化槽の清掃と「汲み取り式トイレ」の違い、単独処理浄化槽と合併処理浄化槽の見分け方、汲み取りにかかる時間や料金の目安、頻度が処理方式で変わる理由までを2026年版で整理しました。';
+const canonical = `${site.domain}/column/johkasou-kumitori/`;
+const published = '2026-06-16';
+const modified = '2026-06-16';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '浄化槽の汲み取り', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 4600,
+  articleSection: '浄化槽',
+  keywords: '浄化槽 汲み取り,頻度,費用,汲み取り式トイレ 違い,単独処理浄化槽,合併処理浄化槽,見分け方,清掃,2026',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-johkasou.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '浄化槽清掃・保守点検', serviceType: '浄化槽の維持管理' },
+  citation: [
+    { '@type': 'Legislation', name: '浄化槽法', url: 'https://laws.e-gov.go.jp/law/358AC1000000043' },
+  ],
+});
+
+const faqItems = [
+  {
+    q: '浄化槽の汲み取りと汲み取り式トイレは同じですか？',
+    a: '違います。汲み取り式トイレ（便槽）は、し尿をそのまま便槽に溜めて定期的に汲み取る方式で、汚水を処理する機能はありません。一方、浄化槽は微生物などで汚水を処理してから放流する設備で、その維持管理として溜まった汚泥を引き抜く作業を「清掃」と呼びます。浄化槽の「汲み取り」は、この清掃（汚泥の引き抜き）を指すことが多いです。',
+  },
+  {
+    q: '浄化槽の汲み取り（清掃）の頻度はどのくらいですか？',
+    a: '浄化槽の清掃は、原則として年1回以上です。ただし、全ばっ気方式の浄化槽は年2回以上と定められています。便槽（汲み取り式トイレ）の汲み取りは、使用量に応じて数週間〜数か月ごとなど頻度が異なり、浄化槽の清掃とは考え方が別です。',
+  },
+  {
+    q: '単独処理浄化槽と合併処理浄化槽はどう違いますか？',
+    a: '単独処理浄化槽（みなし浄化槽）は、トイレの汚水だけを処理する古いタイプで、生活雑排水（台所・風呂など）は処理せずそのまま放流します。合併処理浄化槽は、トイレ＋生活雑排水をまとめて処理します。現在は単独処理浄化槽の新設は原則禁止で、合併処理浄化槽への転換が進められています。',
+  },
+  {
+    q: '自分の浄化槽が単独か合併か、見分け方はありますか？',
+    a: '判断材料としては、(1)設置時期（古いものは単独の可能性）、(2)台所・風呂の排水が浄化槽に入っているか（入っていれば合併の可能性）、(3)設置時の書類や保守点検記録の記載、などがあります。確実なのは、保守点検業者や設置記録で確認することです。転換補助金の検討時にも重要な情報になります。',
+  },
+  {
+    q: '汲み取り（清掃）の費用はどのくらいですか？',
+    a: '家庭用の合併処理浄化槽（5〜7人槽）の清掃は、1回あたりおおむね2万〜4万円程度が目安です。人槽が大きいほど、また汚泥量が多いほど高くなります。汲み取り式トイレの汲み取り料金は、量（リットル単位など）に応じた自治体・業者の料金体系で計算されることが多く、浄化槽清掃とは別の体系です。',
+  },
+  {
+    q: '汲み取り（清掃）にかかる時間はどのくらいですか？',
+    a: '家庭用の浄化槽清掃は、バキューム車による汚泥の引き抜き・洗浄・水張りを含めて、おおむね1〜2時間程度が目安です。槽の大きさ・汚泥量・搬出条件によって変わります。立ち会いの要否は業者により異なるため、事前に確認してください。',
+  },
+  {
+    q: '清掃で汚泥を全部抜かなくてもいいのですか？',
+    a: '浄化槽の清掃は、原則として槽内の汚泥・スカムを適切に引き抜く必要があります。一部だけ抜く簡易的な作業では機能が十分に回復せず、臭い・処理不良の原因になります。安い見積もりでは全量を引き抜かないケースがあるため、作業範囲を確認してください。',
+  },
+  {
+    q: '単独処理浄化槽は合併処理浄化槽に変えたほうがいいですか？',
+    a: '単独処理浄化槽は生活雑排水を処理せず放流するため、環境負荷が大きく、合併処理浄化槽への転換が国・自治体で推進されています。転換には補助金が用意されている自治体も多くあります。維持管理の負担や水質、補助金の有無を踏まえ、転換を検討する価値があります。',
+  },
+];
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-answer-grid', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-johkasou.png` },
+});
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified}
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a>
+          <span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a>
+          <span aria-hidden="true">›</span>
+          <span>浄化槽の汲み取り</span>
+        </nav>
+        <span class="cl-cat">浄化槽</span>
+        <h1 class="cl-title">浄化槽の汲み取り｜頻度・費用・汲み取り式トイレとの違い・単独/合併の見分け方</h1>
+        <p class="cl-lead">
+          「浄化槽の汲み取り」という言葉は、<strong>浄化槽の清掃（汚泥の引き抜き）</strong>を指すことが多く、<strong>汲み取り式トイレ（便槽）</strong>とは別物です。また、自分の設備が<strong>単独処理浄化槽か合併処理浄化槽か</strong>で扱いが変わります。本記事では、浄化槽の汲み取り（清掃）の頻度・費用・時間、汲み取り式トイレとの違い、単独/合併の見分け方を、戸建てオーナー向けに整理します。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年6月16日</time>
+          <span>最終更新：2026年6月16日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 浄化槽の汲み取りって何？頻度・費用は？</p>
+        <p class="cl-qa-a">A. 浄化槽の「汲み取り」は通常<strong>清掃（汚泥の引き抜き）</strong>を指し、<strong>原則年1回以上</strong>（全ばっ気方式は年2回以上）。家庭用で<strong>1回2万〜4万円</strong>が目安です。し尿をそのまま溜める<strong>汲み取り式トイレ（便槽）とは別物</strong>。単独/合併で処理範囲も違います。</p>
+        <p class="cl-qa-src">※浄化槽法、一般的な料金水準をもとに整理</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="johkasou" serviceName="浄化槽清掃・保守点検" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#diff-toilet">浄化槽の清掃と汲み取り式トイレの違い</a></li>
+          <li><a href="#tandoku-gappei">単独処理浄化槽と合併処理浄化槽の違い</a></li>
+          <li><a href="#minowake">単独か合併かの見分け方</a></li>
+          <li><a href="#frequency">汲み取り（清掃）の頻度</a></li>
+          <li><a href="#cost">費用と時間の目安</a></li>
+          <li><a href="#tenkan">単独処理浄化槽の転換</a></li>
+          <li><a href="#sources">参考にした公式情報</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>浄化槽の「汲み取り」＝清掃（汚泥の引き抜き）</strong>。し尿を溜める汲み取り式トイレ（便槽）とは別物</li>
+            <li><strong>清掃は原則年1回以上</strong>（全ばっ気は年2回以上）、家庭用で1回2万〜4万円が目安</li>
+            <li><strong>単独処理浄化槽はトイレのみ処理</strong>。合併はトイレ＋生活雑排水。単独は転換が推進されている</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="diff-toilet" class="cl-section">
+        <h2>浄化槽の清掃と汲み取り式トイレの違い</h2>
+        <p>「汲み取り」という言葉が、浄化槽の清掃と、汲み取り式トイレ（便槽）の両方に使われるため混同が起きます。まず整理しましょう。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>浄化槽の清掃と汲み取り式トイレの違い</caption>
+            <thead>
+              <tr><th scope="col">項目</th><th scope="col">浄化槽（の清掃）</th><th scope="col">汲み取り式トイレ（便槽）</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">汚水の処理</th><td>微生物などで処理してから放流</td><td>処理せず溜めるだけ</td></tr>
+              <tr><th scope="row">引き抜くもの</th><td>処理の過程で溜まる汚泥・スカム</td><td>溜まったし尿</td></tr>
+              <tr><th scope="row">頻度</th><td>原則年1回以上（全ばっ気は年2回以上）</td><td>使用量に応じて随時</td></tr>
+              <tr><th scope="row">料金体系</th><td>清掃料金（人槽・汚泥量による）</td><td>量（リットル等）に応じた料金が多い</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>つまり、浄化槽は「処理する設備」で、清掃はその維持管理。汲み取り式トイレは「溜める設備」で、汲み取りは溜まったものの除去です。役割が根本的に違います。</p>
+      </section>
+
+      <section id="tandoku-gappei" class="cl-section">
+        <h2>単独処理浄化槽と合併処理浄化槽の違い</h2>
+        <p>浄化槽には、処理する汚水の範囲が異なる2タイプがあります。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>単独処理浄化槽と合併処理浄化槽</caption>
+            <thead>
+              <tr><th scope="col">項目</th><th scope="col">単独処理浄化槽（みなし浄化槽）</th><th scope="col">合併処理浄化槽</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">処理する汚水</th><td>トイレの汚水のみ</td><td>トイレ＋生活雑排水（台所・風呂等）</td></tr>
+              <tr><th scope="row">生活雑排水</th><td>処理せず放流</td><td>処理して放流</td></tr>
+              <tr><th scope="row">新設</th><td>原則禁止</td><td>現在の標準</td></tr>
+              <tr><th scope="row">環境負荷</th><td>大きい</td><td>小さい</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>単独処理浄化槽は古いタイプで、生活雑排水を処理せずそのまま流すため環境負荷が大きく、現在は新設が原則禁止されています。国・自治体は合併処理浄化槽への転換を推進しています。</p>
+      </section>
+
+      <section id="minowake" class="cl-section">
+        <h2>単独か合併かの見分け方</h2>
+        <p>自分の浄化槽が単独か合併か分からない場合、次のような材料で判断します。</p>
+        <ul>
+          <li><strong>設置時期</strong>：古い設置のものは単独処理浄化槽の可能性がある</li>
+          <li><strong>排水の経路</strong>：台所・風呂の排水が浄化槽に入っていれば合併、入っていなければ単独の可能性</li>
+          <li><strong>設置・保守の記録</strong>：設置時の書類や保守点検記録に処理方式の記載がある</li>
+          <li><strong>業者に確認</strong>：保守点検業者に見てもらうのが最も確実</li>
+        </ul>
+        <div class="cl-callout">
+          <h3 class="cl-callout-h">確実なのは記録・業者での確認</h3>
+          <p>見た目だけでの判断は難しいことがあります。設置記録や保守点検業者での確認が確実です。単独か合併かは、転換補助金の検討や維持管理の内容に関わる重要な情報なので、把握しておきましょう。</p>
+        </div>
+      </section>
+
+      <section id="frequency" class="cl-section">
+        <h2>汲み取り（清掃）の頻度</h2>
+        <p>浄化槽の清掃（汚泥の引き抜き）の頻度は、浄化槽法で定められています。</p>
+        <ul>
+          <li><strong>原則</strong>：年1回以上</li>
+          <li><strong>全ばっ気方式</strong>：年2回以上</li>
+          <li><strong>判断</strong>：保守点検の中で汚泥のたまり具合を確認し、清掃時期を判断する</li>
+        </ul>
+        <p>清掃は保守点検・法定検査と並ぶ3つの義務の一つです。3つの違いは<a href="/column/johkasou-tenken-seiso-kensa/">浄化槽の保守点検・清掃・法定検査の違い2026</a>で詳しく解説しています。</p>
+      </section>
+
+      <section id="cost" class="cl-section">
+        <h2>費用と時間の目安</h2>
+        <p>家庭用の合併処理浄化槽（5〜7人槽）を例にした目安です。</p>
+        <ul>
+          <li><strong>清掃費用</strong>：1回あたり2万〜4万円程度（人槽・汚泥量・搬出条件で変動）</li>
+          <li><strong>所要時間</strong>：おおむね1〜2時間程度（引き抜き・洗浄・水張りを含む）</li>
+          <li><strong>注意</strong>：全量を引き抜かない簡易作業は機能回復が不十分になりやすい</li>
+        </ul>
+        <p>費用全体の内訳・年間維持費は<a href="/column/johkasou-hiyo-sohba/">浄化槽の費用相場2026</a>を参照してください。安い見積もりの注意点もそちらで解説しています。</p>
+      </section>
+
+      <section id="tenkan" class="cl-section">
+        <h2>単独処理浄化槽の転換</h2>
+        <p>単独処理浄化槽は生活雑排水を処理せず放流するため、合併処理浄化槽への転換が推進されています。</p>
+        <ul>
+          <li><strong>背景</strong>：単独は新設原則禁止。環境負荷低減のため合併への転換が国・自治体で推進</li>
+          <li><strong>補助金</strong>：転換に補助金を用意している自治体が多い</li>
+          <li><strong>検討材料</strong>：維持管理の負担、放流水質、補助金の有無</li>
+        </ul>
+        <p>下水道が近くに来ている地域では、下水道への切替という選択肢もあります。使わなくなった浄化槽の休止・廃止・撤去や、下水道切替の判断は<a href="/column/johkasou-haishi-gesuido/">浄化槽を使わなくなったら2026｜休止・廃止・撤去・下水道切替</a>で解説しています。</p>
+      </section>
+
+      <section id="sources" class="cl-section">
+        <h2>参考にした公式情報</h2>
+        <p>本記事は、浄化槽法および環境省の公開情報、一般的な料金水準をもとに整理しています。清掃頻度・費用・転換補助金は地域で異なるため、お住まいの自治体・業者の案内も確認してください。</p>
+        <ul class="cl-source-list">
+          <li><a href="https://laws.e-gov.go.jp/law/358AC1000000043" target="_blank" rel="noopener">浄化槽法｜e-Gov法令検索</a></li>
+          <li><a href="https://www.env.go.jp/recycle/jokaso/" target="_blank" rel="noopener">浄化槽サイト（環境省）</a></li>
+        </ul>
+      </section>
+
+      <div class="cl-cta">
+        <h2>浄化槽の清掃・保守点検をまとめて相談</h2>
+        <p>市町村許可の清掃業者・登録保守点検業者から最大3社の見積もりを<br/>完全無料・約1分で取得できます</p>
+        <a class="cta-btn-primary" href="/johkasou/">無料で一括見積もりを依頼する</a>
+      </div>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          {faqItems.map((item) => (
+            <div class="cl-faq-item">
+              <dt>{item.q}</dt>
+              <dd>{item.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別の浄化槽業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/johkasou/tokyo/">東京都</a></li>
+          <li><a href="/johkasou/osaka/">大阪府</a></li>
+          <li><a href="/johkasou/kanagawa/">神奈川県</a></li>
+          <li><a href="/johkasou/aichi/">愛知県</a></li>
+          <li><a href="/johkasou/saitama/">埼玉県</a></li>
+          <li><a href="/johkasou/chiba/">千葉県</a></li>
+          <li><a href="/johkasou/hyogo/">兵庫県</a></li>
+          <li><a href="/johkasou/fukuoka/">福岡県</a></li>
+          <li><a href="/johkasou/hokkaido/">北海道</a></li>
+          <li><a href="/johkasou/kyoto/">京都府</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/johkasou/">全国47都道府県の対応業者を見る</a></p>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連サービス・コラム</h2>
+        <ul>
+          <li><a href="/johkasou/">浄化槽の保守点検・清掃業者を一括見積比較</a></li>
+          <li><a href="/column/johkasou-hiyo-sohba/">浄化槽の費用相場2026</a></li>
+          <li><a href="/column/johkasou-tenken-seiso-kensa/">浄化槽の保守点検・清掃・法定検査の違い2026</a></li>
+          <li><a href="/column/johkasou-haishi-gesuido/">浄化槽を使わなくなったら2026｜休止・廃止・撤去・下水道切替</a></li>
+          <li><a href="/column/johkasou-horei-gimu/">浄化槽法の保守点検・清掃・法定検査ガイド2026</a></li>
+        </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#jokaso-ho">浄化槽法</a></li>
+          <li><a href="/glossary/#gappei-shori-jokaso">合併処理浄化槽</a></li>
+          <li><a href="/glossary/#tandoku-shori-jokaso">単独処理浄化槽</a></li>
+          <li><a href="/glossary/#jokaso-hoteikensa">法定検査（7条・11条）</a></li>
+          <li><a href="/glossary/#jokaso-kanrishi">浄化槽管理士</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集（49語）をすべて見る</a></p>
+      </aside>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header {
+  background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%);
+  color: #fff;
+  padding: 48px 0 40px;
+}
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul, .cl-callout--warn ul { padding-left: 18px; margin: 0; }
+.cl-callout li, .cl-callout--warn li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-answer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 20px 0 24px; }
+.cl-answer-grid > div { background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; padding: 18px 20px; box-shadow: 0 6px 18px rgba(15, 23, 42, .05); }
+.cl-answer-grid h3 { font-size: 1rem; color: var(--blue-dark); margin: 0 0 8px; }
+.cl-answer-grid p { margin: 0; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-source-list { padding-left: 22px; display: grid; gap: 8px; }
+.cl-source-list a { color: var(--blue); text-decoration: underline; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-glossary-block { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 24px; }
+.cl-glossary-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; }
+.cl-glossary-list { padding-left: 18px; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; }
+.cl-glossary-list a { color: var(--blue); text-decoration: underline; font-size: .88rem; }
+.cl-glossary-more { font-size: .85rem; margin: 12px 0 0; }
+.cl-glossary-more a { color: var(--blue); text-decoration: underline; }
+@media (max-width: 600px) {
+  .cl-header { padding: 32px 0 28px; }
+  .cl-body { padding: 28px 16px 48px; }
+  .cl-section h2 { font-size: 1.15rem; }
+  .cl-answer-grid { grid-template-columns: 1fr; }
+}
+
+.cl-quickanswer {
+  background: #eef6ff;
+  border: 1.5px solid #1a56db;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-bottom: 32px;
+}
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+</style>

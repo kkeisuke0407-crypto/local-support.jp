@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
-const title = 'シャッター点検・修理の費用相場2026｜点検1〜3万円・修理2万円〜を種別・規模ごとに解説';
+const title = 'シャッター点検・修理の費用相場｜点検1〜3万円・修理2万円〜を種別・規模ごとに解説';
 const description = '防火シャッター・電動シャッターの点検・修理費用を2026年最新版で解説。点検1〜3万円/台、修理2万円〜をベースに、シャッター種別（防火・防煙・電動・手動）ごとの相場、部品交換・大規模修繕の費用、業者選びのポイントまで施設管理担当者向けにまとめました。';
 const canonical = `${site.domain}/column/shutter-hiyo-sohba/`;
 const published = '2026-05-27';
@@ -32,12 +33,7 @@ const articleLd = JSON.stringify({
   articleSection: '費用相場',
   keywords: 'シャッター点検,シャッター修理,費用相場,防火シャッター,電動シャッター,建築基準法,2026',
   author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
-  publisher: {
-    '@type': 'Organization',
-    name: site.org.legalName,
-    url: site.domain,
-    logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
-  },
+  publisher: { '@id': `${site.domain}/#organization` },
   image: { '@type': 'ImageObject', url: `${site.domain}/og-shutter.png`, width: 1200, height: 630 },
   about: { '@type': 'Service', name: 'シャッター点検・修理' },
 });
@@ -51,16 +47,38 @@ const faqLd = JSON.stringify({
     { '@type': 'Question', name: 'シャッターの点検は何年に1回必要ですか？', acceptedAnswer: { '@type': 'Answer', text: '建築基準法第12条に基づく防火設備検査は特定建築物で年1回の実施・報告が義務です。電動シャッターや一般シャッターについても、製造メーカーは年1回の保守点検を推奨しています。' } },
     { '@type': 'Question', name: 'シャッター点検で見積もりを取るときのポイントは？', acceptedAnswer: { '@type': 'Answer', text: '①防火設備検査員資格の有無（法定検査の場合は必須）、②定期報告書の作成・提出代行の可否、③修理が必要な場合の追加費用の概算提示、④複数台まとめ発注の割引の有無、の4点を確認してください。' } },
     { '@type': 'Question', name: '修理と交換の判断基準は？', acceptedAnswer: { '@type': 'Answer', text: '一般的に、修理費用が新設費用の50〜60%を超える場合は交換を検討します。また、スラット（羽板）の腐食・変形が広範囲に及ぶ場合、シャフト・スプリングが著しく劣化している場合も交換が推奨されます。耐用年数の目安は手動シャッターで15〜20年、電動で10〜15年です。' } },
+    { '@type': 'Question', name: "シャッターの修理と交換の判断基準は？", acceptedAnswer: { '@type': 'Answer', text: "部品交換（スプリング・バネ・基板）で対応できる場合は修理。ガイドレールの変形・シャッタースラットの大規模損傷・開閉不能は交換検討。目安として修理費が新設費用の50〜70%を超えたら交換を推奨します。" } },
+    { '@type': 'Question', name: "電動シャッターが動かなくなったとき、まず何をすべきですか？", acceptedAnswer: { '@type': 'Answer', text: "まず手動切替レバーで手動操作に切り替え安全を確保。次に電源・ブレーカーを確認。解決しない場合は業者に緊急修理依頼。シャッターを無理に動かすとモーター・スプリングの二次破損につながります。" } },
+    { '@type': 'Question', name: "シャッター点検は経費にできますか？", acceptedAnswer: { '@type': 'Answer', text: "法令義務に基づく費用として修繕費・維持管理費で全額損金算入可能です。" } },
+    { '@type': 'Question', name: "何年ごとにシャッターを交換するのが目安ですか？", acceptedAnswer: { '@type': 'Answer', text: "電動シャッターのモーターは10〜15年、スプリングは7〜10年が交換目安。定期点検で消耗品を早期交換することで本体寿命を20〜25年に延ばせます。" } },
+    { '@type': 'Question', name: "防火シャッターの点検を怠ると何が起きますか？", acceptedAnswer: { '@type': 'Answer', text: "建築基準法の定期報告義務違反で100万円以下の罰金対象。火災時に防火シャッターが機能不全を起こした場合、死傷事故の損害賠償責任を問われるリスクがあります。" } }
+  
   ],
 });
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-shutter.png` },
+});
+
 ---
-<BaseLayout
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified}
   title={title}
   description={description}
   canonical={canonical}
   siteName={site.name}
   logoSub="施設管理の一括見積比較"
-  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
 >
   <article class="cl-article">
 
@@ -74,7 +92,7 @@ const faqLd = JSON.stringify({
           <span>シャッター点検・修理の費用相場</span>
         </nav>
         <span class="cl-cat">シャッター点検・修理</span>
-        <h1 class="cl-title">シャッター点検・修理の費用相場2026｜点検1〜3万円・修理2万円〜を種別・規模ごとに解説</h1>
+        <h1 class="cl-title">シャッター点検・修理の費用相場｜点検1〜3万円・修理2万円〜を種別・規模ごとに解説</h1>
         <p class="cl-lead">
           防火シャッターの定期検査費用は<strong>1台あたり1〜3万円</strong>が目安ですが、電動・防煙・手動など種別や台数によって異なります。修理費用は<strong>軽微な調整で2〜8万円、スプリング交換で5〜20万円</strong>が相場です。本記事では、シャッター種別ごとの費用相場、部品交換・大規模修繕の単価、業者選びのポイントを2026年版で解説します。
         </p>
@@ -91,8 +109,11 @@ const faqLd = JSON.stringify({
       <div class="cl-quickanswer">
         <p class="cl-qa-q">Q. シャッター点検・修理の費用はいくらですか？</p>
         <p class="cl-qa-a">A. <strong>点検は1台あたり1〜3万円、修理は2万円〜（部品代別途）</strong>。電動シャッターの基板交換・スプリング交換は10〜30万円になるケースもある。</p>
-        <p class="cl-qa-src">※ロカサポ調査（2026年1〜4月・全国35社の見積データ）</p>
+        <p class="cl-qa-src">※ロカサポ編集部による相場調査（2026年1〜4月）</p>
       </div>
+
+      <ColumnCtaCard serviceSlug="shutter" serviceName="シャッター点検・修理" variant="top" />
+
 
 
       <aside class="cl-toc" aria-label="目次">
@@ -422,7 +443,7 @@ const faqLd = JSON.stringify({
       <section class="cl-cta">
         <h2>シャッター点検・修理の業者選びでお困りなら</h2>
         <p>{site.name}では、防火設備検査員の在籍と定期報告書の作成・提出対応を確認済みの業者の中から、ご依頼内容に応じて最大3社を厳選してご紹介します。<strong>お見積もり依頼は1分・完全無料</strong>です。</p>
-        <a href="/shutter/" class="cta-btn-primary">無料で一括見積もりを依頼する →</a>
+        <a href="/shutter/" class="cta-btn-primary">無料で一括見積もりを依頼する</a>
       </section>
 
             <div class="cl-pref-links">
@@ -439,7 +460,7 @@ const faqLd = JSON.stringify({
           <li><a href="/shutter/hokkaido/">北海道</a></li>
           <li><a href="/shutter/kyoto/">京都府</a></li>
         </ul>
-        <p class="cl-pref-more"><a href="/shutter/">全国47都道府県の対応業者を見る →</a></p>
+        <p class="cl-pref-more"><a href="/shutter/">全国47都道府県の対応業者を見る</a></p>
       </div>
 
       <aside class="cl-related">
@@ -450,6 +471,18 @@ const faqLd = JSON.stringify({
           <li><a href="/flow/">一括見積依頼から契約までの流れ</a></li>
           <li><a href="/operator/">運営者情報・ご紹介業者の審査基準</a></li>
         </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#shobo-ho">消防法</a></li>
+          <li><a href="/glossary/#boukashutter">防火シャッター</a></li>
+          <li><a href="/glossary/#tokutei-boka-taisho">特定防火対象物</a></li>
+          <li><a href="/glossary/#kiki-tenken">機器点検</a></li>
+          <li><a href="/glossary/#sogo-tenken">総合点検</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集（49語）をすべて見る</a></p>
       </aside>
 
       <p class="cl-note">

@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
-const title = '看板点検の費用相場2026｜サイズ別・高所作業車込みの料金と補修工事の単価';
+const title = '看板点検の費用相場｜サイズ別・高所作業車込みの料金と補修工事の単価';
 const description = '看板・屋外広告物点検の費用相場をサイズ別（壁面・屋上広告塔・突き出し看板）に整理。高所作業車・足場の手配費用、電飾サインの電気点検追加コスト、点検後の補修工事単価、許可更新時の自治体提出代行まで施設オーナー向けに解説します。';
 const canonical = `${site.domain}/column/signboard-inspection-hiyo-sohba/`;
 const published = '2026-05-26';
@@ -25,7 +26,7 @@ const articleLd = JSON.stringify({
   articleSection: '費用相場',
   keywords: '看板点検,屋外広告物,費用相場,高所作業車,電飾サイン,補修工事,許可更新,2026',
   author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
-  publisher: { '@type': 'Organization', name: site.org.legalName, url: site.domain, logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` } },
+  publisher: { '@id': `${site.domain}/#organization` },
   image: { '@type': 'ImageObject', url: `${site.domain}/og-signboard-inspection.png`, width: 1200, height: 630 },
   about: { '@type': 'Service', name: '看板・屋外広告物点検' },
 });
@@ -39,10 +40,32 @@ const faqLd = JSON.stringify({
     { '@type': 'Question', name: '点検後の補修工事の費用は？', acceptedAnswer: { '@type': 'Answer', text: '締結ボルト交換等の軽微補修で1基10,000〜30,000円、塗装・防錆処理で30,000〜100,000円、サイン面の張替えで50,000円〜数十万円が目安です。点検費用と補修工事費用は別契約とするのが透明性が高いです。' } },
     { '@type': 'Question', name: '許可更新時の自治体提出代行は？', acceptedAnswer: { '@type': 'Answer', text: '5,000〜15,000円程度が目安。多くの業者は点検＋報告書作成＋提出代行をセットで提供しています。自治体ごとに様式が異なるため、提出経験のある業者を選ぶと書類差し戻しを避けられます。' } },
     { '@type': 'Question', name: '複数看板まとめての割引はある？', acceptedAnswer: { '@type': 'Answer', text: '複数基まとめての点検は割引が一般的。同一物件で5基以上、または複数物件をエリア集中で発注すると20〜30%程度の割引が出やすい傾向です。多店舗・複数物件保有事業者は一括契約のメリットが大きいです。' } },
+    { '@type': 'Question', name: "看板点検は自分でできますか？", acceptedAnswer: { '@type': 'Answer', text: "目視による簡易確認は可能ですが、高所・屋上看板の打音検査・ボルトの引張試験・溶接部の確認は有資格者による専門検査が必要です。" } },
+    { '@type': 'Question', name: "看板点検を怠って落下事故が起きたら誰が責任を負いますか？", acceptedAnswer: { '@type': 'Answer', text: "看板の設置者・管理者（建物オーナー・テナント）が損害賠償責任を負います。定期点検の記録がない場合は管理義務違反として賠償額が増加するリスクがあります。" } },
+    { '@type': 'Question', name: "看板点検費用は経費にできますか？", acceptedAnswer: { '@type': 'Answer', text: "修繕費・管理費として全額損金算入可能です。" } },
+    { '@type': 'Question', name: "屋外広告物の許可更新と点検の関係は？", acceptedAnswer: { '@type': 'Answer', text: "多くの自治体では屋外広告物の許可更新時（2〜3年ごと）に点検報告を求めています。点検記録がないと更新申請が受理されないケースがあります。" } },
+    { '@type': 'Question', name: "袖看板・突出し看板の落下事故はなぜ多いですか？", acceptedAnswer: { '@type': 'Answer', text: "金属の疲労・腐食・溶接部の経年劣化で固定部が破断するためです。特に設置後10年以上の看板は専門業者による定期点検が必須です。" } }
+  
   ],
 });
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-signboard-inspection.png` },
+});
+
 ---
-<BaseLayout title={title} description={description} canonical={canonical} siteName={site.name} logoSub="施設管理の一括見積比較" jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}>
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified} title={title} description={description} canonical={canonical} siteName={site.name} logoSub="施設管理の一括見積比較" jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}>
   <article class="cl-article">
     <header class="cl-header">
       <div class="sd-container">
@@ -52,7 +75,7 @@ const faqLd = JSON.stringify({
           <span>看板点検の費用相場ガイド</span>
         </nav>
         <span class="cl-cat">費用相場</span>
-        <h1 class="cl-title">看板点検の費用相場2026｜サイズ別・高所作業車込みの料金と補修工事の単価</h1>
+        <h1 class="cl-title">看板点検の費用相場｜サイズ別・高所作業車込みの料金と補修工事の単価</h1>
         <p class="cl-lead">
           看板・屋外広告物点検の費用は、<strong>看板の種類・サイズ・設置高さ・基数・電飾の有無</strong>で大きく変動します。「壁面看板1枚で3,000円〜と聞いたが、本当にその金額で済むのか」「高所作業車の費用込みかどうかわからない」「点検後の補修工事はいくらが妥当か」といった疑問にお答えするため、本記事ではサイズ別の点検単価、高所作業車・足場の手配費用、電飾サインの追加コスト、補修工事の単価、自治体提出代行までを整理しました。
         </p>
@@ -69,8 +92,11 @@ const faqLd = JSON.stringify({
       <div class="cl-quickanswer">
         <p class="cl-qa-q">Q. 看板点検の費用はいくらですか？</p>
         <p class="cl-qa-a">A. <strong>1台あたり1〜3万円（高所作業が必要な場合は別途2〜5万円）</strong>。老朽化した袖看板・屋上看板・壁面看板は打音検査・目視検査・ボルト点検が必要。</p>
-        <p class="cl-qa-src">※ロカサポ調査（2026年1〜4月・全国31社の見積データ）</p>
+        <p class="cl-qa-src">※ロカサポ編集部による相場調査（2026年1〜4月）</p>
       </div>
+
+      <ColumnCtaCard serviceSlug="signboard-inspection" serviceName="看板・屋外広告物点検" variant="top" />
+
 
       <aside class="cl-toc" aria-label="目次">
         <h2 class="cl-toc-h">この記事の目次</h2>
@@ -226,8 +252,8 @@ const faqLd = JSON.stringify({
 
       <div class="cl-cta">
         <h2>看板・屋外広告物点検の見積比較なら</h2>
-        <p>有資格者が在籍する登録業者から最大3社の見積もりを<br/>完全無料・約1分で取得できます</p>
-        <a class="cta-btn-primary" href="/signboard-inspection/">無料で一括見積もりを依頼する →</a>
+        <p>有資格者が在籍する実績・信頼のある専門業者から最大3社の見積もりを<br/>完全無料・約1分で取得できます</p>
+        <a class="cta-btn-primary" href="/signboard-inspection/">無料で一括見積もりを依頼する</a>
       </div>
 
       <section id="faq" class="cl-section">
@@ -256,7 +282,7 @@ const faqLd = JSON.stringify({
           <li><a href="/signboard-inspection/hokkaido/">北海道</a></li>
           <li><a href="/signboard-inspection/kyoto/">京都府</a></li>
         </ul>
-        <p class="cl-pref-more"><a href="/signboard-inspection/">全国47都道府県の対応業者を見る →</a></p>
+        <p class="cl-pref-more"><a href="/signboard-inspection/">全国47都道府県の対応業者を見る</a></p>
       </div>
 
       <aside class="cl-related">
@@ -267,6 +293,18 @@ const faqLd = JSON.stringify({
           <li><a href="/shutter/">シャッター点検の業者を比較</a></li>
           <li><a href="/flow/">ご利用の流れ・3ステップで業者紹介</a></li>
         </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#okugai-koukokubutsu-ho">屋外広告物法</a></li>
+          <li><a href="/glossary/#okugai-tenken-ginou-shuryo">屋外広告物点検技能講習修了者</a></li>
+          <li><a href="/glossary/#minpo-717">民法第717条（工作物責任）</a></li>
+          <li><a href="/glossary/#okujou-koukokuto">屋上広告塔</a></li>
+          <li><a href="/glossary/#sodekanban">突き出し看板（袖看板）</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集（49語）をすべて見る</a></p>
       </aside>
     </div>
   </article>

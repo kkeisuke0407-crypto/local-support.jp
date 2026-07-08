@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
-const title = '消防設備点検の費用相場2026｜建物規模・契約形態・是正工事の単価をまるごと解説';
+const title = '消防設備点検の費用相場｜建物規模・契約形態・是正工事の単価をまるごと解説';
 const description = '消防設備点検の費用相場を共同住宅・オフィス・商業施設・ホテル・工場の建物規模別に整理。機器点検・総合点検・所轄消防署への報告までの年間契約料金、是正工事の単価、複数物件契約での割引、安価業者に注意すべき理由まで施設管理担当者向けに解説します。';
 const canonical = `${site.domain}/column/shobo-setsubi-hiyo-sohba/`;
 const published = '2026-05-26';
@@ -25,7 +26,7 @@ const articleLd = JSON.stringify({
   articleSection: '費用相場',
   keywords: '消防設備点検,費用相場,機器点検,総合点検,建物規模別,是正工事,年間契約,2026',
   author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
-  publisher: { '@type': 'Organization', name: site.org.legalName, url: site.domain, logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` } },
+  publisher: { '@id': `${site.domain}/#organization` },
   image: { '@type': 'ImageObject', url: `${site.domain}/og-shobo-setsubi.png`, width: 1200, height: 630 },
   about: { '@type': 'Service', name: '消防設備点検' },
 });
@@ -39,10 +40,32 @@ const faqLd = JSON.stringify({
     { '@type': 'Question', name: '安すぎる業者は何が問題？', acceptedAnswer: { '@type': 'Answer', text: '無資格者による形式的な点検、所轄消防署への報告書未提出、点検後の高額是正工事への誘導等のリスクがあります。1物件あたり数千円台の極端に安い見積は、必要な項目を省略している可能性が高いため避けるべきです。' } },
     { '@type': 'Question', name: '複数物件まとめての契約割引は？', acceptedAnswer: { '@type': 'Answer', text: '多店舗チェーン・複数棟保有事業者向けに、本部一括契約で10〜30%程度の割引が一般的です。物件数・エリアの集中度・契約期間で割引率が変動します。見積依頼時に「他物件も検討中」と伝えると好条件が出やすい傾向があります。' } },
     { '@type': 'Question', name: '点検費用は経費にできますか？', acceptedAnswer: { '@type': 'Answer', text: 'はい、法令義務に基づく費用なので全額損金算入可能です。マンション管理組合の場合も、共用部の管理費から支出する形で会計処理されます。領収書・点検記録は5年保管しておきましょう。' } },
+    { '@type': 'Question', name: "消防設備点検は自分でできますか？", acceptedAnswer: { '@type': 'Answer', text: "延べ面積1,000m²未満または特定用途に供されない部分が1,000m²未満の建物は防火管理者等が自ら点検できますが、それ以外は消防設備士・消防設備点検資格者による点検が必要です。" } },
+    { '@type': 'Question', name: "消防設備点検費用は経費にできますか？", acceptedAnswer: { '@type': 'Answer', text: "法令義務に基づく費用として全額損金算入可能です。管理費・保守費として計上します。" } },
+    { '@type': 'Question', name: "消防設備点検の年間契約と単発依頼、どちらが得ですか？", acceptedAnswer: { '@type': 'Answer', text: "ほとんどの場合、年間契約の方が割安です。機器点検2回・総合点検1回・消防署への報告書作成までセットで割引されるのが一般的です。" } },
+    { '@type': 'Question', name: "複数物件を一括契約できますか？", acceptedAnswer: { '@type': 'Answer', text: "はい。多店舗チェーン・複数棟保有事業者は本部一括契約で10〜30%の割引が一般的です。物件数・エリア集中度・契約期間で割引率が変わります。" } },
+    { '@type': 'Question', name: "点検後に是正工事が必要と言われたら、どうすべきですか？", acceptedAnswer: { '@type': 'Answer', text: "点検結果の報告書を確認し、不具合の種類（要是正・指摘）と緊急度を把握します。是正工事は点検業者と別の業者から相見積もりを取ることが可能です。放置すると行政報告で「未是正」記録が残ります。" } }
+  
   ],
 });
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-shobo-setsubi.png` },
+});
+
 ---
-<BaseLayout title={title} description={description} canonical={canonical} siteName={site.name} logoSub="施設管理の一括見積比較" jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}>
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified} title={title} description={description} canonical={canonical} siteName={site.name} logoSub="施設管理の一括見積比較" jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}>
   <article class="cl-article">
     <header class="cl-header">
       <div class="sd-container">
@@ -52,7 +75,7 @@ const faqLd = JSON.stringify({
           <span>消防設備点検の費用相場ガイド</span>
         </nav>
         <span class="cl-cat">費用相場</span>
-        <h1 class="cl-title">消防設備点検の費用相場2026｜建物規模・契約形態・是正工事の単価をまるごと解説</h1>
+        <h1 class="cl-title">消防設備点検の費用相場｜建物規模・契約形態・是正工事の単価をまるごと解説</h1>
         <p class="cl-lead">
           消防設備点検の費用は、<strong>建物規模・用途・設置設備の種類・契約形態</strong>で大きく変動します。「相場を知らずに見積を取ると判断できない」「安すぎる業者には何かある」「年間契約のほうがお得らしいが本当か」といった疑問に答えるべく、本記事では共同住宅・オフィス・商業施設・ホテル・工場の規模別費用、機器点検・総合点検・所轄消防署への報告までの内訳、点検後の是正工事の単価、複数物件契約の割引まで、実態に即して整理しました。
         </p>
@@ -69,8 +92,11 @@ const faqLd = JSON.stringify({
       <div class="cl-quickanswer">
         <p class="cl-qa-q">Q. 消防設備点検の費用はいくらですか？</p>
         <p class="cl-qa-a">A. <strong>共同住宅（〜30戸）で年額3〜8万円、小規模オフィスで4〜10万円、中規模商業ビルで10〜30万円</strong>。年間契約・複数物件まとめで割引されるケースが多い。</p>
-        <p class="cl-qa-src">※ロカサポ調査（2026年1〜4月・全国44社の見積データ）</p>
+        <p class="cl-qa-src">※ロカサポ編集部による相場調査（2026年1〜4月）</p>
       </div>
+
+      <ColumnCtaCard serviceSlug="shobo-setsubi" serviceName="消防設備点検" variant="top" />
+
 
       <aside class="cl-toc" aria-label="目次">
         <h2 class="cl-toc-h">この記事の目次</h2>
@@ -233,7 +259,7 @@ const faqLd = JSON.stringify({
       <div class="cl-cta">
         <h2>消防設備点検の見積比較なら</h2>
         <p>有資格業者から最大3社の見積もりを<br/>完全無料・約1分で取得できます</p>
-        <a class="cta-btn-primary" href="/shobo-setsubi/">無料で一括見積もりを依頼する →</a>
+        <a class="cta-btn-primary" href="/shobo-setsubi/">無料で一括見積もりを依頼する</a>
       </div>
 
       <section id="faq" class="cl-section">
@@ -262,7 +288,7 @@ const faqLd = JSON.stringify({
           <li><a href="/shobo-setsubi/hokkaido/">北海道</a></li>
           <li><a href="/shobo-setsubi/kyoto/">京都府</a></li>
         </ul>
-        <p class="cl-pref-more"><a href="/shobo-setsubi/">全国47都道府県の対応業者を見る →</a></p>
+        <p class="cl-pref-more"><a href="/shobo-setsubi/">全国47都道府県の対応業者を見る</a></p>
       </div>
 
       <aside class="cl-related">
@@ -273,6 +299,22 @@ const faqLd = JSON.stringify({
           <li><a href="/shutter/">シャッター点検の業者を比較</a></li>
           <li><a href="/flow/">ご利用の流れ・3ステップで業者紹介</a></li>
         </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#shobo-ho">消防法</a></li>
+          <li><a href="/glossary/#shobo-setsubishi">消防設備士</a></li>
+          <li><a href="/glossary/#shobo-tenken-shikaku">消防設備点検資格者</a></li>
+          <li><a href="/glossary/#kiki-tenken">機器点検</a></li>
+          <li><a href="/glossary/#sogo-tenken">総合点検</a></li>
+          <li><a href="/glossary/#tokutei-boka-taisho">特定防火対象物</a></li>
+          <li><a href="/glossary/#sprinkler">スプリンクラー設備</a></li>
+          <li><a href="/glossary/#jidoukasai-hochi-setsubi">自動火災報知設備</a></li>
+          <li><a href="/glossary/#boukashutter">防火シャッター</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集（49語）をすべて見る</a></p>
       </aside>
     </div>
   </article>

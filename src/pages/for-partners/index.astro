@@ -1,0 +1,248 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../data/site';
+
+const title = '業者・施工会社の方へ｜ロカサポへの掲載・提携のご案内';
+const description = 'ロカサポは、施設管理サービスを手がける業者の方の登録を無料で受け付けています。一旦の登録条件は「ロカサポへの被リンク設置」のみ。見積依頼の流れと被リンクの設置方法をまとめました。';
+const canonical = `${site.domain}/for-partners/`;
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: '業者・施工会社の方へ', item: canonical },
+  ],
+});
+
+// 被リンク用のサンプルコード
+const linkUrl = site.domain + '/';
+const textLinkSample = `<a href="${linkUrl}" target="_blank" rel="noopener">施設管理の業者紹介サイト｜ロカサポ</a>`;
+const bannerLinkSample = `<a href="${linkUrl}" target="_blank" rel="noopener">
+  <img src="${site.domain}/images/partners/banner.png" alt="施設管理の業者紹介サイト ロカサポ" width="2172" height="724" style="max-width:100%;height:auto;">
+</a>`;
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="業者・施工会社の方へ"
+  jsonLdBlocks={[breadcrumbLd]}
+>
+  <section class="fp-hero">
+    <div class="sd-container">
+      <nav class="fp-crumbs" aria-label="パンくず">
+        <a href="/">トップ</a><span aria-hidden="true">›</span><span>業者・施工会社の方へ</span>
+      </nav>
+      <p class="fp-kicker">FOR PARTNERS</p>
+      <h1 class="fp-h1">業者・施工会社の方へ<br/><span class="fp-h1-sub">— ロカサポへの掲載・提携のご案内</span></h1>
+      <p class="fp-lead">
+        ロカサポでは、施設管理サービスを手がける業者の方の登録を<strong>無料</strong>で受け付けています。
+        紹介料・成果報酬とも、現在は<strong>0円</strong>。お試しいただきやすい運用にしています。
+      </p>
+      <a href="#apply" class="fp-cta-primary">お問い合わせへ ↓</a>
+    </div>
+  </section>
+
+  <section class="sd-section fp-section">
+    <div class="sd-container fp-container">
+
+      <h2 id="cond" class="fp-h2">登録の条件</h2>
+      <p class="fp-desc">
+        現在は無料での提携運用中のため、登録条件は<strong>「ロカサポへの被リンクを設置していただくこと」</strong>の1点だけです。
+        設置方法は <a href="#backlink">このページ後半</a> でご案内しています。
+      </p>
+      <p class="fp-note">
+        ※ 将来的に紹介料・成果報酬の設定や、必要資格・許認可の確認をお願いする場合は、事前にご相談のうえで進めます。事後的に費用が発生することはありません。
+      </p>
+
+      <h2 id="flow" class="fp-h2">見積依頼から成約までの流れ</h2>
+      <ol class="fp-flow">
+        <li>
+          <span class="fp-flow-num">STEP 1</span>
+          <h3>依頼者がフォームから見積依頼</h3>
+          <p>各サービスサイトのフォームから、施設情報・エリア・希望時期などが届きます。</p>
+        </li>
+        <li>
+          <span class="fp-flow-num">STEP 2</span>
+          <h3>ロカサポから業者へご案内</h3>
+          <p>対応エリア・サービス範囲に合う実績・信頼のある専門業者へ、依頼内容をメールでお送りします。受けるか辞退するかは業者側で選んでいただけます。</p>
+        </li>
+        <li>
+          <span class="fp-flow-num">STEP 3</span>
+          <h3>業者から依頼者へ直接連絡</h3>
+          <p>受けていただいた業者から、依頼者へ直接メール・電話で連絡し、見積もり提示・現地調査・契約を進めていただきます。</p>
+        </li>
+        <li>
+          <span class="fp-flow-num">STEP 4</span>
+          <h3>成約報告（任意）</h3>
+          <p>今後の運営の参考にさせていただくため、成約の有無を月に1回ほどご報告いただけると助かります。現状、紹介料・成果報酬はいただいていません。</p>
+        </li>
+      </ol>
+
+      <h2 id="backlink" class="fp-h2">被リンクの設置方法</h2>
+      <p class="fp-desc">
+        御社サイトのフッターやリンク集ページに、次のいずれかの方法でロカサポへのリンクを設置してください。<strong>バナーでもテキストリンクでもどちらでもOK</strong>です。
+      </p>
+
+      <h3 class="fp-h3">A. バナーリンクの場合（推奨）</h3>
+      <p class="fp-desc-sm">
+        専用のバナー画像をご用意しています。下のHTMLをコピーして、御社サイトに貼り付けてください。
+      </p>
+      <div class="fp-banner-preview">
+        <picture>
+          <source srcset="/images/partners/banner.webp" type="image/webp" />
+          <img src="/images/partners/banner.png" alt="ロカサポ｜施設管理の業者紹介サイト" width="2172" height="724" loading="lazy" decoding="async" />
+        </picture>
+      </div>
+      <pre class="fp-code"><code>{bannerLinkSample}</code></pre>
+      <p class="fp-desc-sm">
+        ※ バナー画像はロカサポ側でホストしていますので、御社サーバーへのアップロードは不要です。サイズは <code>max-width:100%</code> で自動調整される設定になっています。
+      </p>
+
+      <h3 class="fp-h3">B. テキストリンクの場合</h3>
+      <p class="fp-desc-sm">画像を貼りたくない場合は、テキストリンクでもOKです。</p>
+      <pre class="fp-code"><code>{textLinkSample}</code></pre>
+
+      <h3 class="fp-h3">設置後のご連絡</h3>
+      <p class="fp-desc-sm">
+        被リンクを設置していただいたら、<strong>設置先ページのURL</strong>をお問い合わせフォームからお知らせください。確認のうえ、登録手続きを進めます。
+      </p>
+
+      <div id="apply" class="fp-apply">
+        <h2>登録・お問い合わせ</h2>
+        <p>下のフォームから「種別：提携相談（業者・メディア）」を選んでお問い合わせください。<br/>営業日3日以内にご返信します。</p>
+        <a href="/#contact" class="fp-apply-btn">お問い合わせフォームへ</a>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.fp-hero { background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 100%); color: #fff; padding: 56px 0 48px; }
+.fp-crumbs { font-size: .78rem; opacity: .85; margin-bottom: 16px; display: flex; gap: 6px; align-items: center; }
+.fp-crumbs a { color: #fff; text-decoration: none; }
+.fp-crumbs a:hover { text-decoration: underline; }
+.fp-kicker { font-size: .78rem; font-weight: 800; letter-spacing: .14em; color: #93c5fd; margin-bottom: 12px; }
+.fp-h1 { font-size: clamp(1.5rem, 3.4vw, 2.1rem); font-weight: 900; line-height: 1.4; margin-bottom: 16px; }
+.fp-h1-sub { display: block; font-size: clamp(.95rem, 2vw, 1.15rem); font-weight: 600; color: #cbe1ff; margin-top: 6px; }
+.fp-lead { font-size: .95rem; line-height: 1.85; opacity: .95; max-width: 760px; margin-bottom: 24px; }
+.fp-lead strong { color: #fff; }
+.fp-cta-primary {
+  display: inline-block;
+  background: var(--accent, #f59e0b);
+  color: #1a202c;
+  font-weight: 800;
+  font-size: 1rem;
+  padding: 12px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+.fp-cta-primary:hover { opacity: .9; }
+
+.fp-section { padding: 56px 0 64px; background: #fff; }
+.fp-container { max-width: 880px; }
+
+.fp-h2 {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: var(--gray-900, #111827);
+  border-bottom: 2px solid var(--blue-light, #dbeafe);
+  padding-bottom: 8px;
+  margin: 44px 0 18px;
+  scroll-margin-top: 80px;
+}
+.fp-h2:first-of-type { margin-top: 0; }
+.fp-h3 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--gray-800, #1f2937);
+  margin: 24px 0 8px;
+}
+.fp-desc { font-size: .92rem; line-height: 1.85; color: var(--gray-700, #374151); margin-bottom: 12px; }
+.fp-desc strong { color: var(--gray-900, #111827); }
+.fp-desc a { color: var(--blue, #1d4ed8); text-decoration: underline; }
+.fp-desc-sm { font-size: .88rem; line-height: 1.8; color: var(--gray-700, #374151); margin-bottom: 10px; }
+.fp-desc-sm code { background: var(--gray-100, #f3f4f6); padding: 2px 6px; border-radius: 4px; font-size: .82rem; }
+.fp-note { font-size: .82rem; color: var(--gray-500, #6b7280); margin-top: 8px; line-height: 1.7; }
+
+.fp-flow { list-style: none; padding: 0; margin: 18px 0 8px; display: grid; gap: 14px; }
+.fp-flow li {
+  background: #fff;
+  border: 1px solid var(--gray-200, #e5e7eb);
+  border-radius: 10px;
+  padding: 18px 22px;
+}
+.fp-flow-num {
+  display: inline-block;
+  background: var(--blue, #1d4ed8);
+  color: #fff;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  padding: 3px 10px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+.fp-flow h3 { font-size: 1.02rem; font-weight: 800; color: var(--gray-900, #111827); margin-bottom: 6px; }
+.fp-flow p { font-size: .9rem; line-height: 1.85; color: var(--gray-700, #374151); margin: 0; }
+
+.fp-banner-preview {
+  background: var(--gray-100, #f3f4f6);
+  border-radius: 10px;
+  padding: 18px;
+  margin: 10px 0 12px;
+  text-align: center;
+}
+.fp-banner-preview img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
+}
+
+.fp-code {
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-size: .82rem;
+  line-height: 1.65;
+  overflow-x: auto;
+  margin: 8px 0 12px;
+}
+.fp-code code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+
+.fp-apply {
+  background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%);
+  color: #fff;
+  border-radius: 14px;
+  padding: 32px 28px;
+  text-align: center;
+  margin-top: 48px;
+  scroll-margin-top: 80px;
+}
+.fp-apply h2 { font-size: 1.2rem; font-weight: 900; margin-bottom: 10px; color: #fff; border: none; padding: 0; }
+.fp-apply p { font-size: .92rem; opacity: .92; margin-bottom: 16px; line-height: 1.8; }
+.fp-apply-btn {
+  display: inline-block;
+  background: var(--accent, #f59e0b);
+  color: #1a202c;
+  font-weight: 800;
+  font-size: 1rem;
+  padding: 14px 36px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+.fp-apply-btn:hover { opacity: .9; }
+
+@media (max-width: 640px) {
+  .fp-hero { padding: 40px 0 32px; }
+  .fp-section { padding: 36px 0 48px; }
+  .fp-h2 { font-size: 1.15rem; }
+}
+</style>
+</content>
+</invoke>

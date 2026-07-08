@@ -1,0 +1,427 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = 'グリストラップの臭い・虫・詰まり対策｜原因と今すぐできる対処法・予防のコツ';
+const description = 'グリストラップの悪臭・コバエやチョウバエ・ゴキブリ・詰まり・逆流の原因と対処法を飲食店オーナー向けに解説。臭いの正体（硫化水素・封水切れ）、虫が湧く仕組みと駆除、詰まりの応急処置、熱湯や強力洗剤がNGな理由、再発を防ぐ清掃のコツまで整理しました。';
+const canonical = `${site.domain}/column/grease-trap-nioi-mushi/`;
+const published = '2026-06-16';
+const modified = '2026-06-16';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: 'グリストラップの臭い・虫・詰まり対策', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 5200,
+  articleSection: 'グリストラップ清掃',
+  keywords: 'グリストラップ 臭い,悪臭,硫化水素,封水,コバエ,チョウバエ,ゴキブリ,詰まり,逆流,応急処置,2026',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-grease-trap.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: 'グリストラップ清掃', serviceType: '厨房排水設備の清掃' },
+  citation: [
+    { '@type': 'Legislation', name: '下水道法', url: 'https://laws.e-gov.go.jp/law/333AC0000000079' },
+  ],
+});
+
+const faqItems = [
+  {
+    q: 'グリストラップが臭い原因は何ですか？',
+    a: '主な原因は、溜まった油脂・汚泥の腐敗による硫化水素などの発生と、封水（トラップ管の水の層）が切れて下水の臭いが逆流していることの2つです。清掃不足で油脂・汚泥が蓄積するほど腐敗臭が強くなり、封水が蒸発・排出で切れると配管側の臭いも上がってきます。まず清掃で汚れを取り除き、封水を確保するのが基本対処です。',
+  },
+  {
+    q: '掃除したのに臭いが消えないのはなぜですか？',
+    a: 'いくつか原因が考えられます。(1)封水が戻っていない（掃除後に水を張り忘れた）、(2)槽底の汚泥が残っている（表面のスカムだけ取って全槽清掃ができていない）、(3)配管内に油脂がこびりついている、などです。表面清掃だけで改善しない場合は、汚泥の全槽清掃や配管洗浄が必要なサインです。',
+  },
+  {
+    q: 'グリストラップにコバエやチョウバエが湧きます。どうすればいいですか？',
+    a: 'コバエ・チョウバエは、グリストラップに溜まった有機物（油脂・汚泥・スカム）を栄養源に繁殖します。根本対策は清掃で発生源を断つことです。表面のスカムや残渣をこまめに除去し、汚泥は定期的に全槽清掃で取り除きます。殺虫剤での駆除は一時的な対症療法で、清掃を続けないと再発します。',
+  },
+  {
+    q: 'グリストラップからゴキブリが出ます。対策はありますか？',
+    a: 'ゴキブリもグリストラップの有機物と湿気を好みます。清掃で発生源と餌を減らすことが第一です。あわせて、蓋の隙間をふさぐ、周囲を乾燥・清潔に保つ、夜間の餌になる残渣を残さない、などが有効です。発生がひどい場合は、清掃と並行して害虫駆除（PCO）業者の利用も検討してください。',
+  },
+  {
+    q: 'グリストラップが詰まった・逆流したときの応急処置は？',
+    a: 'まず溜まった油脂・スカム・残渣を取り除き、水の流れを確認します。バスケットの目詰まりや仕切り板への油脂付着が原因のことが多いです。表面の清掃で改善しない場合、配管内に油脂が固着している可能性が高く、無理に熱湯や強力薬剤を使うのは避け、配管高圧洗浄ができる業者に依頼してください。',
+  },
+  {
+    q: '熱湯やパイプクリーナーで詰まりを解消してもいいですか？',
+    a: 'おすすめできません。熱湯は油を一時的に溶かしても配管の先で再び固まり、かえって詰まりを悪化させます。強力な薬剤で油を乳化させて流すと、下水道の排水基準（ノルマルヘキサン）超過の原因になることもあります。油脂は溶かして流すのではなく、すくい取って回収するのが正しい方法です。',
+  },
+  {
+    q: '臭い消しスプレーや消臭剤で対処できますか？',
+    a: '一時的なごまかしにはなりますが、根本解決にはなりません。臭いの原因は溜まった油脂・汚泥の腐敗と封水切れなので、清掃と封水の確保が必須です。消臭剤は清掃を前提とした補助として使い、臭いが続く場合は全槽清掃や配管洗浄を検討してください。',
+  },
+  {
+    q: '硫化水素は危険ですか？',
+    a: '硫化水素は腐敗で発生する有毒ガスで、高濃度では健康被害の危険があります。通常の厨房で直ちに危険な濃度になることは多くありませんが、強い腐卵臭がする・換気の悪い地下ピットで作業する場合などは注意が必要です。深い槽や密閉空間での清掃は、無理をせず業者に依頼するのが安全です。',
+  },
+];
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-answer-grid', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-grease-trap.png` },
+});
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified}
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a>
+          <span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a>
+          <span aria-hidden="true">›</span>
+          <span>グリストラップの臭い・虫・詰まり対策</span>
+        </nav>
+        <span class="cl-cat">グリストラップ清掃</span>
+        <h1 class="cl-title">グリストラップの臭い・虫・詰まり対策｜原因と今すぐできる対処法・予防のコツ</h1>
+        <p class="cl-lead">
+          グリストラップの<strong>悪臭・コバエやゴキブリ・詰まり・逆流</strong>は、飲食店で最も多いトラブルです。原因の多くは<strong>溜まった油脂・汚泥の腐敗</strong>と<strong>封水切れ</strong>に行き着きます。本記事では、臭い・虫・詰まりそれぞれの原因と今すぐできる対処法、熱湯や強力薬剤がNGな理由、そして再発を防ぐ清掃のコツを飲食店オーナー向けに整理します。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年6月16日</time>
+          <span>最終更新：2026年6月16日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. グリストラップの臭い・虫・詰まり、どう直す？</p>
+        <p class="cl-qa-a">A. 原因の多くは<strong>溜まった油脂・汚泥の腐敗</strong>と<strong>封水切れ</strong>。まず清掃で発生源を取り除き、封水を確保するのが基本です。表面清掃で改善しなければ<strong>汚泥の全槽清掃・配管高圧洗浄</strong>のサイン。熱湯・強力薬剤で溶かして流すのは逆効果なので避けてください。</p>
+        <p class="cl-qa-src">※下水道法・自治体の維持管理資料、害虫管理の一般的知見をもとに整理</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="grease-trap" serviceName="グリストラップ清掃" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#nioi">臭いの原因と対処（硫化水素・封水切れ）</a></li>
+          <li><a href="#mushi">虫の対策（コバエ・チョウバエ・ゴキブリ）</a></li>
+          <li><a href="#tsumari">詰まり・逆流の対処</a></li>
+          <li><a href="#ng">やってはいけないNG行為</a></li>
+          <li><a href="#yobo">再発を防ぐ予防のコツ</a></li>
+          <li><a href="#pro">業者に頼むべきサイン</a></li>
+          <li><a href="#sources">参考にした公式情報</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>臭い・虫・詰まりの根っこは同じ</strong>：溜まった油脂・汚泥の腐敗と封水切れ。清掃と封水確保が基本対処</li>
+            <li><strong>表面清掃で改善しなければ全槽清掃・配管洗浄のサイン</strong>。汚泥や配管固着が残っている</li>
+            <li><strong>熱湯・強力薬剤・消臭剤は対症療法</strong>。発生源を断たないと必ず再発する</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="nioi" class="cl-section">
+        <h2>臭いの原因と対処（硫化水素・封水切れ）</h2>
+        <p>グリストラップの臭いには、大きく2つの原因があります。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>臭いの主な原因と対処</caption>
+            <thead>
+              <tr><th scope="col">原因</th><th scope="col">何が起きているか</th><th scope="col">対処</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">油脂・汚泥の腐敗</th><td>溜まった有機物が腐敗し、硫化水素などの腐敗臭が発生</td><td>清掃で油脂・汚泥を除去（表面で改善しなければ全槽清掃）</td></tr>
+              <tr><th scope="row">封水切れ</th><td>トラップ管の封水が蒸発・排出で切れ、下水の臭いが逆流</td><td>水を張って封水を確保する</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>「掃除したのに臭う」場合は、封水を戻し忘れているか、表面のスカムだけ取って槽底の汚泥が残っているケースが多いです。腐卵臭（硫化水素）が強いときは腐敗が進んでいるサインで、全槽清掃が必要です。</p>
+      </section>
+
+      <section id="mushi" class="cl-section">
+        <h2>虫の対策（コバエ・チョウバエ・ゴキブリ）</h2>
+        <p>グリストラップは、虫にとって餌（有機物）と湿気がそろった絶好の繁殖場所です。種類ごとの特徴と対策を整理します。</p>
+        <div class="cl-answer-grid">
+          <div>
+            <h3>コバエ・チョウバエ</h3>
+            <p>スカムや汚泥の有機物に産卵して繁殖。表面のスカム・残渣をこまめに除去し、汚泥は全槽清掃で断つのが根本対策。</p>
+          </div>
+          <div>
+            <h3>ゴキブリ</h3>
+            <p>有機物と湿気を好む。清掃で餌を減らし、蓋の隙間をふさぎ、周囲を乾燥・清潔に保つ。夜間に残渣を残さない。</p>
+          </div>
+          <div>
+            <h3>ウジ虫・幼虫</h3>
+            <p>汚れの蓄積が進んだサイン。早急に全槽清掃で汚泥を除去し、発生源そのものをなくす。</p>
+          </div>
+          <div>
+            <h3>殺虫剤の位置づけ</h3>
+            <p>その場の駆除（対症療法）にはなるが、清掃を続けないと再発。発生源を断つ清掃とセットで使う。</p>
+          </div>
+        </div>
+        <div class="cl-callout">
+          <h3 class="cl-callout-h">根本対策は「餌を断つ」</h3>
+          <p>虫対策の本質は、殺虫より<strong>発生源（有機物）を断つこと</strong>です。日常清掃でスカム・残渣を減らし、定期的な全槽清掃で汚泥を取り除けば、虫は寄り付きにくくなります。発生がひどい場合は、清掃と並行して害虫駆除（PCO）の利用も検討してください。HACCP対応の害虫管理は<a href="/column/pest-control-haccp/">HACCP制度化で必須になった害虫対策ガイド2026</a>を参照してください。</p>
+        </div>
+      </section>
+
+      <section id="tsumari" class="cl-section">
+        <h2>詰まり・逆流の対処</h2>
+        <p>排水が流れにくい・逆流する・溢れるといった詰まりトラブルは、油脂の蓄積が原因のことがほとんどです。</p>
+        <h3>段階的な対処</h3>
+        <ol>
+          <li><strong>バスケットの確認</strong>：残渣で目詰まりしていないか。ゴミを取り除く</li>
+          <li><strong>スカム・仕切り板の確認</strong>：浮上油や仕切り板への油脂付着を除去する</li>
+          <li><strong>水の流れを再確認</strong>：表面清掃で流れが戻るかを確認</li>
+          <li><strong>改善しなければ配管固着を疑う</strong>：配管内の油脂固着は専門機材（高圧洗浄）が必要</li>
+        </ol>
+        <p>表面の清掃で流れが戻らない場合、配管内に油脂が固着している可能性が高く、無理に薬剤や熱湯を使うと悪化します。配管高圧洗浄に対応する業者へ依頼してください。詰まりによる店舗浸水は休業損失・修繕費につながるため、早めの対応が重要です。</p>
+      </section>
+
+      <section id="ng" class="cl-section">
+        <h2>やってはいけないNG行為</h2>
+        <ul>
+          <li><strong>熱湯で油を溶かして流す</strong>：配管の先で固まり、詰まりを悪化させる</li>
+          <li><strong>強力な薬剤で油を乳化させて流す</strong>：下水道の排水基準（ノルマルヘキサン）超過の原因になり得る</li>
+          <li><strong>消臭剤・芳香剤でごまかす</strong>：原因（腐敗・封水切れ）が残れば再発する</li>
+          <li><strong>封水を戻さない</strong>：下水の臭いが逆流する</li>
+          <li><strong>殺虫剤だけで済ませる</strong>：発生源の有機物が残れば虫は再発する</li>
+        </ul>
+        <p>洗剤・薬剤・バイオ製剤の正しい使い方と注意点は、<a href="/column/grease-trap-senzai-bio/">グリストラップの洗剤・薬剤・バイオ製剤2026</a>で詳しく解説しています。</p>
+      </section>
+
+      <section id="yobo" class="cl-section">
+        <h2>再発を防ぐ予防のコツ</h2>
+        <p>トラブルは「起きてから直す」より「起こさない」ほうが圧倒的に低コストです。日常の習慣で再発を防げます。</p>
+        <ul>
+          <li><strong>バスケットの残渣は毎日除去</strong>：餌と腐敗の元を翌日に持ち越さない</li>
+          <li><strong>スカムは週1回以上すくい取る</strong>：浮上油を溜めない</li>
+          <li><strong>掃除後は必ず水を張る</strong>：封水を切らさない</li>
+          <li><strong>定期的に全槽清掃を入れる</strong>：汚泥は必ず溜まるので業者の定期清掃で除去</li>
+          <li><strong>油を直接流さない</strong>：使用済み油は別途回収、シンクに油を捨てない運用にする</li>
+        </ul>
+        <p>日常清掃の具体的な手順は<a href="/column/grease-trap-souji-jibun-de/">グリストラップの掃除を自分でやる方法2026</a>を参照してください。</p>
+      </section>
+
+      <section id="pro" class="cl-section">
+        <h2>業者に頼むべきサイン</h2>
+        <p>次のサインが出たら、自社清掃の限界です。業者の全槽清掃・配管洗浄を依頼してください。</p>
+        <ul>
+          <li><strong>清掃しても臭いが取れない</strong>：槽底の汚泥や配管固着が残っている</li>
+          <li><strong>虫が慢性的に発生する</strong>：発生源（汚泥）の除去が不十分</li>
+          <li><strong>排水の流れが悪い・逆流する</strong>：配管内の油脂固着の可能性</li>
+          <li><strong>腐卵臭（硫化水素）が強い</strong>：腐敗が進行している</li>
+          <li><strong>深い槽・地下ピットで作業が必要</strong>：安全のため業者に任せる</li>
+        </ul>
+        <p>汚泥・廃油は産業廃棄物なので、許可業者への委託が必要です。業者選びのポイントは<a href="/column/grease-trap-horei-gimu/">グリストラップ清掃・維持管理ガイド2026</a>を参考にしてください。</p>
+      </section>
+
+      <section id="sources" class="cl-section">
+        <h2>参考にした公式情報</h2>
+        <p>本記事は、下水道法・自治体の維持管理資料および害虫管理の一般的な知見をもとに、飲食店の実務で使いやすい形に整理しています。排水基準や清掃の運用は、店舗所在地の自治体・下水道局の案内も確認してください。</p>
+        <ul class="cl-source-list">
+          <li><a href="https://laws.e-gov.go.jp/law/333AC0000000079" target="_blank" rel="noopener">下水道法｜e-Gov法令検索</a></li>
+          <li><a href="https://www.gesui.metro.tokyo.lg.jp/" target="_blank" rel="noopener">東京都下水道局</a></li>
+          <li><a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000098735.html" target="_blank" rel="noopener">HACCPに沿った衛生管理の制度化｜厚生労働省</a></li>
+        </ul>
+      </section>
+
+      <div class="cl-cta">
+        <h2>臭い・虫・詰まりが直らないなら全槽清掃を</h2>
+        <p>全槽清掃・配管高圧洗浄に対応する許可業者から<br/>最大3社の見積もりを完全無料・約1分で取得できます</p>
+        <a class="cta-btn-primary" href="/grease-trap/">無料で一括見積もりを依頼する</a>
+      </div>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          {faqItems.map((item) => (
+            <div class="cl-faq-item">
+              <dt>{item.q}</dt>
+              <dd>{item.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別のグリストラップ清掃業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/grease-trap/tokyo/">東京都</a></li>
+          <li><a href="/grease-trap/osaka/">大阪府</a></li>
+          <li><a href="/grease-trap/kanagawa/">神奈川県</a></li>
+          <li><a href="/grease-trap/aichi/">愛知県</a></li>
+          <li><a href="/grease-trap/saitama/">埼玉県</a></li>
+          <li><a href="/grease-trap/chiba/">千葉県</a></li>
+          <li><a href="/grease-trap/hyogo/">兵庫県</a></li>
+          <li><a href="/grease-trap/fukuoka/">福岡県</a></li>
+          <li><a href="/grease-trap/hokkaido/">北海道</a></li>
+          <li><a href="/grease-trap/kyoto/">京都府</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/grease-trap/">全国47都道府県の対応業者を見る</a></p>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連サービス・コラム</h2>
+        <ul>
+          <li><a href="/grease-trap/">グリストラップ清掃の業者を一括見積比較</a></li>
+          <li><a href="/column/grease-trap-souji-jibun-de/">グリストラップの掃除を自分でやる方法2026</a></li>
+          <li><a href="/column/grease-trap-senzai-bio/">グリストラップの洗剤・薬剤・バイオ製剤2026</a></li>
+          <li><a href="/column/grease-trap-hiyo-sohba/">グリストラップ清掃の費用相場2026</a></li>
+          <li><a href="/column/pest-control-haccp/">HACCP制度化で必須になった害虫対策ガイド2026</a></li>
+        </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#grease-trap">グリストラップ（阻集器）</a></li>
+          <li><a href="/glossary/#scum">スカム</a></li>
+          <li><a href="/glossary/#n-hex">ノルマルヘキサン</a></li>
+          <li><a href="/glossary/#gesuido-ho">下水道法</a></li>
+          <li><a href="/glossary/#shokuhin-eisei-ho-haccp">食品衛生法（HACCP）</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集（49語）をすべて見る</a></p>
+      </aside>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header {
+  background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%);
+  color: #fff;
+  padding: 48px 0 40px;
+}
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul, .cl-callout--warn ul { padding-left: 18px; margin: 0; }
+.cl-callout li, .cl-callout--warn li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-answer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 20px 0 24px; }
+.cl-answer-grid > div { background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; padding: 18px 20px; box-shadow: 0 6px 18px rgba(15, 23, 42, .05); }
+.cl-answer-grid h3 { font-size: 1rem; color: var(--blue-dark); margin: 0 0 8px; }
+.cl-answer-grid p { margin: 0; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-source-list { padding-left: 22px; display: grid; gap: 8px; }
+.cl-source-list a { color: var(--blue); text-decoration: underline; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-glossary-block { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 24px; }
+.cl-glossary-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; }
+.cl-glossary-list { padding-left: 18px; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; }
+.cl-glossary-list a { color: var(--blue); text-decoration: underline; font-size: .88rem; }
+.cl-glossary-more { font-size: .85rem; margin: 12px 0 0; }
+.cl-glossary-more a { color: var(--blue); text-decoration: underline; }
+@media (max-width: 600px) {
+  .cl-header { padding: 32px 0 28px; }
+  .cl-body { padding: 28px 16px 48px; }
+  .cl-section h2 { font-size: 1.15rem; }
+  .cl-answer-grid { grid-template-columns: 1fr; }
+}
+
+.cl-quickanswer {
+  background: #eef6ff;
+  border: 1.5px solid #1a56db;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-bottom: 32px;
+}
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+</style>
