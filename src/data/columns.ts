@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/pest-control-byoin-clinic/',
+    category: '害虫駆除',
+    title: '病院・クリニックの害虫対策ガイド｜院内感染対策と防除記録の実務',
+    excerpt: '病院・クリニックの害虫駆除を解説。外来待合室から手術室・ICU・給食施設まで、エリアごとに異なる衛生管理の考え方、医療法に基づく院内感染対策との連携、食品衛生法(HACCP)対応、無菌エリアでの薬剤使用制限とIPM、業者選び7項目、費用相場まで。',
+    date: '2026-07-08',
+  },
+  {
     href: '/column/pest-control-kaigo-fukushi/',
     category: '害虫駆除',
     title: '介護・福祉施設の害虫駆除ガイド｜入居者に配慮した衛生管理と業者選び',

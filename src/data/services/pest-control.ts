@@ -307,6 +307,13 @@ const data: ServiceData = {
 
   relatedColumns: [
     {
+      href: '/column/pest-control-byoin-clinic/',
+      category: '業種別（医療機関）',
+      title: '病院・クリニックの害虫対策ガイド｜院内感染対策と防除記録の実務',
+      excerpt: '外来待合室から手術室・ICU・給食施設まで、エリアごとに異なる衛生管理、医療法に基づく院内感染対策との連携、HACCP対応、無菌エリアでのIPM、業者選び7項目、費用相場を整理。',
+      date: '2026-07-08',
+    },
+    {
       href: '/column/pest-control-kaigo-fukushi/',
       category: '業種別（介護・福祉）',
       title: '介護・福祉施設の害虫駆除ガイド｜入居者に配慮した衛生管理と業者選び',
