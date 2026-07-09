@@ -185,20 +185,17 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       return jsonResponse(400, { ok: false, error: '必須項目が不足しています' });
     }
 
-    // 連絡方法バリデーション
+    // メールアドレスは受付時に必ず取得する（比較ページ送付・運営連絡に不可欠）
+    if (!data.email) {
+      return jsonResponse(400, { ok: false, error: 'メールアドレスを入力してください' });
+    }
+    // 業者からの連絡方法が「電話」「どちらでも」の場合は電話番号も必須
     const method = data.contact_method;
-    if (method === 'メール') {
-      if (!data.email) return jsonResponse(400, { ok: false, error: 'メールアドレスを入力してください' });
-    } else if (method === '電話') {
-      if (!data.tel) return jsonResponse(400, { ok: false, error: '電話番号を入力してください' });
-    } else if (method === 'どちらでも') {
-      if (!data.email && !data.tel) return jsonResponse(400, { ok: false, error: 'メールまたは電話番号を入力してください' });
-    } else {
-      // contact_method未指定（旧フォーム互換）：両方必須
-      if (!data.email || !data.tel) return jsonResponse(400, { ok: false, error: '必須項目が不足しています' });
+    if ((method === '電話' || method === 'どちらでも') && !data.tel) {
+      return jsonResponse(400, { ok: false, error: '電話番号を入力してください' });
     }
 
-    if (data.email && !isValidEmail(data.email)) {
+    if (!isValidEmail(data.email)) {
       return jsonResponse(400, { ok: false, error: 'メールアドレスの形式が正しくありません' });
     }
     if (data.tel && !isValidTel(data.tel)) {

@@ -120,7 +120,7 @@ const otherServices = serviceIndex.filter((s) => s.slug !== data.slug);
               <input id="qf-name" name="name" type="text" required placeholder="例：山田 太郎" autocomplete="name" />
             </div>
             <div class="qf-row qf-row--wide">
-              <label>希望の連絡方法 <span class="qf-req">必須</span></label>
+              <label>業者からの連絡方法 <span class="qf-req">必須</span></label>
               <div class="qf-radios">
                 <label class="qf-radio"><input type="radio" name="contact_method" value="メール" required /> メール</label>
                 <label class="qf-radio"><input type="radio" name="contact_method" value="電話" /> 電話</label>
@@ -128,11 +128,11 @@ const otherServices = serviceIndex.filter((s) => s.slug !== data.slug);
               </div>
             </div>
             <div class="qf-row qf-contact-email">
-              <label for="qf-email">連絡先メール</label>
-              <input id="qf-email" name="email" type="email" placeholder="例：info@example.com" autocomplete="email" />
+              <label for="qf-email">連絡先メール <span class="qf-req">必須</span></label>
+              <input id="qf-email" name="email" type="email" required placeholder="例：info@example.com" autocomplete="email" />
             </div>
             <div class="qf-row qf-contact-tel">
-              <label for="qf-tel">連絡先電話</label>
+              <label for="qf-tel">連絡先電話 <span class="qf-note-inline">（連絡方法で「電話」「どちらでも」を選んだ場合は必須）</span></label>
               <input id="qf-tel" name="tel" type="tel" placeholder="例：03-0000-0000" autocomplete="tel" />
             </div>
           </div>
