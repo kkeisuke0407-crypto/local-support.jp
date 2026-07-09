@@ -36,7 +36,7 @@ const otherServices = serviceIndex.filter((s) => s.slug !== data.slug);
       </div>
     )}
     <div class="qf-row">
-      <label>希望の連絡方法 <span class="qf-req">必須</span></label>
+      <label>業者からの連絡方法 <span class="qf-req">必須</span></label>
       <div class="qf-radios">
         <label class="qf-radio"><input type="radio" name="contact_method" value="メール" required /> メール</label>
         <label class="qf-radio"><input type="radio" name="contact_method" value="電話" /> 電話</label>
@@ -44,11 +44,11 @@ const otherServices = serviceIndex.filter((s) => s.slug !== data.slug);
       </div>
     </div>
     <div class="qf-row qf-contact-email">
-      <label for="cf-email">連絡先メール</label>
-      <input id="cf-email" name="email" type="email" placeholder="例：info@example.com" autocomplete="email" />
+      <label for="cf-email">連絡先メール <span class="qf-req">必須</span></label>
+      <input id="cf-email" name="email" type="email" required placeholder="例：info@example.com" autocomplete="email" />
     </div>
     <div class="qf-row qf-contact-tel">
-      <label for="cf-tel">連絡先電話</label>
+      <label for="cf-tel">連絡先電話 <span class="qf-note-inline">（「電話」「どちらでも」選択時は必須）</span></label>
       <input id="cf-tel" name="tel" type="tel" placeholder="例：03-0000-0000" autocomplete="tel" />
     </div>
 
