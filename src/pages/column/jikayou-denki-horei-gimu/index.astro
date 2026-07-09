@@ -1,0 +1,569 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = '自家用電気工作物の保安点検義務ガイド｜高圧受電・保安規程・主任技術者・外部委託';
+const description = '高圧・特別高圧で受電するキュービクル等の自家用電気工作物について、電気事業法第38条・第42条・第43条に基づく設置者義務を整理。保安規程の使用開始前届出、電気主任技術者の選任、外部委託承認制度、保安規程に基づく点検頻度、年次点検、記録保管、事故時対応まで施設管理担当者向けに解説します。';
+const canonical = `${site.domain}/column/jikayou-denki-horei-gimu/`;
+const published = '2026-06-05';
+const modified = '2026-06-15';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '自家用電気工作物の保安点検義務ガイド', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 6800,
+  articleSection: '法令・義務',
+  keywords: '自家用電気工作物,電気事業法,キュービクル,保安規程,電気主任技術者,外部委託承認,電気保安法人,年次点検,2026',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-jikayou-denki.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '自家用電気工作物点検（キュービクル点検）' },
+  citation: [
+    { '@type': 'Legislation', name: '電気事業法第38条（自家用電気工作物の定義）' },
+    { '@type': 'Legislation', name: '電気事業法第42条（保安規程）' },
+    { '@type': 'Legislation', name: '電気事業法第43条（主任技術者選任）' },
+    { '@type': 'Legislation', name: '電気事業法第118条等（罰則）' },
+  ],
+});
+
+const faqItems = [
+  {
+    q: '自家用電気工作物とは何ですか？',
+    a: '一般用電気工作物や電気事業の用に供する電気工作物以外の電気工作物を指します。実務では、電力会社から高圧・特別高圧で受電するビル、工場、病院、商業施設、学校などの受変電設備や、一定規模を超える発電設備などが代表例です。',
+  },
+  {
+    q: 'キュービクルがあれば自家用電気工作物ですか？',
+    a: '多くの場合は該当します。キュービクルは高圧受電設備を収納する設備であり、高圧で受電している事業所は原則として保安規程の届出、主任技術者の選任または外部委託承認などの対応が必要です。',
+  },
+  {
+    q: '保安規程の届出はいつ必要ですか？',
+    a: '自家用電気工作物の使用開始前に保安規程を定め、経済産業大臣へ届け出る必要があります。変更した場合も遅滞なく変更届出が必要です。新設時は所轄の産業保安監督部の様式と手続きに従います。',
+  },
+  {
+    q: '電気主任技術者は必ず社内で選任しますか？',
+    a: '原則として主任技術者免状を持つ人から選任しますが、一定要件を満たす場合は、電気保安法人または個人の電気管理技術者へ保安管理業務を外部委託し、所轄産業保安監督部長の承認を受けることで、主任技術者を選任しない扱いにできます。',
+  },
+  {
+    q: '外部委託できる需要設備の条件は？',
+    a: '代表的には、電圧7,000V以下で受電する需要設備が外部委託承認の対象です。発電所や蓄電所は出力や連系電圧など別条件があるため、設備種別ごとに確認が必要です。',
+  },
+  {
+    q: '月次点検と年次点検は必ず毎月・毎年ですか？',
+    a: '保安規程、外部委託契約、経済産業省告示に基づく点検頻度で実施します。実務上は月次点検と停電年次点検を基本に組むことが多いですが、設備条件や告示により頻度が変わる場合があります。',
+  },
+  {
+    q: '年次点検では何を確認しますか？',
+    a: '停電または必要な安全措置を取ったうえで、絶縁抵抗、接地抵抗、保護継電器の動作、遮断器との連動、非常用発電装置、蓄電池設備など、月次では確認しにくい項目を確認します。',
+  },
+  {
+    q: '電気保安法人と電気管理技術者の違いは？',
+    a: '電気保安法人は法人として保安管理業務を受託する体制、電気管理技術者は個人として受託する体制です。どちらも要件を満たし、設置者と委託契約を結び、外部委託承認を受ける必要があります。',
+  },
+  {
+    q: '保安ネットで申請できますか？',
+    a: '産業保安監督部では、保安ネットを標準的な電子申請方法としています。利用にはGビズIDが必要で、委託先が代行申請する場合は同意書などの添付が必要です。',
+  },
+  {
+    q: '違反した場合の罰則はありますか？',
+    a: '主任技術者の未選任や保安規程違反などは、電気事業法上の罰則や行政指導の対象になり得ます。悪質な場合は300万円以下の罰金が適用される可能性があるため、未届出・未選任の状態を放置しないことが重要です。',
+  },
+  {
+    q: '低圧受電に切り替えれば義務はなくなりますか？',
+    a: '設備構成や使用電力によっては低圧受電へ切り替えることで、主任技術者選任や保安規程届出が不要になる場合があります。ただし受電設備の改修や電力会社との協議が必要です。',
+  },
+  {
+    q: '点検記録はどのように管理すべきですか？',
+    a: '点検記録、試験成績書、事故報告、是正履歴、保安規程、主任技術者・外部委託承認関係書類を事業場ごとに整理し、立入検査や事故時に提示できる状態にします。保管期間は保安規程や施行規則、委託契約に沿って確認してください。',
+  },
+];
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@id': `${site.domain}/#website` },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-answer-grid', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-jikayou-denki.png` },
+});
+
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a>
+          <span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a>
+          <span aria-hidden="true">›</span>
+          <span>自家用電気工作物の保安点検義務ガイド</span>
+        </nav>
+        <span class="cl-cat">法令・義務</span>
+        <h1 class="cl-title">自家用電気工作物の保安点検義務ガイド｜高圧受電・保安規程・主任技術者・外部委託</h1>
+        <p class="cl-lead">
+          高圧・特別高圧で受電するビル、工場、病院、商業施設などのキュービクル等は<strong>「自家用電気工作物」</strong>として、電気事業法による自主保安体制の整備が必要です。実務で重要なのは、<strong>保安規程の使用開始前届出、電気主任技術者の選任または外部委託承認、保安規程・告示に沿った点検頻度、記録管理</strong>です。本記事では、対象判定から委託先選定まで施設管理担当者向けに整理します。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年6月5日</time>
+          <span>最終更新：2026年6月15日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. キュービクル等の自家用電気工作物の保安義務は？</p>
+        <p class="cl-qa-a">A. <strong>技術基準への適合維持、保安規程の届出・遵守、電気主任技術者の選任または外部委託承認</strong>が中心です。点検頻度は保安規程・外部委託契約・経済産業省告示に沿って定め、記録を残します。未届出・未選任の放置は罰則対象になり得ます。</p>
+        <p class="cl-qa-src">※電気事業法第38条・第42条・第43条、電気事業法施行規則第52条等をもとに整理</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="jikayou-denki" serviceName="自家用電気工作物点検" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#checklist">対象判定・保安体制の実務チェック</a></li>
+          <li><a href="#scope">対象設備の判定（自家用電気工作物の範囲）</a></li>
+          <li><a href="#regulation">保安規程と届出</a></li>
+          <li><a href="#engineer">電気主任技術者の選任</a></li>
+          <li><a href="#outsource">外部委託承認制度（電気保安法人）</a></li>
+          <li><a href="#monthly">月次点検（通電中）</a></li>
+          <li><a href="#annual">年次点検（停電を伴う精密点検）</a></li>
+          <li><a href="#penalties">違反時の罰則と監督官庁</a></li>
+          <li><a href="#tips">実務上のポイント</a></li>
+          <li><a href="#sources">参考にした公式情報</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>対象</strong>：電力会社から高圧・特別高圧で受電するビル・工場など、一般用電気工作物以外の自家用電気工作物</li>
+            <li><strong>義務</strong>：技術基準適合維持、保安規程の使用開始前届出・遵守、主任技術者選任または外部委託承認、点検記録の管理</li>
+            <li><strong>実務</strong>：外部委託は電圧7,000V以下で受電する需要設備などが対象。点検頻度は保安規程・告示・委託契約で確認する</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="checklist" class="cl-section">
+        <h2>対象判定・保安体制の実務チェック</h2>
+        <p>自家用電気工作物は「キュービクルがあるか」だけでなく、受電電圧、発電設備、外部委託承認、保安規程、点検記録をセットで確認します。</p>
+        <div class="cl-answer-grid">
+          <div>
+            <h3>受電電圧</h3>
+            <p>高圧・特別高圧で受電しているかを契約書、単線結線図、キュービクル銘板で確認します。</p>
+          </div>
+          <div>
+            <h3>発電設備</h3>
+            <p>太陽光、蓄電所、非常用発電機などは出力・連系電圧により外部委託可否や届出が変わります。</p>
+          </div>
+          <div>
+            <h3>保安規程</h3>
+            <p>使用開始前届出、変更届出、保安規程本文、点検頻度、緊急連絡体制を事業場ごとに確認します。</p>
+          </div>
+          <div>
+            <h3>主任技術者</h3>
+            <p>専任、兼任、選任許可、外部委託承認のどれで保安監督体制を組んでいるか確認します。</p>
+          </div>
+          <div>
+            <h3>点検頻度</h3>
+            <p>月次・年次という呼び方だけで判断せず、保安規程、告示、委託契約、設備条件を確認します。</p>
+          </div>
+          <div>
+            <h3>記録保管</h3>
+            <p>点検記録、試験成績書、事故報告、是正履歴、届出控えを立入検査で提示できる状態にします。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="scope" class="cl-section">
+        <h2>対象設備の判定（自家用電気工作物の範囲）</h2>
+        <p>「自家用電気工作物」は、電気事業法第38条に基づき、<strong>一般用電気工作物および電気事業の用に供する電気工作物以外の電気工作物</strong>を指します。実務では、電力会社から高圧・特別高圧で受電するビル・工場などが代表例です。</p>
+
+        <h3>典型的な対象設備</h3>
+        <ul>
+          <li>キュービクル式高圧受電設備（パッケージ変電所）</li>
+          <li>受変電設備（受電盤・変圧器・配電盤一式）</li>
+          <li>自家発電設備（非常用発電機・コジェネレーション）</li>
+          <li>小出力発電設備を超える太陽光発電設備・風力発電設備等</li>
+          <li>一定規模以上の蓄電所・蓄電池設備</li>
+        </ul>
+
+        <h3>典型的な対象事業所</h3>
+        <ul>
+          <li>中規模以上の事務所ビル（5階建以上が目安）</li>
+          <li>工場・物流倉庫（生産機械等の電力消費が大きい）</li>
+          <li>大規模商業施設・スーパー・百貨店</li>
+          <li>病院・福祉施設（医療機器・空調の電力消費）</li>
+          <li>学校・研究施設</li>
+          <li>大規模マンション（共用部の電力消費）</li>
+          <li>ホテル・宿泊施設</li>
+        </ul>
+
+        <h3>対象外となるケース</h3>
+        <ul>
+          <li>一般家庭（低圧契約）</li>
+          <li>小規模事業所（電力契約50kW未満の低圧受電）</li>
+          <li>小出力発電設備の範囲に収まる発電設備</li>
+        </ul>
+      </section>
+
+      <section id="regulation" class="cl-section">
+        <h2>保安規程と届出</h2>
+        <p>自家用電気工作物の設置者は、<strong>保安規程を定め、使用開始前に経済産業大臣へ届け出る</strong>義務があります（電気事業法第42条）。変更した場合も遅滞なく変更届出が必要です。</p>
+
+        <h3>保安規程の記載事項</h3>
+        <ol>
+          <li>保安組織体制（責任者・主任技術者・実務担当者の役職）</li>
+          <li>主任技術者の職務範囲・権限</li>
+          <li>点検計画（月次・年次の具体的スケジュール）</li>
+          <li>運転操作の手順・記録方法</li>
+          <li>事故発生時の対応手順・連絡体制</li>
+          <li>従事者の教育・訓練計画</li>
+          <li>記録の保管方法・期間</li>
+        </ol>
+
+        <h3>届出のタイミング</h3>
+        <ul>
+          <li><strong>使用開始前</strong>：保安規程の初回届出</li>
+          <li><strong>変更時</strong>：組織変更・点検計画変更時の変更届出</li>
+          <li><strong>主任技術者変更時</strong>：選任・解任の届出</li>
+          <li><strong>工事計画が必要な場合</strong>：受電電圧1万V以上の需要設備の新設などは、着工30日前までの工事計画届出を確認</li>
+        </ul>
+
+        <h3>届出書類のテンプレート</h3>
+        <p>各産業保安監督部のWebサイトで様式が公開されています。外部委託を使う場合も、保安規程本文や委託契約書の内容が承認要件に合っているかを委託先と確認してください。</p>
+      </section>
+
+      <section id="engineer" class="cl-section">
+        <h2>電気主任技術者の選任</h2>
+        <p>自家用電気工作物の設置者は、<strong>電気主任技術者を選任</strong>する必要があります（電気事業法第43条）。電力会社から受電する電圧によって必要な資格区分が異なります。</p>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>受電電圧と必要な主任技術者資格</caption>
+            <thead><tr><th>受電電圧</th><th>必要な資格</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">5万V未満（高圧6.6kV含む）</th><td>第三種電気主任技術者以上</td></tr>
+              <tr><th scope="row">17万V未満</th><td>第二種電気主任技術者以上</td></tr>
+              <tr><th scope="row">17万V以上</th><td>第一種電気主任技術者</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>選任方式の選択肢</h3>
+        <ul>
+          <li><strong>専任</strong>：その事業所専属の主任技術者（自社雇用）</li>
+          <li><strong>兼任</strong>：複数事業所を一人の主任技術者が兼任（経産省承認）</li>
+          <li><strong>外部委託</strong>：電気保安法人・電気管理技術者への委託</li>
+        </ul>
+
+        <h3>主任技術者の責任範囲</h3>
+        <p>主任技術者は<strong>「保安監督」</strong>の責任を負います。具体的には、保安規程の遵守確認、点検作業の実施・指揮、事故時の応急処置の指示、経産省・電力会社への報告対応など。事故が発生した場合、主任技術者個人にも管理責任が問われる可能性があります。</p>
+      </section>
+
+      <section id="outsource" class="cl-section">
+        <h2>外部委託承認制度（電気保安法人）</h2>
+        <p>中小規模の事業所で活用されるのが<strong>「外部委託承認制度」</strong>です。一定要件を満たす電気保安法人または個人の電気管理技術者と委託契約を結び、所轄産業保安監督部長の承認を受けると、主任技術者を選任しないことができます。ただし、法令上の履行義務は設置者に残ります。</p>
+
+        <h3>外部委託の要件</h3>
+        <ul>
+          <li>電圧7,000V以下で受電する需要設備</li>
+          <li>出力5,000kW未満の太陽電池発電所または蓄電所で、電圧7,000V以下で連系等するもの</li>
+          <li>出力2,000kW未満の水力・火力・風力発電所で、電圧7,000V以下で連系等するもの</li>
+          <li>その他、電気事業法施行規則第52条第2項および関連告示の基準を満たすこと</li>
+        </ul>
+
+        <h3>委託先の選択肢</h3>
+        <ul>
+          <li><strong>電気保安法人</strong>：法人として保安業務を提供。複数の電気管理技術者を抱え、安定供給が可能</li>
+          <li><strong>電気管理技術者</strong>：個人として保安業務を提供。費用が安いが、退職・廃業リスクあり</li>
+        </ul>
+
+        <h3>委託料金の相場</h3>
+        <p>受電電力・点検頻度・地域により異なりますが、おおよそ<strong>月額2万円〜10万円</strong>が中心レンジです。金額だけでなく、緊急時の駆けつけ体制、停電年次点検の扱い、保安ネット申請代行、是正提案の範囲を確認してください。</p>
+
+        <h3>外部委託の手続き</h3>
+        <ol>
+          <li>電気保安法人・電気管理技術者と委託契約締結</li>
+          <li>経済産業大臣への外部委託承認申請</li>
+          <li>承認後、保安規程の変更届出</li>
+          <li>運用開始</li>
+        </ol>
+      </section>
+
+      <section id="monthly" class="cl-section">
+        <h2>月次点検（通電中）</h2>
+        <p>月次点検は、保安規程や外部委託契約に基づいて行う通電中の点検です。外部委託の場合、点検頻度は経済産業省告示や設備条件に従って設定されるため、契約書と保安規程で確認します。</p>
+
+        <h3>主な点検項目</h3>
+        <ol>
+          <li>計器値の読取（電圧・電流・電力）</li>
+          <li>変圧器・遮断器の温度測定（赤外線サーモグラフィ）</li>
+          <li>異常音・振動・においの確認</li>
+          <li>絶縁油の漏れ・劣化の目視</li>
+          <li>盤面・端子部の汚れ・腐食状況</li>
+          <li>接地線の接続状態</li>
+          <li>非常用照明・換気装置の作動確認</li>
+        </ol>
+
+        <h3>月次点検の実施者</h3>
+        <p>原則として電気主任技術者または保安規程で定められた実務担当者が実施。外部委託の場合は委託先の電気管理技術者が訪問して実施します。</p>
+
+        <h3>記録の作成</h3>
+        <p>点検実施日・点検者氏名・測定値・異常の有無を点検記録票に記入。<strong>異常がなくても記録は必要</strong>です。記録は3年間保管します。</p>
+      </section>
+
+      <section id="annual" class="cl-section">
+        <h2>年次点検（停電を伴う精密点検）</h2>
+        <p>年次点検は、月次点検では確認しにくい絶縁性能・保護動作などを確認する精密点検です。停電年次点検を基本にする場合が多い一方、設備条件や告示に基づき点検方法・頻度が変わる場合があります。</p>
+
+        <h3>主な点検項目</h3>
+        <ol>
+          <li>絶縁抵抗測定（メガー試験）</li>
+          <li>接地抵抗測定</li>
+          <li>保護継電器の動作試験（過電流・地絡）</li>
+          <li>遮断器・断路器の動作試験</li>
+          <li>変圧器の絶縁油試験（必要に応じて）</li>
+          <li>電線・端子の締付け確認・増締め</li>
+          <li>盤内清掃・換気フィルタ交換</li>
+          <li>蓄電池・無停電電源装置（UPS）の試験</li>
+        </ol>
+
+        <h3>停電作業の事前準備</h3>
+        <ul>
+          <li>停電日時の利用者への事前告知（1〜2週間前）</li>
+          <li>業務継続のための代替手段（バックアップ電源・営業時間調整）</li>
+          <li>電力会社への停電作業届出（必要に応じて）</li>
+          <li>従業員への当日対応指示</li>
+        </ul>
+
+        <h3>年次点検の費用</h3>
+        <p>事業所規模・受電電圧・点検範囲により異なりますが、<strong>10万円〜100万円程度</strong>が中心レンジ。大規模設備や特殊機器を含む場合はさらに高額になります。電気保安法人との年間契約に含まれている場合と別途精算の場合があるため、契約書を確認してください。</p>
+      </section>
+
+      <section id="penalties" class="cl-section">
+        <h2>違反時の罰則と監督官庁</h2>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>電気事業法の主な罰則</caption>
+            <thead><tr><th>違反内容</th><th>罰則</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">主任技術者未選任・外部委託未承認</th><td>悪質な場合、電気事業法第118条等により300万円以下の罰金対象になり得る</td></tr>
+              <tr><th scope="row">保安規程未届出・変更未届出</th><td>届出義務違反として、過料・罰則・行政指導の対象になり得る</td></tr>
+              <tr><th scope="row">保安規程の不遵守・点検記録不備</th><td>立入検査での指導、改善要求、事故時の責任追及につながる</td></tr>
+              <tr><th scope="row">電気事故発生時の報告漏れ</th><td>事故報告義務違反として指導・罰則対象になり得る</td></tr>
+              <tr><th scope="row">感電・火災事故発生</th><td>刑事責任・民事賠償責任・営業停止リスクが問題になる</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>監督官庁</h3>
+        <p>電気事業法の所管は<strong>経済産業省（産業保安監督部）</strong>です。事業場の所在地を管轄する産業保安監督部が、保安規程、主任技術者、外部委託承認、工事計画、事故報告などの手続きを扱います。</p>
+
+        <h3>違反発覚のパターン</h3>
+        <ul>
+          <li>定期立入検査（数年に1回）</li>
+          <li>感電・火災事故発生時の調査</li>
+          <li>電気保安法人からの保安規程未遵守の通報</li>
+          <li>建物売却・改修時の調査での記録不備発覚</li>
+          <li>従業員・元従業員からの告発</li>
+        </ul>
+      </section>
+
+      <section id="tips" class="cl-section">
+        <h2>実務上のポイント</h2>
+
+        <h3>外部委託は「安いから」ではなく承認要件で選ぶ</h3>
+        <p>自社で電気主任技術者を雇用しにくい事業所では外部委託が現実的ですが、委託先が電気保安法人または電気管理技術者として要件を満たし、契約書・保安規程・点検頻度が承認基準に合っていることが前提です。金額だけでなく、緊急時対応、停電年次点検、保安ネット申請、是正提案まで比較してください。</p>
+
+        <h3>キュービクルの更新計画を立てる</h3>
+        <p>キュービクルの更新時期は、年数だけでなく、絶縁抵抗、接地抵抗、保護継電器、遮断器、変圧器、コンデンサ、PCB含有機器の有無を見て判断します。20年を超える設備は、年次点検結果を使って部品更新・本体更新・停電計画を早めに組むのが安全です。</p>
+
+        <h3>停電作業日の業務影響を最小化する</h3>
+        <p>年次点検時の停電は事業継続への影響が大きいため、<strong>休日・夜間に実施</strong>するのが基本。多くの電気保安法人は土日・深夜の作業に対応します。割増料金がかかりますが、業務継続への影響と比較すれば妥当な投資です。</p>
+
+        <h3>事故報告の迅速化</h3>
+        <p>電気事故が発生した場合は、事故の種類に応じて産業保安監督部への報告が必要になります。報告遅れは別途問題になるため、事故発生時の一次連絡先、委託先、設置者側責任者、電力会社への連絡手順を保安規程と緊急連絡表で明確化しておきます。</p>
+      </section>
+
+      <section id="sources" class="cl-section">
+        <h2>参考にした公式情報</h2>
+        <p>本記事では、対象定義、保安規程、主任技術者、外部委託承認制度を次の公式情報に基づいて整理しています。実際の申請様式・提出先は、事業場所在地を管轄する産業保安監督部で確認してください。</p>
+        <ul class="cl-source-list">
+          <li><a href="https://laws.e-gov.go.jp/law/339AC0000000170/" target="_blank" rel="noopener">電気事業法｜e-Gov法令検索</a></li>
+          <li><a href="https://laws.e-gov.go.jp/law/407M50000400077/" target="_blank" rel="noopener">電気事業法施行規則｜e-Gov法令検索</a></li>
+          <li><a href="https://www.safety-chubu.meti.go.jp/denryoku/jikayou/teigi.html" target="_blank" rel="noopener">自家用電気工作物とは｜中部近畿産業保安監督部</a></li>
+          <li><a href="https://www.safety-kanto.meti.go.jp/electric/jikayou/e_jikayou01.html" target="_blank" rel="noopener">自家用電気工作物を新設する場合｜関東東北産業保安監督部</a></li>
+          <li><a href="https://www.safety-kanto.meti.go.jp/electric/jikayou/e_gaibuitaku.html" target="_blank" rel="noopener">外部委託承認制度｜関東東北産業保安監督部</a></li>
+          <li><a href="https://www.meti.go.jp/policy/safety_security/industrial_safety/law/denjikokuji.html" target="_blank" rel="noopener">電気事業法 告示・内規等｜経済産業省</a></li>
+        </ul>
+      </section>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          {faqItems.map((item) => (
+            <div class="cl-faq-item">
+              <dt>{item.q}</dt>
+              <dd>{item.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別の自家用電気工作物点検業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/jikayou-denki/tokyo/">東京都</a></li>
+          <li><a href="/jikayou-denki/osaka/">大阪府</a></li>
+          <li><a href="/jikayou-denki/kanagawa/">神奈川県</a></li>
+          <li><a href="/jikayou-denki/aichi/">愛知県</a></li>
+          <li><a href="/jikayou-denki/saitama/">埼玉県</a></li>
+          <li><a href="/jikayou-denki/fukuoka/">福岡県</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/jikayou-denki/">全国47都道府県の対応業者を見る</a></p>
+      </div>
+
+      <div class="cl-cta" id="contact">
+        <h2>電気主任技術者の外部委託・点検をお考えの方へ</h2>
+        <p>電気保安法人・電気管理技術者の登録を確認した業者をご紹介。月次・年次点検から保安規程の作成・届出代行まで対応可能な業者を最大3社まで無料で比較できます。</p>
+        <a href="/jikayou-denki/" class="cta-btn-primary">無料で一括見積もりを依頼する</a>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連する詳細情報</h2>
+        <ul>
+          <li><a href="/jikayou-denki/">自家用電気工作物点検のサービストップ</a></li>
+          <li><a href="/elevator-hoshu/">エレベーター保守点検のサービストップ</a></li>
+          <li><a href="/shobo-setsubi/">消防設備点検のサービストップ</a></li>
+          <li><a href="/flow/">一括見積依頼から契約までの流れ</a></li>
+        </ul>
+      </aside>
+
+      <ColumnCtaCard serviceSlug="jikayou-denki" serviceName="自家用電気工作物点検" variant="bottom" />
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-article { background: #fff; }
+.cl-header { background: linear-gradient(135deg, #f0f9ff, #e0f2fe); padding: 40px 0 32px; border-bottom: 1px solid var(--gray-200); }
+.cl-crumbs { font-size: .82rem; color: var(--gray-600); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.cl-crumbs a { color: var(--blue); text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; font-size: .75rem; font-weight: 800; color: var(--blue-dark); background: #dbeafe; padding: 4px 12px; border-radius: 999px; margin-bottom: 14px; letter-spacing: .04em; }
+.cl-title { font-size: clamp(1.4rem, 3.5vw, 1.9rem); font-weight: 900; line-height: 1.45; color: var(--gray-900); margin-bottom: 14px; }
+.cl-lead { font-size: 1rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 20px; }
+.cl-lead strong { color: var(--gray-900); }
+.cl-meta { font-size: .82rem; color: var(--gray-600); display: flex; gap: 16px; flex-wrap: wrap; }
+.cl-author-link { color: var(--blue); }
+.cl-body { padding: 32px 16px 48px; max-width: 800px; }
+.cl-quickanswer { background: #fef3c7; border-left: 4px solid #f59e0b; border-radius: 8px; padding: 18px 22px; margin-bottom: 28px; }
+.cl-qa-q { font-size: .95rem; font-weight: 700; color: var(--gray-900); margin-bottom: 8px; }
+.cl-qa-a { font-size: .92rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 8px; }
+.cl-qa-a strong { color: #b45309; }
+.cl-qa-src { font-size: .78rem; color: var(--gray-600); margin: 0; }
+.cl-toc { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-toc ol { padding-left: 22px; margin: 0; }
+.cl-toc li { font-size: .92rem; line-height: 1.85; }
+.cl-toc a { color: var(--blue); text-decoration: none; }
+.cl-toc a:hover { text-decoration: underline; }
+.cl-section { margin: 36px 0; scroll-margin-top: 80px; }
+.cl-section h2 { font-size: 1.35rem; font-weight: 900; color: var(--gray-900); border-bottom: 3px solid var(--blue); padding-bottom: 8px; margin-bottom: 18px; line-height: 1.45; }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-900); margin: 24px 0 12px; padding-left: 12px; border-left: 4px solid var(--blue); }
+.cl-section p { font-size: .95rem; line-height: 1.9; color: var(--gray-800); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 24px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; margin-bottom: 6px; }
+.cl-section strong { color: var(--gray-900); }
+.cl-callout { background: #f0f9ff; border: 1px solid #bae6fd; border-left: 4px solid var(--blue); border-radius: 8px; padding: 18px 22px; margin: 20px 0; }
+.cl-callout-h { font-size: 1rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-answer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 20px 0 24px; }
+.cl-answer-grid > div { background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; padding: 18px 20px; box-shadow: 0 6px 18px rgba(15, 23, 42, .05); }
+.cl-answer-grid h3 { font-size: 1rem; color: var(--blue-dark); margin: 0 0 8px; padding-left: 0; border-left: 0; }
+.cl-answer-grid p { margin: 0; }
+.cl-table-wrap { overflow-x: auto; margin: 16px 0; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .88rem; border: 1px solid var(--gray-200); }
+.cl-table caption { text-align: left; font-size: .85rem; font-weight: 700; color: var(--gray-700); margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--gray-100); font-weight: 700; }
+.cl-table tbody th { background: #f9fafb; font-weight: 600; }
+.cl-faq { margin: 0; padding: 0; }
+.cl-faq-item { border-bottom: 1px solid var(--gray-200); padding: 16px 0; }
+.cl-faq-item dt { font-size: .98rem; font-weight: 700; color: var(--gray-900); margin-bottom: 8px; }
+.cl-faq-item dd { font-size: .92rem; line-height: 1.8; color: var(--gray-700); margin-left: 0; }
+.cl-source-list { padding-left: 22px; display: grid; gap: 8px; }
+.cl-source-list a { color: var(--blue); text-decoration: underline; }
+.cl-pref-links { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin: 32px 0; }
+.cl-pref-h { font-size: .92rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; }
+.cl-pref-list { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin-bottom: 10px; }
+.cl-pref-list a { display: inline-block; background: #fff; border: 1px solid var(--gray-300); border-radius: 6px; padding: 6px 14px; font-size: .85rem; color: var(--blue); text-decoration: none; }
+.cl-pref-list a:hover { background: var(--blue); color: #fff; }
+.cl-pref-more { font-size: .85rem; }
+.cl-pref-more a { color: var(--blue); }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 32px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cl-cta .cta-btn-primary { background: var(--accent); color: var(--gray-900); padding: 12px 32px; border-radius: 8px; font-weight: 800; text-decoration: none; display: inline-block; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 32px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; list-style: none; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+@media (max-width: 640px) {
+  .cl-body { padding: 24px 14px 36px; }
+  .cl-section h2 { font-size: 1.2rem; }
+  .cl-section h3 { font-size: 1rem; }
+  .cl-answer-grid { grid-template-columns: 1fr; }
+}
+</style>

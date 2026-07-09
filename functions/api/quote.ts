@@ -2,8 +2,8 @@ interface Env {
   RESEND_API_KEY: string;
 }
 
-const TO_ADDRESS = 'kkeisuke0407@gmail.com';
-const FROM_ADDRESS = 'local-support.jp <contact@local-support.jp>';
+const TO_ADDRESS = 'contact@local-support.jp';
+const FROM_ADDRESS = 'ロカサポ <contact@local-support.jp>';
 const FIELD_LABELS: Record<string, string> = {
   service: 'サービス',
   company: '会社名・施設名',
@@ -18,6 +18,7 @@ const FIELD_LABELS: Record<string, string> = {
   schedule: '希望時期・時間帯',
   message: '補足メッセージ',
   name: '担当者名',
+  contact_method: '希望の連絡方法',
   email: '連絡先メール',
   tel: '連絡先電話',
   agree: '同意',
@@ -87,13 +88,15 @@ function buildUserReplyHtml(data: QuotePayload): string {
 <p>${nameLine}</p>
 <p>このたびは local-support.jp をご利用いただき、誠にありがとうございます。<br>下記の内容でお見積もり依頼を受け付けましたのでご連絡いたします。</p>
 
-<h3 style="font-size:15px;margin-top:24px;color:#1f2937;">今後の流れ</h3>
+<h3 style="font-size:15px;margin-top:24px;color:#1f2937;">今後の流れ（6ステップ）</h3>
 <ol style="padding-left:20px;font-size:14px;">
-  <li>こちらで内容を確認のうえ、対応可能な登録業者を最大3社まで厳選します（通常1営業日以内）。</li>
-  <li>厳選した業者から直接メールまたはお電話でご連絡が入ります。</li>
-  <li>お見積もりを比較し、納得いただける業者とご契約ください。</li>
+  <li>こちらで内容を確認のうえ、対応可能な実績・信頼のある専門業者へお声がけします（1営業日以内に打診開始）。</li>
+  <li>業者の対応可否・概算見積回答を取りまとめます（通常 3〜7営業日）。</li>
+  <li>業者の概算見積・実績を一覧で確認できる「業者比較ページ」のURLをご案内します。</li>
+  <li>比較ページから連絡を希望する業者を1〜3社お選びください。<strong>選択した業者にのみ連絡先が共有されます。</strong></li>
+  <li>選定された業者からご連絡が入ります（選定後 1〜3営業日）。最終見積を比較してご契約ください。</li>
 </ol>
-<p style="font-size:13px;color:#6b7280;">※ 土日祝のお申し込みは翌営業日以降の対応となります。<br>※ 業者からのご連絡が確認できない場合は、迷惑メールフォルダ、またはご登録の電話番号への着信履歴もあわせてご確認ください。</p>
+<p style="font-size:13px;color:#6b7280;">※ お急ぎの場合はフォームの「緊急度」欄でその旨をお知らせください。早期回答可能な業者から優先的にお声がけします。<br>※ 土日祝のお申し込みは翌営業日以降の対応開始となります。<br>※ <strong>業者をお選びいただくまで、業者からの直接のご連絡は一切ありません。</strong></p>
 
 <h3 style="font-size:15px;margin-top:24px;color:#1f2937;">ご依頼内容（控え）</h3>
 <table style="border-collapse:collapse;width:100%;font-size:14px;margin-top:8px;">${rows}</table>
@@ -120,13 +123,17 @@ function buildUserReplyText(data: QuotePayload): string {
 このたびは local-support.jp をご利用いただき、誠にありがとうございます。
 下記の内容でお見積もり依頼を受け付けましたのでご連絡いたします。
 
-■ 今後の流れ
-  1. こちらで内容を確認のうえ、対応可能な登録業者を最大3社まで厳選します（通常1営業日以内）。
-  2. 厳選した業者から直接メールまたはお電話でご連絡が入ります。
-  3. お見積もりを比較し、納得いただける業者とご契約ください。
+■ 今後の流れ（6ステップ）
+  1. こちらで内容を確認のうえ、対応可能な実績・信頼のある専門業者へお声がけします（1営業日以内に打診開始）。
+  2. 業者の対応可否・概算見積回答を取りまとめます（通常 3〜7営業日）。
+  3. 業者の概算見積・実績を一覧で確認できる「業者比較ページ」のURLをご案内します。
+  4. 比較ページから連絡を希望する業者を1〜3社お選びください。選択した業者にのみ連絡先が共有されます。
+  5. 選定された業者からご連絡が入ります（選定後 1〜3営業日）。
+  6. 最終見積を比較してご契約ください。
 
-※ 土日祝のお申し込みは翌営業日以降の対応となります。
-※ 業者からのご連絡が確認できない場合は、迷惑メールフォルダ、またはご登録の電話番号への着信履歴もあわせてご確認ください。
+※ お急ぎの場合はフォームの「緊急度」欄でその旨をお知らせください。早期回答可能な業者から優先的にお声がけします。
+※ 土日祝のお申し込みは翌営業日以降の対応開始となります。
+※ 業者をお選びいただくまで、業者からの直接のご連絡は一切ありません。
 
 ■ ご依頼内容（控え）
 ${summary}
@@ -148,23 +155,53 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     });
 
   try {
+    // 簡易ボット対策：正規ブラウザの同一オリジン送信は Origin ヘッダを必ず送る。
+    // Origin が存在し、かつ自サイト以外なら拒否（直接POSTするボットを弾く）。
+    const origin = context.request.headers.get('Origin');
+    if (origin && !/^https?:\/\/(www\.)?local-support\.jp$/.test(origin)) {
+      return jsonResponse(403, { ok: false, error: '不正なリクエストです' });
+    }
+
     const formData = await context.request.formData();
     const data: QuotePayload = {};
     for (const [key, value] of formData.entries()) {
-      if (typeof value === 'string') data[key] = value;
+      if (typeof value !== 'string') continue;
+      if (key === 'additional_services') continue;
+      data[key] = value;
+    }
+    // 複数選択の追加サービスを service フィールドにマージ
+    const additional = formData.getAll('additional_services').filter((v): v is string => typeof v === 'string' && v.trim() !== '');
+    if (additional.length > 0) {
+      const baseService = (data.service || '').trim();
+      const combined = baseService ? [baseService, ...additional] : additional;
+      data.service = combined.join('、');
     }
 
     if (data.website) {
       return jsonResponse(200, { ok: true });
     }
 
-    if (!data.company || !data.email || !data.prefecture || !data.tel) {
+    if (!data.company || !data.prefecture) {
       return jsonResponse(400, { ok: false, error: '必須項目が不足しています' });
     }
-    if (!isValidEmail(data.email)) {
+
+    // 連絡方法バリデーション
+    const method = data.contact_method;
+    if (method === 'メール') {
+      if (!data.email) return jsonResponse(400, { ok: false, error: 'メールアドレスを入力してください' });
+    } else if (method === '電話') {
+      if (!data.tel) return jsonResponse(400, { ok: false, error: '電話番号を入力してください' });
+    } else if (method === 'どちらでも') {
+      if (!data.email && !data.tel) return jsonResponse(400, { ok: false, error: 'メールまたは電話番号を入力してください' });
+    } else {
+      // contact_method未指定（旧フォーム互換）：両方必須
+      if (!data.email || !data.tel) return jsonResponse(400, { ok: false, error: '必須項目が不足しています' });
+    }
+
+    if (data.email && !isValidEmail(data.email)) {
       return jsonResponse(400, { ok: false, error: 'メールアドレスの形式が正しくありません' });
     }
-    if (!isValidTel(data.tel)) {
+    if (data.tel && !isValidTel(data.tel)) {
       return jsonResponse(400, { ok: false, error: '電話番号の形式が正しくありません' });
     }
     if (data.agree !== undefined && data.agree !== 'on' && data.agree !== 'true' && data.agree !== '1') {
@@ -184,7 +221,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       body: JSON.stringify({
         from: FROM_ADDRESS,
         to: [TO_ADDRESS],
-        reply_to: data.email,
+        ...(data.email ? { reply_to: data.email } : {}),
         subject,
         html,
         text,
@@ -197,8 +234,8 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       return jsonResponse(502, { ok: false, error: 'メール送信に失敗しました' });
     }
 
-    // ユーザー宛の受付確認メール（失敗してもメイン処理は成功扱い）
-    try {
+    // ユーザー宛の受付確認メール（メールアドレスがある場合のみ・失敗してもメイン処理は成功扱い）
+    if (data.email) try {
       const userReplyResp = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
@@ -208,7 +245,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         body: JSON.stringify({
           from: FROM_ADDRESS,
           to: [data.email],
-          subject: '【local-support.jp】お見積もり依頼を受け付けました',
+          subject: '【ロカサポ】お見積もり依頼を受け付けました',
           html: buildUserReplyHtml(data),
           text: buildUserReplyText(data),
         }),

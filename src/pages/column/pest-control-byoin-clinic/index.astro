@@ -1,0 +1,454 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = '病院・クリニックの害虫対策ガイド｜院内感染対策と防除記録の実務';
+const description = '病院・クリニックの害虫駆除（PCO）を解説。外来待合室から手術室・ICU・給食施設まで、エリアごとに異なる衛生管理の考え方、医療法に基づく院内感染対策との連携、食品衛生法(HACCP)対応、無菌エリアでの薬剤使用制限とIPM、業者選び7項目、費用相場までまとめました。';
+const canonical = `${site.domain}/column/pest-control-byoin-clinic/`;
+const published = '2026-07-08';
+const modified = '2026-07-08';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '病院・クリニックの害虫対策ガイド', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 5500,
+  articleSection: '害虫駆除',
+  keywords: '害虫駆除 病院,害虫駆除 クリニック,院内感染対策,医療機関 衛生管理,手術室 害虫対策,ICU 防除,医療法 安全管理体制,HACCP,IPM',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-pest-control.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '害虫駆除', serviceType: '建築物の害虫防除（PCO）' },
+  citation: [
+    { '@type': 'Legislation', name: '医療法', url: 'https://laws.e-gov.go.jp/law/323AC0000000205' },
+    { '@type': 'Legislation', name: '食品衛生法（HACCP制度化）', url: 'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/shokuhin/haccp/index.html' },
+  ],
+});
+
+const faqItems = [
+  {
+    q: '病院・クリニックで害虫駆除業者を選ぶとき、最初に確認すべきことは？',
+    a: 'まず「医療機関での施工実績」です。手術室・ICUなど無菌管理が求められるエリアと、外来待合室のような一般エリアでは求められる対応が大きく異なるため、両方の勘所を理解している業者かどうかが重要です。あわせて建築物ねずみ昆虫等防除業の登録、給食施設がある場合はHACCP対応の可否、院内感染対策委員会に提出できる報告書を発行できるかを確認してください。',
+  },
+  {
+    q: '病院とクリニックで、害虫対策の考え方はどう違いますか？',
+    a: '病床のある病院は、手術室・ICU・NICUなどの無菌管理エリア、入院患者の病室、給食施設まで対象範囲が広く、24時間体制での継続的な管理が必要です。一方、無床のクリニックは診察室・処置室・待合室が中心で、対象範囲は狭いものの、院内感染対策の考え方自体は病床の有無にかかわらず共通して求められます。規模に応じて管理の密度を調整しつつ、基本方針は同じと考えてください。',
+  },
+  {
+    q: '建築物衛生法の「特定建築物」に病院は含まれますか？',
+    a: '建築物衛生法における特定建築物は、事務所・店舗・百貨店・ホテル・集会場などの用途区分で定義されており、病院は原則としてこの対象には含まれません。医療機関の衛生管理は、建築物衛生法ではなく医療法および医療法施行規則に基づく医療安全管理体制（院内感染対策を含む）の枠組みで扱われる点が、オフィスビルや商業施設との大きな違いです。',
+  },
+  {
+    q: '手術室やICUでも殺虫剤を使って駆除するのですか？',
+    a: '手術室・ICU・NICUなどの無菌管理エリアでは、殺虫剤の空間噴霧は基本的に行いません。侵入経路の物理的な遮断（隙間・配管まわりのシーリング）、環境整備（清掃・湿度管理・ごみの管理）、粘着トラップによるモニタリングを中心にした対応が基本です。薬剤を使う場合も、対象エリアから離れた場所に限定し、使用薬剤・設置場所を記録して感染対策部門と共有できる業者を選ぶことが重要です。',
+  },
+  {
+    q: '院内感染対策委員会（ICT）とはどう関わりますか？',
+    a: '多くの病院には感染対策委員会（ICT：Infection Control Team）が設置され、指針の策定・職員研修・感染症発生状況の把握と改善を継続的に行っています。害虫の発生状況やモニタリング結果、防除の実施記録は、この院内感染対策の一環として委員会に報告される情報の一つです。業者から提出される報告書がそのまま委員会資料として使える形式かどうかは、業者選びの実務上のポイントになります。',
+  },
+  {
+    q: '給食施設がある病院の食品衛生対策はどうなりますか？',
+    a: '院内の厨房・給食施設で食事を提供している場合、食品衛生法に基づくHACCPに沿った衛生管理の対象となり、そ族・昆虫の防除と記録が一般衛生管理の一部として求められます。入院患者は抵抗力が低下している方も多いため、食中毒対策としての防虫管理は特に重要度が高い領域です。給食委託業者と防除業者、双方の記録を突き合わせて管理する体制が望ましいといえます。',
+  },
+  {
+    q: '費用相場はどのくらいですか？',
+    a: '施設規模（病床数・延床面積）、対象エリアの範囲、給食施設の有無、無菌エリアの管理レベルによって幅があります。目安として、無床クリニックの定期モニタリング契約は1回あたり数千円〜、病床のある病院で施設全体を対象にする場合は規模に応じて月額数万円〜が一般的です。手術室・ICU等の特殊エリアや発生時の緊急対応は別途見積もりになることが多いため、対象範囲を明確にしたうえで複数社から相見積もりを取ることをおすすめします。',
+  },
+];
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-answer-grid', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-pest-control.png` },
+});
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified}
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  ogImage={`${site.domain}/og-pest-control.png`}
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a>
+          <span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a>
+          <span aria-hidden="true">›</span>
+          <span>病院・クリニックの害虫対策ガイド</span>
+        </nav>
+        <span class="cl-cat">害虫駆除</span>
+        <h1 class="cl-title">病院・クリニックの害虫対策ガイド｜院内感染対策と防除記録の実務</h1>
+        <p class="cl-lead">
+          病院・クリニックは、<strong>外来待合室から手術室・ICUまでエリアごとに求められる衛生管理レベルが大きく異なる</strong>施設です。無菌管理エリアでは薬剤の使い方そのものに制約があり、院内感染対策委員会との連携も欠かせません。この記事では、エリア別のリスクの違い、関係する法令、無菌エリアでのIPMの考え方、業者選び7項目、費用相場までを、医療機関の施設管理・感染対策担当者向けにまとめます。※2026年7月時点の情報をもとに整理。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年7月8日</time>
+          <span>最終更新：2026年7月8日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 病院・クリニックの害虫対策で大事なことは？</p>
+        <p class="cl-qa-a">A. <strong>①医療機関での施工実績、②手術室・ICU等の無菌エリアでは薬剤散布に頼らないIPM（侵入遮断・環境整備・モニタリング中心）、③院内感染対策委員会に提出できる報告書の発行、④給食施設があればHACCP対応、⑤エリアごとにリスクを分けて管理する視点</strong>。無菌管理と一般エリアの両方に対応できる業者を、相見積もりで選ぶのがコツです。</p>
+        <p class="cl-qa-src">※医療法・食品衛生法（HACCP）、害虫管理の一般的知見をもとに整理</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="pest-control" serviceName="害虫駆除" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#why">なぜ医療機関の害虫対策は特殊か</a></li>
+          <li><a href="#place">エリア別のリスクと管理レベル</a></li>
+          <li><a href="#law">関係する法令・院内体制</a></li>
+          <li><a href="#ipm">無菌エリアでのIPMの考え方</a></li>
+          <li><a href="#check">業者選び7つのチェックポイント</a></li>
+          <li><a href="#cost">費用相場の考え方</a></li>
+          <li><a href="#sources">参考にした公式情報</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>エリアで管理レベルが違う</strong>：外来・病室と、手術室・ICU等の無菌エリアでは求められる対策の厳しさがまったく異なる</li>
+            <li><strong>薬剤散布に制約</strong>：無菌管理エリアでは空間噴霧を避け、侵入遮断・環境整備・モニタリング中心のIPMが基本</li>
+            <li><strong>院内体制との連携</strong>：感染対策委員会に提出できる記録・報告書を発行でき、給食施設があればHACCPにも対応できる業者を選ぶ</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="why" class="cl-section">
+        <h2>なぜ医療機関の害虫対策は特殊か</h2>
+        <p>病院・クリニックは、一般的なオフィスや商業施設とは異なる特有の事情を抱えています。</p>
+        <ul>
+          <li><strong>患者の抵抗力低下</strong>：入院患者や高齢・基礎疾患のある患者は、害虫が媒介する病原体や食中毒に対して重症化しやすい</li>
+          <li><strong>無菌管理エリアの存在</strong>：手術室・ICU・NICUなど、通常の殺虫剤散布がなじまないエリアを抱える</li>
+          <li><strong>院内感染対策との一体運用</strong>：害虫の発生・防除記録は、感染対策委員会が把握すべき衛生管理情報の一部として扱われる</li>
+          <li><strong>24時間稼働</strong>：入院設備のある病院は昼夜を問わず患者・職員が活動しており、作業時間帯の調整が必要</li>
+        </ul>
+        <p>つまり医療機関では、「発生してから駆除する」対応では遅く、<strong>エリアごとにリスクを分けて、平時から発生源を管理する体制</strong>が求められます。</p>
+      </section>
+
+      <section id="place" class="cl-section">
+        <h2>エリア別のリスクと管理レベル</h2>
+        <p>院内のどこにどの程度の管理レベルが必要かを整理すると、対策の優先順位がつけやすくなります。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>医療機関のエリア別・防除の考え方</caption>
+            <thead>
+              <tr><th scope="col">エリア</th><th scope="col">管理レベル</th><th scope="col">対応の基本</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">手術室・ICU・NICU</th><td>最も厳格（無菌管理）</td><td>薬剤散布は避け、侵入遮断・モニタリング中心</td></tr>
+              <tr><th scope="row">病室・処置室</th><td>厳格</td><td>低リスクな工法を優先、作業時間帯に配慮</td></tr>
+              <tr><th scope="row">給食施設・厨房</th><td>厳格（食品衛生）</td><td>HACCPに沿った継続的な防除・記録</td></tr>
+              <tr><th scope="row">薬局・検査室</th><td>やや厳格</td><td>薬剤・検体保管エリアへの薬剤飛散を避ける</td></tr>
+              <tr><th scope="row">外来待合室・受付</th><td>標準</td><td>通常のモニタリング・発生源対策</td></tr>
+              <tr><th scope="row">リネン室・医療廃棄物保管庫</th><td>標準〜やや厳格</td><td>湿気・臭気源の管理、侵入経路の遮断</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>院内の食事提供にともなうリスクは<a href="/column/pest-control-shokuhin-koujou-boumushi/">食品工場の防虫設計</a>の考え方も参考になります。エリアごとに求められる対応の差を理解した上で、施設全体の防除計画を立てることが重要です。</p>
+      </section>
+
+      <section id="law" class="cl-section">
+        <h2>関係する法令・院内体制</h2>
+        <p>医療機関の衛生管理は、オフィスや商業施設とは異なる枠組みで扱われます。自施設にどれが当てはまるかを確認しましょう。</p>
+        <div class="cl-answer-grid">
+          <div>
+            <h3>医療法・医療法施行規則</h3>
+            <p>医療安全管理体制の一環として、院内感染対策のための指針策定・委員会設置・職員研修・報告体制の整備が求められる。</p>
+          </div>
+          <div>
+            <h3>建築物衛生法は原則対象外</h3>
+            <p>特定建築物の用途区分（事務所・店舗・ホテル等）に病院は含まれず、建築物衛生法の6か月ごとの調査義務は適用されないのが一般的。</p>
+          </div>
+          <div>
+            <h3>食品衛生法（HACCP）</h3>
+            <p>給食施設がある場合、そ族・昆虫対策と防除記録が一般衛生管理の一部として必要。</p>
+          </div>
+          <div>
+            <h3>第三者評価・監査</h3>
+            <p>医療機能評価などの第三者評価や保健所の立入検査で、衛生管理の記録提示を求められる場合がある。</p>
+          </div>
+        </div>
+        <p>害虫駆除の法的義務の全体像は<a href="/column/pest-control-horei-gimu/">害虫駆除の法的義務ガイド（建築物衛生法・食品衛生法HACCP）</a>、介護・福祉施設との違いは<a href="/column/pest-control-kaigo-fukushi/">介護・福祉施設の害虫駆除ガイド</a>もあわせてご覧ください。</p>
+      </section>
+
+      <section id="ipm" class="cl-section">
+        <h2>無菌エリアでのIPMの考え方</h2>
+        <p>手術室・ICU・NICUのような無菌管理エリアでは、一般的な薬剤散布は基本的になじみません。基本は<a href="/glossary/#ipm">IPM（総合的有害生物管理）</a>――発生源対策と物理的手段を中心に、化学的手段は必要最小限にとどめる考え方です。</p>
+        <div class="cl-callout cl-callout--warn">
+          <h2 class="cl-callout-h">無菌エリアでの施工で重視したいポイント</h2>
+          <ul>
+            <li><strong>空間噴霧は行わない</strong>：手術室・ICU等では殺虫剤の空間噴霧を避け、侵入経路の物理的な遮断を優先する</li>
+            <li><strong>モニタリング中心</strong>：粘着トラップ・捕虫器で発生傾向を把握し、無菌エリア外で対処する</li>
+            <li><strong>作業時間帯の厳密な調整</strong>：手術予定・処置スケジュールを避け、清掃・滅菌のタイミングと合わせて実施</li>
+            <li><strong>記録の一元管理</strong>：使用薬剤・設置場所・実施日を記録し、感染対策部門がいつでも確認できる形で共有</li>
+          </ul>
+        </div>
+        <p>こうした配慮は、無菌エリア外の一般エリアにも共通して当てはまります。発生源（餌・水・すみか・侵入経路）を継続的に管理することで、そもそも薬剤を使う場面を減らすのがIPMの狙いです。定期管理とスポットの違いは<a href="/column/pest-control-teiki-spot-hikaku/">定期契約とスポット駆除の比較</a>をご覧ください。</p>
+      </section>
+
+      <section id="check" class="cl-section">
+        <h2>業者選び7つのチェックポイント</h2>
+        <p>病院・クリニックで害虫駆除業者を比較するときに確認したい7項目です。</p>
+        <div class="cl-answer-grid">
+          <div>
+            <h3>① 医療機関の実績</h3>
+            <p>病院・クリニックでの施工実績があり、無菌エリアと一般エリアの違いを理解しているか。</p>
+          </div>
+          <div>
+            <h3>② 無菌エリア対応</h3>
+            <p>手術室・ICU等では空間噴霧を避け、侵入遮断・モニタリング中心の対応ができるか。</p>
+          </div>
+          <div>
+            <h3>③ 資格・登録</h3>
+            <p>建築物ねずみ昆虫等防除業の登録があり、日本ペストコントロール協会の会員かどうか。</p>
+          </div>
+          <div>
+            <h3>④ 院内体制との連携</h3>
+            <p>感染対策委員会に提出できる形式で報告書・記録を発行できるか。</p>
+          </div>
+          <div>
+            <h3>⑤ 給食施設のHACCP対応</h3>
+            <p>厨房・給食施設がある場合、HACCPに沿った継続的な防除と記録に対応できるか。</p>
+          </div>
+          <div>
+            <h3>⑥ 作業時間帯の柔軟さ</h3>
+            <p>手術・処置・入院患者の生活リズムに配慮した時間帯調整に応じられるか。</p>
+          </div>
+          <div>
+            <h3>⑦ 見積の透明性</h3>
+            <p>エリアごとの対応内容・薬剤・回数・記録発行が見積に明記され、相見積もりで比較できるか。</p>
+          </div>
+        </div>
+        <p>業者選びの一般的な考え方は<a href="/column/pest-control-gokiburi-gyosha/">業務用ゴキブリ駆除の業者選び完全ガイド</a>、協会会員と登録の違いは<a href="/column/pest-control-kyokai-kaiin/">ペストコントロール協会の会員業者を見分ける方法</a>もあわせてご覧ください。</p>
+      </section>
+
+      <section id="cost" class="cl-section">
+        <h2>費用相場の考え方</h2>
+        <p>害虫駆除の費用は、病床数・延床面積・対象エリアの範囲・給食施設の有無・無菌エリアの管理レベルで変わります。医療機関での目安として、次のように考えます。</p>
+        <ul>
+          <li><strong>無床クリニックの定期モニタリング契約</strong>：1回あたり数千円〜（対象範囲・頻度で変動）</li>
+          <li><strong>病床のある病院で施設全体を対象にする場合</strong>：規模に応じて月額数万円〜が一般的</li>
+          <li><strong>手術室・ICU等の特殊エリア対応、発生時の緊急対応</strong>：上記とは別に個別見積もり</li>
+        </ul>
+        <p>同じ条件（対象範囲・回数・記録発行の有無）で複数社を比較すると、適正価格を把握しやすくなります。業種別・契約形態別の詳しい相場は<a href="/column/pest-control-hiyo-sohba/">業務用害虫駆除（PCO）の費用相場ガイド</a>で解説しています。</p>
+
+        <div class="cl-callout">
+          <h3 class="cl-callout-h">「安さ」だけで選ばない</h3>
+          <p>医療機関では、価格の安さよりも<strong>無菌エリアへの配慮と記録の信頼性</strong>が重要です。極端に安い提案は、エリアの違いを考慮せず一律の薬剤散布で済ませる、記録が発行されない、といったケースもあります。院内体制との連携まで含めて総合的に比較してください。</p>
+        </div>
+      </section>
+
+      <section id="sources" class="cl-section">
+        <h2>参考にした公式情報</h2>
+        <p>本記事は、医療法および食品衛生法（HACCP制度化）、害虫管理の一般的な知見をもとに、医療機関の実務で使いやすい形に整理しています。院内感染対策・医療安全管理の詳細な基準は、所管行政の案内もあわせてご確認ください。</p>
+        <ul class="cl-source-list">
+          <li><a href="https://laws.e-gov.go.jp/law/323AC0000000205" target="_blank" rel="noopener">医療法｜e-Gov法令検索</a></li>
+          <li><a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/shokuhin/haccp/index.html" target="_blank" rel="noopener">HACCPに沿った衛生管理の制度化｜厚生労働省</a></li>
+          <li><a href="https://www.pestcontrol.or.jp/" target="_blank" rel="noopener">公益社団法人 日本ペストコントロール協会</a></li>
+        </ul>
+      </section>
+
+      <div class="cl-cta">
+        <h2>病院・クリニックの害虫対策業者をお探しなら</h2>
+        <p>無菌エリアへの配慮と院内感染対策委員会向けの記録発行に対応する業者から<br/>最大3社の見積もりを完全無料・約1分で取得できます</p>
+        <a class="cta-btn-primary" href="/pest-control/">無料で一括見積もりを依頼する</a>
+      </div>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          {faqItems.map((item) => (
+            <div class="cl-faq-item">
+              <dt>{item.q}</dt>
+              <dd>{item.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別の害虫駆除業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/pest-control/tokyo/">東京都</a></li>
+          <li><a href="/pest-control/osaka/">大阪府</a></li>
+          <li><a href="/pest-control/fukuoka/">福岡県</a></li>
+          <li><a href="/pest-control/kanagawa/">神奈川県</a></li>
+          <li><a href="/pest-control/aichi/">愛知県</a></li>
+          <li><a href="/pest-control/saitama/">埼玉県</a></li>
+          <li><a href="/pest-control/hyogo/">兵庫県</a></li>
+          <li><a href="/pest-control/hokkaido/">北海道</a></li>
+          <li><a href="/pest-control/kyoto/">京都府</a></li>
+          <li><a href="/pest-control/chiba/">千葉県</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/pest-control/">全国47都道府県の対応業者を見る</a></p>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連サービス・コラム</h2>
+        <ul>
+          <li><a href="/column/pest-control-guide/">業務用害虫駆除（PCO）完全ガイド｜法的義務・費用・業者選び・害虫別対策の総まとめ</a></li>
+          <li><a href="/column/pest-control-horei-gimu/">害虫駆除の法的義務ガイド（建築物衛生法・食品衛生法HACCP）</a></li>
+          <li><a href="/column/pest-control-kaigo-fukushi/">介護・福祉施設の害虫駆除ガイド｜入居者に配慮した衛生管理と業者選び</a></li>
+          <li><a href="/column/pest-control-shokuhin-koujou-boumushi/">食品工場の防虫設計 FSSC22000対応業者の選び方</a></li>
+          <li><a href="/column/pest-control-hiyo-sohba/">業務用害虫駆除（PCO）の費用相場ガイド</a></li>
+        </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#ipm">IPM（総合的有害生物管理）</a></li>
+          <li><a href="/glossary/#haccp">HACCP</a></li>
+          <li><a href="/glossary/#shokuhin-eisei-ho-haccp">食品衛生法（HACCP）</a></li>
+          <li><a href="/glossary/#kenchikubutsu-nezumi-konchu-bojogyo">建築物ねずみ昆虫等防除業</a></li>
+          <li><a href="/glossary/#biru-kan-ho">建築物衛生法</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集（49語）をすべて見る</a></p>
+      </aside>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header {
+  background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%);
+  color: #fff;
+  padding: 48px 0 40px;
+}
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul, .cl-callout--warn ul { padding-left: 18px; margin: 0; }
+.cl-callout li, .cl-callout--warn li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-answer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 20px 0 24px; }
+.cl-answer-grid > div { background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; padding: 18px 20px; box-shadow: 0 6px 18px rgba(15, 23, 42, .05); }
+.cl-answer-grid h3 { font-size: 1rem; color: var(--blue-dark); margin: 0 0 8px; }
+.cl-answer-grid p { margin: 0; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-source-list { padding-left: 22px; display: grid; gap: 8px; }
+.cl-source-list a { color: var(--blue); text-decoration: underline; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-glossary-block { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 24px; }
+.cl-glossary-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; }
+.cl-glossary-list { padding-left: 18px; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; }
+.cl-glossary-list a { color: var(--blue); text-decoration: underline; font-size: .88rem; }
+.cl-glossary-more { font-size: .85rem; margin: 12px 0 0; }
+.cl-glossary-more a { color: var(--blue); text-decoration: underline; }
+@media (max-width: 600px) {
+  .cl-header { padding: 32px 0 28px; }
+  .cl-body { padding: 28px 16px 48px; }
+  .cl-section h2 { font-size: 1.15rem; }
+  .cl-answer-grid { grid-template-columns: 1fr; }
+}
+
+.cl-quickanswer {
+  background: #eef6ff;
+  border: 1.5px solid #1a56db;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-bottom: 32px;
+}
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+</style>

@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
-const title = 'ダクト清掃の法令義務ガイド2026｜消防法・建築物衛生法の要点と火災時の管理責任';
+const title = 'ダクト清掃の法令義務ガイド｜消防法・建築物衛生法の要点と火災時の管理責任';
 const description = '厨房排気ダクト清掃を義務付ける消防法の防火管理義務と、空調ダクト管理を規制する建築物衛生法を施設管理担当者向けに解説。清掃頻度の根拠、消防署立入検査のポイント、火災保険との関係、清掃証明書の保管まで2026年最新版でまとめました。';
 const canonical = `${site.domain}/column/duct-horei-gimu/`;
 const published = '2026-05-27';
@@ -32,12 +33,7 @@ const articleLd = JSON.stringify({
   articleSection: '法令・義務',
   keywords: 'ダクト清掃,消防法,建築物衛生法,防火管理義務,法定義務,火災保険,2026',
   author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
-  publisher: {
-    '@type': 'Organization',
-    name: site.org.legalName,
-    url: site.domain,
-    logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
-  },
+  publisher: { '@id': `${site.domain}/#organization` },
   image: { '@type': 'ImageObject', url: `${site.domain}/og-duct.png`, width: 1200, height: 630 },
   about: { '@type': 'Service', name: 'ダクト清掃' },
   citation: [
@@ -56,16 +52,38 @@ const faqLd = JSON.stringify({
     { '@type': 'Question', name: '建築物衛生法の対象となる建物は？', acceptedAnswer: { '@type': 'Answer', text: '不特定多数が利用する用途（事務所・ホテル・百貨店・興行場・旅館等）で延床面積3,000㎡以上（学校は8,000㎡以上）の建築物が「特定建築物」として対象となります。特定建築物では空気環境測定（2か月以内ごとに1回）・空調設備の清掃・維持管理が義務付けられています。' } },
     { '@type': 'Question', name: '清掃証明書はどのくらい保管すればよいですか？', acceptedAnswer: { '@type': 'Answer', text: '法律上の明確な規定はありませんが、消防法上の防火管理記録として3年以上の保管が推奨されます。建築物衛生法の特定建築物では空気環境測定記録等を5年間保存する義務があります。火災保険の観点からは、少なくとも直近3〜5年分の保管が安全です。' } },
     { '@type': 'Question', name: '飲食店の開業時にダクト清掃の届出は必要ですか？', acceptedAnswer: { '@type': 'Answer', text: '開業時のダクト清掃自体の届出は通常不要ですが、飲食店の開業届（保健所）や防火対象物使用開始届（消防署）の際に厨房設備・ダクト設備の設置状況を申告します。開業後は防火管理者の選任義務（一定規模以上）と消防計画の届出が必要となります。' } },
+    { '@type': 'Question', name: "ダクト清掃を怠ったことで火災が起きたら保険はおりますか？", acceptedAnswer: { '@type': 'Answer', text: "清掃義務を怠った状態での厨房火災は、火災保険の免責事項に該当する可能性があります。定期清掃の記録（清掃証明書・作業報告書）を保管しておくことが保険適用上も重要です。" } },
+    { '@type': 'Question', name: "消防署の立入検査でダクト清掃は確認されますか？", acceptedAnswer: { '@type': 'Answer', text: "はい。消防法の防火管理業務の一環として、厨房ダクトの清掃記録・防火ダンパーの作動確認が確認項目に含まれます。" } },
+    { '@type': 'Question', name: "建築物衛生法の対象施設の空調ダクト清掃の頻度は？", acceptedAnswer: { '@type': 'Answer', text: "建築物衛生法の管理基準では、空調ダクトについて「必要に応じて」清掃を行うとされており、概ね2〜3年に1回が実務上の目安です。" } },
+    { '@type': 'Question', name: "ダクト清掃の義務を果たしていることをどう証明しますか？", acceptedAnswer: { '@type': 'Answer', text: "業者が発行する清掃証明書（写真付き作業報告書）・グリースの廃棄物処理マニフェストを5年間保管することが証明になります。" } },
+    { '@type': 'Question', name: "テナントと建物オーナーどちらが清掃義務を負いますか？", acceptedAnswer: { '@type': 'Answer', text: "厨房を使用するテナントが自設備の防火管理義務を負うケースが多いですが、建物共用ダクトはオーナー側の責任となる場合があります。賃貸借契約書で清掃義務の帰属を確認してください。" } }
+  
   ],
 });
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-duct.png` },
+});
+
 ---
-<BaseLayout
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified}
   title={title}
   description={description}
   canonical={canonical}
   siteName={site.name}
   logoSub="施設管理の一括見積比較"
-  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
 >
   <article class="cl-article">
 
@@ -79,7 +97,7 @@ const faqLd = JSON.stringify({
           <span>ダクト清掃の法令義務ガイド</span>
         </nav>
         <span class="cl-cat">法令・義務</span>
-        <h1 class="cl-title">ダクト清掃の法令義務ガイド2026｜消防法・建築物衛生法の要点と火災時の管理責任</h1>
+        <h1 class="cl-title">ダクト清掃の法令義務ガイド｜消防法・建築物衛生法の要点と火災時の管理責任</h1>
         <p class="cl-lead">
           厨房ダクトのグリス蓄積は<strong>消防法上の防火管理義務違反となるリスク</strong>があり、火災が発生すれば管理者責任・火災保険の免責にも直結します。本記事では、ダクト清掃に関係する消防法・建築物衛生法の要点、消防署立入検査で確認されるポイント、清掃証明書の保管義務まで2026年版で解説します。
         </p>
@@ -98,6 +116,9 @@ const faqLd = JSON.stringify({
         <p class="cl-qa-a">A. <strong>消防法の防火管理義務として厨房ダクトは年1〜2回の清掃が強く推奨</strong>される。建築物衛生法の対象施設では空調ダクトの清掃も義務的に求められる。</p>
         <p class="cl-qa-src">※消防法・建築物衛生法（2026年4月時点）</p>
       </div>
+
+      <ColumnCtaCard serviceSlug="duct" serviceName="ダクト清掃" variant="top" />
+
 
 
       <aside class="cl-toc" aria-label="目次">
@@ -136,7 +157,7 @@ const faqLd = JSON.stringify({
             <li>一定規模以上の防火対象物（飲食店・ホテル・商業施設等）の管理権原者は<strong>防火管理者を選任</strong>する義務がある</li>
             <li>防火管理者は<strong>消防計画を作成</strong>し、防火対象物の<strong>維持管理</strong>を行う義務がある</li>
             <li>「維持管理」には厨房設備・ダクトの油脂除去も含まれると消防当局は解釈している</li>
-            <li>違反した場合は消防法第46条により1年以下の懲役または100万円以下の罰金</li>
+            <li>防火管理に関する消防署の措置命令・業務適正執行命令に違反した場合は消防法第41条により1年以下の懲役または100万円以下の罰金</li>
           </ul>
         </div>
 
@@ -308,7 +329,7 @@ const faqLd = JSON.stringify({
           <li>火災発生時の初期消火・避難誘導・消防署への通報</li>
         </ul>
 
-        <p>防火管理者が不選任の場合または消防計画が未提出の場合は、消防法違反となります（30万円以下の罰金）。</p>
+        <p>防火管理者が不選任の場合、消防署長は選任を命じることができ、この選任命令に違反すると消防法第42条により6か月以下の懲役または50万円以下の罰金の対象となります。</p>
       </section>
 
       <section id="checklist" class="cl-section">
@@ -376,7 +397,7 @@ const faqLd = JSON.stringify({
       <section class="cl-cta">
         <h2>ダクト清掃の業者選びでお困りなら</h2>
         <p>{site.name}では、清掃証明書の発行・廃棄物の適正処理に対応した業者の中から、ご依頼内容に応じて最大3社を厳選してご紹介します。<strong>お見積もり依頼は1分・完全無料</strong>です。</p>
-        <a href="/duct/" class="cta-btn-primary">無料で一括見積もりを依頼する →</a>
+        <a href="/duct/" class="cta-btn-primary">無料で一括見積もりを依頼する</a>
       </section>
 
             <div class="cl-pref-links">
@@ -393,8 +414,16 @@ const faqLd = JSON.stringify({
           <li><a href="/duct/hokkaido/">北海道</a></li>
           <li><a href="/duct/kyoto/">京都府</a></li>
         </ul>
-        <p class="cl-pref-more"><a href="/duct/">全国47都道府県の対応業者を見る →</a></p>
+        <p class="cl-pref-more"><a href="/duct/">全国47都道府県の対応業者を見る</a></p>
       </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">参考法令・一次資料</h2>
+        <ul>
+          <li><a href="https://elaws.e-gov.go.jp/document?lawid=323AC1000000186" target="_blank" rel="noopener">消防法（昭和23年法律第186号）｜e-Gov</a></li>
+          <li><a href="https://elaws.e-gov.go.jp/document?lawid=345AC0000000020" target="_blank" rel="noopener">建築物衛生法｜e-Gov</a></li>
+        </ul>
+      </aside>
 
       <aside class="cl-related">
         <h2 class="cl-related-h">関連する詳細情報</h2>
@@ -406,6 +435,18 @@ const faqLd = JSON.stringify({
           <li><a href="/flow/">一括見積依頼から契約までの流れ</a></li>
           <li><a href="/operator/">運営者情報・ご紹介業者の審査基準</a></li>
         </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#shobo-ho">消防法</a></li>
+          <li><a href="/glossary/#biru-kan-ho">建築物衛生法（ビル管法）</a></li>
+          <li><a href="/glossary/#duct">ダクト</a></li>
+          <li><a href="/glossary/#tokutei-kenchikubutsu">特定建築物</a></li>
+          <li><a href="/glossary/#tokutei-boka-taisho">特定防火対象物</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集（49語）をすべて見る</a></p>
       </aside>
 
       <p class="cl-note">

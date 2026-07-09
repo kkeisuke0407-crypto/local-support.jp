@@ -3,6 +3,16 @@ import type { ServiceData } from '../data/services/_types';
 interface Props { legal: ServiceData['legal']; serviceName: string; relatedColumns?: ServiceData['relatedColumns']; }
 const { legal, serviceName, relatedColumns } = Astro.props;
 const legalColumn = relatedColumns?.find((c) => c.category === '法令・義務' || c.category === '法令');
+
+// 法令名は e-Gov法令検索（政府公式DB）へリンク。告示・基準など法令でないものは素のテキスト。
+function isLaw(name: string): boolean {
+  return /法/.test(name) && !/基準|告示|要領|指針|ガイドライン|マニュアル/.test(name);
+}
+function egovUrl(name: string): string {
+  // 「水道法第34条の2」→「水道法」、「○○法律（略称）」→ 括弧除去 で検索精度を上げる
+  const base = name.replace(/第.*$/, '').replace(/（.*?）/g, '').trim();
+  return `https://laws.e-gov.go.jp/search/elawsSearch/elaws_search/lsg0100/?keyword=${encodeURIComponent(base)}`;
+}
 ---
 <section class="sd-section gimu-section" id="legal">
   <div class="sd-container">
@@ -36,8 +46,18 @@ const legalColumn = relatedColumns?.find((c) => c.category === '法令・義務'
     </div>
     <dl class="legal-basis">
       <dt>関連法令</dt>
-      <dd>{legal.legalBasis.join(' ／ ')}</dd>
+      <dd>
+        {legal.legalBasis.map((law, i) => (
+          <>
+            {i > 0 && ' ／ '}
+            {isLaw(law)
+              ? <a href={egovUrl(law)} class="legal-basis-link" target="_blank" rel="noopener nofollow">{law}<span class="legal-basis-ext" aria-hidden="true"> ↗</span></a>
+              : <span>{law}</span>}
+          </>
+        ))}
+      </dd>
     </dl>
+    <p class="legal-basis-note">※「関連法令」は <a href="https://laws.e-gov.go.jp/" target="_blank" rel="noopener nofollow">e-Gov法令検索（デジタル庁）</a> の該当法令へリンクしています。最新の条文は公式でご確認ください。</p>
     {legalColumn && (
       <a href={legalColumn.href} class="inline-column-cta">
         <span class="inline-column-cta-icon" aria-hidden="true">📖</span>
@@ -45,7 +65,7 @@ const legalColumn = relatedColumns?.find((c) => c.category === '法令・義務'
           <span class="inline-column-cta-label">法令・義務の詳しい解説</span>
           <span class="inline-column-cta-title">{legalColumn.title}</span>
         </span>
-        <span class="inline-column-cta-arrow" aria-hidden="true">→</span>
+        <span class="inline-column-cta-arrow" aria-hidden="true"></span>
       </a>
     )}
   </div>

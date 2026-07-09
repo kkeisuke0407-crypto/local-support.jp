@@ -1,0 +1,430 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = "飲食店の害虫駆除 頻度・法的義務 完全ガイド｜食品衛生法・HACCP・保健所立入の実務";
+const description = "飲食店・食品事業者に必要な害虫駆除の頻度と法的義務を整理。食品衛生法・HACCP・保健所立入検査で求められる記録と作業頻度を業態別（一般飲食・居酒屋・カフェ・食品工場・厨房付きホテル）に詳細解説。月次〜年4回の防除設計と業者選びの実務まで。";
+const canonical = `${site.domain}/column/pest-control-inshokuten-hindo-gimu/`;
+const published = '2026-06-19';
+const modified = '2026-06-19';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '飲食店の害虫駆除 頻度・法的義務', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 5800,
+  articleSection: '害虫駆除 飲食店',
+  keywords: '害虫駆除,飲食店,頻度,義務,食品衛生法,HACCP,保健所,業種別,2026',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-pest-control.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '害虫駆除（業務用PCO）' },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: '飲食店の害虫駆除は法律で義務付けられていますか？', acceptedAnswer: { '@type': 'Answer', text: '食品衛生法に基づきHACCPに沿った衛生管理が原則すべての食品事業者に義務化されており、その一般衛生管理の一項目として「そ族（ねずみ）・昆虫対策」が含まれます。直接「業者へ駆除を依頼せよ」と命じる規定ではありませんが、防虫・防鼠の措置と記録の保管が実質的に必須となります。記録不備があると保健所立入検査で指導・改善命令の対象になります。' } },
+    { '@type': 'Question', name: '飲食店の害虫駆除はどのくらいの頻度で行えばいいですか？', acceptedAnswer: { '@type': 'Answer', text: '業態により異なります。一般飲食店は月1回〜2か月に1回が標準、居酒屋・焼肉・中華は月1回、カフェ・ベーカリーは2か月〜四半期に1回、食品工場・セントラルキッチンは月1〜2回が目安です。シーズン（梅雨・夏・秋）は強化、冬は捕獲器の設置と巡回で代替する設計が一般的です。' } },
+    { '@type': 'Question', name: '保健所立入検査で求められる害虫対策の記録は？', acceptedAnswer: { '@type': 'Answer', text: '①防除作業の実施記録（業者作業報告書）②モニタリングトラップの捕獲記録③改善措置の記録④使用薬剤の安全データシート（SDS）が主要4点です。HACCP上の一般衛生管理として年単位で保管が求められ、3年保管が一般的な指導目安です。' } },
+    { '@type': 'Question', name: '自分で害虫駆除して記録だけ業者に頼むのは可能ですか？', acceptedAnswer: { '@type': 'Answer', text: '形式的には可能ですが推奨できません。HACCP対応の防除記録は「実施者・使用薬剤・対象害虫・効果判定」の専門的記載が必要で、自社実施だと記録様式の不備で保健所指導の対象になりやすいです。また、業務用薬剤の使用は「医薬品医療機器等法」「労働安全衛生法」の規制を受けるため、有資格者の作業が安全です。' } },
+    { '@type': 'Question', name: '害虫駆除業者の費用相場はどれくらいですか？', acceptedAnswer: { '@type': 'Answer', text: '一般飲食店（30〜100㎡）の定期契約で月額12,000〜25,000円が相場です。スポット駆除は1回30,000〜80,000円。食品工場・セントラルキッチンは月額50,000〜150,000円が目安。地域・業態・対象害虫・実施頻度で変動します。詳細は別記事「業務用害虫駆除の費用相場2026」をご参照ください。' } },
+    { '@type': 'Question', name: 'IPM（総合防除）とは何ですか？', acceptedAnswer: { '@type': 'Answer', text: 'Integrated Pest Management の略で、薬剤散布に頼らず、施設の構造改善・侵入防止・モニタリング・必要最小限の薬剤使用を組み合わせた防除手法です。HACCP対応の食品事業者では IPM 設計の業者を選ぶのが標準で、薬剤汚染リスクの低減と長期的な効果が両立します。' } },
+    { '@type': 'Question', name: '繁忙期に作業を入れたくない場合はどうすればいいですか？', acceptedAnswer: { '@type': 'Answer', text: '営業時間外（早朝・深夜）の作業を依頼可能です。割増費用は通常費の1.2〜1.5倍が目安。年間契約時に「希望時間帯」を明記しておくと、業者側の人員配置がスムーズです。閉店後の作業なら客や食材への影響もありません。' } },
+  ],
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-pest-control.png` },
+});
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  ogImage={`${site.domain}/og-pest-control.png`}
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>飲食店の害虫駆除 頻度・法的義務</span>
+        </nav>
+        <span class="cl-cat">害虫駆除</span>
+        <h1 class="cl-title">飲食店の害虫駆除 頻度・法的義務 完全ガイド｜食品衛生法・HACCP・保健所立入の実務</h1>
+        <p class="cl-lead">飲食店・食品事業者の害虫駆除は、<strong>食品衛生法とHACCP制度化</strong>でほぼ必須の取り組みになりました。この記事では業態別の標準頻度、保健所立入で求められる記録、業者選びの実務までを管理者目線でまとめます。目安は<strong>一般飲食店で月1回〜2か月に1回、食品工場で月1〜2回</strong>です。</p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年6月19日</time>
+          <span>最終更新：2026年6月19日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 飲食店の害虫駆除、何を・どの頻度で・なぜやる？</p>
+        <p class="cl-qa-a">A. <strong>食品衛生法・HACCP上の「一般衛生管理」として防虫防鼠が実質必須</strong>。一般飲食月1回、居酒屋・焼肉月1回、食品工場月1〜2回が標準。記録3年保管が保健所立入対応の鉄則。</p>
+        <p class="cl-qa-src">※食品衛生法・HACCPに沿った衛生管理（2021年6月から原則すべての食品事業者に義務化）</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="pest-control" serviceName="害虫駆除" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#law">法的義務：食品衛生法・HACCPの要点</a></li>
+          <li><a href="#frequency">業態別の標準頻度</a></li>
+          <li><a href="#season">季節別の重点害虫と作業設計</a></li>
+          <li><a href="#hokenjo">保健所立入で求められる記録4点</a></li>
+          <li><a href="#choose">業者選びで確認すべき7項目</a></li>
+          <li><a href="#cost">費用相場と契約形態</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <h2>3行サマリ</h2>
+        <div class="cl-callout">
+          <ul>
+            <li><strong>法的義務</strong>：HACCP制度化（2021年6月）で防虫防鼠が一般衛生管理として実質必須</li>
+            <li><strong>頻度の目安</strong>：一般飲食 月1回〜2か月に1回、居酒屋・焼肉 月1回、食品工場 月1〜2回</li>
+            <li><strong>記録</strong>：作業報告書・モニタリング・改善措置・SDSの4点を3年保管</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="law" class="cl-section">
+        <h2>法的義務：食品衛生法・HACCPの要点</h2>
+        <p>飲食店・食品事業者に対する害虫駆除は、<strong>「業者に駆除を依頼せよ」と直接命じる条文はありません</strong>。しかし、複数の法令が組み合わさって実質的に防虫防鼠の措置と記録が必須となります。</p>
+
+        <h3>① 食品衛生法（2021年改正）</h3>
+        <p>2021年6月から原則すべての食品事業者にHACCPに沿った衛生管理が義務化されました。HACCPの<strong>一般衛生管理プログラム</strong>の中に「そ族（ねずみ）・昆虫対策」が明記されており、防除計画の策定・実施・記録が求められます。</p>
+
+        <h3>② HACCP（一般衛生管理）の防除要件</h3>
+        <ul>
+          <li>侵入防止：シャッター・網戸・配管周りの隙間対策</li>
+          <li>発生防止：清掃・廃棄物管理・湿度コントロール</li>
+          <li>駆除・モニタリング：定期作業と捕獲器・粘着シート設置</li>
+          <li>記録保管：実施記録・改善履歴を年単位で保管（3年が標準目安）</li>
+        </ul>
+
+        <h3>③ 業態別の具体的な法令フレーム</h3>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>業態別の主な法令フレーム（2026年6月時点）</caption>
+            <thead><tr><th>業態</th><th>主な根拠</th><th>記録保管目安</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">飲食店・カフェ</th><td>食品衛生法・HACCP一般衛生管理</td><td>3年（自治体目安）</td></tr>
+              <tr><th scope="row">食品工場</th><td>食品衛生法・HACCP・FSSC22000等</td><td>3〜5年</td></tr>
+              <tr><th scope="row">セントラルキッチン</th><td>食品衛生法・大量調理施設衛生管理マニュアル</td><td>3年</td></tr>
+              <tr><th scope="row">宿泊施設（厨房付き）</th><td>食品衛生法・旅館業法・建築物衛生法（大規模）</td><td>3年</td></tr>
+              <tr><th scope="row">病院・福祉施設給食</th><td>食品衛生法・健康増進法</td><td>3年</td></tr>
+              <tr><th scope="row">学校給食</th><td>学校給食法・学校給食衛生管理基準</td><td>5年</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>④ 保健所立入検査での扱い</h3>
+        <p>保健所の立入検査では、防除作業の記録・モニタリングシートの提示を求められます。記録の整備不備は<strong>「衛生管理計画書の不備」「HACCP対応不十分」</strong>として指導対象になり、悪質なケースでは食品衛生法第55条による営業停止・許可取消の対象となります。罰則よりも<strong>「テナント保証会社・取引先・SNS拡散」の信用リスクが実害として大きい</strong>傾向です。</p>
+      </section>
+
+      <section id="frequency" class="cl-section">
+        <h2>業態別の標準頻度</h2>
+        <p>害虫駆除の頻度は<strong>「業態の食品リスク・調理時間・廃棄物量」</strong>で決まります。法令で頻度が固定されているわけではありませんが、業界標準と保健所指導の傾向から、以下が実務上の目安となります。</p>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>業態別の害虫駆除標準頻度（2026年6月時点）</caption>
+            <thead><tr><th>業態</th><th>標準頻度</th><th>主な対象害虫</th><th>強化期</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">一般飲食店（カフェ・定食屋）</th><td>月1回〜2か月に1回</td><td>ゴキブリ・ハエ・蛾</td><td>梅雨・夏</td></tr>
+              <tr><th scope="row">居酒屋・焼肉・中華</th><td>月1回</td><td>ゴキブリ・ネズミ・ハエ</td><td>梅雨・夏・秋</td></tr>
+              <tr><th scope="row">ベーカリー・パティスリー</th><td>月1〜2回</td><td>ノシメマダラメイガ・コクヌストモドキ</td><td>夏・秋</td></tr>
+              <tr><th scope="row">バー・スナック</th><td>2か月に1回</td><td>ゴキブリ・ショウジョウバエ</td><td>梅雨・夏</td></tr>
+              <tr><th scope="row">食品工場（中規模）</th><td>月1〜2回</td><td>ゴキブリ・ネズミ・貯穀害虫</td><td>通年強化</td></tr>
+              <tr><th scope="row">食品工場（大規模・原料庫あり）</th><td>月2〜4回</td><td>貯穀害虫・ネズミ・侵入虫</td><td>通年強化</td></tr>
+              <tr><th scope="row">セントラルキッチン</th><td>月1〜2回</td><td>ゴキブリ・ハエ・ネズミ</td><td>夏</td></tr>
+              <tr><th scope="row">ホテル・旅館（厨房付き）</th><td>月1回</td><td>ゴキブリ・トコジラミ・ネズミ</td><td>梅雨・夏</td></tr>
+              <tr><th scope="row">病院・福祉施設給食</th><td>月1回</td><td>ゴキブリ・ハエ・ネズミ</td><td>梅雨・夏</td></tr>
+              <tr><th scope="row">学校給食</th><td>月1回</td><td>ゴキブリ・ハエ・ネズミ</td><td>夏休み後・秋</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>「頻度を下げたい」場合の判断基準</h3>
+        <p>コスト削減で頻度を下げたい場合、以下を満たしているか確認してください。</p>
+        <ul>
+          <li>過去6か月のモニタリングトラップで捕獲ゼロが続いている</li>
+          <li>侵入防止策（シール・網戸・シャッター下端ブラシ）が完備</li>
+          <li>清掃・廃棄物管理が標準以上のレベル</li>
+          <li>保健所立入検査で防除関連の指摘がない</li>
+        </ul>
+        <p>条件を満たすなら<strong>四半期に1回（年4回）</strong>の最低ラインまで下げられます。ただし、捕獲器の巡回点検と新規侵入兆候のチェックは月次で実施するのが安全です。</p>
+      </section>
+
+      <section id="season" class="cl-section">
+        <h2>季節別の重点害虫と作業設計</h2>
+        <p>害虫の活動は気温と湿度に左右されるため、季節ごとに重点害虫と作業内容を切り替えるのが効率的です。年間契約のなかで以下の設計を業者と擦り合わせておくと、コストと効果のバランスが取れます。</p>
+
+        <h3>春（3〜5月）</h3>
+        <ul>
+          <li><strong>重点</strong>：越冬から目覚めるゴキブリ・コバエ</li>
+          <li><strong>作業</strong>：通常防除＋シーズン前の構造点検（侵入経路）</li>
+          <li><strong>標準頻度</strong>：通常通り</li>
+        </ul>
+
+        <h3>梅雨〜夏（6〜8月）</h3>
+        <ul>
+          <li><strong>重点</strong>：ゴキブリ（活動最盛期）・ショウジョウバエ・チョウバエ・大型ハエ</li>
+          <li><strong>作業</strong>：薬剤散布強化・侵入経路ベイト設置・排水溝処理</li>
+          <li><strong>標準頻度</strong>：通常+1回／月（月1→月2など）</li>
+        </ul>
+
+        <h3>秋（9〜11月）</h3>
+        <ul>
+          <li><strong>重点</strong>：ネズミ（屋内侵入期）・貯穀害虫</li>
+          <li><strong>作業</strong>：ネズミトラップ増設・倉庫の総点検</li>
+          <li><strong>標準頻度</strong>：通常通り＋ネズミ重点</li>
+        </ul>
+
+        <h3>冬（12〜2月）</h3>
+        <ul>
+          <li><strong>重点</strong>：ネズミ（屋内定着）・冬虫（クモ・ヤスデ侵入）</li>
+          <li><strong>作業</strong>：捕獲器の維持・構造改善工事の好機</li>
+          <li><strong>標準頻度</strong>：四半期に1回まで下げて維持</li>
+        </ul>
+      </section>
+
+      <section id="hokenjo" class="cl-section">
+        <h2>保健所立入で求められる記録4点</h2>
+        <p>保健所立入検査で害虫対策について確認される書類は、以下の<strong>4点セット</strong>が標準です。HACCPの一般衛生管理プログラムの一部として整備しておく必要があります。</p>
+
+        <h3>① 防除作業の実施記録（業者作業報告書）</h3>
+        <p>業者から発行される正式な作業報告書。以下を満たしている必要があります。</p>
+        <ul>
+          <li>実施日・実施者氏名・在籍資格（防除作業監督者など）</li>
+          <li>対象施設名・対象範囲・作業時間</li>
+          <li>使用薬剤名・濃度・使用量</li>
+          <li>対象害虫と効果判定</li>
+          <li>次回作業の推奨スケジュール</li>
+        </ul>
+
+        <h3>② モニタリングトラップの捕獲記録</h3>
+        <p>粘着シートトラップ・粘着リボン・捕獲器の<strong>設置位置と捕獲数の月次記録</strong>。捕獲ゼロでも「ゼロ」と記録するのが鉄則です。トレンドが見えると保健所評価がプラスになります。</p>
+
+        <h3>③ 改善措置の記録</h3>
+        <p>捕獲または目視発見時の対応記録。「いつ、どこで、何匹、どう対応したか」を時系列で残します。改善要請への対応スピードが保健所の信頼度を左右します。</p>
+
+        <h3>④ 使用薬剤の安全データシート（SDS）</h3>
+        <p>業者から提供される<strong>各薬剤のSDS（安全データシート）</strong>を保管。食品衛生法上、施設管理者は使用される薬剤の安全性を把握する義務があります。電子保管・紙保管どちらでも可ですが、保健所の求めに応じて即時提示できる状態にしておきます。</p>
+
+        <p class="cl-note"><small>※詳細な記録様式・テンプレートは <a href="/column/pest-control-haccp/">HACCP対応の害虫対策ガイド</a> もご参照ください。</small></p>
+      </section>
+
+      <section id="choose" class="cl-section">
+        <h2>業者選びで確認すべき7項目</h2>
+        <p>飲食店の害虫駆除業者選びは、<strong>「資格・実績・記録品質・対応スピード」</strong>の4軸で比較するのが鉄則です。安価な業者でも、記録が雑で保健所指導の原因になるケースが少なくありません。</p>
+
+        <ol>
+          <li><strong>公益社団法人 日本ペストコントロール協会会員</strong>：協会の倫理規定・苦情対応窓口があるため、トラブル時の安心感が違います</li>
+          <li><strong>防除作業監督者の在籍</strong>：協会認定資格。HACCP対応の食品事業者で必須水準</li>
+          <li><strong>HACCP対応実績の件数</strong>：年間50件以上が安心の目安</li>
+          <li><strong>IPM（総合防除）の提案力</strong>：薬剤偏重ではなく予防設計ができる業者を選ぶ</li>
+          <li><strong>報告書のサンプル</strong>：写真付き・項目別の報告書フォーマットを事前確認</li>
+          <li><strong>緊急対応の体制</strong>：24時間ホットライン・休日対応の可否</li>
+          <li><strong>過去のトラブル対応事例</strong>：飲食店での「集団食中毒寸前」「保健所指導」などの実例を聞く</li>
+        </ol>
+
+        <h3>「安すぎ見積」の特徴</h3>
+        <p>業界平均より<strong>30%以上安い見積</strong>が出てきた場合、以下のいずれかが抜けています。</p>
+        <ul>
+          <li>無資格者の作業（協会非会員）</li>
+          <li>薬剤散布のみ・モニタリング未実施</li>
+          <li>報告書が簡易（HACCP対応として不十分）</li>
+          <li>緊急対応に追加費用を別途請求</li>
+          <li>賠償責任保険なし（食品汚染事故時のリスク）</li>
+        </ul>
+      </section>
+
+      <section id="cost" class="cl-section">
+        <h2>費用相場と契約形態</h2>
+        <p>飲食店の害虫駆除費用は<strong>業態・面積・実施頻度・契約形態</strong>で大きく変わります。定期契約とスポット駆除のどちらを選ぶべきかは、施設のリスクレベルと予算感で判断します。</p>
+
+        <h3>業態別・月額費用相場</h3>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>飲食店・食品事業者の害虫駆除 月額費用相場（2026年6月時点）</caption>
+            <thead><tr><th>業態・規模</th><th>定期契約月額</th><th>スポット駆除1回</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">小規模飲食店（〜50㎡）</th><td>8,000〜15,000円</td><td>20,000〜50,000円</td></tr>
+              <tr><th scope="row">一般飲食店（50〜100㎡）</th><td>12,000〜25,000円</td><td>30,000〜80,000円</td></tr>
+              <tr><th scope="row">居酒屋・焼肉（100〜200㎡）</th><td>18,000〜35,000円</td><td>50,000〜120,000円</td></tr>
+              <tr><th scope="row">中規模食品工場（〜1,000㎡）</th><td>40,000〜100,000円</td><td>100,000〜300,000円</td></tr>
+              <tr><th scope="row">大規模食品工場（1,000㎡〜）</th><td>80,000〜200,000円</td><td>個別見積</td></tr>
+              <tr><th scope="row">ホテル・旅館（中規模）</th><td>30,000〜80,000円</td><td>60,000〜150,000円</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>定期契約 vs スポット駆除の判断軸</h3>
+        <p>以下のチェックで定期契約のメリットが大きい施設が判定できます。</p>
+        <ul>
+          <li>HACCP対応・保健所立入対象 → <strong>定期契約推奨</strong></li>
+          <li>食材の取り扱い量が大きい → <strong>定期契約推奨</strong></li>
+          <li>客単価が高くSNSリスクが大きい → <strong>定期契約推奨</strong></li>
+          <li>夜間・休日営業中心 → <strong>定期契約推奨</strong></li>
+          <li>季節限定営業・小規模カフェ → <strong>スポット駆除でも可</strong></li>
+        </ul>
+        <p>詳細な業種別費用と契約モデルは <a href="/column/pest-control-hiyo-sohba/">業務用害虫駆除の費用相場2026</a> もご参照ください。</p>
+      </section>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          <div class="cl-faq-item">
+            <dt>飲食店の害虫駆除は法律で義務付けられていますか？</dt>
+            <dd>食品衛生法に基づきHACCPに沿った衛生管理が原則すべての食品事業者に義務化されており、その一般衛生管理の一項目として<strong>「そ族（ねずみ）・昆虫対策」</strong>が含まれます。直接「業者へ駆除を依頼せよ」と命じる規定ではありませんが、防虫・防鼠の措置と記録の保管が実質的に必須となります。記録不備があると保健所立入検査で指導・改善命令の対象になります。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>飲食店の害虫駆除はどのくらいの頻度で行えばいいですか？</dt>
+            <dd>業態により異なります。一般飲食店は<strong>月1回〜2か月に1回</strong>が標準、居酒屋・焼肉・中華は月1回、カフェ・ベーカリーは2か月〜四半期に1回、食品工場・セントラルキッチンは月1〜2回が目安です。シーズン（梅雨・夏・秋）は強化、冬は捕獲器の設置と巡回で代替する設計が一般的です。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>保健所立入検査で求められる害虫対策の記録は？</dt>
+            <dd>①防除作業の実施記録（業者作業報告書）②モニタリングトラップの捕獲記録③改善措置の記録④使用薬剤の安全データシート（SDS）が主要4点です。HACCP上の一般衛生管理として年単位で保管が求められ、<strong>3年保管</strong>が一般的な指導目安です。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>自分で害虫駆除して記録だけ業者に頼むのは可能ですか？</dt>
+            <dd>形式的には可能ですが推奨できません。HACCP対応の防除記録は「実施者・使用薬剤・対象害虫・効果判定」の専門的記載が必要で、自社実施だと記録様式の不備で保健所指導の対象になりやすいです。また、業務用薬剤の使用は「医薬品医療機器等法」「労働安全衛生法」の規制を受けるため、有資格者の作業が安全です。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>害虫駆除業者の費用相場はどれくらいですか？</dt>
+            <dd>一般飲食店（30〜100㎡）の定期契約で<strong>月額12,000〜25,000円</strong>が相場です。スポット駆除は1回30,000〜80,000円。食品工場・セントラルキッチンは月額50,000〜150,000円が目安。地域・業態・対象害虫・実施頻度で変動します。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>IPM（総合防除）とは何ですか？</dt>
+            <dd>Integrated Pest Management の略で、薬剤散布に頼らず、施設の構造改善・侵入防止・モニタリング・必要最小限の薬剤使用を組み合わせた防除手法です。HACCP対応の食品事業者では<strong>IPM 設計の業者を選ぶのが標準</strong>で、薬剤汚染リスクの低減と長期的な効果が両立します。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>繁忙期に作業を入れたくない場合はどうすればいいですか？</dt>
+            <dd>営業時間外（早朝・深夜）の作業を依頼可能です。割増費用は通常費の<strong>1.2〜1.5倍</strong>が目安。年間契約時に「希望時間帯」を明記しておくと、業者側の人員配置がスムーズです。閉店後の作業なら客や食材への影響もありません。</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="cl-section">
+        <h2>関連記事</h2>
+        <ul class="cl-related">
+          <li><a href="/column/pest-control-guide/">業務用害虫駆除（PCO）完全ガイド｜法的義務・費用・業者選び・害虫別対策の総まとめ</a></li>
+          <li><a href="/column/pest-control-hiyo-sohba/">業務用害虫駆除（PCO）の費用相場2026｜業種別・契約形態別の料金ガイド</a></li>
+          <li><a href="/column/pest-control-haccp/">HACCP制度化で必須になった害虫対策ガイド2026｜飲食・食品事業者の防除記録の作り方</a></li>
+          <li><a href="/pest-control/">害虫駆除（業務用PCO）の一括見積比較</a></li>
+          <li><a href="/column/grease-trap-horei-gimu/">グリストラップ清掃の法的義務ガイド2026｜下水道法・建築基準法・HACCP</a></li>
+          <li><a href="/column/shisetsu-kanri-nenkan-schedule/">施設管理の年間スケジュール2026｜9種の法定点検カレンダー</a></li>
+        </ul>
+      </section>
+
+      <ColumnCtaCard serviceSlug="pest-control" serviceName="害虫駆除" variant="bottom" />
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-note { font-size: .82rem; color: var(--gray-500); font-style: italic; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-callout li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+@media (max-width: 600px) { .cl-header { padding: 32px 0 28px; } .cl-body { padding: 28px 16px 48px; } .cl-section h2 { font-size: 1.15rem; } }
+.cl-quickanswer { background: #eef6ff; border: 1.5px solid #1a56db; border-radius: 10px; padding: 18px 22px; margin-bottom: 32px; }
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+</style>

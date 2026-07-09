@@ -8,6 +8,24 @@ import greaseTrap from './grease-trap';
 import airconBusiness from './aircon-business';
 import pestControl from './pest-control';
 import signboardInspection from './signboard-inspection';
+import jikayouDenki from './jikayou-denki';
+import elevatorHoshu from './elevator-hoshu';
+import johkasou from './johkasou';
+import haisuikan from './haisuikan';
+import tokushuKenchiku from './tokushu-kenchiku';
+import boukaTenken from './bouka-tenken';
+import furonTenken from './furon-tenken';
+import reitoReizou from './reito-reizou';
+import solarCleaning from './solar-cleaning';
+import solarOm from './solar-om';
+import gaihekiToso from './gaiheki-toso';
+import yaneFukikae from './yane-fukikae';
+import kaitai from './kaitai';
+import zanchibutsu from './zanchibutsu';
+import bohanCamera from './bohan-camera';
+import nyutaishitsu from './nyutaishitsu';
+import officeIten from './office-iten';
+import chikudenchi from './chikudenchi';
 
 export const allServices: ServiceData[] = [
   jusuisouSeisou,
@@ -19,6 +37,24 @@ export const allServices: ServiceData[] = [
   airconBusiness,
   pestControl,
   signboardInspection,
+  jikayouDenki,
+  elevatorHoshu,
+  johkasou,
+  haisuikan,
+  tokushuKenchiku,
+  boukaTenken,
+  furonTenken,
+  reitoReizou,
+  solarCleaning,
+  solarOm,
+  gaihekiToso,
+  yaneFukikae,
+  kaitai,
+  zanchibutsu,
+  bohanCamera,
+  nyutaishitsu,
+  officeIten,
+  chikudenchi,
 ];
 
 export const serviceBySlug = Object.fromEntries(

@@ -1,0 +1,54 @@
+.hr-section { padding: 32px 0 64px; background: #f8fafc; min-height: 100vh; }
+.hr-empty { max-width: 720px; margin: 60px auto; padding: 40px 32px; background: #fff; border: 1px solid #e5e7eb; border-radius: 14px; text-align: center; line-height: 1.8; }
+.hr-empty h1 { font-size: 1.4rem; font-weight: 800; margin: 0 0 16px; color: #1f2937; }
+.hr-empty p { color: #4b5563; }
+
+.hr-main { max-width: 760px; margin: 0 auto; }
+.hr-header { background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; padding: 28px 32px; margin-bottom: 20px; }
+.hr-eyebrow { display: inline-block; font-size: 0.78rem; font-weight: 800; color: #1d4ed8; background: #eff6ff; padding: 4px 12px; border-radius: 999px; margin: 0 0 12px; }
+.hr-header h1 { font-size: 1.4rem; font-weight: 900; margin: 0 0 12px; color: #1f2937; }
+.hr-lead { font-size: 0.92rem; color: #374151; line-height: 1.8; margin: 0 0 18px; }
+.hr-lead strong { color: #1d4ed8; }
+.hr-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 0; padding: 16px; background: #f9fafb; border-radius: 10px; }
+.hr-meta > div { margin: 0; }
+.hr-meta dt { font-size: 0.72rem; color: #6b7280; font-weight: 700; margin-bottom: 4px; }
+.hr-meta dd { font-size: 0.88rem; color: #1f2937; font-weight: 600; margin: 0; }
+
+.hr-group { background: #fff; border: 1px solid #e5e7eb; border-radius: 14px; padding: 22px 24px; margin-bottom: 16px; }
+.hr-group--optional { border-style: dashed; background: #fcfcfd; }
+.hr-group-title { font-size: 0.92rem; font-weight: 800; color: #1d4ed8; margin: 0 0 16px; padding-bottom: 10px; border-bottom: 2px solid #eff6ff; }
+.hr-group--optional .hr-group-title { color: #6b7280; border-bottom-color: #f3f4f6; }
+
+.hr-q { border: none; margin: 0 0 22px; padding: 0; }
+.hr-q:last-child { margin-bottom: 0; }
+.hr-q legend { font-size: 0.95rem; font-weight: 700; color: #1f2937; margin-bottom: 10px; padding: 0; line-height: 1.5; }
+.hr-req { display: inline-block; font-size: 0.68rem; font-weight: 800; color: #dc2626; background: #fef2f2; padding: 2px 7px; border-radius: 4px; margin-left: 4px; vertical-align: middle; }
+.hr-sub-q { font-size: 0.88rem; font-weight: 700; color: #374151; margin: 14px 0 8px; }
+.hr-conditional { margin-top: 8px; padding: 14px; background: #f0f9ff; border-radius: 10px; }
+
+.hr-options { display: flex; flex-wrap: wrap; gap: 8px; }
+.hr-opt { display: inline-flex; align-items: center; gap: 7px; padding: 9px 14px; border: 1.5px solid #e5e7eb; border-radius: 10px; font-size: 0.86rem; cursor: pointer; transition: border-color .15s, background .15s; margin: 0; background: #fff; }
+.hr-opt:hover { border-color: #93c5fd; }
+.hr-opt.is-checked { border-color: #1d4ed8; background: #eff6ff; font-weight: 700; }
+.hr-opt input { width: 16px; height: 16px; accent-color: #1d4ed8; flex-shrink: 0; }
+
+.hr-form textarea { width: 100%; padding: 12px 14px; border: 1.5px solid #e5e7eb; border-radius: 10px; font-size: 0.95rem; font-family: inherit; box-sizing: border-box; resize: vertical; }
+.hr-honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; }
+
+.hr-submit { display: block; width: 100%; background: #1d4ed8; color: #fff; border: none; border-radius: 12px; padding: 16px; font-size: 1rem; font-weight: 900; cursor: pointer; margin-top: 4px; transition: background .15s; }
+.hr-submit:hover:not(:disabled) { background: #1e3a8a; }
+.hr-submit:disabled { background: #cbd5e1; cursor: not-allowed; }
+.hr-submit-note { font-size: 0.75rem; color: #6b7280; text-align: center; margin: 10px 0 0; line-height: 1.6; }
+.hr-error { color: #dc2626; font-size: 0.85rem; text-align: center; margin: 12px 0 0; padding: 10px; background: #fef2f2; border-radius: 8px; }
+
+.hr-done { background: #fff; border: 2px solid #059669; border-radius: 16px; padding: 40px 32px; text-align: center; }
+.hr-done-icon { width: 64px; height: 64px; margin: 0 auto 16px; background: #059669; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 900; }
+.hr-done h2 { font-size: 1.3rem; font-weight: 800; color: #065f46; margin: 0 0 12px; }
+.hr-done p { color: #374151; line-height: 1.8; margin: 0 0 8px; }
+.hr-done-note { font-size: 0.85rem; color: #6b7280; margin-top: 16px; }
+
+@media (max-width: 600px) {
+  .hr-header { padding: 20px; }
+  .hr-group { padding: 18px 16px; }
+  .hr-opt { font-size: 0.82rem; padding: 8px 12px; }
+}

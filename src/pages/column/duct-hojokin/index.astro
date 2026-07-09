@@ -1,0 +1,344 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = "ダクト清掃に使える補助金・助成金2026年度版｜事業継続力強化・防火対策の助成まとめ";
+const description = "ダクト清掃そのものは補助対象になりにくいが、事業継続力強化計画・小規模事業者持続化補助金・防火設備改修費補助・自治体の衛生管理助成など、関連する補助金で間接的に活用できる制度を2026年度版でまとめて解説。";
+const canonical = `${site.domain}/column/duct-hojokin/`;
+const published = '2026-05-27';
+const modified = '2026-05-27';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: "ダクト清掃の補助金", item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 4300,
+  articleSection: "補助金・助成金",
+  keywords: "ダクト清掃,補助金,事業継続力強化,持続化補助金,衛生管理,2026",
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-duct.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: "ダクト清掃" },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: "定期清掃だけで補助金は出ますか？", acceptedAnswer: { '@type': 'Answer', text: "原則として出ません。補助金は「事業改善」「衛生改善」「防火対策強化」など投資的な活用が前提です。定期清掃は法令義務の維持管理として全額損金算入で処理してください。" } },
+    { '@type': 'Question', name: "個人事業の飲食店も対象になりますか？", acceptedAnswer: { '@type': 'Answer', text: "はい、小規模事業者持続化補助金は個人事業主も対象です。商工会議所・商工会の会員でなくても申請できる制度が多くあります。" } },
+    { '@type': 'Question', name: "補助金と保険料割引は併用できますか？", acceptedAnswer: { '@type': 'Answer', text: "はい、補助金と保険料割引は別制度のため併用可能です。事業継続力強化計画の認定を受けることで両方の恩恵を受けられます。" } },
+    { '@type': 'Question', name: "商店街共同発注の手続きは？", acceptedAnswer: { '@type': 'Answer', text: "商店街振興組合または地元商工会に相談してください。複数店舗でのとりまとめが必要で、補助金の交付要綱に応じた事業計画書の作成が必要です。" } },
+    { '@type': 'Question', name: "採択率はどれくらいですか？", acceptedAnswer: { '@type': 'Answer', text: "小規模事業者持続化補助金の採択率は概ね30〜60%で、応募回・枠によって変動します。事業計画書の質と補助金趣旨との合致度が決め手です。" } },
+    { '@type': 'Question', name: "ダクト清掃に絞った補助金はないですか？", acceptedAnswer: { '@type': 'Answer', text: "2026年現在、ダクト清掃単独で対象となる補助金は限定的です。代わりに「衛生管理」「防火対策」「設備更新」など広いカテゴリで申請するのが現実的です。" } }
+  ],
+});
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-duct.png` },
+});
+
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified}
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  ogImage={`${site.domain}/og-duct.png`}
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>ダクト清掃の補助金</span>
+        </nav>
+        <span class="cl-cat">ダクト清掃</span>
+        <h1 class="cl-title">ダクト清掃に使える補助金・助成金2026年度版｜事業継続力強化・防火対策の助成まとめ</h1>
+        <p class="cl-lead">ダクト清掃の<strong>定期清掃そのものは補助金対象になりにくい</strong>ですが、事業継続力強化計画・小規模事業者持続化補助金・自治体の衛生管理助成と組み合わせて活用できます。本記事では関連制度をまとめて整理します。</p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年5月27日</time>
+          <span>最終更新：2026年5月27日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. ダクト清掃に使える補助金はありますか？</p>
+        <p class="cl-qa-a">A. <strong>定期清掃単独の補助は少ないが、設備更新・防火対策と組み合わせると活用可能</strong>。小規模事業者持続化補助金・事業継続力強化計画・自治体の衛生管理助成が代表的。</p>
+        <p class="cl-qa-src">※中小企業庁・各自治体の2026年度制度（2026年4月時点）</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="duct" serviceName="ダクト清掃" variant="top" />
+
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#national">国の補助制度</a></li>
+          <li><a href="#cities">自治体の助成制度</a></li>
+          <li><a href="#combine">補助金活用の組み合わせ例</a></li>
+          <li><a href="#flow">申請の流れ</a></li>
+          <li><a href="#strategy">補助金審査を通過する事業計画書の書き方</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <h2>3行サマリ</h2>
+        <div class="cl-callout">
+          <ul>
+            <li><strong>定期清掃単独の補助は限定的</strong>：設備更新・防火対策と組み合わせて活用</li>
+            <li><strong>小規模事業者持続化補助金</strong>：HACCP対応の衛生改善で上限50〜200万円</li>
+            <li><strong>事業継続力強化計画</strong>：防火対策設備投資で税制優遇・保険料割引</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="national" class="cl-section">
+        <h2>国の補助制度</h2>
+        <h3>小規模事業者持続化補助金</h3>
+        <p>飲食店・小規模事業者向け。HACCP対応のためのダクト清掃・改修費が補助対象になる場合があります。</p>
+        <ul>
+          <li>補助率：2/3〜3/4</li>
+          <li>上限：50〜200万円（枠による）</li>
+          <li>対象：HACCP対応・販路開拓と組み合わせた衛生改善</li>
+        </ul>
+
+        <h3>事業継続力強化計画（BCP）</h3>
+        <p>火災等の事業中断リスクへの備えとして、ダクト清掃・防火設備投資を計画に組み込むと税制優遇・保険料割引が受けられます。</p>
+        <ul>
+          <li>中小企業強靱化法に基づく経済産業大臣認定</li>
+          <li>低利融資・税制優遇・補助金加点</li>
+          <li>火災保険の保険料割引対象になる場合あり</li>
+        </ul>
+      </section>
+
+      <section id="cities" class="cl-section">
+        <h2>自治体の助成制度</h2>
+        <p>自治体によっては、衛生管理・防火対策・HACCP対応の文脈でダクト清掃費用の一部が助成対象になることがあります。</p>
+        <ul>
+          <li><strong>東京都・各区</strong>：飲食店HACCP対応支援助成（上限50万円程度）</li>
+          <li><strong>大阪府</strong>：中小飲食店衛生管理支援事業</li>
+          <li><strong>福岡市・横浜市</strong>：商店街・地域振興補助金で活用例あり</li>
+        </ul>
+        <p class="cl-note"><small>※ 助成制度は年度ごとに内容が変動します。所在地の自治体・商工会議所窓口で最新情報をご確認ください。</small></p>
+      </section>
+
+      <section id="combine" class="cl-section">
+        <h2>補助金活用の組み合わせ例</h2>
+        <h3>ケース1：飲食店リニューアル＋HACCP対応</h3>
+        <p>店舗改装と合わせて厨房ダクトの大規模清掃・改修を実施。小規模事業者持続化補助金（上限200万円）で改修費の2/3が補助対象に。</p>
+        <h3>ケース2：火災予防対策の強化</h3>
+        <p>事業継続力強化計画を策定し、防火設備改修と一体でダクト清掃を実施。低利融資＋税制優遇＋火災保険料割引で総合的にコスト削減。</p>
+        <h3>ケース3：商店街での共同発注</h3>
+        <p>地域商店街で複数飲食店が共同でダクト清掃を発注し、自治体の商店街振興補助金を活用。1店舗あたり費用を30〜50%削減できた事例があります。</p>
+      </section>
+
+      <section id="flow" class="cl-section">
+        <h2>申請の流れ</h2>
+        <ol>
+          <li><strong>商工会議所・商工会への相談</strong>：申請可能な補助金の特定</li>
+          <li><strong>事業計画書の作成</strong>：補助金の趣旨に沿った投資計画を整理</li>
+          <li><strong>申請書類の準備</strong>：見積書・現況写真・決算書類</li>
+          <li><strong>申請・審査</strong>：事務局による書類審査（数週間〜数ヶ月）</li>
+          <li><strong>採択・交付決定</strong>：採択通知後に着工</li>
+          <li><strong>実施・完了報告</strong>：完了後に実績報告書を提出</li>
+          <li><strong>補助金受領</strong>：審査完了後に振込</li>
+        </ol>
+      </section>
+
+      <section id="strategy" class="cl-section">
+        <h2>補助金審査を通過する事業計画書の書き方</h2>
+        <p>事業継続力強化計画・小規模事業者持続化補助金などの<strong>事業計画書</strong>は採択の決め手になります。ダクト清掃という単発の保守工事ではなく、「事業継続・防火・衛生強化の包括的投資」として位置づけることが重要です。</p>
+
+        <h3>採択されやすい計画書の3要素</h3>
+        <ol>
+          <li><strong>現状課題の数値化</strong>：「過去○年で消防査察での指導が○回」「グリス蓄積による焦げ臭の苦情が月○件」など、改善の必要性を具体的な数字で説明</li>
+          <li><strong>投資効果の見える化</strong>：「ダクト清掃＋自動消火装置＋油煙センサーの導入で火災リスクを○%低減」「保険料を年○万円削減」など、投資対効果を金額で示す</li>
+          <li><strong>事業継続への波及効果</strong>：「火災時の営業停止リスクを回避し、年商○千万円の事業継続を確保」「BCP（事業継続計画）の一環として位置づけ」など、補助金の趣旨と紐付ける</li>
+        </ol>
+
+        <h3>採択率を上げる申請書の付帯資料</h3>
+        <ul>
+          <li>厨房の現状写真（油煙の蓄積状況・グリスフィルターの汚れ）</li>
+          <li>消防設備点検報告書（指摘事項がある場合は特に有効）</li>
+          <li>過去の消防査察記録（指導歴があれば改善の必要性として説得力）</li>
+          <li>火災保険の証券コピー（補償範囲・免責額）</li>
+          <li>過去3期分の決算書（小規模事業者持続化補助金で必須）</li>
+        </ul>
+
+        <h3>申請のタイミング戦略</h3>
+        <p>多くの補助金は<strong>年に複数回の募集</strong>があります。小規模事業者持続化補助金は年4回、事業継続力強化計画認定はほぼ通年募集。一度不採択でも次回申請可能ですが、同一内容の再申請は採択率が下がる傾向にあるため、<strong>計画書のブラッシュアップ</strong>が必要です。事業者側に体力があれば、1回目の不採択を「審査員のコメントを獲得する機会」と捉えて、2回目で完成度の高い申請に仕上げる戦略も有効です。</p>
+      </section>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          <div class="cl-faq-item">
+            <dt>定期清掃だけで補助金は出ますか？</dt>
+            <dd>原則として出ません。補助金は「事業改善」「衛生改善」「防火対策強化」など投資的な活用が前提です。定期清掃は法令義務の維持管理として全額損金算入で処理してください。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>個人事業の飲食店も対象になりますか？</dt>
+            <dd>はい、小規模事業者持続化補助金は個人事業主も対象です。商工会議所・商工会の会員でなくても申請できる制度が多くあります。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>補助金と保険料割引は併用できますか？</dt>
+            <dd>はい、補助金と保険料割引は別制度のため併用可能です。事業継続力強化計画の認定を受けることで両方の恩恵を受けられます。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>商店街共同発注の手続きは？</dt>
+            <dd>商店街振興組合または地元商工会に相談してください。複数店舗でのとりまとめが必要で、補助金の交付要綱に応じた事業計画書の作成が必要です。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>採択率はどれくらいですか？</dt>
+            <dd>小規模事業者持続化補助金の採択率は概ね30〜60%で、応募回・枠によって変動します。事業計画書の質と補助金趣旨との合致度が決め手です。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>ダクト清掃に絞った補助金はないですか？</dt>
+            <dd>2026年現在、ダクト清掃単独で対象となる補助金は限定的です。代わりに「衛生管理」「防火対策」「設備更新」など広いカテゴリで申請するのが現実的です。</dd>
+          </div>
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別のダクト清掃業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/duct/tokyo/">東京都</a></li>
+          <li><a href="/duct/osaka/">大阪府</a></li>
+          <li><a href="/duct/kanagawa/">神奈川県</a></li>
+          <li><a href="/duct/aichi/">愛知県</a></li>
+          <li><a href="/duct/saitama/">埼玉県</a></li>
+          <li><a href="/duct/chiba/">千葉県</a></li>
+          <li><a href="/duct/hyogo/">兵庫県</a></li>
+          <li><a href="/duct/fukuoka/">福岡県</a></li>
+          <li><a href="/duct/hokkaido/">北海道</a></li>
+          <li><a href="/duct/kyoto/">京都府</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/duct/">全国47都道府県の対応業者を見る</a></p>
+      </div>
+
+      <div class="cl-cta" id="contact">
+        <h2>ダクト清掃の見積もり相談はこちらから</h2>
+        <p>補助金活用に必要な見積書・現況写真の発行に対応できる業者から最大3社を無料でご紹介します。</p>
+        <a href="/duct/" class="cta-btn-primary">無料で一括見積もりを依頼する</a>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連する詳細情報</h2>
+        <ul>
+          <li><a href="/column/duct-hiyo-sohba/">ダクト清掃の費用相場2026</a></li>
+          <li><a href="/column/duct-keihi/">ダクト清掃の経費計上ガイド2026</a></li>
+          <li><a href="/column/duct-horei-gimu/">ダクト清掃の法令義務ガイド2026</a></li>
+        </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#shobo-ho">消防法</a></li>
+          <li><a href="/glossary/#biru-kan-ho">建築物衛生法（ビル管法）</a></li>
+          <li><a href="/glossary/#duct">ダクト</a></li>
+          <li><a href="/glossary/#tokutei-kenchikubutsu">特定建築物</a></li>
+          <li><a href="/glossary/#tokutei-boka-taisho">特定防火対象物</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集（49語）をすべて見る</a></p>
+      </aside>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-author-link { color: #fff; text-decoration: underline; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-quickanswer { background: #eef6ff; border: 1.5px solid #1a56db; border-radius: 10px; padding: 18px 22px; margin-bottom: 32px; }
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-faq { display: grid; gap: 14px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 32px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 32px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; list-style: none; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+</style>

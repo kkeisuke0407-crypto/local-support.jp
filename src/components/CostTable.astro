@@ -1,9 +1,23 @@
 ---
 import type { ServiceData } from '../data/services/_types';
-interface Props { costGuide: ServiceData['costGuide']; serviceName: string; lastUpdated: string; relatedColumns?: ServiceData['relatedColumns']; }
-const { costGuide, serviceName, lastUpdated, relatedColumns } = Astro.props;
+import type { Prefecture } from '../data/prefectures';
+interface Props { costGuide: ServiceData['costGuide']; serviceName: string; lastUpdated: string; relatedColumns?: ServiceData['relatedColumns']; prefecture?: Prefecture; }
+const { costGuide, serviceName, lastUpdated, relatedColumns, prefecture } = Astro.props;
 const updatedJa = new Date(lastUpdated).toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
 const costColumn = relatedColumns?.find((c) => c.category === '費用相場');
+
+// 地域相場補正：priceFactor を持つ主要都道府県のページでのみ「全国平均との差」を注記する。
+// 下表の数値は全国の目安。地域の人件費・出張費・搬出条件で実際の相場は上下する。
+function regionalCostNote(pref: Prefecture): string | null {
+  const f = pref.priceFactor;
+  if (f == null) return null;
+  const pct = Math.round(Math.abs(f - 1) * 100);
+  if (f >= 1.15) return `${pref.name}は人件費・搬出条件などの影響で、費用相場が全国平均より高め（目安：約${pct}%増）になる傾向があります。下表は全国の目安額のため、${pref.name}では上振れを見込んでおくと安心です。`;
+  if (f >= 1.04) return `${pref.name}の費用相場は全国平均よりやや高め（目安：約${pct}%増）の傾向があります。`;
+  if (f > 0.96) return `${pref.name}の費用相場はおおむね全国平均水準です。`;
+  return `${pref.name}の費用相場は全国平均よりやや低め（目安：約${pct}%減）の傾向があり、相見積もりでコストを抑えやすいエリアです。`;
+}
+const regionNote = prefecture ? regionalCostNote(prefecture) : null;
 ---
 <section class="sd-section section-white" id="cost">
   <div class="sd-container">
@@ -12,6 +26,9 @@ const costColumn = relatedColumns?.find((c) => c.category === '費用相場');
       <h2>{serviceName}の費用はどのくらいかかる？</h2>
       <p>{costGuide.intro}</p>
     </div>
+    {regionNote && (
+      <p class="cost-region-note"><strong>地域の相場感：</strong>{regionNote}</p>
+    )}
     <div class="cost-table-wrap">
       <table class="cost-table" aria-describedby="cost-table-caption">
         <caption id="cost-table-caption">
@@ -50,8 +67,21 @@ const costColumn = relatedColumns?.find((c) => c.category === '費用相場');
           <span class="inline-column-cta-label">費用相場の詳細解説</span>
           <span class="inline-column-cta-title">{costColumn.title}</span>
         </span>
-        <span class="inline-column-cta-arrow" aria-hidden="true">→</span>
+        <span class="inline-column-cta-arrow" aria-hidden="true"></span>
       </a>
     )}
   </div>
 </section>
+
+<style>
+  .cost-region-note {
+    max-width: 760px;
+    margin: 0 auto 1.5rem;
+    padding: 0.9rem 1.1rem;
+    background: #fff7ed;
+    border: 1px solid #fcd9b6;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    line-height: 1.75;
+  }
+</style>

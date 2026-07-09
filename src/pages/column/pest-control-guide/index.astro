@@ -1,0 +1,471 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = '業務用害虫駆除（PCO）完全ガイド｜法的義務・費用・業者選び・害虫別対策の総まとめ';
+const description = '飲食店・食品工場・ホテル・マンション・倉庫などの業務用害虫駆除（PCO）を体系的に解説するハブ記事。HACCP・建築物衛生法の法的義務、費用相場と契約形態、ゴキブリ・ネズミ・トコジラミの害虫別対策、業種別ガイド、業者選びと地域別ガイドへの入口をまとめました。';
+const canonical = `${site.domain}/column/pest-control-guide/`;
+const published = '2026-06-29';
+const modified = '2026-06-29';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '業務用害虫駆除（PCO）完全ガイド', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 5600,
+  articleSection: '害虫駆除',
+  keywords: '業務用害虫駆除,PCO,害虫駆除 業者,ゴキブリ駆除,ネズミ駆除,トコジラミ,HACCP,IPM,害虫駆除 費用,防除',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-pest-control.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '害虫駆除', serviceType: '建築物の害虫防除（PCO）' },
+  citation: [
+    { '@type': 'Legislation', name: '食品衛生法（HACCP制度化）', url: 'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000098735.html' },
+    { '@type': 'Legislation', name: '建築物における衛生的環境の確保に関する法律（建築物衛生法）', url: 'https://laws.e-gov.go.jp/law/345AC0000000020' },
+  ],
+});
+
+// クラスタ記事のItemList（ハブとしての構造化）
+const clusterArticles = [
+  { name: '害虫駆除の法的義務ガイド（建築物衛生法・食品衛生法HACCP）', url: `${site.domain}/column/pest-control-horei-gimu/` },
+  { name: 'HACCP制度化で必須になった害虫対策ガイド', url: `${site.domain}/column/pest-control-haccp/` },
+  { name: '飲食店の害虫駆除 頻度・法的義務 完全ガイド', url: `${site.domain}/column/pest-control-inshokuten-hindo-gimu/` },
+  { name: '業務用害虫駆除（PCO）の費用相場', url: `${site.domain}/column/pest-control-hiyo-sohba/` },
+  { name: '害虫駆除の定期契約とスポット駆除を徹底比較', url: `${site.domain}/column/pest-control-teiki-spot-hikaku/` },
+  { name: '業務用ゴキブリ駆除の業者選び完全ガイド', url: `${site.domain}/column/pest-control-gokiburi-gyosha/` },
+  { name: '飲食店のネズミ駆除 緊急対応の費用相場', url: `${site.domain}/column/pest-control-nezumi-inshokuten/` },
+  { name: 'トコジラミ駆除 宿泊施設の対応マニュアル', url: `${site.domain}/column/pest-control-tokojirami-shukuhaku/` },
+  { name: '食品工場の防虫設計 FSSC22000対応業者の選び方', url: `${site.domain}/column/pest-control-shokuhin-koujou-boumushi/` },
+  { name: '倉庫・物流施設のIPM導入ガイド', url: `${site.domain}/column/pest-control-souko-butsuryu-ipm/` },
+  { name: 'マンション管理組合の害虫駆除', url: `${site.domain}/column/pest-control-mansion-kanri-kumiai/` },
+  { name: 'ペストコントロール協会の会員業者を見分ける方法', url: `${site.domain}/column/pest-control-kyokai-kaiin/` },
+  { name: '福岡で害虫駆除業者を選ぶ完全ガイド', url: `${site.domain}/column/pest-control-gyosha-fukuoka/` },
+  { name: '大阪で害虫駆除業者を選ぶ完全ガイド', url: `${site.domain}/column/pest-control-gyosha-osaka/` },
+];
+
+const itemListLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: '業務用害虫駆除 関連記事一覧',
+  numberOfItems: clusterArticles.length,
+  itemListElement: clusterArticles.map((a, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: a.name,
+    url: a.url,
+  })),
+});
+
+const faqItems = [
+  {
+    q: '業務用害虫駆除（PCO）と家庭用の駆除は何が違いますか？',
+    a: 'PCO（ペストコントロール）は、薬剤散布だけでなく「侵入させない・定着させない・早期に検知する」というIPM（総合的有害生物管理）に基づき、発生源と侵入経路を継続管理する点が家庭用と大きく異なります。さらに飲食店・食品工場ではHACCP対応の防除記録が必要になるため、記録を発行できる専門業者への委託が前提になります。',
+  },
+  {
+    q: '害虫駆除に法的な義務はありますか？',
+    a: '食品事業者は2021年6月から義務化されたHACCPの一般衛生管理として「そ族・昆虫対策」と記録が求められます。また建築物衛生法の特定建築物（延床3,000㎡以上で特定用途）は、ねずみ・昆虫等の生息状況調査を6か月以内ごとに1回、統一的に実施する義務があります。業種・施設により適用される制度が異なるため、自社がどれに該当するかの確認が出発点です。',
+  },
+  {
+    q: '害虫駆除の費用はどのくらいかかりますか？',
+    a: '業態・面積・契約形態・対象害虫で変わります。飲食店の定期モニタリング契約で1回あたり数千円〜、スポット駆除で1万円台〜、食品工場・大型施設の総合管理では月額数万〜数十万円が目安です。詳しくは費用相場の記事で業種別・契約形態別に整理しています。',
+  },
+  {
+    q: 'どんな業者を選べばよいですか？',
+    a: '①建築物ねずみ昆虫等防除業の登録、②有資格者の在籍、③IPM対応（薬剤散布だけでない）、④HACCP対応の報告書発行、⑤協会会員かどうか、を確認するのが基本です。会員かどうかは「足切り」的な目安の一つで、最終判断はIPM提案力・報告書の質・見積もりの明確さを総合的に見ます。',
+  },
+  {
+    q: 'まず何から読めばよいですか？',
+    a: '飲食店なら「飲食店の害虫駆除 頻度・法的義務」、コストを知りたいなら「費用相場」、業者を選ぶ段階なら「業務用ゴキブリ駆除の業者選び」または地域別ガイドが入口に向いています。本記事の各セクションから目的別に該当記事へ進めます。',
+  },
+];
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-pest-control.png` },
+});
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified}
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  ogImage={`${site.domain}/og-pest-control.png`}
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd, itemListLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a>
+          <span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a>
+          <span aria-hidden="true">›</span>
+          <span>業務用害虫駆除（PCO）完全ガイド</span>
+        </nav>
+        <span class="cl-cat">害虫駆除</span>
+        <h1 class="cl-title">業務用害虫駆除（PCO）完全ガイド｜法的義務・費用・業者選び・害虫別対策の総まとめ</h1>
+        <p class="cl-lead">
+          飲食店・食品工場・ホテル・マンション・倉庫などの<strong>業務用害虫駆除（PCO）</strong>は、「発生したら駆除する」ではなく<strong>法的義務・継続管理・記録までを含めた衛生管理</strong>です。このページは、害虫駆除に関する当サイトの記事を<strong>目的別に整理したハブ</strong>です。法的義務・費用・害虫別対策・業種別ガイド・業者選び・地域別ガイドへ、ここから必要な記事に進めます。※2026年6月時点の情報をもとに整理。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年6月29日</time>
+          <span>最終更新：2026年6月29日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 業務用害虫駆除でまず押さえるべきことは？</p>
+        <p class="cl-qa-a">A. <strong>①自社の業種・施設にかかる法的義務（HACCP／建築物衛生法）の確認、②IPM（侵入防止・環境整備・モニタリング）に基づく継続管理、③登録・資格・記録発行ができる業者の選定</strong>の3点。害虫駆除は「駆除して終わり」ではなく、記録まで含めた衛生管理。目的別に下記の各ガイドへ進んでください。</p>
+        <p class="cl-qa-src">※食品衛生法（HACCP）・建築物衛生法、害虫管理の一般的知見をもとに整理</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="pest-control" serviceName="害虫駆除" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">このガイドの構成</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#basic">害虫駆除（PCO）の基本｜なぜ専門業者か</a></li>
+          <li><a href="#legal">法的義務で押さえる（HACCP・建築物衛生法）</a></li>
+          <li><a href="#cost">費用と契約形態</a></li>
+          <li><a href="#pest">害虫の種類別対策（ゴキブリ・ネズミ・トコジラミ）</a></li>
+          <li><a href="#industry">業種・施設別ガイド</a></li>
+          <li><a href="#select">業者選びの基準</a></li>
+          <li><a href="#area">地域別ガイド</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>害虫駆除は法的義務×継続管理×記録</strong>。HACCP・建築物衛生法のどれが自社に効くかをまず確認</li>
+            <li><strong>薬剤散布よりIPM</strong>。侵入防止・環境整備・モニタリングを継続できる業者と定期契約するのが基本</li>
+            <li><strong>業者選びは登録・資格・記録発行が土台</strong>。協会会員は目安の一つ。目的別に下記ガイドへ</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="basic" class="cl-section">
+        <h2>害虫駆除（PCO）の基本｜なぜ専門業者か</h2>
+        <p>業務施設の害虫対策は、市販の殺虫剤で個体を減らすだけでは根本解決になりません。PCO（ペストコントロール）が専門業者に委託される理由は主に3つです。</p>
+        <ul>
+          <li><strong>発生源・侵入経路の特定と封鎖</strong>：搬入物・排水・配管・隙間など、専門調査がないと根本原因を断てない</li>
+          <li><strong>法令・記録対応</strong>：HACCP・建築物衛生法では「実施したこと」を記録として残す必要がある</li>
+          <li><strong>薬剤の適正使用</strong>：食品施設での薬剤は養生・濃度・廃棄に専門知識が必要</li>
+        </ul>
+        <p>こうした管理の考え方の中心が<strong>IPM（総合的有害生物管理）</strong>です。「侵入させない・定着させない・早期に検知する」を組み合わせ、薬剤は最後の手段とします。IPMの実践は<a href="/column/pest-control-souko-butsuryu-ipm/">倉庫・物流施設のIPM導入ガイド</a>や<a href="/column/pest-control-shokuhin-koujou-boumushi/">食品工場の防虫設計ガイド</a>で具体的に解説しています。</p>
+      </section>
+
+      <section id="legal" class="cl-section">
+        <h2>法的義務で押さえる（HACCP・建築物衛生法）</h2>
+        <p>害虫駆除の「やるべき水準」は、自社の業種・施設にかかる法令で決まります。まずどの制度が該当するかを確認してください。</p>
+        <div class="cl-answer-grid">
+          <div>
+            <h3>HACCP（食品事業者）</h3>
+            <p>2021年6月から原則すべての食品事業者が対象。一般衛生管理の「そ族・昆虫対策」と防除記録が必要。</p>
+            <p class="cl-grid-link"><a href="/column/pest-control-haccp/">→ HACCP害虫対策ガイド</a></p>
+          </div>
+          <div>
+            <h3>飲食店の頻度・義務</h3>
+            <p>業態別の標準頻度、保健所立入で確認される記録、食品衛生法上の位置づけを整理。</p>
+            <p class="cl-grid-link"><a href="/column/pest-control-inshokuten-hindo-gimu/">→ 飲食店の頻度・法的義務</a></p>
+          </div>
+        </div>
+        <p>建築物衛生法の特定建築物（延床3,000㎡以上で特定用途）は、ねずみ・昆虫等の生息状況調査を6か月以内ごとに1回、統一的に実施する義務があります。適用法令・登録業者・罰則・記録保存までの全体像は<a href="/column/pest-control-horei-gimu/">害虫駆除の法的義務ガイド（建築物衛生法・HACCP）</a>で詳しく解説しています。マンション・複合ビルの該当判定は<a href="/column/pest-control-mansion-kanri-kumiai/">マンション管理組合の害虫駆除</a>もご参照ください。</p>
+      </section>
+
+      <section id="cost" class="cl-section">
+        <h2>費用と契約形態</h2>
+        <p>害虫駆除のコストは、業態・面積・契約形態・対象害虫で変わります。費用の全体像と、定期契約とスポットの使い分けを押さえましょう。</p>
+        <div class="cl-answer-grid">
+          <div>
+            <h3>費用相場</h3>
+            <p>業種別・契約形態別の料金、月次モニタリング・スポット・大型施設の目安を整理。</p>
+            <p class="cl-grid-link"><a href="/column/pest-control-hiyo-sohba/">→ 業務用害虫駆除の費用相場</a></p>
+          </div>
+          <div>
+            <h3>定期契約 vs スポット</h3>
+            <p>損益分岐点（年4回前後）、HACCP対応・監査有無による選び方、契約書チェック項目。</p>
+            <p class="cl-grid-link"><a href="/column/pest-control-teiki-spot-hikaku/">→ 定期契約とスポットを徹底比較</a></p>
+          </div>
+        </div>
+        <p>飲食店・食品施設など「発生させてはいけない」業態は、記録も残せる<strong>定期モニタリング契約が基本</strong>です。緊急の大量発生は初回スポット→定期移行が費用対効果の高い組み合わせです。</p>
+      </section>
+
+      <section id="pest" class="cl-section">
+        <h2>害虫の種類別対策（ゴキブリ・ネズミ・トコジラミ）</h2>
+        <p>害虫は種類ごとに行動・繁殖・対策手法が異なります。代表的な3種について、業務施設向けの対策をまとめています。</p>
+        <div class="cl-answer-grid">
+          <div>
+            <h3>ゴキブリ</h3>
+            <p>業務施設で最も相談が多い。発生源・侵入経路の封鎖とIPMで再発を抑える。業者選びの核心も解説。</p>
+            <p class="cl-grid-link"><a href="/column/pest-control-gokiburi-gyosha/">→ 業務用ゴキブリ駆除の業者選び</a></p>
+          </div>
+          <div>
+            <h3>ネズミ</h3>
+            <p>飲食店での緊急対応の初動、保健所・営業停止リスク、侵入封鎖による再発防止まで。</p>
+            <p class="cl-grid-link"><a href="/column/pest-control-nezumi-inshokuten/">→ 飲食店のネズミ駆除 緊急対応</a></p>
+          </div>
+          <div>
+            <h3>トコジラミ</h3>
+            <p>宿泊施設の発見時の初動・客室隔離、加熱処理と薬剤処理の違い、風評・賠償リスク対策。</p>
+            <p class="cl-grid-link"><a href="/column/pest-control-tokojirami-shukuhaku/">→ トコジラミ駆除 宿泊施設マニュアル</a></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="industry" class="cl-section">
+        <h2>業種・施設別ガイド</h2>
+        <p>同じ害虫対策でも、業種・施設により求められる水準と重点が異なります。自社の施設タイプから該当ガイドへ進んでください。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>業種・施設別の害虫駆除ガイド</caption>
+            <thead>
+              <tr><th scope="col">施設タイプ</th><th scope="col">重点</th><th scope="col">該当ガイド</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">飲食店</th><td>HACCP記録・頻度・保健所対応</td><td><a href="/column/pest-control-inshokuten-hindo-gimu/">飲食店の害虫駆除 頻度・法的義務</a></td></tr>
+              <tr><th scope="row">食品工場</th><td>FSSC22000・防虫設計・トレンド分析</td><td><a href="/column/pest-control-shokuhin-koujou-boumushi/">食品工場の防虫設計ガイド</a></td></tr>
+              <tr><th scope="row">倉庫・物流</th><td>輸入貨物リスク・IPM・FSSC対応</td><td><a href="/column/pest-control-souko-butsuryu-ipm/">倉庫・物流施設のIPM導入</a></td></tr>
+              <tr><th scope="row">マンション</th><td>共用部/専有部の責任分界・管理組合実務</td><td><a href="/column/pest-control-mansion-kanri-kumiai/">マンション管理組合の害虫駆除</a></td></tr>
+              <tr><th scope="row">宿泊施設</th><td>トコジラミ・客室隔離・風評リスク</td><td><a href="/column/pest-control-tokojirami-shukuhaku/">トコジラミ駆除 宿泊施設マニュアル</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="select" class="cl-section">
+        <h2>業者選びの基準</h2>
+        <p>害虫駆除業者を選ぶときは、口頭説明ではなく<strong>書面・記録で確認できるか</strong>を基準にします。共通する確認項目は次の通りです。</p>
+        <ul>
+          <li><strong>建築物ねずみ昆虫等防除業の登録</strong>（都道府県知事登録）— 特に特定建築物・食品施設で重要</li>
+          <li><strong>有資格者の在籍</strong>（防除作業監督者・ペストコントロール技術者など）</li>
+          <li><strong>IPM対応</strong>（薬剤散布だけでなくモニタリング・侵入経路封鎖を提案できるか）</li>
+          <li><strong>HACCP対応の報告書発行</strong>（保健所・監査で提示できる記録様式か）</li>
+          <li><strong>協会会員かどうか</strong>（技術研鑽・倫理準拠の目安の一つ）</li>
+        </ul>
+        <div class="cl-answer-grid">
+          <div>
+            <h3>業者選びの実務</h3>
+            <p>登録番号の確認方法、IPM対応の見分け方、見積もり時の質問リストまで。</p>
+            <p class="cl-grid-link"><a href="/column/pest-control-gokiburi-gyosha/">→ 業務用ゴキブリ駆除の業者選び</a></p>
+          </div>
+          <div>
+            <h3>協会会員と登録の違い</h3>
+            <p>「協会会員」と「登録業者」は別物。混同しないための整理と確認方法。</p>
+            <p class="cl-grid-link"><a href="/column/pest-control-kyokai-kaiin/">→ ペストコントロール協会の会員業者を見分ける</a></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="area" class="cl-section">
+        <h2>地域別ガイド</h2>
+        <p>地域ごとの害虫事情（繁華街の密集度・気候・夜間営業など）を踏まえた業者選びガイドです。</p>
+        <div class="cl-answer-grid">
+          <div>
+            <h3>福岡</h3>
+            <p>中洲・天神の飲食密集エリアの害虫事情、夜間対応、費用相場、業者選び7項目。</p>
+            <p class="cl-grid-link"><a href="/column/pest-control-gyosha-fukuoka/">→ 福岡で害虫駆除業者を選ぶ</a></p>
+          </div>
+          <div>
+            <h3>大阪</h3>
+            <p>ミナミ・キタの繁華街と地下飲食フロアの害虫事情、夜間対応、費用相場、業者選び7項目。</p>
+            <p class="cl-grid-link"><a href="/column/pest-control-gyosha-osaka/">→ 大阪で害虫駆除業者を選ぶ</a></p>
+          </div>
+        </div>
+        <p>全国の対応業者は<a href="/pest-control/">害虫駆除サービスのエリア一覧</a>から確認できます。</p>
+      </section>
+
+      <div class="cl-cta">
+        <h2>害虫駆除業者をお探しなら</h2>
+        <p>建築物防除業の登録・HACCP対応の記録発行に対応する業者から<br/>最大3社の見積もりを完全無料・約1分で取得できます</p>
+        <a class="cta-btn-primary" href="/pest-control/">無料で一括見積もりを依頼する</a>
+      </div>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          {faqItems.map((item) => (
+            <div class="cl-faq-item">
+              <dt>{item.q}</dt>
+              <dd>{item.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別の害虫駆除業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/pest-control/tokyo/">東京都</a></li>
+          <li><a href="/pest-control/osaka/">大阪府</a></li>
+          <li><a href="/pest-control/fukuoka/">福岡県</a></li>
+          <li><a href="/pest-control/kanagawa/">神奈川県</a></li>
+          <li><a href="/pest-control/aichi/">愛知県</a></li>
+          <li><a href="/pest-control/saitama/">埼玉県</a></li>
+          <li><a href="/pest-control/hyogo/">兵庫県</a></li>
+          <li><a href="/pest-control/hokkaido/">北海道</a></li>
+          <li><a href="/pest-control/kyoto/">京都府</a></li>
+          <li><a href="/pest-control/chiba/">千葉県</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/pest-control/">全国47都道府県の対応業者を見る</a></p>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連サービス・コラム</h2>
+        <ul>
+          <li><a href="/pest-control/">害虫駆除サービス（一括見積比較）</a></li>
+          <li><a href="/column/pest-control-haccp/">HACCP制度化で必須になった害虫対策ガイド</a></li>
+          <li><a href="/column/pest-control-hiyo-sohba/">業務用害虫駆除（PCO）の費用相場</a></li>
+          <li><a href="/column/pest-control-gokiburi-gyosha/">業務用ゴキブリ駆除の業者選び完全ガイド</a></li>
+          <li><a href="/column/pest-control-teiki-spot-hikaku/">害虫駆除の定期契約とスポット駆除を徹底比較</a></li>
+        </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 このガイドに出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#haccp">HACCP</a></li>
+          <li><a href="/glossary/#shokuhin-eisei-ho-haccp">食品衛生法（HACCP）</a></li>
+          <li><a href="/glossary/#ipm">IPM（総合的有害生物管理）</a></li>
+          <li><a href="/glossary/#kenchikubutsu-nezumi-konchu-bojogyo">建築物ねずみ昆虫等防除業</a></li>
+          <li><a href="/glossary/#biru-kan-ho">建築物衛生法</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集（49語）をすべて見る</a></p>
+      </aside>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header {
+  background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%);
+  color: #fff;
+  padding: 48px 0 40px;
+}
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-callout li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-answer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 20px 0 24px; }
+.cl-answer-grid > div { background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; padding: 18px 20px; box-shadow: 0 6px 18px rgba(15, 23, 42, .05); }
+.cl-answer-grid h3 { font-size: 1rem; color: var(--blue-dark); margin: 0 0 8px; }
+.cl-answer-grid p { margin: 0 0 8px; font-size: .9rem; line-height: 1.75; color: var(--gray-700); }
+.cl-grid-link { margin: 0 !important; }
+.cl-grid-link a { color: var(--blue); text-decoration: underline; font-weight: 700; font-size: .88rem; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-glossary-block { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 24px; }
+.cl-glossary-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; }
+.cl-glossary-list { padding-left: 18px; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; }
+.cl-glossary-list a { color: var(--blue); text-decoration: underline; font-size: .88rem; }
+.cl-glossary-more { font-size: .85rem; margin: 12px 0 0; }
+.cl-glossary-more a { color: var(--blue); text-decoration: underline; }
+@media (max-width: 600px) {
+  .cl-header { padding: 32px 0 28px; }
+  .cl-body { padding: 28px 16px 48px; }
+  .cl-section h2 { font-size: 1.15rem; }
+  .cl-answer-grid { grid-template-columns: 1fr; }
+}
+
+.cl-quickanswer {
+  background: #eef6ff;
+  border: 1.5px solid #1a56db;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-bottom: 32px;
+}
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+</style>

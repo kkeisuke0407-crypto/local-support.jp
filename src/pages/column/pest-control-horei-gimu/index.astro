@@ -1,0 +1,783 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = '害虫駆除の法的義務ガイド｜建築物衛生法・食品衛生法(HACCP)の防除義務と罰則';
+const description = '業務用害虫駆除（PCO）の法的義務を2026年最新版で解説。特定建築物に6か月ごとの生息状況調査を課す建築物衛生法、食品事業者にそ族・昆虫対策を求める食品衛生法(HACCP)、建築物ねずみ昆虫等防除業の登録、違反時の罰則、5年間の記録保存義務まで施設管理担当者向けにまとめました。';
+const canonical = `${site.domain}/column/pest-control-horei-gimu/`;
+const published = '2026-07-01';
+const modified = '2026-07-01';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '害虫駆除の法的義務ガイド', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 5600,
+  articleSection: '法令・義務',
+  keywords: '害虫駆除,法的義務,建築物衛生法,食品衛生法,HACCP,ねずみ昆虫等防除,特定建築物,IPM,建築物ねずみ昆虫等防除業,罰則,2026',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-pest-control.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '害虫駆除', serviceType: '建築物ねずみ昆虫等防除' },
+  citation: [
+    { '@type': 'Legislation', name: '建築物における衛生的環境の確保に関する法律（建築物衛生法）', url: 'https://elaws.e-gov.go.jp/document?lawid=345AC0000000020' },
+    { '@type': 'Legislation', name: '食品衛生法', url: 'https://elaws.e-gov.go.jp/document?lawid=322AC0000000233' },
+  ],
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: '害虫駆除は法律で義務づけられていますか？',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '建物や業種によります。延床面積3,000m²以上の特定建築物は建築物衛生法により、6か月以内ごとに1回、ねずみ・昆虫等の生息状況調査を行い、必要に応じて防除することが義務づけられています。また飲食店・食品工場など食品を扱う事業者は、2021年6月完全義務化のHACCPに沿った衛生管理の一環として、そ族（ねずみ）・昆虫の防除を継続的に行う必要があります。',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '特定建築物とは何ですか？害虫駆除の義務はどう違いますか？',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '特定建築物とは、延床面積3,000m²以上（学校教育法上の学校は8,000m²以上）で、事務所・店舗・百貨店・ホテル・集会場などの用途に使われる建築物です。特定建築物では建築物環境衛生管理基準に基づき、6か月以内ごとの生息状況調査と、統一的・計画的な防除（IPM＝総合的有害生物管理の考え方に基づく）が義務づけられ、その記録を5年間保存する必要があります。',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '小さな飲食店でも害虫駆除の義務はありますか？',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '特定建築物に該当しない小規模店舗でも、食品を扱う場合は食品衛生法（HACCPに沿った衛生管理）により、そ族・昆虫の防除が求められます。具体的には、生息調査を年2回以上（発生しやすい環境では月1回以上）行い、発生を認めた場合に駆除を実施し、その記録を残すことが一般衛生管理の基準として定められています。',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '害虫駆除の記録はどれくらい保存しなければなりませんか？',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '特定建築物では建築物衛生法施行規則により、防除の実施記録・生息状況調査の結果などの帳簿書類を5年間保存する義務があります。食品衛生法（HACCP）の記録は、取り扱う食品の流通期間などを踏まえて事業者が保存期間を設定しますが、実務上は少なくとも1年以上の保存が推奨されます。',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '害虫駆除を依頼する業者に資格や登録は必要ですか？',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '業者側には「建築物ねずみ昆虫等防除業」の都道府県知事登録の制度があります（建築物衛生法第12条の2）。これは任意の登録制度ですが、防除作業監督者の選任や機械器具の保有など一定の要件を満たした業者だけが登録できるため、発注者は登録番号のある業者を選ぶことで品質の目安になります。特定建築物の防除を委託する際は特に確認をおすすめします。',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '害虫駆除の義務に違反するとどうなりますか？',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '特定建築物で管理基準を満たさない場合、保健所からの改善指導・改善命令（建築物衛生法第11条）の対象となり、命令に従わないと30万円以下の罰金が科されることがあります。飲食店・食品工場では、そ族昆虫対策の不備が原因で異物混入・食中毒が発生すると、食品衛生法に基づく営業停止・許可取消などの行政処分や、損害賠償・信用失墜につながります。',
+      },
+    },
+    { '@type': 'Question', name: 'HACCPでは害虫対策をどう扱いますか？', acceptedAnswer: { '@type': 'Answer', text: 'HACCPに沿った衛生管理では、そ族・昆虫の防除は「一般衛生管理（前提条件プログラム）」に位置づけられます。防除計画の作成、定期的な生息調査、捕虫器やトラップによるモニタリング、発生時の是正措置、そしてこれらの記録の作成・保存までが一連の管理事項として求められます。' } },
+    { '@type': 'Question', name: '月1回の駆除は必ず必要ですか？', acceptedAnswer: { '@type': 'Answer', text: '法律が一律に「月1回」を義務づけているわけではありません。建築物衛生法は「6か月以内ごとに1回の調査」を基準とし、食品事業者は発生状況に応じた頻度を求められます。ただしゴキブリ等が発生しやすい厨房・食品取扱区域では、実務上は月1回程度の定期管理が選ばれることが多く、HACCPのモニタリングとしても有効です。' } },
+  ],
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-pest-control.png` },
+});
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified}
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a>
+          <span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a>
+          <span aria-hidden="true">›</span>
+          <span>害虫駆除の法的義務ガイド</span>
+        </nav>
+        <span class="cl-cat">法令・義務</span>
+        <h1 class="cl-title">害虫駆除の法的義務ガイド｜建築物衛生法・食品衛生法(HACCP)の防除義務と罰則</h1>
+        <p class="cl-lead">
+          業務用の害虫駆除（PCO）は、単なる「発生したら退治する」対応ではなく、<strong>建物や業種によっては法律で継続的な管理が義務</strong>づけられています。とくに延床3,000m²以上の特定建築物には<strong>6か月ごとの生息状況調査</strong>が、食品を扱う事業者には<strong>HACCPに沿ったそ族・昆虫対策</strong>が求められます。この記事では、適用される法律・義務の中身・違反時の罰則・記録の残し方までを、施設管理担当者の目線で整理します。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年7月1日</time>
+          <span>最終更新：2026年7月1日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 害虫駆除は法律で義務ですか？</p>
+        <p class="cl-qa-a">A. <strong>延床3,000m²以上の特定建築物は建築物衛生法で6か月ごとの生息調査が義務</strong>。<strong>食品を扱う事業者は食品衛生法(HACCP)でそ族・昆虫対策が必須</strong>。違反は改善命令・30万円以下の罰金や営業停止の対象。</p>
+        <p class="cl-qa-src">※建築物衛生法・食品衛生法（2026年7月時点）</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="pest-control" serviceName="害虫駆除" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#law-overview">害虫駆除を規制する法律の全体像</a></li>
+          <li><a href="#biru-kan">建築物衛生法：特定建築物の防除義務（6か月ごと）</a></li>
+          <li><a href="#haccp">食品衛生法・HACCP：そ族昆虫対策の義務化</a></li>
+          <li><a href="#building-type">建物・業種別の義務早見表</a></li>
+          <li><a href="#registration">建築物ねずみ昆虫等防除業の登録と業者資格</a></li>
+          <li><a href="#penalty">違反時のペナルティと行政処分</a></li>
+          <li><a href="#records">保存すべき書類・記録の一覧</a></li>
+          <li><a href="#ipm">IPM（総合的有害生物管理）の実務ステップ</a></li>
+          <li><a href="#checklist">年間管理スケジュールのひな形</a></li>
+          <li><a href="#vendor">適切な業者に依頼するための確認事項</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>2つの柱</strong>：害虫駆除の義務は「建築物衛生法（特定建築物）」と「食品衛生法＝HACCP（食品事業者）」の2系統。自分の施設がどちらに当たるかをまず確認する</li>
+            <li><strong>義務の中身</strong>：特定建築物は6か月ごとの生息状況調査＋計画的防除（IPM）。食品事業者は生息調査・モニタリング・是正・記録の継続</li>
+            <li><strong>違反リスクと対策</strong>：改善命令→30万円以下の罰金、食品事業者は営業停止も。登録業者に委託し、実施記録を5年間保存するのが基本</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="law-overview" class="cl-section">
+        <h2>害虫駆除を規制する法律の全体像</h2>
+        <p>「害虫駆除の法的義務」と一口に言っても、根拠となる法律は建物の規模や業種によって異なります。まずは全体像を押さえましょう。関係する主な法令は次のとおりです。</p>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>害虫駆除に関わる主な法令の比較</caption>
+            <thead>
+              <tr>
+                <th scope="col">法律</th>
+                <th scope="col">適用対象</th>
+                <th scope="col">主な義務</th>
+                <th scope="col">所管</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">建築物衛生法</th>
+                <td>延床3,000m²以上の特定建築物（学校は8,000m²以上）</td>
+                <td>6か月以内ごとの生息状況調査＋計画的防除、帳簿の5年保存</td>
+                <td>厚生労働省／保健所</td>
+              </tr>
+              <tr>
+                <th scope="row">食品衛生法（HACCP）</th>
+                <td>飲食店・食品工場・食品販売など食品を扱う事業者</td>
+                <td>そ族・昆虫の防除を一般衛生管理として実施・記録</td>
+                <td>厚生労働省／保健所</td>
+              </tr>
+              <tr>
+                <th scope="row">労働安全衛生法（事務所衛生基準規則）</th>
+                <td>労働者を使用する事業場</td>
+                <td>ねずみ・昆虫等による被害の防止措置</td>
+                <td>厚生労働省／労働基準監督署</td>
+              </tr>
+              <tr>
+                <th scope="row">感染症法・廃棄物処理法 ほか</th>
+                <td>該当する施設・状況</td>
+                <td>媒介昆虫対策・衛生害虫の発生防止</td>
+                <td>各所管</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>実務上とくに重要なのは、上2つ――<strong>建築物衛生法</strong>と<strong>食品衛生法（HACCP）</strong>です。大型ビルの飲食テナントのように、両方が重なって適用されるケースもあります。それぞれの義務を次章以降で詳しく見ていきます。全体像を先につかみたい場合は、<a href="/column/pest-control-guide/">業務用害虫駆除（PCO）完全ガイド</a>もあわせてご覧ください。</p>
+      </section>
+
+      <section id="biru-kan" class="cl-section">
+        <h2>建築物衛生法：特定建築物の防除義務（6か月ごと）</h2>
+        <p>「建築物における衛生的環境の確保に関する法律」（通称・建築物衛生法／ビル管法）は、多数の人が使用する大規模建築物の衛生管理を定めた法律です。ねずみ・昆虫等の防除も、この法律が求める<strong>建築物環境衛生管理基準</strong>の1項目として位置づけられています。</p>
+
+        <h3>対象となる「特定建築物」の条件</h3>
+        <p>建築物衛生法の対象は<a href="/glossary/#tokutei-kenchikubutsu">特定建築物</a>です。具体的には、次の用途に使われ、かつ延床面積が基準を超える建物が該当します。</p>
+        <ul>
+          <li>興行場・百貨店・集会場・図書館・博物館・美術館・遊技場</li>
+          <li>店舗・事務所</li>
+          <li>学校（研修所を含む）※学校教育法上の学校は8,000m²以上</li>
+          <li>旅館（ホテル）</li>
+        </ul>
+        <p>上記の用途で<strong>延床面積3,000m²以上</strong>（学校のみ8,000m²以上）が特定建築物となります。オフィスビル、商業施設、ホテル、大型店舗などが典型例です。</p>
+
+        <h3>ねずみ・昆虫等の防除に関する具体的義務</h3>
+        <p>特定建築物の所有者・管理者は、建築物環境衛生管理基準に従い、ねずみ・昆虫等（＝ねずみ、ゴキブリ、ハエ、蚊などの衛生害虫）について、次の管理を行わなければなりません。</p>
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">特定建築物に課される防除義務のポイント</h2>
+          <ul>
+            <li><strong>生息状況の調査</strong>：6か月以内ごとに1回、定期的に、統一的に生息状況を調査する</li>
+            <li><strong>防除の実施</strong>：調査の結果に基づき、発生を防止するため必要な措置（防除）を講じる</li>
+            <li><strong>IPMの考え方</strong>：やみくもな薬剤散布ではなく、<a href="/glossary/#ipm">IPM（総合的有害生物管理）</a>に基づき、生息を許さない環境づくりを重視する</li>
+            <li><strong>記録の保存</strong>：調査・防除の実施状況を帳簿に記録し、5年間保存する</li>
+          </ul>
+        </div>
+        <p>ここで重要なのは、義務の起点が「<strong>調査（モニタリング）</strong>」である点です。害虫が出ていなくても、6か月ごとに専門的な生息調査を行い、その結果を記録すること自体が義務になります。「発生していないから何もしない」は、記録が残らないため義務不履行と評価されるおそれがあります。</p>
+
+        <h3>IPM（総合的有害生物管理）とは</h3>
+        <p>建築物衛生法の防除は、2003年（平成15年）の基準改正以降、IPMの考え方が明確に採り入れられています。IPMとは、①発生状況の調査（モニタリング）、②目標水準の設定、③環境的・物理的・化学的手段を組み合わせた防除、④評価――を繰り返す管理手法です。薬剤を一律に定期散布するのではなく、「必要な場所に、必要なときだけ」対策する考え方で、食品を扱う現場との相性も良いものです。IPMの実務手順は本記事の<a href="#ipm">IPMの実務ステップ</a>で解説します。</p>
+      </section>
+
+      <section id="haccp" class="cl-section">
+        <h2>食品衛生法・HACCP：そ族昆虫対策の義務化</h2>
+        <p>2021年（令和3年）6月に、原則としてすべての食品等事業者に<a href="/glossary/#haccp">HACCP</a>に沿った衛生管理が完全義務化されました。これにより、飲食店・食品工場・食品販売店などでは、そ族（ねずみ）・昆虫の防除が明確な管理事項として求められるようになっています。</p>
+
+        <h3>そ族・昆虫対策は「一般衛生管理」の必須項目</h3>
+        <p>HACCPは、危害要因分析（HA）と重要管理点（CCP）による管理だけでなく、その土台となる<strong>一般衛生管理（前提条件プログラム）</strong>の実施を求めます。食品衛生法施行規則の別表で定められた一般衛生管理の項目には、「そ族及び昆虫の防除」が含まれています。具体的には次のような管理が想定されます。</p>
+        <ul>
+          <li><strong>防除計画</strong>：施設の状況に応じた駆除・防除の計画を作成する</li>
+          <li><strong>生息調査</strong>：年2回以上（発生しやすい環境では月1回以上）、そ族・昆虫の生息調査を実施する</li>
+          <li><strong>モニタリング</strong>：捕虫器（ライトトラップ）・粘着トラップなどで継続的に発生傾向を把握する</li>
+          <li><strong>是正措置</strong>：発生を認めた場合に駆除を行い、侵入経路・発生源を是正する</li>
+          <li><strong>記録</strong>：上記の実施内容と結果を記録し、保存する</li>
+        </ul>
+        <p>飲食店における頻度や保健所の立入対応の実務は、<a href="/column/pest-control-inshokuten-hindo-gimu/">飲食店の害虫駆除 頻度・法的義務 完全ガイド</a>で詳しく解説しています。HACCP対応の防除記録の作り方は<a href="/column/pest-control-haccp/">HACCP制度化で必須になった害虫対策ガイド</a>を参照してください。</p>
+
+        <div class="cl-callout cl-callout--warn">
+          <h2 class="cl-callout-h">「小規模だからHACCPは関係ない」は誤解</h2>
+          <ul>
+            <li>小規模な飲食店・店舗は「<strong>HACCPの考え方を取り入れた衛生管理</strong>」という簡略化された運用が認められますが、義務そのものが免除されるわけではありません</li>
+            <li>そ族・昆虫対策は簡略版でも必須項目です。手引書に沿った点検と記録が求められます</li>
+            <li>記録がないと、保健所の立入時に「実施していない」と判断されるリスクがあります</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="building-type" class="cl-section">
+        <h2>建物・業種別の義務早見表</h2>
+        <p>自分の施設にどの義務が当てはまるかを、代表的なケースで整理しました。複数に該当する場合は、より厳しい方（または両方）の管理が必要です。</p>
+
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>建物・業種別に見る害虫駆除の主な義務</caption>
+            <thead>
+              <tr>
+                <th scope="col">施設タイプ</th>
+                <th scope="col">主な根拠法</th>
+                <th scope="col">求められる管理の目安</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">大型オフィスビル・商業施設（3,000m²以上）</th>
+                <td>建築物衛生法</td>
+                <td>6か月ごとの生息調査＋計画的防除、5年保存</td>
+              </tr>
+              <tr>
+                <th scope="row">ホテル・旅館（3,000m²以上）</th>
+                <td>建築物衛生法（＋食品部門はHACCP）</td>
+                <td>6か月ごと調査。客室のトコジラミ対策も重要</td>
+              </tr>
+              <tr>
+                <th scope="row">飲食店（単独店舗・小規模）</th>
+                <td>食品衛生法（HACCP）</td>
+                <td>発生状況に応じた駆除・調査と記録（実務上は月1回が多い）</td>
+              </tr>
+              <tr>
+                <th scope="row">食品工場</th>
+                <td>食品衛生法（HACCP／FSSC22000等）</td>
+                <td>ゾーニング・捕虫器モニタリング・トレンド分析まで</td>
+              </tr>
+              <tr>
+                <th scope="row">分譲・賃貸マンション</th>
+                <td>（法定義務は限定的）</td>
+                <td>共用部・ごみ置場の衛生管理として管理組合が実施</td>
+              </tr>
+              <tr>
+                <th scope="row">倉庫・物流施設</th>
+                <td>食品保管ならHACCP／取引先要求</td>
+                <td>ネズミ・鳥・貯穀害虫対策とIPM記録</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>ホテルの客室害虫や宿泊施設のトコジラミ対応は<a href="/column/pest-control-tokojirami-shukuhaku/">トコジラミ駆除 宿泊施設の対応マニュアル</a>、マンション共用部は<a href="/column/pest-control-mansion-kanri-kumiai/">マンション管理組合の害虫対策</a>、倉庫・物流は<a href="/column/pest-control-souko-butsuryu-ipm/">倉庫・物流施設のIPM</a>もご覧ください。</p>
+      </section>
+
+      <section id="registration" class="cl-section">
+        <h2>建築物ねずみ昆虫等防除業の登録と業者資格</h2>
+        <p>害虫駆除を「依頼する側」の義務とあわせて押さえておきたいのが、「引き受ける側（業者）」の資格です。建築物衛生法は、防除を業として行う事業者について<a href="/glossary/#kenchikubutsu-nezumi-konchu-bojogyo">建築物ねずみ昆虫等防除業</a>の登録制度を設けています（第12条の2）。</p>
+
+        <h3>登録制度のポイント</h3>
+        <ul>
+          <li><strong>登録先</strong>：事業所ごとに、所在地の都道府県知事に登録する</li>
+          <li><strong>要件</strong>：防除作業監督者の選任、必要な機械器具の保有、作業の方法などの基準を満たすこと</li>
+          <li><strong>性質</strong>：この登録は<strong>任意</strong>の制度。無登録でも防除業自体は営めるが、登録業者は「一定の水準を満たしている」目安になる</li>
+          <li><strong>有効期間</strong>：登録の有効期間は6年（更新が必要）</li>
+        </ul>
+        <p>特定建築物の防除は専門性が高く、記録の信頼性も問われます。発注時には登録番号の有無を確認し、あわせて日本ペストコントロール協会などの<a href="/column/pest-control-kyokai-kaiin/">協会会員かどうか</a>も参考にするとよいでしょう。</p>
+
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">発注者が確認したい業者の資格・登録</h2>
+          <ul>
+            <li>建築物ねずみ昆虫等防除業の<strong>都道府県知事登録番号</strong></li>
+            <li>防除作業監督者・ペストコントロール技術者などの<strong>有資格者</strong>の在籍</li>
+            <li>特定建築物やHACCP対応の<strong>実績</strong>と、報告書・記録の発行体制</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="penalty" class="cl-section">
+        <h2>違反時のペナルティと行政処分</h2>
+        <p>害虫駆除の義務違反は、法律ごとにペナルティの重さが異なります。</p>
+
+        <h3>建築物衛生法の場合</h3>
+        <p>特定建築物が管理基準に適合していない場合、保健所（都道府県知事等）は改善のための指導を行い、状況が改善されなければ<strong>改善命令</strong>（第11条）を出します。この命令に従わなかったときは、<strong>30万円以下の罰金</strong>が科されることがあります。加えて、立入検査の拒否や虚偽報告にも罰則が定められています。</p>
+
+        <h3>食品衛生法（HACCP）の場合</h3>
+        <p>飲食店・食品工場でそ族昆虫対策が不十分な場合、まずは保健所の<strong>改善指導</strong>が入ります。改善されない、または異物混入・食中毒など具体的な被害が生じた場合は、<strong>営業停止・営業許可の取消し</strong>といった行政処分につながることがあります。害虫（ゴキブリ・ネズミ等）の混入は、SNS等で拡散されれば信用失墜・損害賠償のリスクも大きく、罰則以上の実害となりがちです。</p>
+
+        <div class="cl-callout cl-callout--warn">
+          <h2 class="cl-callout-h">罰則よりも怖い「実害」</h2>
+          <ul>
+            <li>異物（虫・ネズミの痕跡）混入による<strong>クレーム・返金・賠償</strong></li>
+            <li>取引先監査（食品工場のFSSC22000等）での<strong>是正指摘・取引停止</strong></li>
+            <li>口コミ・SNS拡散による<strong>ブランド毀損</strong></li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="records" class="cl-section">
+        <h2>保存すべき書類・記録の一覧</h2>
+        <p>害虫駆除の義務は「実施すること」と同じくらい「記録を残すこと」が重視されます。保健所の立入や取引先監査で提示を求められるのは、多くの場合これらの帳票です。</p>
+        <ul>
+          <li><strong>生息状況調査の結果票</strong>（いつ・どこを・どう調べ・どうだったか）</li>
+          <li><strong>防除作業報告書</strong>（実施日・区域・使用薬剤・施工方法・作業者）</li>
+          <li><strong>モニタリング記録</strong>（捕虫器・粘着トラップの捕獲数の推移）</li>
+          <li><strong>是正措置の記録</strong>（発生時にどう対応し、発生源をどう改善したか）</li>
+          <li><strong>年間防除計画書</strong>（IPMに基づく管理計画）</li>
+          <li><strong>業者の登録証・資格の写し</strong></li>
+        </ul>
+        <p>特定建築物ではこれらの帳簿書類を<strong>5年間</strong>保存する義務があります（建築物衛生法施行規則）。HACCPの記録も、取り扱う食品の性質に応じて適切な期間保存します。これらの報告書を確実に発行してくれるかどうかは、業者選びの重要な判断材料です。</p>
+      </section>
+
+      <section id="ipm" class="cl-section">
+        <h2>IPM（総合的有害生物管理）の実務ステップ</h2>
+        <p>建築物衛生法・HACCPのいずれもIPMの考え方を土台にしています。実務では、次のサイクルを回すことが「適切な防除」とされます。</p>
+        <ol>
+          <li><strong>調査（モニタリング）</strong>：捕虫器・粘着トラップ・目視で、種類・数・発生場所を把握する</li>
+          <li><strong>評価・目標設定</strong>：許容水準（この場所ではゼロ、この場所はこの数まで等）を決める</li>
+          <li><strong>防除の実施</strong>：環境的対策（清掃・侵入経路封鎖）＋物理的対策（トラップ）＋必要最小限の化学的対策を組み合わせる</li>
+          <li><strong>再評価・記録</strong>：効果を確認し、次サイクルに反映。すべて記録する</li>
+        </ol>
+        <p>ポイントは、薬剤散布を「主役」にしないことです。ゴキブリやネズミは、餌・水・すみかがある限り再発します。清掃・整理整頓・侵入経路の封鎖といった<strong>環境整備</strong>こそが、法が求める「発生を許さない管理」の核心です。定期管理とスポット駆除の違いは<a href="/column/pest-control-teiki-spot-hikaku/">定期管理とスポット駆除の比較</a>で解説しています。</p>
+      </section>
+
+      <section id="checklist" class="cl-section">
+        <h2>年間管理スケジュールのひな形</h2>
+        <p>特定建築物・食品事業者が実務で組みやすい、年間スケジュールの一例です。施設の実情に合わせて調整してください。</p>
+        <ul class="cl-check">
+          <li>毎月：厨房・食品取扱区域のモニタリング（捕虫器の確認・清掃点検）※発生しやすい施設</li>
+          <li>3か月ごと：定期防除作業＋トラップ交換、記録の更新</li>
+          <li>6か月ごと：全館の統一的な生息状況調査（建築物衛生法の基準）</li>
+          <li>年1回：年間防除計画の見直し、業者との契約・報告体制の点検</li>
+          <li>随時：発生時の是正措置と、侵入経路・発生源の改善記録</li>
+        </ul>
+        <p>他サービスの年間スケジュールと合わせて管理したい場合は、<a href="/column/shisetsu-kanri-nenkan-schedule/">施設管理の年間スケジュール</a>もご活用ください。</p>
+      </section>
+
+      <section id="vendor" class="cl-section">
+        <h2>適切な業者に依頼するための確認事項</h2>
+        <p>法的義務を確実に果たすには、記録まで含めて任せられる業者選びが欠かせません。発注前に次の点を確認しましょう。</p>
+        <ul>
+          <li>✅ 建築物ねずみ昆虫等防除業の<strong>登録番号</strong>があるか（見積書・契約書に明記されているか）</li>
+          <li>✅ 生息調査結果・防除作業報告書を<strong>書面で発行</strong>してくれるか</li>
+          <li>✅ IPMに基づく<strong>年間防除計画</strong>を提案してくれるか</li>
+          <li>✅ HACCP・特定建築物の<strong>対応実績</strong>があるか（監査対応の可否）</li>
+          <li>✅ 使用薬剤の<strong>安全性</strong>と、食品取扱区域での施工方法</li>
+        </ul>
+        <p>業者選びの詳しいチェックポイントは<a href="/column/pest-control-gokiburi-gyosha/">害虫駆除業者の選び方</a>を、費用の目安は<a href="/column/pest-control-hiyo-sohba/">業務用害虫駆除の費用相場</a>をご参照ください。</p>
+
+        <section class="cl-cta">
+          <h2>害虫駆除の業者を無料で一括比較</h2>
+          <p>法的義務を確実に満たすには、登録業者への依頼とIPMに基づく記録の整備が基本です。一度の入力で最大3社から見積もりを取り寄せ、対応範囲・料金・報告書発行の有無を比較できます。業者をお選びいただくまで、業者からの連絡は一切ありません。</p>
+          <a href="/pest-control/" class="cta-btn-primary">無料で一括見積もりを依頼する</a>
+        </section>
+      </section>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          <div class="cl-faq-item">
+            <dt>害虫駆除は法律で義務づけられていますか？</dt>
+            <dd>建物や業種によります。延床面積3,000m²以上の特定建築物は建築物衛生法により、6か月以内ごとに1回、ねずみ・昆虫等の生息状況調査を行い、必要に応じて防除することが義務づけられています。また飲食店・食品工場など食品を扱う事業者は、2021年6月完全義務化のHACCPに沿った衛生管理の一環として、そ族（ねずみ）・昆虫の防除を継続的に行う必要があります。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>特定建築物とは何ですか？害虫駆除の義務はどう違いますか？</dt>
+            <dd>特定建築物とは、延床面積3,000m²以上（学校教育法上の学校は8,000m²以上）で、事務所・店舗・百貨店・ホテル・集会場などの用途に使われる建築物です。特定建築物では建築物環境衛生管理基準に基づき、6か月以内ごとの生息状況調査と、統一的・計画的な防除（IPMの考え方に基づく）が義務づけられ、その記録を5年間保存する必要があります。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>小さな飲食店でも害虫駆除の義務はありますか？</dt>
+            <dd>特定建築物に該当しない小規模店舗でも、食品を扱う場合は食品衛生法（HACCPに沿った衛生管理）により、そ族・昆虫の防除が求められます。具体的には、生息調査を年2回以上（発生しやすい環境では月1回以上）行い、発生を認めた場合に駆除を実施し、その記録を残すことが一般衛生管理の基準として定められています。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>害虫駆除の記録はどれくらい保存しなければなりませんか？</dt>
+            <dd>特定建築物では建築物衛生法施行規則により、防除の実施記録・生息状況調査の結果などの帳簿書類を5年間保存する義務があります。食品衛生法（HACCP）の記録は、取り扱う食品の流通期間などを踏まえて事業者が保存期間を設定しますが、実務上は少なくとも1年以上の保存が推奨されます。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>害虫駆除を依頼する業者に資格や登録は必要ですか？</dt>
+            <dd>業者側には「建築物ねずみ昆虫等防除業」の都道府県知事登録の制度があります（建築物衛生法第12条の2）。これは任意の登録制度ですが、防除作業監督者の選任や機械器具の保有など一定の要件を満たした業者だけが登録できるため、発注者は登録番号のある業者を選ぶことで品質の目安になります。特定建築物の防除を委託する際は特に確認をおすすめします。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>害虫駆除の義務に違反するとどうなりますか？</dt>
+            <dd>特定建築物で管理基準を満たさない場合、保健所からの改善指導・改善命令（建築物衛生法第11条）の対象となり、命令に従わないと30万円以下の罰金が科されることがあります。飲食店・食品工場では、そ族昆虫対策の不備が原因で異物混入・食中毒が発生すると、食品衛生法に基づく営業停止・許可取消などの行政処分や、損害賠償・信用失墜につながります。</dd>
+          </div>
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別の害虫駆除業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/pest-control/tokyo/">東京都</a></li>
+          <li><a href="/pest-control/osaka/">大阪府</a></li>
+          <li><a href="/pest-control/fukuoka/">福岡県</a></li>
+          <li><a href="/pest-control/aichi/">愛知県</a></li>
+          <li><a href="/pest-control/kanagawa/">神奈川県</a></li>
+          <li><a href="/pest-control/saitama/">埼玉県</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/pest-control/">全国47都道府県の対応業者を見る</a></p>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">参考法令・一次資料</h2>
+        <ul>
+          <li><a href="https://elaws.e-gov.go.jp/document?lawid=345AC0000000020" target="_blank" rel="noopener">建築物における衛生的環境の確保に関する法律（建築物衛生法）｜e-Gov法令検索</a></li>
+          <li><a href="https://elaws.e-gov.go.jp/document?lawid=322AC0000000233" target="_blank" rel="noopener">食品衛生法（昭和22年法律第233号）｜e-Gov法令検索</a></li>
+          <li><a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/shokuhin/haccp/index.html" target="_blank" rel="noopener">HACCPに沿った衛生管理の制度化｜厚生労働省</a></li>
+        </ul>
+      </aside>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連する詳細情報</h2>
+        <ul>
+          <li><a href="/column/pest-control-guide/">業務用害虫駆除（PCO）完全ガイド｜法的義務・費用・業者選びの総まとめ</a></li>
+          <li><a href="/column/pest-control-haccp/">HACCP制度化で必須になった害虫対策ガイド｜防除記録の作り方</a></li>
+          <li><a href="/column/pest-control-inshokuten-hindo-gimu/">飲食店の害虫駆除 頻度・法的義務 完全ガイド</a></li>
+          <li><a href="/column/pest-control-hiyo-sohba/">業務用害虫駆除（PCO）の費用相場</a></li>
+          <li><a href="/column/jusuisou-seisou-horei-gimu/">受水槽清掃の法定義務ガイド｜水道法・建築物衛生法の要点</a></li>
+          <li><a href="/column/duct-horei-gimu/">ダクト清掃の法令義務ガイド｜消防法・建築物衛生法に基づく防火管理</a></li>
+        </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#biru-kan-ho">建築物衛生法（ビル管法）</a></li>
+          <li><a href="/glossary/#tokutei-kenchikubutsu">特定建築物</a></li>
+          <li><a href="/glossary/#haccp">HACCP</a></li>
+          <li><a href="/glossary/#ipm">IPM（総合的有害生物管理）</a></li>
+          <li><a href="/glossary/#kenchikubutsu-nezumi-konchu-bojogyo">建築物ねずみ昆虫等防除業</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集をすべて見る</a></p>
+      </aside>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-article { background: #fff; }
+.cl-header {
+  background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%);
+  color: #fff;
+  padding: 48px 0 40px;
+}
+.cl-crumbs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .78rem;
+  margin-bottom: 16px;
+  opacity: .85;
+}
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat {
+  display: inline-block;
+  background: rgba(255,255,255,.2);
+  color: #fff;
+  font-size: .72rem;
+  font-weight: 700;
+  padding: 3px 12px;
+  border-radius: 99px;
+  letter-spacing: .06em;
+  margin-bottom: 14px;
+}
+.cl-title {
+  font-size: clamp(1.15rem, 3vw, 1.55rem);
+  font-weight: 900;
+  line-height: 1.45;
+  margin-bottom: 16px;
+}
+.cl-lead {
+  font-size: .95rem;
+  line-height: 1.85;
+  opacity: .92;
+  max-width: 720px;
+}
+.cl-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: .76rem;
+  opacity: .72;
+  margin-top: 20px;
+}
+.cl-body {
+  padding: 40px 20px 60px;
+  max-width: 860px;
+}
+.cl-toc {
+  background: var(--gray-100);
+  border: 1px solid var(--gray-200);
+  border-radius: 10px;
+  padding: 22px 26px;
+  margin-bottom: 40px;
+}
+.cl-toc-h {
+  font-size: .88rem;
+  font-weight: 800;
+  color: var(--gray-700);
+  margin-bottom: 12px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.cl-toc ol {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 6px;
+}
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section {
+  margin-bottom: 52px;
+}
+.cl-section h2 {
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--gray-900);
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--blue-light);
+}
+.cl-section h3 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--gray-800);
+  margin: 24px 0 12px;
+}
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-note { font-size: .82rem; color: var(--gray-500); font-style: italic; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .87rem;
+}
+.cl-table caption {
+  caption-side: top;
+  font-size: .78rem;
+  color: var(--gray-500);
+  text-align: left;
+  margin-bottom: 8px;
+}
+.cl-table th, .cl-table td {
+  padding: 10px 14px;
+  border: 1px solid var(--gray-200);
+  text-align: left;
+  line-height: 1.6;
+}
+.cl-table thead th {
+  background: var(--blue-light);
+  color: var(--blue-dark);
+  font-weight: 700;
+}
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] {
+  background: #f3f4f6;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.cl-callout {
+  background: var(--blue-light);
+  border-left: 4px solid var(--blue);
+  border-radius: 0 8px 8px 0;
+  padding: 20px 24px;
+  margin: 20px 0;
+}
+.cl-callout--warn {
+  background: #fff7ed;
+  border-left-color: #f97316;
+}
+.cl-callout-h {
+  font-size: .95rem;
+  font-weight: 800;
+  color: var(--blue-dark);
+  margin-bottom: 10px;
+}
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul, .cl-callout--warn ul { padding-left: 18px; margin: 0; }
+.cl-callout li, .cl-callout--warn li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item {
+  border: 1px solid var(--gray-200);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.cl-faq-item dt {
+  background: var(--gray-100);
+  padding: 14px 18px;
+  font-weight: 700;
+  font-size: .93rem;
+  color: var(--gray-900);
+}
+.cl-faq-item dd {
+  padding: 14px 18px;
+  font-size: .88rem;
+  line-height: 1.85;
+  color: var(--gray-700);
+  margin: 0;
+}
+.cl-cta {
+  background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%);
+  color: #fff;
+  padding: 36px 32px;
+  border-radius: 14px;
+  text-align: center;
+  margin: 48px 0 40px;
+}
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary {
+  display: inline-block;
+  background: #f59e0b;
+  color: #1a1a1a;
+  font-weight: 800;
+  font-size: 1rem;
+  padding: 14px 32px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related {
+  background: var(--gray-100);
+  border-radius: 10px;
+  padding: 22px 26px;
+  margin-top: 40px;
+}
+.cl-related-h {
+  font-size: .88rem;
+  font-weight: 800;
+  color: var(--gray-700);
+  margin-bottom: 12px;
+  letter-spacing: .04em;
+}
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+@media (max-width: 600px) {
+  .cl-header { padding: 32px 0 28px; }
+  .cl-body { padding: 28px 16px 48px; }
+  .cl-toc, .cl-callout, .cl-related, .cl-cta { padding: 18px 20px; }
+}
+
+.cl-quickanswer {
+  background: #eef6ff;
+  border: 1.5px solid #1a56db;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-bottom: 32px;
+}
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+.cl-glossary-block { background: #fffdf5; border: 1px solid #f0e6c0; border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-glossary-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; }
+.cl-glossary-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; }
+.cl-glossary-list a { color: var(--blue); text-decoration: underline; font-size: .88rem; }
+.cl-glossary-more { font-size: .87rem; margin: 0; }
+.cl-glossary-more a { color: var(--blue); text-decoration: underline; }
+
+/* セルフチェックリスト */
+.cl-check {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 22px;
+  display: grid;
+  gap: 8px;
+}
+.cl-check li {
+  position: relative;
+  padding: 10px 14px 10px 38px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: .9rem;
+  line-height: 1.65;
+  color: var(--gray-800);
+}
+.cl-check li::before {
+  content: "☑";
+  position: absolute;
+  left: 12px;
+  top: 10px;
+  font-size: 1.1rem;
+  color: var(--blue);
+  font-weight: 700;
+}
+
+</style>

@@ -1,0 +1,429 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = '消防設備点検の機器点検と総合点検の違い｜項目・頻度・1回でまとめられる？';
+const description = '消防設備点検の「機器点検」と「総合点検」の違いを施設管理担当者向けに解説。機器点検は6か月に1回、総合点検は1年に1回という頻度の差、確認する項目・所要時間・入居者への影響、年2回の訪問で両方をまとめる実務の組み方、機器点検のみの契約が成り立つかまで整理しました。';
+const canonical = `${site.domain}/column/shobo-setsubi-kiki-sougou/`;
+const published = '2026-06-16';
+const modified = '2026-06-16';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '機器点検と総合点検の違い', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 5200,
+  articleSection: '消防設備点検',
+  keywords: '消防設備点検,機器点検,総合点検,違い,頻度,6か月,1年,点検項目,機器点検のみ,2026',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-shobo-setsubi.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '消防設備点検', serviceType: '消防用設備等の点検' },
+  citation: [
+    { '@type': 'Legislation', name: '消防法第17条の3の3', url: 'https://laws.e-gov.go.jp/law/323AC1000000186' },
+    { '@type': 'Legislation', name: '消防法施行規則第31条の6', url: 'https://laws.e-gov.go.jp/law/336M50000008006' },
+    { '@type': 'CreativeWork', name: '消防用設備等の点検基準・点検要領', url: 'https://www.fdma.go.jp/mission/prevention/post-1.html' },
+  ],
+});
+
+const faqItems = [
+  {
+    q: '機器点検と総合点検の一番の違いは何ですか？',
+    a: '頻度と確認の深さです。機器点検は6か月に1回、消防用設備等の配置・損傷・外観や機能の概要を確認します。総合点検は1年に1回、設備を実際に作動させて総合的な機能を確認します。総合点検のほうが踏み込んだ内容で、放水試験や警報の鳴動試験などを伴います。',
+  },
+  {
+    q: '年に何回点検すればよいのですか？',
+    a: '機器点検は6か月に1回なので年2回、総合点検は1年に1回です。実務では、機器点検2回のうち1回を総合点検と同じ日にまとめ、年2回の訪問（例：春と秋）でカバーするスケジュールが一般的です。つまり「年2回現場に来てもらう」契約が標準的な形です。',
+  },
+  {
+    q: '機器点検と総合点検は同じ日にまとめてできますか？',
+    a: 'はい。多くの業者は、年2回の訪問のうち1回で「機器点検＋総合点検」を同時に実施します。残り1回は機器点検のみです。これにより訪問回数を年2回に抑えつつ、6か月ごとの機器点検と年1回の総合点検の両方を満たせます。',
+  },
+  {
+    q: '「機器点検のみ」の契約でも法律上問題ありませんか？',
+    a: '機器点検だけでは不十分です。消防用設備等は機器点検（6か月に1回）と総合点検（1年に1回）の両方が必要で、総合点検を行わないと点検義務を満たせません。「機器点検のみ」と書かれた見積もりは、総合点検が別料金になっていないか、年間で両方が実施される内容かを必ず確認してください。',
+  },
+  {
+    q: '総合点検では何をするのですか？',
+    a: '設備を実際に作動させて機能を確認します。屋内消火栓の放水試験、スプリンクラーの作動試験、自動火災報知設備の総合的な作動・連動試験、非常警報設備の鳴動試験、非常用発電機の負荷試験などが代表例です。警報音や放水を伴うため、入居者・利用者への事前告知が必要です。',
+  },
+  {
+    q: '総合点検のとき警報音は鳴りますか？',
+    a: '鳴る場合があります。総合点検では自動火災報知設備や非常警報設備の鳴動試験を行うため、館内に警報音が流れることがあります。点検前に掲示・ポスティング等で「点検のため警報が鳴ることがある」旨を告知し、本物の火災と誤認されないようにするのが実務上の基本です。',
+  },
+  {
+    q: '点検にかかる時間はどのくらいですか？',
+    a: '建物規模によります。中規模ビルの場合、機器点検は半日〜1日程度、総合点検は1〜2日程度が目安です。総合点検は作動試験を伴うため機器点検より時間がかかります。住戸数の多いマンションは、専有部の在宅状況によって所要日数が変動します。',
+  },
+  {
+    q: '機器点検と総合点検で報告書は別々ですか？',
+    a: '点検結果報告書は、機器点検・総合点検の結果をまとめて所轄消防署へ報告します。報告の頻度は特定防火対象物で1年に1回、非特定防火対象物で3年に1回です。日々の点検記録（点検票）は点検ごとに作成し、報告のタイミングでまとめて提出する流れになります。',
+  },
+];
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-answer-grid', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-shobo-setsubi.png` },
+});
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified}
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a>
+          <span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a>
+          <span aria-hidden="true">›</span>
+          <span>機器点検と総合点検の違い</span>
+        </nav>
+        <span class="cl-cat">消防設備点検</span>
+        <h1 class="cl-title">消防設備点検の機器点検と総合点検の違い｜項目・頻度・1回でまとめられる？</h1>
+        <p class="cl-lead">
+          消防設備点検には<strong>「機器点検」と「総合点検」の2種類</strong>があり、頻度・確認する内容・所要時間が異なります。見積もりを比較するとき、「機器点検のみ」になっていないか、年間で両方が実施される内容かを見落とすと、点検義務を満たせないことがあります。本記事では2つの点検の違い、確認項目、年2回の訪問で両方をまとめる実務の組み方を、施設管理担当者向けに整理します。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年6月16日</time>
+          <span>最終更新：2026年6月16日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 機器点検と総合点検の違いは？</p>
+        <p class="cl-qa-a">A. <strong>機器点検は6か月に1回（外観・機能の概要確認）、総合点検は1年に1回（設備を作動させる総合確認）</strong>です。両方が必要で、機器点検だけでは義務を満たせません。実務では年2回の訪問のうち1回で機器点検と総合点検を同時に実施します。</p>
+        <p class="cl-qa-src">※消防法第17条の3の3、消防法施行規則第31条の6、点検基準・点検要領をもとに整理</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="shobo-setsubi" serviceName="消防設備点検" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#hikaku">機器点検と総合点検の違い（早見表）</a></li>
+          <li><a href="#kiki">機器点検とは（6か月に1回）</a></li>
+          <li><a href="#sougou">総合点検とは（1年に1回）</a></li>
+          <li><a href="#schedule">年2回の訪問でまとめる実務スケジュール</a></li>
+          <li><a href="#kikinomi">「機器点検のみ」の見積もりに注意</a></li>
+          <li><a href="#houkoku">点検と報告の関係</a></li>
+          <li><a href="#sources">参考にした公式情報</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>機器点検＝6か月に1回・外観や機能の概要確認</strong>。総合点検＝1年に1回・設備を作動させる総合確認</li>
+            <li><strong>両方が必須</strong>。機器点検だけでは点検義務を満たせない。総合点検は放水・警報を伴うため事前告知が必要</li>
+            <li><strong>標準は年2回訪問</strong>。うち1回で機器点検＋総合点検を同時実施、もう1回は機器点検のみ</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="hikaku" class="cl-section">
+        <h2>機器点検と総合点検の違い（早見表）</h2>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>機器点検と総合点検の比較</caption>
+            <thead>
+              <tr><th scope="col">項目</th><th scope="col">機器点検</th><th scope="col">総合点検</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">頻度</th><td>6か月に1回（年2回）</td><td>1年に1回</td></tr>
+              <tr><th scope="row">目的</th><td>配置・損傷・外観・機能の概要確認</td><td>設備を作動させて総合的に機能確認</td></tr>
+              <tr><th scope="row">代表的な内容</th><td>消火器の圧力・位置確認、誘導灯の点灯確認、感知器の外観・取付確認</td><td>消火栓の放水試験、スプリンクラー作動試験、自火報の総合作動試験</td></tr>
+              <tr><th scope="row">所要時間（中規模ビル）</th><td>半日〜1日</td><td>1〜2日</td></tr>
+              <tr><th scope="row">警報音・放水</th><td>原則なし</td><td>あり（鳴動試験・放水試験など）</td></tr>
+              <tr><th scope="row">入居者・利用者への影響</th><td>小さい</td><td>大きい（事前告知が必要）</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>ざっくり言うと、<strong>機器点検は「見て・触って・概要を確認」、総合点検は「実際に動かして確認」</strong>です。総合点検のほうが踏み込んだ内容のため、頻度は年1回に設定されています。</p>
+      </section>
+
+      <section id="kiki" class="cl-section">
+        <h2>機器点検とは（6か月に1回）</h2>
+        <p>機器点検は、消防用設備等が正しく設置され、損傷なく機能する状態にあるかを、外観や簡単な操作で確認する点検です。6か月に1回（年2回）の実施が求められます。</p>
+        <h3>機器点検の主な確認内容</h3>
+        <ul>
+          <li><strong>消火器</strong>：設置位置、圧力ゲージ、本体の腐食・変形、使用期限</li>
+          <li><strong>自動火災報知設備</strong>：感知器の外観・取付状態、受信機の表示・電源</li>
+          <li><strong>誘導灯・誘導標識</strong>：点灯状態、視認性、バッテリー</li>
+          <li><strong>屋内消火栓</strong>：ホース・ノズル・表示灯の状態、格納状況</li>
+          <li><strong>避難器具</strong>：取付状態、損傷、操作のしやすさ</li>
+        </ul>
+        <p>機器点検は警報音や放水を伴わないことが多く、入居者・利用者への影響は比較的小さい点検です。マンションでは専有部の感知器確認のため在宅・立ち会いが必要になります。</p>
+      </section>
+
+      <section id="sougou" class="cl-section">
+        <h2>総合点検とは（1年に1回）</h2>
+        <p>総合点検は、設備を実際に作動させて、全体として正常に機能するかを確認する点検です。1年に1回の実施が求められます。機器点検で「外観・概要」を見るのに対し、総合点検は「本当に動くか」を試します。</p>
+        <h3>総合点検の主な確認内容</h3>
+        <ul>
+          <li><strong>屋内消火栓設備</strong>：実際に放水し、放水圧力・放水量を確認</li>
+          <li><strong>スプリンクラー設備</strong>：末端試験弁による作動試験、ポンプ起動確認</li>
+          <li><strong>自動火災報知設備</strong>：感知器を作動させ、受信機への信号・地区表示・連動（防火戸・排煙等）を総合確認</li>
+          <li><strong>非常警報設備</strong>：非常ベル・放送設備の鳴動試験</li>
+          <li><strong>非常用発電機</strong>：負荷試験等による起動・電源供給の確認</li>
+        </ul>
+        <div class="cl-callout cl-callout--warn">
+          <h3 class="cl-callout-h">総合点検は事前告知が必須</h3>
+          <p>総合点検では警報音の鳴動や放水を伴うため、入居者・テナント・利用者が「本物の火災」と誤認しないよう、必ず事前に掲示・ポスティング等で告知します。商業施設・ホテルでは営業時間や繁忙時間帯を避けた日程調整も重要です。</p>
+        </div>
+      </section>
+
+      <section id="schedule" class="cl-section">
+        <h2>年2回の訪問でまとめる実務スケジュール</h2>
+        <p>「6か月ごとの機器点検」と「年1回の総合点検」をどう組み合わせるか、標準的な年間スケジュールを示します。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>年間点検スケジュールの例</caption>
+            <thead>
+              <tr><th scope="col">時期</th><th scope="col">実施内容</th><th scope="col">入居者への影響</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">春（例：4月）</th><td>機器点検＋総合点検（同日実施）</td><td>警報・放水あり→事前告知</td></tr>
+              <tr><th scope="row">秋（例：10月）</th><td>機器点検のみ</td><td>小さい</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>このように、<strong>年2回の訪問のうち1回で機器点検と総合点検をまとめて実施</strong>するのが一般的です。これにより、現場への訪問は年2回に抑えつつ、6か月ごとの機器点検（年2回）と年1回の総合点検の両方を満たせます。見積もりを取る際は「年2回訪問・うち1回は総合点検込み」という形になっているかを確認しましょう。</p>
+      </section>
+
+      <section id="kikinomi" class="cl-section">
+        <h2>「機器点検のみ」の見積もりに注意</h2>
+        <p>業者の見積もりで「機器点検のみ」と記載されている場合、注意が必要です。機器点検だけでは消防用設備等の点検義務を満たせません。</p>
+        <div class="cl-callout cl-callout--warn">
+          <h3 class="cl-callout-h">見積もりで確認すべきこと</h3>
+          <ul>
+            <li><strong>総合点検が含まれているか</strong>：年1回の総合点検が見積もりに入っているか。別料金になっていないか</li>
+            <li><strong>年間の訪問回数と内容</strong>：「年2回訪問・うち1回総合点検込み」など、年間で両方をカバーする内容か</li>
+            <li><strong>報告書作成・提出</strong>：点検だけでなく、所轄消防署への報告書作成・提出まで含まれるか</li>
+          </ul>
+        </div>
+        <p>極端に安い見積もりは、「機器点検のみ」で総合点検が抜けていたり、報告書作成が別料金だったりすることがあります。複数業者で比較するときは、<strong>「年2回訪問・機器点検2回＋総合点検1回＋報告書提出まで」</strong>という同じ条件で見積条件をそろえると、純粋な価格比較ができます。</p>
+      </section>
+
+      <section id="houkoku" class="cl-section">
+        <h2>点検と報告の関係</h2>
+        <p>機器点検・総合点検の結果は、点検票としてその都度記録し、所轄消防署への報告のタイミングでまとめて提出します。点検と報告は別の義務です。</p>
+        <ul>
+          <li><strong>点検頻度</strong>：機器点検6か月に1回、総合点検1年に1回（建物用途に関わらず共通）</li>
+          <li><strong>報告頻度</strong>：特定防火対象物は1年に1回、非特定防火対象物は3年に1回</li>
+          <li><strong>注意点</strong>：点検していても報告書を提出していなければ報告義務違反になる</li>
+        </ul>
+        <p>報告義務・資格者要件・罰則の詳細は、<a href="/column/shobo-setsubi-horei-gimu/">消防設備点検の点検・報告義務ガイド2026</a>で詳しく解説しています。</p>
+      </section>
+
+      <section id="sources" class="cl-section">
+        <h2>参考にした公式情報</h2>
+        <p>本記事は、消防法・消防法施行規則・消防庁の公開情報をもとに、施設管理の実務で使いやすい形に整理しています。具体的な点検項目・判定基準は、消防庁の点検基準・点検要領および所轄消防署の案内を確認してください。</p>
+        <ul class="cl-source-list">
+          <li><a href="https://laws.e-gov.go.jp/law/323AC1000000186" target="_blank" rel="noopener">消防法｜e-Gov法令検索</a></li>
+          <li><a href="https://laws.e-gov.go.jp/law/336M50000008006" target="_blank" rel="noopener">消防法施行規則｜e-Gov法令検索</a></li>
+          <li><a href="https://www.fdma.go.jp/mission/prevention/post-1.html" target="_blank" rel="noopener">消防用設備等の点検基準・点検要領・点検票｜総務省消防庁</a></li>
+          <li><a href="https://www.tfd.metro.tokyo.lg.jp/lfe/office_adv/tenken_houkoku.html" target="_blank" rel="noopener">消防用設備等点検報告制度｜東京消防庁</a></li>
+        </ul>
+      </section>
+
+      <div class="cl-cta">
+        <h2>消防設備点検の業者選びでお悩みなら</h2>
+        <p>機器点検・総合点検・報告書提出までワンストップ対応の有資格業者から<br/>最大3社の見積もりを完全無料・約1分で取得できます</p>
+        <a class="cta-btn-primary" href="/shobo-setsubi/">無料で一括見積もりを依頼する</a>
+      </div>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          {faqItems.map((item) => (
+            <div class="cl-faq-item">
+              <dt>{item.q}</dt>
+              <dd>{item.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別の消防設備点検業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/shobo-setsubi/tokyo/">東京都</a></li>
+          <li><a href="/shobo-setsubi/osaka/">大阪府</a></li>
+          <li><a href="/shobo-setsubi/kanagawa/">神奈川県</a></li>
+          <li><a href="/shobo-setsubi/aichi/">愛知県</a></li>
+          <li><a href="/shobo-setsubi/saitama/">埼玉県</a></li>
+          <li><a href="/shobo-setsubi/chiba/">千葉県</a></li>
+          <li><a href="/shobo-setsubi/hyogo/">兵庫県</a></li>
+          <li><a href="/shobo-setsubi/fukuoka/">福岡県</a></li>
+          <li><a href="/shobo-setsubi/hokkaido/">北海道</a></li>
+          <li><a href="/shobo-setsubi/kyoto/">京都府</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/shobo-setsubi/">全国47都道府県の対応業者を見る</a></p>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連サービス・コラム</h2>
+        <ul>
+          <li><a href="/shobo-setsubi/">消防設備点検の業者を一括見積比較</a></li>
+          <li><a href="/column/shobo-setsubi-horei-gimu/">消防設備点検の点検・報告義務ガイド2026｜消防法17条の3の3</a></li>
+          <li><a href="/column/shobo-setsubi-hiyo-sohba/">消防設備点検の費用相場2026｜建物規模・契約形態別</a></li>
+          <li><a href="/column/shobo-setsubi-fuzai-tachiai/">消防設備点検で入居者が不在・立ち会えないとき2026</a></li>
+          <li><a href="/flow/">ご利用の流れ・3ステップで業者紹介</a></li>
+        </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#shobo-ho">消防法</a></li>
+          <li><a href="/glossary/#kiki-tenken">機器点検</a></li>
+          <li><a href="/glossary/#sogo-tenken">総合点検</a></li>
+          <li><a href="/glossary/#jidoukasai-hochi-setsubi">自動火災報知設備</a></li>
+          <li><a href="/glossary/#sprinkler">スプリンクラー設備</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集（49語）をすべて見る</a></p>
+      </aside>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header {
+  background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%);
+  color: #fff;
+  padding: 48px 0 40px;
+}
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul, .cl-callout--warn ul { padding-left: 18px; margin: 0; }
+.cl-callout li, .cl-callout--warn li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-answer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 20px 0 24px; }
+.cl-answer-grid > div { background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; padding: 18px 20px; box-shadow: 0 6px 18px rgba(15, 23, 42, .05); }
+.cl-answer-grid h3 { font-size: 1rem; color: var(--blue-dark); margin: 0 0 8px; }
+.cl-answer-grid p { margin: 0; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-source-list { padding-left: 22px; display: grid; gap: 8px; }
+.cl-source-list a { color: var(--blue); text-decoration: underline; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-glossary-block { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 24px; }
+.cl-glossary-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; }
+.cl-glossary-list { padding-left: 18px; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; }
+.cl-glossary-list a { color: var(--blue); text-decoration: underline; font-size: .88rem; }
+.cl-glossary-more { font-size: .85rem; margin: 12px 0 0; }
+.cl-glossary-more a { color: var(--blue); text-decoration: underline; }
+@media (max-width: 600px) {
+  .cl-header { padding: 32px 0 28px; }
+  .cl-body { padding: 28px 16px 48px; }
+  .cl-section h2 { font-size: 1.15rem; }
+  .cl-answer-grid { grid-template-columns: 1fr; }
+}
+
+.cl-quickanswer {
+  background: #eef6ff;
+  border: 1.5px solid #1a56db;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-bottom: 32px;
+}
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+</style>

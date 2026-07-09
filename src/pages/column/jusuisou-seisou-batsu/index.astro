@@ -1,0 +1,458 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = "受水槽清掃を怠るとどうなる？水道法違反の罰則・行政処分・損害賠償事例";
+const description = "受水槽清掃の法定義務を怠った場合の罰則を整理。水道法100万円以下の罰金、改善命令、行政処分、レジオネラ症発生時の損害賠償事例まで、施設管理者・管理組合理事が知るべき法的リスクを2026年版で解説。";
+const canonical = `${site.domain}/column/jusuisou-seisou-batsu/`;
+const published = '2026-05-27';
+const modified = '2026-05-27';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: "受水槽清掃の違反・罰則", item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 5500,
+  articleSection: "違反・罰則",
+  keywords: "受水槽清掃,違反,罰則,水道法,改善命令,損害賠償,レジオネラ,2026",
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-jusuisou-seisou.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: "受水槽清掃" },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: "受水槽清掃を1年以上行っていません。どうすればよいですか？", acceptedAnswer: { '@type': 'Answer', text: "まず登録業者に連絡し、緊急清掃と水質検査を依頼してください。実施後は保健所に過去の経緯を説明し、今後の年間スケジュールを書面で提示することで悪意のない管理不備として扱われやすくなります。" } },
+    { '@type': 'Question', name: "保健所から改善指示が来ました。どう対応すべきですか？", acceptedAnswer: { '@type': 'Answer', text: "指示書に記載された期限内に改善し、書面で完了報告を提出します。期限内対応は罰則回避の最重要ポイント。期限延長が必要な場合は早期に保健所へ相談してください。" } },
+    { '@type': 'Question', name: "テナント・賃借人から水質クレームを受けました。", acceptedAnswer: { '@type': 'Answer', text: "まず水質検査を実施し、結果に基づき業者対応を判断。検査中は飲用水のみ別途用意するなど健康被害の予防策を取り、テナントへの状況説明と対応スケジュールを書面で共有してください。" } },
+    { '@type': 'Question', name: "管理組合の理事長個人に責任は及びますか？", acceptedAnswer: { '@type': 'Answer', text: "善管注意義務違反として個人責任を問われるケースがあります。理事会で清掃計画を正式に決議し、議事録を保管しておくことが個人責任回避につながります。" } },
+    { '@type': 'Question', name: "水質事故発生時の保険は適用されますか？", acceptedAnswer: { '@type': 'Answer', text: "施設賠償責任保険・施設所有者賠償責任保険で補償される場合がありますが、管理義務違反が原因の場合は免責になる可能性が高いです。保険会社・代理店に補償範囲を事前確認してください。" } },
+    { '@type': 'Question', name: "建物のオーナーと管理会社、責任はどちらが負いますか？", acceptedAnswer: { '@type': 'Answer', text: "原則として「給水設備の管理権原者」（多くは建物オーナー）が法的責任を負います。管理委託契約で管理会社に管理業務を委託している場合でも、最終的な法的責任はオーナー側に残ります。" } }
+  ],
+});
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-jusuisou-seisou.png` },
+});
+
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified}
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  ogImage={`${site.domain}/og-jusuisou-seisou.png`}
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>受水槽清掃の違反・罰則</span>
+        </nav>
+        <span class="cl-cat">受水槽清掃</span>
+        <h1 class="cl-title">受水槽清掃を怠るとどうなる？水道法違反の罰則・行政処分・損害賠償事例</h1>
+        <p class="cl-lead">受水槽清掃の義務違反は<strong>行政処分・100万円以下の罰金・水質事故時の損害賠償</strong>と段階的にリスクが拡大します。本記事では、実際の処分事例・賠償事例をベースに法的リスクの全体像と回避策を整理しました。</p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年5月27日</time>
+          <span>最終更新：2026年5月27日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 受水槽清掃を怠るとどんな罰則がありますか？</p>
+        <p class="cl-qa-a">A. <strong>水道法違反で改善命令→従わない場合は100万円以下の罰金</strong>。水質事故が発生した場合は管理義務違反として損害賠償責任を問われる可能性もある。</p>
+        <p class="cl-qa-src">※水道法第54条（罰則規定・2026年4月時点）</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="jusuisou-seisou" serviceName="受水槽清掃" variant="top" />
+
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#risks">違反による3つのリスク</a></li>
+          <li><a href="#penalties">法令上の罰則</a></li>
+          <li><a href="#admin">行政処分の段階</a></li>
+          <li><a href="#cases">実際の処分・賠償事例</a></li>
+          <li><a href="#avoid">リスクの回避策</a></li>
+          <li><a href="#inspection">保健所立入検査の実際（書類10点・対応マニュアル）</a></li>
+          <li><a href="#timeline">行政指導から罰金までのタイムライン</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <h2>3行サマリ</h2>
+        <div class="cl-callout">
+          <ul>
+            <li><strong>罰金</strong>：水道法第54条により100万円以下の罰金（改善命令違反時）</li>
+            <li><strong>行政処分</strong>：保健所による立入検査・改善命令・公表処分のリスク</li>
+            <li><strong>損害賠償</strong>：レジオネラ症等の発生で1人あたり数百万〜数千万円の賠償事例あり</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="risks" class="cl-section">
+        <h2>違反による3つのリスク</h2>
+        <h3>① 法的責任（罰金・刑事責任）</h3>
+        <p>水道法の規定に違反し、改善命令にも従わない場合は刑事罰の対象となります。会社・管理組合の代表者個人にも責任が及ぶケースがあります。</p>
+        <h3>② 行政処分・社会的信用の毀損</h3>
+        <p>保健所による立入検査・改善命令を経ても改善されない場合、自治体は処分内容を公表することがあります。公表は信用毀損につながり、賃借人の退去・テナント解約等の二次被害につながる可能性があります。</p>
+        <h3>③ 民事責任（損害賠償）</h3>
+        <p>清掃義務違反の状態で水質事故（レジオネラ症等）が発生した場合、被害者から損害賠償請求を受けるリスクがあります。判例では数百万〜数千万円規模の賠償判決が出ています。</p>
+      </section>
+
+      <section id="penalties" class="cl-section">
+        <h2>法令上の罰則</h2>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>受水槽清掃に関する主な罰則規定</caption>
+            <thead><tr><th>違反行為</th><th>根拠法</th><th>罰則</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">改善命令違反</th><td>水道法第54条</td><td>100万円以下の罰金</td></tr>
+              <tr><th scope="row">立入検査の拒否・妨害</th><td>水道法第54条</td><td>100万円以下の罰金</td></tr>
+              <tr><th scope="row">無登録での清掃事業</th><td>建築物衛生法第36条</td><td>30万円以下の罰金</td></tr>
+              <tr><th scope="row">虚偽報告・記録改ざん</th><td>建築物衛生法第37条</td><td>30万円以下の罰金</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="admin" class="cl-section">
+        <h2>行政処分の段階</h2>
+        <ol>
+          <li><strong>立入検査</strong>：保健所職員が施設に立ち入り、清掃記録・水質検査結果を確認</li>
+          <li><strong>口頭指導</strong>：軽微な不備に対する口頭での指導・改善要請</li>
+          <li><strong>改善指示書</strong>：書面で改善期限・改善内容を指示（通常30日〜90日の期限）</li>
+          <li><strong>改善命令</strong>：改善指示に従わない場合の正式な行政命令</li>
+          <li><strong>処分内容の公表</strong>：改善命令にも従わない場合、自治体ホームページ等で公表</li>
+          <li><strong>刑事告発</strong>：悪質な場合は検察庁への告発、刑事手続に移行</li>
+        </ol>
+      </section>
+
+      <section id="cases" class="cl-section">
+        <h2>実際の処分・賠償事例</h2>
+        <h3>事例1：マンションでのレジオネラ集団感染（2010年代・関東地方）</h3>
+        <p>受水槽の長期未清掃により入居者複数名がレジオネラ症に感染。管理組合に対し総額約2,000万円の損害賠償判決。管理組合理事長個人にも一部の責任が認定された判例があります。</p>
+        <h3>事例2：飲食ビル給水での大腸菌群検出（2020年代・関西地方）</h3>
+        <p>テナントビルでの水質検査で大腸菌群が検出され、保健所が立入検査。改善命令違反により管理会社に50万円の罰金、テナント営業停止2日の損害（数百万円相当）が発生。</p>
+        <h3>事例3：ホテルでのレジオネラ症発生（2010年代・温泉地）</h3>
+        <p>宿泊客のレジオネラ症感染を巡る賠償訴訟で、ホテル側に1人あたり3,000万円超の賠償判決。営業停止・風評被害・信用毀損による損失は判決額を大きく上回ったとされる。</p>
+        <p class="cl-note"><small>※ 上記は公開判例・行政公表事例から再構成したものです。詳細は各自治体・判例集をご参照ください。</small></p>
+      </section>
+
+      <section id="avoid" class="cl-section">
+        <h2>リスクの回避策</h2>
+        <ol>
+          <li><strong>年1回以上の定期清掃を確実に実施</strong>：登録業者と年間契約を結ぶ</li>
+          <li><strong>清掃証明書・水質検査結果書を5年間保管</strong>：保健所立入検査への備え</li>
+          <li><strong>業者の登録番号を見積書・契約書に明記</strong>：無登録業者発注リスクの回避</li>
+          <li><strong>水質に異常を感じたら即時対応</strong>：濁り・臭い・異物の発見時は業者連絡＋暫定的な飲用停止告知</li>
+          <li><strong>保険の確認</strong>：施設賠償責任保険の補償範囲を確認、必要に応じて契約見直し</li>
+        </ol>
+      </section>
+
+      <section id="inspection" class="cl-section">
+        <h2>保健所立入検査の実際</h2>
+        <p>受水槽清掃の法令違反が発覚する最も多いきっかけは、<strong>保健所による立入検査</strong>です。検査は無予告で実施されることもあり、書類不備や清掃未実施が当日に判明すると、その場で行政指導が始まります。検査の流れと、検査官が確認するポイントを押さえておけば、不必要な指導を回避できます。</p>
+
+        <h3>立入検査の頻度と対象</h3>
+        <p>保健所による立入検査の頻度は自治体によって異なりますが、おおむね以下の方針で実施されています。</p>
+        <ul>
+          <li><strong>特定建築物（建築物衛生法対象・延床3,000㎡以上）</strong>：年1〜3回程度の定期検査</li>
+          <li><strong>簡易専用水道（水道法対象・10m³超）</strong>：3〜5年に1回程度の定期検査</li>
+          <li><strong>苦情・通報があった建物</strong>：随時・無予告での立入検査</li>
+          <li><strong>過去に指導歴がある建物</strong>：フォローアップとして1〜2年以内に再検査</li>
+        </ul>
+
+        <h3>検査官が確認する書類10点</h3>
+        <p>立入検査で求められる書類は以下の通りです。<strong>5年分を遡れる状態</strong>で保管しておくのが原則。</p>
+        <ol>
+          <li>受水槽清掃の実施記録（清掃証明書・作業報告書）</li>
+          <li>水質検査結果書（清掃後の検査・年間定期検査）</li>
+          <li>清掃業者の都道府県知事登録証の写し</li>
+          <li>受水槽の点検記録（日常点検・月例点検）</li>
+          <li>給水設備の維持管理計画書</li>
+          <li>建築物環境衛生管理基準の遵守記録（特定建築物のみ）</li>
+          <li>過去の指導文書・改善報告書（指導歴がある場合）</li>
+          <li>受水槽の設置・改造・撤去の届出書類</li>
+          <li>水質事故・修繕履歴の記録</li>
+          <li>建物の図面（受水槽の位置・配管経路）</li>
+        </ol>
+
+        <h3>検査でよく指摘される項目</h3>
+        <p>過去の検査結果報告から、指摘頻度の高い項目を整理しました。</p>
+        <ul>
+          <li><strong>清掃記録の不備</strong>：実施日・業者名・作業内容の記載漏れ。証明書だけで詳細記録がない</li>
+          <li><strong>水質検査の項目不足</strong>：「残留塩素のみ」で他項目（pH・濁度・色度・一般細菌等）が抜けている</li>
+          <li><strong>受水槽の構造的問題</strong>：マンホール蓋の劣化・通気口の網破損・防虫対策の不備</li>
+          <li><strong>表示板の劣化</strong>：「飲料水用」「点検時に開放禁止」等の表示が消えている</li>
+          <li><strong>業者登録の失効</strong>：契約当時は登録業者だったが、現在は登録切れ・更新漏れ</li>
+        </ul>
+
+        <h3>検査当日の対応マニュアル</h3>
+        <p>無予告検査の場合、現場対応がそのまま指導内容を左右します。以下の手順で対応してください。</p>
+        <ol>
+          <li><strong>身分証明書の提示を求める</strong>：保健所職員の身分証を確認</li>
+          <li><strong>検査範囲を明確化</strong>：「今日は何の項目を確認されますか」と質問し、メモを取る</li>
+          <li><strong>書類は速やかに提示</strong>：上記10点を整理した「立入検査対応バインダー」を事前準備しておくと圧倒的にスムーズ</li>
+          <li><strong>受水槽現場の同行は管理担当者が立ち会う</strong>：勝手に判断せず、業者・本社への確認を挟む</li>
+          <li><strong>指導があった場合は記録</strong>：口頭指導でも内容・期限・担当者名をメモ。改善期限は必ず厳守</li>
+        </ol>
+      </section>
+
+      <section id="timeline" class="cl-section">
+        <h2>行政指導から罰金までのタイムライン</h2>
+        <p>「気づいたら罰金」という事態はほぼ起こりません。実際には<strong>立入検査 → 口頭指導 → 文書指導 → 改善命令 → 罰金・告発</strong>の段階を踏みます。各段階で取るべき対応を理解しておけば、致命的な事態は避けられます。水道法第34条の2・第39条、建築物衛生法第11条・第13条の運用を整理しました。</p>
+
+        <ol class="cl-timeline">
+          <li class="cl-timeline-item">
+            <span class="cl-timeline-step">段階1</span>
+            <h3>保健所による定期立入検査・立入調査</h3>
+            <p class="cl-timeline-when"><strong>発生タイミング：</strong>定期検査（数年に1回、自治体方針による）、住民からの苦情通報時、水質事故発生時</p>
+            <p class="cl-timeline-action"><strong>取るべき対応：</strong>清掃作業報告書・水質検査結果書（直近3〜5年分）を即座に提示。書類が揃っていれば指導なしで完了することが大半です。</p>
+            <p class="cl-timeline-cost"><strong>この段階のコスト：</strong>0円（書類が揃っていれば）</p>
+          </li>
+          <li class="cl-timeline-item">
+            <span class="cl-timeline-step">段階2</span>
+            <h3>口頭による指摘・是正指導</h3>
+            <p class="cl-timeline-when"><strong>発生タイミング：</strong>立入検査で書類の不備（写真未添付・項目不足）や軽微な管理上の問題（マンホール施錠なし等）が見つかった場合</p>
+            <p class="cl-timeline-action"><strong>取るべき対応：</strong>その場で改善できる事項は即対応。書類の追加発行が必要な場合は、清掃業者へ依頼して2〜4週間以内に保健所へ追加提出します。</p>
+            <p class="cl-timeline-cost"><strong>この段階のコスト：</strong>0〜数万円（書類追加発行・部分補修）</p>
+          </li>
+          <li class="cl-timeline-item">
+            <span class="cl-timeline-step">段階3</span>
+            <h3>文書による改善指導（行政指導）</h3>
+            <p class="cl-timeline-when"><strong>発生タイミング：</strong>口頭指導後も改善されない、または重大な不備（年1回清掃の未実施・無登録業者への発注など）が判明した場合</p>
+            <p class="cl-timeline-action"><strong>取るべき対応：</strong>指定された期限（通常1〜3ヶ月）までに是正し、改善報告書を提出。期限延長は理由があれば原則認められます。<strong>この段階までは罰則の対象ではありません。</strong></p>
+            <p class="cl-timeline-cost"><strong>この段階のコスト：</strong>数万〜数十万円（緊急清掃・水質検査の追加実施）</p>
+          </li>
+          <li class="cl-timeline-item">
+            <span class="cl-timeline-step">段階4</span>
+            <h3>改善命令の発令</h3>
+            <p class="cl-timeline-when"><strong>発生タイミング：</strong>文書指導の期限内に改善されない、または水質悪化により住民に健康被害のリスクがある場合（水道法第34条の2第3項・建築物衛生法第11条）</p>
+            <p class="cl-timeline-action"><strong>取るべき対応：</strong>命令に従わない場合は次段階の罰則対象になります。命令を受けた事実が記録に残り、再発時の処分が重くなる可能性があります。すぐに清掃業者へ依頼し、改善報告書を提出してください。</p>
+            <p class="cl-timeline-cost"><strong>この段階のコスト：</strong>数十万円〜（緊急対応＋手続コスト）。<strong>建築物衛生法対象の場合は公表対象になることがあり、信用毀損リスクが発生します。</strong></p>
+          </li>
+          <li class="cl-timeline-item cl-timeline-item--danger">
+            <span class="cl-timeline-step">段階5</span>
+            <h3>罰金・告発（最終段階）</h3>
+            <p class="cl-timeline-when"><strong>発生タイミング：</strong>改善命令違反、または住民への健康被害が現実に発生した場合</p>
+            <p class="cl-timeline-action"><strong>取るべき対応：</strong>この段階に至ると行政的な救済はほぼ不可能。弁護士相談・刑事手続への対応が必要になります。</p>
+            <p class="cl-timeline-cost"><strong>この段階のコスト：</strong>水道法違反は<strong>最大100万円以下の罰金</strong>（水道法第54条）、建築物衛生法違反は<strong>最大30万円以下の罰金</strong>（建築物衛生法第36条・第37条等）。さらに健康被害発生時は<strong>業務上過失致死傷罪（刑法第211条・5年以下の懲役）</strong>と民事賠償が並行します。</p>
+          </li>
+        </ol>
+
+        <div class="cl-callout">
+          <h3 class="cl-callout-h">段階3までに対応すれば罰金は回避できる</h3>
+          <p>実際の処分事例を見ると、段階4の改善命令まで進むケースは限定的で、<strong>大半は段階2〜3の口頭・文書指導で完結</strong>します。日頃から清掃・水質検査・記録保管を怠らず、立入検査時に求められた書類を即提示できれば、罰金リスクは実質ゼロです。逆に「指導があっても放置」が最も危険で、一度命令違反になると次回の指導サイクルが厳しくなります。</p>
+        </div>
+      </section>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          <div class="cl-faq-item">
+            <dt>受水槽清掃を1年以上行っていません。どうすればよいですか？</dt>
+            <dd>まず登録業者に連絡し、緊急清掃と水質検査を依頼してください。実施後は保健所に過去の経緯を説明し、今後の年間スケジュールを書面で提示することで悪意のない管理不備として扱われやすくなります。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>保健所から改善指示が来ました。どう対応すべきですか？</dt>
+            <dd>指示書に記載された期限内に改善し、書面で完了報告を提出します。期限内対応は罰則回避の最重要ポイント。期限延長が必要な場合は早期に保健所へ相談してください。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>テナント・賃借人から水質クレームを受けました。</dt>
+            <dd>まず水質検査を実施し、結果に基づき業者対応を判断。検査中は飲用水のみ別途用意するなど健康被害の予防策を取り、テナントへの状況説明と対応スケジュールを書面で共有してください。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>管理組合の理事長個人に責任は及びますか？</dt>
+            <dd>善管注意義務違反として個人責任を問われるケースがあります。理事会で清掃計画を正式に決議し、議事録を保管しておくことが個人責任回避につながります。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>水質事故発生時の保険は適用されますか？</dt>
+            <dd>施設賠償責任保険・施設所有者賠償責任保険で補償される場合がありますが、管理義務違反が原因の場合は免責になる可能性が高いです。保険会社・代理店に補償範囲を事前確認してください。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>建物のオーナーと管理会社、責任はどちらが負いますか？</dt>
+            <dd>原則として「給水設備の管理権原者」（多くは建物オーナー）が法的責任を負います。管理委託契約で管理会社に管理業務を委託している場合でも、最終的な法的責任はオーナー側に残ります。</dd>
+          </div>
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別の受水槽清掃業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/jusuisou-seisou/tokyo/">東京都</a></li>
+          <li><a href="/jusuisou-seisou/osaka/">大阪府</a></li>
+          <li><a href="/jusuisou-seisou/kanagawa/">神奈川県</a></li>
+          <li><a href="/jusuisou-seisou/aichi/">愛知県</a></li>
+          <li><a href="/jusuisou-seisou/saitama/">埼玉県</a></li>
+          <li><a href="/jusuisou-seisou/chiba/">千葉県</a></li>
+          <li><a href="/jusuisou-seisou/hyogo/">兵庫県</a></li>
+          <li><a href="/jusuisou-seisou/fukuoka/">福岡県</a></li>
+          <li><a href="/jusuisou-seisou/hokkaido/">北海道</a></li>
+          <li><a href="/jusuisou-seisou/kyoto/">京都府</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/jusuisou-seisou/">全国47都道府県の対応業者を見る</a></p>
+      </div>
+
+      <div class="cl-cta" id="contact">
+        <h2>受水槽清掃を確実に実施したい方へ</h2>
+        <p>都道府県知事登録のある業者・書面交付・水質検査まで対応する3社を無料でご紹介。法令違反リスクを回避する管理体制を整えます。</p>
+        <a href="/jusuisou-seisou/" class="cta-btn-primary">無料で一括見積もりを依頼する</a>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連する詳細情報</h2>
+        <ul>
+          <li><a href="/column/jusuisou-seisou-horei-gimu/">受水槽清掃の法定義務ガイド2026</a></li>
+          <li><a href="/column/jusuisou-seisou-keihi/">受水槽清掃の経費計上ガイド2026</a></li>
+          <li><a href="/column/jusuisou-seisou-gyosha-sentaku/">受水槽清掃の業者選び完全ガイド2026</a></li>
+        </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#suido-ho">水道法</a></li>
+          <li><a href="/glossary/#biru-kan-ho">建築物衛生法（ビル管法）</a></li>
+          <li><a href="/glossary/#kanni-senyou-suido">簡易専用水道</a></li>
+          <li><a href="/glossary/#jusuisou">受水槽／貯水槽</a></li>
+          <li><a href="/glossary/#koukasuisou">高架水槽</a></li>
+          <li><a href="/glossary/#kenchiku-suiso-seisogyo">建築物飲料水貯水槽清掃業</a></li>
+          <li><a href="/glossary/#tokutei-kenchikubutsu">特定建築物</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集（49語）をすべて見る</a></p>
+      </aside>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-author-link { color: #fff; text-decoration: underline; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-quickanswer { background: #eef6ff; border: 1.5px solid #1a56db; border-radius: 10px; padding: 18px 22px; margin-bottom: 32px; }
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-faq { display: grid; gap: 14px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 32px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 32px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; list-style: none; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+
+/* 行政指導→罰金タイムライン */
+.cl-timeline { list-style: none; padding: 0; margin: 0 0 22px; }
+.cl-timeline-item {
+  position: relative;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid var(--blue);
+  border-radius: 8px;
+  padding: 18px 20px 18px 22px;
+  margin-bottom: 14px;
+}
+.cl-timeline-item--danger { border-left-color: #dc2626; background: #fef2f2; }
+.cl-timeline-step {
+  display: inline-block;
+  background: var(--blue);
+  color: #fff;
+  font-size: .72rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 99px;
+  letter-spacing: .04em;
+  margin-bottom: 8px;
+}
+.cl-timeline-item--danger .cl-timeline-step { background: #dc2626; }
+.cl-timeline-item h3 { font-size: 1rem; font-weight: 800; color: var(--gray-900); margin: 0 0 10px; line-height: 1.5; }
+.cl-timeline-item p { font-size: .88rem; line-height: 1.75; color: var(--gray-700); margin: 0 0 6px; }
+.cl-timeline-item p:last-child { margin-bottom: 0; }
+.cl-timeline-item strong { color: var(--gray-900); }
+.cl-timeline-item--danger strong { color: #991b1b; }
+</style>

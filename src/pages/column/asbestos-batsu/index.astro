@@ -1,0 +1,370 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = "アスベスト法令違反の罰則｜罰金・懲役はいくら？大防法・石綿則の処分事例と回避策";
+const description = "アスベスト関連の事前調査未実施・無届工事・記録未提出の罰則はいくら？大気汚染防止法の30万円罰金、石綿障害予防規則の50万円罰金、労働者死傷時の業務上過失致死傷罪（懲役）まで、実際の処分事例と回避策をわかりやすく整理しました。";
+const canonical = `${site.domain}/column/asbestos-batsu/`;
+const published = '2026-05-27';
+const modified = '2026-07-01';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: "アスベスト違反・罰則", item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 4300,
+  articleSection: "違反・罰則",
+  keywords: "アスベスト,違反,罰則,大気汚染防止法,石綿則,業務上過失,2026",
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-asbestos.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: "アスベスト調査・除去" },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: "事前調査をしていない解体工事を発注してしまいました。どうすればよいですか？", acceptedAnswer: { '@type': 'Answer', text: "直ちに工事を一時停止し、有資格者による事前調査を実施してください。労基署・自治体への報告は調査結果を待ってから実施。隠蔽は最大の悪手で、自主申告と早期対応が処分軽減につながります。" } },
+    { '@type': 'Question', name: "元請がアスベスト対応を怠った場合、発注者の責任は？", acceptedAnswer: { '@type': 'Answer', text: "発注者にも管理責任が問われるケースが増えています。特に大気汚染防止法では「発注者の責務」が明文化されており、発注時の業者選定・調査結果の確認・電子報告の確認が必要です。" } },
+    { '@type': 'Question', name: "みなし含有での除去なら法令違反になりませんか？", acceptedAnswer: { '@type': 'Answer', text: "なりません。「分析を行わずアスベスト含有とみなして除去する」ことは法令上認められています。ただし、その場合の除去工法・養生・廃棄物処理はアスベスト含有を前提とした基準を満たす必要があります。" } },
+    { '@type': 'Question', name: "小規模工事でも罰則は適用されますか？", acceptedAnswer: { '@type': 'Answer', text: "はい。事前調査義務は規模を問わず適用されます。報告義務は床面積80m²以上の解体・100万円以上の改修が対象ですが、調査義務はすべての工事で必要です。" } },
+    { '@type': 'Question', name: "労働者の健康被害は何年後でも責任を問われますか？", acceptedAnswer: { '@type': 'Answer', text: "はい。中皮腫の潜伏期間は20〜40年と長く、退職後・廃業後でも訴訟リスクが残ります。作業記録の40年保存義務はこのリスクに対応するためです。" } },
+    { '@type': 'Question', name: "海外で類似の事例はありますか？", acceptedAnswer: { '@type': 'Answer', text: "欧米諸国でも同様にアスベスト被害は深刻な社会問題化しており、各国で厳格な規制が整備されています。日本の規制も国際的な動向を踏まえて段階的に強化されています。" } }
+  ],
+});
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-asbestos.png` },
+});
+
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified}
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  ogImage={`${site.domain}/og-asbestos.png`}
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>アスベスト違反・罰則</span>
+        </nav>
+        <span class="cl-cat">アスベスト調査・除去</span>
+        <h1 class="cl-title">アスベスト法令違反の罰則｜罰金・懲役はいくら？大防法・石綿則の処分事例と回避策</h1>
+        <p class="cl-lead">アスベスト関連の法令違反は<strong>30万〜50万円の罰金、業務上過失致死傷罪、損害賠償</strong>と段階的にリスクが拡大します。本記事では各法令の罰則規定・実際の処分事例・回避策を整理しました。</p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年5月27日</time>
+          <span>最終更新：2026年5月27日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. アスベスト法令違反の罰則はどれくらい？</p>
+        <p class="cl-qa-a">A. <strong>大気汚染防止法30万円以下、石綿障害予防規則50万円以下の罰金</strong>。労働者死傷事故では業務上過失致死傷罪（5年以下の懲役）、被害者賠償は数千万円規模。</p>
+        <p class="cl-qa-src">※大気汚染防止法第34条・労働安全衛生法第119条</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="asbestos" serviceName="アスベスト調査・除去" variant="top" />
+
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#laws">罰則がある主な法令</a></li>
+          <li><a href="#penalties">罰金・刑事罰の一覧</a></li>
+          <li><a href="#cases">実際の処分事例</a></li>
+          <li><a href="#civil">民事賠償リスク</a></li>
+          <li><a href="#avoid">リスク回避策</a></li>
+          <li><a href="#inspection">労基署立入検査と現場での対応</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <h2>3行サマリ</h2>
+        <div class="cl-callout">
+          <ul>
+            <li><strong>大気汚染防止法</strong>：作業基準違反30万円、報告義務違反30万円</li>
+            <li><strong>石綿障害予防規則</strong>：作業主任者未選任50万円、特別教育未実施50万円</li>
+            <li><strong>業務上過失致死傷</strong>：労働者の健康被害発生で5年以下の懲役・100万円以下の罰金</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="laws" class="cl-section">
+        <h2>罰則がある主な法令</h2>
+        <ul>
+          <li><strong>大気汚染防止法</strong>：周辺住民への飛散防止（環境省所管）</li>
+          <li><strong>石綿障害予防規則</strong>：労働者の健康被害防止（厚生労働省所管）</li>
+          <li><strong>労働安全衛生法</strong>：労働者の安全衛生（厚生労働省所管）</li>
+          <li><strong>廃棄物処理法</strong>：特別管理産業廃棄物の適正処理</li>
+          <li><strong>建設リサイクル法</strong>：建設廃材の再資源化義務</li>
+        </ul>
+      </section>
+
+      <section id="penalties" class="cl-section">
+        <h2>罰金・刑事罰の一覧</h2>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>アスベスト関連の主な罰則規定</caption>
+            <thead><tr><th>違反行為</th><th>根拠法</th><th>罰則</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">事前調査未実施</th><td>大防法第18条の15</td><td>30万円以下の罰金</td></tr>
+              <tr><th scope="row">作業基準違反</th><td>大防法第18条の14</td><td>3か月以下の懲役または30万円以下の罰金</td></tr>
+              <tr><th scope="row">報告義務違反（電子報告未提出）</th><td>大防法第18条の17</td><td>30万円以下の罰金</td></tr>
+              <tr><th scope="row">作業主任者未選任</th><td>石綿則第19条</td><td>50万円以下の罰金</td></tr>
+              <tr><th scope="row">特別教育未実施</th><td>石綿則第27条</td><td>50万円以下の罰金</td></tr>
+              <tr><th scope="row">無資格者による調査</th><td>石綿則第3条</td><td>50万円以下の罰金</td></tr>
+              <tr><th scope="row">作業計画書未届出</th><td>労安衛法第88条</td><td>50万円以下の罰金</td></tr>
+              <tr><th scope="row">不適正処理（不法投棄）</th><td>廃掃法第25条</td><td>5年以下の懲役または1,000万円以下の罰金</td></tr>
+              <tr><th scope="row">労働者の健康被害発生</th><td>刑法第211条</td><td>業務上過失致死傷罪（5年以下の懲役）</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="cases" class="cl-section">
+        <h2>実際の処分事例</h2>
+        <h3>事例1：解体業者の無届工事（2020年代・関東地方）</h3>
+        <p>アスベスト含有建材の解体工事を労基署届出なしで実施。発覚後、業者に20万円の略式命令、行政指導による業務停止1週間。元請ゼネコンも管理責任で処分対象に。</p>
+        <h3>事例2：事前調査の偽装報告（2020年代・関西地方）</h3>
+        <p>建築物石綿含有建材調査者の資格を持たない者が調査を実施し、虚偽の調査結果を提出。報告義務違反として15万円の罰金。建物所有者にも管理責任の指摘あり。</p>
+        <h3>事例3：作業員の健康被害判明（2010年代・複数地域）</h3>
+        <p>アスベスト除去工事に従事した作業員に中皮腫・肺癌が発症。労災認定・損害賠償訴訟で被害者1人あたり3,000万〜5,000万円の賠償判決。元請・解体業者・建物所有者がそれぞれ責任を分担。</p>
+        <p class="cl-note"><small>※ 上記は公開判例・行政公表事例から再構成したものです。</small></p>
+      </section>
+
+      <section id="civil" class="cl-section">
+        <h2>民事賠償リスク</h2>
+        <p>刑事罰・行政処分に加え、民事上の損害賠償リスクも大きい点に注意が必要です。</p>
+        <ul>
+          <li><strong>作業員への賠償</strong>：中皮腫・肺癌発症で1人あたり数千万円</li>
+          <li><strong>周辺住民への賠償</strong>：飛散による健康被害が認められた場合の集団訴訟リスク</li>
+          <li><strong>建築物所有者の管理責任</strong>：飛散時の社会的信用毀損による損害</li>
+          <li><strong>事業継続への影響</strong>：処分の公表による取引停止・社会的信用の損失</li>
+        </ul>
+      </section>
+
+      <section id="avoid" class="cl-section">
+        <h2>リスク回避策</h2>
+        <ol>
+          <li><strong>有資格業者の起用</strong>：建築物石綿含有建材調査者・石綿作業主任者の在籍を確認</li>
+          <li><strong>事前調査の確実な実施</strong>：規模を問わずすべての解体・改修で実施</li>
+          <li><strong>電子報告システムの活用</strong>：石綿事前調査結果報告システムで報告を完了</li>
+          <li><strong>労基署届出の確認</strong>：レベル1・2の除去工事は14日前までに届出</li>
+          <li><strong>書類の40年保存</strong>：石綿則上の作業記録は労働者の健康管理のため長期保存</li>
+          <li><strong>保険の活用</strong>：施設賠償責任保険・労災総合保険の補償範囲確認</li>
+        </ol>
+      </section>
+
+      <section id="inspection" class="cl-section">
+        <h2>労基署立入検査と現場での対応</h2>
+        <p>アスベスト工事の現場では、労基署・自治体・近隣住民いずれからも検査・通報が入りやすい状態にあります。発注者側で押さえるべき検査対応のポイントを整理します。</p>
+
+        <h3>労基署立入検査の発生パターン</h3>
+        <ul>
+          <li><strong>事前届出に対する確認</strong>：レベル1・2の作業届を提出した工事は、開始後1〜2週間以内に労基署が現地確認することがある</li>
+          <li><strong>近隣からの通報</strong>：粉じんの飛散・養生不備・無届工事への通報で立入検査に発展</li>
+          <li><strong>定期パトロール</strong>：解体・改修工事の集中地域では、無作為立入が行われる</li>
+          <li><strong>事故・労災発生時</strong>：作業員のばく露事故・健康被害申告がきっかけになるケース</li>
+        </ul>
+
+        <h3>検査で必ず確認される項目</h3>
+        <ol>
+          <li>事前調査結果報告書（石綿事前調査結果報告システムでの提出済証）</li>
+          <li>労基署届出（特定粉じん排出等作業届）の控え</li>
+          <li>調査者・作業主任者の資格証</li>
+          <li>作業計画書・作業手順書</li>
+          <li>養生・隔離・負圧設備の設置状況（現地確認）</li>
+          <li>作業員の健康診断記録・特別教育修了証</li>
+          <li>マニフェスト（産業廃棄物管理票・特別管理産業廃棄物）</li>
+        </ol>
+
+        <h3>指導・指摘を受けた場合の対応</h3>
+        <p>違反指摘があった場合、その場で改善を求められます。<strong>軽微な指摘（書類の追記漏れ等）は当日〜1週間以内、重大な指摘（無届・無資格・養生不備）は工事中止＋是正計画書の提出</strong>が標準的な対応です。発注者として工事を依頼している場合でも、「施工業者の問題」では責任を免れません。発注者責任として、是正計画書への記名・改善状況の報告書提出を求められることがあります。</p>
+
+        <h3>近隣対応の事前準備</h3>
+        <p>アスベスト工事は周辺住民の不安が大きく、近隣からの通報が労基署検査の最多きっかけ。以下の事前準備で大半のトラブルは防げます。</p>
+        <ul>
+          <li><strong>工事開始2週間前までに近隣への説明</strong>：工事内容・期間・養生対策をチラシで配布</li>
+          <li><strong>現場掲示板の設置</strong>：作業計画・問合せ先・有資格者名を明示（法令上も必須）</li>
+          <li><strong>夜間・休日の連絡先明示</strong>：施工業者ではなく管理担当者の直通連絡先を案内</li>
+          <li><strong>飛散モニタリング結果の開示</strong>：希望する近隣には測定結果を提供できる体制を整える</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          <div class="cl-faq-item">
+            <dt>事前調査をしていない解体工事を発注してしまいました。どうすればよいですか？</dt>
+            <dd>直ちに工事を一時停止し、有資格者による事前調査を実施してください。労基署・自治体への報告は調査結果を待ってから実施。隠蔽は最大の悪手で、自主申告と早期対応が処分軽減につながります。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>元請がアスベスト対応を怠った場合、発注者の責任は？</dt>
+            <dd>発注者にも管理責任が問われるケースが増えています。特に大気汚染防止法では「発注者の責務」が明文化されており、発注時の業者選定・調査結果の確認・電子報告の確認が必要です。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>みなし含有での除去なら法令違反になりませんか？</dt>
+            <dd>なりません。「分析を行わずアスベスト含有とみなして除去する」ことは法令上認められています。ただし、その場合の除去工法・養生・廃棄物処理はアスベスト含有を前提とした基準を満たす必要があります。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>小規模工事でも罰則は適用されますか？</dt>
+            <dd>はい。事前調査義務は規模を問わず適用されます。報告義務は床面積80m²以上の解体・100万円以上の改修が対象ですが、調査義務はすべての工事で必要です。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>労働者の健康被害は何年後でも責任を問われますか？</dt>
+            <dd>はい。中皮腫の潜伏期間は20〜40年と長く、退職後・廃業後でも訴訟リスクが残ります。作業記録の40年保存義務はこのリスクに対応するためです。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>海外で類似の事例はありますか？</dt>
+            <dd>欧米諸国でも同様にアスベスト被害は深刻な社会問題化しており、各国で厳格な規制が整備されています。日本の規制も国際的な動向を踏まえて段階的に強化されています。</dd>
+          </div>
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別のアスベスト調査・除去業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/asbestos/tokyo/">東京都</a></li>
+          <li><a href="/asbestos/osaka/">大阪府</a></li>
+          <li><a href="/asbestos/kanagawa/">神奈川県</a></li>
+          <li><a href="/asbestos/aichi/">愛知県</a></li>
+          <li><a href="/asbestos/saitama/">埼玉県</a></li>
+          <li><a href="/asbestos/chiba/">千葉県</a></li>
+          <li><a href="/asbestos/hyogo/">兵庫県</a></li>
+          <li><a href="/asbestos/fukuoka/">福岡県</a></li>
+          <li><a href="/asbestos/hokkaido/">北海道</a></li>
+          <li><a href="/asbestos/kyoto/">京都府</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/asbestos/">全国47都道府県の対応業者を見る</a></p>
+      </div>
+
+      <div class="cl-cta" id="contact">
+        <h2>アスベスト工事を法令遵守で確実に進めたい方へ</h2>
+        <p>有資格者在籍・電子報告対応・書類完備の業者から最大3社を無料でご紹介。法令違反リスクを回避できます。</p>
+        <a href="/asbestos/" class="cta-btn-primary">無料で一括見積もりを依頼する</a>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連する詳細情報</h2>
+        <ul>
+          <li><a href="/column/asbestos-horei-gimu/">アスベスト法令義務ガイド2026</a></li>
+          <li><a href="/column/asbestos-hiyo-sohba/">アスベスト調査・除去の費用相場2026</a></li>
+          <li><a href="/column/asbestos-keihi/">アスベスト調査・除去の経費計上ガイド2026</a></li>
+        </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#taikiosen-boshi-ho">大気汚染防止法</a></li>
+          <li><a href="/glossary/#sekimen-soku">石綿障害予防規則（石綿則）</a></li>
+          <li><a href="/glossary/#kenchiku-sekimen-chosasha">建築物石綿含有建材調査者</a></li>
+          <li><a href="/glossary/#sekimen-sagyo-shunin">石綿作業主任者</a></li>
+          <li><a href="/glossary/#jizen-chosa">事前調査（アスベスト）</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集（49語）をすべて見る</a></p>
+      </aside>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-author-link { color: #fff; text-decoration: underline; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-quickanswer { background: #eef6ff; border: 1.5px solid #1a56db; border-radius: 10px; padding: 18px 22px; margin-bottom: 32px; }
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-faq { display: grid; gap: 14px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 32px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 32px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; list-style: none; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+</style>

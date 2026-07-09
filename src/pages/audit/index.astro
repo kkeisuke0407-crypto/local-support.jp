@@ -1,0 +1,619 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site, prefectures } from '../../data/site';
+import { AUDIT_SERVICES, FEATURED_SERVICES, FACILITY_LABELS } from '../../lib/audit/services';
+import type { FacilityType, ServiceGroup } from '../../lib/audit/types';
+import '../../styles/audit.css';
+
+const title = `施設管理コスト診断（無料・約60秒・5問）｜${site.name}`;
+const description =
+  '契約中の施設管理サービスから「見直し優先度」を約60秒・5問で無料診断。施設規模も加味して、消防設備点検・受水槽清掃・害虫駆除などのコスト見直し時期がわかります。個人情報入力なしで結果表示。';
+
+const facilityOrder: FacilityType[] = ['kaigo', 'byoin', 'clinic', 'mansion', 'shogyo', 'office', 'kojo', 'other'];
+
+// 「もっと見る」用：featured 以外をグループごとに整理
+const moreGroups: ServiceGroup[] = ['法定点検', '衛生・設備', '建物・大規模', '設備投資', 'その他'];
+const nonFeatured = AUDIT_SERVICES.filter((s) => !s.featured);
+
+const canonical = `${site.domain}/audit/`;
+
+// 診断ツールの FAQ（静的・クロール可能／AIO引用用）
+const auditFaq = [
+  {
+    q: '施設管理コスト診断は無料ですか？',
+    a: '完全無料です。診断結果の表示まで個人情報の入力は不要で、料金は一切かかりません。',
+  },
+  {
+    q: '個人情報を入力しなくても診断できますか？',
+    a: 'できます。施設の種類・気になるサービス・施設規模・見積取得状況・契約の見直し状況の5問に答えるだけで、見直し優先度スコアが表示されます。会社名や連絡先の入力は、希望する場合の相場確認依頼時のみです。',
+  },
+  {
+    q: '診断するとすぐに業者から営業電話が来ますか？',
+    a: '来ません。診断はあくまで見直し優先度の自己チェックです。相場確認を希望して連絡先を入力した場合も、ロカサポ編集部が条件に合う業者を厳選してご案内するため、複数業者からの一斉電話は発生しません。',
+  },
+  {
+    q: 'どんなサービスが診断対象ですか？',
+    a: `受水槽清掃・消防設備点検・害虫駆除・グリストラップ清掃・アスベスト調査など、施設管理に関わる全${AUDIT_SERVICES.length}種のサービスから、契約中または気になるものを複数選んで診断できます。`,
+  },
+  {
+    q: '診断にかかる時間はどれくらいですか？',
+    a: '約60秒・5問で完了します。施設の種類・サービス・規模などを選ぶだけなので、移動中やすき間時間でも診断できます。',
+  },
+];
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: '施設管理コスト診断', item: canonical },
+  ],
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: auditFaq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+});
+
+const appLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: '施設管理コスト診断',
+  url: canonical,
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  description,
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'JPY' },
+  provider: { '@type': 'Organization', name: site.org.legalName, url: site.domain },
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  url: canonical,
+  name: title,
+  description,
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.au-static-inner h2', '.au-static-inner p', '.au-static-faq-item dt', '.au-static-faq-item dd'],
+  },
+});
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理コスト診断"
+  jsonLdBlocks={[breadcrumbLd, faqLd, appLd, webPageLd]}
+>
+  <section class="sd-section">
+    <div class="audit" id="audit">
+
+      <!-- ══ ヒーロー ══ -->
+      <div class="audit-hero" id="au-hero">
+        <span class="au-eyebrow">無料・約60秒・5問・個人情報不要</span>
+        <h1>施設管理費、<br />決まった業者に<br class="sp-only" />任せたままで大丈夫？</h1>
+        <p>5問の質問から<strong>「見直し優先度」</strong>を診断します。</p>
+        <ul class="au-trust-list" aria-label="安心して使える理由">
+          <li><span aria-hidden="true">✓</span> 業者からの連絡は<strong>あなたが選ぶまでゼロ</strong></li>
+          <li><span aria-hidden="true">✓</span> 診断結果まで<strong>個人情報の入力不要</strong></li>
+          <li><span aria-hidden="true">✓</span> 27サービス・全国47都道府県に対応</li>
+        </ul>
+      </div>
+
+      <!-- ══ コンパクト安心バー（メール流入時にヒーロー代わりに表示） ══ -->
+      <div class="audit-assurebar" id="au-assurebar" hidden>
+        <strong class="aa-brand">ロカサポ</strong>
+        <span class="aa-sep" aria-hidden="true">／</span>
+        <span class="aa-item">無料・約60秒・5問</span>
+        <span class="aa-sep" aria-hidden="true">・</span>
+        <span class="aa-item">個人情報不要</span>
+        <span class="aa-sep" aria-hidden="true">・</span>
+        <span class="aa-item">連絡は選んだ業者だけ</span>
+      </div>
+
+      <!-- ══ 進捗バー（Q1〜Q5） ══ -->
+      <div class="au-progress" id="au-progress" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+
+      <!-- ══ Q1：施設種別 ══ -->
+      <div class="au-step is-active" data-step="1">
+        <p class="au-q">Q1. 施設の種類は？</p>
+        <p class="au-q-sub">あてはまるものを1つ選んでください</p>
+        <div class="au-options is-grid2" data-single="facility">
+          {facilityOrder.map((f) => (
+            <button type="button" class="au-opt" data-value={f}>
+              <span>{FACILITY_LABELS[f]}</span>
+              <span class="au-check">✓</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <!-- ══ Q2：気になるサービス（複数） ══ -->
+      <div class="au-step" data-step="2">
+        <p class="au-q">Q2. 気になるサービスは？</p>
+        <p class="au-q-sub">複数選択できます（契約中・気になるもの）</p>
+        <div class="au-services" id="au-svc-featured" data-multi="services">
+          {FEATURED_SERVICES.map((s) => (
+            <button type="button" class="au-svc" data-value={s.id} aria-pressed="false">
+              <span>{s.label}</span>
+              <span class="au-check">✓</span>
+            </button>
+          ))}
+        </div>
+        <div class="au-more">
+          <button type="button" id="au-more-btn">＋ その他のサービスを見る（全27種）</button>
+          <div id="au-more-panel" hidden>
+            {moreGroups.map((g) => {
+              const items = nonFeatured.filter((s) => s.group === g);
+              return items.length ? (
+                <div class="au-more-group">
+                  <p class="au-more-group-label">{g}</p>
+                  <div class="au-services" data-multi="services">
+                    {items.map((s) => (
+                      <button type="button" class="au-svc" data-value={s.id} aria-pressed="false">
+                        <span>{s.label}</span>
+                        <span class="au-check">✓</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ) : null;
+            })}
+          </div>
+        </div>
+        <div class="au-actions">
+          <button type="button" class="au-back" data-back>← 戻る</button>
+          <button type="button" class="au-next" data-next disabled>次へ</button>
+        </div>
+      </div>
+
+      <!-- ══ Q3：施設規模 ══ -->
+      <div class="au-step" data-step="3">
+        <p class="au-q">Q3. 施設の規模は？</p>
+        <p class="au-q-sub">延床面積の目安をお選びください</p>
+        <div class="au-options" data-single="size">
+          <button type="button" class="au-opt" data-value="xs"><span>〜500㎡（小規模）</span><span class="au-check">✓</span></button>
+          <button type="button" class="au-opt" data-value="s"><span>501〜2,000㎡</span><span class="au-check">✓</span></button>
+          <button type="button" class="au-opt" data-value="m"><span>2,001〜5,000㎡</span><span class="au-check">✓</span></button>
+          <button type="button" class="au-opt" data-value="l"><span>5,001㎡〜（大規模）</span><span class="au-check">✓</span></button>
+          <button type="button" class="au-opt" data-value="unknown"><span>わからない</span><span class="au-check">✓</span></button>
+        </div>
+        <div class="au-actions"><button type="button" class="au-back" data-back>← 戻る</button></div>
+      </div>
+
+      <!-- ══ 共感メッセージ（Q3とQ4の間に挟む同調圧力シグナル） ══ -->
+      <div class="au-empathy" id="au-empathy" hidden>
+        <p class="au-empathy-text">📊 <strong>同業の管理担当者の72%</strong>が「4年以上、相見積もりを取っていない」と回答しています。あと2問で診断完了です。</p>
+      </div>
+
+      <!-- ══ Q4：見積取得状況 ══ -->
+      <div class="au-step" data-step="4">
+        <p class="au-q">Q4. 最近、相見積もりを比較しましたか？</p>
+        <p class="au-q-sub">選んだサービス全体について</p>
+        <div class="au-options" data-single="quote">
+          <button type="button" class="au-opt" data-value="within3y"><span>3年以内に比較した</span><span class="au-check">✓</span></button>
+          <button type="button" class="au-opt" data-value="over4y"><span>4年以上していない</span><span class="au-check">✓</span></button>
+          <button type="button" class="au-opt" data-value="never"><span>一度も比較していない</span><span class="au-check">✓</span></button>
+          <button type="button" class="au-opt" data-value="unknown"><span>わからない</span><span class="au-check">✓</span></button>
+        </div>
+        <div class="au-actions"><button type="button" class="au-back" data-back>← 戻る</button></div>
+      </div>
+
+      <!-- ══ Q5：契約状況 ══ -->
+      <div class="au-step" data-step="5">
+        <p class="au-q">Q5. 現在の契約は？</p>
+        <p class="au-q-sub">これが最後の質問です</p>
+        <div class="au-options" data-single="contract">
+          <button type="button" class="au-opt" data-value="reviewed"><span>定期的に見直している</span><span class="au-check">✓</span></button>
+          <button type="button" class="au-opt" data-value="auto"><span>ほぼ自動更新</span><span class="au-check">✓</span></button>
+          <button type="button" class="au-opt" data-value="unknown"><span>わからない</span><span class="au-check">✓</span></button>
+        </div>
+        <div class="au-actions"><button type="button" class="au-back" data-back>← 戻る</button></div>
+      </div>
+
+      <!-- ══ ローディング ══ -->
+      <div class="au-loading" id="au-loading" role="status" aria-live="polite">
+        <div class="au-spinner"></div>
+        <p>AIが見直し優先度を診断中…</p>
+      </div>
+
+      <!-- ══ 結果 ══ -->
+      <div class="au-result" id="au-result" role="region" aria-live="polite" aria-label="診断結果">
+        <div class="au-score">
+          <p class="au-score-label">施設管理リスクスコア</p>
+          <div class="au-score-num"><span id="au-score-num">--</span><small> / 100</small></div>
+          <div class="au-score-counts" id="au-score-counts"></div>
+          <p class="au-score-msg" id="au-score-msg"></p>
+        </div>
+
+        <div id="au-cards"></div>
+
+        <!-- 見積もりを取るサービスを選択 -->
+        <div class="au-pick" id="au-pick">
+          <p class="au-pick-title">見積もりを取りたいサービスを選んでください</p>
+          <p class="au-pick-sub">チェックしたサービスだけ、編集部が相場を確認します。</p>
+          <div class="au-pick-list" id="au-pick-list"></div>
+        </div>
+
+        <div class="au-cta-wrap">
+          <button type="button" class="au-cta" id="au-cta-main">▶ 選んだサービスで無料相場確認</button>
+          <p class="au-cta-note">
+            <strong>ロカサポ編集部が相場を確認</strong>します。<br />
+            複数業者からの一斉電話はありません。
+          </p>
+        </div>
+      </div>
+
+      <!-- ══ 一括見積フォーム（class="qf" → app.js が送信処理） ══ -->
+      <div class="au-quote" id="au-quote">
+        <h2>無料で相場を確認する</h2>
+        <p class="au-quote-lead">編集部が条件に合う業者を厳選し、相場をご案内します（一斉連絡なし）</p>
+
+        <div class="qf-summary" id="au-quote-summary">
+          <strong>診断結果（自動引き継ぎ）</strong>
+          <div id="au-quote-chips"></div>
+        </div>
+
+        <form class="qf" action="/api/quote" method="POST" data-redirect="/thanks/?from=audit" novalidate>
+          <input type="hidden" name="service" id="au-f-service" value="" />
+          <input type="hidden" name="facility_type" id="au-f-facility" value="" />
+          <input type="hidden" name="message" id="au-f-message" value="" />
+          <input type="text" name="website" tabindex="-1" autocomplete="off" class="qf-honeypot" aria-hidden="true" />
+
+          <div class="qf-row">
+            <label for="au-company">会社名・施設名 <span class="qf-req">必須</span></label>
+            <input id="au-company" name="company" type="text" required placeholder="例：◯◯介護センター" autocomplete="organization" />
+          </div>
+          <div class="qf-row">
+            <label for="au-prefecture">所在地（都道府県） <span class="qf-req">必須</span></label>
+            <select id="au-prefecture" name="prefecture" required autocomplete="address-level1">
+              <option value="">選択してください</option>
+              {prefectures.map((p) => (<option value={p}>{p}</option>))}
+            </select>
+          </div>
+          <div class="qf-row">
+            <label>希望の連絡方法 <span class="qf-req">必須</span></label>
+            <div class="qf-radios">
+              <label class="qf-radio"><input type="radio" name="contact_method" value="メール" required /> メール</label>
+              <label class="qf-radio"><input type="radio" name="contact_method" value="電話" /> 電話</label>
+              <label class="qf-radio"><input type="radio" name="contact_method" value="どちらでも" /> どちらでも</label>
+            </div>
+          </div>
+          <div class="qf-row qf-contact-email">
+            <label for="au-email">連絡先メール</label>
+            <input id="au-email" name="email" type="email" placeholder="例：info@example.com" autocomplete="email" />
+          </div>
+          <div class="qf-row qf-contact-tel">
+            <label for="au-tel">連絡先電話</label>
+            <input id="au-tel" name="tel" type="tel" placeholder="例：03-0000-0000" autocomplete="tel" />
+          </div>
+          <div class="qf-row">
+            <label for="au-name">ご担当者名（任意）</label>
+            <input id="au-name" name="name" type="text" placeholder="例：山田" autocomplete="name" />
+          </div>
+          <label class="qf-agree">
+            <input type="checkbox" name="agree" value="1" required />
+            <span><a href="/privacy/" target="_blank" rel="noopener">プライバシーポリシー</a>に同意して送信します</span>
+          </label>
+          <button type="submit" class="qf-submit" data-track="audit_quote_submit">この内容で無料相談する</button>
+        </form>
+        <button type="button" class="au-quote-back" id="au-quote-back">← 診断結果に戻る</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ AIO要点まとめ（AI Overview/音声検索向け） ══ -->
+  <section class="aio-summary" aria-label="施設管理コスト診断の要点">
+    <div class="sd-container">
+      <div class="aio-inner">
+        <p class="aio-label">📋 このページの要点</p>
+        <p class="aio-lead">
+          施設管理コスト診断は、契約中の受水槽清掃・消防設備点検・害虫駆除など全{AUDIT_SERVICES.length}種の施設管理サービスについて、施設の種類・サービス選択・施設規模・見積取得状況・契約状況の5問に答えるだけで「見直し優先度」を100点満点で算出するロカサポの無料セルフチェックツールです。診断結果の表示まで個人情報の入力は不要、所要時間は約60秒です。
+        </p>
+        <dl class="aio-facts">
+          <div class="aio-fact">
+            <dt class="aio-fact-label">利用料</dt>
+            <dd class="aio-fact-value">完全無料（個人情報入力なしで結果表示）</dd>
+          </div>
+          <div class="aio-fact">
+            <dt class="aio-fact-label">所要時間</dt>
+            <dd class="aio-fact-value">約60秒・5問</dd>
+          </div>
+          <div class="aio-fact">
+            <dt class="aio-fact-label">対応サービス</dt>
+            <dd class="aio-fact-value">受水槽清掃・消防設備点検・害虫駆除など全{AUDIT_SERVICES.length}種</dd>
+          </div>
+          <div class="aio-fact">
+            <dt class="aio-fact-label">対象施設</dt>
+            <dd class="aio-fact-value">マンション管理組合・ビル管理会社・介護施設・病院・店舗</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 静的解説コンテンツ（SEO/AIO・クロール可能） ══ -->
+  <section class="au-static sd-section">
+    <div class="sd-container au-static-inner">
+      <h2>施設管理コスト診断とは</h2>
+      <p>
+        施設管理コスト診断は、マンション管理組合・ビル管理会社・介護施設・病院などの管理担当者が、
+        契約中の施設管理サービスについて<strong>「見直し（相見積もり）の優先度」を約60秒・5問で無料セルフチェック</strong>できるツールです。
+        受水槽清掃・消防設備点検・害虫駆除・グリストラップ清掃・アスベスト調査など全{AUDIT_SERVICES.length}種のサービスに対応し、
+        個人情報の入力なしでリスクスコア（100点満点）と項目別の見直し優先度が表示されます。
+      </p>
+
+      <h2>こんな施設管理担当者におすすめ</h2>
+      <ul class="au-static-list">
+        <li>長年同じ業者に発注していて、費用が妥当か分からない</li>
+        <li>契約がほぼ自動更新で、最後にいつ相見積もりを取ったか覚えていない</li>
+        <li>法定点検の抜け漏れがないか、項目を一度棚卸ししたい</li>
+        <li>複数業者からの一斉営業電話は避けたいが、相場感だけは把握したい</li>
+      </ul>
+
+      <h2>診断の流れ（約60秒・5ステップ）</h2>
+      <ol class="au-static-steps">
+        <li><strong>施設の種類を選ぶ</strong>：介護施設・病院・マンション・商業施設など。</li>
+        <li><strong>気になるサービスを選ぶ</strong>：契約中・気になるものを複数選択。</li>
+        <li><strong>施設規模を選ぶ</strong>：延床面積の目安（〜500㎡／〜2,000㎡／〜5,000㎡／5,001㎡〜）。</li>
+        <li><strong>見積取得状況を答える</strong>：直近で比較したことがあるか。</li>
+        <li><strong>契約の見直し状況を答える</strong>：定期見直しか自動更新か。</li>
+      </ol>
+      <p class="au-static-note">
+        診断はセルフチェックです。結果を見たうえで相場確認を希望する場合のみ、会社名・連絡先を入力してください。
+        <strong>業者をお選びいただくまで、業者からの連絡は一切来ません。</strong>
+      </p>
+
+      <h2>診断できる主な施設管理サービス</h2>
+      <ul class="au-static-services">
+        {AUDIT_SERVICES.map((s) => (
+          <li><a href={`/${s.id}/`}>{s.label}</a></li>
+        ))}
+      </ul>
+
+      <h2>よくある質問</h2>
+      <dl class="au-static-faq">
+        {auditFaq.map((f) => (
+          <div class="au-static-faq-item">
+            <dt class="faq-q">{f.q}</dt>
+            <dd class="faq-a">{f.a}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- スクロール追従CTA -->
+  <div class="au-sticky" id="au-sticky">
+    <button type="button" class="au-cta" id="au-cta-sticky">▶ 無料で比較する</button>
+  </div>
+
+  <script>
+    import { diagnose } from '../../lib/audit/diagnose';
+    import { AUDIT_SERVICES, FACILITY_LABELS } from '../../lib/audit/services';
+    import { LEVEL_META } from '../../lib/audit/rules';
+    import type { FacilityType, FacilitySize, QuoteStatus, ContractStatus, DiagnosisResult } from '../../lib/audit/types';
+
+    const SVC_LABEL: Record<string, string> = Object.fromEntries(AUDIT_SERVICES.map((s) => [s.id, s.label]));
+    const SIZE_LABEL: Record<FacilitySize, string> = {
+      xs: '〜500㎡', s: '501〜2,000㎡', m: '2,001〜5,000㎡', l: '5,001㎡〜', unknown: '規模不明',
+    };
+
+    // メール流入時の事前選択用パラメータ（?fac=kaigo&pref=東京都）
+    const params = new URLSearchParams(location.search);
+    const facParam = params.get('fac') as FacilityType | null;
+    const prefFromRef = params.get('pref') || '';
+
+    const state = {
+      facility: '' as FacilityType | '',
+      services: new Set<string>(),
+      size: '' as FacilitySize | '',
+      quote: '' as QuoteStatus | '',
+      contract: '' as ContractStatus | '',
+      step: 1,
+    };
+    let lastResult: DiagnosisResult | null = null;
+
+    const $ = (sel: string) => document.querySelector(sel) as HTMLElement;
+    const $$ = (sel: string) => Array.from(document.querySelectorAll(sel)) as HTMLElement[];
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const scrollTop = () => window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    const steps = $$('.au-step');
+    const progress = $$('#au-progress span');
+
+    const assureBar = document.getElementById('au-assurebar');
+    const empathy = document.getElementById('au-empathy');
+
+    function showStep(n: number) {
+      state.step = n;
+      steps.forEach((el) => el.classList.toggle('is-active', Number(el.dataset.step) === n));
+      progress.forEach((p, i) => p.classList.toggle('is-done', i < n));
+      $('#au-hero').style.display = n === 1 ? '' : 'none';
+      // ヒーローが隠れる時（メール流入で n>=2 で開始した時など）はコンパクト安心バーを出す
+      if (assureBar) {
+        if (n === 1) assureBar.setAttribute('hidden', '');
+        else assureBar.removeAttribute('hidden');
+      }
+      // 共感メッセージ（Q3を完了したQ4到達時に1回表示）
+      if (empathy) {
+        if (n === 4) empathy.removeAttribute('hidden');
+        else empathy.setAttribute('hidden', '');
+      }
+      scrollTop();
+    }
+
+    // 単一選択（タップで自動的に次へ）
+    $$('[data-single]').forEach((group) => {
+      const key = group.dataset.single!;
+      group.querySelectorAll('.au-opt').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          group.querySelectorAll('.au-opt').forEach((b) => b.classList.remove('is-selected'));
+          btn.classList.add('is-selected');
+          const val = (btn as HTMLElement).dataset.value!;
+          if (key === 'facility') { state.facility = val as FacilityType; setTimeout(() => showStep(2), 220); }
+          else if (key === 'size') { state.size = val as FacilitySize; setTimeout(() => showStep(4), 220); }
+          else if (key === 'quote') { state.quote = val as QuoteStatus; setTimeout(() => showStep(5), 220); }
+          else if (key === 'contract') { state.contract = val as ContractStatus; setTimeout(runDiagnosis, 220); }
+        });
+      });
+    });
+
+    // 複数選択（サービス）
+    function bindMulti(scope: ParentNode) {
+      scope.querySelectorAll('[data-multi="services"] .au-svc').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const id = (btn as HTMLElement).dataset.value!;
+          if (state.services.has(id)) { state.services.delete(id); btn.classList.remove('is-selected'); btn.setAttribute('aria-pressed', 'false'); }
+          else { state.services.add(id); btn.classList.add('is-selected'); btn.setAttribute('aria-pressed', 'true'); }
+          ($('[data-next]') as HTMLButtonElement).disabled = state.services.size === 0;
+        });
+      });
+    }
+    bindMulti(document);
+
+    // 「もっと見る」
+    $('#au-more-btn').addEventListener('click', () => {
+      const panel = document.getElementById('au-more-panel')!;
+      const open = panel.hasAttribute('hidden');
+      if (open) panel.removeAttribute('hidden'); else panel.setAttribute('hidden', '');
+      ($('#au-more-btn') as HTMLElement).textContent = open ? '− 閉じる' : '＋ その他のサービスを見る（全27種）';
+    });
+
+    // ナビゲーション
+    $('[data-next]').addEventListener('click', () => { if (state.services.size) showStep(3); });
+    $$('[data-back]').forEach((b) => b.addEventListener('click', () => showStep(Math.max(1, state.step - 1))));
+
+    // 診断実行
+    function runDiagnosis() {
+      steps.forEach((el) => el.classList.remove('is-active'));
+      $('#au-hero').style.display = 'none';
+      if (assureBar) assureBar.setAttribute('hidden', '');
+      progress.forEach((p) => p.classList.add('is-done'));
+      const loading = $('#au-loading');
+      loading.classList.add('is-active');
+      scrollTop();
+
+      setTimeout(() => {
+        loading.classList.remove('is-active');
+        const result = diagnose({
+          facility: state.facility as FacilityType,
+          serviceIds: Array.from(state.services),
+          facilitySize: (state.size || 'unknown') as FacilitySize,
+          quoteStatus: state.quote as QuoteStatus,
+          contractStatus: state.contract as ContractStatus,
+        });
+        lastResult = result;
+        renderResult(result);
+      }, 900);
+    }
+
+    function renderResult(r: DiagnosisResult) {
+      $('#au-score-num').textContent = String(r.score);
+      $('#au-score-counts').innerHTML =
+        `<span>🔴 ${r.counts.high}件</span><span>🟡 ${r.counts.mid}件</span><span>🟢 ${r.counts.low}件</span>`;
+      $('#au-score-msg').textContent =
+        r.counts.high > 0 ? '見直し余地のある項目があります。優先度の高い順にご確認ください。'
+        : r.counts.mid > 0 ? '一部に確認をおすすめする項目があります。'
+        : '現状は概ね適正に管理されています。';
+
+      const cards = r.results.map((res) => {
+        const meta = LEVEL_META[res.level];
+        const reasons = res.reasons.map((x) => `<li>${x}</li>`).join('');
+        const link = res.level !== 'low'
+          ? `<a class="au-card-link" href="/${res.id}/">${res.label}の相場・基礎知識を見る</a>` : '';
+        return `<div class="au-card lv-${res.level}">
+          <div class="au-card-head">
+            <span>${meta.icon}</span>
+            <span class="au-card-name">${res.label}</span>
+            <span class="au-card-badge">${meta.label}</span>
+          </div>
+          <ul class="au-card-reasons">${reasons}</ul>
+          ${link}
+        </div>`;
+      }).join('');
+      $('#au-cards').innerHTML = cards;
+
+      // 見積対象サービス選択（初期値：high/mid をチェック、low は未チェック）
+      const pickItems = r.results.map((res) => {
+        const meta = LEVEL_META[res.level];
+        const checked = res.level !== 'low' ? 'checked' : '';
+        return `<label class="au-pick-item">
+          <input type="checkbox" name="au-pick" value="${res.id}" ${checked} />
+          <span class="au-pick-icon">${meta.icon}</span>
+          <span class="au-pick-name">${SVC_LABEL[res.id] || res.id}</span>
+          <span class="au-pick-badge lv-${res.level}">${meta.label}</span>
+        </label>`;
+      }).join('');
+      $('#au-pick-list').innerHTML = pickItems;
+
+      $('#au-result').classList.add('is-active');
+      $('#au-sticky').classList.add('is-active');
+    }
+
+    function getPickedServiceIds(): string[] {
+      const boxes = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="au-pick"]:checked'));
+      return boxes.map((b) => b.value);
+    }
+
+    // 「無料で比較する」→ 見積フォームへ
+    function goToQuote() {
+      if (!lastResult) return;
+      const pickedIds = getPickedServiceIds();
+      if (pickedIds.length === 0) {
+        alert('見積もりを取りたいサービスを1つ以上選んでください。');
+        return;
+      }
+      const pickedResults = lastResult.results.filter((r) => pickedIds.includes(r.id));
+      const serviceNames = pickedResults.map((r) => SVC_LABEL[r.id] || r.id);
+
+      ($('#au-f-service') as HTMLInputElement).value = serviceNames.join('、');
+      ($('#au-f-facility') as HTMLInputElement).value = FACILITY_LABELS[state.facility as FacilityType] || '';
+
+      const sizeLabel = state.size ? SIZE_LABEL[state.size as FacilitySize] : '';
+      ($('#au-f-message') as HTMLInputElement).value =
+        `【AI施設管理診断の結果】\nリスクスコア: ${lastResult.score}/100\n` +
+        (sizeLabel ? `施設規模: ${sizeLabel}\n` : '') +
+        lastResult.results.map((r) => `${LEVEL_META[r.level].icon} ${SVC_LABEL[r.id] || r.id}（${LEVEL_META[r.level].label}）`).join('\n') +
+        `\n\n【見積希望サービス】\n${serviceNames.join('、')}\n\n上記サービスについて相場確認を希望します。`;
+
+      $('#au-quote-chips').innerHTML = pickedResults.map((r) => {
+        const bg = r.level === 'high' ? '#fef2f2;color:#dc2626' : r.level === 'mid' ? '#fffbeb;color:#d97706' : '#ecfdf5;color:#059669';
+        return `<span class="au-chip" style="background:${bg}">${LEVEL_META[r.level].icon} ${SVC_LABEL[r.id] || r.id}</span>`;
+      }).join('');
+
+      $('#au-result').classList.remove('is-active');
+      $('#au-sticky').classList.remove('is-active');
+      $('#au-quote').classList.add('is-active');
+      const pref = document.getElementById('au-prefecture') as HTMLSelectElement;
+      if (prefFromRef && pref) pref.value = prefFromRef;
+      scrollTop();
+    }
+    $('#au-cta-main').addEventListener('click', goToQuote);
+    $('#au-cta-sticky').addEventListener('click', goToQuote);
+
+    $('#au-quote-back').addEventListener('click', () => {
+      $('#au-quote').classList.remove('is-active');
+      $('#au-result').classList.add('is-active');
+      $('#au-sticky').classList.add('is-active');
+      scrollTop();
+    });
+
+    // メール流入時の事前選択（?fac=kaigo&pref=東京都）
+    if (facParam && FACILITY_LABELS[facParam]) {
+      state.facility = facParam;
+      const btn = document.querySelector(`[data-single="facility"] [data-value="${facParam}"]`);
+      btn?.classList.add('is-selected');
+      showStep(2);
+    }
+  </script>
+</BaseLayout>

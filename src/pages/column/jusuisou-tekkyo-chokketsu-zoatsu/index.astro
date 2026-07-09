@@ -1,0 +1,458 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = "受水槽の撤去・直結増圧方式への切り替え費用｜マンション・ビルの工事相場と補助金";
+const description = "受水槽を撤去して直結増圧給水方式に切り替える費用相場を、戸数・規模別に整理。本体撤去20〜50万円、配管改修込み100〜400万円が目安。自治体補助金、メリット・デメリット、切替不可な建物条件、工事の流れまで実務目線で解説。";
+const canonical = `${site.domain}/column/jusuisou-tekkyo-chokketsu-zoatsu/`;
+const published = '2026-06-18';
+const modified = '2026-06-18';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '受水槽撤去・直結増圧切替の費用', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 5500,
+  articleSection: '受水槽 撤去・改修',
+  keywords: '受水槽,撤去,直結増圧,切替,費用,補助金,マンション,ビル,2026',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-jusuisou-seisou.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '受水槽清掃' },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: '受水槽を撤去して直結増圧方式に切り替える費用はいくらが相場ですか？', acceptedAnswer: { '@type': 'Answer', text: 'マンション中規模（30〜80戸）で本体撤去・直結配管・増圧ポンプ設置を合わせて150〜300万円が相場です。本体撤去のみなら20〜50万円、配管全更新を含む場合は200〜400万円が目安。建物規模・既存配管の状態・自治体補助金の有無で大きく変動します。' } },
+    { '@type': 'Question', name: 'すべての建物で直結増圧方式に切り替えられますか？', acceptedAnswer: { '@type': 'Answer', text: 'いいえ。切り替えには「水道事業者の本管口径・水圧」「建物高さ（一般的に5〜10階以下まで）」「水道メーター位置」などの条件があります。給水負荷が大きい病院・ホテル・大規模商業施設では断水時の供給確保のため受水槽方式が維持されるケースもあります。事前に水道局へ「直結増圧切替申請」の可否を確認してください。' } },
+    { '@type': 'Question', name: '切り替えるとどんなメリットがありますか？', acceptedAnswer: { '@type': 'Answer', text: '主なメリットは4つ。①水道直結で水質劣化リスクが低減、②受水槽の年1回清掃義務（年6〜10万円）が不要に、③貯水槽スペースが空く（駐輪場・倉庫転用が可能）、④停電時もある程度の給水が確保される（直圧分のみ）。10年運用で清掃費・点検費・更新費を合算すると100〜200万円の削減効果が出るケースもあります。' } },
+    { '@type': 'Question', name: 'デメリットや注意点はありますか？', acceptedAnswer: { '@type': 'Answer', text: '①断水時に建物全体が即時断水する（受水槽方式なら貯水分でしばらく給水可能）、②増圧ポンプは10〜15年で更新が必要、③切替工事中の数日間は仮設給水対応が必要、④水道局へ「直結増圧給水方式承認申請」が必要で承認に1〜2ヶ月かかる。災害時の備えが必要な施設（病院・福祉施設）では受水槽併用も選択肢です。' } },
+    { '@type': 'Question', name: '自治体の補助金は使えますか？', acceptedAnswer: { '@type': 'Answer', text: '東京都・大阪府の一部自治体、横浜市・川崎市・名古屋市などで「直結給水切替支援補助金」「貯水槽水道改善助成」が用意されています。補助率は工事費の1/3〜1/2、上限50〜200万円程度が一般的。鉛配管解消補助との併用が可能な場合もあります。年度予算消化型で受付終了することがあるため、申請は早めに。' } },
+    { '@type': 'Question', name: '工事期間と建物への影響はどれくらいですか？', acceptedAnswer: { '@type': 'Answer', text: '一般的なマンション中規模（30〜80戸）で工事期間は1〜2週間、断水期間は計画工事として2〜4日が目安です。完全断水は2〜8時間×数日程度に分散させるのが一般的。住民・テナントへの周知は2〜3週間前から、トイレ・調理用の給水車手配や仮設タンク設置で生活影響を最小化します。' } },
+    { '@type': 'Question', name: '築古マンションで配管も古い場合、同時に更新すべきですか？', acceptedAnswer: { '@type': 'Answer', text: '築30年超で給水配管が亜鉛メッキ鋼管（白ガス管）の場合、直結増圧切替と同時の配管更新を強く推奨します。直結方式は本管側から建物配管に直接水が流れるため、古い配管の腐食物が住戸に届きやすくなるリスクがあります。配管更新と同時実施で工事費は1.5〜2倍になりますが、別々に発注するより20〜30%安く済むことが多いです。' } },
+  ],
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-jusuisou-seisou.png` },
+});
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  ogImage={`${site.domain}/og-jusuisou-seisou.png`}
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>受水槽撤去・直結増圧切替の費用</span>
+        </nav>
+        <span class="cl-cat">受水槽清掃</span>
+        <h1 class="cl-title">受水槽の撤去・直結増圧方式への切り替え費用｜マンション・ビルの工事相場と補助金</h1>
+        <p class="cl-lead">老朽化した受水槽を撤去して<strong>直結増圧給水方式</strong>に切り替える事例が増えています。本記事では、戸数別の工事費用、自治体補助金、メリット・デメリット、切替不可な建物条件、工事の流れまで実務目線でまとめました。<strong>中規模マンションで150〜300万円</strong>が相場の目安です。</p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年6月18日</time>
+          <span>最終更新：2026年6月18日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 受水槽撤去 → 直結増圧切替、いくらかかる？</p>
+        <p class="cl-qa-a">A. <strong>中規模マンション（30〜80戸）で150〜300万円</strong>が相場。配管全更新まで含めると200〜400万円。自治体補助金で50〜200万円カバーできるケースあり。</p>
+        <p class="cl-qa-src">※2026年6月時点・水道事業者承認が前提</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="jusuisou-seisou" serviceName="受水槽清掃" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#what">直結増圧方式とは（受水槽との違い）</a></li>
+          <li><a href="#cost">規模別・切替工事の費用相場</a></li>
+          <li><a href="#subsidy">使える自治体補助金</a></li>
+          <li><a href="#merit">切替のメリット・デメリット</a></li>
+          <li><a href="#impossible">切り替えできない建物条件</a></li>
+          <li><a href="#flow">工事の流れと住民影響</a></li>
+          <li><a href="#choose">業者選びのポイント</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <h2>3行サマリ</h2>
+        <div class="cl-callout">
+          <ul>
+            <li><strong>費用</strong>：中規模マンション150〜300万円、配管更新込み200〜400万円</li>
+            <li><strong>補助金</strong>：自治体により50〜200万円。鉛配管解消補助との併用可</li>
+            <li><strong>条件</strong>：水道本管口径・水圧・建物高さ（一般的に5〜10階以下）が承認要件</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="what" class="cl-section">
+        <h2>直結増圧方式とは（受水槽との違い）</h2>
+        <p>給水方式は大きく2つに分けられます。<strong>受水槽方式</strong>は水道本管 → 受水槽（地下や1階）→ 給水ポンプ → 各戸 という流れで、貯水槽に一旦水を貯めてから供給する方式です。<strong>直結増圧方式</strong>は水道本管 → 増圧ポンプ → 各戸 と直接送水する方式で、貯水槽を経由しません。</p>
+
+        <h3>方式別の主な違い</h3>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>受水槽方式 vs 直結増圧方式の比較</caption>
+            <thead><tr><th>項目</th><th>受水槽方式</th><th>直結増圧方式</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">貯水槽</th><td>必要（年1回清掃義務）</td><td>不要</td></tr>
+              <tr><th scope="row">水質</th><td>滞留・劣化リスクあり</td><td>水道本管直結で劣化少</td></tr>
+              <tr><th scope="row">点検義務</th><td>水道法・建築物衛生法対象</td><td>増圧ポンプの法定点検は限定的</td></tr>
+              <tr><th scope="row">停電時</th><td>受水槽の貯水分は使える</td><td>即時断水（直圧分のみ可）</td></tr>
+              <tr><th scope="row">災害時</th><td>非常用水源として活用可</td><td>本管断水で即影響</td></tr>
+              <tr><th scope="row">スペース</th><td>受水槽分の占有あり</td><td>増圧ポンプのみ（小型）</td></tr>
+              <tr><th scope="row">年間維持費</th><td>清掃6〜10万円＋点検＋電気代</td><td>増圧ポンプ点検＋電気代</td></tr>
+              <tr><th scope="row">適用建物</th><td>全規模・全階数</td><td>原則10階以下・中小規模</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>近年は<strong>水道本管の口径拡大・水圧確保</strong>が進み、直結増圧方式が選択可能なエリアが拡大しています。築古マンションの受水槽更新タイミング（25〜30年）で切替を検討する事例が増えています。</p>
+      </section>
+
+      <section id="cost" class="cl-section">
+        <h2>規模別・切替工事の費用相場</h2>
+        <p>費用は<strong>「撤去」「直結配管化」「増圧ポンプ設置」</strong>の3要素で構成されます。既存配管の状態・搬出経路・夜間工事の有無で大きく変動するため、本記事の数値は「平日昼間・標準的な施工条件」を前提とした目安です。</p>
+
+        <h3>戸数別・標準的な総工事費</h3>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>受水槽撤去→直結増圧切替の費用相場（2026年6月時点）</caption>
+            <thead><tr><th>建物規模</th><th>受水槽撤去</th><th>直結配管・増圧ポンプ設置</th><th>標準総額</th><th>配管全更新込み</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">小規模マンション（10〜30戸）</th><td>20〜35万円</td><td>80〜130万円</td><td>100〜170万円</td><td>150〜250万円</td></tr>
+              <tr><th scope="row">中規模マンション（30〜80戸）</th><td>30〜50万円</td><td>120〜250万円</td><td>150〜300万円</td><td>200〜400万円</td></tr>
+              <tr><th scope="row">大規模マンション（80戸〜）</th><td>50〜80万円</td><td>250〜500万円</td><td>300〜600万円</td><td>400〜800万円</td></tr>
+              <tr><th scope="row">小規模ビル（〜延床1,000㎡）</th><td>20〜40万円</td><td>80〜150万円</td><td>100〜200万円</td><td>150〜300万円</td></tr>
+              <tr><th scope="row">中規模ビル（〜延床3,000㎡）</th><td>30〜60万円</td><td>150〜300万円</td><td>200〜400万円</td><td>300〜500万円</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>費用に影響する主な要因</h3>
+        <ul>
+          <li><strong>水道本管口径</strong>：細い口径（25mm以下）の場合は本管引込増径工事が追加（30〜80万円）</li>
+          <li><strong>既存配管の状態</strong>：白ガス管・鉛配管がある場合は同時更新が事実上必須</li>
+          <li><strong>受水槽の設置位置</strong>：屋上・地下深部だと撤去搬出費が+10〜30万円</li>
+          <li><strong>増圧ポンプの仕様</strong>：インバータ式・並列複数台で+20〜80万円</li>
+          <li><strong>夜間・休日工事</strong>：人件費割増で総額+20〜40%</li>
+          <li><strong>仮設給水の手配</strong>：給水車・仮設タンクで+10〜30万円／日</li>
+        </ul>
+
+        <p class="cl-note"><small>※詳細な単発工事の費用は <a href="/column/jusuisou-seisou-hiyo-sohba/">受水槽清掃の費用相場2026</a>、ポンプ単体更新の費用は <a href="/column/jusuisou-pump-haikan-kokan-hiyo/">受水槽のポンプ・配管交換費用相場</a> もご参照ください。</small></p>
+      </section>
+
+      <section id="subsidy" class="cl-section">
+        <h2>使える自治体補助金</h2>
+        <p>直結増圧切替は<strong>水質改善・水道事業の効率化</strong>に資するため、多くの自治体が補助制度を用意しています。補助率は工事費の1/3〜1/2、上限額は50〜200万円程度が一般的です。</p>
+
+        <h3>代表的な補助制度（2026年6月時点）</h3>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>主要自治体の直結増圧切替支援（参考例）</caption>
+            <thead><tr><th>自治体</th><th>制度名（参考）</th><th>補助率・上限</th><th>対象</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">東京都・特別区</th><td>貯水槽水道改善助成</td><td>1/3〜1/2・上限50〜100万円</td><td>受水槽方式の集合住宅・小規模ビル</td></tr>
+              <tr><th scope="row">横浜市</th><td>直結給水化助成制度</td><td>1/2・上限100万円程度</td><td>3階以上の集合住宅</td></tr>
+              <tr><th scope="row">川崎市</th><td>直結給水切替助成</td><td>1/2・上限100万円程度</td><td>集合住宅・小規模ビル</td></tr>
+              <tr><th scope="row">名古屋市</th><td>給水方式変更助成</td><td>1/3・上限80万円程度</td><td>条件付き</td></tr>
+              <tr><th scope="row">大阪市</th><td>貯水槽水道改善助成</td><td>1/3・上限60万円程度</td><td>受水槽更新時期到来物件</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="cl-note"><small>※制度名・補助率・上限は自治体により変更されることがあります。最新の情報は各自治体水道局公式サイトの「直結 助成」「貯水槽 改善」等で検索してください。</small></p>
+
+        <h3>補助金申請の落とし穴</h3>
+        <ul>
+          <li><strong>事前申請が原則</strong>：工事着工後の申請は対象外</li>
+          <li><strong>年度予算消化型</strong>：受付終了タイミングが予測しにくい</li>
+          <li><strong>業者要件</strong>：自治体登録業者のみ対象の補助あり</li>
+          <li><strong>書類の保管期間</strong>：工事写真・領収書を5〜10年保管が必須</li>
+          <li><strong>マンション総会承認</strong>：補助申請に総会議事録の添付を求める自治体あり</li>
+        </ul>
+        <p>申請ノウハウの蓄積がある業者を選ぶと、書類負担を大幅に軽減できます。詳細は <a href="/column/jusuisou-seisou-hojokin/">受水槽清掃・更新の補助金活用ガイド</a> もご参照ください。</p>
+      </section>
+
+      <section id="merit" class="cl-section">
+        <h2>切替のメリット・デメリット</h2>
+
+        <h3>メリット4点</h3>
+        <ol>
+          <li><strong>水質改善</strong>：受水槽の滞留水・劣化リスクがなくなり、水道本管の水質がそのまま供給される</li>
+          <li><strong>維持費削減</strong>：受水槽清掃（年6〜10万円）、水質検査、点検が不要に。10年で100〜200万円の維持費削減</li>
+          <li><strong>スペース活用</strong>：撤去後の貯水槽スペースを駐輪場・倉庫・テナント区画に転用できる</li>
+          <li><strong>更新費の長期削減</strong>：受水槽本体は25〜30年で更新（200〜500万円）が必要。これが不要に</li>
+        </ol>
+
+        <h3>デメリット・注意点4点</h3>
+        <ol>
+          <li><strong>断水時の即影響</strong>：本管断水・停電時に建物全体が即時断水。受水槽方式なら貯水分でしばらく給水可能</li>
+          <li><strong>増圧ポンプの更新</strong>：10〜15年で増圧ポンプ更新（30〜80万円）が必要</li>
+          <li><strong>水道局承認に時間</strong>：「直結増圧給水方式承認申請」の審査に1〜2ヶ月</li>
+          <li><strong>切替工事中の影響</strong>：1〜2週間の工事期間、計画断水2〜4日が必要</li>
+        </ol>
+
+        <h3>判断の目安：受水槽方式を維持すべきケース</h3>
+        <p>以下の建物では、直結増圧切替よりも<strong>受水槽方式の継続・更新が合理的</strong>な場合があります。</p>
+        <ul>
+          <li>病院・介護施設・福祉施設（災害時の給水確保が必要）</li>
+          <li>大型ホテル・宿泊施設（断水時の宿泊客対応が困難）</li>
+          <li>11階以上の高層マンション（直結増圧の能力限界を超える可能性）</li>
+          <li>大型商業施設・工場（給水負荷のピークが大きい）</li>
+          <li>本管口径が25mm以下で増径困難な道路状況</li>
+        </ul>
+      </section>
+
+      <section id="impossible" class="cl-section">
+        <h2>切り替えできない建物条件</h2>
+        <p>直結増圧方式は<strong>水道事業者の承認</strong>がないと切替できません。一般的に承認要件として以下が確認されます。</p>
+
+        <h3>水道事業者が確認する条件</h3>
+        <ol>
+          <li><strong>水道本管の口径</strong>：原則75mm以上が前提（場合により50mm可）</li>
+          <li><strong>本管の水圧</strong>：必要水圧（建物最高位+10m程度）を満たす本管圧</li>
+          <li><strong>建物の高さ</strong>：一般的に5〜10階以下（増圧ポンプの能力次第）</li>
+          <li><strong>給水負荷</strong>：ピーク時給水量が本管能力内</li>
+          <li><strong>水道メーター位置</strong>：適切な位置に設置可能</li>
+          <li><strong>他建物への影響</strong>：周辺建物の水圧低下を招かない</li>
+        </ol>
+
+        <h3>申請から承認までの流れ</h3>
+        <ol>
+          <li>水道局へ「直結増圧切替の事前相談」（無料・1〜2週間）</li>
+          <li>給水装置工事業者による設計図面作成</li>
+          <li>水道局へ「直結増圧給水方式承認申請」提出</li>
+          <li>水道局審査（通常1〜2ヶ月）</li>
+          <li>承認後、工事着工</li>
+        </ol>
+
+        <p>水道局事前相談は<strong>必ず工事業者選定前に行ってください</strong>。「承認不可」となった場合に発注済みの設計費用が無駄になることを防ぐためです。</p>
+      </section>
+
+      <section id="flow" class="cl-section">
+        <h2>工事の流れと住民影響</h2>
+
+        <h3>標準的なスケジュール（中規模マンション例）</h3>
+        <ol>
+          <li><strong>事前準備（2〜4ヶ月）</strong>
+            <ul>
+              <li>水道局事前相談・補助金確認</li>
+              <li>業者選定（3社相見積もり）</li>
+              <li>理事会承認・総会決議</li>
+              <li>水道局へ承認申請</li>
+            </ul>
+          </li>
+          <li><strong>承認待ち（1〜2ヶ月）</strong>
+            <ul>
+              <li>住民・テナントへの工事告知（書面投函）</li>
+              <li>仮設給水の手配（給水車・仮設タンク）</li>
+            </ul>
+          </li>
+          <li><strong>工事期間（1〜2週間）</strong>
+            <ul>
+              <li>1〜2日目：直結配管・増圧ポンプ設置</li>
+              <li>3〜5日目：受水槽周辺配管の切替・断水試験</li>
+              <li>6〜8日目：受水槽撤去・搬出</li>
+              <li>9〜10日目：仕上げ・水質検査・引渡し</li>
+            </ul>
+          </li>
+        </ol>
+
+        <h3>住民・テナントへの周知ポイント</h3>
+        <p>切替工事は<strong>断水時間が複数日に分散</strong>するため、通常の受水槽清掃以上に丁寧な周知が必要です。</p>
+        <ul>
+          <li><strong>2〜3ヶ月前</strong>：工事計画の概要を理事会・テナント説明会で共有</li>
+          <li><strong>1ヶ月前</strong>：詳細スケジュール・断水時間帯を書面投函</li>
+          <li><strong>2週間前</strong>：再度書面投函・エレベーター掲示</li>
+          <li><strong>1週間前</strong>：給水車・仮設タンクの設置場所案内</li>
+          <li><strong>前日</strong>：玄関ドアへのリマインダー掲示</li>
+        </ul>
+      </section>
+
+      <section id="choose" class="cl-section">
+        <h2>業者選びのポイント</h2>
+        <p>切替工事は<strong>「水道局承認申請」「補助金申請」「配管工事」「住民対応」</strong>の4要素が絡む複雑な工事です。業者選定で以下を必ず確認してください。</p>
+
+        <h3>必須確認項目5点</h3>
+        <ol>
+          <li><strong>給水装置工事主任技術者の在籍</strong>：水道局申請の必須資格</li>
+          <li><strong>当該水道事業者の指定工事店登録</strong>：自治体ごとに指定工事店制度あり</li>
+          <li><strong>直結増圧切替の実績件数</strong>：年間5件以上が安心の目安</li>
+          <li><strong>補助金申請の代行可否</strong>：書類作成の手間を大幅削減</li>
+          <li><strong>仮設給水の手配能力</strong>：給水車・仮設タンクの調達ルート</li>
+        </ol>
+
+        <h3>見積書で必ず確認する内訳</h3>
+        <ul>
+          <li>受水槽撤去費（解体・搬出・産廃処分）</li>
+          <li>直結配管工事費（材料・施工・保温）</li>
+          <li>増圧ポンプ本体費・設置工事費</li>
+          <li>水道メーター移設・口径変更費</li>
+          <li>仮設給水費（給水車・仮設タンク・配管）</li>
+          <li>水道局申請手数料・補助金申請代行費</li>
+          <li>住民周知・チラシ作成費</li>
+          <li>試運転・水質検査・引渡し書類作成</li>
+        </ul>
+
+        <h3>3社相見積もりの活用</h3>
+        <p>切替工事は業者ごとに見積項目の粒度・施工方法に差が出やすい領域です。<strong>同じ条件で3社見積もり</strong>を比較することで、見積書の項目過不足・標準的な相場感が掴めます。ロカサポでは資格・実績・自治体登録を確認した業者を最大3社まで無料でご紹介しています。</p>
+      </section>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          <div class="cl-faq-item">
+            <dt>受水槽を撤去して直結増圧方式に切り替える費用はいくらが相場ですか？</dt>
+            <dd>マンション中規模（30〜80戸）で本体撤去・直結配管・増圧ポンプ設置を合わせて<strong>150〜300万円</strong>が相場です。本体撤去のみなら20〜50万円、配管全更新を含む場合は200〜400万円が目安。建物規模・既存配管の状態・自治体補助金の有無で大きく変動します。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>すべての建物で直結増圧方式に切り替えられますか？</dt>
+            <dd>いいえ。切り替えには「水道事業者の本管口径・水圧」「建物高さ（一般的に5〜10階以下まで）」「水道メーター位置」などの条件があります。給水負荷が大きい病院・ホテル・大規模商業施設では断水時の供給確保のため受水槽方式が維持されるケースもあります。事前に水道局へ「直結増圧切替申請」の可否を確認してください。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>切り替えるとどんなメリットがありますか？</dt>
+            <dd>主なメリットは4つ。①水道直結で水質劣化リスクが低減、②受水槽の年1回清掃義務（年6〜10万円）が不要に、③貯水槽スペースが空く（駐輪場・倉庫転用が可能）、④停電時もある程度の給水が確保される（直圧分のみ）。10年運用で清掃費・点検費・更新費を合算すると100〜200万円の削減効果が出るケースもあります。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>デメリットや注意点はありますか？</dt>
+            <dd>①断水時に建物全体が即時断水する（受水槽方式なら貯水分でしばらく給水可能）、②増圧ポンプは10〜15年で更新が必要、③切替工事中の数日間は仮設給水対応が必要、④水道局へ「直結増圧給水方式承認申請」が必要で承認に1〜2ヶ月かかる。災害時の備えが必要な施設（病院・福祉施設）では受水槽併用も選択肢です。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>自治体の補助金は使えますか？</dt>
+            <dd>東京都・大阪府の一部自治体、横浜市・川崎市・名古屋市などで「直結給水切替支援補助金」「貯水槽水道改善助成」が用意されています。補助率は工事費の1/3〜1/2、上限50〜200万円程度が一般的。鉛配管解消補助との併用が可能な場合もあります。年度予算消化型で受付終了することがあるため、申請は早めに。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>工事期間と建物への影響はどれくらいですか？</dt>
+            <dd>一般的なマンション中規模（30〜80戸）で工事期間は<strong>1〜2週間</strong>、断水期間は計画工事として2〜4日が目安です。完全断水は2〜8時間×数日程度に分散させるのが一般的。住民・テナントへの周知は2〜3週間前から、トイレ・調理用の給水車手配や仮設タンク設置で生活影響を最小化します。</dd>
+          </div>
+          <div class="cl-faq-item">
+            <dt>築古マンションで配管も古い場合、同時に更新すべきですか？</dt>
+            <dd>築30年超で給水配管が亜鉛メッキ鋼管（白ガス管）の場合、直結増圧切替と同時の配管更新を強く推奨します。直結方式は本管側から建物配管に直接水が流れるため、古い配管の腐食物が住戸に届きやすくなるリスクがあります。配管更新と同時実施で工事費は1.5〜2倍になりますが、別々に発注するより20〜30%安く済むことが多いです。</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="cl-section">
+        <h2>関連記事</h2>
+        <ul class="cl-related">
+          <li><a href="/column/jusuisou-pump-haikan-kokan-hiyo/">受水槽のポンプ・配管交換 費用相場2026｜給水加圧ポンプの見積もり内訳</a></li>
+          <li><a href="/column/jusuisou-seisou-mansion/">受水槽清掃のマンション向け完全ガイド2026｜管理組合の責任・費用相場・業者選び</a></li>
+          <li><a href="/column/jusuisou-seisou-hojokin/">受水槽清掃・更新の補助金活用ガイド</a></li>
+          <li><a href="/column/jusuisou-seisou-horei-gimu/">受水槽清掃の法定義務ガイド2026｜水道法・建築物衛生法</a></li>
+          <li><a href="/column/shisetsu-kanri-nenkan-schedule/">施設管理の年間スケジュール2026｜9種の法定点検カレンダー</a></li>
+        </ul>
+      </section>
+
+      <ColumnCtaCard serviceSlug="jusuisou-seisou" serviceName="受水槽清掃" variant="bottom" />
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-note { font-size: .82rem; color: var(--gray-500); font-style: italic; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-callout li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+@media (max-width: 600px) { .cl-header { padding: 32px 0 28px; } .cl-body { padding: 28px 16px 48px; } .cl-section h2 { font-size: 1.15rem; } }
+.cl-quickanswer { background: #eef6ff; border: 1.5px solid #1a56db; border-radius: 10px; padding: 18px 22px; margin-bottom: 32px; }
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+</style>

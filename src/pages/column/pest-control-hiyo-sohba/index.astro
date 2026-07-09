@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
-const title = '業務用害虫駆除（PCO）の費用相場2026｜業種別・契約形態別の料金ガイド';
+const title = '業務用害虫駆除（PCO）の費用相場｜業種別・契約形態別の料金ガイド';
 const description = '飲食店・食品工場・ホテル・福祉施設の業務用害虫駆除（PCO）の費用相場を業種別・契約形態別に整理。月次モニタリング契約・スポット駆除・トコジラミ・大型施設対応の料金、薬剤コスト、IPM対応業者の選定ポイントまで施設管理者向けに解説します。';
 const canonical = `${site.domain}/column/pest-control-hiyo-sohba/`;
 const published = '2026-05-26';
@@ -25,7 +26,7 @@ const articleLd = JSON.stringify({
   articleSection: '費用相場',
   keywords: '害虫駆除,PCO,費用相場,業種別料金,月次契約,トコジラミ,HACCP対応,2026',
   author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
-  publisher: { '@type': 'Organization', name: site.org.legalName, url: site.domain, logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` } },
+  publisher: { '@id': `${site.domain}/#organization` },
   image: { '@type': 'ImageObject', url: `${site.domain}/og-pest-control.png`, width: 1200, height: 630 },
   about: { '@type': 'Service', name: '害虫駆除（業務用PCO）' },
 });
@@ -39,10 +40,32 @@ const faqLd = JSON.stringify({
     { '@type': 'Question', name: '食品工場の害虫管理費用は？', acceptedAnswer: { '@type': 'Answer', text: '工場規模により月50,000〜300,000円が目安。HACCP・FSSC22000等の認証維持が求められる場合は、月次モニタリング＋四半期の総合点検＋年次のリスクアセスメントを含む包括契約となり、年間数百万円規模になるケースもあります。' } },
     { '@type': 'Question', name: 'IPM対応業者を選ぶ理由は？', acceptedAnswer: { '@type': 'Answer', text: 'IPM（総合的有害生物管理）は薬剤散布を最小化し、物理的駆除・環境改善を優先する手法。食品事業者・福祉施設・医療機関では薬剤接触リスクを下げる必要があり、IPM対応が標準です。また長期的にはコスト効率も高いです。' } },
     { '@type': 'Question', name: '報告書の質で料金が変わりますか？', acceptedAnswer: { '@type': 'Answer', text: 'はい。HACCP対応の詳細な報告書（生息マップ・トレンド分析・改善提案付き）を発行する業者は月額+2,000〜5,000円程度高い傾向ですが、保健所立入時の対応や食中毒事故時の証拠として価値が大きいです。' } },
+    { '@type': 'Question', name: "業務用害虫駆除のスポット依頼と管理契約の違いは？", acceptedAnswer: { '@type': 'Answer', text: "スポット依頼は発生時の単発対応。管理契約は定期巡回（月1〜2回）＋記録作成でHACCP対応・再発防止に効果的。食品・飲食施設は管理契約が強く推奨されます。" } },
+    { '@type': 'Question', name: "害虫駆除の薬剤は食品に影響しませんか？", acceptedAnswer: { '@type': 'Answer', text: "食品衛生法に基づく食品添加物等として承認された薬剤を使用します。施工後の換気・食品の保護等について業者から指示があります。飲食・食品施設は食品衛生適合薬剤を使用する業者を選んでください。" } },
+    { '@type': 'Question', name: "業務用害虫駆除は経費にできますか？", acceptedAnswer: { '@type': 'Answer', text: "衛生管理費・修繕費として損金算入可能です。HACCP関連費用として管理記録とあわせて保管してください。" } },
+    { '@type': 'Question', name: "自分でゴキブリ駆除をした場合とプロが来た場合の違いは？", acceptedAnswer: { '@type': 'Answer', text: "市販薬は表面処理・忌避効果が中心。業者は生息調査・侵入経路の特定・産卵場所の処理・モニタリングトラップ設置まで行います。再発防止効果は業者依頼が大幅に高い。" } },
+    { '@type': 'Question', name: "複数店舗をまとめて契約できますか？", acceptedAnswer: { '@type': 'Answer', text: "はい。チェーン店・複数施設のまとめ契約で1施設あたり費用を20〜30%削減できるケースがあります。" } }
+  
   ],
 });
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-pest-control.png` },
+});
+
 ---
-<BaseLayout title={title} description={description} canonical={canonical} siteName={site.name} logoSub="施設管理の一括見積比較" jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}>
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified} title={title} description={description} canonical={canonical} siteName={site.name} logoSub="施設管理の一括見積比較" jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}>
   <article class="cl-article">
     <header class="cl-header">
       <div class="sd-container">
@@ -52,9 +75,9 @@ const faqLd = JSON.stringify({
           <span>害虫駆除（PCO）の費用相場ガイド</span>
         </nav>
         <span class="cl-cat">費用相場</span>
-        <h1 class="cl-title">業務用害虫駆除（PCO）の費用相場2026｜業種別・契約形態別の料金ガイド</h1>
+        <h1 class="cl-title">業務用害虫駆除（PCO）の費用相場｜業種別・契約形態別の料金ガイド</h1>
         <p class="cl-lead">
-          業務用害虫駆除（PCO: Pest Control Operations）の費用は、<strong>業種・施設規模・契約形態・対象害虫</strong>で大きく変動します。「月いくらが妥当か」「飲食店と食品工場で何が違うか」「トコジラミの駆除費用はホテル経営者にとってどれくらい大きい支出か」といった疑問に答えるため、業種別の月額契約相場、スポット駆除の単価、特殊害虫対応、HACCP対応報告書付き契約の付加コスト、多店舗一括契約の割引まで実態に即して整理しました。
+          業務用害虫駆除（PCO: Pest Control Operations）の費用は、<strong>業種・施設規模・契約形態・対象害虫</strong>で振れ幅がかなり大きい分野です。「月いくらが妥当なのか」「飲食店と食品工場で何が違うのか」「トコジラミ駆除はホテル経営にどれくらい響くのか」——よくあるこうした疑問に答えるため、業種別の月額契約相場、スポット駆除の単価、特殊害虫対応、HACCP対応報告書付き契約の上乗せコスト、多店舗一括契約の割引まで、実例ベースで整理しました。
         </p>
         <div class="cl-meta">
           <time datetime={published}>公開：2026年5月26日</time>
@@ -69,8 +92,11 @@ const faqLd = JSON.stringify({
       <div class="cl-quickanswer">
         <p class="cl-qa-q">Q. 業務用害虫駆除（PCO）の費用はいくらですか？</p>
         <p class="cl-qa-a">A. <strong>スポット駆除1〜5万円、月次管理契約1〜3万円/月</strong>が目安。ゴキブリ・ネズミなど害虫の種類・施設面積・発生状況で変動する。</p>
-        <p class="cl-qa-src">※ロカサポ調査（2026年1〜4月・全国28社の見積データ）</p>
+        <p class="cl-qa-src">※ロカサポ編集部による相場調査（2026年1〜4月）</p>
       </div>
+
+      <ColumnCtaCard serviceSlug="pest-control" serviceName="害虫駆除" variant="top" />
+
 
       <aside class="cl-toc" aria-label="目次">
         <h2 class="cl-toc-h">この記事の目次</h2>
@@ -229,7 +255,7 @@ const faqLd = JSON.stringify({
       <div class="cl-cta">
         <h2>害虫駆除（PCO）の見積比較なら</h2>
         <p>HACCP対応の有資格業者から最大3社の見積もりを<br/>完全無料・約1分で取得できます</p>
-        <a class="cta-btn-primary" href="/pest-control/">無料で一括見積もりを依頼する →</a>
+        <a class="cta-btn-primary" href="/pest-control/">無料で一括見積もりを依頼する</a>
       </div>
 
       <section id="faq" class="cl-section">
@@ -258,17 +284,31 @@ const faqLd = JSON.stringify({
           <li><a href="/pest-control/hokkaido/">北海道</a></li>
           <li><a href="/pest-control/kyoto/">京都府</a></li>
         </ul>
-        <p class="cl-pref-more"><a href="/pest-control/">全国47都道府県の対応業者を見る →</a></p>
+        <p class="cl-pref-more"><a href="/pest-control/">全国47都道府県の対応業者を見る</a></p>
       </div>
 
       <aside class="cl-related">
         <h2 class="cl-related-h">関連サービス・コラム</h2>
         <ul>
+          <li><a href="/column/pest-control-guide/">業務用害虫駆除（PCO）完全ガイド｜法的義務・費用・業者選び・害虫別対策の総まとめ</a></li>
           <li><a href="/pest-control/">害虫駆除（業務用PCO）の業者を一括見積比較</a></li>
           <li><a href="/column/pest-control-haccp/">HACCP制度化で必須になった害虫対策ガイド</a></li>
           <li><a href="/grease-trap/">グリストラップ清掃の業者を比較</a></li>
           <li><a href="/flow/">ご利用の流れ・3ステップで業者紹介</a></li>
         </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#shokuhin-eisei-ho-haccp">食品衛生法（HACCP制度化）</a></li>
+          <li><a href="/glossary/#biru-kan-ho">建築物衛生法（ビル管法）</a></li>
+          <li><a href="/glossary/#kenchikubutsu-nezumi-konchu-bojogyo">建築物ねずみ昆虫等防除業</a></li>
+          <li><a href="/glossary/#tokutei-kenchikubutsu">特定建築物</a></li>
+          <li><a href="/glossary/#ipm">IPM（総合的有害生物管理）</a></li>
+          <li><a href="/glossary/#haccp">HACCP</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集（49語）をすべて見る</a></p>
       </aside>
     </div>
   </article>

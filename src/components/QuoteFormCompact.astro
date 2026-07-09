@@ -1,8 +1,9 @@
 ---
 import type { ServiceData } from '../data/services/_types';
-import { prefectures } from '../data/site';
+import { prefectures, serviceIndex } from '../data/site';
 interface Props { data: ServiceData; }
 const { data } = Astro.props;
+const otherServices = serviceIndex.filter((s) => s.slug !== data.slug);
 ---
 <aside class="qf-compact" aria-label="無料見積もり依頼フォーム（簡易）">
   <div class="qf-compact-head">
@@ -16,11 +17,11 @@ const { data } = Astro.props;
     <input type="text" name="website" tabindex="-1" autocomplete="off" class="qf-honeypot" aria-hidden="true" />
     <div class="qf-row">
       <label for="cf-company">会社名・施設名 <span class="qf-req">必須</span></label>
-      <input id="cf-company" name="company" type="text" required placeholder="例：◯◯ビル管理組合" />
+      <input id="cf-company" name="company" type="text" required placeholder="例：◯◯ビル管理組合" autocomplete="organization" />
     </div>
     <div class="qf-row">
       <label for="cf-prefecture">所在地（都道府県） <span class="qf-req">必須</span></label>
-      <select id="cf-prefecture" name="prefecture" required>
+      <select id="cf-prefecture" name="prefecture" required autocomplete="address-level1">
         <option value="">選択してください</option>
         {prefectures.map((p) => (<option value={p}>{p}</option>))}
       </select>
@@ -35,14 +36,41 @@ const { data } = Astro.props;
       </div>
     )}
     <div class="qf-row">
-      <label for="cf-email">連絡先メール <span class="qf-req">必須</span></label>
-      <input id="cf-email" name="email" type="email" required placeholder="例：info@example.com" />
+      <label>希望の連絡方法 <span class="qf-req">必須</span></label>
+      <div class="qf-radios">
+        <label class="qf-radio"><input type="radio" name="contact_method" value="メール" required /> メール</label>
+        <label class="qf-radio"><input type="radio" name="contact_method" value="電話" /> 電話</label>
+        <label class="qf-radio"><input type="radio" name="contact_method" value="どちらでも" /> どちらでも</label>
+      </div>
     </div>
-    <div class="qf-row">
-      <label for="cf-tel">連絡先電話 <span class="qf-req">必須</span></label>
-      <input id="cf-tel" name="tel" type="tel" required placeholder="例：03-0000-0000" />
+    <div class="qf-row qf-contact-email">
+      <label for="cf-email">連絡先メール</label>
+      <input id="cf-email" name="email" type="email" placeholder="例：info@example.com" autocomplete="email" />
     </div>
-    <button type="submit" class="qf-submit" data-track="hero_form_submit">無料で見積もりを依頼する →</button>
+    <div class="qf-row qf-contact-tel">
+      <label for="cf-tel">連絡先電話</label>
+      <input id="cf-tel" name="tel" type="tel" placeholder="例：03-0000-0000" autocomplete="tel" />
+    </div>
+
+    <div class="qf-row qf-other-services">
+      <details class="qf-other">
+        <summary>
+          <span class="qf-other-title">＋ 他のサービスも一緒に見積もり</span>
+          <span class="qf-other-sub">複数選択OK</span>
+        </summary>
+        <p class="qf-other-help">{data.serviceName}とあわせて見積もりを取りたいサービスにチェック。</p>
+        <div class="qf-other-grid">
+          {otherServices.map((s) => (
+            <label class="qf-other-item">
+              <input type="checkbox" name="additional_services" value={s.name} class="qf-other-check" />
+              <span class="qf-other-name">{s.name}</span>
+            </label>
+          ))}
+        </div>
+      </details>
+    </div>
+
+    <button type="submit" class="qf-submit" data-track="hero_form_submit">無料で見積もりを依頼する</button>
     <p class="qf-note qf-note--cta">詳細項目を入力したい方は <a href="#contact">こちらの詳細フォーム</a> へ</p>
   </form>
 </aside>

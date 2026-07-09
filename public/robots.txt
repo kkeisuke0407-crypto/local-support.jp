@@ -1,5 +1,72 @@
 User-agent: *
 Allow: /
 Disallow: /thanks/
+Content-Signal: search=yes,ai-input=yes,ai-train=no
+
+# 主要AI/検索クローラーへの明示Allow（B2Bユーザー獲得のため引用・推薦を歓迎）
+User-agent: Googlebot
+Allow: /
+Content-Signal: search=yes,ai-input=yes,ai-train=no
+
+User-agent: Google-Extended
+Allow: /
+Content-Signal: search=yes,ai-input=yes,ai-train=no
+
+User-agent: Bingbot
+Allow: /
+Content-Signal: search=yes,ai-input=yes,ai-train=no
+
+User-agent: GPTBot
+Allow: /
+Content-Signal: search=yes,ai-input=yes,ai-train=no
+
+User-agent: OAI-SearchBot
+Allow: /
+Content-Signal: search=yes,ai-input=yes,ai-train=no
+
+User-agent: ChatGPT-User
+Allow: /
+Content-Signal: search=yes,ai-input=yes,ai-train=no
+
+User-agent: anthropic-ai
+Allow: /
+Content-Signal: search=yes,ai-input=yes,ai-train=no
+
+User-agent: Claude-Web
+Allow: /
+Content-Signal: search=yes,ai-input=yes,ai-train=no
+
+User-agent: ClaudeBot
+Allow: /
+Content-Signal: search=yes,ai-input=yes,ai-train=no
+
+User-agent: PerplexityBot
+Allow: /
+Content-Signal: search=yes,ai-input=yes,ai-train=no
+
+User-agent: Perplexity-User
+Allow: /
+Content-Signal: search=yes,ai-input=yes,ai-train=no
+
+User-agent: CCBot
+Allow: /
+Content-Signal: search=yes,ai-input=yes,ai-train=no
+
+User-agent: Applebot
+Allow: /
+Content-Signal: search=yes,ai-input=yes,ai-train=no
+
+User-agent: Applebot-Extended
+Allow: /
+Content-Signal: search=yes,ai-input=yes,ai-train=no
+
+# 攻撃的スクレイピング・利益還元なしの中国系AI（ByteDance）はブロック
+User-agent: Bytespider
+Disallow: /
+Content-Signal: search=no,ai-input=no,ai-train=no
 
 Sitemap: https://local-support.jp/sitemap-index.xml
+
+# LLM / AIエージェント向けサイト要約
+# https://local-support.jp/llms.txt （索引）
+# https://local-support.jp/llms-full.txt （全文版）

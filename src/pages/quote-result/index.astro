@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../data/site';
+
+const title = '業者比較ページ｜ロカサポ';
+const description = 'ロカサポからご案内した業者の見積もり比較ページです。';
+const canonical = `${site.domain}/quote-result/`;
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="業者比較・選定ページ"
+  noindex={true}
+>
+  <link rel="stylesheet" href="/css/quote-result.css" slot="head" />
+  <section class="qr-section">
+    <div class="sd-container">
+
+      <div class="qr-empty" id="qr-empty">
+        <h1>業者比較ページ</h1>
+        <p>このページは、ロカサポからお送りしたメール内のリンクからアクセスしてください。</p>
+        <p>URLが正しく開けない場合は <a href="mailto:support@local-support.jp">support@local-support.jp</a> までご連絡ください。</p>
+      </div>
+
+      <div class="qr-main" id="qr-main" hidden>
+
+        <header class="qr-header">
+          <p class="qr-eyebrow">業者比較・選定</p>
+          <h1 id="qr-h1">業者比較ページ</h1>
+          <p class="qr-lead">
+            ご依頼の<strong id="qr-service"></strong>について、<strong id="qr-count">--</strong>社の業者から見積もりが届きました。<br/>
+            ご希望の業者を<strong>1〜3社</strong>選んで「選択した業者に連絡を依頼する」をクリックしてください。
+          </p>
+          <dl class="qr-meta">
+            <div><dt>案件ID</dt><dd id="qr-id"></dd></div>
+            <div><dt>ご依頼者</dt><dd id="qr-requester"></dd></div>
+            <div><dt>地域</dt><dd id="qr-prefecture"></dd></div>
+            <div><dt>有効期限</dt><dd id="qr-expires"></dd></div>
+          </dl>
+        </header>
+
+        <div class="qr-vendor-list" id="qr-vendor-list"></div>
+
+        <div class="qr-selected-bar" id="qr-selected-bar">
+          <span>選択中：<strong id="qr-selected-count">0</strong> / 最大3社</span>
+          <button type="button" class="qr-clear-btn" id="qr-clear-btn" hidden>選択をクリア</button>
+        </div>
+
+        <form class="qr-submit-form" id="qr-form" novalidate>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" class="qr-honeypot" aria-hidden="true" />
+
+          <div class="qr-form-row">
+            <label for="qr-message">業者へのご要望・補足メッセージ（任意）</label>
+            <textarea id="qr-message" name="message" rows="3" placeholder="連絡可能な時間帯・追加で確認したい事項・特に重視する条件などがあればご記入ください"></textarea>
+          </div>
+
+          <div class="qr-form-row qr-confirm">
+            <label class="qr-checkbox">
+              <input type="checkbox" id="qr-agree" name="agree" required />
+              <span>選択した業者に、ご依頼者の連絡先（メール・電話）が共有されることに同意します</span>
+            </label>
+          </div>
+
+          <button type="submit" class="qr-submit-btn" id="qr-submit-btn" disabled>
+            選択した業者に連絡を依頼する
+          </button>
+          <p class="qr-submit-note">送信後、ロカサポ運営事務局でご紹介プロセスを開始します。選択していない業者には連絡先は共有されません。</p>
+          <p class="qr-error" id="qr-error" hidden></p>
+        </form>
+
+        <div class="qr-done" id="qr-done" hidden>
+          <div class="qr-done-icon">✓</div>
+          <h2>選択を受け付けました</h2>
+          <p>選択された業者へ、ロカサポ運営事務局から順次ご連絡先をお伝えします。<br/>業者から直接ご依頼者様へ詳細見積のご連絡が入りますので、しばらくお待ちください。</p>
+          <p class="qr-done-note">ご質問は <a href="mailto:support@local-support.jp">support@local-support.jp</a> までご連絡ください。</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <script is:inline src="/js/quote-result.js"></script>
+</BaseLayout>

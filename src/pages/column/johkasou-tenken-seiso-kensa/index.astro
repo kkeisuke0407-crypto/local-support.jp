@@ -1,0 +1,439 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = '浄化槽の保守点検・清掃・法定検査の違い｜頻度・7条検査と11条検査・3つの義務';
+const description = '浄化槽の「保守点検」「清掃」「法定検査」の違いを戸建てオーナー・施設管理者向けに解説。それぞれの目的・頻度・担当者、7条検査と11条検査の違い、保守点検と法定検査が別物である理由、3つの義務を怠った場合のリスクまで2026年版で整理しました。';
+const canonical = `${site.domain}/column/johkasou-tenken-seiso-kensa/`;
+const published = '2026-06-16';
+const modified = '2026-06-16';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '浄化槽の保守点検・清掃・法定検査の違い', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 5200,
+  articleSection: '浄化槽',
+  keywords: '浄化槽 保守点検,清掃,法定検査,7条検査,11条検査,頻度,3つの義務,違い,浄化槽法,2026',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-johkasou.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '浄化槽清掃・保守点検', serviceType: '浄化槽の維持管理' },
+  citation: [
+    { '@type': 'Legislation', name: '浄化槽法第7条', url: 'https://laws.e-gov.go.jp/law/358AC1000000043' },
+    { '@type': 'Legislation', name: '浄化槽法第10条', url: 'https://laws.e-gov.go.jp/law/358AC1000000043' },
+    { '@type': 'Legislation', name: '浄化槽法第11条', url: 'https://laws.e-gov.go.jp/law/358AC1000000043' },
+    { '@type': 'Legislation', name: '浄化槽法施行規則', url: 'https://laws.e-gov.go.jp/law/359M50000100017' },
+  ],
+});
+
+const faqItems = [
+  {
+    q: '浄化槽の保守点検・清掃・法定検査は何が違うのですか？',
+    a: '保守点検は浄化槽が正常に機能するよう点検・調整・消毒する作業（年数回）、清掃は溜まった汚泥・スカムを引き抜く作業（年1回以上）、法定検査は保守点検・清掃が適正に行われ浄化槽が正常に働いているかを指定検査機関が確認する検査（毎年1回の11条検査）です。3つは目的も担当者も別で、いずれも浄化槽法で定められた管理者の義務です。',
+  },
+  {
+    q: '7条検査と11条検査の違いは何ですか？',
+    a: '7条検査は、浄化槽を新しく設置した後（使用開始後3〜8か月の間）に1回だけ受ける、設置や工事が適正かを確認する検査です。11条検査は、設置後に毎年1回受ける、その後も浄化槽が正常に維持管理されているかを確認する定期検査です。7条は「設置時の1回」、11条は「毎年」と覚えると分かりやすいです。',
+  },
+  {
+    q: '保守点検をしていれば法定検査は受けなくてよいですか？',
+    a: 'いいえ。保守点検（業者が行う日常的な点検・調整）と法定検査（指定検査機関が行う第三者チェック）は別物で、両方が義務です。保守点検を受けていても、毎年1回の法定検査（11条検査）は別途受ける必要があります。「点検しているから検査は不要」という誤解は非常に多いので注意してください。',
+  },
+  {
+    q: '保守点検の頻度はどのくらいですか？',
+    a: '浄化槽法施行規則で、処理方式・人槽に応じて頻度が定められています。家庭用の合併処理浄化槽ではおおむね年3〜4回程度が一般的です。処理方式（分離接触ばっ気方式・全ばっ気方式など）や規模によって回数が変わるため、自分の浄化槽の方式に応じた頻度を確認してください。',
+  },
+  {
+    q: '清掃の頻度はどのくらいですか？',
+    a: '清掃は原則として年1回以上です。ただし、全ばっ気方式の浄化槽は年2回以上と定められています。清掃を怠ると汚泥が溜まりすぎて処理機能が低下し、放流水質の悪化・臭い・詰まりの原因になります。',
+  },
+  {
+    q: '法定検査を受けないとどうなりますか？',
+    a: '法定検査は浄化槽法で義務付けられており、受検しないと都道府県知事による指導・助言、勧告、命令の対象になり得ます。命令に違反した場合は過料が科されることがあります。実務上は、まず受検案内や指導が来ることが多いので、案内が来たら速やかに受検してください。',
+  },
+  {
+    q: '3つはそれぞれ誰に頼むのですか？',
+    a: '保守点検は、都道府県に登録された保守点検業者（または浄化槽管理士）に依頼します。清掃は、市町村の許可を受けた浄化槽清掃業者に依頼します。法定検査は、都道府県が指定する指定検査機関が行います。保守点検と清掃を同じ業者がまとめて対応することもありますが、法定検査は指定検査機関が独立して行う第三者チェックです。',
+  },
+  {
+    q: '単独処理浄化槽でも3つの義務はありますか？',
+    a: '単独処理浄化槽（みなし浄化槽）でも、保守点検・清掃・法定検査の義務があります。なお、単独処理浄化槽は新設が原則禁止され、合併処理浄化槽への転換が促されています。単独と合併の違いは別記事で解説しています。',
+  },
+];
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-answer-grid', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-johkasou.png` },
+});
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified}
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a>
+          <span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a>
+          <span aria-hidden="true">›</span>
+          <span>保守点検・清掃・法定検査の違い</span>
+        </nav>
+        <span class="cl-cat">浄化槽</span>
+        <h1 class="cl-title">浄化槽の保守点検・清掃・法定検査の違い｜頻度・7条検査と11条検査・3つの義務</h1>
+        <p class="cl-lead">
+          浄化槽の管理者には、<strong>「保守点検」「清掃」「法定検査」という3つの義務</strong>があります。名前が似ていて混同されがちですが、目的も頻度も担当者も別物です。特に<strong>「保守点検をしているから法定検査は不要」という誤解</strong>が多く見られます。本記事では、3つの違いと頻度、7条検査と11条検査の違い、それぞれ誰に頼むか、怠った場合のリスクまでを戸建てオーナー・施設管理者向けに整理します。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年6月16日</time>
+          <span>最終更新：2026年6月16日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 保守点検・清掃・法定検査はどう違う？</p>
+        <p class="cl-qa-a">A. <strong>保守点検＝機能を保つ点検・調整（年数回）</strong>、<strong>清掃＝汚泥の引き抜き（年1回以上）</strong>、<strong>法定検査＝指定検査機関による第三者チェック（毎年1回の11条検査）</strong>。3つとも別の義務で、保守点検を受けていても法定検査は別途必要です。</p>
+        <p class="cl-qa-src">※浄化槽法第7条・第10条・第11条、浄化槽法施行規則をもとに整理</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="johkasou" serviceName="浄化槽清掃・保守点検" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#three">3つの義務の違い（早見表）</a></li>
+          <li><a href="#hoshu">保守点検とは</a></li>
+          <li><a href="#seiso">清掃とは</a></li>
+          <li><a href="#kensa">法定検査（7条検査・11条検査）とは</a></li>
+          <li><a href="#confusion">「点検しているから検査は不要」は誤解</a></li>
+          <li><a href="#who">それぞれ誰に頼むか</a></li>
+          <li><a href="#risk">怠った場合のリスク</a></li>
+          <li><a href="#sources">参考にした公式情報</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>3つの義務は別物</strong>：保守点検（年数回）／清掃（年1回以上）／法定検査（毎年1回・11条検査）</li>
+            <li><strong>7条検査は設置後の1回だけ、11条検査は毎年</strong>。担当は指定検査機関（第三者）</li>
+            <li><strong>保守点検と法定検査は別</strong>。点検を受けていても法定検査は受ける必要がある</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="three" class="cl-section">
+        <h2>3つの義務の違い（早見表）</h2>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>保守点検・清掃・法定検査の違い</caption>
+            <thead>
+              <tr><th scope="col">項目</th><th scope="col">保守点検</th><th scope="col">清掃</th><th scope="col">法定検査</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">目的</th><td>機能を保つ点検・調整・消毒</td><td>汚泥・スカムの引き抜き</td><td>適正に維持されているかの第三者チェック</td></tr>
+              <tr><th scope="row">頻度</th><td>年3〜4回程度（方式・人槽による）</td><td>年1回以上（全ばっ気は年2回以上）</td><td>設置後3〜8か月に7条検査、以後毎年11条検査</td></tr>
+              <tr><th scope="row">担当</th><td>登録保守点検業者・浄化槽管理士</td><td>市町村許可の清掃業者</td><td>都道府県の指定検査機関</td></tr>
+              <tr><th scope="row">根拠</th><td>浄化槽法第10条</td><td>浄化槽法第10条</td><td>浄化槽法第7条・第11条</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>ポイントは、<strong>保守点検・清掃は「維持管理の作業」、法定検査は「その作業が適正かを確認する検査」</strong>という関係です。作業をする人と、それをチェックする人が別、と考えると整理しやすくなります。</p>
+      </section>
+
+      <section id="hoshu" class="cl-section">
+        <h2>保守点検とは</h2>
+        <p>保守点検は、浄化槽が正常に機能し続けるように、装置の点検・調整や消毒剤の補充などを行う日常的な維持管理作業です。</p>
+        <ul>
+          <li><strong>主な内容</strong>：各装置の作動確認、汚泥のたまり具合の確認、ブロワーの確認、消毒剤の補充、水質の簡易確認など</li>
+          <li><strong>頻度</strong>：浄化槽法施行規則で処理方式・人槽別に規定。家庭用合併処理浄化槽でおおむね年3〜4回程度</li>
+          <li><strong>担当</strong>：都道府県に登録された保守点検業者、または浄化槽管理士</li>
+        </ul>
+        <p>保守点検は「異常を早期に見つけ、機能を保つ」ための作業です。清掃が必要な時期の判断も、保守点検の中で行われます。</p>
+      </section>
+
+      <section id="seiso" class="cl-section">
+        <h2>清掃とは</h2>
+        <p>清掃は、浄化槽の内部に溜まった汚泥やスカム（浮上物）を引き抜き、付属装置を洗浄する作業です。保守点検が「点検・調整」なのに対し、清掃は「溜まったものを取り除く」作業です。</p>
+        <ul>
+          <li><strong>主な内容</strong>：汚泥・スカムの引き抜き、各槽・装置の洗浄、必要に応じた水張り</li>
+          <li><strong>頻度</strong>：原則年1回以上（全ばっ気方式は年2回以上）</li>
+          <li><strong>担当</strong>：市町村の許可を受けた浄化槽清掃業者</li>
+        </ul>
+        <p>清掃を怠ると汚泥が過剰に溜まり、処理機能が低下して放流水質の悪化・臭い・詰まりにつながります。費用相場は<a href="/column/johkasou-hiyo-sohba/">浄化槽の費用相場2026</a>を参照してください。</p>
+      </section>
+
+      <section id="kensa" class="cl-section">
+        <h2>法定検査（7条検査・11条検査）とは</h2>
+        <p>法定検査は、保守点検・清掃が適正に行われ、浄化槽が正常に機能しているかを、都道府県の指定検査機関が確認する第三者チェックです。2種類あります。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>7条検査と11条検査の違い</caption>
+            <thead>
+              <tr><th scope="col">項目</th><th scope="col">7条検査</th><th scope="col">11条検査</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">タイミング</th><td>設置後（使用開始後3〜8か月の間）に1回</td><td>毎年1回</td></tr>
+              <tr><th scope="row">目的</th><td>設置・工事が適正かの確認</td><td>その後の維持管理が適正かの確認</td></tr>
+              <tr><th scope="row">位置づけ</th><td>設置時の1回だけ</td><td>定期検査（継続）</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>「7条＝設置時の1回」「11条＝毎年」と覚えるのが簡単です。日常的に話題になるのは、毎年受ける11条検査です。法令の詳細は<a href="/column/johkasou-horei-gimu/">浄化槽法の保守点検・清掃・法定検査ガイド2026</a>で解説しています。</p>
+      </section>
+
+      <section id="confusion" class="cl-section">
+        <h2>「点検しているから検査は不要」は誤解</h2>
+        <p>最も多い誤解が、「業者に保守点検を頼んでいるから、法定検査は受けなくていい」というものです。これは誤りです。</p>
+        <div class="cl-callout cl-callout--warn">
+          <h3 class="cl-callout-h">保守点検と法定検査は別の義務</h3>
+          <p>保守点検は、維持管理業者が行う日常的な点検・調整です。法定検査は、都道府県の指定検査機関が行う独立した第三者チェックです。両者は目的も担当者も違い、どちらも浄化槽法で定められた別個の義務です。保守点検を受けていても、毎年1回の法定検査（11条検査）は別途受ける必要があります。</p>
+        </div>
+        <p>「保守点検の業者がやってくれていると思っていた」というケースもあります。保守点検と法定検査の両方が手配されているか、契約内容を確認しておきましょう。</p>
+      </section>
+
+      <section id="who" class="cl-section">
+        <h2>それぞれ誰に頼むか</h2>
+        <div class="cl-answer-grid">
+          <div>
+            <h3>保守点検</h3>
+            <p>都道府県に登録された保守点検業者、または浄化槽管理士に依頼します。年間契約が一般的です。</p>
+          </div>
+          <div>
+            <h3>清掃</h3>
+            <p>市町村の許可を受けた浄化槽清掃業者に依頼します。保守点検業者があわせて手配することもあります。</p>
+          </div>
+          <div>
+            <h3>法定検査</h3>
+            <p>都道府県が指定する指定検査機関が行います。受検案内が届いたら申し込みます。</p>
+          </div>
+          <div>
+            <h3>まとめて相談も可能</h3>
+            <p>保守点検と清掃は同じ業者がまとめて対応することも多く、年間契約で管理工数を減らせます。</p>
+          </div>
+        </div>
+        <p>保守点検・清掃をまとめて依頼できる業者を選ぶと、点検結果に基づく清掃の手配や記録管理がスムーズです。法定検査は指定検査機関による独立した検査である点だけ押さえておきましょう。</p>
+      </section>
+
+      <section id="risk" class="cl-section">
+        <h2>怠った場合のリスク</h2>
+        <p>3つの義務を怠ると、機能面・法令面の両方で問題が生じます。</p>
+        <ul>
+          <li><strong>機能面</strong>：汚泥の蓄積や調整不足で放流水質が悪化し、臭い・詰まり・近隣への影響が出る</li>
+          <li><strong>法令面</strong>：法定検査の未受検などは、都道府県知事による指導・助言、勧告、命令の対象になり得る</li>
+          <li><strong>命令違反</strong>：改善命令等に従わない場合、過料が科されることがある</li>
+        </ul>
+        <p>実務上は、いきなり罰則ではなく、まず受検案内・指導が来ることが多いです。案内が届いたら放置せず対応してください。法令面の詳細は<a href="/column/johkasou-horei-gimu/">浄化槽法ガイド2026</a>を参照してください。</p>
+      </section>
+
+      <section id="sources" class="cl-section">
+        <h2>参考にした公式情報</h2>
+        <p>本記事は、浄化槽法・浄化槽法施行規則および環境省の公開情報をもとに、維持管理の実務で使いやすい形に整理しています。頻度・手数料・受検方法は地域・指定検査機関で異なるため、お住まいの自治体・指定検査機関の案内も確認してください。</p>
+        <ul class="cl-source-list">
+          <li><a href="https://laws.e-gov.go.jp/law/358AC1000000043" target="_blank" rel="noopener">浄化槽法｜e-Gov法令検索</a></li>
+          <li><a href="https://laws.e-gov.go.jp/law/359M50000100017" target="_blank" rel="noopener">浄化槽法施行規則｜e-Gov法令検索</a></li>
+          <li><a href="https://www.env.go.jp/recycle/jokaso/" target="_blank" rel="noopener">浄化槽サイト（環境省）</a></li>
+        </ul>
+      </section>
+
+      <div class="cl-cta">
+        <h2>保守点検・清掃をまとめて依頼したいなら</h2>
+        <p>地域の登録・許可業者から最大3社の見積もりを<br/>完全無料・約1分で取得できます</p>
+        <a class="cta-btn-primary" href="/johkasou/">無料で一括見積もりを依頼する</a>
+      </div>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          {faqItems.map((item) => (
+            <div class="cl-faq-item">
+              <dt>{item.q}</dt>
+              <dd>{item.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別の浄化槽業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/johkasou/tokyo/">東京都</a></li>
+          <li><a href="/johkasou/osaka/">大阪府</a></li>
+          <li><a href="/johkasou/kanagawa/">神奈川県</a></li>
+          <li><a href="/johkasou/aichi/">愛知県</a></li>
+          <li><a href="/johkasou/saitama/">埼玉県</a></li>
+          <li><a href="/johkasou/chiba/">千葉県</a></li>
+          <li><a href="/johkasou/hyogo/">兵庫県</a></li>
+          <li><a href="/johkasou/fukuoka/">福岡県</a></li>
+          <li><a href="/johkasou/hokkaido/">北海道</a></li>
+          <li><a href="/johkasou/kyoto/">京都府</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/johkasou/">全国47都道府県の対応業者を見る</a></p>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連サービス・コラム</h2>
+        <ul>
+          <li><a href="/johkasou/">浄化槽の保守点検・清掃業者を一括見積比較</a></li>
+          <li><a href="/column/johkasou-horei-gimu/">浄化槽法の保守点検・清掃・法定検査ガイド2026</a></li>
+          <li><a href="/column/johkasou-hiyo-sohba/">浄化槽の費用相場2026</a></li>
+          <li><a href="/column/johkasou-kumitori/">浄化槽の汲み取り2026｜頻度・費用・単独/合併の違い</a></li>
+          <li><a href="/column/johkasou-blower/">浄化槽ブロワーの異音・故障・交換2026</a></li>
+        </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#jokaso-ho">浄化槽法</a></li>
+          <li><a href="/glossary/#jokaso-hoteikensa">法定検査（7条・11条）</a></li>
+          <li><a href="/glossary/#jokaso-kanrishi">浄化槽管理士</a></li>
+          <li><a href="/glossary/#gappei-shori-jokaso">合併処理浄化槽</a></li>
+          <li><a href="/glossary/#tandoku-shori-jokaso">単独処理浄化槽</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集（49語）をすべて見る</a></p>
+      </aside>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header {
+  background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%);
+  color: #fff;
+  padding: 48px 0 40px;
+}
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul, .cl-callout--warn ul { padding-left: 18px; margin: 0; }
+.cl-callout li, .cl-callout--warn li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-answer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 20px 0 24px; }
+.cl-answer-grid > div { background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; padding: 18px 20px; box-shadow: 0 6px 18px rgba(15, 23, 42, .05); }
+.cl-answer-grid h3 { font-size: 1rem; color: var(--blue-dark); margin: 0 0 8px; }
+.cl-answer-grid p { margin: 0; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-source-list { padding-left: 22px; display: grid; gap: 8px; }
+.cl-source-list a { color: var(--blue); text-decoration: underline; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-glossary-block { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 24px; }
+.cl-glossary-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; }
+.cl-glossary-list { padding-left: 18px; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; }
+.cl-glossary-list a { color: var(--blue); text-decoration: underline; font-size: .88rem; }
+.cl-glossary-more { font-size: .85rem; margin: 12px 0 0; }
+.cl-glossary-more a { color: var(--blue); text-decoration: underline; }
+@media (max-width: 600px) {
+  .cl-header { padding: 32px 0 28px; }
+  .cl-body { padding: 28px 16px 48px; }
+  .cl-section h2 { font-size: 1.15rem; }
+  .cl-answer-grid { grid-template-columns: 1fr; }
+}
+
+.cl-quickanswer {
+  background: #eef6ff;
+  border: 1.5px solid #1a56db;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-bottom: 32px;
+}
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+</style>

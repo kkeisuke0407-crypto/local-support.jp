@@ -1,0 +1,348 @@
+---
+/**
+ * コラム記事内に挿入するCTAカード（top: 冒頭直後／bottom: 末尾用）
+ * - top: 「約60秒・5問コスト診断」＋「サービスの一括見積」の2択
+ * - bottom: 既存の cl-cta があるカラムでは使わない
+ */
+import type { ServiceData } from '../data/services/_types';
+import { serviceBySlug } from '../data/services';
+import { findServiceCategory, getCategoryHref } from '../data/serviceCategories';
+
+interface Props {
+  serviceSlug: string;
+  serviceName: string;
+  variant?: 'top' | 'bottom';
+}
+const { serviceSlug, serviceName, variant = 'top' } = Astro.props;
+const isTop = variant === 'top';
+const service = serviceBySlug[serviceSlug];
+const category = findServiceCategory(serviceSlug);
+const categoryHref = category ? getCategoryHref(category.slug) : null;
+const currentPath = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
+const relatedColumns = service?.relatedColumns
+  ?.filter((column) => column.href !== currentPath)
+  .slice(0, 3) ?? [];
+const summaryFacts = service?.aiSummary.facts.slice(0, 3) ?? [];
+const checklistItems = service?.selectionCriteria.slice(0, 4) ?? [];
+const categoryServices = category
+  ? category.serviceSlugs
+      .map((slug) => serviceBySlug[slug])
+      .filter((item): item is ServiceData => Boolean(item) && item.slug !== serviceSlug)
+      .slice(0, 4)
+  : [];
+const showContextLinks = isTop && (Boolean(category) || relatedColumns.length > 0 || categoryServices.length > 0);
+const showDecisionSupport = isTop && Boolean(service) && (summaryFacts.length > 0 || checklistItems.length > 0);
+
+const priceRangeText = service?.costGuide.priceRange
+  ? `${formatPrice(service.costGuide.priceRange.min)}〜${formatPrice(service.costGuide.priceRange.max)}`
+  : null;
+
+function formatPrice(value: number) {
+  if (value >= 10000 && value % 10000 === 0) {
+    return `${new Intl.NumberFormat('ja-JP').format(value / 10000)}万円`;
+  }
+  return `${new Intl.NumberFormat('ja-JP').format(value)}円`;
+}
+---
+<aside class={`col-cta-card${isTop ? ' col-cta-card--top' : ' col-cta-card--bottom'}`}>
+  <div class="col-cta-head">
+    <span class="col-cta-eyebrow">{isTop ? 'この記事を読む前に' : '記事のまとめ'}</span>
+    <p class="col-cta-h">
+      {isTop
+        ? <>{serviceName}の<strong>コスト見直し・一括見積</strong>はこちらから</>
+        : <>{serviceName}の<strong>業者選び・見積</strong>はロカサポで</>}
+    </p>
+    <p class="col-cta-sub">
+      個人情報なしで約60秒・5問のコスト診断、または実績・信頼のある専門業者ネットワークから最大3社まで一括見積を依頼できます。<br/>
+      <strong>業者をお選びいただくまで、業者からの連絡は来ません。</strong>
+    </p>
+  </div>
+  <div class="col-cta-btns">
+    <a href="/audit/" class="col-cta-btn col-cta-btn--primary" data-track={`column_${variant}_audit`}>
+      まず60秒でコスト診断
+    </a>
+    <a href={`/${serviceSlug}/`} class="col-cta-btn col-cta-btn--secondary" data-track={`column_${variant}_quote`}>
+      {serviceName}の一括見積を依頼
+    </a>
+  </div>
+
+  {showDecisionSupport && (
+    <div class="col-cta-decision" aria-label={`${serviceName}の見積前チェックリスト`}>
+      <div class="col-cta-summary">
+        <h3>要点サマリー</h3>
+        <dl>
+          {priceRangeText && (
+            <>
+              <dt>費用目安</dt>
+              <dd>{priceRangeText}</dd>
+            </>
+          )}
+          {summaryFacts.map((fact) => (
+            <>
+              <dt>{fact.label}</dt>
+              <dd>{fact.value}</dd>
+            </>
+          ))}
+        </dl>
+      </div>
+
+      {checklistItems.length > 0 && (
+        <div class="col-cta-checklist">
+          <h3>見積前チェックリスト</h3>
+          <ul>
+            {checklistItems.map((item) => (
+              <li>
+                <strong>{item.title}</strong>
+                <span>{item.body}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  )}
+
+  {showContextLinks && (
+    <div class="col-cta-context" aria-label={`${serviceName}の関連導線`}>
+      {category && categoryHref && (
+        <a href={categoryHref} class="col-cta-context-main">
+          <span>カテゴリで確認</span>
+          <strong>{category.label}</strong>
+        </a>
+      )}
+
+      <div class="col-cta-context-grid">
+        {categoryServices.length > 0 && (
+          <div class="col-cta-link-block">
+            <h3>同じカテゴリのサービス</h3>
+            <ul>
+              {categoryServices.map((item) => (
+                <li><a href={`/${item.slug}/`}>{item.serviceName}</a></li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {relatedColumns.length > 0 && (
+          <div class="col-cta-link-block">
+            <h3>関連コラム</h3>
+            <ul>
+              {relatedColumns.map((column) => (
+                <li><a href={column.href}>{column.title}</a></li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    </div>
+  )}
+</aside>
+
+<style>
+.col-cta-card {
+  background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+  border: 1px solid #bfdbfe;
+  border-left: 5px solid var(--blue, #1d4ed8);
+  border-radius: 12px;
+  padding: 20px 22px;
+  margin: 24px 0 32px;
+  box-shadow: 0 2px 8px rgba(29, 78, 216, 0.06);
+}
+.col-cta-card--bottom {
+  background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%);
+  border-color: #fcd34d;
+  border-left-color: #d97706;
+}
+.col-cta-eyebrow {
+  display: inline-block;
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  color: var(--blue, #1d4ed8);
+  background: #dbeafe;
+  padding: 3px 10px;
+  border-radius: 99px;
+  margin-bottom: 10px;
+}
+.col-cta-card--bottom .col-cta-eyebrow {
+  color: #b45309;
+  background: #fde68a;
+}
+.col-cta-h {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #111827;
+  line-height: 1.55;
+  margin: 0 0 8px;
+}
+.col-cta-h strong { color: var(--blue, #1d4ed8); }
+.col-cta-card--bottom .col-cta-h strong { color: #b45309; }
+.col-cta-sub {
+  font-size: .85rem;
+  line-height: 1.75;
+  color: #4b5563;
+  margin: 0 0 16px;
+}
+.col-cta-sub strong { color: #111827; }
+.col-cta-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.col-cta-btn {
+  display: inline-block;
+  font-size: .92rem;
+  font-weight: 800;
+  padding: 12px 22px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: opacity .2s, transform .15s;
+  text-align: center;
+}
+.col-cta-btn:hover { opacity: .88; transform: translateY(-1px); }
+.col-cta-btn--primary {
+  background: #fbbf24;
+  color: #1a202c;
+}
+.col-cta-btn--secondary {
+  background: var(--blue, #1d4ed8);
+  color: #fff;
+}
+.col-cta-decision {
+  display: grid;
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+  gap: 14px;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid #dbeafe;
+}
+.col-cta-summary,
+.col-cta-checklist {
+  padding: 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .72);
+}
+.col-cta-summary h3,
+.col-cta-checklist h3 {
+  margin: 0 0 10px;
+  color: #111827;
+  font-size: .82rem;
+  font-weight: 900;
+}
+.col-cta-summary dl {
+  display: grid;
+  grid-template-columns: minmax(82px, .38fr) minmax(0, 1fr);
+  gap: 8px 10px;
+  margin: 0;
+}
+.col-cta-summary dt {
+  color: #64748b;
+  font-size: .72rem;
+  font-weight: 900;
+}
+.col-cta-summary dd {
+  margin: 0;
+  color: #111827;
+  font-size: .8rem;
+  font-weight: 700;
+  line-height: 1.55;
+}
+.col-cta-checklist ul {
+  display: grid;
+  gap: 9px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.col-cta-checklist li {
+  display: grid;
+  gap: 3px;
+  padding-left: 14px;
+  border-left: 3px solid #bfdbfe;
+}
+.col-cta-checklist strong {
+  color: #111827;
+  font-size: .8rem;
+  line-height: 1.5;
+}
+.col-cta-checklist span {
+  display: -webkit-box;
+  overflow: hidden;
+  color: #4b5563;
+  font-size: .76rem;
+  line-height: 1.6;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.col-cta-context {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid #dbeafe;
+}
+.col-cta-context-main {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  color: var(--blue, #1d4ed8);
+  font-size: .84rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+.col-cta-context-main span {
+  color: #64748b;
+  font-size: .72rem;
+  letter-spacing: .04em;
+}
+.col-cta-context-main strong {
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: #dbeafe;
+  color: var(--blue, #1d4ed8);
+}
+.col-cta-context-main:hover strong { text-decoration: underline; }
+.col-cta-context-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.col-cta-link-block {
+  padding: 14px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .72);
+  border: 1px solid #e5e7eb;
+}
+.col-cta-link-block h3 {
+  margin: 0 0 10px;
+  color: #111827;
+  font-size: .82rem;
+  font-weight: 900;
+}
+.col-cta-link-block ul {
+  display: grid;
+  gap: 7px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.col-cta-link-block a {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--blue, #1d4ed8);
+  font-size: .8rem;
+  font-weight: 700;
+  line-height: 1.55;
+  text-decoration: none;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.col-cta-link-block a:hover { text-decoration: underline; }
+@media (max-width: 640px) {
+  .col-cta-btns { flex-direction: column; }
+  .col-cta-btn { width: 100%; }
+  .col-cta-decision { grid-template-columns: 1fr; }
+  .col-cta-summary dl { grid-template-columns: 1fr; }
+  .col-cta-context-grid { grid-template-columns: 1fr; }
+}
+</style>

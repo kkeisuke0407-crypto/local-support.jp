@@ -1,0 +1,408 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = 'グリストラップとは｜仕組み・構造・3槽の役割をやさしく解説｜なぜ必要・ないとどうなる';
+const description = 'グリストラップとは何かを飲食店オーナー・開業者向けにやさしく解説。油水分離阻集器という設備の意味、3槽（バスケット槽・油脂分離槽・排水槽）の役割と仕組み、なぜ必要か、ないとどうなるか、設置が求められる施設、清掃が必要な理由までを図解的に整理しました。';
+const canonical = `${site.domain}/column/grease-trap-toha/`;
+const published = '2026-06-16';
+const modified = '2026-06-16';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: 'グリストラップとは', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 4400,
+  articleSection: 'グリストラップ清掃',
+  keywords: 'グリストラップとは,意味,仕組み,構造,3槽,役割,油水分離,阻集器,なぜ必要,ないとどうなる,2026',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-grease-trap.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: 'グリストラップ清掃', serviceType: '厨房排水設備の清掃' },
+  citation: [
+    { '@type': 'Legislation', name: '下水道法', url: 'https://laws.e-gov.go.jp/law/333AC0000000079' },
+  ],
+});
+
+const faqItems = [
+  {
+    q: 'グリストラップとは何ですか？',
+    a: 'グリストラップ（grease trap）とは、飲食店や厨房の排水から油脂（グリス）や食材くずを分離・回収し、そのまま下水へ油を流さないようにする排水設備です。日本語では「油水分離阻集器（グリース阻集器）」と呼ばれます。厨房のシンク下や床に設置され、油を冷やして固め、沈殿物とともに分離する仕組みになっています。',
+  },
+  {
+    q: 'グリストラップの3槽の役割を教えてください。',
+    a: '一般的な3槽式では、第1槽がバスケット（残渣カゴ）で食材くずなど大きな固形物を受け止め、第2槽で水より軽い油脂が浮上して分離（スカムとして溜まる）、第3槽で細かい汚れを沈殿させてから、上澄みの比較的きれいな水だけが下水へ流れます。各槽で「固形物→油脂→沈殿」と段階的に分けるのがポイントです。',
+  },
+  {
+    q: 'なぜグリストラップが必要なのですか？',
+    a: '油脂をそのまま下水に流すと、配管の詰まり、下水道の排水基準（ノルマルヘキサン抽出物質）超過、悪臭・害虫の原因になります。グリストラップは、油脂・残渣を下水へ流す前に分離・回収することで、これらを防ぐ役割を担います。油脂を扱う厨房では、設置と維持管理が実務上欠かせません。',
+  },
+  {
+    q: 'グリストラップがないとどうなりますか？',
+    a: '油脂・残渣が直接下水へ流れ、排水管や下水道本管の詰まり、下水道の排水基準超過による下水道局の指導、悪臭・害虫の発生などを招きます。油脂を扱う飲食店では、建築・排水設備・自治体の下水道条例の観点からグリストラップの設置を求められるのが一般的です。',
+  },
+  {
+    q: 'グリストラップはどんな施設に設置が必要ですか？',
+    a: '油脂を含む排水を出す厨房——飲食店、ホテル・旅館、社員食堂・給食施設、食品工場、スーパー・惣菜店、ファストフードなど——で設置が求められるのが一般的です。設置の要否・基準は自治体の下水道条例や排水設備基準によるため、開業・改修時は建築士・設備業者・自治体窓口に確認してください。',
+  },
+  {
+    q: 'グリストラップはなぜ清掃が必要なのですか？',
+    a: 'グリストラップは油脂・残渣・汚泥を「溜める」ことで分離する設備なので、放置すると溜まった汚れがあふれ、分離機能が働かなくなります。機能を保つには、バスケットの残渣・浮上油（スカム）・槽底の汚泥を定期的に取り除く清掃が必要です。清掃しないと臭い・虫・詰まり・排水基準超過につながります。',
+  },
+  {
+    q: 'グリストラップの別名・正式名称は？',
+    a: '正式には「油水分離阻集器」または「グリース阻集器」と呼ばれます。「グリストラップ」「グリーストラップ」はいずれも同じ設備を指す通称です。図面では阻集器として記載されることがあります。',
+  },
+];
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-answer-grid', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-grease-trap.png` },
+});
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified}
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a>
+          <span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a>
+          <span aria-hidden="true">›</span>
+          <span>グリストラップとは</span>
+        </nav>
+        <span class="cl-cat">グリストラップ清掃</span>
+        <h1 class="cl-title">グリストラップとは｜仕組み・構造・3槽の役割をやさしく解説｜なぜ必要・ないとどうなる</h1>
+        <p class="cl-lead">
+          グリストラップとは、厨房の排水から<strong>油脂（グリス）や食材くずを分離・回収する設備</strong>で、日本語では「油水分離阻集器（グリース阻集器）」と呼ばれます。油をそのまま下水に流さないための装置です。本記事では、グリストラップの意味・仕組み、<strong>3槽（バスケット槽・油脂分離槽・排水槽）の役割</strong>、なぜ必要か、ないとどうなるか、設置が求められる施設までを、開業前の方にもわかるようやさしく解説します。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年6月16日</time>
+          <span>最終更新：2026年6月16日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. グリストラップとは？</p>
+        <p class="cl-qa-a">A. <strong>厨房排水から油脂・食材くずを分離・回収し、下水に油を流さないための設備</strong>（油水分離阻集器）です。多くは<strong>3槽式</strong>で、第1槽で固形物、第2槽で浮上油、第3槽で沈殿物を分けてから、上澄みの水だけを下水へ流します。油を「溜めて分ける」設備なので、定期的な清掃が前提です。</p>
+        <p class="cl-qa-src">※下水道法・自治体の維持管理資料をもとに整理</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="grease-trap" serviceName="グリストラップ清掃" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#meaning">グリストラップとは（意味・正式名称）</a></li>
+          <li><a href="#three">3槽の役割と仕組み</a></li>
+          <li><a href="#why">なぜ必要なのか</a></li>
+          <li><a href="#without">ないとどうなるか</a></li>
+          <li><a href="#facility">設置が求められる施設</a></li>
+          <li><a href="#cleaning">なぜ清掃が必要か</a></li>
+          <li><a href="#sources">参考にした公式情報</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>グリストラップ＝油水分離阻集器</strong>。厨房排水から油脂・残渣を分離し、下水に油を流さない設備</li>
+            <li><strong>3槽で「固形物→油脂→沈殿」と段階的に分離</strong>。上澄みの水だけを下水へ流す</li>
+            <li><strong>「溜めて分ける」設備なので清掃が前提</strong>。放置すると臭い・虫・詰まり・排水基準超過につながる</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="meaning" class="cl-section">
+        <h2>グリストラップとは（意味・正式名称）</h2>
+        <p>グリストラップ（grease trap）は、「グリス（grease＝油脂）」を「トラップ（trap＝捕まえる）」する設備、という意味です。厨房の排水に含まれる油脂や食材くずを途中で受け止め、下水へそのまま流さないようにします。</p>
+        <ul>
+          <li><strong>正式名称</strong>：油水分離阻集器（グリース阻集器）</li>
+          <li><strong>通称</strong>：グリストラップ、グリーストラップ</li>
+          <li><strong>設置場所</strong>：厨房のシンク下、床、屋外など</li>
+          <li><strong>目的</strong>：油脂・残渣を分離・回収し、下水へ油を流さない</li>
+        </ul>
+        <p>飲食店の厨房では当たり前にある設備ですが、開業前の方には馴染みが薄いことも多く、「とは」「意味」「仕組み」を調べる方が多いテーマです。</p>
+      </section>
+
+      <section id="three" class="cl-section">
+        <h2>3槽の役割と仕組み</h2>
+        <p>一般的なグリストラップは3つの槽（区画）に分かれ、排水が順番に通過しながら段階的に汚れを分離します。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>3槽式グリストラップの役割</caption>
+            <thead>
+              <tr><th scope="col">槽</th><th scope="col">役割</th><th scope="col">溜まるもの</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">第1槽（バスケット槽）</th><td>食材くずなど大きな固形物を受け止める</td><td>残渣（バスケットに溜まる）</td></tr>
+              <tr><th scope="row">第2槽（油脂分離槽）</th><td>水より軽い油脂を浮上させて分離</td><td>浮上油（スカム）が表面に、汚泥が底に</td></tr>
+              <tr><th scope="row">第3槽（排水槽）</th><td>細かい汚れを沈殿させ、上澄みを排水</td><td>沈殿物（汚泥）</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>仕組みのポイントは「油は水より軽いので浮く」「固形物は重いので沈む」という性質を利用していること。排水をゆっくり通すことで、<strong>固形物は第1槽で受け止め、油は浮かせて分離し、沈殿物を沈めてから、上澄みの比較的きれいな水だけを下水へ流す</strong>——これがグリストラップの基本動作です。</p>
+        <div class="cl-callout">
+          <h3 class="cl-callout-h">「溜めて分ける」から清掃が必要</h3>
+          <p>グリストラップは汚れを「溜める」ことで分離します。つまり、残渣・浮上油・汚泥は使うほど必ず溜まっていきます。溜まりすぎると分離機能が働かなくなり、油がそのまま下水へ流れてしまうため、定期的に取り除く清掃が前提の設備なのです。</p>
+        </div>
+      </section>
+
+      <section id="why" class="cl-section">
+        <h2>なぜ必要なのか</h2>
+        <p>グリストラップが必要なのは、油脂をそのまま下水に流すと多くの問題が起きるからです。</p>
+        <ul>
+          <li><strong>配管の詰まり防止</strong>：油は冷えると固まり、配管を詰まらせる。手前で回収して防ぐ</li>
+          <li><strong>下水道の排水基準の遵守</strong>：油脂（ノルマルヘキサン抽出物質）の基準超過を防ぐ</li>
+          <li><strong>悪臭・害虫の抑制</strong>：油脂・残渣の腐敗による臭い・虫の発生を抑える</li>
+          <li><strong>下水処理への負荷軽減</strong>：下水道本管・処理場への油脂流入を減らす</li>
+        </ul>
+      </section>
+
+      <section id="without" class="cl-section">
+        <h2>ないとどうなるか</h2>
+        <p>グリストラップがない、または機能していないと、次のような問題が連鎖的に起きます。</p>
+        <ul>
+          <li><strong>排水管・下水本管の詰まり</strong>：油脂が固着し、逆流・店舗浸水のリスク</li>
+          <li><strong>排水基準超過</strong>：下水道局のサンプリングで基準超過が判明し、改善指導・命令の対象に</li>
+          <li><strong>悪臭・害虫</strong>：コバエ・チョウバエ・ゴキブリの発生、近隣クレーム</li>
+          <li><strong>営業への支障</strong>：詰まり修繕の費用・休業、保健所・下水道局対応の負担</li>
+        </ul>
+        <p>こうしたトラブルの具体的な対処は<a href="/column/grease-trap-nioi-mushi/">グリストラップの臭い・虫・詰まり対策2026</a>で解説しています。</p>
+      </section>
+
+      <section id="facility" class="cl-section">
+        <h2>設置が求められる施設</h2>
+        <p>油脂を含む排水を出す厨房では、グリストラップの設置を求められるのが一般的です。</p>
+        <ul>
+          <li>飲食店・レストラン・居酒屋・ラーメン店など</li>
+          <li>ホテル・旅館の厨房</li>
+          <li>社員食堂・給食施設・セントラルキッチン</li>
+          <li>食品工場・惣菜製造</li>
+          <li>スーパー・惣菜店・ファストフード</li>
+        </ul>
+        <p>設置の要否・基準（サイズ・容量など）は、自治体の下水道条例や排水設備基準によって定められています。開業・改修時は、建築士・設備業者・自治体の下水道窓口に確認してください。法的な位置づけは<a href="/column/grease-trap-horei-gimu/">グリストラップ清掃・維持管理ガイド2026</a>を参照してください。</p>
+      </section>
+
+      <section id="cleaning" class="cl-section">
+        <h2>なぜ清掃が必要か</h2>
+        <p>前述のとおり、グリストラップは汚れを「溜めて分ける」設備です。そのため、溜まった汚れを取り除かないと分離機能が失われ、油がそのまま下水へ流れてしまいます。</p>
+        <ul>
+          <li><strong>バスケットの残渣</strong>：毎日除去（自社）</li>
+          <li><strong>浮上油（スカム）</strong>：週1回以上すくい取り（自社）</li>
+          <li><strong>槽底の汚泥</strong>：月1回以上の全槽清掃（許可業者）</li>
+        </ul>
+        <p>清掃の具体的な手順は<a href="/column/grease-trap-souji-jibun-de/">グリストラップの掃除を自分でやる方法2026</a>、費用相場は<a href="/column/grease-trap-hiyo-sohba/">グリストラップ清掃の費用相場2026</a>を参照してください。汚泥・廃油は産業廃棄物なので、全槽清掃は許可業者への委託が必要です。</p>
+      </section>
+
+      <section id="sources" class="cl-section">
+        <h2>参考にした公式情報</h2>
+        <p>本記事は、下水道法・自治体の維持管理資料をもとに、開業前の方にもわかりやすい形に整理しています。設置基準・排水基準は、店舗所在地の自治体・下水道局の案内を確認してください。</p>
+        <ul class="cl-source-list">
+          <li><a href="https://laws.e-gov.go.jp/law/333AC0000000079" target="_blank" rel="noopener">下水道法｜e-Gov法令検索</a></li>
+          <li><a href="https://www.gesui.metro.tokyo.lg.jp/" target="_blank" rel="noopener">東京都下水道局</a></li>
+        </ul>
+      </section>
+
+      <div class="cl-cta">
+        <h2>グリストラップの清掃業者をお探しなら</h2>
+        <p>産廃許可・マニフェスト対応の業者から最大3社の見積もりを<br/>完全無料・約1分で取得できます</p>
+        <a class="cta-btn-primary" href="/grease-trap/">無料で一括見積もりを依頼する</a>
+      </div>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          {faqItems.map((item) => (
+            <div class="cl-faq-item">
+              <dt>{item.q}</dt>
+              <dd>{item.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別のグリストラップ清掃業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/grease-trap/tokyo/">東京都</a></li>
+          <li><a href="/grease-trap/osaka/">大阪府</a></li>
+          <li><a href="/grease-trap/kanagawa/">神奈川県</a></li>
+          <li><a href="/grease-trap/aichi/">愛知県</a></li>
+          <li><a href="/grease-trap/saitama/">埼玉県</a></li>
+          <li><a href="/grease-trap/chiba/">千葉県</a></li>
+          <li><a href="/grease-trap/hyogo/">兵庫県</a></li>
+          <li><a href="/grease-trap/fukuoka/">福岡県</a></li>
+          <li><a href="/grease-trap/hokkaido/">北海道</a></li>
+          <li><a href="/grease-trap/kyoto/">京都府</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/grease-trap/">全国47都道府県の対応業者を見る</a></p>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連サービス・コラム</h2>
+        <ul>
+          <li><a href="/grease-trap/">グリストラップ清掃の業者を一括見積比較</a></li>
+          <li><a href="/column/grease-trap-souji-jibun-de/">グリストラップの掃除を自分でやる方法2026</a></li>
+          <li><a href="/column/grease-trap-nioi-mushi/">グリストラップの臭い・虫・詰まり対策2026</a></li>
+          <li><a href="/column/grease-trap-hiyo-sohba/">グリストラップ清掃の費用相場2026</a></li>
+          <li><a href="/column/grease-trap-horei-gimu/">グリストラップ清掃・維持管理ガイド2026</a></li>
+        </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#grease-trap">グリストラップ（阻集器）</a></li>
+          <li><a href="/glossary/#scum">スカム</a></li>
+          <li><a href="/glossary/#gesuido-ho">下水道法</a></li>
+          <li><a href="/glossary/#n-hex">ノルマルヘキサン</a></li>
+          <li><a href="/glossary/#haikibutsu-shori-ho">廃棄物処理法</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集（49語）をすべて見る</a></p>
+      </aside>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header {
+  background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%);
+  color: #fff;
+  padding: 48px 0 40px;
+}
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul, .cl-callout--warn ul { padding-left: 18px; margin: 0; }
+.cl-callout li, .cl-callout--warn li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-answer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 20px 0 24px; }
+.cl-answer-grid > div { background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; padding: 18px 20px; box-shadow: 0 6px 18px rgba(15, 23, 42, .05); }
+.cl-answer-grid h3 { font-size: 1rem; color: var(--blue-dark); margin: 0 0 8px; }
+.cl-answer-grid p { margin: 0; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-source-list { padding-left: 22px; display: grid; gap: 8px; }
+.cl-source-list a { color: var(--blue); text-decoration: underline; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-glossary-block { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 24px; }
+.cl-glossary-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; }
+.cl-glossary-list { padding-left: 18px; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; }
+.cl-glossary-list a { color: var(--blue); text-decoration: underline; font-size: .88rem; }
+.cl-glossary-more { font-size: .85rem; margin: 12px 0 0; }
+.cl-glossary-more a { color: var(--blue); text-decoration: underline; }
+@media (max-width: 600px) {
+  .cl-header { padding: 32px 0 28px; }
+  .cl-body { padding: 28px 16px 48px; }
+  .cl-section h2 { font-size: 1.15rem; }
+  .cl-answer-grid { grid-template-columns: 1fr; }
+}
+
+.cl-quickanswer {
+  background: #eef6ff;
+  border: 1.5px solid #1a56db;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-bottom: 32px;
+}
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+</style>

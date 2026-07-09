@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
-const title = '受水槽清掃の業者選び完全ガイド2026｜資格・実績・見積書で失敗しない10のチェックポイント';
+const title = '受水槽清掃の業者選び完全ガイド｜資格・実績・見積書で失敗しない10のチェックポイント';
 const description = '受水槽清掃業者を選ぶ際に確認すべき10項目を解説。建築物衛生法上の必須資格（建築物飲料水貯水槽清掃業登録）、水質検査の有無、清掃証明書の発行、廃棄物処理方法まで、施設管理担当者が見積もり段階で必ず確認すべきポイントをまとめました。';
 const canonical = `${site.domain}/column/jusuisou-seisou-gyosha-sentaku/`;
 const published = '2026-05-27';
@@ -32,12 +33,7 @@ const articleLd = JSON.stringify({
   articleSection: '業者選び',
   keywords: '受水槽清掃,業者選び,資格,建築物飲料水貯水槽清掃業,見積もり,チェックリスト,2026',
   author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
-  publisher: {
-    '@type': 'Organization',
-    name: site.org.legalName,
-    url: site.domain,
-    logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png` },
-  },
+  publisher: { '@id': `${site.domain}/#organization` },
   image: { '@type': 'ImageObject', url: `${site.domain}/og-jusuisou-seisou.png`, width: 1200, height: 630 },
   about: { '@type': 'Service', name: '受水槽清掃' },
 });
@@ -52,16 +48,38 @@ const faqLd = JSON.stringify({
     { '@type': 'Question', name: '相見積もりを取るとき何社に依頼すればいいですか？', acceptedAnswer: { '@type': 'Answer', text: '最低3社が推奨です。1社では適正価格の判断ができず、2社では1社が極端に安い・高い場合の判断が難しいため、3社以上の比較が安全です。一括見積もりサービスを活用すると複数業者への同時依頼が効率的です。' } },
     { '@type': 'Question', name: '安い業者を選んで問題になることはありますか？', acceptedAnswer: { '@type': 'Answer', text: 'あります。①無登録業者による不正な清掃（行政指導・罰金リスク）、②水質検査省略による衛生義務違反、③廃棄汚泥の不法投棄（廃棄物処理法違反）、④清掃後のフタ・配管の締め不足による汚染事故などのリスクがあります。価格だけでなく、登録証・実績・清掃報告書の質を必ず確認してください。' } },
     { '@type': 'Question', name: '年間契約と単発依頼、どちらがお得ですか？', acceptedAnswer: { '@type': 'Answer', text: '年間契約（清掃＋水質検査をセットで年1〜2回実施）の方が単発より10〜20%程度割安になるケースが多いです。また、記録管理・スケジュール管理を業者に委託できる点でも年間契約が管理効率を高めます。複数物件を持つ施設管理者には特におすすめです。' } },
+    { '@type': 'Question', name: "見積書で必ず確認すべき項目は何ですか？", acceptedAnswer: { '@type': 'Answer', text: "①清掃・消毒・水質検査の各作業の単価明細、②排水処理方法と費用、③清掃証明書・水質検査結果書の発行有無、④追加費用の発生条件と上限、⑤断水時間と仮設給水の対応有無、の5項目を書面で確認してください。" } },
+    { '@type': 'Question', name: "最低何社から見積もりを取るべきですか？", acceptedAnswer: { '@type': 'Answer', text: "最低2〜3社が推奨です。1社のみだと相場感がつかめず、過剰請求に気づけません。ロカサポでは最大3社の実績・信頼のある専門業者に同条件で見積依頼できます。" } },
+    { '@type': 'Question', name: "安い業者を選んだら何かリスクがありますか？", acceptedAnswer: { '@type': 'Answer', text: "最大のリスクは①無登録業者による技術基準を満たさない清掃、②水質検査の省略、③清掃証明書の未発行です。保健所の指導や水質事故発生時に、管理者側の責任を問われる可能性があります。価格より内容と資格で選ぶべきです。" } },
+    { '@type': 'Question', name: "業者の登録は自分で確認できますか？", acceptedAnswer: { '@type': 'Answer', text: "はい。各都道府県の担当部局（保健所・衛生局等）が登録業者一覧を公開しています。業者から登録番号を提示させ、対応する都道府県のWebサイト・窓口で確認できます。" } },
+    { '@type': 'Question', name: "年間契約とスポット依頼、どちらが得ですか？", acceptedAnswer: { '@type': 'Answer', text: "毎年必要な法定清掃は年間契約の方が一般的に割安です。同一業者が継続することで施設状況の把握が深まり、急な追加作業にも対応しやすくなります。複数棟をまとめた年間契約だとさらに交渉余地が生まれます。" } }
+  
   ],
 });
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-jusuisou-seisou.png` },
+});
+
 ---
-<BaseLayout
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified}
   title={title}
   description={description}
   canonical={canonical}
   siteName={site.name}
   logoSub="施設管理の一括見積比較"
-  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd]}
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
 >
   <article class="cl-article">
 
@@ -75,9 +93,9 @@ const faqLd = JSON.stringify({
           <span>受水槽清掃の業者選び完全ガイド</span>
         </nav>
         <span class="cl-cat">受水槽清掃</span>
-        <h1 class="cl-title">受水槽清掃の業者選び完全ガイド2026｜資格・実績・見積書で失敗しない10のチェックポイント</h1>
+        <h1 class="cl-title">受水槽清掃の業者選び完全ガイド｜資格・実績・見積書で失敗しない10のチェックポイント</h1>
         <p class="cl-lead">
-          受水槽清掃業者を選ぶ際に<strong>「安さだけで選んで後悔した」</strong>というケースは後を絶ちません。無登録業者による不正清掃、水質検査省略、廃棄汚泥の不法投棄など、法的リスクも伴います。本記事では、見積もり段階で必ず確認すべき<strong>10のチェックポイント</strong>を具体的に解説します。
+          受水槽清掃の業者選びでは、<strong>「安さだけで選んで後悔した」</strong>という話が今も後を絶ちません。無登録業者による不正清掃、水質検査の省略、廃棄汚泥の不法投棄など、法的なリスクもついて回ります。この記事では、見積もり段階で必ず押さえておきたい<strong>10のチェックポイント</strong>を、具体例と一緒に解説します。
         </p>
         <div class="cl-meta">
           <time datetime={published}>公開：2026年5月27日</time>
@@ -94,6 +112,9 @@ const faqLd = JSON.stringify({
         <p class="cl-qa-a">A. <strong>①都道府県知事の「建築物飲料水貯水槽清掃業」登録番号、②水質検査の実施、③清掃証明書の発行、④見積書の内訳明細、⑤追加費用の条件</strong>の5項目。</p>
         <p class="cl-qa-src">※ロカサポ編集部まとめ（2026年5月）</p>
       </div>
+
+      <ColumnCtaCard serviceSlug="jusuisou-seisou" serviceName="受水槽清掃" variant="top" />
+
 
 
       <aside class="cl-toc" aria-label="目次">
@@ -112,6 +133,7 @@ const faqLd = JSON.stringify({
           <li><a href="#check9">⑨ 賠償保険への加入確認</a></li>
           <li><a href="#check10">⑩ 年間契約の内容と単価の透明性</a></li>
           <li><a href="#quotation">見積書で確認すべき記載項目</a></li>
+          <li><a href="#hearing-script">業者ヒアリングスクリプト集（電話・現地下見でそのまま使える）</a></li>
           <li><a href="#mistakes">よくある失敗パターン</a></li>
           <li><a href="#faq">よくある質問</a></li>
         </ol>
@@ -420,6 +442,55 @@ const faqLd = JSON.stringify({
         </div>
       </section>
 
+      <section id="hearing-script" class="cl-section">
+        <h2>業者ヒアリングスクリプト集</h2>
+        <p>初回連絡や現地下見で「<strong>何を聞けばいいか分からない</strong>」を解消するスクリプト集です。<strong>答え方で業者の良し悪しが判別できる質問</strong>を、シーン別に整理しています。コピーしてメール・メモにそのままお使いください。</p>
+
+        <h3>シーン1：初回の電話・問い合わせ時</h3>
+        <div class="cl-script">
+          <p class="cl-script-q">Q1.「建築物飲料水貯水槽清掃業の登録番号を教えてください」</p>
+          <p class="cl-script-a">↳ <strong>即答できないのは要注意。</strong>登録番号は「○○県知事登録 第○○号」の形式。後でメールで送る、と言われた場合は、登録証の写しを送ってもらえるか確認しましょう。</p>
+
+          <p class="cl-script-q">Q2.「貯水槽清掃作業監督者は何名在籍していますか？」</p>
+          <p class="cl-script-a">↳ <strong>1名以上の在籍が法定要件</strong>。具体的な人数・氏名（または資格番号）まで答えられる業者を選びましょう。</p>
+
+          <p class="cl-script-q">Q3.「水質検査はどの機関で何項目実施しますか？」</p>
+          <p class="cl-script-a">↳ <strong>「厚生労働省登録の水質検査機関」</strong>と明言できるか。最低5項目（色・濁り・臭味・残留塩素・一般細菌など）、ビル管法対象なら16項目以上が望ましいです。</p>
+
+          <p class="cl-script-q">Q4.「賠償責任保険には加入していますか？金額は？」</p>
+          <p class="cl-script-a">↳ <strong>未加入は論外。</strong>「対人・対物1億円以上」が一般的な水準。具体額を答えられない業者は避けたほうが無難です。</p>
+        </div>
+
+        <h3>シーン2：現地下見（無料相談）時</h3>
+        <div class="cl-script">
+          <p class="cl-script-q">Q5.「過去に当施設と同種（マンション／ビル／工場）の清掃実績はありますか？」</p>
+          <p class="cl-script-a">↳ 具体的な物件名は出せなくても、<strong>「○○戸規模のマンションを月○件」「○○m²のオフィスビルを年○件」</strong>と数字で答えられるかが目安です。</p>
+
+          <p class="cl-script-q">Q6.「マンホール・吐水口空間・通気管・防虫網の状態を見て、清掃以外に補修が必要そうな箇所はありますか？」</p>
+          <p class="cl-script-a">↳ <strong>専門家としての目線で指摘できる業者は信頼できます。</strong>「いえ、清掃だけで大丈夫です」と即答する業者は、現場を見ていないか説明能力に欠ける可能性があります。</p>
+
+          <p class="cl-script-q">Q7.「断水時間はどれくらい？利用者への周知文を業者側で用意してもらえますか？」</p>
+          <p class="cl-script-a">↳ <strong>断水時間の根拠（受水槽容量÷○m³/h）と、周知文サンプルの提示</strong>ができる業者は段取りがしっかりしています。</p>
+        </div>
+
+        <h3>シーン3：見積書受領後</h3>
+        <div class="cl-script">
+          <p class="cl-script-q">Q8.「清掃当日に追加費用が発生するのは、どんな条件のときですか？」</p>
+          <p class="cl-script-a">↳ <strong>「赤錆発見時の追加洗浄」「配管腐食時の補修見積」など具体的な条件と上限額</strong>を答えられるか。「特にありません」は逆に怪しいので、書面で取り交わしてください。</p>
+
+          <p class="cl-script-q">Q9.「清掃後の水質検査で基準値を下回った場合、再清掃の費用はどちらが負担しますか？」</p>
+          <p class="cl-script-a">↳ <strong>業者側負担と明言できるのが理想。</strong>「都度相談」と濁す業者は、トラブル時に追加請求してくる可能性があります。</p>
+
+          <p class="cl-script-q">Q10.「報告書はいつ・どんな形式で受領できますか？写真は何枚？」</p>
+          <p class="cl-script-a">↳ <strong>清掃から○営業日以内・PDF＋紙の両方・清掃前後の写真各○枚以上</strong>を明示できる業者を選びましょう。報告書は保健所立入検査の証拠書類になります。</p>
+        </div>
+
+        <div class="cl-callout">
+          <h3 class="cl-callout-h">「即答できる」「数字で答えられる」がプロの目印</h3>
+          <p>上記10問に対して、<strong>5問以上で具体的な数字・固有名詞・条件付きの回答</strong>ができる業者は、現場経験が豊富で説明能力もある信頼できる業者です。逆に「持ち帰って確認」「だいたい」が3問以上ある場合は、別の業者からも見積もりを取って比較することを強くおすすめします。</p>
+        </div>
+      </section>
+
       <section id="mistakes" class="cl-section">
         <h2>よくある失敗パターン</h2>
 
@@ -464,7 +535,7 @@ const faqLd = JSON.stringify({
       <section class="cl-cta">
         <h2>受水槽清掃の業者選びでお困りなら</h2>
         <p>{site.name}では、建築物飲料水貯水槽清掃業の登録・貯水槽清掃作業監督者の在籍・水質検査対応・清掃証明書の発行を確認済みの業者の中から、最大3社を厳選してご紹介します。<strong>お見積もり依頼は1分・完全無料</strong>です。</p>
-        <a href="/jusuisou-seisou/" class="cta-btn-primary">無料で一括見積もりを依頼する →</a>
+        <a href="/jusuisou-seisou/" class="cta-btn-primary">無料で一括見積もりを依頼する</a>
       </section>
 
             <div class="cl-pref-links">
@@ -481,8 +552,16 @@ const faqLd = JSON.stringify({
           <li><a href="/jusuisou-seisou/hokkaido/">北海道</a></li>
           <li><a href="/jusuisou-seisou/kyoto/">京都府</a></li>
         </ul>
-        <p class="cl-pref-more"><a href="/jusuisou-seisou/">全国47都道府県の対応業者を見る →</a></p>
+        <p class="cl-pref-more"><a href="/jusuisou-seisou/">全国47都道府県の対応業者を見る</a></p>
       </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">参考法令・一次資料</h2>
+        <ul>
+          <li><a href="https://elaws.e-gov.go.jp/document?lawid=345AC0000000020" target="_blank" rel="noopener">建築物衛生法（特定建築物の管理基準）｜e-Gov法令検索</a></li>
+          <li><a href="https://elaws.e-gov.go.jp/document?lawid=332AC0000000177" target="_blank" rel="noopener">水道法｜e-Gov法令検索</a></li>
+        </ul>
+      </aside>
 
       <aside class="cl-related">
         <h2 class="cl-related-h">関連する詳細情報</h2>
@@ -492,6 +571,20 @@ const faqLd = JSON.stringify({
           <li><a href="/jusuisou-seisou/">受水槽清掃のサービストップ</a></li>
           <li><a href="/flow/">一括見積依頼から契約までの流れ</a></li>
         </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#suido-ho">水道法</a></li>
+          <li><a href="/glossary/#biru-kan-ho">建築物衛生法（ビル管法）</a></li>
+          <li><a href="/glossary/#kanni-senyou-suido">簡易専用水道</a></li>
+          <li><a href="/glossary/#jusuisou">受水槽／貯水槽</a></li>
+          <li><a href="/glossary/#koukasuisou">高架水槽</a></li>
+          <li><a href="/glossary/#kenchiku-suiso-seisogyo">建築物飲料水貯水槽清掃業</a></li>
+          <li><a href="/glossary/#tokutei-kenchikubutsu">特定建築物</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集（49語）をすべて見る</a></p>
       </aside>
 
       <p class="cl-note">
@@ -599,5 +692,29 @@ const faqLd = JSON.stringify({
 .cl-pref-list a:hover { background: var(--blue-light); }
 .cl-pref-more { font-size: .87rem; margin: 0; }
 .cl-pref-more a { color: var(--blue); text-decoration: underline; }
+
+/* 業者ヒアリングスクリプト */
+.cl-script {
+  background: #f8fafc;
+  border-left: 4px solid var(--blue);
+  border-radius: 6px;
+  padding: 16px 18px;
+  margin: 0 0 18px;
+}
+.cl-script-q {
+  font-size: .92rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin: 0 0 6px;
+  line-height: 1.55;
+}
+.cl-script-a {
+  font-size: .88rem;
+  line-height: 1.75;
+  color: var(--gray-700);
+  margin: 0 0 14px;
+}
+.cl-script-a:last-child { margin-bottom: 0; }
+.cl-script-a strong { color: var(--blue-dark); }
 
 </style>

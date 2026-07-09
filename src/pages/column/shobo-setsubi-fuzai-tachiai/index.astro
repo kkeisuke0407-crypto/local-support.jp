@@ -1,0 +1,489 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = '消防設備点検で入居者が不在・立ち会えないとき｜室内点検は必要？対応手順とお知らせ文例';
+const description = '消防設備点検でマンション・アパートの入居者が不在、立ち会えない、点検を拒否するときの対応を管理会社・オーナー向けに解説。専有部（室内）点検がなぜ必要か、再点検の段取り、居留守・在宅できない場合の進め方、そのまま使えるお知らせ文・案内文テンプレートまで整理しました。';
+const canonical = `${site.domain}/column/shobo-setsubi-fuzai-tachiai/`;
+const published = '2026-06-16';
+const modified = '2026-06-16';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '消防設備点検で入居者が不在・立ち会えないとき', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 5800,
+  articleSection: '消防設備点検',
+  keywords: '消防設備点検,不在,立ち会い,立ち会えない,マンション,賃貸,アパート,室内,専有部,拒否,居留守,お知らせ,案内文,2026',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-shobo-setsubi.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '消防設備点検', serviceType: '消防用設備等の点検' },
+  citation: [
+    { '@type': 'Legislation', name: '消防法第17条の3の3', url: 'https://laws.e-gov.go.jp/law/323AC1000000186' },
+    { '@type': 'Legislation', name: '消防法施行規則第31条の6', url: 'https://laws.e-gov.go.jp/law/336M50000008006' },
+    { '@type': 'CreativeWork', name: '消防用設備等の点検基準・点検要領', url: 'https://www.fdma.go.jp/mission/prevention/post-1.html' },
+  ],
+});
+
+const faqItems = [
+  {
+    q: '入居者が不在だと消防設備点検はできないのですか？',
+    a: '共用部（廊下・階段・受水槽室・ポンプ室など）は不在でも点検できます。点検できないのは専有部（室内）にある自動火災報知設備の感知器などです。不在の住戸は、後日まとめて実施する「予備日・再点検日」を設けて対応するのが一般的です。専有部が点検できない住戸が残っても、その住戸を「未実施」として記録し、再点検の案内を続けることが重要です。',
+  },
+  {
+    q: 'なぜ部屋の中（専有部）まで点検する必要があるのですか？',
+    a: '住戸内には自動火災報知設備の感知器（熱感知器・煙感知器）が設置されていることが多く、これは建物全体の自火報システムの一部です。室内の感知器が作動しないと、火災を早期に検知できず、ほかの住戸への警報も遅れます。専有部の点検は入居者自身と建物全体の安全のために必要で、管理規約や賃貸借契約でも協力義務を定めているケースが一般的です。',
+  },
+  {
+    q: '居住者が点検を拒否した場合、管理会社はどうすればよいですか？',
+    a: 'まず点検の必要性（法定点検であること・感知器が全体システムの一部であること）を文書で説明します。それでも応じない場合は、拒否された事実・日時・対応経緯を記録に残し、再点検日を複数回案内します。立入を強制する権限は管理会社にはないため、記録を残して「実施に向けて合理的な努力をした」ことを証跡化することが、後日のトラブル・責任問題への備えになります。',
+  },
+  {
+    q: '点検に立ち会えない（平日仕事で家にいない）のですが、どうすればよいですか？',
+    a: '多くの管理会社・点検業者は、予備日（土日・夜間を含む場合あり）や、鍵預かりによる不在時点検に対応しています。立ち会いが難しい場合は、管理会社へ早めに連絡し、(1)予備日に変更、(2)鍵を預けて不在点検、のどちらが可能かを確認してください。連絡なく不在が続くと、未実施住戸として何度も案内が来ることになります。',
+  },
+  {
+    q: '不在のとき、勝手に部屋に入って点検されることはありますか？',
+    a: '入居者の同意なく室内に立ち入ることは原則できません。鍵を預けている、または管理規約・契約で不在時立入に同意している場合を除き、無断で入室して点検することはありません。「不在なら勝手に入られるのでは」という不安がある場合は、事前に管理会社へ立入方法を確認しておくと安心です。',
+  },
+  {
+    q: '立ち会いは法律上の義務ですか？',
+    a: '入居者個人に「立ち会い」を直接義務づける消防法の規定はありません。ただし点検・報告の義務は建物の関係者（所有者・管理者・占有者）にあり、専有部の感知器が点検できないと適正な点検・報告に支障が出ます。実務では管理規約・賃貸借契約で点検への協力を定め、入居者の協力を求めるのが一般的です。',
+  },
+  {
+    q: '点検のお知らせはいつ・どのように出せばよいですか？',
+    a: '点検日の2週間〜10日前を目安に、掲示板への掲示と各戸ポスティング（または郵送）の両方で告知するのが確実です。総合点検で警報音・放水を伴う場合はその旨も明記します。不在が見込まれる住戸向けに予備日と連絡先を載せ、立ち会えない場合の選択肢（予備日・鍵預かり）を案内すると、再点検の手間が減ります。',
+  },
+  {
+    q: '点検を何度も拒否・不在で受けられないと、罰則の対象になりますか？',
+    a: '罰則（消防法第44条の30万円以下の罰金または拘留等）は、点検結果を報告しない・虚偽報告をする建物の関係者（管理者・所有者）が対象です。入居者個人が直ちに罰則を受けるわけではありません。ただし管理者側は、専有部が未実施でも実施できた範囲を点検・報告し、未実施住戸への案内記録を残すことで、義務を果たす努力をしていることを示す必要があります。',
+  },
+  {
+    q: '分譲マンションで自分（区分所有者）が立ち会えない場合はどうなりますか？',
+    a: '分譲マンションでは管理組合（または委託先の管理会社）が点検を手配し、各住戸に専有部点検の協力を求めます。区分所有者・賃借人が立ち会えない場合は、予備日への変更や鍵預かりで対応します。専有部の感知器点検は管理規約で協力義務が定められていることが多く、未実施が続くと総会・理事会で課題として扱われることがあります。',
+  },
+  {
+    q: '点検業者が来ない・連絡がないのですが、放置していいですか？',
+    a: 'いけません。法定点検は実施・報告まで管理者の義務です。委託している業者から点検案内や日程連絡がない場合は、管理会社・点検業者へ実施状況を確認してください。委託していても管理者の義務自体は免除されないため、年2回の機器点検・年1回の総合点検が予定どおり行われているかを管理者側で把握する必要があります。',
+  },
+];
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-answer-grid', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-shobo-setsubi.png` },
+});
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified}
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a>
+          <span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a>
+          <span aria-hidden="true">›</span>
+          <span>不在・立ち会えないときの対応</span>
+        </nav>
+        <span class="cl-cat">消防設備点検</span>
+        <h1 class="cl-title">消防設備点検で入居者が不在・立ち会えないとき｜室内点検は必要？対応手順とお知らせ文例</h1>
+        <p class="cl-lead">
+          マンション・アパートの消防設備点検で必ず起きるのが、<strong>入居者の不在・立ち会えない・点検を拒否される</strong>という問題です。共用部は点検できても、<strong>専有部（室内）の感知器</strong>が点検できないと、住戸が「未実施」のまま残ってしまいます。本記事では、なぜ室内点検が必要なのか、不在・居留守・在宅できない場合の管理会社・オーナーの対応手順、そして<strong>そのまま使えるお知らせ文・案内文テンプレート</strong>までを実務目線で整理します。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年6月16日</time>
+          <span>最終更新：2026年6月16日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 入居者が不在だと消防設備点検はできない？</p>
+        <p class="cl-qa-a">A. <strong>共用部は不在でも点検でき、点検できないのは専有部（室内）の感知器などだけ</strong>です。不在の住戸は「予備日・再点検日」を設けて対応します。専有部が点検できない住戸が残っても、実施できた範囲を点検・報告し、<strong>未実施住戸への案内記録を残す</strong>ことが管理者の義務を果たすうえで重要です。</p>
+        <p class="cl-qa-src">※消防法第17条の3の3、消防用設備等の点検基準・点検要領をもとに整理</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="shobo-setsubi" serviceName="消防設備点検" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#why-shitsunai">なぜ部屋の中（専有部）まで点検するのか</a></li>
+          <li><a href="#flow">不在・立ち会えない場合の対応フロー（管理者向け）</a></li>
+          <li><a href="#resident">入居者側の選択肢（予備日・鍵預かり）</a></li>
+          <li><a href="#refuse">拒否・居留守・連絡なしへの対応</a></li>
+          <li><a href="#template">お知らせ文・案内文テンプレート（コピペ可）</a></li>
+          <li><a href="#nyusyu">無断で部屋に入られる？立ち会い義務の有無</a></li>
+          <li><a href="#penalty">未実施が続くと罰則になる？管理者の責任</a></li>
+          <li><a href="#sources">参考にした公式情報</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>共用部は不在でも点検可能</strong>。問題になるのは専有部（室内）の感知器など。不在住戸は予備日・再点検日で拾う</li>
+            <li><strong>立ち会えないときは「予備日への変更」か「鍵預かりによる不在点検」</strong>の2択。管理会社へ早めに連絡する</li>
+            <li><strong>拒否・居留守は記録を残す</strong>。強制入室はできないため、案内を繰り返し「実施に向けた努力」を証跡化することが管理者の備えになる</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="why-shitsunai" class="cl-section">
+        <h2>なぜ部屋の中（専有部）まで点検するのか</h2>
+        <p>「点検なら共用部だけでいいのでは」「なぜ自分の部屋に入る必要があるのか」という疑問は、入居者から最もよく出る声です。答えは、<strong>住戸内に設置された自動火災報知設備の感知器が、建物全体の火災検知システムの一部だから</strong>です。</p>
+        <h3>室内に点検対象がある主な設備</h3>
+        <ul>
+          <li><strong>自動火災報知設備の感知器</strong>（熱感知器・煙感知器）：住戸内の天井等に設置。作動・外観・配線を確認</li>
+          <li><strong>住宅用火災警報器との違い</strong>：自火報の感知器は受信機を通じて建物全体に連動。各戸で完結する住警器とは別物</li>
+          <li><strong>共同住宅用スプリンクラー・連結送水管の一部</strong>：建物によっては専有部側に関連部分があるケースも</li>
+        </ul>
+        <div class="cl-callout cl-callout--warn">
+          <h3 class="cl-callout-h">室内点検をしないとどうなるか</h3>
+          <p>専有部の感知器が故障・電池切れ・カバー外れのまま放置されると、その住戸で火災が起きても<strong>早期に感知できず、ほかの住戸への警報も遅れます</strong>。1住戸の未点検が、建物全体の避難の遅れにつながりかねません。室内点検は入居者自身と全居住者の安全のために必要です。</p>
+        </div>
+        <p>多くのマンションでは管理規約に、賃貸では賃貸借契約に「法定点検への協力」が定められています。室内点検は管理者の都合ではなく、法令に基づく安全確保のための手続きである点を、入居者へ丁寧に伝えることがトラブル回避の第一歩です。</p>
+      </section>
+
+      <section id="flow" class="cl-section">
+        <h2>不在・立ち会えない場合の対応フロー（管理者向け）</h2>
+        <p>管理会社・オーナー・管理組合が、不在住戸を最小化しながら点検・報告まで進めるための実務フローを整理します。</p>
+        <div class="cl-answer-grid">
+          <div>
+            <h3>① 事前告知（2週間前）</h3>
+            <p>掲示板掲示＋各戸ポスティングで点検日・時間帯・対象設備を告知。総合点検で警報音・放水がある場合は明記し、予備日と連絡先も同時に案内します。</p>
+          </div>
+          <div>
+            <h3>② 当日点検</h3>
+            <p>共用部を点検しつつ、在宅住戸の専有部を実施。不在住戸は「不在票」を投函し、予備日・連絡先・鍵預かりの可否を改めて伝えます。</p>
+          </div>
+          <div>
+            <h3>③ 予備日（再点検）</h3>
+            <p>不在住戸をまとめて再訪。土日や夕方を含めると在宅率が上がります。それでも不在の住戸は連絡を取り、個別日程または鍵預かりを調整します。</p>
+          </div>
+          <div>
+            <h3>④ 未実施住戸の記録</h3>
+            <p>最終的に点検できなかった住戸は、号室・案内回数・対応経緯を記録。実施できた範囲で点検結果報告書をまとめ、所轄消防署へ報告します。</p>
+          </div>
+        </div>
+        <p>ポイントは、<strong>「不在住戸が残ること」自体は珍しくない</strong>と理解したうえで、(1)実施できた範囲を確実に点検・報告し、(2)未実施住戸への案内記録を残すことです。100%の住戸を一度で点検できなくても、合理的な努力の証跡があれば、管理者として義務を果たしている状態に近づきます。</p>
+      </section>
+
+      <section id="resident" class="cl-section">
+        <h2>入居者側の選択肢（予備日・鍵預かり）</h2>
+        <p>「平日は仕事で家にいない」「立ち会えない」という入居者には、主に次の2つの選択肢を案内します。どちらが使えるかは管理会社・点検業者の運用によります。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>立ち会えない場合の主な対応方法</caption>
+            <thead>
+              <tr><th scope="col">方法</th><th scope="col">内容</th><th scope="col">向いているケース</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">予備日に変更</th><td>後日の再点検日（土日・夕方を含む場合あり）に立ち会う</td><td>在宅できる日が別にある／室内に他人を入れることに抵抗がある</td></tr>
+              <tr><th scope="row">鍵預かりで不在点検</th><td>管理会社へ鍵を預け、不在のまま点検してもらう</td><td>どうしても在宅できない／管理会社の鍵預かり運用がある</td></tr>
+              <tr><th scope="row">個別日程調整</th><td>点検業者と直接、都合の良い日時を相談</td><td>予備日にも都合がつかない／単発で調整したい</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>いずれの場合も、<strong>連絡なしの不在が一番手間が増えます</strong>。再点検のたびに案内・再訪が発生し、最終的に未実施として残るためです。入居者には「立ち会えない場合は早めに管理会社へ連絡を」と明確に伝えるのが、双方にとって最も効率的です。</p>
+      </section>
+
+      <section id="refuse" class="cl-section">
+        <h2>拒否・居留守・連絡なしへの対応</h2>
+        <p>案内をしても応じてもらえない住戸への対応は、管理者が悩むポイントです。重要なのは、<strong>強制はできないが、記録は残せる</strong>という原則です。</p>
+        <h3>段階的な対応</h3>
+        <ol>
+          <li><strong>文書で必要性を説明</strong>：法定点検であること、室内の感知器が全体システムの一部であることを書面で伝える</li>
+          <li><strong>複数回・複数手段で案内</strong>：ポスティング・掲示・郵送・（連絡先が分かれば）電話で再点検日を複数回案内</li>
+          <li><strong>拒否・不在の事実を記録</strong>：号室・日時・案内方法・対応結果を一覧で管理。後日の説明責任に備える</li>
+          <li><strong>所有者・理事会・オーナーへ共有</strong>：賃貸はオーナーへ、分譲は理事会へ未実施状況を報告し、対応方針を共有</li>
+        </ol>
+        <div class="cl-callout cl-callout--warn">
+          <h3 class="cl-callout-h">やってはいけないこと</h3>
+          <p>同意のない<strong>無断入室</strong>はできません。鍵預かりや契約・規約上の同意がない限り、不在の住戸に勝手に入って点検することは避けてください。トラブルの原因になり、かえって今後の協力を得にくくなります。あくまで「案内を尽くし、記録を残す」が基本です。</p>
+        </div>
+      </section>
+
+      <section id="template" class="cl-section">
+        <h2>お知らせ文・案内文テンプレート（コピペ可）</h2>
+        <p>そのまま使える告知文の例です。建物名・日付・連絡先を差し替えてご利用ください。</p>
+
+        <h3>① 事前告知（掲示・ポスティング用）</h3>
+        <div class="cl-template">
+          <p>居住者各位</p>
+          <p>消防設備点検実施のお知らせ</p>
+          <p>日頃よりご協力いただきありがとうございます。消防法に基づく消防設備点検（法定点検）を下記のとおり実施いたします。安全確保のため、ご在宅・ご協力をお願いいたします。</p>
+          <p>記<br/>
+          ・点検日：◯◯◯◯年◯月◯日（◯）◯時〜◯時頃<br/>
+          ・予備日：◯◯◯◯年◯月◯日（◯）◯時〜◯時頃<br/>
+          ・点検範囲：共用部および各住戸内の火災感知器など<br/>
+          ・所要時間：1住戸あたり約5〜10分<br/>
+          ※総合点検のため、点検中に警報音が鳴る場合があります。<br/>
+          ・実施業者：◯◯◯◯株式会社（身分証を携帯しています）</p>
+          <p>当日ご不在の場合は予備日に伺います。いずれの日もご都合が合わない場合は、お手数ですが下記までご連絡ください（予備日への変更・鍵のお預かり等をご相談いただけます）。</p>
+          <p>【お問い合わせ】◯◯管理株式会社　TEL ◯◯-◯◯◯◯-◯◯◯◯（平日◯時〜◯時）</p>
+        </div>
+
+        <h3>② 不在票（当日不在だった住戸へ投函）</h3>
+        <div class="cl-template">
+          <p>◯号室　ご入居者様</p>
+          <p>本日、消防設備点検にお伺いしましたがご不在でした。室内の火災感知器の点検が完了していません。お手数ですが、下記の予備日にご在宅いただくか、ご連絡をお願いいたします。</p>
+          <p>・予備日：◯月◯日（◯）◯時〜◯時頃<br/>
+          ・ご都合が合わない場合：予備日の変更、または鍵のお預かりによる点検も可能です。下記までご連絡ください。</p>
+          <p>【連絡先】◯◯管理株式会社　TEL ◯◯-◯◯◯◯-◯◯◯◯</p>
+        </div>
+
+        <h3>③ 最終案内（再点検でも不在が続いた住戸へ）</h3>
+        <div class="cl-template">
+          <p>◯号室　ご入居者様</p>
+          <p>消防設備点検につきまして、◯回ご案内いたしましたが、室内の火災感知器の点検が未完了となっております。火災感知器は建物全体の安全に関わる重要な設備です。誠に恐れ入りますが、◯月◯日までに下記へご連絡をお願いいたします。ご連絡がない場合、未実施の住戸として記録させていただきます。</p>
+          <p>【連絡先】◯◯管理株式会社　TEL ◯◯-◯◯◯◯-◯◯◯◯</p>
+        </div>
+
+        <p class="cl-template-note">※上記は一般的なひな形です。建物の管理規約・賃貸借契約の内容、所轄消防署の指導に合わせて文言を調整してください。</p>
+      </section>
+
+      <section id="nyusyu" class="cl-section">
+        <h2>無断で部屋に入られる？立ち会い義務の有無</h2>
+        <p>入居者からよくある不安が「不在のとき勝手に部屋に入られるのでは」というものです。結論として、<strong>同意のない室内立入は原則できません</strong>。鍵を預けている、または管理規約・賃貸借契約で不在時立入に同意している場合を除き、無断で入室して点検することはありません。</p>
+        <h3>「立ち会い」は誰の義務か</h3>
+        <p>消防法は、点検・報告の義務を<strong>建物の関係者（所有者・管理者・占有者）</strong>に課しています。入居者個人に「立ち会い」を直接義務づける条文があるわけではありません。ただし、専有部の感知器が点検できないと適正な点検・報告に支障が出るため、実務では管理規約・契約で点検への協力を定め、立ち会いや在宅をお願いする形をとります。</p>
+        <ul>
+          <li><strong>強制力</strong>：管理会社・オーナーに、入居者の意思に反して室内に入る権限はない</li>
+          <li><strong>協力義務</strong>：管理規約・賃貸借契約で「法定点検への協力」を定めているケースが一般的</li>
+          <li><strong>現実的な落としどころ</strong>：予備日・鍵預かり・個別調整で在宅率を上げ、未実施住戸を最小化する</li>
+        </ul>
+      </section>
+
+      <section id="penalty" class="cl-section">
+        <h2>未実施が続くと罰則になる？管理者の責任</h2>
+        <p>「入居者が応じてくれず点検できない住戸がある。罰則になるのか」という不安について整理します。</p>
+        <h3>罰則の対象は「関係者（管理者・所有者）」</h3>
+        <p>消防法第44条では、点検結果を報告しない場合や虚偽報告をした場合に、30万円以下の罰金または拘留の対象になり得るとされています。これは<strong>建物の関係者（管理者・所有者）が対象</strong>であり、入居者個人が直ちに罰則を受けるわけではありません。</p>
+        <h3>管理者が取るべき行動</h3>
+        <ul>
+          <li><strong>実施できた範囲を確実に点検・報告</strong>：一部住戸が未実施でも、点検できた範囲をまとめて所轄消防署へ報告する</li>
+          <li><strong>未実施住戸の案内記録を残す</strong>：案内回数・日時・対応経緯を記録し、「実施に向けた合理的な努力」を証跡化する</li>
+          <li><strong>放置しない</strong>：未実施のまま何年も放置せず、毎回の点検で案内を継続する</li>
+        </ul>
+        <div class="cl-callout">
+          <h3 class="cl-callout-h">ポイント</h3>
+          <p>大切なのは「全住戸を完璧に点検すること」よりも、<strong>義務を果たすために合理的に動いた記録を残すこと</strong>です。点検・報告のサイクルを止めず、未実施住戸へ案内を続けている状態を維持しましょう。判断に迷う場合は、所轄消防署や点検業者に未実施住戸の扱いを相談するのが確実です。</p>
+        </div>
+      </section>
+
+      <section id="sources" class="cl-section">
+        <h2>参考にした公式情報</h2>
+        <p>本記事は、消防法・消防法施行規則・消防庁および消防本部の公開情報をもとに、マンション・賃貸管理の実務で使いやすい形に整理しています。未実施住戸の扱いや報告方法は、建物所在地を管轄する消防署の案内を確認してください。</p>
+        <ul class="cl-source-list">
+          <li><a href="https://laws.e-gov.go.jp/law/323AC1000000186" target="_blank" rel="noopener">消防法｜e-Gov法令検索</a></li>
+          <li><a href="https://laws.e-gov.go.jp/law/336M50000008006" target="_blank" rel="noopener">消防法施行規則｜e-Gov法令検索</a></li>
+          <li><a href="https://www.fdma.go.jp/mission/prevention/post-1.html" target="_blank" rel="noopener">消防用設備等の点検基準・点検要領・点検票｜総務省消防庁</a></li>
+          <li><a href="https://www.tfd.metro.tokyo.lg.jp/lfe/office_adv/tenken_houkoku.html" target="_blank" rel="noopener">消防用設備等点検報告制度｜東京消防庁</a></li>
+        </ul>
+      </section>
+
+      <div class="cl-cta">
+        <h2>マンション・賃貸の消防設備点検でお悩みなら</h2>
+        <p>不在対応・報告書作成まで任せられる有資格業者から<br/>最大3社の見積もりを完全無料・約1分で取得できます</p>
+        <a class="cta-btn-primary" href="/shobo-setsubi/">無料で一括見積もりを依頼する</a>
+      </div>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          {faqItems.map((item) => (
+            <div class="cl-faq-item">
+              <dt>{item.q}</dt>
+              <dd>{item.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別の消防設備点検業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/shobo-setsubi/tokyo/">東京都</a></li>
+          <li><a href="/shobo-setsubi/osaka/">大阪府</a></li>
+          <li><a href="/shobo-setsubi/kanagawa/">神奈川県</a></li>
+          <li><a href="/shobo-setsubi/aichi/">愛知県</a></li>
+          <li><a href="/shobo-setsubi/saitama/">埼玉県</a></li>
+          <li><a href="/shobo-setsubi/chiba/">千葉県</a></li>
+          <li><a href="/shobo-setsubi/hyogo/">兵庫県</a></li>
+          <li><a href="/shobo-setsubi/fukuoka/">福岡県</a></li>
+          <li><a href="/shobo-setsubi/hokkaido/">北海道</a></li>
+          <li><a href="/shobo-setsubi/kyoto/">京都府</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/shobo-setsubi/">全国47都道府県の対応業者を見る</a></p>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連サービス・コラム</h2>
+        <ul>
+          <li><a href="/shobo-setsubi/">消防設備点検の業者を一括見積比較</a></li>
+          <li><a href="/column/shobo-setsubi-horei-gimu/">消防設備点検の点検・報告義務ガイド2026｜消防法17条の3の3</a></li>
+          <li><a href="/column/shobo-setsubi-hiyo-sohba/">消防設備点検の費用相場2026｜建物規模・契約形態別</a></li>
+          <li><a href="/flow/">ご利用の流れ・3ステップで業者紹介</a></li>
+        </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#shobo-ho">消防法</a></li>
+          <li><a href="/glossary/#kiki-tenken">機器点検</a></li>
+          <li><a href="/glossary/#sogo-tenken">総合点検</a></li>
+          <li><a href="/glossary/#jidoukasai-hochi-setsubi">自動火災報知設備</a></li>
+          <li><a href="/glossary/#tokutei-boka-taisho">特定防火対象物</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集（49語）をすべて見る</a></p>
+      </aside>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header {
+  background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%);
+  color: #fff;
+  padding: 48px 0 40px;
+}
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul, .cl-callout--warn ul { padding-left: 18px; margin: 0; }
+.cl-callout li, .cl-callout--warn li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-answer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 20px 0 24px; }
+.cl-answer-grid > div { background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; padding: 18px 20px; box-shadow: 0 6px 18px rgba(15, 23, 42, .05); }
+.cl-answer-grid h3 { font-size: 1rem; color: var(--blue-dark); margin: 0 0 8px; }
+.cl-answer-grid p { margin: 0; }
+.cl-template { background: #f8fafc; border: 1px dashed var(--gray-400); border-radius: 10px; padding: 18px 22px; margin: 12px 0 24px; }
+.cl-template p { font-size: .88rem; line-height: 1.85; color: var(--gray-800); margin: 0 0 12px; }
+.cl-template p:last-child { margin-bottom: 0; }
+.cl-template-note { font-size: .8rem; color: var(--gray-500); }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-source-list { padding-left: 22px; display: grid; gap: 8px; }
+.cl-source-list a { color: var(--blue); text-decoration: underline; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-glossary-block { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 24px; }
+.cl-glossary-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; }
+.cl-glossary-list { padding-left: 18px; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; }
+.cl-glossary-list a { color: var(--blue); text-decoration: underline; font-size: .88rem; }
+.cl-glossary-more { font-size: .85rem; margin: 12px 0 0; }
+.cl-glossary-more a { color: var(--blue); text-decoration: underline; }
+@media (max-width: 600px) {
+  .cl-header { padding: 32px 0 28px; }
+  .cl-body { padding: 28px 16px 48px; }
+  .cl-section h2 { font-size: 1.15rem; }
+  .cl-answer-grid { grid-template-columns: 1fr; }
+}
+
+.cl-quickanswer {
+  background: #eef6ff;
+  border: 1.5px solid #1a56db;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-bottom: 32px;
+}
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+</style>

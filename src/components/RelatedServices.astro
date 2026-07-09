@@ -1,10 +1,27 @@
 ---
 import { serviceIndex } from '../data/site';
+import { prefectureBySlug } from '../data/prefectures';
+import { findServiceCategory, getCategoryHref } from '../data/serviceCategories';
 interface Props { currentSlug: string; relatedSlugs: string[]; }
 const { currentSlug, relatedSlugs } = Astro.props;
 const related = relatedSlugs
   .map((slug) => serviceIndex.find((s) => s.slug === slug))
   .filter((s): s is (typeof serviceIndex)[number] => !!s && s.slug !== currentSlug);
+
+const pathParts = Astro.url.pathname.split('/').filter(Boolean);
+const prefectureSlug = pathParts[0] === currentSlug && pathParts[1] ? pathParts[1] : undefined;
+const prefecture = prefectureSlug ? prefectureBySlug[prefectureSlug] : undefined;
+const category = findServiceCategory(currentSlug);
+const relatedSlugSet = new Set(related.map((s) => s.slug));
+const categoryRelated = category
+  ? category.serviceSlugs
+      .map((slug) => serviceIndex.find((s) => s.slug === slug))
+      .filter((s): s is (typeof serviceIndex)[number] => !!s && s.slug !== currentSlug && !relatedSlugSet.has(s.slug))
+  : [];
+const hrefFor = (slug: string) => prefecture ? `/${slug}/${prefecture.slug}/` : `/${slug}/`;
+const serviceLabel = (service: (typeof serviceIndex)[number]) => prefecture
+  ? `${prefecture.name}の${service.name}`
+  : service.name;
 ---
 {related.length > 0 && (
   <section class="sd-section section-white" id="related">
@@ -16,14 +33,106 @@ const related = relatedSlugs
       </div>
       <div class="related-grid">
         {related.map((s) => (
-          <a class="related-card" href={`/${s.slug}/`}>
+          <a class="related-card" href={hrefFor(s.slug)}>
             <div class="related-card-tag">{s.short}</div>
-            <h3>{s.name}</h3>
+            <h3>{serviceLabel(s)}</h3>
             <p>{s.description}</p>
-            <span class="related-link">詳しく見る →</span>
+            <span class="related-link">詳しく見る</span>
           </a>
         ))}
       </div>
+      {category && categoryRelated.length > 0 && (
+        <div class="related-category">
+          <div class="related-category-head">
+            <a class="related-category-kicker" href={getCategoryHref(category.slug)}>{category.label}</a>
+            <h3>{prefecture ? `${prefecture.name}で同じカテゴリのサービス` : '同じカテゴリのサービス'}</h3>
+            <p>{category.description}</p>
+          </div>
+          <div class="related-category-grid">
+            {categoryRelated.map((s) => (
+              <a class="related-category-link" href={hrefFor(s.slug)}>
+                <strong>{serviceLabel(s)}</strong>
+                <small>{s.description}</small>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   </section>
 )}
+
+<style>
+  .related-category {
+    margin-top: 32px;
+    padding: 24px;
+    border: 1px solid rgba(14, 116, 144, 0.16);
+    border-radius: 24px;
+    background: linear-gradient(135deg, rgba(240, 249, 255, 0.82), rgba(255, 255, 255, 0.96));
+  }
+
+  .related-category-head {
+    max-width: 760px;
+    margin-bottom: 18px;
+  }
+
+  .related-category-kicker {
+    display: inline-flex;
+    margin-bottom: 8px;
+    color: var(--primary);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+  }
+
+  .related-category-kicker:hover {
+    text-decoration: underline;
+  }
+
+  .related-category-head h3 {
+    margin: 0 0 8px;
+    color: var(--text);
+    font-size: clamp(20px, 3vw, 26px);
+  }
+
+  .related-category-head p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .related-category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+  }
+
+  .related-category-link {
+    display: grid;
+    gap: 6px;
+    padding: 16px;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 16px;
+    background: #fff;
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+
+  .related-category-link:hover {
+    transform: translateY(-2px);
+    border-color: rgba(14, 116, 144, 0.32);
+    box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
+  }
+
+  .related-category-link strong {
+    color: var(--text);
+    font-size: 15px;
+  }
+
+  .related-category-link small {
+    color: var(--muted);
+    line-height: 1.65;
+  }
+</style>
