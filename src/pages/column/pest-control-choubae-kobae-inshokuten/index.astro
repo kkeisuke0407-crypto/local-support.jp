@@ -1,0 +1,425 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = 'チョウバエ・コバエ駆除 飲食店の完全ガイド｜発生源対策と業者依頼の境界';
+const description = '飲食店のチョウバエ・コバエ駆除を解説。チョウバエ・ショウジョウバエ・ノミバエ・キノコバエの種類別の発生源、排水溝・グリストラップ・生ごみ・ドリンクバーの対策、自分でできる範囲と業者に頼むべき境界、HACCP・異物混入リスク、費用相場、業者選びまでまとめました。';
+const canonical = `${site.domain}/column/pest-control-choubae-kobae-inshokuten/`;
+const published = '2026-07-09';
+const modified = '2026-07-09';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: 'チョウバエ・コバエ駆除 飲食店の完全ガイド', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 5400,
+  articleSection: '害虫駆除',
+  keywords: 'チョウバエ 駆除,コバエ 駆除 飲食店,ショウジョウバエ,ノミバエ,キノコバエ,グリストラップ 虫,排水溝 コバエ,発生源対策,HACCP',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-pest-control.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '害虫駆除', serviceType: '建築物の害虫防除（PCO）' },
+  citation: [
+    { '@type': 'Legislation', name: '食品衛生法（HACCP制度化）', url: 'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000098735.html' },
+  ],
+});
+
+const faqItems = [
+  {
+    q: '飲食店のコバエは、駆除スプレーで退治すれば解決しますか？',
+    a: '成虫を一時的に減らせても、根本解決にはなりません。コバエは排水溝・グリストラップ・生ごみなどの「発生源」で幼虫が育ち続けるため、成虫を退治しても次々に発生します。解決の基本は、まず種類を見極めて発生源を特定し、そこを清掃・管理して断つことです。スプレーは補助的な手段と考えてください。',
+  },
+  {
+    q: 'チョウバエとショウジョウバエ、ノミバエの違いは何ですか？',
+    a: 'いずれも「コバエ」と呼ばれますが、発生源が異なります。チョウバエは排水溝・グリストラップ・床排水などの水まわりのヘドロ、ショウジョウバエは生ごみ・熟した果物・酒類・ドリンクの残り、ノミバエは腐敗した有機物や死骸に発生します。種類によって対策する場所が変わるため、まず「どこから出ているか」を見極めることが駆除の出発点です。',
+  },
+  {
+    q: 'グリストラップからコバエが出ます。どうすればよいですか？',
+    a: 'グリストラップ（油脂分離槽）は、油とヘドロが溜まりチョウバエの温床になりやすい場所です。まずは定期的な清掃で堆積した油脂・汚泥を除去し、蓋の隙間をふさぐことが基本です。清掃を怠ると発生を繰り返すため、清掃頻度の見直しが必要です。グリストラップの清掃・臭い・虫の詳細は関連記事もご参照ください。',
+  },
+  {
+    q: '自分で対策する場合と、業者に頼む場合の境界は？',
+    a: '発生源が特定でき、清掃で減らせる範囲（排水溝・生ごみ・グリストラップの日常管理）は自店で対応できます。一方、①発生源が特定できない、②清掃してもすぐ再発する、③床下・配管内など手の届かない場所が原因、④HACCP対応で記録が必要、といった場合は業者への依頼が有効です。業者は発生源調査・排水処理・モニタリングまで含めて根本対策を行います。',
+  },
+  {
+    q: 'コバエの発生は保健所やHACCPで問題になりますか？',
+    a: 'なります。食品を扱う店舗でのコバエ発生は、食品への異物混入（虫の混入）に直結し、クレーム・信用低下の原因になります。HACCPに沿った衛生管理では「そ族・昆虫対策」が求められ、保健所の立入時にも衛生状態として確認されます。発生源対策と記録を残しておくことが、リスク管理の観点でも重要です。',
+  },
+  {
+    q: '業者に頼むと費用はどのくらいですか？',
+    a: '店舗規模・発生源・対象範囲で変わります。目安として、スポットの発生源調査＋処理で数万円〜、継続的な定期モニタリング契約は1回あたり数千円〜が一般的です。排水系統が原因で配管洗浄などが必要な場合は別途見積もりになります。複数社から同条件で相見積もりを取り、発生源調査の有無や記録発行まで含めて比較するのがおすすめです。',
+  },
+];
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-answer-grid', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-pest-control.png` },
+});
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified}
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  ogImage={`${site.domain}/og-pest-control.png`}
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a>
+          <span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a>
+          <span aria-hidden="true">›</span>
+          <span>チョウバエ・コバエ駆除 飲食店の完全ガイド</span>
+        </nav>
+        <span class="cl-cat">害虫駆除</span>
+        <h1 class="cl-title">チョウバエ・コバエ駆除 飲食店の完全ガイド｜発生源対策と業者依頼の境界</h1>
+        <p class="cl-lead">
+          飲食店で繰り返すコバエは、<strong>スプレーで成虫を退治しても解決しません</strong>。排水溝・グリストラップ・生ごみといった「発生源」で幼虫が育ち続けるからです。この記事では、<strong>コバエの種類ごとに異なる発生源</strong>、場所別の対策、そして<strong>自分でできる範囲と業者に頼むべき境界</strong>、HACCP・費用相場・業者選びまでを、飲食店オーナー・店長向けにまとめます。※2026年7月時点の情報をもとに整理。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年7月9日</time>
+          <span>最終更新：2026年7月9日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 飲食店のコバエを根本から駆除するには？</p>
+        <p class="cl-qa-a">A. <strong>①コバエの種類を見極める（チョウバエ／ショウジョウバエ／ノミバエ）、②種類ごとの発生源（排水・グリストラップ／生ごみ・ドリンク／腐敗物）を清掃・管理して断つ、③再発・原因不明・配管内が原因なら業者の発生源調査へ</strong>。成虫のスプレーは補助。発生源を断たなければ再発します。</p>
+        <p class="cl-qa-src">※食品衛生法（HACCP）・害虫管理の一般的知見をもとに整理</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="pest-control" serviceName="害虫駆除" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#types">コバエの種類と発生源（種類で対策が変わる）</a></li>
+          <li><a href="#why">飲食店でコバエが問題になる理由</a></li>
+          <li><a href="#place">発生源別の対策</a></li>
+          <li><a href="#border">自分でできる対策 vs 業者に頼む境界</a></li>
+          <li><a href="#vendor">業者に頼む場合の内容と業者選び</a></li>
+          <li><a href="#cost">費用相場の考え方</a></li>
+          <li><a href="#sources">参考にした公式情報</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>発生源を断つのが基本</strong>：成虫のスプレーは対症療法。幼虫が育つ排水・グリストラップ・生ごみを管理しないと再発する</li>
+            <li><strong>種類の見極めが先</strong>：チョウバエは水まわり、ショウジョウバエは生ごみ・ドリンク、ノミバエは腐敗物。発生源が違う</li>
+            <li><strong>再発・原因不明は業者へ</strong>：配管内・床下が原因、記録が必要（HACCP）なら発生源調査から業者に依頼する</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="types" class="cl-section">
+        <h2>コバエの種類と発生源（種類で対策が変わる）</h2>
+        <p>「コバエ」は特定の1種ではなく、複数の小さなハエの総称です。飲食店で問題になる主な種類と、その発生源は次のとおりです。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>飲食店で見られる主なコバエの種類と発生源</caption>
+            <thead>
+              <tr><th scope="col">種類</th><th scope="col">主な発生源</th><th scope="col">見分けの目安</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">チョウバエ</th><td>排水溝・グリストラップ・床排水のヘドロ</td><td>ハート型の羽・壁にとまる</td></tr>
+              <tr><th scope="row">ショウジョウバエ</th><td>生ごみ・熟した果物・酒類・ドリンクの残り</td><td>赤い目・生ごみに群がる</td></tr>
+              <tr><th scope="row">ノミバエ</th><td>腐敗した有機物・食品くず・死骸</td><td>素早く歩き回る・小さい</td></tr>
+              <tr><th scope="row">キノコバエ</th><td>観葉植物の湿った土・堆積した有機物</td><td>植木鉢まわりを飛ぶ</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>ポイントは、<strong>種類によって発生源＝対策する場所が違う</strong>ことです。排水を掃除してもコバエが減らないなら、原因はショウジョウバエ（生ごみ）やキノコバエ（観葉植物）かもしれません。まず「どこから出ているか」を見極めることが、駆除の最短ルートです。</p>
+      </section>
+
+      <section id="why" class="cl-section">
+        <h2>飲食店でコバエが問題になる理由</h2>
+        <p>コバエは「小さくて害がなさそう」に見えますが、飲食店では次のような具体的リスクにつながります。</p>
+        <ul>
+          <li><strong>食品への異物混入</strong>：料理やドリンクへの混入は、クレーム・返金・SNS拡散に直結する</li>
+          <li><strong>衛生印象の悪化</strong>：店内を飛ぶコバエは、客に「不衛生な店」という印象を与える</li>
+          <li><strong>HACCP・保健所対応</strong>：食品衛生法（HACCP）では「そ族・昆虫対策」が求められ、立入時の確認対象になる</li>
+          <li><strong>他の害虫の兆候</strong>：コバエが多い＝有機物・水分が管理されていないサインで、ゴキブリ等の温床にもなりやすい</li>
+        </ul>
+        <p>とくに異物混入は、1件のクレームが店の評判を大きく損なうことがあります。飲食店の害虫対策全体の頻度・義務は<a href="/column/pest-control-inshokuten-hindo-gimu/">飲食店の害虫駆除 頻度・法的義務 完全ガイド</a>で解説しています。</p>
+      </section>
+
+      <section id="place" class="cl-section">
+        <h2>発生源別の対策</h2>
+        <p>種類を見極めたら、発生源ごとに対策します。基本は「幼虫が育つ環境（水分＋有機物）をなくす」ことです。</p>
+        <div class="cl-answer-grid">
+          <div>
+            <h3>排水溝・床排水</h3>
+            <p>ヘドロを物理的に除去し、ブラシで側面までこすり洗い。熱湯や専用洗浄剤の併用も有効。</p>
+          </div>
+          <div>
+            <h3>グリストラップ</h3>
+            <p>堆積した油脂・汚泥を定期清掃で除去。蓋の隙間をふさぐ。清掃頻度の見直しが再発防止の鍵。</p>
+          </div>
+          <div>
+            <h3>生ごみ・ドリンクバー</h3>
+            <p>生ごみは密閉・こまめに廃棄。ドリンクの注ぎ口・受け皿・製氷機周りの糖分汚れを毎日清掃。</p>
+          </div>
+          <div>
+            <h3>観葉植物</h3>
+            <p>キノコバエは土の過湿が原因。水やりを控えめにし、必要なら用土を入れ替える。</p>
+          </div>
+        </div>
+        <div class="cl-callout">
+          <h3 class="cl-callout-h">グリストラップは「臭い・虫」の最大の発生源になりやすい</h3>
+          <p>厨房のグリストラップは、油脂とヘドロが溜まりチョウバエ・臭いの温床になりがちです。清掃を怠ると発生を繰り返すため、頻度と方法の見直しが必要です。詳しくは<a href="/column/grease-trap-nioi-mushi/">グリストラップの臭い・虫の対策</a>、清掃全般は<a href="/grease-trap/">グリストラップ清掃の業者比較</a>もご覧ください。</p>
+        </div>
+      </section>
+
+      <section id="border" class="cl-section">
+        <h2>自分でできる対策 vs 業者に頼む境界</h2>
+        <p>コバエ対策は、まず日常清掃で減らせる部分が大きいサービスです。一方で、自店では手に負えないケースもあります。境界を整理しました。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>自店対応と業者依頼の目安</caption>
+            <thead>
+              <tr><th scope="col">状況</th><th scope="col">対応の目安</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">発生源が特定でき、清掃で減る</th><td>自店の日常清掃・グリストラップ管理で対応</td></tr>
+              <tr><th scope="row">清掃してもすぐ再発する</th><td>業者の発生源調査を検討</td></tr>
+              <tr><th scope="row">発生源が特定できない</th><td>業者の調査で見えない発生源を特定</td></tr>
+              <tr><th scope="row">床下・配管内が原因の疑い</th><td>業者による排水系統の処理が必要</td></tr>
+              <tr><th scope="row">HACCP対応で記録が必要</th><td>業者の防除記録・モニタリングを活用</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>「清掃しているのに減らない」場合、多くは<strong>見えない発生源（配管内・床下・什器の裏）</strong>が残っています。ここは自店の清掃では届かないため、業者の調査が近道です。</p>
+      </section>
+
+      <section id="vendor" class="cl-section">
+        <h2>業者に頼む場合の内容と業者選び</h2>
+        <p>業者に依頼すると、成虫の駆除だけでなく発生源を断つ根本対策まで行います。主な内容は次のとおりです。</p>
+        <ul>
+          <li><strong>発生源調査</strong>：どの種類がどこから出ているかを特定（配管・什器裏・床下含む）</li>
+          <li><strong>排水・グリストラップ処理</strong>：ヘドロ除去・専用薬剤・必要に応じ配管洗浄</li>
+          <li><strong>IPMに基づく継続管理</strong>：<a href="/glossary/#ipm">IPM（総合的有害生物管理）</a>で環境整備＋モニタリング</li>
+          <li><strong>記録・報告書</strong>：HACCP・保健所対応に使える防除記録の発行</li>
+        </ul>
+        <p>業者選びでは、①発生源調査から行うか、②排水系統の処理に対応できるか、③記録を発行できるか、④建築物ねずみ昆虫等防除業の登録・協会会員か、を確認しましょう。詳しくは<a href="/column/pest-control-gokiburi-gyosha/">業務用ゴキブリ駆除の業者選び完全ガイド</a>の考え方も共通して役立ちます。</p>
+      </section>
+
+      <section id="cost" class="cl-section">
+        <h2>費用相場の考え方</h2>
+        <p>費用は、店舗規模・発生源・対象範囲・契約形態で変わります。飲食店での目安として、次のように考えます。</p>
+        <ul>
+          <li><strong>スポットの発生源調査＋処理</strong>：数万円〜（発生源の数・範囲で変動）</li>
+          <li><strong>定期モニタリング契約</strong>：1回あたり数千円〜（継続管理）</li>
+          <li><strong>配管洗浄・排水系統の処理が必要な場合</strong>：別途見積もり</li>
+        </ul>
+        <p>同じ条件（対象範囲・調査の有無・記録発行）で複数社を比較すると、適正価格を把握しやすくなります。業種別・契約形態別の詳しい相場は<a href="/column/pest-control-hiyo-sohba/">業務用害虫駆除（PCO）の費用相場ガイド</a>で解説しています。定期契約とスポットの使い分けは<a href="/column/pest-control-teiki-spot-hikaku/">定期契約とスポット駆除の比較</a>もご参照ください。</p>
+      </section>
+
+      <section id="sources" class="cl-section">
+        <h2>参考にした公式情報</h2>
+        <p>本記事は、食品衛生法（HACCP制度化）および害虫管理の一般的な知見をもとに、飲食店の実務で使いやすい形に整理しています。</p>
+        <ul class="cl-source-list">
+          <li><a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000098735.html" target="_blank" rel="noopener">HACCPに沿った衛生管理の制度化｜厚生労働省</a></li>
+          <li><a href="https://www.pestcontrol.or.jp/" target="_blank" rel="noopener">公益社団法人 日本ペストコントロール協会</a></li>
+        </ul>
+      </section>
+
+      <div class="cl-cta">
+        <h2>飲食店のコバエ・チョウバエ対策を業者に相談するなら</h2>
+        <p>発生源調査からHACCP対応の記録発行まで対応する業者から<br/>最大3社の見積もりを完全無料・約1分で取得できます</p>
+        <a class="cta-btn-primary" href="/pest-control/">無料で一括見積もりを依頼する</a>
+      </div>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          {faqItems.map((item) => (
+            <div class="cl-faq-item">
+              <dt>{item.q}</dt>
+              <dd>{item.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別の害虫駆除業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/pest-control/tokyo/">東京都</a></li>
+          <li><a href="/pest-control/osaka/">大阪府</a></li>
+          <li><a href="/pest-control/fukuoka/">福岡県</a></li>
+          <li><a href="/pest-control/kanagawa/">神奈川県</a></li>
+          <li><a href="/pest-control/aichi/">愛知県</a></li>
+          <li><a href="/pest-control/saitama/">埼玉県</a></li>
+          <li><a href="/pest-control/hyogo/">兵庫県</a></li>
+          <li><a href="/pest-control/hokkaido/">北海道</a></li>
+          <li><a href="/pest-control/kyoto/">京都府</a></li>
+          <li><a href="/pest-control/chiba/">千葉県</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/pest-control/">全国47都道府県の対応業者を見る</a></p>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連サービス・コラム</h2>
+        <ul>
+          <li><a href="/column/pest-control-guide/">業務用害虫駆除（PCO）完全ガイド｜法的義務・費用・業者選び・害虫別対策の総まとめ</a></li>
+          <li><a href="/column/pest-control-inshokuten-hindo-gimu/">飲食店の害虫駆除 頻度・法的義務 完全ガイド</a></li>
+          <li><a href="/column/grease-trap-nioi-mushi/">グリストラップの臭い・虫の対策｜発生源と清掃のポイント</a></li>
+          <li><a href="/column/pest-control-nezumi-inshokuten/">飲食店のネズミ駆除｜緊急対応の費用相場・保健所対応・再発防止まで</a></li>
+          <li><a href="/column/pest-control-hiyo-sohba/">業務用害虫駆除（PCO）の費用相場ガイド</a></li>
+        </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#ipm">IPM（総合的有害生物管理）</a></li>
+          <li><a href="/glossary/#haccp">HACCP</a></li>
+          <li><a href="/glossary/#shokuhin-eisei-ho-haccp">食品衛生法（HACCP）</a></li>
+          <li><a href="/glossary/#kenchikubutsu-nezumi-konchu-bojogyo">建築物ねずみ昆虫等防除業</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集（49語）をすべて見る</a></p>
+      </aside>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header {
+  background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%);
+  color: #fff;
+  padding: 48px 0 40px;
+}
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul, .cl-callout--warn ul { padding-left: 18px; margin: 0; }
+.cl-callout li, .cl-callout--warn li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-answer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 20px 0 24px; }
+.cl-answer-grid > div { background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; padding: 18px 20px; box-shadow: 0 6px 18px rgba(15, 23, 42, .05); }
+.cl-answer-grid h3 { font-size: 1rem; color: var(--blue-dark); margin: 0 0 8px; }
+.cl-answer-grid p { margin: 0; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-source-list { padding-left: 22px; display: grid; gap: 8px; }
+.cl-source-list a { color: var(--blue); text-decoration: underline; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-glossary-block { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 24px; }
+.cl-glossary-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; }
+.cl-glossary-list { padding-left: 18px; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; }
+.cl-glossary-list a { color: var(--blue); text-decoration: underline; font-size: .88rem; }
+.cl-glossary-more { font-size: .85rem; margin: 12px 0 0; }
+.cl-glossary-more a { color: var(--blue); text-decoration: underline; }
+@media (max-width: 600px) {
+  .cl-header { padding: 32px 0 28px; }
+  .cl-body { padding: 28px 16px 48px; }
+  .cl-section h2 { font-size: 1.15rem; }
+  .cl-answer-grid { grid-template-columns: 1fr; }
+}
+
+.cl-quickanswer {
+  background: #eef6ff;
+  border: 1.5px solid #1a56db;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-bottom: 32px;
+}
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+</style>

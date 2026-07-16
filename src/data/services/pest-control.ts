@@ -307,6 +307,13 @@ const data: ServiceData = {
 
   relatedColumns: [
     {
+      href: '/column/pest-control-choubae-kobae-inshokuten/',
+      category: '害虫別（コバエ）',
+      title: 'チョウバエ・コバエ駆除 飲食店の完全ガイド｜発生源対策と業者依頼の境界',
+      excerpt: 'チョウバエ・ショウジョウバエ・ノミバエの種類別発生源、排水溝・グリストラップ・生ごみの対策、自分でできる範囲と業者依頼の境界、HACCP・費用相場を整理。',
+      date: '2026-07-09',
+    },
+    {
       href: '/column/pest-control-hoiku-yochien/',
       category: '業種別（保育・幼稚園）',
       title: '保育園・幼稚園の害虫駆除ガイド｜子ども施設の安全な防除と業者選び',
