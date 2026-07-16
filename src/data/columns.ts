@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/jusuisou-seisou-gyosha-osaka/',
+    category: '受水槽清掃',
+    title: '大阪で受水槽清掃の業者を選ぶ完全ガイド｜市内・北摂・堺・泉州の相場・保健所事情・夜間作業の実情',
+    excerpt: '大阪府内の受水槽清掃業者選びを地域別に整理。大阪市都心と北摂・堺・泉州の相場差、大阪府知事登録業者の調べ方、大阪市の政令市保健所の運用、梅田・難波の高層マンションの搬入制約、夜間・休日対応の費用、業者比較8項目まで。',
+    date: '2026-07-16',
+  },
+  {
     href: '/column/pest-control-choubae-kobae-inshokuten/',
     category: '害虫駆除',
     title: 'チョウバエ・コバエ駆除 飲食店の完全ガイド｜発生源対策と業者依頼の境界',

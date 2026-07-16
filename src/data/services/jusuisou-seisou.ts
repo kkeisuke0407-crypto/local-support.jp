@@ -306,6 +306,13 @@ const data: ServiceData = {
 
   relatedColumns: [
     {
+      href: '/column/jusuisou-seisou-gyosha-osaka/',
+      category: '業者選び（大阪）',
+      title: '大阪で受水槽清掃の業者を選ぶ完全ガイド｜市内・北摂・堺・泉州の相場・保健所事情',
+      excerpt: '大阪市都心と北摂・堺・泉州の相場差、大阪府知事登録の調べ方、政令市（大阪市）と府の保健所運用差、梅田・難波の高層物件の搬入制約、夜間作業の割増まで実務解説。',
+      date: '2026-07-16',
+    },
+    {
       href: '/column/jusuisou-seisou-gyosha-tokyo/',
       category: '業者選び',
       title: '東京で受水槽清掃の業者を選ぶ完全ガイド｜23区・多摩の相場・保健所事情・夜間作業',
