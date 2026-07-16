@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/pest-control-choubae-kobae-inshokuten/',
+    category: '害虫駆除',
+    title: 'チョウバエ・コバエ駆除 飲食店の完全ガイド｜発生源対策と業者依頼の境界',
+    excerpt: '飲食店のチョウバエ・コバエ駆除を解説。チョウバエ・ショウジョウバエ・ノミバエ・キノコバエの種類別の発生源、排水溝・グリストラップ・生ごみ・ドリンクバーの対策、自分でできる範囲と業者に頼むべき境界、HACCP・異物混入リスク、費用相場、業者選びまで。',
+    date: '2026-07-09',
+  },
+  {
     href: '/column/pest-control-hoiku-yochien/',
     category: '害虫駆除',
     title: '保育園・幼稚園の害虫駆除ガイド｜子ども施設の安全な防除と業者選び',
