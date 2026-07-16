@@ -307,6 +307,13 @@ const data: ServiceData = {
 
   relatedColumns: [
     {
+      href: '/column/pest-control-hoiku-yochien/',
+      category: '業種別（保育・幼稚園）',
+      title: '保育園・幼稚園の害虫駆除ガイド｜子ども施設の安全な防除と業者選び',
+      excerpt: '乳幼児の薬剤感受性・給食・園庭ゆえのリスク、厨房から園庭のハチ・蚊・毛虫まで、低毒性IPMと園児不在時施工、HACCP・児童福祉施設基準との関係、業者選び7項目、費用相場を整理。',
+      date: '2026-07-09',
+    },
+    {
       href: '/column/pest-control-byoin-clinic/',
       category: '業種別（医療機関）',
       title: '病院・クリニックの害虫対策ガイド｜院内感染対策と防除記録の実務',
