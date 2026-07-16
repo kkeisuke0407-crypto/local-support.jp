@@ -1,0 +1,454 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = '保育園・幼稚園の害虫駆除ガイド｜子ども施設の安全な防除と業者選び';
+const description = '保育園・認定こども園・幼稚園の害虫駆除（PCO）を解説。乳幼児の薬剤感受性・給食・園庭という特性ゆえのリスク、厨房のゴキブリ/ネズミから園庭のハチ・蚊・毛虫まで、低毒性IPMと園児不在時施工、食品衛生法(HACCP)・児童福祉施設基準との関係、業者選び7項目、費用相場までまとめました。';
+const canonical = `${site.domain}/column/pest-control-hoiku-yochien/`;
+const published = '2026-07-09';
+const modified = '2026-07-09';
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '保育園・幼稚園の害虫駆除ガイド', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'ja-JP',
+  url: canonical,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 5500,
+  articleSection: '害虫駆除',
+  keywords: '害虫駆除 保育園,幼稚園 害虫,認定こども園 衛生管理,園庭 ハチ 駆除,乳幼児 薬剤 安全,低毒性 IPM,ベイト工法,HACCP,児童福祉施設',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-pest-control.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '害虫駆除', serviceType: '建築物の害虫防除（PCO）' },
+  citation: [
+    { '@type': 'Legislation', name: '食品衛生法（HACCP制度化）', url: 'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000098735.html' },
+    { '@type': 'Legislation', name: '建築物における衛生的環境の確保に関する法律（建築物衛生法）', url: 'https://laws.e-gov.go.jp/law/345AC0000000020' },
+  ],
+});
+
+const faqItems = [
+  {
+    q: '保育園・幼稚園で害虫駆除業者を選ぶとき、最初に確認すべきことは？',
+    a: 'まず「子ども施設・教育施設での施工実績」と「低毒性・IPMへの対応」です。乳幼児は薬剤の影響を受けやすく、床で過ごしたり手を口に入れたりするため、薬剤の空間散布に頼らずベイト（毒餌）工法や物理的対策を中心にしたIPM（総合的有害生物管理）で、園児の安全に配慮できる業者を選びます。あわせて園児が不在の時間帯（休園日・夜間）に施工できるか、建築物ねずみ昆虫等防除業の登録、給食施設のHACCP対応、防除記録の発行可否を確認してください。',
+  },
+  {
+    q: 'なぜ保育園・幼稚園は特に害虫対策の配慮が必要なのですか？',
+    a: '乳幼児は体が小さく薬剤感受性が高いこと、床やマットで過ごし手を口に運ぶ行動が多いこと、免疫が未発達で感染症に弱いことが理由です。加えて給食・おやつの提供、砂場や園庭といった屋外空間があり、厨房の衛生害虫だけでなく、ハチ・蚊・毛虫・アリなど屋外害虫への対応も必要になります。安全性と衛生の両立が、他の施設以上に強く求められます。',
+  },
+  {
+    q: '園児がいる中で駆除作業をしても安全ですか？',
+    a: '園児がいる時間帯の空間散布は避けるのが基本です。適切な業者は、休園日や夜間など園児が不在のタイミングで施工したり、厨房・配管周りにベイト（毒餌）を設置し粘着トラップでモニタリングしたりと、園児が薬剤に触れない方法を選びます。ベイトやトラップは子どもの手が届かない場所に設置し、設置箇所を記録・共有します。見積時に「園児不在時の作業可否」と「使用薬剤の安全性」を必ず確認してください。',
+  },
+  {
+    q: '園庭のハチの巣や毛虫も対応してもらえますか？',
+    a: 'はい。多くのPCO業者はハチの巣の駆除や、樹木の毛虫（チャドクガ等）の防除にも対応します。ハチの営巣や毛虫は、園児の刺傷・皮膚炎につながる緊急性の高い問題です。園庭・軒下・樹木は子どもの活動エリアなので、発見したら早めに専門業者へ相談してください。緊急対応の可否と料金を、定期契約とあわせて確認しておくと安心です。',
+  },
+  {
+    q: '保育園・幼稚園の害虫駆除に法的な位置づけはありますか？',
+    a: '給食を提供する施設は食品衛生法（HACCPに沿った衛生管理）により、そ族・昆虫の防除と記録が求められます。保育所などの児童福祉施設には設備運営基準で衛生的な環境の確保が、幼稚園には学校保健安全法に基づく環境衛生管理が関係します。延床3,000㎡以上の大規模施設は建築物衛生法の特定建築物にあたる場合もあります。いずれも「安全で衛生的な環境の維持」が施設に求められます。',
+  },
+  {
+    q: '費用相場はどのくらいですか？',
+    a: '園の規模・給食の有無・屋外対応の範囲・対象害虫で変わります。目安として、定期モニタリング契約は1回あたり数千円〜、園全体を対象にする場合は規模に応じて月額数千円〜数万円が一般的です。ハチの巣駆除や毛虫の樹木消毒はスポットで別途見積もりになることが多いです。複数社から同条件で相見積もりを取り、園児不在時施工や記録発行まで含めて比較するのがおすすめです。',
+  },
+  {
+    q: '小規模保育や企業主導型保育でも依頼できますか？',
+    a: 'はい。認可保育園・認定こども園・幼稚園だけでなく、小規模保育・企業主導型保育・院内保育なども対応可能です。小規模施設では、厨房・調乳室・ごみ置き場・園庭など発生源になりやすい場所に絞った効率的なプランを組めます。複数園を運営している法人は、本部一括契約で施工品質と安全基準・記録管理を統一するとメリットがあります。',
+  },
+];
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-answer-grid', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-pest-control.png` },
+});
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified}
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={site.name}
+  logoSub="施設管理の一括見積比較"
+  ogImage={`${site.domain}/og-pest-control.png`}
+  jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}
+>
+  <article class="cl-article">
+
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a>
+          <span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a>
+          <span aria-hidden="true">›</span>
+          <span>保育園・幼稚園の害虫駆除ガイド</span>
+        </nav>
+        <span class="cl-cat">害虫駆除</span>
+        <h1 class="cl-title">保育園・幼稚園の害虫駆除ガイド｜子ども施設の安全な防除と業者選び</h1>
+        <p class="cl-lead">
+          保育園・幼稚園は、<strong>薬剤感受性の高い乳幼児・給食・園庭</strong>という特性から、害虫対策に一般施設以上の安全配慮が求められる施設です。厨房のゴキブリ・ネズミだけでなく、<strong>園庭のハチ・蚊・毛虫</strong>など屋外害虫への対応も欠かせません。この記事では、施設特有のリスク、関係する基準、園児に配慮した低毒性IPMと園児不在時施工の考え方、業者選び7項目、費用相場までを、園長・主任・施設担当者向けにまとめます。※2026年7月時点の情報をもとに整理。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年7月9日</time>
+          <span>最終更新：2026年7月9日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 保育園・幼稚園の害虫駆除で大事なことは？</p>
+        <p class="cl-qa-a">A. <strong>①子ども施設・教育施設の実績、②薬剤散布に頼らない低毒性IPM（ベイト工法・モニタリング中心）、③園児不在時（休園日・夜間）の施工、④園庭のハチ・蚊・毛虫など屋外害虫への対応、⑤給食施設のHACCP対応と記録発行</strong>。園児の安全を最優先できる業者を、相見積もりで選ぶのがコツです。</p>
+        <p class="cl-qa-src">※食品衛生法（HACCP）・児童福祉施設/学校の衛生基準、害虫管理の一般的知見をもとに整理</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="pest-control" serviceName="害虫駆除" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#why">なぜ子ども施設で安全配慮が重要か</a></li>
+          <li><a href="#place">園内・園庭で害虫が発生しやすい場所</a></li>
+          <li><a href="#law">関係する法令・基準</a></li>
+          <li><a href="#ipm">園児に配慮した低毒性IPM・不在時施工</a></li>
+          <li><a href="#check">業者選び7つのチェックポイント</a></li>
+          <li><a href="#cost">費用相場の考え方</a></li>
+          <li><a href="#sources">参考にした公式情報</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>安全性が最優先</strong>：乳幼児は薬剤感受性が高く床で過ごすため、空間散布ではなくベイト工法・園児不在時施工が基本</li>
+            <li><strong>屋内＋屋外の両方</strong>：厨房のゴキブリ・ネズミに加え、園庭のハチ・蚊・毛虫など屋外害虫の緊急対応も重要</li>
+            <li><strong>継続管理と記録</strong>：発生源を継続管理し、HACCP・衛生基準に対応した防除記録を残せる業者を相見積もりで選ぶ</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="why" class="cl-section">
+        <h2>なぜ子ども施設で安全配慮が重要か</h2>
+        <p>認可保育園、認定こども園、幼稚園、小規模保育、企業主導型保育などの子ども施設は、一般的なオフィスや店舗とは異なる配慮が必要です。</p>
+        <ul>
+          <li><strong>乳幼児の薬剤感受性</strong>：体が小さく、大人より薬剤の影響を受けやすい</li>
+          <li><strong>床での生活・手を口に運ぶ行動</strong>：ハイハイ・お昼寝・食事など、床や低い場所で過ごす時間が長い</li>
+          <li><strong>未発達な免疫</strong>：衛生害虫が媒介する病原体や食中毒に対して弱く、集団感染が広がりやすい</li>
+          <li><strong>給食・おやつの提供</strong>：厨房・調乳室の衛生管理が施設全体の安全に直結する</li>
+          <li><strong>園庭・砂場という屋外空間</strong>：ハチ・蚊・毛虫・アリなど、屋外害虫による刺傷・皮膚炎のリスクがある</li>
+        </ul>
+        <p>つまり子ども施設では、「害虫を駆除する」ことと「園児を薬剤から守る」ことを両立させる必要があります。発生源を予防的に管理し、薬剤を使う場面をできるだけ減らす体制づくりが、安全と衛生の両面で重要になります。</p>
+      </section>
+
+      <section id="place" class="cl-section">
+        <h2>園内・園庭で害虫が発生しやすい場所</h2>
+        <p>屋内と屋外の両方にリスクが分かれるのが、子ども施設の特徴です。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>保育園・幼稚園で注意したい主な発生源と害虫</caption>
+            <thead>
+              <tr><th scope="col">場所</th><th scope="col">主なリスク</th><th scope="col">注意したい害虫</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">厨房・調乳室</th><td>食材・生ごみ・水気</td><td>ゴキブリ・チョウバエ・ネズミ</td></tr>
+              <tr><th scope="row">保育室・お昼寝スペース</th><td>布団・カーペット・こぼれた食品</td><td>ダニ・アリ・ゴキブリ</td></tr>
+              <tr><th scope="row">園庭・軒下・樹木</th><td>営巣・水たまり・植栽</td><td>ハチ・蚊・毛虫（チャドクガ等）</td></tr>
+              <tr><th scope="row">砂場・排水まわり</th><td>湿気・有機物</td><td>アリ・ハエ類・ヤブ蚊</td></tr>
+              <tr><th scope="row">ごみ置き場・外周</th><td>生ごみ・侵入経路</td><td>ネズミ・ハエ・ゴキブリ</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>とくに園庭のハチの営巣や毛虫は、園児の刺傷・皮膚炎につながる緊急性の高い問題です。発見したら子どもを近づけず、早めに専門業者へ相談してください。厨房の衛生管理については<a href="/column/pest-control-inshokuten-hindo-gimu/">飲食店の害虫駆除 頻度・法的義務</a>の考え方も参考になります。</p>
+      </section>
+
+      <section id="law" class="cl-section">
+        <h2>関係する法令・基準</h2>
+        <p>子ども施設の害虫対策は、複数の制度が関係します。自園にどれが当てはまるかを確認しましょう。</p>
+        <div class="cl-answer-grid">
+          <div>
+            <h3>食品衛生法（HACCP）</h3>
+            <p>給食を提供する施設は、一般衛生管理の「そ族・昆虫対策」と防除記録が必要。</p>
+          </div>
+          <div>
+            <h3>児童福祉施設の基準</h3>
+            <p>保育所等は設備運営基準により、衛生的で安全な環境の確保が求められる。</p>
+          </div>
+          <div>
+            <h3>学校保健安全法（幼稚園）</h3>
+            <p>幼稚園は学校として、環境衛生の維持・管理が関係する。</p>
+          </div>
+          <div>
+            <h3>建築物衛生法</h3>
+            <p>延床3,000㎡以上の大規模施設は特定建築物として生息状況調査が必要な場合がある。</p>
+          </div>
+        </div>
+        <p>害虫駆除の法的義務の全体像は<a href="/column/pest-control-horei-gimu/">害虫駆除の法的義務ガイド（建築物衛生法・食品衛生法HACCP）</a>で詳しく解説しています。</p>
+      </section>
+
+      <section id="ipm" class="cl-section">
+        <h2>園児に配慮した低毒性IPM・不在時施工</h2>
+        <p>子ども施設では、薬剤の使い方に最大限の配慮が必要です。基本は<a href="/glossary/#ipm">IPM（総合的有害生物管理）</a>――発生源対策と物理的手段を中心に、化学的手段は必要最小限にする考え方です。</p>
+        <div class="cl-callout cl-callout--warn">
+          <h2 class="cl-callout-h">子ども施設での施工で重視したいポイント</h2>
+          <ul>
+            <li><strong>園児不在時に施工</strong>：休園日・夜間・早朝など、園児がいない時間帯を基本にする</li>
+            <li><strong>空間散布を避ける</strong>：保育室ではベイト（毒餌）を隙間に設置する方法や粘着トラップを中心にする</li>
+            <li><strong>誤食・接触の防止</strong>：ベイトやトラップは子どもの手が絶対に届かない場所に設置し、設置箇所を園と共有・記録する</li>
+            <li><strong>屋外は活動前に</strong>：園庭のハチ・毛虫対応は、園児が外遊びをする前に安全を確認する</li>
+          </ul>
+        </div>
+        <p>これらは、薬剤に頼りきる「その場の駆除」では実現できません。餌・水・すみか・侵入経路を継続的に管理することで、そもそも殺虫剤を使う場面を減らすのがIPMの狙いです。定期管理とスポットの違いは<a href="/column/pest-control-teiki-spot-hikaku/">定期契約とスポット駆除の比較</a>をご覧ください。</p>
+      </section>
+
+      <section id="check" class="cl-section">
+        <h2>業者選び7つのチェックポイント</h2>
+        <p>保育園・幼稚園で害虫駆除業者を比較するときに確認したい7項目です。</p>
+        <div class="cl-answer-grid">
+          <div>
+            <h3>① 子ども施設の実績</h3>
+            <p>保育園・幼稚園・学校など、子どもがいる施設での施工実績があるか。</p>
+          </div>
+          <div>
+            <h3>② 低毒性・IPM対応</h3>
+            <p>空間散布に頼らず、ベイト工法・モニタリング中心の低リスクな施工ができるか。</p>
+          </div>
+          <div>
+            <h3>③ 園児不在時の施工</h3>
+            <p>休園日・夜間・早朝など、園児がいない時間帯に作業してもらえるか。</p>
+          </div>
+          <div>
+            <h3>④ 屋外害虫への対応</h3>
+            <p>園庭のハチの巣・毛虫・蚊など、屋外害虫の緊急対応にも応じられるか。</p>
+          </div>
+          <div>
+            <h3>⑤ 資格・登録</h3>
+            <p>建築物ねずみ昆虫等防除業の登録があり、日本ペストコントロール協会の会員かどうか。</p>
+          </div>
+          <div>
+            <h3>⑥ 記録・報告書</h3>
+            <p>HACCP・監査・保護者への説明に使える防除記録・報告書を発行できるか。</p>
+          </div>
+          <div>
+            <h3>⑦ 見積の透明性</h3>
+            <p>作業内容・薬剤・回数・記録発行が見積に明記され、相見積もりで比較できるか。</p>
+          </div>
+        </div>
+        <p>業者選びの一般的な考え方は<a href="/column/pest-control-gokiburi-gyosha/">業務用ゴキブリ駆除の業者選び完全ガイド</a>、協会会員と登録の違いは<a href="/column/pest-control-kyokai-kaiin/">ペストコントロール協会の会員業者を見分ける方法</a>もあわせてご覧ください。</p>
+      </section>
+
+      <section id="cost" class="cl-section">
+        <h2>費用相場の考え方</h2>
+        <p>害虫駆除の費用は、園の規模・給食の有無・屋外対応の範囲・対象害虫・契約形態で変わります。子ども施設での目安として、次のように考えます。</p>
+        <ul>
+          <li><strong>定期モニタリング契約</strong>：1回あたり数千円〜（対象範囲・頻度で変動）</li>
+          <li><strong>園全体を対象にする場合</strong>：規模に応じて月額数千円〜数万円が一般的</li>
+          <li><strong>ハチの巣駆除・毛虫の樹木消毒</strong>：スポットで別途見積もり（発生状況・高所作業の有無で変動）</li>
+        </ul>
+        <p>同じ条件（対象範囲・回数・記録発行の有無）で複数社を比較すると、適正価格を把握しやすくなります。業種別・契約形態別の詳しい相場は<a href="/column/pest-control-hiyo-sohba/">業務用害虫駆除（PCO）の費用相場ガイド</a>で解説しています。</p>
+
+        <div class="cl-callout">
+          <h3 class="cl-callout-h">「安さ」だけで選ばない</h3>
+          <p>子ども施設では、価格の安さよりも<strong>園児の安全と継続的な記録</strong>が重要です。極端に安い提案は、空間散布中心で園児への配慮が薄い、園児不在時施工に対応しない、記録が発行されない、といったケースもあります。安全な施工方法と報告体制まで含めて総合的に比較してください。</p>
+        </div>
+      </section>
+
+      <section id="sources" class="cl-section">
+        <h2>参考にした公式情報</h2>
+        <p>本記事は、食品衛生法（HACCP制度化）・建築物衛生法および児童福祉施設・学校の衛生管理に関する一般的な知見をもとに、保育園・幼稚園の実務で使いやすい形に整理しています。施設運営に関わる基準は、所管行政の案内もあわせてご確認ください。</p>
+        <ul class="cl-source-list">
+          <li><a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000098735.html" target="_blank" rel="noopener">HACCPに沿った衛生管理の制度化｜厚生労働省</a></li>
+          <li><a href="https://laws.e-gov.go.jp/law/345AC0000000020" target="_blank" rel="noopener">建築物衛生法｜e-Gov法令検索</a></li>
+          <li><a href="https://www.pestcontrol.or.jp/" target="_blank" rel="noopener">公益社団法人 日本ペストコントロール協会</a></li>
+        </ul>
+      </section>
+
+      <div class="cl-cta">
+        <h2>保育園・幼稚園の害虫駆除業者をお探しなら</h2>
+        <p>園児への配慮と園児不在時施工・記録発行に対応する業者から<br/>最大3社の見積もりを完全無料・約1分で取得できます</p>
+        <a class="cta-btn-primary" href="/pest-control/">無料で一括見積もりを依頼する</a>
+      </div>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          {faqItems.map((item) => (
+            <div class="cl-faq-item">
+              <dt>{item.q}</dt>
+              <dd>{item.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別の害虫駆除業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/pest-control/tokyo/">東京都</a></li>
+          <li><a href="/pest-control/osaka/">大阪府</a></li>
+          <li><a href="/pest-control/fukuoka/">福岡県</a></li>
+          <li><a href="/pest-control/kanagawa/">神奈川県</a></li>
+          <li><a href="/pest-control/aichi/">愛知県</a></li>
+          <li><a href="/pest-control/saitama/">埼玉県</a></li>
+          <li><a href="/pest-control/hyogo/">兵庫県</a></li>
+          <li><a href="/pest-control/hokkaido/">北海道</a></li>
+          <li><a href="/pest-control/kyoto/">京都府</a></li>
+          <li><a href="/pest-control/chiba/">千葉県</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/pest-control/">全国47都道府県の対応業者を見る</a></p>
+      </div>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連サービス・コラム</h2>
+        <ul>
+          <li><a href="/column/pest-control-guide/">業務用害虫駆除（PCO）完全ガイド｜法的義務・費用・業者選び・害虫別対策の総まとめ</a></li>
+          <li><a href="/column/pest-control-kaigo-fukushi/">介護・福祉施設の害虫駆除ガイド｜入居者に配慮した衛生管理と業者選び</a></li>
+          <li><a href="/column/pest-control-horei-gimu/">害虫駆除の法的義務ガイド（建築物衛生法・食品衛生法HACCP）</a></li>
+          <li><a href="/column/pest-control-hiyo-sohba/">業務用害虫駆除（PCO）の費用相場ガイド</a></li>
+          <li><a href="/column/pest-control-teiki-spot-hikaku/">害虫駆除の定期契約とスポット駆除を徹底比較</a></li>
+        </ul>
+      </aside>
+
+      <aside class="cl-glossary-block">
+        <h2 class="cl-glossary-h">📖 この記事に出てくる主な用語</h2>
+        <ul class="cl-glossary-list">
+          <li><a href="/glossary/#ipm">IPM（総合的有害生物管理）</a></li>
+          <li><a href="/glossary/#haccp">HACCP</a></li>
+          <li><a href="/glossary/#shokuhin-eisei-ho-haccp">食品衛生法（HACCP）</a></li>
+          <li><a href="/glossary/#kenchikubutsu-nezumi-konchu-bojogyo">建築物ねずみ昆虫等防除業</a></li>
+          <li><a href="/glossary/#biru-kan-ho">建築物衛生法</a></li>
+        </ul>
+        <p class="cl-glossary-more"><a href="/glossary/">施設管理用語集（49語）をすべて見る</a></p>
+      </aside>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header {
+  background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%);
+  color: #fff;
+  padding: 48px 0 40px;
+}
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul, .cl-callout--warn ul { padding-left: 18px; margin: 0; }
+.cl-callout li, .cl-callout--warn li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-answer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 20px 0 24px; }
+.cl-answer-grid > div { background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; padding: 18px 20px; box-shadow: 0 6px 18px rgba(15, 23, 42, .05); }
+.cl-answer-grid h3 { font-size: 1rem; color: var(--blue-dark); margin: 0 0 8px; }
+.cl-answer-grid p { margin: 0; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-source-list { padding-left: 22px; display: grid; gap: 8px; }
+.cl-source-list a { color: var(--blue); text-decoration: underline; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-glossary-block { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 24px; }
+.cl-glossary-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; }
+.cl-glossary-list { padding-left: 18px; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; }
+.cl-glossary-list a { color: var(--blue); text-decoration: underline; font-size: .88rem; }
+.cl-glossary-more { font-size: .85rem; margin: 12px 0 0; }
+.cl-glossary-more a { color: var(--blue); text-decoration: underline; }
+@media (max-width: 600px) {
+  .cl-header { padding: 32px 0 28px; }
+  .cl-body { padding: 28px 16px 48px; }
+  .cl-section h2 { font-size: 1.15rem; }
+  .cl-answer-grid { grid-template-columns: 1fr; }
+}
+
+.cl-quickanswer {
+  background: #eef6ff;
+  border: 1.5px solid #1a56db;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-bottom: 32px;
+}
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+</style>

@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/pest-control-hoiku-yochien/',
+    category: '害虫駆除',
+    title: '保育園・幼稚園の害虫駆除ガイド｜子ども施設の安全な防除と業者選び',
+    excerpt: '保育園・認定こども園・幼稚園の害虫駆除を解説。乳幼児の薬剤感受性・給食・園庭という特性ゆえのリスク、厨房のゴキブリ/ネズミから園庭のハチ・蚊・毛虫まで、低毒性IPMと園児不在時施工、食品衛生法(HACCP)・児童福祉施設基準との関係、業者選び7項目、費用相場まで。',
+    date: '2026-07-09',
+  },
+  {
     href: '/column/pest-control-byoin-clinic/',
     category: '害虫駆除',
     title: '病院・クリニックの害虫対策ガイド｜院内感染対策と防除記録の実務',
