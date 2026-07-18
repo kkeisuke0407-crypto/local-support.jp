@@ -22,6 +22,7 @@ const otherServices = serviceIndex.filter((s) => s.slug !== data.slug);
       {/* バックエンド：functions/api/quote.ts (Cloudflare Pages Functions) */}
       <form class="qf qf--full" id="quote-form-full" action="/api/quote" method="POST" data-service={data.slug} data-redirect={`/thanks/?service=${data.slug}`} novalidate>
         <input type="hidden" name="service" value={data.serviceName} />
+        <input type="hidden" name="service_slug" value={data.slug} />
         <input type="text" name="website" tabindex="-1" autocomplete="off" class="qf-honeypot" aria-hidden="true" />
 
         {/* Step 1 */}

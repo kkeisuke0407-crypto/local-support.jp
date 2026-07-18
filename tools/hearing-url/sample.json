@@ -1,6 +1,7 @@
 {
   "id": "PCO-2026-0619-001",
   "service": "害虫駆除（業務用PCO）",
+  "serviceSlug": "pest-control",
   "facilityType": "食品工場・セントラルキッチン",
   "prefecture": "福岡県",
   "requester": {

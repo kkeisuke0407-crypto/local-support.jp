@@ -52,3 +52,11 @@
   .hr-group { padding: 18px 16px; }
   .hr-opt { font-size: 0.82rem; padding: 8px 12px; }
 }
+
+/* 動的ヒアリング：任意マーク・数値/テキスト入力 */
+.hr-opt-mark { display: inline-block; font-size: 0.66rem; font-weight: 700; color: #6b7280; background: #f3f4f6; padding: 2px 7px; border-radius: 4px; margin-left: 4px; vertical-align: middle; }
+.hr-inline { display: flex; align-items: center; gap: 8px; }
+.hr-unit { font-size: 0.9rem; color: #6b7280; font-weight: 600; }
+.hr-input { padding: 11px 14px; border: 1.5px solid #e5e7eb; border-radius: 10px; font-size: 0.95rem; font-family: inherit; box-sizing: border-box; max-width: 220px; }
+.hr-input:focus { outline: none; border-color: #1d4ed8; }
+.hr-input--wide { max-width: 100%; width: 100%; }
