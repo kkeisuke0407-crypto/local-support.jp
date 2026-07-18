@@ -42,6 +42,29 @@ const isValidTel = (v: string): boolean => {
   return /^\+?\d{10,15}$/.test(digits);
 };
 
+// UTF-8 文字列を base64url へ（/hearing/ /quote-result/ のデコード方式に一致）
+const b64urlEncodeUtf8 = (str: string): string => {
+  const bytes = new TextEncoder().encode(str);
+  let bin = '';
+  for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+  return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+};
+
+// フォーム内容から事前ヒアリングページのURLを自動生成（全依頼者を必須ヒアリングへ誘導）
+const buildHearingUrl = (data: QuotePayload): string => {
+  const now = new Date();
+  const ymd = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}`;
+  const rand = Math.random().toString(16).slice(2, 6).toUpperCase();
+  const payload = {
+    id: `WEB-${ymd}-${rand}`,
+    service: data.service || '',
+    facilityType: data.facility_type || '',
+    prefecture: data.prefecture || '',
+    requester: { name: data.name || data.company || '', email: data.email || '', tel: data.tel || '' },
+  };
+  return `https://local-support.jp/hearing/#data=${b64urlEncodeUtf8(JSON.stringify(payload))}`;
+};
+
 interface QuotePayload {
   [key: string]: string;
 }
@@ -71,7 +94,7 @@ function buildPlainText(data: QuotePayload): string {
     .join('\n');
 }
 
-function buildUserReplyHtml(data: QuotePayload): string {
+function buildUserReplyHtml(data: QuotePayload, hearingUrl: string): string {
   const summaryKeys = ['service', 'company', 'prefecture', 'city', 'facility_type', 'urgency', 'schedule', 'name', 'email', 'tel'];
   const rows = summaryKeys
     .filter((k) => data[k] && data[k].trim() !== '')
@@ -88,9 +111,16 @@ function buildUserReplyHtml(data: QuotePayload): string {
 <p>${nameLine}</p>
 <p>このたびは local-support.jp をご利用いただき、誠にありがとうございます。<br>下記の内容でお見積もり依頼を受け付けましたのでご連絡いたします。</p>
 
-<h3 style="font-size:15px;margin-top:24px;color:#1f2937;">今後の流れ（6ステップ）</h3>
+<div style="margin:20px 0;padding:16px 18px;background:#fffbeb;border:1.5px solid #f59e0b;border-radius:8px;">
+<p style="margin:0 0 6px;font-weight:700;color:#92400e;">【重要】まず事前ヒアリングへのご回答をお願いします（約1〜2分）</p>
+<p style="margin:0 0 12px;font-size:14px;">施設の規模や現状など詳細をお伺いすることで、<strong>業者が正確なお見積もりを提示できます</strong>。この回答をもって業者への打診を開始しますので、ぜひご協力ください。</p>
+<a href="${hearingUrl}" style="display:inline-block;background:#f59e0b;color:#1a1a1a;font-weight:700;padding:12px 26px;border-radius:6px;text-decoration:none;">事前ヒアリングに回答する</a>
+</div>
+
+<h3 style="font-size:15px;margin-top:24px;color:#1f2937;">今後の流れ</h3>
 <ol style="padding-left:20px;font-size:14px;">
-  <li>こちらで内容を確認のうえ、対応可能な実績・信頼のある専門業者へお声がけします（1営業日以内に打診開始）。</li>
+  <li><strong>上記の事前ヒアリングにご回答ください</strong>（正確な見積もりの前提になります）。</li>
+  <li>ご回答をもとに、対応可能な実績・信頼のある専門業者へお声がけします（1営業日以内に打診開始）。</li>
   <li>業者の対応可否・概算見積回答を取りまとめます（通常 3〜7営業日）。</li>
   <li>業者の概算見積・実績を一覧で確認できる「業者比較ページ」のURLをご案内します。</li>
   <li>比較ページから連絡を希望する業者を1〜3社お選びください。<strong>選択した業者にのみ連絡先が共有されます。</strong></li>
@@ -111,7 +141,7 @@ local-support.jp（運営：ローカル情報局）<br>
 </body></html>`;
 }
 
-function buildUserReplyText(data: QuotePayload): string {
+function buildUserReplyText(data: QuotePayload, hearingUrl: string): string {
   const summaryKeys = ['service', 'company', 'prefecture', 'city', 'facility_type', 'urgency', 'schedule', 'name', 'email', 'tel'];
   const summary = summaryKeys
     .filter((k) => data[k] && data[k].trim() !== '')
@@ -123,13 +153,21 @@ function buildUserReplyText(data: QuotePayload): string {
 このたびは local-support.jp をご利用いただき、誠にありがとうございます。
 下記の内容でお見積もり依頼を受け付けましたのでご連絡いたします。
 
-■ 今後の流れ（6ステップ）
-  1. こちらで内容を確認のうえ、対応可能な実績・信頼のある専門業者へお声がけします（1営業日以内に打診開始）。
-  2. 業者の対応可否・概算見積回答を取りまとめます（通常 3〜7営業日）。
-  3. 業者の概算見積・実績を一覧で確認できる「業者比較ページ」のURLをご案内します。
-  4. 比較ページから連絡を希望する業者を1〜3社お選びください。選択した業者にのみ連絡先が共有されます。
-  5. 選定された業者からご連絡が入ります（選定後 1〜3営業日）。
-  6. 最終見積を比較してご契約ください。
+━━━━━━━━━━━━━━━━━━━━
+【重要】まず事前ヒアリングへのご回答をお願いします（約1〜2分）
+施設の規模・現状などの詳細をお伺いすることで、業者が正確なお見積もりを
+提示できます。この回答をもって業者への打診を開始します。
+▼ 事前ヒアリング
+${hearingUrl}
+━━━━━━━━━━━━━━━━━━━━
+
+■ 今後の流れ
+  1. 上記の事前ヒアリングにご回答ください（正確な見積もりの前提になります）。
+  2. ご回答をもとに、対応可能な実績・信頼のある専門業者へお声がけします（1営業日以内に打診開始）。
+  3. 業者の対応可否・概算見積回答を取りまとめます（通常 3〜7営業日）。
+  4. 業者の概算見積・実績を一覧で確認できる「業者比較ページ」のURLをご案内します。
+  5. 比較ページから連絡を希望する業者を1〜3社お選びください。選択した業者にのみ連絡先が共有されます。
+  6. 選定された業者からご連絡が入り、最終見積を比較してご契約ください。
 
 ※ お急ぎの場合はフォームの「緊急度」欄でその旨をお知らせください。早期回答可能な業者から優先的にお声がけします。
 ※ 土日祝のお申し込みは翌営業日以降の対応開始となります。
@@ -233,6 +271,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
     // ユーザー宛の受付確認メール（メールアドレスがある場合のみ・失敗してもメイン処理は成功扱い）
     if (data.email) try {
+      const hearingUrl = buildHearingUrl(data);
       const userReplyResp = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
@@ -242,9 +281,9 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         body: JSON.stringify({
           from: FROM_ADDRESS,
           to: [data.email],
-          subject: '【ロカサポ】お見積もり依頼を受け付けました',
-          html: buildUserReplyHtml(data),
-          text: buildUserReplyText(data),
+          subject: '【ロカサポ】お見積もり依頼を受け付けました（まず事前ヒアリングのお願い）',
+          html: buildUserReplyHtml(data, hearingUrl),
+          text: buildUserReplyText(data, hearingUrl),
         }),
       });
       if (!userReplyResp.ok) {
