@@ -58,6 +58,7 @@ const buildHearingUrl = (data: QuotePayload): string => {
   const payload = {
     id: `WEB-${ymd}-${rand}`,
     service: data.service || '',
+    serviceSlug: data.service_slug || '',
     facilityType: data.facility_type || '',
     prefecture: data.prefecture || '',
     requester: { name: data.name || data.company || '', email: data.email || '', tel: data.tel || '' },

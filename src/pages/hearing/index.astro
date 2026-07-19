@@ -1,10 +1,14 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { site } from '../../data/site';
+import { hearingQuestions, defaultHearingQuestions } from '../../data/hearing-questions';
 
 const title = 'お見積もり事前ヒアリング｜ロカサポ';
 const description = 'ロカサポの見積もり精度を高めるための事前ヒアリングページです。';
 const canonical = `${site.domain}/hearing/`;
+
+// サービス別の質問設定をクライアントへ渡す（JSがslugに応じて動的描画）
+const questionsJson = JSON.stringify({ byService: hearingQuestions, default: defaultHearingQuestions });
 ---
 <BaseLayout
   title={title}
@@ -31,7 +35,7 @@ const canonical = `${site.domain}/hearing/`;
           <h1 id="hr-h1">お見積もり事前ヒアリング</h1>
           <p class="hr-lead">
             より正確なお見積もりをご用意するため、いくつかの追加情報をお伺いします。<br/>
-            <strong>必須は5問、所要時間は約2分</strong>です。回答内容は業者選定の精度向上にのみ使用します。
+            <strong>所要時間は約2分</strong>です。回答内容は業者選定の精度向上にのみ使用します。
           </p>
           <dl class="hr-meta">
             <div><dt>案件ID</dt><dd id="hr-id"></dd></div>
@@ -44,107 +48,8 @@ const canonical = `${site.domain}/hearing/`;
         <form class="hr-form" id="hr-form" novalidate>
           <input type="text" name="website" tabindex="-1" autocomplete="off" class="hr-honeypot" aria-hidden="true" />
 
-          <div class="hr-group">
-            <p class="hr-group-title">必須項目（5問）</p>
-
-            <fieldset class="hr-q">
-              <legend>Q1. 建物のおおよその延床面積は？ <span class="hr-req">必須</span></legend>
-              <div class="hr-options" data-key="floor_area">
-                {['100㎡未満','100〜300㎡','300〜500㎡','500〜1,000㎡','1,000〜3,000㎡','3,000㎡以上','わからない'].map((o) => (
-                  <label class="hr-opt"><input type="radio" name="floor_area" value={o} required /> <span>{o}</span></label>
-                ))}
-              </div>
-            </fieldset>
-
-            <fieldset class="hr-q">
-              <legend>Q2. 建物は何階建てですか？ <span class="hr-req">必須</span></legend>
-              <div class="hr-options" data-key="floors">
-                {['平屋','2階建','3〜5階建','6階建以上','わからない'].map((o) => (
-                  <label class="hr-opt"><input type="radio" name="floors" value={o} required /> <span>{o}</span></label>
-                ))}
-              </div>
-            </fieldset>
-
-            <fieldset class="hr-q">
-              <legend>Q3. 管理したい場所は？（複数選択可） <span class="hr-req">必須</span></legend>
-              <div class="hr-options hr-options--multi" data-key="areas">
-                {['建物全体','厨房・製造エリア','倉庫','事務所','ゴミ置場','共用部','建物外周'].map((o) => (
-                  <label class="hr-opt"><input type="checkbox" name="areas" value={o} /> <span>{o}</span></label>
-                ))}
-              </div>
-            </fieldset>
-
-            <fieldset class="hr-q">
-              <legend>Q4. ご希望の点検・訪問頻度は？ <span class="hr-req">必須</span></legend>
-              <div class="hr-options" data-key="frequency">
-                {['月1回','2か月に1回','3か月に1回','半年に1回','年1回','業者の提案に任せる'].map((o) => (
-                  <label class="hr-opt"><input type="radio" name="frequency" value={o} required /> <span>{o}</span></label>
-                ))}
-              </div>
-            </fieldset>
-
-            <fieldset class="hr-q">
-              <legend>Q5. 現在、害虫駆除・防虫管理サービスを利用していますか？ <span class="hr-req">必須</span></legend>
-              <div class="hr-options" data-key="contract_status">
-                {['利用していない（新規導入）','利用中（切替を検討）','利用中（相見積もりを希望）'].map((o) => (
-                  <label class="hr-opt"><input type="radio" name="contract_status" value={o} required /> <span>{o}</span></label>
-                ))}
-              </div>
-              <div class="hr-conditional" id="hr-cost-wrap" hidden>
-                <p class="hr-sub-q">現在の年間契約費用は？</p>
-                <div class="hr-options" data-key="current_cost">
-                  {['10万円未満','10〜30万円','30〜50万円','50〜100万円','100万円以上','わからない'].map((o) => (
-                    <label class="hr-opt"><input type="radio" name="current_cost" value={o} /> <span>{o}</span></label>
-                  ))}
-                </div>
-              </div>
-            </fieldset>
-
-            <fieldset class="hr-q" id="hr-worktime-wrap" hidden>
-              <legend>Q6. 作業可能な時間帯は？ <span class="hr-req">必須</span></legend>
-              <div class="hr-options" data-key="work_time">
-                {['稼働中のみ','停止日のみ','どちらでも可能','夜間・休日のみ','わからない'].map((o) => (
-                  <label class="hr-opt"><input type="radio" name="work_time" value={o} /> <span>{o}</span></label>
-                ))}
-              </div>
-            </fieldset>
-          </div>
-
-          <div class="hr-group hr-group--optional">
-            <p class="hr-group-title">任意項目（精度がさらに上がります）</p>
-
-            <fieldset class="hr-q">
-              <legend>現在の発生状況は？（任意）</legend>
-              <div class="hr-options" data-key="occurrence">
-                {['発生していない（予防目的）','たまに見かける','毎週見かける','毎日見かける','大量発生している'].map((o) => (
-                  <label class="hr-opt"><input type="radio" name="occurrence" value={o} /> <span>{o}</span></label>
-                ))}
-              </div>
-            </fieldset>
-
-            <fieldset class="hr-q">
-              <legend>衛生監査・HACCP対応は必要ですか？（任意）</legend>
-              <div class="hr-options" data-key="haccp">
-                {['必要','不要','わからない'].map((o) => (
-                  <label class="hr-opt"><input type="radio" name="haccp" value={o} /> <span>{o}</span></label>
-                ))}
-              </div>
-            </fieldset>
-
-            <fieldset class="hr-q">
-              <legend>建物のおおよその築年数は？（任意）</legend>
-              <div class="hr-options" data-key="building_age">
-                {['5年未満','5〜10年','10〜20年','20〜30年','30年以上','わからない'].map((o) => (
-                  <label class="hr-opt"><input type="radio" name="building_age" value={o} /> <span>{o}</span></label>
-                ))}
-              </div>
-            </fieldset>
-
-            <fieldset class="hr-q">
-              <legend>ご要望・現場の状況など（任意）</legend>
-              <textarea name="free_text" id="hr-free" rows="4" maxlength="400" placeholder="例：監査前なので急ぎ／ネズミのフンを見かける／夜しか入れない／工場は500㎡×2階建 など、お気づきの点を自由にご記入ください（400字まで）"></textarea>
-            </fieldset>
-          </div>
+          <!-- 質問はサービスに応じて hearing.js が動的に描画 -->
+          <div id="hr-questions"></div>
 
           <button type="submit" class="hr-submit" id="hr-submit">この内容で送信する</button>
           <p class="hr-submit-note">送信後、ロカサポ運営事務局でこの情報をもとに業者選定を進めます。回答内容が業者へ共有されるのは、後日あなたが業者を選定した後です。</p>
@@ -162,5 +67,6 @@ const canonical = `${site.domain}/hearing/`;
     </div>
   </section>
 
+  <script is:inline set:html={`window.__HEARING_Q = ${questionsJson};`}></script>
   <script is:inline src="/js/hearing.js"></script>
 </BaseLayout>
