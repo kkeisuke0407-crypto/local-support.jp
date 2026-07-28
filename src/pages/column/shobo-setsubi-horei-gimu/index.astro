@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import LegalDutySeries from '../../../components/LegalDutySeries.astro';
 import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
@@ -475,6 +476,8 @@ const webPageLd = JSON.stringify({
         </ul>
         <p class="cl-pref-more"><a href="/shobo-setsubi/">全国47都道府県の対応業者を見る</a></p>
       </div>
+
+      <LegalDutySeries current="shobo-setsubi-horei-gimu" />
 
       <aside class="cl-related">
         <h2 class="cl-related-h">関連サービス・コラム</h2>

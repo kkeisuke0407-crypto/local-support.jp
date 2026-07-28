@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import LegalDutySeries from '../../../components/LegalDutySeries.astro';
 import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
@@ -490,6 +491,8 @@ const webPageLd = JSON.stringify({
         <p>防火対象物点検資格者の登録を確認した業者をご紹介。消防設備点検との一括対応・特例認定申請支援まで可能な業者を最大3社まで無料で比較できます。</p>
         <a href="/bouka-tenken/" class="cta-btn-primary">無料で一括見積もりを依頼する</a>
       </div>
+
+      <LegalDutySeries current="bouka-tenken-horei-gimu" />
 
       <aside class="cl-related">
         <h2 class="cl-related-h">関連する詳細情報</h2>

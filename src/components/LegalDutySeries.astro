@@ -1,0 +1,74 @@
+---
+/**
+ * 法令義務シリーズの相互リンク（クラスタ内回遊 + 内部リンク強化）
+ *
+ * サイトで最も検索反応が良いコンテンツ型が「法令義務(horei-gimu)」だが、
+ * 記事同士がほぼ繋がっていなかったため（相互リンク0〜3本）、
+ * 全14本を1つのシリーズとして相互リンクさせる。
+ *
+ * 使い方: 記事末尾（cl-related の直前）に
+ *   <LegalDutySeries current="johkasou-horei-gimu" />
+ */
+interface Props {
+  /** 表示中の記事スラッグ（自分自身はリストから除外される） */
+  current: string;
+}
+const { current } = Astro.props;
+
+interface SeriesItem {
+  slug: string;
+  label: string;
+  law: string;
+}
+
+/** 表示順は「根拠法のまとまり」順。ラベルは各記事のタイトルから短縮 */
+const series: SeriesItem[] = [
+  { slug: 'jusuisou-seisou-horei-gimu', label: '受水槽清掃', law: '水道法・建築物衛生法' },
+  { slug: 'johkasou-horei-gimu', label: '浄化槽の保守点検・清掃', law: '浄化槽法' },
+  { slug: 'grease-trap-horei-gimu', label: 'グリストラップ維持管理', law: '下水道法・阻集器' },
+  { slug: 'shobo-setsubi-horei-gimu', label: '消防設備点検', law: '消防法17条の3の3' },
+  { slug: 'bouka-tenken-horei-gimu', label: '防火対象物点検', law: '消防法' },
+  { slug: 'duct-horei-gimu', label: 'ダクト清掃', law: '消防法・建築物衛生法' },
+  { slug: 'pest-control-horei-gimu', label: '害虫駆除（防除）', law: '建築物衛生法・食品衛生法' },
+  { slug: 'tokushu-kenchiku-horei-gimu', label: '特定建築物の定期調査報告', law: '建築基準法12条' },
+  { slug: 'shutter-horei-gimu', label: '防火シャッター定期検査', law: '建築基準法12条' },
+  { slug: 'elevator-hoshu-horei-gimu', label: 'エレベーター定期検査報告', law: '建築基準法12条' },
+  { slug: 'asbestos-horei-gimu', label: 'アスベスト事前調査', law: '大気汚染防止法・石綿則' },
+  { slug: 'jikayou-denki-horei-gimu', label: '自家用電気工作物の保安点検', law: '電気事業法' },
+  { slug: 'furon-tenken-horei-gimu', label: '業務用空調のフロン点検', law: 'フロン排出抑制法' },
+  { slug: 'signboard-inspection-horei-gimu', label: '看板・屋外広告物点検', law: '屋外広告物条例' },
+];
+
+const others = series.filter((s) => s.slug !== current);
+---
+<aside class="lds">
+  <h2 class="lds-h">施設管理の法令義務ガイド（全{series.length}本）</h2>
+  <p class="lds-lead">
+    施設管理で法令上の点検・清掃・報告が義務づけられている項目を、根拠法ごとに整理したシリーズです。担当施設に該当するものをあわせてご確認ください。
+  </p>
+  <ul class="lds-list">
+    {others.map((s) => (
+      <li>
+        <a href={`/column/${s.slug}/`}>
+          <span class="lds-label">{s.label}</span>
+          <span class="lds-law">{s.law}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</aside>
+
+<style>
+.lds { background: #f8fafc; border: 1px solid var(--gray-200); border-radius: 12px; padding: 24px 26px; margin-top: 40px; }
+.lds-h { font-size: 1rem; font-weight: 800; color: var(--blue-dark); margin: 0 0 8px; padding: 0; border: 0; }
+.lds-lead { font-size: .86rem; line-height: 1.75; color: var(--gray-700); margin: 0 0 16px; }
+.lds-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 8px; }
+.lds-list a { display: flex; flex-direction: column; gap: 2px; background: #fff; border: 1px solid var(--gray-200); border-radius: 8px; padding: 10px 14px; text-decoration: none; height: 100%; }
+.lds-list a:hover { border-color: var(--blue); background: var(--blue-light); }
+.lds-label { font-size: .88rem; font-weight: 700; color: var(--blue); }
+.lds-law { font-size: .76rem; color: var(--gray-600); }
+@media (max-width: 640px) {
+  .lds { padding: 20px 16px; }
+  .lds-list { grid-template-columns: 1fr; }
+}
+</style>
