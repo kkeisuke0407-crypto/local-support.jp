@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import LegalDutySeries from '../../../components/LegalDutySeries.astro';
 import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
@@ -451,6 +452,8 @@ const webPageLd = JSON.stringify({
           <li><a href="https://www.env.go.jp/earth/furon/files/r07_semminar_material.pdf" target="_blank" rel="noopener">令和7年度 フロン排出抑制法説明会資料｜環境省</a></li>
         </ul>
       </aside>
+
+      <LegalDutySeries current="furon-tenken-horei-gimu" />
 
       <aside class="cl-related">
         <h2 class="cl-related-h">関連する詳細情報</h2>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import LegalDutySeries from '../../../components/LegalDutySeries.astro';
 import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
@@ -492,6 +493,8 @@ const webPageLd = JSON.stringify({
           <li><a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/shokuhin/haccp/index.html" target="_blank" rel="noopener">HACCPに沿った衛生管理の制度化｜厚生労働省</a></li>
         </ul>
       </aside>
+
+      <LegalDutySeries current="pest-control-horei-gimu" />
 
       <aside class="cl-related">
         <h2 class="cl-related-h">関連する詳細情報</h2>

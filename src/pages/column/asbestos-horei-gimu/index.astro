@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import LegalDutySeries from '../../../components/LegalDutySeries.astro';
 import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
@@ -490,6 +491,8 @@ const webPageLd = JSON.stringify({
           <li><a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/sekimen/index.html" target="_blank" rel="noopener">石綿（アスベスト）対策｜厚生労働省</a></li>
         </ul>
       </aside>
+
+      <LegalDutySeries current="asbestos-horei-gimu" />
 
       <aside class="cl-related">
         <h2 class="cl-related-h">関連する詳細情報</h2>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import LegalDutySeries from '../../../components/LegalDutySeries.astro';
 import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
@@ -479,6 +480,8 @@ const webPageLd = JSON.stringify({
         <p>保守点検業の登録・浄化槽清掃業の許可を確認した業者をご紹介。保守点検・清掃・法定検査の年間管理まで一括対応できる業者を最大3社まで無料で比較できます。</p>
         <a href="/johkasou/" class="cta-btn-primary">無料で一括見積もりを依頼する</a>
       </div>
+
+      <LegalDutySeries current="johkasou-horei-gimu" />
 
       <aside class="cl-related">
         <h2 class="cl-related-h">関連する詳細情報</h2>

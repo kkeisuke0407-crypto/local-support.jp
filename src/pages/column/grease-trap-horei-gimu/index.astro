@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import LegalDutySeries from '../../../components/LegalDutySeries.astro';
 import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
@@ -351,6 +352,8 @@ const webPageLd = JSON.stringify({
           ))}
         </ul>
       </aside>
+
+      <LegalDutySeries current="grease-trap-horei-gimu" />
 
       <aside class="cl-related">
         <h2 class="cl-related-h">関連サービス・コラム</h2>
