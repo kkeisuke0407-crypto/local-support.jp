@@ -28,6 +28,19 @@ const {
   SUBJECT_AB = 'true',
 } = process.env;
 
+// ─────────────────────────────────────────────────────────────
+// 送信停止スイッチ（2026-07-28 停止・反響0のため）
+// 再開する場合のみ .env に OUTREACH_ENABLED=true を明示的に足すこと。
+// ※このガードは「このリポジトリのsend.jsを実行している場合」にのみ効く。
+//   別環境で古いコピーを回している場合は Resend APIキーの失効が確実な停止手段。
+// ─────────────────────────────────────────────────────────────
+if (!DRY_RUN && process.env.OUTREACH_ENABLED !== 'true') {
+  console.error('STOPPED: 冷メール送信は停止中です（2026-07-28）。');
+  console.error('  再開するには .env に OUTREACH_ENABLED=true を設定してください。');
+  console.error('  プレビューのみなら: npm run send:dry');
+  process.exit(1);
+}
+
 if (!DRY_RUN && !RESEND_API_KEY) {
   console.error('ERROR: RESEND_API_KEY must be set in .env');
   process.exit(1);
