@@ -83,6 +83,33 @@ export const hearingQuestions: Record<string, HearingQuestion[]> = {
     { key: 'free_text', label: 'ご要望・補足（任意）', type: 'textarea',
       placeholder: '例：発電量が落ちてきた／特定の時期に実施したい など（400字まで）' },
   ],
+
+  // ── 自家用電気工作物点検（キュービクル点検）─────────
+  // 保安管理業務の外部委託は「契約電力2,000kW未満・7,000V以下」が対象。
+  // 見積は延床面積ではなく 契約電力(kW)・受電設備容量(kVA)・基数・点検頻度 で決まる。
+  'jikayou-denki': [
+    { key: 'facility_type', label: '施設の種類は？', type: 'radio', required: true,
+      options: ['工場・倉庫', 'オフィスビル', '商業施設・店舗', 'マンション（共用部）', 'ホテル・旅館', '福祉・医療施設', '太陽光発電所', 'その他'] },
+    { key: 'contract_power', label: '契約電力は？（検針票・電気料金明細に記載）', type: 'number', required: true, unit: 'kW', placeholder: '例：50' },
+    { key: 'cubicle_capacity', label: '受電設備の容量は？（キュービクル銘板の kVA）', type: 'number', unit: 'kVA', placeholder: '例：75（不明な場合は空欄で可）' },
+    { key: 'cubicle_count', label: 'キュービクルの基数は？', type: 'number', required: true, unit: '基', placeholder: '例：1' },
+    { key: 'inspection_scope', label: 'ご希望の点検範囲は？', type: 'radio', required: true,
+      options: ['月次点検＋年次点検（標準委託）', '隔月点検＋年次点検', '年次点検（停電作業）のみ', '未定・業者提案を希望'] },
+    { key: 'remote_monitor', label: '絶縁監視装置（遠隔監視）は設置されていますか？', type: 'radio', required: true,
+      options: ['設置済み', '未設置', '設置も相談したい', 'わからない'] },
+    { key: 'contract_status', label: '現在の保安管理の状況は？', type: 'radio', required: true,
+      options: ['新規（これから外部委託）', '既存の委託先あり（乗換検討）', '主任技術者を自社選任中', 'わからない'] },
+    { key: 'annual_shutdown', label: '年次点検の停電（全停電）は可能ですか？', type: 'radio', required: true,
+      options: ['可能（休日・夜間なら可を含む）', '不可（無停電での対応を希望）', 'わからない'] },
+    { key: 'generator', label: '発電設備はありますか？（複数選択可）', type: 'checkbox',
+      options: ['非常用発電機', '太陽光発電（連系）', '蓄電池', 'なし', 'わからない'] },
+    { key: 'install_place', label: 'キュービクルの設置場所は？（任意）', type: 'radio',
+      options: ['屋外（地上）', '屋上', '屋内（電気室）', 'わからない'] },
+    { key: 'timing', label: 'ご希望の時期は？', type: 'radio', required: true,
+      options: ['急ぎ（1か月以内）', '2〜3か月以内', '時期は未定'] },
+    { key: 'free_text', label: 'ご要望・補足（任意）', type: 'textarea',
+      placeholder: '例：現在の委託費用／年次点検の希望時期／設備の不具合 など（400字まで）' },
+  ],
 };
 
 // 未設定サービス用の汎用フォールバック（壊れた建物系フォームを出さないための最小構成）
