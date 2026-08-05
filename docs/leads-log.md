@@ -388,21 +388,26 @@ https://docs.google.com/spreadsheets/d/1Zdt7d8luN6o4D9YgQwZ0D2kGRwew5uLtdY8pdZyn
 ### 見積ステータスの値
 `未依頼` / `依頼済` / `見積受領` / `要現地調査` / `辞退` / `不通` / `採用` / `見送り`
 
-### 🔄 自動同期（推奨・手動インポート不要）
+### 🔄 スプシへの反映は `npm run push-sheet`（手動インポート不要）
 
-`IMPORTDATA()` でスプシ側から GitHub の CSV を引かせれば、**main へマージするだけで自動反映**される。
-セットアップ手順・制約・個人情報の扱いは **`docs/sheet-auto-sync.md`** を参照。
+Sheets API v4 に OAuth2 で直接書き込む。初回だけ `.env` 設定と認証が必要。
+```
+npm run push-sheet:dry    # CSVの行数・列数を検証
+npm run push-sheet        # 2タブを最新CSVで置き換え
+```
+セットアップ手順・フォールバック（IMPORTDATA）・個人情報の扱いは **`docs/sheet-auto-sync.md`** を参照。
 
 ### Claude から見えるもの・見えないもの（2026-08-05 確認）
 
 | | 可否 |
 |---|---|
 | スプシの**読み取り** | ✅ 可（Drive コネクタが `support@local-support.jp` に接続済み） |
-| スプシへの**書き込み** | ❌ **不可**。Drive コネクタにセル・行を更新するツールが存在しない（`search` / `read` / `download` / `get_metadata` / `get_permissions` / `list_recent` / `create_file` / `copy_file` のみ） |
+| Drive コネクタでの**書き込み** | ❌ 不可。セル・行を更新するツールが存在しない（`search` / `read` / `download` / `get_metadata` / `get_permissions` / `list_recent` / `create_file` / `copy_file` のみ） |
+| `npm run push-sheet` での**書き込み** | ✅ 可。Sheets API v4 に直接書く。`.env` とトークンが要るため**初回認証だけ人間**が行う |
 
-- **運用**：Claude は毎セッション冒頭でスプシを読み、CSV との差分を報告する。**書き込みは人間が CSV をインポート**
+- **運用**：Claude は毎セッション冒頭でスプシを読み、CSV との差分を報告 → CSV を更新 → `npm run push-sheet`
 - Drive が別アカウント（`fuhyo.consulting@gmail.com` 等）に繋がっていると `Requested entity was not found` になる。
-  その場合はコネクタの接続先アカウントを確認する
+  その場合はコネクタの接続先アカウントを確認する。**push-sheet の認証も同じで、所有者アカウントで行うこと**
 
 ### CSV インポート手順（⚠️「置換」ではなく「差し替え確認」を挟む）
 
