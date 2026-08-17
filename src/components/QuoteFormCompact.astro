@@ -9,7 +9,7 @@ const otherServices = serviceIndex.filter((s) => s.slug !== data.slug);
   <div class="qf-compact-head">
     <span class="qf-compact-badge">完全無料</span>
     <h3>60秒で無料見積もり依頼</h3>
-    <p>最大3社の{data.serviceName}業者をご紹介します</p>
+    <p>最大5社の{data.serviceName}業者をご紹介します</p>
   </div>
   {/* バックエンド：functions/api/quote.ts (Cloudflare Pages Functions) */}
   <form class="qf qf--compact" action="/api/quote" method="POST" data-service={data.slug} data-redirect={`/thanks/?service=${data.slug}`} novalidate>

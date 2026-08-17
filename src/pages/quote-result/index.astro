@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { site } from '../../data/site';
 
 const title = '業者比較ページ｜ロカサポ';
-const description = 'ロカサポからご案内した業者の見積もり比較ページです。';
+const description = 'ロカサポからご案内した業者の比較・選定ページです。';
 const canonical = `${site.domain}/quote-result/`;
 ---
 <BaseLayout
@@ -30,8 +30,8 @@ const canonical = `${site.domain}/quote-result/`;
           <p class="qr-eyebrow">業者比較・選定</p>
           <h1 id="qr-h1">業者比較ページ</h1>
           <p class="qr-lead">
-            ご依頼の<strong id="qr-service"></strong>について、<strong id="qr-count">--</strong>社の業者から見積もりが届きました。<br/>
-            ご希望の業者を<strong>1〜3社</strong>選んで「選択した業者に連絡を依頼する」をクリックしてください。
+            ご依頼の<strong id="qr-service"></strong>について、<strong id="qr-count">--</strong>社の業者から「対応可能」と回答がありました。<br/>
+            ご希望の業者を<strong>1〜5社</strong>選んで「選択した業者に連絡を依頼する」をクリックしてください。
           </p>
           <dl class="qr-meta">
             <div><dt>案件ID</dt><dd id="qr-id"></dd></div>
@@ -44,7 +44,7 @@ const canonical = `${site.domain}/quote-result/`;
         <div class="qr-vendor-list" id="qr-vendor-list"></div>
 
         <div class="qr-selected-bar" id="qr-selected-bar">
-          <span>選択中：<strong id="qr-selected-count">0</strong> / 最大3社</span>
+          <span>選択中：<strong id="qr-selected-count">0</strong> / 最大5社</span>
           <button type="button" class="qr-clear-btn" id="qr-clear-btn" hidden>選択をクリア</button>
         </div>
 

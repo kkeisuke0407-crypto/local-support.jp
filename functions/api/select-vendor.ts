@@ -72,7 +72,7 @@ function buildOpsHtml(p: SelectVendorPayload): string {
 
 <h3 style="font-size:15px;margin-top:24px;color:#1f2937;">選定された業者（連絡先共有OK）</h3>
 <table style="border-collapse:collapse;width:100%;font-size:14px;margin-top:8px;">
-  <thead><tr><th style="padding:8px 12px;background:#dcfce7;border:1px solid #86efac;text-align:left;width:40px;">No</th><th style="padding:8px 12px;background:#dcfce7;border:1px solid #86efac;text-align:left;">業者</th><th style="padding:8px 12px;background:#dcfce7;border:1px solid #86efac;text-align:left;">概算見積</th></tr></thead>
+  <thead><tr><th style="padding:8px 12px;background:#dcfce7;border:1px solid #86efac;text-align:left;width:40px;">No</th><th style="padding:8px 12px;background:#dcfce7;border:1px solid #86efac;text-align:left;">業者</th><th style="padding:8px 12px;background:#dcfce7;border:1px solid #86efac;text-align:left;">概算（目安・任意）</th></tr></thead>
   <tbody>${selectedRows}</tbody>
 </table>
 
@@ -163,8 +163,8 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     if (!data.request_id || !data.service) {
       return jsonResponse(400, { ok: false, error: '案件情報が不足しています' });
     }
-    if (!Array.isArray(data.selected_vendors) || data.selected_vendors.length < 1 || data.selected_vendors.length > 3) {
-      return jsonResponse(400, { ok: false, error: '業者は1〜3社を選択してください' });
+    if (!Array.isArray(data.selected_vendors) || data.selected_vendors.length < 1 || data.selected_vendors.length > 5) {
+      return jsonResponse(400, { ok: false, error: '業者は1〜5社を選択してください' });
     }
 
     // 運営オペ宛

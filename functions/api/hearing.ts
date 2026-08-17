@@ -83,8 +83,8 @@ function buildUserConfirmHtml(p: HearingPayload): string {
 <h3 style="font-size:15px;margin-top:24px;color:#1f2937;">今後の流れ</h3>
 <ol style="padding-left:20px;font-size:14px;">
   <li>いただいた情報をもとに、ロカサポ運営事務局が条件に合う業者を選定します。</li>
-  <li>業者の概算見積が揃いましたら、業者を比較できる専用ページのURLをメールでお送りします（通常 3〜7営業日）。</li>
-  <li>比較ページから連絡を希望する業者を1〜3社お選びください。</li>
+  <li>業者からの回答が揃いましたら、業者を比較できる専用ページのURLをメールでお送りします（通常 3〜7営業日）。</li>
+  <li>比較ページから連絡を希望する業者を1〜5社お選びください。</li>
 </ol>
 
 <p style="font-size:13px;color:#6b7280;">※ 業者をお選びいただくまで、業者からの直接のご連絡はありません。</p>

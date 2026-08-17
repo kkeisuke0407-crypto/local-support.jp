@@ -80,7 +80,7 @@ function renderView(data) {
             <div class="qr-vendor-head">
               <h2>${escapeHtml(v.name || ('業者 ' + (i+1)))}</h2>
               <div class="qr-vendor-prices">
-                ${v.estimatedPrice ? `<div class="qr-price-line"><span>概算見積</span><strong>${escapeHtml(v.estimatedPrice)}</strong></div>` : ''}
+                ${v.estimatedPrice ? `<div class="qr-price-line"><span>概算（目安）</span><strong>${escapeHtml(v.estimatedPrice)}</strong></div>` : ''}
                 ${v.annualPrice ? `<div class="qr-price-line qr-price-line--sub"><span>年額換算</span><strong>${escapeHtml(v.annualPrice)}</strong></div>` : ''}
               </div>
             </div>
@@ -112,9 +112,9 @@ function renderView(data) {
     const target = e.target;
     if (target && target.classList.contains('qr-vendor-check')) {
       const selected = getSelectedIds();
-      if (selected.length > 3) {
+      if (selected.length > 5) {
         target.checked = false;
-        alert('選択できるのは最大3社までです。');
+        alert('選択できるのは最大5社までです。');
         return;
       }
       persistSelection(STORAGE_KEY);
@@ -179,8 +179,8 @@ async function submitSelection(data) {
   if (honey && honey.value) return;
 
   const selectedIds = getSelectedIds();
-  if (selectedIds.length < 1 || selectedIds.length > 3) {
-    showError('1〜3社を選択してください');
+  if (selectedIds.length < 1 || selectedIds.length > 5) {
+    showError('1〜5社を選択してください');
     return;
   }
   const selected = data.vendors.filter((v) => selectedIds.includes(v.id));
