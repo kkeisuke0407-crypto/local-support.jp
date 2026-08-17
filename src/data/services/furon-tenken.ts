@@ -39,7 +39,7 @@ const data: ServiceData = {
   trustStats: [
     { label: '業者選定基準', value: '資格・登録を確認' },
     { label: '対応エリア', value: '全国47都道府県' },
-    { label: '平均紹介社数', value: '最大3社' },
+    { label: '平均紹介社数', value: '最大5社' },
   ],
 
   whyUs: [

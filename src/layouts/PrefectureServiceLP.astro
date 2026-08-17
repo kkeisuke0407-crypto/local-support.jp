@@ -46,7 +46,7 @@ const faq = buildServiceFaq(data, { prefectureName: prefecture.name, additionalF
 const canonical = `${site.domain}/${data.slug}/${prefecture.slug}/`;
 const cityText = prefecture.majorCities.slice(0, 3).join('・');
 const title = `${prefecture.name}の${data.serviceName}｜業者を一括比較｜${site.name}`;
-const description = `${prefecture.name}（${prefecture.majorCities.join('・')}など）の${data.serviceName}に対応できる業者を一括見積で比較。法定義務・費用相場・業者の選び方を解説。資格・許認可を確認した業者から最大3社をご紹介、完全無料。`;
+const description = `${prefecture.name}（${prefecture.majorCities.join('・')}など）の${data.serviceName}に対応できる業者を一括見積で比較。法定義務・費用相場・業者の選び方を解説。資格・許認可を確認した業者から最大5社をご紹介、完全無料。`;
 
 // 主要都府県（全サービス共通）か、サービス別の追加インデックス県の場合はindex対象。
 // それ以外は段階的公開のためnoindex（ユニークコンテンツ拡充後に解除）
@@ -205,7 +205,7 @@ const jsonLdBlocks = [breadcrumbLd, serviceLd, webPageLd, faqLd, checklistLd, qu
   <HeroWithForm
     data={data}
     headline={`${prefecture.name}の${data.serviceName}業者を一括比較`}
-    subheadline={`${cityText}など${prefecture.name}内で、資格・許認可を確認した業者から最大3社をご紹介します。`}
+    subheadline={`${cityText}など${prefecture.name}内で、資格・許認可を確認した業者から最大5社をご紹介します。`}
   />
   <Breadcrumb items={[
     { label: 'トップ', href: '/' },
