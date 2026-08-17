@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { site } from '../../data/site';
 
 const title = `送信完了｜${site.name}`;
-const description = 'お見積もり依頼を受け付けました。担当者より営業時間内にご連絡します。';
+const description = 'お見積もり依頼を受け付けました。ロカサポが条件に合う業者へ打診し、比較ページのURLをメールでお送りします。業者をお選びいただくまで業者からの連絡はありません。';
 ---
 <BaseLayout
   title={title}
@@ -26,19 +26,22 @@ const description = 'お見積もり依頼を受け付けました。担当者�
         </div>
         <h1>お見積もり依頼を受け付けました</h1>
         <p class="thanks-lead">
-          ご入力いただいた内容を確認のうえ、最大5社の実績・信頼のある専門業者からご連絡いたします。<br/>
-          担当者より<strong>営業時間内（平日 9:00〜18:00）</strong>にメールまたはお電話でご連絡します。土日祝のお申し込みは翌営業日以降の対応となります。
+          ご入力いただいた内容を確認のうえ、条件に合う実績・信頼のある専門業者へロカサポから打診します。<br/>
+          <strong>業者をお選びいただくまで、業者からの連絡は一切ありません。</strong>ご登録のメールアドレスへ確認メールをお送りしていますのでご確認ください。
         </p>
+        <h2 class="thanks-next-h">この後の流れ</h2>
         <ol class="thanks-steps">
-          <li><strong>STEP 1</strong>こちらで内容を確認し、対応可能な業者を厳選します（通常1営業日以内）</li>
-          <li><strong>STEP 2</strong>厳選した業者から直接メールまたはお電話でご連絡が入ります</li>
-          <li><strong>STEP 3</strong>お見積もりを比較し、納得いただける業者とご契約ください</li>
+          <li><strong>STEP 1</strong>確認メール内の「事前ヒアリング」にご回答ください（約1〜2分）。この回答をもって業者への打診を開始します</li>
+          <li><strong>STEP 2</strong>ロカサポが条件に合う業者へ打診し、対応可能と回答した中から最大5社を選定します（通常3〜7営業日）</li>
+          <li><strong>STEP 3</strong>業者比較ページのURLをメールでお送りします。資格・実績・対応条件を見て、連絡してよい業者を1〜5社お選びください</li>
+          <li><strong>STEP 4</strong>お選びいただいた業者だけがご連絡し、正式なお見積もりをご提示します。比較してご契約ください</li>
         </ol>
+        <p class="thanks-note">全6ステップの詳細は<a href="/flow/">ご利用の流れ</a>をご覧ください。</p>
         <div class="thanks-actions">
           <a href="/" class="cta-btn-primary">トップに戻る</a>
         </div>
         <p class="thanks-note">
-          ※ メールが見当たらない場合は、迷惑メールフォルダのご確認、またはご登録の電話番号への着信履歴もあわせてご確認ください。
+          ※ 確認メールが見当たらない場合は、迷惑メールフォルダをご確認ください。届いていない場合は <a href="mailto:support@local-support.jp">support@local-support.jp</a> までご連絡ください。
         </p>
 
         <div class="thanks-next">

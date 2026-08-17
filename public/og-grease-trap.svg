@@ -23,7 +23,7 @@
   <rect x="80" y="460" width="280" height="56" rx="28" fill="#f59e0b"/>
   <text x="220" y="495" font-family="'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#1e293b" text-anchor="middle">無料で一括見積もり依頼</text>
 
-  <text x="80" y="565" font-family="'Helvetica Neue', Arial, sans-serif" font-size="16" fill="rgba(255,255,255,0.5)">完全無料 ｜ 最大3社を比較 ｜ 全国47都道府県対応</text>
+  <text x="80" y="565" font-family="'Helvetica Neue', Arial, sans-serif" font-size="16" fill="rgba(255,255,255,0.5)">完全無料 ｜ 最大5社を比較 ｜ 全国47都道府県対応</text>
 
   <g transform="translate(960, 240)">
     <path d="M75 10 L140 35 L140 90 C140 130 75 160 75 160 C75 160 10 130 10 90 L10 35 Z" fill="rgba(245,158,11,0.15)" stroke="#f59e0b" stroke-width="3"/>
