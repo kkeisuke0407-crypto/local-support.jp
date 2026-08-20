@@ -1,7 +1,12 @@
 # スプシ同期（案件トラッカー）
 
 `docs/sheet-tab*.csv` を Googleスプレッドシート「ロカサポ 案件トラッカー」へ反映する方法。
-**手動インポートは不要。`npm run push-sheet` で直接書き込む。**
+
+> 🔁 **2026-08-20 方式変更：本命を `IMPORTDATA`（旧・方式B）に入れ替えた。**
+> 理由は **クラウドセッションのコンテナが毎回まっさらで、`.env` も `.sheet-token.json` も残らない**こと。
+> `npm run push-sheet` は動作するが、セッションのたびに OAuth 情報の再投入と再認証が必要で、
+> 「毎回スプシが更新されない」という詰まりの原因になっていた。
+> IMPORTDATA は**一度式を貼れば以降 push するだけで自動反映**され、認証情報を一切必要としない。
 
 | | |
 |---|---|
@@ -11,7 +16,48 @@
 
 ---
 
-## 方式A：`npm run push-sheet`（本命）
+## 方式1：`IMPORTDATA`（本命・推奨）
+
+スプシ側から GitHub の raw CSV を読ませる。`.env` もトークンも認証も不要。
+**一度セットアップすれば、以降は git に push するだけでスプシが自動で追随する。**
+
+### セットアップ（一度だけ）
+
+`依頼者` タブ → 全選択して中身を削除 → **A1** に貼る:
+
+```
+=IMPORTDATA("https://raw.githubusercontent.com/kkeisuke0407-crypto/local-support.jp/main/docs/sheet-tab1-cases.csv")
+```
+
+`業者` タブ → 同様に全削除 → **A1** に貼る:
+
+```
+=IMPORTDATA("https://raw.githubusercontent.com/kkeisuke0407-crypto/local-support.jp/main/docs/sheet-tab2-quotes.csv")
+```
+
+作業ブランチの内容を先に見たい場合は URL の `/main/` をブランチ名に差し替える。
+
+### 制約と、その受け入れ理由
+
+| 制約 | 内容 | 対処 |
+|---|---|---|
+| 手編集 | **不可**（式が生成する領域） | **CSV を正本に切り替える。** スプシは閲覧用ミラー。手で直したい内容は Claude に言って CSV を直す |
+| 反映速度 | push後おおむね1時間以内（キャッシュ） | 急ぐときはタブを再読み込み／式を再入力 |
+| 前提 | **リポジトリが public** であること | private 化したら方式2へ戻す |
+| 反映条件 | URL が指すブランチにマージ済みであること | 通常は main を指す |
+| 日付表示 | `2026-06-19` が `46192` と出ることがある | 該当列を「表示形式 → 日付」にする（1回だけ） |
+
+> ⚠️ **同じタブに方式1と方式2を混在させないこと。**
+
+### 「スプシが正本」からの変更点
+
+従来は「スプシが正本・CSVはseed」だったが、方式1では **`docs/sheet-tab*.csv` が正本**になる。
+`leads-log.md` の「正本：Googleスプレッドシート」の記述はこの方式に切り替えた時点で無効。
+codex・ユーザーがスプシに直接書き込む運用も同時に廃止する（書いても次の反映で消える）。
+
+---
+
+## 方式2：`npm run push-sheet`（フォールバック）
 
 Sheets API v4 に OAuth2 で直接書き込む。`scripts/push-sheet.js`。
 認証まわりは `scripts/fetch-gsc.js` と同じ仕組み（OAuth2＋トークンをAES-256-CBCで暗号化保存）。
@@ -34,7 +80,7 @@ Sheets API v4 に OAuth2 で直接書き込む。`scripts/push-sheet.js`。
    ```
    > ⚠️ **スプシの所有者アカウント（`support@local-support.jp`）で認証すること。**
    > 別アカウントで認証すると `Requested entity was not found` になる。
-   > 2026-08-05 に Drive コネクタが `fuhyo.consulting@gmail.com` に繋がっていて
+   > 2026-08-05 に Drive コネクタが `別のGoogleアカウント` に繋がっていて
    > スプシが見つからなかったのと同じ現象。
 
 ### 通常実行
@@ -51,30 +97,6 @@ npm run push-sheet        # 2タブを最新CSVで置き換え
   （2026-08-05 の手動インポートで実際に発生した）
 - タブが存在しない場合は自動作成
 - **実行前にCSVの列数を検証**し、不揃いなら認証前に停止する
-
----
-
-## 方式B：`IMPORTDATA`（フォールバック）
-
-スプシ側から GitHub の raw CSV を読ませる。`.env` もトークンも不要だが、制約が大きい。
-
-新規タブ `依頼者_sync` / `業者_sync` を作り、それぞれ **A1** に:
-
-```
-=IMPORTDATA("https://raw.githubusercontent.com/kkeisuke0407-crypto/local-support.jp/main/docs/sheet-tab1-cases.csv")
-```
-```
-=IMPORTDATA("https://raw.githubusercontent.com/kkeisuke0407-crypto/local-support.jp/main/docs/sheet-tab2-quotes.csv")
-```
-
-| 制約 | 内容 |
-|---|---|
-| 反映条件 | **main へマージ済み**であること（URLが `/main/` を指すため） |
-| 反映速度 | push後おおむね1時間以内 |
-| 手編集 | **不可**（式が生成する領域のため） |
-| 前提 | **リポジトリが public** であること。private化すると即座に壊れる |
-
-方式Aが動くなら方式Bは不要。**両方を同じタブに使わないこと。**
 
 ---
 
@@ -112,7 +134,7 @@ npm run push-sheet        # 2タブを最新CSVで置き換え
 CSV には `案件ID` と `担当者名` までを書き、詳細はメールを引く。
 
 > 📌 過去のコミット履歴には削除前の値が残る。完全に消すには履歴の書き換え、
-> またはリポジトリの private 化が必要。private 化した場合、方式B（IMPORTDATA）は使えなくなるが、
-> **方式A（push-sheet）は影響を受けない。**
+> またはリポジトリの private 化が必要。private 化した場合、方式1（IMPORTDATA）は使えなくなるが、
+> **方式2（push-sheet）は影響を受けない。**
 
 `.gsc-token.json` / `.sheet-token.json` / `.env` は `.gitignore` 済み。**絶対にコミットしないこと。**

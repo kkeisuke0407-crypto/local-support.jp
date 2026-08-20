@@ -583,12 +583,12 @@ info@local-support.jp ／ https://local-support.jp/
 
 | 宛先 | アドレス | 内容 |
 |---|---|---|
-| アルス 平井様 | hirai@arskk.com | 回答御礼＋報告書は不要・断水なし可否は現地判断で可 |
-| アドバンスサービス 小田部様 | advan28@advance1997.co.jp | 質問3点は依頼者も未把握と回答＋要見積り前提へ |
-| 横浜管財 | info@hamakan.jp | 8/17打診のフォロー＋要見積り前提へ |
-| ユアーズ | toiawase@yours-aqua.com | 同上 |
-| アクア技研 | nakagawa@aqua-tr.jp | 同上（自動受付の返信先。転送依頼を1文添えた） |
-| 依頼者 高橋様 | mikita-@nissingroup.co.jp | 宿題の取り下げ＋現地調査の受け入れ可否のみ確認 |
+| アルス 平井様 | support@ 受信箱を参照 | 回答御礼＋報告書は不要・断水なし可否は現地判断で可 |
+| アドバンスサービス 小田部様 | support@ 受信箱を参照 | 質問3点は依頼者も未把握と回答＋要見積り前提へ |
+| 横浜管財 | support@ 受信箱を参照 | 8/17打診のフォロー＋要見積り前提へ |
+| ユアーズ | support@ 受信箱を参照 | 同上 |
+| アクア技研 | support@ 受信箱を参照 | 同上（自動受付の返信先。転送依頼を1文添えた） |
+| 依頼者 高橋様 | support@ 受信箱を参照 | 宿題の取り下げ＋現地調査の受け入れ可否のみ確認 |
 
 **メール未取得のためフォーム再送が必要**：TKKエンジニアリング／新設／アクアサービス
 （8/17はフォーム送信のみで自動受付メールが届いていない）
@@ -640,14 +640,21 @@ https://docs.google.com/spreadsheets/d/1Zdt7d8luN6o4D9YgQwZ0D2kGRwew5uLtdY8pdZyn
 ### 見積ステータスの値
 `未依頼` / `依頼済` / `見積受領` / `要現地調査` / `辞退` / `不通` / `採用` / `見送り`
 
-### 🔄 スプシへの反映は `npm run push-sheet`（手動インポート不要）
+### 🔄 スプシへの反映は `IMPORTDATA`（2026-08-20 に方式変更）
 
-Sheets API v4 に OAuth2 で直接書き込む。初回だけ `.env` 設定と認証が必要。
+各タブの **A1 に式を1つ貼るだけ**。以降は git に push すれば自動で追随する。認証情報は不要。
+
 ```
-npm run push-sheet:dry    # CSVの行数・列数を検証
-npm run push-sheet        # 2タブを最新CSVで置き換え
+=IMPORTDATA("https://raw.githubusercontent.com/kkeisuke0407-crypto/local-support.jp/main/docs/sheet-tab1-cases.csv")
+=IMPORTDATA("https://raw.githubusercontent.com/kkeisuke0407-crypto/local-support.jp/main/docs/sheet-tab2-quotes.csv")
 ```
-セットアップ手順・フォールバック（IMPORTDATA）・個人情報の扱いは **`docs/sheet-auto-sync.md`** を参照。
+
+> ⚠️ **これに伴い正本が入れ替わる。** `docs/sheet-tab*.csv` が正本、スプシは閲覧用ミラー。
+> スプシへの直接書き込みは廃止（次の反映で消える）。修正は Claude に言って CSV を直す。
+> 下の「codexとユーザーの衝突防止ルール」「CSVインポート手順」はこの方式では不要になる。
+
+`npm run push-sheet`（Sheets API v4 直書き）はフォールバックとして残す。
+セットアップ手順・制約・個人情報の扱いは **`docs/sheet-auto-sync.md`** を参照。
 
 ### Claude から見えるもの・見えないもの（2026-08-05 確認）
 
@@ -658,7 +665,7 @@ npm run push-sheet        # 2タブを最新CSVで置き換え
 | `npm run push-sheet` での**書き込み** | ✅ 可。Sheets API v4 に直接書く。`.env` とトークンが要るため**初回認証だけ人間**が行う |
 
 - **運用**：Claude は毎セッション冒頭でスプシを読み、CSV との差分を報告 → CSV を更新 → `npm run push-sheet`
-- Drive が別アカウント（`fuhyo.consulting@gmail.com` 等）に繋がっていると `Requested entity was not found` になる。
+- Drive が別アカウント（`別のGoogleアカウント` 等）に繋がっていると `Requested entity was not found` になる。
   その場合はコネクタの接続先アカウントを確認する。**push-sheet の認証も同じで、所有者アカウントで行うこと**
 
 ### CSV インポート手順（⚠️「置換」ではなく「差し替え確認」を挟む）
