@@ -224,6 +224,12 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       return jsonResponse(400, { ok: false, error: '必須項目が不足しています' });
     }
 
+    // 市区町村は業者選定の前提。都道府県だけだと拠点からの距離が判断できず、
+    // 受付後にメールで聞き直す往復が発生する（PCO-2026-0823-001 で実際に発生）
+    if (!data.city) {
+      return jsonResponse(400, { ok: false, error: '市区町村を入力してください' });
+    }
+
     // メールアドレスは受付時に必ず取得する（比較ページ送付・運営連絡に不可欠）
     if (!data.email) {
       return jsonResponse(400, { ok: false, error: 'メールアドレスを入力してください' });

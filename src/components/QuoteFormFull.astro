@@ -41,8 +41,8 @@ const otherServices = serviceIndex.filter((s) => s.slug !== data.slug);
               </select>
             </div>
             <div class="qf-row">
-              <label for="qf-city">市区町村</label>
-              <input id="qf-city" name="city" type="text" placeholder="例：千代田区" autocomplete="address-level2" />
+              <label for="qf-city">市区町村 <span class="qf-req">必須</span></label>
+              <input id="qf-city" name="city" type="text" required placeholder="例：千代田区" autocomplete="address-level2" />
             </div>
             <div class="qf-row">
               <label for="qf-facility">施設の種類 <span class="qf-req">必須</span></label>

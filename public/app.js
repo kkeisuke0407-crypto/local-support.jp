@@ -161,7 +161,9 @@ document.addEventListener('DOMContentLoaded', function () {
         var errBox = document.createElement('div');
         errBox.className = 'qf-error';
         errBox.setAttribute('role', 'alert');
-        errBox.textContent = '送信に失敗しました。時間をおいて再度お試しいただくか、別の方法でお問い合わせください。';
+        errBox.textContent = (err && err.message)
+          ? err.message
+          : '送信に失敗しました。時間をおいて再度お試しいただくか、別の方法でお問い合わせください。';
         form.appendChild(errBox);
       });
     });

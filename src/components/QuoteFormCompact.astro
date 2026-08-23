@@ -27,6 +27,10 @@ const otherServices = serviceIndex.filter((s) => s.slug !== data.slug);
         {prefectures.map((p) => (<option value={p}>{p}</option>))}
       </select>
     </div>
+    <div class="qf-row">
+      <label for="cf-city">市区町村 <span class="qf-req">必須</span></label>
+      <input id="cf-city" name="city" type="text" required placeholder="例：大阪市西区" autocomplete="address-level2" />
+    </div>
     {data.formCustomField && (
       <div class="qf-row">
         <label for={`cf-${data.formCustomField.name}`}>{data.formCustomField.label}</label>
