@@ -112,36 +112,32 @@ export const hearingQuestions: Record<string, HearingQuestion[]> = {
   ],
 
   // ── フロン排出抑制法 定期点検 ─────────────────────
-  // 見積は台数だけでは決まらない。決定変数は「圧縮機の定格出力(kW)」。
-  //   7.5kW未満          → 簡易点検（3か月に1回）のみ。定期点検の義務なし
-  //   7.5kW以上の空調     → 定期点検 3年に1回以上
-  //   50kW以上の空調      → 定期点検 1年に1回以上
-  //   7.5kW以上の冷凍冷蔵 → 定期点検 1年に1回以上
-  // つまり同じ10台でも、義務頻度が3年に1回か毎年かで見積が数倍変わる。
-  // 台数だけ聞いて kW を聞かないと、業者は必ず聞き返してくる。
+  // 【設問の設計方針】運営は概算見積を出さない（CLAUDE.md §マッチング運用方針-2）。
+  // したがってここで聞くのは「どの業者に声をかけるか」を決めるための情報だけに絞る。
+  //
+  // 聞かない：圧縮機の定格出力(kW)、50kW以上の有無、点検記録簿の整備状況。
+  //   これらは点検義務の頻度（7.5kW未満=簡易点検のみ／7.5kW以上=3年に1回／
+  //   50kW以上と冷凍冷蔵7.5kW以上=1年に1回）を分ける重要な変数だが、
+  //   依頼者が銘板を見て答えるのは負担が大きく、業者が現地で判定すれば済む。
+  //   依頼者に宿題を出すと着手が遅れるだけなので運営側では取得しない。
+  // 聞く：機器の種別（空調か冷凍冷蔵かで対応できる業者が変わる）、
+  //   台数と設置場所（作業条件）、希望範囲、状況、時期。
   'furon-tenken': [
     { key: 'facility_type', label: '施設の種類は？', type: 'radio', required: true,
       options: ['工場', '倉庫・物流施設', 'オフィスビル', '商業施設・店舗', '飲食店', 'ホテル・旅館', '福祉・医療施設', 'その他'] },
     { key: 'equipment_type', label: '対象機器の種類は？（複数選択可）', type: 'checkbox', required: true,
       options: ['業務用エアコン（パッケージ・ビル用マルチ等）', '冷凍・冷蔵機器（冷蔵庫・冷凍庫・ショーケース等）', 'チラー・冷凍機', 'その他・わからない'] },
-    { key: 'unit_count_total', label: '第一種特定製品の台数は合計何台ですか？', type: 'number', required: true, unit: '台', placeholder: '例：10' },
-    { key: 'unit_count_7_5kw', label: 'そのうち圧縮機の定格出力 7.5kW以上 は何台ですか？', type: 'radio', required: true,
-      options: ['すべて7.5kW未満（簡易点検のみ）', '1〜5台', '6〜10台', '11台以上', 'わからない（機器の銘板を確認できていない）'] },
-    { key: 'unit_count_50kw', label: '50kW以上の空調機器（年1回点検の対象）はありますか？', type: 'radio', required: true,
-      options: ['ある', 'ない', 'わからない'] },
+    { key: 'unit_count_total', label: '対象機器はおおよそ何台ですか？', type: 'number', required: true, unit: '台', placeholder: '例：10（正確でなくて構いません）' },
     { key: 'install_place', label: '機器の設置場所は？（複数選択可）', type: 'checkbox', required: true,
       options: ['屋内（工場・倉庫内）', '屋上', '屋外（地上）', 'コンテナ・別棟', '高所（脚立や足場が必要）'] },
-    { key: 'site_count', label: '対象の拠点・建屋はいくつありますか？', type: 'number', required: true, unit: '箇所', placeholder: '例：1' },
     { key: 'service_scope', label: 'ご希望の範囲は？', type: 'radio', required: true,
       options: ['定期点検のみ', '簡易点検＋定期点検の年間契約', '点検記録簿の作成・管理も委託したい', '未定・業者提案を希望'] },
-    { key: 'record_status', label: '点検記録簿（管理台帳）の作成状況は？', type: 'radio', required: true,
-      options: ['作成済みで最新', '作成しているが更新できていない', '作成していない', 'わからない'] },
     { key: 'contract_status', label: '現在の状況は？', type: 'radio', required: true,
       options: ['新規（初めて依頼）', '既存業者あり（乗換検討）', '漏えいや不具合が発生中', '情報収集中'] },
     { key: 'timing', label: 'ご希望の時期は？', type: 'radio', required: true,
       options: ['急ぎ（1か月以内）', '2〜3か月以内', '時期は未定'] },
     { key: 'free_text', label: 'ご要望・補足（任意）', type: 'textarea',
-      placeholder: '例：監督官庁からの指摘がある／算定漏えい量の報告も相談したい／機器の型番が分かる資料あり など（400字まで）' },
+      placeholder: '例：監督官庁からの指摘がある／機器の型番が分かる資料あり など（400字まで）' },
   ],
 };
 
