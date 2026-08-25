@@ -139,6 +139,40 @@ export const hearingQuestions: Record<string, HearingQuestion[]> = {
     { key: 'free_text', label: 'ご要望・補足（任意）', type: 'textarea',
       placeholder: '例：監督官庁からの指摘がある／機器の型番が分かる資料あり など（400字まで）' },
   ],
+
+  // ── 看板・屋外広告物点検 ───────────────────────────
+  // 【設問の設計方針】SOP §3.6 に同じ。見積の変数ではなく「どの業者に声をかけるか」を聞く。
+  //
+  // このサービス特有の足切り条件が2つある。
+  //  ① 屋外広告業の登録業者でないと施工できない（都道府県・政令市・中核市ごとの登録制）
+  //  ② 点検は屋外広告士・講習会修了者などの有資格者が行う必要がある
+  // どちらも業者側の資格要件なので依頼者には聞かない。打診時に業者へ確認する。
+  //
+  // 依頼者に聞くのは、業者を絞り込む条件になるものだけ：
+  //  ・看板の種類と高さ  → 高所作業車・足場の要否が変わり、対応できる業者が変わる
+  //  ・電飾の有無        → 電気系の点検可否が変わる
+  //  ・許可更新の期限    → 期限がある案件は納期が最優先の足切り条件になる
+  // 寸法・面積・設置年は聞かない（依頼者が測りに行くことになるため。業者が現地で確認する）
+  'signboard-inspection': [
+    { key: 'signboard_type', label: '看板の種類は？（複数選択可）', type: 'checkbox', required: true,
+      options: ['自立看板・ポール看板', '壁面看板', '袖看板・突き出し看板', '屋上看板', '野立て看板', 'その他・わからない'] },
+    { key: 'signboard_count', label: '対象の看板はおおよそ何基ですか？', type: 'number', required: true, unit: '基', placeholder: '例：3（正確でなくて構いません）' },
+    { key: 'signboard_height', label: 'いちばん高い看板の設置高さは？', type: 'radio', required: true,
+      options: ['3m未満（脚立で届く）', '3〜5m程度', '5〜10m程度', '10m以上', 'わからない'] },
+    { key: 'illumination', label: '電飾（内照式・照明付き）の看板はありますか？', type: 'radio', required: true,
+      options: ['ある', 'ない', 'わからない'] },
+    { key: 'inspection_purpose', label: '点検の目的は？', type: 'radio', required: true,
+      options: ['許可更新前の点検（報告書が必要）', '定期的な安全点検', '劣化・破損が気になる', '未定・業者提案を希望'] },
+    { key: 'permit_deadline', label: '許可更新の期限は決まっていますか？', type: 'radio', required: true,
+      options: ['1か月以内', '2〜3か月以内', '半年以内', '期限は未定・更新ではない', 'わからない'] },
+    { key: 'site_count', label: '対象の店舗・拠点はいくつありますか？', type: 'number', required: true, unit: '箇所', placeholder: '例：1' },
+    { key: 'access', label: '作業上の制約はありますか？（複数選択可）', type: 'checkbox',
+      options: ['歩道・道路にかかるため交通誘導が必要そう', '駐車スペースが狭い', '営業時間外でないと作業できない', '特になし・わからない'] },
+    { key: 'contract_status', label: '現在の状況は？', type: 'radio', required: true,
+      options: ['新規（初めて依頼）', '既存業者あり（乗換検討）', '破損・落下の懸念が発生中', '情報収集中'] },
+    { key: 'free_text', label: 'ご要望・補足（任意）', type: 'textarea',
+      placeholder: '例：自治体から更新案内が届いている／看板の写真あり／設置業者が分からない など（400字まで）' },
+  ],
 };
 
 // 未設定サービス用の汎用フォールバック（壊れた建物系フォームを出さないための最小構成）
