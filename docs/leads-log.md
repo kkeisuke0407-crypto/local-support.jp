@@ -725,21 +725,21 @@ https://docs.google.com/spreadsheets/d/1Zdt7d8luN6o4D9YgQwZ0D2kGRwew5uLtdY8pdZyn
 ### 見積ステータスの値
 `未依頼` / `依頼済` / `見積受領` / `要現地調査` / `辞退` / `不通` / `採用` / `見送り`
 
-### 🔄 スプシへの反映は `IMPORTDATA`（2026-08-20 に方式変更）
+### 🔄 スプシへの反映は Apps Script（2026-08-27 に方式変更）
 
-各タブの **A1 に式を1つ貼るだけ**。以降は git に push すれば自動で追随する。認証情報は不要。
+スプレッドシート側に **`docs/sheet-apps-script.gs`** を貼り、1時間おきのトリガーで
+GitHub の raw CSV を取り込む。**こちらは git に push するだけ**でよい。
 
-```
-=IMPORTDATA("https://raw.githubusercontent.com/kkeisuke0407-crypto/local-support.jp/main/docs/sheet-tab1-cases.csv")
-=IMPORTDATA("https://raw.githubusercontent.com/kkeisuke0407-crypto/local-support.jp/main/docs/sheet-tab2-quotes.csv")
-```
+- 急ぐときはスプシのメニュー「ロカサポ」→「今すぐ同期」
+- 列数を検算するため、壊れたCSVでタブが潰れない
+- `_sync_log` タブに実行時刻と結果が残る
+- `依頼者` / `業者` の2タブは上書きされる。手メモは別タブに置くこと
 
 > ⚠️ **これに伴い正本が入れ替わる。** `docs/sheet-tab*.csv` が正本、スプシは閲覧用ミラー。
-> スプシへの直接書き込みは廃止（次の反映で消える）。修正は Claude に言って CSV を直す。
-> 下の「codexとユーザーの衝突防止ルール」「CSVインポート手順」はこの方式では不要になる。
+> 修正は Claude に言って CSV を直す。下の「codexとユーザーの衝突防止ルール」
+> 「CSVインポート手順」はこの方式では不要。
 
-`npm run push-sheet`（Sheets API v4 直書き）はフォールバックとして残す。
-セットアップ手順・制約・個人情報の扱いは **`docs/sheet-auto-sync.md`** を参照。
+方式の比較・セットアップ手順は **`docs/sheet-auto-sync.md`** を参照。
 
 ### Claude から見えるもの・見えないもの（2026-08-05 確認）
 
