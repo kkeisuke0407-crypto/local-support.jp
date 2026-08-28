@@ -10,3 +10,7 @@ dist/
 
 # 営業ツール（見込み客リスト・電話番号・ログ等。公開リポジトリに含めない）
 tools/
+
+# 請求書に入力した住所・振込先が公開されないようにする（このリポジトリは public）
+docs/invoice/*-filled.xlsx
+docs/invoice/*-filled.html
