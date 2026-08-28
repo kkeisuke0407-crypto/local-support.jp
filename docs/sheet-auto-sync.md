@@ -2,7 +2,7 @@
 
 `docs/sheet-tab*.csv` を Googleスプレッドシート「ロカサポ 案件トラッカー」へ反映する方法。
 
-> 🔁 **2026-08-20 方式変更：本命を `IMPORTDATA`（旧・方式B）に入れ替えた。**
+> 🔁 **2026-08-27 方式変更：本命を Apps Script に入れ替えた。**（8/20 は IMPORTDATA を本命としていた）
 > 理由は **クラウドセッションのコンテナが毎回まっさらで、`.env` も `.sheet-token.json` も残らない**こと。
 > `npm run push-sheet` は動作するが、セッションのたびに OAuth 情報の再投入と再認証が必要で、
 > 「毎回スプシが更新されない」という詰まりの原因になっていた。
@@ -16,87 +16,83 @@
 
 ---
 
-## 方式1：`IMPORTDATA`（本命・推奨）
+## 方式の比較（2026-08-27 時点）
 
-スプシ側から GitHub の raw CSV を読ませる。`.env` もトークンも認証も不要。
-**一度セットアップすれば、以降は git に push するだけでスプシが自動で追随する。**
+| | Apps Script | IMPORTDATA | push-sheet | 手動インポート |
+|---|---|---|---|---|
+| セットアップ | 一度だけ（貼り付け＋トリガー） | 一度だけ（式を2つ） | 毎セッション | 毎回 |
+| 認証情報 | 不要 | 不要 | **必要**（.env＋OAuth） | 不要 |
+| 自動更新 | ✅ 1時間ごと | ✅ 1時間以内 | ❌ 手動実行 | ❌ 手動 |
+| 手編集の余地 | ✅ **別タブ・別列で可** | ❌ 不可 | ✅ 可 | ✅ 可 |
+| 壊れたCSVへの防御 | ✅ **列数を検算して中止** | ❌ そのまま流入 | ✅ あり | ❌ なし |
+| 同期できたか分かる | ✅ `_sync_log` タブ | ❌ 分からない | ✅ 実行結果 | — |
+| 日付のシリアル化 | ✅ 防止済 | ⚠️ 起きる | ✅ 防止済 | ⚠️ 起きる |
+| 今すぐ同期 | ✅ メニューから | △ 式の再入力 | ✅ | ✅ |
 
-### セットアップ（一度だけ）
-
-`依頼者` タブ → 全選択して中身を削除 → **A1** に貼る:
-
-```
-=IMPORTDATA("https://raw.githubusercontent.com/kkeisuke0407-crypto/local-support.jp/main/docs/sheet-tab1-cases.csv")
-```
-
-`業者` タブ → 同様に全削除 → **A1** に貼る:
-
-```
-=IMPORTDATA("https://raw.githubusercontent.com/kkeisuke0407-crypto/local-support.jp/main/docs/sheet-tab2-quotes.csv")
-```
-
-作業ブランチの内容を先に見たい場合は URL の `/main/` をブランチ名に差し替える。
-
-### 制約と、その受け入れ理由
-
-| 制約 | 内容 | 対処 |
-|---|---|---|
-| 手編集 | **不可**（式が生成する領域） | **CSV を正本に切り替える。** スプシは閲覧用ミラー。手で直したい内容は Claude に言って CSV を直す |
-| 反映速度 | push後おおむね1時間以内（キャッシュ） | 急ぐときはタブを再読み込み／式を再入力 |
-| 前提 | **リポジトリが public** であること | private 化したら方式2へ戻す |
-| 反映条件 | URL が指すブランチにマージ済みであること | 通常は main を指す |
-| 日付表示 | `2026-06-19` が `46192` と出ることがある | 該当列を「表示形式 → 日付」にする（1回だけ） |
-
-> ⚠️ **同じタブに方式1と方式2を混在させないこと。**
-
-### 「スプシが正本」からの変更点
-
-従来は「スプシが正本・CSVはseed」だったが、方式1では **`docs/sheet-tab*.csv` が正本**になる。
-`leads-log.md` の「正本：Googleスプレッドシート」の記述はこの方式に切り替えた時点で無効。
-codex・ユーザーがスプシに直接書き込む運用も同時に廃止する（書いても次の反映で消える）。
+> ✅ **本命は Apps Script。** クラウドセッションのコンテナは毎回まっさらで
+> `.env` も `.sheet-token.json` も残らないため、`push-sheet` は「常に最新」の手段にならない。
+> Apps Script は**Google側で動く**ので、こちらの環境に一切依存しない。
 
 ---
 
-## 方式2：`npm run push-sheet`（フォールバック）
+## 方式1：Apps Script（本命・推奨）
 
-Sheets API v4 に OAuth2 で直接書き込む。`scripts/push-sheet.js`。
-認証まわりは `scripts/fetch-gsc.js` と同じ仕組み（OAuth2＋トークンをAES-256-CBCで暗号化保存）。
+スクリプト本体は **`docs/sheet-apps-script.gs`**。セットアップ手順もファイル冒頭に書いてある。
 
-### セットアップ（初回のみ）
+### セットアップ（一度だけ・5分）
 
-1. **Google Cloud Console で「Google Sheets API」を有効化**
-   （Search Console API とは別枠。これを忘れると `accessNotConfigured` で落ちる）
+1. スプレッドシート → 拡張機能 → Apps Script
+2. `docs/sheet-apps-script.gs` の中身を全部貼り付けて保存
+3. 関数 `syncAll` を選んで実行（初回だけ承認が必要）
+4. トリガー（時計アイコン）→ `syncAll` を **1時間おき** の時間主導型で登録
 
-2. `.env` に追記（`GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` は fetch-gsc と共通）
-   ```
-   SHEET_ID=1Zdt7d8luN6o4D9YgQwZ0D2kGRwew5uLtdY8pdZynrqg
-   TOKEN_ENCRYPTION_KEY=（初回実行時に出力される32バイトhexを固定）
-   ```
+以降は **git に push すれば最大1時間で反映**される。
+急ぐときはスプレッドシートのメニュー **「ロカサポ」→「今すぐ同期」**。
 
-3. 初回認証
-   ```
-   npm run push-sheet:auth    # クラウド／ブラウザが開けない環境（コード貼り付け）
-   npm run push-sheet         # ローカル（ブラウザが自動で開く）
-   ```
-   > ⚠️ **スプシの所有者アカウント（`support@local-support.jp`）で認証すること。**
-   > 別アカウントで認証すると `Requested entity was not found` になる。
-   > 2026-08-05 に Drive コネクタが `別のGoogleアカウント` に繋がっていて
-   > スプシが見つからなかったのと同じ現象。
+### この方式だけが持っている利点
 
-### 通常実行
+- **壊れたCSVでタブを潰さない。** 列数を検算し、想定と違えばそのタブの更新を中止する
+- **同期できたか確認できる。** `_sync_log` タブに実行時刻と結果が積まれる
+- **手編集を共存させられる。** スクリプトが書くのは `依頼者` / `業者` の2タブだけなので、
+  メモ用のタブを別に作れば消されない
+- **日付がシリアル値に化けない**（書き込み前に範囲を書式なしテキストにしている）
+
+### 制約
+
+- 反映は最大1時間遅れる（急ぐならメニューから手動同期）
+- `依頼者` / `業者` タブへの直接の書き込みは、次の同期で消える
+- リポジトリが public であることが前提（private 化したら方式3へ）
+
+---
+
+## 方式2：`IMPORTDATA`（簡易版）
+
+各タブの **A1** に式を1つ貼るだけ。Apps Script より手軽だが、
+検算も実行ログもなく、日付がシリアル値に化ける。
 
 ```
-npm run push-sheet:dry    # CSVの行数・列数だけ検証（認証も書き込みもしない）
+=IMPORTDATA("https://raw.githubusercontent.com/kkeisuke0407-crypto/local-support.jp/main/docs/sheet-tab1-cases.csv")
+=IMPORTDATA("https://raw.githubusercontent.com/kkeisuke0407-crypto/local-support.jp/main/docs/sheet-tab2-quotes.csv")
+```
+
+---
+
+## 方式3：`npm run push-sheet`（フォールバック）
+
+Sheets API v4 に OAuth2 で直接書き込む（`scripts/push-sheet.js`）。
+ローカル環境で使うなら有効だが、**クラウドセッションではコンテナが毎回まっさらになり
+`.env` と `.sheet-token.json` が残らない**ため、「常に最新」の手段にはならない。
+
+セットアップ：Google Cloud Console で Sheets API を有効化 →
+`.env` に `SHEET_ID` と `TOKEN_ENCRYPTION_KEY` を追記 → `npm run push-sheet:auth` で初回認証
+（**スプシの所有者アカウント `support@local-support.jp` で認証すること**）。
+
+```
+npm run push-sheet:dry    # CSVの行数・列数だけ検証
 npm run push-sheet        # 2タブを最新CSVで置き換え
 ```
 
-### 仕様
-
-- **書き込み前にタブ全体を `clear`** する。行が減っても古い行が残らない
-- **`valueInputOption: 'RAW'`**。これがないと `2026-06-19` が `46192` のようなシリアル値に化ける
-  （2026-08-05 の手動インポートで実際に発生した）
-- タブが存在しない場合は自動作成
-- **実行前にCSVの列数を検証**し、不揃いなら認証前に停止する
+書き込み前にタブを clear し、`valueInputOption: 'RAW'` で日付のシリアル化を防いでいる。
 
 ---
 
