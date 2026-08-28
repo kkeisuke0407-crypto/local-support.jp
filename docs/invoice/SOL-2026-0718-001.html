@@ -1,0 +1,130 @@
+<meta charset="utf-8">
+<title>請求書 SOL-2026-0718-001</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    color: #1a1a1a; font-size: 10.5pt; line-height: 1.7; margin: 0;
+  }
+  .sheet { max-width: 180mm; margin: 0 auto; padding: 8mm 0; }
+  h1 {
+    font-size: 20pt; letter-spacing: 0.4em; text-align: center;
+    margin: 0 0 10mm; padding-bottom: 3mm; border-bottom: 2px solid #1a1a1a;
+  }
+  .head { display: flex; justify-content: space-between; gap: 10mm; margin-bottom: 8mm; }
+  .to { flex: 1; }
+  .to .name { font-size: 13pt; font-weight: 700; border-bottom: 1px solid #1a1a1a; padding-bottom: 2mm; display: inline-block; }
+  .from { width: 74mm; font-size: 9.5pt; }
+  .from .biz { font-size: 11pt; font-weight: 700; }
+  .from dl { display: grid; grid-template-columns: auto 1fr; gap: 0 6px; margin: 2mm 0 0; }
+  .from dt { color: #555; white-space: nowrap; }
+  .from dd { margin: 0; }
+  .meta { text-align: right; font-size: 9.5pt; color: #555; margin-bottom: 2mm; }
+  .total-box { border: 1.5px solid #1a1a1a; padding: 4mm 6mm; margin: 0 0 8mm; display: flex; align-items: baseline; gap: 8mm; }
+  .total-box .label { font-size: 11pt; font-weight: 700; white-space: nowrap; }
+  .total-box .amount { font-size: 20pt; font-weight: 700; letter-spacing: 0.02em; }
+  .total-box .note { margin-left: auto; font-size: 9pt; color: #555; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 6mm; }
+  th, td { border: 1px solid #999; padding: 3mm 4mm; font-size: 10pt; }
+  thead th { background: #f2f2f2; font-weight: 700; text-align: center; }
+  td.num, th.num { text-align: right; white-space: nowrap; }
+  td.ctr { text-align: center; white-space: nowrap; }
+  .sum { width: 88mm; margin-left: auto; border-collapse: collapse; }
+  .sum th { background: #f8f8f8; text-align: left; width: 46mm; font-weight: 600; }
+  .sum .grand th, .sum .grand td { background: #eee; font-weight: 700; font-size: 11pt; }
+  .pay { border: 1px solid #999; padding: 4mm 5mm; margin-bottom: 6mm; }
+  .pay h2 { font-size: 10.5pt; margin: 0 0 2mm; }
+  .pay dl { display: grid; grid-template-columns: 24mm 1fr; gap: 1mm 4px; margin: 0; font-size: 10pt; }
+  .pay dt { color: #555; }
+  .pay dd { margin: 0; }
+  .remarks { font-size: 9.5pt; color: #333; }
+  .remarks h2 { font-size: 10.5pt; margin: 0 0 2mm; }
+  .fill { background: #fff3cd; padding: 0 2px; }
+</style>
+
+<div class="sheet">
+  <h1>請求書</h1>
+
+  <div class="meta">
+    請求書番号：LS-2026-0828-001<br>
+    発行日：2026年8月28日
+  </div>
+
+  <div class="head">
+    <div class="to">
+      <div class="name">竹内産業株式会社 エネルギー事業部 御中</div>
+      <p style="margin:5mm 0 0">下記のとおりご請求申し上げます。</p>
+    </div>
+
+    <div class="from">
+      <div class="biz">ローカル情報局</div>
+      <dl>
+        <dt>事業主</dt><dd>藤波 圭佑</dd>
+        <dt>登録番号</dt><dd>T2810572974271</dd>
+        <dt>所在地</dt><dd><span class="fill">〒000-0000 ◯◯県◯◯市◯◯ 0-0-0</span></dd>
+        <dt>連絡先</dt><dd>support@local-support.jp</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="total-box">
+    <span class="label">ご請求金額</span>
+    <span class="amount">¥8,800 −</span>
+    <span class="note">（消費税込）</span>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:50%">品目</th>
+        <th class="ctr" style="width:12%">数量</th>
+        <th class="num" style="width:19%">単価</th>
+        <th class="num" style="width:19%">金額</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          業者ご紹介手数料<br>
+          <span style="font-size:9pt;color:#555">
+            案件ID：SOL-2026-0718-001／太陽光パネル清掃・除草（兵庫県佐用町）<br>
+            成約金額 88,000円（税込）の10%
+          </span>
+        </td>
+        <td class="ctr">1式</td>
+        <td class="num">8,000</td>
+        <td class="num">8,000</td>
+      </tr>
+      <tr><td>&nbsp;</td><td></td><td></td><td class="num"></td></tr>
+      <tr><td>&nbsp;</td><td></td><td></td><td class="num"></td></tr>
+    </tbody>
+  </table>
+
+  <table class="sum">
+    <tr><th>小計（10%対象）</th><td class="num">8,000 円</td></tr>
+    <tr><th>消費税（10%）</th><td class="num">800 円</td></tr>
+    <tr class="grand"><th>合計</th><td class="num">8,800 円</td></tr>
+  </table>
+
+  <div class="pay" style="margin-top:8mm">
+    <h2>お振込先</h2>
+    <dl>
+      <dt>金融機関</dt><dd><span class="fill">◯◯銀行 ◯◯支店</span></dd>
+      <dt>種別・番号</dt><dd><span class="fill">普通 0000000</span></dd>
+      <dt>口座名義</dt><dd><span class="fill">フジナミ ケイスケ</span></dd>
+    </dl>
+  </div>
+
+  <div class="remarks">
+    <h2>備考</h2>
+    <ul style="margin:0;padding-left:1.2em">
+      <li>お支払期限：2026年9月30日（8月末締め・翌月末払い）</li>
+      <li>振込手数料は恐れ入りますが貴社にてご負担をお願いいたします。</li>
+      <li>本請求書は適格請求書（インボイス）として発行しております。</li>
+      <li>施設管理の一括見積比較サービス「ロカサポ（local-support.jp）」は、
+          屋号「ローカル情報局」として藤波が運営しております。
+          日頃のご連絡は運営担当の寺尾より差し上げております。</li>
+    </ul>
+  </div>
+</div>
