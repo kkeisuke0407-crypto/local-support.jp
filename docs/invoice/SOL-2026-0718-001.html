@@ -40,8 +40,30 @@
   .pay dd { margin: 0; }
   .remarks { font-size: 9.5pt; color: #333; }
   .remarks h2 { font-size: 10.5pt; margin: 0 0 2mm; }
-  .fill { background: #fff3cd; padding: 0 2px; }
+  .fill {
+    background: #fff3cd; padding: 0 3px; border-bottom: 1px dashed #c8a000;
+    min-width: 40mm; display: inline-block; outline: none; cursor: text;
+  }
+  .fill:focus { background: #fff8e1; box-shadow: 0 0 0 2px #ffd54f; }
+  .fill:empty::before { content: attr(data-ph); color: #b0a06a; }
+  .hint {
+    max-width: 180mm; margin: 0 auto 6mm; padding: 3mm 5mm; border-radius: 4px;
+    background: #e8f4fd; border: 1px solid #9ecbf0; font-size: 9.5pt; line-height: 1.8;
+  }
+  .hint b { color: #0b5c9e; }
+  @media print {
+    .hint { display: none !important; }
+    .fill { background: none; border-bottom: none; box-shadow: none; padding: 0; min-width: 0; }
+    .fill:empty::before { content: ""; }
+  }
 </style>
+
+<div class="hint">
+  <b>黄色い部分をクリックすると、そのまま入力できます。</b><br>
+  入力内容はこのブラウザにのみ保存されます（ファイルやサーバーには送信されません）。<br>
+  入力が終わったら <b>Ctrl+P（Macは ⌘+P）→ 送信先を「PDFに保存」</b> でPDFになります。
+  この案内文はPDFには入りません。
+</div>
 
 <div class="sheet">
   <h1>請求書</h1>
@@ -62,7 +84,7 @@
       <dl>
         <dt>事業主</dt><dd>藤波 圭佑</dd>
         <dt>登録番号</dt><dd>T2810572974271</dd>
-        <dt>所在地</dt><dd><span class="fill">〒000-0000 ◯◯県◯◯市◯◯ 0-0-0</span></dd>
+        <dt>所在地</dt><dd><span class="fill" contenteditable="true" data-k="addr" data-ph="〒000-0000 ◯◯県◯◯市◯◯ 0-0-0"></span></dd>
         <dt>連絡先</dt><dd>support@local-support.jp</dd>
       </dl>
     </div>
@@ -110,9 +132,9 @@
   <div class="pay" style="margin-top:8mm">
     <h2>お振込先</h2>
     <dl>
-      <dt>金融機関</dt><dd><span class="fill">◯◯銀行 ◯◯支店</span></dd>
-      <dt>種別・番号</dt><dd><span class="fill">普通 0000000</span></dd>
-      <dt>口座名義</dt><dd><span class="fill">フジナミ ケイスケ</span></dd>
+      <dt>金融機関</dt><dd><span class="fill" contenteditable="true" data-k="bank" data-ph="◯◯銀行 ◯◯支店"></span></dd>
+      <dt>種別・番号</dt><dd><span class="fill" contenteditable="true" data-k="acct" data-ph="普通 0000000"></span></dd>
+      <dt>口座名義</dt><dd><span class="fill" contenteditable="true" data-k="holder" data-ph="フジナミ ケイスケ"></span></dd>
     </dl>
   </div>
 
@@ -128,3 +150,38 @@
     </ul>
   </div>
 </div>
+
+<script>
+(function () {
+  var KEY = 'locasapo-invoice-issuer';
+  var fields = document.querySelectorAll('.fill[contenteditable]');
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { saved = {}; }
+
+  fields.forEach(function (el) {
+    var k = el.getAttribute('data-k');
+    if (saved[k]) el.textContent = saved[k];
+
+    // 書式付きの貼り付けを防ぐ（プレーンテキストのみ受け付ける）
+    el.addEventListener('paste', function (ev) {
+      ev.preventDefault();
+      var t = (ev.clipboardData || window.clipboardData).getData('text');
+      document.execCommand('insertText', false, t.replace(/\s+/g, ' ').trim());
+    });
+    // Enterで改行させない
+    el.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Enter') { ev.preventDefault(); el.blur(); }
+    });
+    el.addEventListener('input', save);
+    el.addEventListener('blur', save);
+  });
+
+  function save() {
+    var out = {};
+    fields.forEach(function (el) {
+      out[el.getAttribute('data-k')] = el.textContent.trim();
+    });
+    try { localStorage.setItem(KEY, JSON.stringify(out)); } catch (e) { /* 保存できなくても表示は続行 */ }
+  }
+})();
+</script>
