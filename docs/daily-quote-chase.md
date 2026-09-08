@@ -8,9 +8,16 @@
 ### 1. 受信を確認する
 
 ```
-Gmail検索: newer_than:1d -in:sent -from:google.com -from:rakkoserver
-Gmail検索: from:contact@local-support.jp newer_than:2d      ← 新規CVとヒアリング回答
+Gmail検索: from:contact@local-support.jp newer_than:2d   ← 新規CVとヒアリング回答
+Gmail検索: in:inbox newer_than:1d -from:google.com -from:rakkoserver
 ```
+
+> ⚠️ **`-in:sent` を付けてはいけない。**
+> 新規CVとヒアリング回答の通知は contact@local-support.jp から
+> contact@local-support.jp 宛に送られるため **SENT ラベルが付く**。
+> `-in:sent` を入れると新規案件がまるごと検索から消える。
+> 2026-09-07 にこれで河野粕屋病院（FIR-2026-0907-001）を取りこぼした。
+> 業者からの返信を探すときは `in:inbox` で絞ること。
 
 新規案件があれば `docs/sheet-tab1-cases.csv` に追加してから先へ進む。
 
