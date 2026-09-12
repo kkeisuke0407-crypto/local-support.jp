@@ -21,6 +21,7 @@ var REPO = 'kkeisuke0407-crypto/local-support.jp';
 var BRANCH = 'main';
 
 var TARGETS = [
+  { sheet: 'サマリ', path: 'docs/sheet-tab0-summary.csv', cols: 13 },
   { sheet: '依頼者', path: 'docs/sheet-tab1-cases.csv', cols: 17 },
   { sheet: '業者',   path: 'docs/sheet-tab2-quotes.csv', cols: 15 }
 ];
