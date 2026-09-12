@@ -15,8 +15,8 @@ OUT = ROOT / 'docs/sheet-tab0-summary.csv'
 
 TODAY = datetime.date.today()
 
-# 決着済みと判定するステータスの手がかり
-CLOSED = ('成約', '失注', 'クローズ', '★依頼者が選定', '連絡先共有済')
+# 決着済みと判定するステータスの手がかり（成約・失注のみ。お繋ぎ済みは別枠）
+CLOSED = ('成約', '失注', 'クローズ')
 
 
 def load(path):
@@ -41,7 +41,11 @@ def main():
     # 案件IDごとに業者行を集計
     tally = {}
     for r in quotes:
-        t = tally.setdefault(r[0], {'打診': 0, '紹介可': 0, '辞退': 0, '不達': 0, '未依頼': 0, '回答待ち': 0})
+        t = tally.setdefault(r[0], {'打診': 0, '紹介可': 0, '辞退': 0, '不達': 0,
+                                    '未依頼': 0, '回答待ち': 0, '共有済': 0})
+        adopt = r[C2['採用可否']]
+        if adopt in ('採用', '成約', '★依頼者が選定') or '連絡先共有' in adopt:
+            t['共有済'] += 1
         s = r[C2['見積ステータス']]
         if s == '未依頼':
             t['未依頼'] += 1
@@ -61,12 +65,19 @@ def main():
     out = []
     for r in cases:
         cid = r[0]
-        t = tally.get(cid, {'打診': 0, '紹介可': 0, '辞退': 0, '不達': 0, '未依頼': 0, '回答待ち': 0})
+        t = tally.get(cid, {'打診': 0, '紹介可': 0, '辞退': 0, '不達': 0,
+                            '未依頼': 0, '回答待ち': 0, '共有済': 0})
         status = r[C1['ステータス']]
         closed = any(k in status for k in CLOSED)
 
         if closed:
-            mark, rank, act = '✅ 決着', 6, '—'
+            mark, rank, act = '✅ 決着', 7, '—'
+        elif t['共有済'] or '連絡先共有' in status:
+            # ⑩まで進んだ案件。運営の手離れ済みで、あとは結果の確認だけ
+            mark, rank = '🤝 お繋ぎ済み', 6
+            act = '結果を確認する（⑩から1週間が目安）'
+        elif '比較ページ送付' in status or '提示' in status:
+            mark, rank, act = '📤 選定待ち', 5, '依頼者の選定を待つ'
         elif t['打診'] == 0:
             mark, rank = '🚨 未打診', 0
             act = f"業者を選んで打診する（候補{t['未依頼']}件）" if t['未依頼'] else '業者候補の選定から'
@@ -76,8 +87,6 @@ def main():
         elif t['紹介可'] == 1:
             mark, rank = '🟡 あと1社', 2
             act = f"2社目を取る（未依頼{t['未依頼']}件）" if t['未依頼'] else '2社目を取る（候補の追加が必要）'
-        elif '比較ページ送付' in status or '提示' in status:
-            mark, rank, act = '📤 選定待ち', 5, '依頼者の選定を待つ'
         else:
             mark, rank, act = '🟢 比較可能', 3, '比較ページを作って依頼者へ送る'
 
