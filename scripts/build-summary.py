@@ -94,7 +94,7 @@ def main():
             mark, rank, act = '🟢 比較可能', 3, '比較ページを作って依頼者へ送る'
 
         out.append([
-            str(rank), mark, cid,
+            str(rank), mark, cid, r[C1['依頼者名']],
             r[C1['サービス']], r[C1['エリア']],
             r[C1['受付日']], str(days_since(r[C1['受付日']])),
             str(t['打診']), str(t['紹介可']), str(t['回答待ち']),
@@ -102,18 +102,19 @@ def main():
             act, status,
         ])
 
-    out.sort(key=lambda x: (x[0], -int(x[6] or 0)))
+    out.sort(key=lambda x: (x[0], -int(x[7] or 0)))
     for r in out:
         del r[0]  # 並べ替え用の rank は出力しない
 
-    header = ['状態', '案件ID', 'サービス', 'エリア', '受付日', '経過日数',
+    header = ['状態', '案件ID', '依頼者名', 'サービス', 'エリア', '受付日', '経過日数',
               '打診', '紹介可', '回答待ち', '辞退不達', '未依頼', '次の一手', '詳細ステータス']
     with OUT.open('w', encoding='utf-8', newline='') as f:
         csv.writer(f, lineterminator='\n').writerows([header] + out)
 
     print(f'{OUT.name}: {len(out)}件')
     for r in out:
-        print(f'  {r[0]:12s} {r[1]:22s} {r[5]:>3s}日  打診{r[6]:>3s} 可{r[7]:>2s} 待{r[8]:>3s} 未依頼{r[10]:>2s}  {r[11]}')
+        print(f'  {r[0]:12s} {r[1]:20s} {r[2][:18]:20s} {r[6]:>3s}日  '
+              f'打診{r[7]:>3s} 可{r[8]:>2s} 待{r[9]:>3s} 未依頼{r[11]:>2s}  {r[12]}')
 
 
 if __name__ == '__main__':
