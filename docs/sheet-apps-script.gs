@@ -15,15 +15,25 @@
  * 以降、1時間ごとに main ブランチの CSV を取り込んでタブを更新する。
  * こちらが git に push すれば、最大1時間で反映される。
  * 今すぐ反映したいときは、スプレッドシートのメニュー「ロカサポ」→「今すぐ同期」。
+ *
+ * 【貼り直しが必要なとき】
+ * このファイルは原本のコピーで、Google 側のスクリプトは自動では更新されない。
+ * スクリプト自体を書き換えたときだけ、手順2をやり直して貼り直すこと。
+ * CSV の列が増減しただけなら貼り直しは不要（列数はヘッダー行から読む）。
+ *
+ * 【同期できているかの確認】
+ * _sync_log タブの最終行を見る。失敗していれば理由がそこに書かれている。
  */
 
 var REPO = 'kkeisuke0407-crypto/local-support.jp';
 var BRANCH = 'main';
 
+// 列数は CSV のヘッダー行から読むので、ここに書かない。
+// 列を足しても引いてもスクリプトの貼り直しは不要。
 var TARGETS = [
-  { sheet: 'サマリ', path: 'docs/sheet-tab0-summary.csv', cols: 14 },
-  { sheet: '依頼者', path: 'docs/sheet-tab1-cases.csv', cols: 17 },
-  { sheet: '業者',   path: 'docs/sheet-tab2-quotes.csv', cols: 15 }
+  { sheet: 'サマリ', path: 'docs/sheet-tab0-summary.csv', minCols: 5 },
+  { sheet: '依頼者', path: 'docs/sheet-tab1-cases.csv', minCols: 5 },
+  { sheet: '業者',   path: 'docs/sheet-tab2-quotes.csv', minCols: 5 }
 ];
 
 /** 手動同期用のメニューを追加する */
@@ -42,16 +52,18 @@ function syncAll() {
     try {
       var rows = fetchCsv(t.path);
 
-      // 列数の検算。壊れた CSV でタブを潰さないための安全弁
+      // 列数の検算。壊れた CSV でタブを潰さないための安全弁。
+      // 正解の列数はヘッダー行そのもの。全行がそれに揃っているかだけを見る
       if (!rows.length) throw new Error('CSV が空です');
-      if (rows[0].length !== t.cols) {
-        throw new Error('列数が想定と違います（期待 ' + t.cols + ' / 実際 ' + rows[0].length + '）');
+      var cols = rows[0].length;
+      if (cols < (t.minCols || 2)) {
+        throw new Error('列が少なすぎます（' + cols + '列）。CSV が壊れている可能性があります');
       }
-      var bad = rows.filter(function (r) { return r.length !== t.cols; }).length;
-      if (bad) throw new Error(bad + ' 行の列数が不揃いです');
+      var bad = rows.filter(function (r) { return r.length !== cols; }).length;
+      if (bad) throw new Error(bad + ' 行の列数がヘッダー（' + cols + '列）と揃っていません');
 
       writeSheet(ss, t.sheet, rows);
-      results.push(t.sheet + ': ' + (rows.length - 1) + '行 OK');
+      results.push(t.sheet + ': ' + (rows.length - 1) + '行 ' + cols + '列 OK');
     } catch (e) {
       results.push(t.sheet + ': 失敗 — ' + e.message);
     }
