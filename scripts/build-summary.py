@@ -15,6 +15,9 @@ OUT = ROOT / 'docs/sheet-tab0-summary.csv'
 
 TODAY = datetime.date.today()
 
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
+
 # 決着済みと判定するステータスの手がかり（成約・失注のみ。お繋ぎ済みは別枠）
 CLOSED = ('成約', '失注', 'クローズ')
 
