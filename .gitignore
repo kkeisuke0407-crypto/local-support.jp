@@ -14,3 +14,7 @@ tools/
 # 請求書に入力した住所・振込先が公開されないようにする（このリポジトリは public）
 docs/invoice/*-filled.xlsx
 docs/invoice/*-filled.html
+
+# 比較ページ用の案件JSON。依頼者のメールアドレスを含むため公開リポジトリに置かない
+# （URL生成はスクラッチパッド上で行う）
+docs/*-2026-*.json
