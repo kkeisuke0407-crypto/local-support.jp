@@ -1,0 +1,48 @@
+---
+/**
+ * 県別ページで、全国版と同じ本文になるセクションの代わりに置くリンク集。
+ * 重複本文を載せずに、法令・リスク・失敗例などの詳細へ辿れるようにする。
+ */
+interface Props {
+  serviceSlug: string;
+  serviceName: string;
+  columns?: { href: string; title: string }[];
+}
+const { serviceSlug, serviceName, columns = [] } = Astro.props;
+const base = `/${serviceSlug}/`;
+const links = [
+  { href: `${base}#legal`, label: `${serviceName}の法令・義務` },
+  { href: `${base}#risk`, label: '点検しないまま放置したときのリスク' },
+  { href: `${base}#industry`, label: '業種・建物ごとのポイント' },
+  { href: `${base}#mistakes`, label: 'よくある失敗と防ぎ方' },
+  { href: `${base}#comparison-tips`, label: '業者を比較するときのコツ' },
+];
+---
+<section class="sd-section section-gray" id="common-guide">
+  <div class="sd-container">
+    <div class="cg-inner">
+      <h2 class="cg-title">{serviceName}の基本（全国共通）</h2>
+      <p class="cg-lead">法令や業者選びの基本は全国で共通のため、全国版のページにまとめています。</p>
+      <ul class="cg-list">
+        {links.map((l) => (<li><a href={l.href}>{l.label}</a></li>))}
+      </ul>
+      {columns.length > 0 && (
+        <>
+          <p class="cg-sub">くわしく解説したコラム</p>
+          <ul class="cg-list">
+            {columns.map((c) => (<li><a href={c.href}>{c.title}</a></li>))}
+          </ul>
+        </>
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  .cg-inner { max-width: 820px; margin: 0 auto; }
+  .cg-title { font-size: 1.3rem; font-weight: 800; margin: 0 0 .8rem; line-height: 1.5; }
+  .cg-lead { line-height: 1.9; color: #38454f; margin: 0 0 1rem; }
+  .cg-sub { font-weight: 700; margin: 1.2rem 0 .5rem; }
+  .cg-list { margin: 0; padding-left: 1.2em; line-height: 2; }
+  .cg-list a { color: var(--blue, #1565c0); }
+</style>

@@ -93,6 +93,25 @@ export interface ServiceData {
       costRows?: string[][];
       /** 共通FAQの末尾に追加する都道府県固有のFAQ */
       localFaq?: { q: string; a: string }[];
+      /**
+       * その都道府県で実際に寄せられた相談（匿名化）と、業者の回答から分かったこと。
+       * 他サイトにない一次情報として、県別ページを全国版の地名違いにしないための中核。
+       * 依頼者・業者が特定できる情報（社名・番地・正確な面積）は書かない。
+       */
+      localCases?: {
+        title: string;
+        lead: string;
+        cases: { label: string; facts: string; body: string }[];
+        findings: { title: string; body: string }[];
+      };
+      /**
+       * true のとき、全国版と同じ本文になるセクション（法令・放置リスク・業種別・失敗例・比較のコツ）を
+       * 全国版へのリンク集に置き換える。県別ページの重複率を下げるため。
+       */
+      condenseCommonSections?: boolean;
+      /** 都道府県ページ固有の title / description（未設定なら共通の定型文） */
+      metaTitle?: string;
+      metaDescription?: string;
     };
   };
 
