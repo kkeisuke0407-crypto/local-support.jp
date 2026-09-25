@@ -14,6 +14,7 @@ on:
     paths:
       - 'src/pages/**'
       - 'src/data/services/**'
+      - 'scripts/indexnow.mjs'
 
 jobs:
   notify:
@@ -31,8 +32,8 @@ jobs:
       - name: 鍵ファイルが公開されているか確認
         run: curl -fsS --retry 5 --retry-delay 30 https://local-support.jp/77dded00e4d205efe7e77527fcd8359b.txt
       - name: 変わったURLを通知
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && !contains(github.event.head_commit.message, '[indexnow-all]')
         run: node scripts/indexnow.mjs --from "${{ github.event.before }}" --to "${{ github.sha }}"
-      - name: 全URLを通知（手動実行）
-        if: github.event_name == 'workflow_dispatch'
+      - name: 全URLを通知（手動実行、またはコミットメッセージに [indexnow-all]）
+        if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[indexnow-all]')
         run: node scripts/indexnow.mjs --all
