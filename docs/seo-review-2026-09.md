@@ -106,4 +106,6 @@ AI経由は母数が小さいが転換率が突出して高い。
 - IndexNow 導入（GitHub Actions）、/column/ 抜けURLの301
 - コラム再開：/column/shobo-setsubi-apartment/
 - CLAUDE.md の横展開条件を「CVが出たサービス優先」に改定
+- IndexNow でサイトマップ全URLを一括送信（HTTP 200）。以降はコミットメッセージに `[indexnow-all]` を入れると全URL送信
+- スマホの Cookie バナーを約130px→68pxに圧縮（ファーストビューのCTAを隠さない）。ヒーローの「平均紹介社数」→「紹介社数」
 - 効果判定：次回GSC（2026-10下旬）で、上記7ページのインデックス登録と、CTR改修15ページのCTRを確認する
