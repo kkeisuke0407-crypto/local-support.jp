@@ -76,8 +76,9 @@ GA4に `/pest-control-haccp/` と `/pest-control/fukuoka/pest-control-haccp/` �
 残る**主要6都府県の県別LP 約80件が「内容が薄い・他と似ている」として登録を外されている**。
 sitemap 290URLに対し登録146＝**半分しか登録されていない**。
 
-ただし県別LPを noindex にはしない。Google では未登録の /signboard-inspection/saitama/ や
-/furon-tenken/kanagawa/ も、Bing 経由でCVを出している（noindex は Bing にも効く）。
+ただし県別LPを noindex にはしない。CVの着地になった県別LP9件のうち**6件が Google 未登録**
+（/shobo-setsubi/tokyo/・/shobo-setsubi/fukuoka/・/duct/tokyo/・/signboard-inspection/saitama/・
+/pest-control/osaka/・/jusuisou-seisou/kanagawa/）。これらは Bing 経由でCVを出している（noindex は Bing にも効く）。
 → **CVが出たサービスの県別LPから、地域固有の中身を足して Google に登録し直させる。**
 
 ## 7. GA4 チャネル別（6/27〜9/24）
