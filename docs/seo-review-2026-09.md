@@ -53,7 +53,7 @@ GA4に `/pest-control-haccp/` と `/pest-control/fukuoka/pest-control-haccp/` �
 
 1. Bing Webmaster Tools の確認・登録と IndexNow 実装（CVの7割とChatGPT経由の土台）
 2. §2 のCTR救出8ページの title/description 改修（消防3本を最優先）
-3. 消防設備点検バーティカルの強化：実案件から出たテーマのコラム追加、東京・福岡・埼玉の県別LPの厚み付け、`case/` への匿名事例
+3. 消防設備点検バーティカルの強化：実案件から出たテーマのコラム追加、東京・福岡・埼玉の県別LPの厚み付け（`case/` への事例追加は見送り＝2026-09-25 ユーザー判断で `case/` は現状維持）
 4. コラムslug直下URLの301（§3）
 5. コラム週1本の再開（消防→浄化槽）、CLAUDE.md の横展開条件を「CVが出たサービス優先」へ
 6. AI引用の月次チェック再開（`aio-test-queries.md`）
