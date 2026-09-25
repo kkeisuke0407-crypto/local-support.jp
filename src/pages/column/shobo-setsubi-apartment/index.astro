@@ -1,0 +1,364 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = 'アパートの消防設備点検｜費用・必要な点検・初めて頼むときの流れ';
+const description = '小さなアパートでも、消火器などの消防用設備があれば点検と報告の義務があります。点検は6か月ごと・1年ごと、消防署への報告は3年に1回。どの設備が義務になるか、費用の目安（〜30戸で年3〜8万円）、誰が点検できるか、初めて業者に頼むときの流れを、実際に寄せられた相談の傾向とあわせて解説します。';
+const canonical = `${site.domain}/column/shobo-setsubi-apartment/`;
+const published = '2026-09-25';
+const modified = '2026-09-25';
+
+const faqItems = [
+  {
+    q: '部屋数の少ないアパートでも消防設備点検は必要ですか？',
+    a: '消火器や自動火災報知設備などの消防用設備等が設置されていれば、戸数や規模にかかわらず点検と報告の義務があります（消防法第17条の3の3）。共同住宅では延べ面積150㎡以上で消火器の設置が必要になるため、多くのアパートが対象になります。',
+  },
+  {
+    q: 'アパートの消防設備点検の報告は何年ごとですか？',
+    a: '共同住宅は非特定防火対象物のため、消防署への報告は3年に1回です。ただし点検そのものは、機器点検を6か月に1回、総合点検を1年に1回行い、その結果を記録しておく必要があります。報告しない年も点検は必要です。',
+  },
+  {
+    q: '各部屋の住宅用火災警報器も点検の対象ですか？',
+    a: '各住戸に取り付ける住宅用火災警報器は、消防用設備等の点検・報告の制度とは別の決まりで設置するもので、消防署への点検報告の対象ではありません。ただし電池切れや本体の寿命（10年が目安）があるため、入居者の入れ替わりや点検の機会に動作を確認しておくと安心です。',
+  },
+  {
+    q: 'オーナーが自分で点検してもよいですか？',
+    a: '共同住宅は非特定防火対象物のため、延べ面積1,000㎡以上で消防長などが指定した建物を除き、資格がなくても建物の関係者が点検できます。ただし自動火災報知設備の作動確認には専用の器具が必要で、報告書の様式に沿った記録も求められるため、実際には点検業者に依頼する人がほとんどです。',
+  },
+  {
+    q: 'どんな消防設備があるか分からなくても業者に相談できますか？',
+    a: '相談できます。ロカサポに寄せられた相談でも、設備の内訳を把握していないオーナーは珍しくなく、業者は「現地で確認する」前提で対応できると回答していました。竣工時の書類（消防用設備等の設置届や検査済証の控え）があれば話は早くなりますが、なくても進められます。',
+  },
+  {
+    q: '点検結果を報告しないとどうなりますか？',
+    a: '報告をしない、または虚偽の報告をした場合は、30万円以下の罰金または拘留の対象になります（消防法第44条）。実際には、まず消防署から報告を求める通知や指導が届くことが多く、竣工から数年たって通知で初めて義務を知るケースもあります。',
+  },
+];
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: 'アパートの消防設備点検', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'Article',
+  headline: title, description, datePublished: published, dateModified: modified,
+  inLanguage: 'ja-JP', url: canonical, mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 5000,
+  articleSection: '消防設備点検',
+  keywords: 'アパート,消防設備点検,共同住宅,費用,報告,3年に1回,消火器,自動火災報知設備,オーナー',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-shobo-setsubi.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '消防設備点検' },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: faqItems.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-shobo-setsubi.png` },
+});
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified} title={title} description={description} canonical={canonical} siteName={site.name} logoSub="施設管理の一括見積比較" jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}>
+  <article class="cl-article">
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>アパートの消防設備点検</span>
+        </nav>
+        <span class="cl-cat">消防設備点検</span>
+        <h1 class="cl-title">アパートの消防設備点検｜費用・必要な点検・初めて頼むときの流れ</h1>
+        <p class="cl-lead">
+          「部屋数の少ないアパートでも消防設備点検は必要？」「何年ごとに、何をすればいい？」「業者にはどう頼めばいい？」。アパートのオーナーや管理担当の方から、こうした相談が多く寄せられます。この記事では、<strong>どの設備が義務になるか、点検と報告の頻度、費用の目安、初めて頼むときの流れ</strong>を、ロカサポに実際に寄せられた相談で分かったこととあわせて整理しました。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年9月25日</time>
+          <span>最終更新：2026年9月25日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 小さなアパートでも消防設備点検は必要ですか？</p>
+        <p class="cl-qa-a">A. <strong>消火器などの消防用設備があれば、規模にかかわらず必要です。</strong>点検は機器点検を6か月に1回・総合点検を1年に1回、消防署への報告は共同住宅なら3年に1回。費用の目安は〜30戸で年3〜8万円です。</p>
+        <p class="cl-qa-src">※消防法第17条の3の3・消防法施行令にもとづく一般的な整理（2026年9月時点）。個別の建物の要件は所轄の消防署か点検業者に確認してください。</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="shobo-setsubi" serviceName="消防設備点検" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#need">アパートで義務になる消防設備</a></li>
+          <li><a href="#frequency">点検と報告の頻度</a></li>
+          <li><a href="#who">誰が点検できるか</a></li>
+          <li><a href="#cost">費用の目安</a></li>
+          <li><a href="#flow">初めて業者に頼むときの流れ</a></li>
+          <li><a href="#cases">実際の相談から分かったこと</a></li>
+          <li><a href="#tenant">入居者への案内と室内の点検</a></li>
+          <li><a href="#penalty">報告しないとどうなるか</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>対象</strong>：共同住宅は延べ面積150㎡以上で消火器が必要になるため、多くのアパートが点検・報告の対象</li>
+            <li><strong>頻度</strong>：機器点検6か月ごと・総合点検1年ごと。消防署への報告は3年に1回（報告しない年も点検は必要）</li>
+            <li><strong>進め方</strong>：設備が分からなくても相談できる。物件の近くに拠点がある点検会社から当たると早い</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="need" class="cl-section">
+        <h2>アパートで義務になる消防設備</h2>
+        <p>アパートやマンションは、消防法施行令の「令別表第一（5）項ロ」＝共同住宅に分類されます。どの消防設備が義務になるかは、主に<strong>延べ面積・階数・収容人員</strong>で決まります。共同住宅の主な基準は次のとおりです。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>共同住宅で設置が必要になる主な消防用設備（原則）</caption>
+            <thead><tr><th scope="col">設備</th><th scope="col">設置が必要になる主な条件</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">消火器</th><td>延べ面積150㎡以上。地階・無窓階・3階以上の階は、その階の床面積50㎡以上</td></tr>
+              <tr><th scope="row">自動火災報知設備</th><td>延べ面積500㎡以上（ほかに階や用途による条件あり）</td></tr>
+              <tr><th scope="row">屋内消火栓設備</th><td>延べ面積700㎡以上。建物の構造によっては1,400㎡・2,100㎡まで緩和</td></tr>
+              <tr><th scope="row">避難器具</th><td>2階以上の階・地階で、その階の収容人員が30人以上（下の階に店舗などがある場合は10人以上）</td></tr>
+              <tr><th scope="row">誘導灯</th><td>共同住宅は、地階・無窓階・11階以上の部分に限って必要</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>2階建て・延べ200〜400㎡ほどの一般的なアパートなら、<strong>消火器が中心</strong>で、規模や構造によって自動火災報知設備や避難器具が加わる、というのがよくある形です。</p>
+        <p>ただし、共同住宅には設備の代わりに別の方法を認める特例があり、市町村の条例で上乗せの基準があることもあります。実際の建物に何が必要かは、竣工時の書類で確認するか、所轄の消防署か点検業者に確認するのが確実です。</p>
+        <div class="cl-callout cl-callout--warn">
+          <h3 class="cl-callout-h">各部屋の住宅用火災警報器は別の制度</h3>
+          <ul>
+            <li>各住戸に取り付ける住宅用火災警報器は、消防署への点検報告の対象ではありません</li>
+            <li>ただし電池切れや本体の寿命（10年が目安）があるため、入居者の入れ替わりのときなどに動作を確認しておくと安心です</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="frequency" class="cl-section">
+        <h2>点検と報告の頻度</h2>
+        <p>消防設備点検は「点検する義務」と「消防署へ報告する義務」の2つに分かれます。アパート（共同住宅）は非特定防火対象物にあたるため、報告は3年に1回です。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>アパート（共同住宅）の点検・報告の頻度</caption>
+            <thead><tr><th scope="col">区分</th><th scope="col">頻度</th><th scope="col">内容</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">機器点検</th><td>6か月に1回</td><td>外観や簡単な操作で、設備の配置・損傷・機能を確認</td></tr>
+              <tr><th scope="row">総合点検</th><td>1年に1回</td><td>設備を実際に作動させて、全体として機能するかを確認</td></tr>
+              <tr><th scope="row">消防署への報告</th><td>3年に1回</td><td>点検結果を報告書にまとめて所轄の消防署へ提出</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>よくある誤解が「報告が3年に1回だから、点検も3年に1回でよい」というものです。<strong>点検は毎年必要</strong>で、報告しない年の点検結果も記録として残しておきます。多くの業者は、年2回の訪問（うち1回で総合点検）と3年ごとの報告書の作成・提出をまとめた年間契約で請け負っています。機器点検と総合点検の違いは<a href="/column/shobo-setsubi-kiki-sougou/">機器点検と総合点検の違い</a>で詳しく解説しています。</p>
+      </section>
+
+      <section id="who" class="cl-section">
+        <h2>誰が点検できるか</h2>
+        <p>消防設備士または消防設備点検資格者による点検が義務になるのは、主に次の建物です。</p>
+        <ul>
+          <li>延べ面積1,000㎡以上の特定防火対象物（飲食店・物販店・ホテルなど）</li>
+          <li>延べ面積1,000㎡以上の非特定防火対象物のうち、消防長または消防署長が指定したもの</li>
+          <li>特定一階段等防火対象物（屋内階段が1つで、地階や3階以上に店舗などがある建物）</li>
+        </ul>
+        <p>一般的なアパートはこのいずれにも当たらないことが多く、<strong>資格がなくても建物の関係者（オーナーや管理者）が点検できます</strong>。ただし自動火災報知設備の作動確認には専用の試験器が必要で、報告書も決められた様式で作る必要があります。実際には点検業者に依頼するオーナーがほとんどです。自分で行う場合の範囲は<a href="/column/shobo-setsubi-jibun-de/">消防設備点検は自分でできる？</a>で整理しています。</p>
+      </section>
+
+      <section id="cost" class="cl-section">
+        <h2>費用の目安</h2>
+        <p>アパートの消防設備点検は、年間契約（年2回の訪問＋3年ごとの報告書作成・提出）で依頼するのが一般的です。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>共同住宅の消防設備点検の年間費用（全国の目安・税込）</caption>
+            <thead><tr><th scope="col">規模</th><th scope="col">年間費用の目安</th><th scope="col">主な点検対象</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">〜30戸</th><td>30,000〜80,000円</td><td>消火器・自動火災報知設備・誘導灯</td></tr>
+              <tr><th scope="row">30〜100戸</th><td>50,000〜150,000円</td><td>上記＋連結送水管・避難器具</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>費用は、設備の種類と数、戸数（室内の感知器の数）、立ち会いの段取り、物件までの距離で変わります。東京都内は全国平均よりやや高い傾向があります。点検で不具合が見つかった場合の修理や消火器の交換は、点検とは別の見積もりになるのが一般的です。建物の規模別の詳しい相場や、是正工事の単価は<a href="/column/shobo-setsubi-hiyo-sohba/">消防設備点検の費用相場</a>にまとめています。</p>
+        <p class="cl-note">※費用はロカサポの相場調査にもとづく目安です。正式な金額は、現地を確認したうえで業者から提示されます。</p>
+      </section>
+
+      <section id="flow" class="cl-section">
+        <h2>初めて業者に頼むときの流れ</h2>
+        <ol>
+          <li><strong>建物の基本情報をまとめる</strong>：所在地、階数、延べ面積のおおよそ、戸数。竣工時の書類（消防用設備等の設置届・検査済証の控え）があれば手元に用意します。設備の内訳が分からなくても相談できます</li>
+          <li><strong>点検業者に相談する</strong>：年間契約でよいか、報告書の作成と消防署への提出まで任せられるか、現地調査の費用がかかるかを確認します</li>
+          <li><strong>現地を確認してもらい、正式な見積もりを受け取る</strong>：設備の数と種類が分かって初めて金額が決まるのが一般的です</li>
+          <li><strong>入居者に点検の日程を知らせる</strong>：室内に感知器がある場合は入居者の立ち会いが必要です。2週間ほど前までに案内を配ります</li>
+          <li><strong>点検を受ける</strong>：小さなアパートなら半日ほどで終わることが多いです</li>
+          <li><strong>報告書を消防署へ提出する</strong>：報告の年にあたる場合は、業者に作成と提出を代行してもらえます。電子申請に対応している消防本部もあります</li>
+          <li><strong>不具合があれば直す</strong>：点検で指摘された箇所は、修理や交換の見積もりを取って対応します</li>
+        </ol>
+        <p>報告書の様式や提出先は<a href="/column/shobo-setsubi-houkokusho/">消防設備点検報告書の書き方と提出先</a>で解説しています。</p>
+      </section>
+
+      <section id="cases" class="cl-section">
+        <h2>実際の相談から分かったこと</h2>
+        <p>ロカサポには、延べ面積200〜400㎡ほどの小さなアパートや事務所ビルから、点検を初めて頼みたいという相談が寄せられています（東京都内・2026年9月時点）。業者とのやり取りから、次のようなことが分かりました。</p>
+        <h3>設備の内訳が分からなくても、業者は対応できる</h3>
+        <p>「消火器はあるが、ほかは分からない」という状態で相談されたケースでも、業者は「設備の内訳は現地で確認する」前提で対応できると回答していました。図面や設備の一覧をそろえてから相談する必要はありません。</p>
+        <h3>物件の近くに拠点がある点検会社のほうが、返事が早い</h3>
+        <p>「対応できる」と回答したのは、物件と同じ区や隣接する市に拠点を置く、中小の点検会社でした。広い地域で営業している会社からは返事がないことも多く、最初の回答が届くまで2週間ほどかかったケースもあります。報告の期限がある場合は、早めに相談を始めてください。</p>
+        <h3>「直近の点検報告書」を求められることがある</h3>
+        <p>見積もりの前に、過去の点検報告書を見たいという業者がいます。初めて点検を頼む建物には報告書がないため、その旨を伝えれば問題なく進みます。</p>
+        <h3>消防署からの通知で、初めて義務を知ることもある</h3>
+        <p>竣工から3年あまり点検と報告をしていなかった建物に、消防署から「点検結果の報告が確認できない」という通知が届いたケースがありました。通知には提出期限が書かれていなかったため、オーナーは急いで業者を探していましたが、実際には2週間ほど先の日程で十分に間に合いました。慌てる前に、業者に状況を伝えて段取りを相談するのが近道です。</p>
+      </section>
+
+      <section id="tenant" class="cl-section">
+        <h2>入居者への案内と室内の点検</h2>
+        <p>自動火災報知設備がある建物では、各住戸の室内にある感知器も点検の対象です。点検には入居者の立ち会いが必要になるため、次の点を案内に書いておくとスムーズです。</p>
+        <ul>
+          <li>点検の日時（候補を2つほど用意すると不在が減ります）</li>
+          <li>室内での作業内容と所要時間（1住戸あたり数分程度が多い）</li>
+          <li>当日に非常ベルが鳴ることがある旨</li>
+          <li>不在の場合の連絡先と、再点検の段取り</li>
+        </ul>
+        <p>不在や立ち会いの拒否が続く場合の対応と、そのまま使える案内文の例は<a href="/column/shobo-setsubi-fuzai-tachiai/">消防設備点検で不在・立ち会えないとどうなる？</a>にまとめています。</p>
+      </section>
+
+      <section id="penalty" class="cl-section">
+        <h2>報告しないとどうなるか</h2>
+        <p>点検結果を報告しない、または虚偽の報告をした場合は、<strong>30万円以下の罰金または拘留</strong>の対象になります（消防法第44条）。法人の場合は、法人も罰金の対象になります。</p>
+        <p>実際には、いきなり罰則になるのではなく、まず消防署から報告を求める通知や指導が届くのが一般的です。消防署の立入検査で点検記録を確認されることもあります。何年も点検していなかったことに気づいた場合も、まずは点検業者に相談し、点検と報告を済ませるのが先決です。法令の詳細は<a href="/column/shobo-setsubi-horei-gimu/">消防設備点検の義務とは</a>で解説しています。</p>
+      </section>
+
+      <div class="cl-cta">
+        <h2>アパートの消防設備点検の業者探しなら</h2>
+        <p>資格を確認した点検業者から、条件に合う会社を<br/>最大5社ご紹介します（完全無料）</p>
+        <a class="cta-btn-primary" href="/shobo-setsubi/">無料で業者を探す</a>
+      </div>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          {faqItems.map((f) => (
+            <div class="cl-faq-item"><dt>{f.q}</dt><dd>{f.a}</dd></div>
+          ))}
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別の消防設備点検業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/shobo-setsubi/tokyo/">東京都</a></li>
+          <li><a href="/shobo-setsubi/osaka/">大阪府</a></li>
+          <li><a href="/shobo-setsubi/kanagawa/">神奈川県</a></li>
+          <li><a href="/shobo-setsubi/aichi/">愛知県</a></li>
+          <li><a href="/shobo-setsubi/saitama/">埼玉県</a></li>
+          <li><a href="/shobo-setsubi/fukuoka/">福岡県</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/shobo-setsubi/">全国の対応業者を見る</a></p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="shobo-setsubi" serviceName="消防設備点検" variant="bottom" />
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連コラム</h2>
+        <ul>
+          <li><a href="/column/shobo-setsubi-hiyo-sohba/">消防設備点検の費用相場｜建物規模・契約形態・是正工事の単価</a></li>
+          <li><a href="/column/shobo-setsubi-horei-gimu/">消防設備点検の義務とは｜年2回の点検と1年・3年ごとの報告、罰則</a></li>
+          <li><a href="/column/shobo-setsubi-fuzai-tachiai/">消防設備点検で不在・立ち会えないとどうなる？対応と案内文例</a></li>
+          <li><a href="/column/shobo-setsubi-kiki-sougou/">機器点検と総合点検の違い</a></li>
+          <li><a href="/column/shobo-setsubi-houkokusho/">消防設備点検報告書｜様式・提出先・保存・電子申請</a></li>
+          <li><a href="/column/shokaki-tenken/">消火器点検｜外観・機能・耐圧の3段階と頻度・費用</a></li>
+        </ul>
+      </aside>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; flex-wrap: wrap; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-author-link { color: #fff; text-decoration: underline; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-section a { color: var(--blue); text-decoration: underline; }
+.cl-note { font-size: .82rem; color: var(--gray-500); }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-callout li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-quickanswer { background: #eef6ff; border: 1.5px solid #1a56db; border-radius: 10px; padding: 18px 22px; margin-bottom: 32px; }
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+@media (max-width: 600px) { .cl-header { padding: 32px 0 28px; } .cl-body { padding: 28px 16px 48px; } .cl-section h2 { font-size: 1.15rem; } .cl-cta { padding: 28px 18px; } }
+</style>
