@@ -1,0 +1,65 @@
+---
+/**
+ * 県別ページ固有の「実際に寄せられた相談」と「業者の回答から分かったこと」。
+ * 全国版にない一次情報で、県別ページが地名置換だけの重複にならないようにする。
+ */
+interface Props {
+  title: string;
+  lead: string;
+  cases: { label: string; facts: string; body: string }[];
+  findings: { title: string; body: string }[];
+}
+const { title, lead, cases, findings } = Astro.props;
+---
+<section class="sd-section section-white" id="local-cases">
+  <div class="sd-container">
+    <div class="lc-inner">
+      <h2 class="lc-title">{title}</h2>
+      <p class="lc-lead">{lead}</p>
+      <div class="lc-cases">
+        {cases.map((c) => (
+          <article class="lc-case">
+            <h3 class="lc-case-label">{c.label}</h3>
+            <p class="lc-case-facts">{c.facts}</p>
+            <p class="lc-case-body">{c.body}</p>
+          </article>
+        ))}
+      </div>
+      <h3 class="lc-findings-title">業者の回答から分かったこと</h3>
+      <dl class="lc-findings">
+        {findings.map((f) => (
+          <div class="lc-finding">
+            <dt>{f.title}</dt>
+            <dd>{f.body}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </div>
+</section>
+
+<style>
+  .lc-inner { max-width: 820px; margin: 0 auto; }
+  .lc-title {
+    font-size: 1.4rem; font-weight: 800; line-height: 1.5;
+    margin: 0 0 1rem; padding-left: 0.9rem; border-left: 5px solid #2f80c4;
+  }
+  .lc-lead { font-size: 1rem; line-height: 1.9; color: #38454f; margin: 0 0 1.4rem; }
+  .lc-cases { display: grid; gap: 14px; margin-bottom: 2rem; }
+  .lc-case {
+    border: 1px solid var(--gray-200, #e5e7eb); border-radius: 10px;
+    padding: 16px 18px; background: #fff;
+  }
+  .lc-case-label { font-size: 1.05rem; font-weight: 800; margin: 0 0 6px; line-height: 1.5; }
+  .lc-case-facts { font-size: .88rem; color: var(--gray-500, #6b7280); margin: 0 0 10px; line-height: 1.7; }
+  .lc-case-body { font-size: .98rem; line-height: 1.9; color: #38454f; margin: 0; }
+  .lc-findings-title { font-size: 1.15rem; font-weight: 800; margin: 0 0 12px; }
+  .lc-findings { margin: 0; display: grid; gap: 12px; }
+  .lc-finding { background: var(--gray-50, #f8fafc); border-radius: 10px; padding: 14px 16px; }
+  .lc-finding dt { font-weight: 800; margin-bottom: 6px; line-height: 1.6; }
+  .lc-finding dd { margin: 0; line-height: 1.9; color: #38454f; font-size: .96rem; }
+  @media (max-width: 640px) {
+    .lc-title { font-size: 1.2rem; }
+    .lc-case { padding: 14px; }
+  }
+</style>
