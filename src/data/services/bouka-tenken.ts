@@ -308,6 +308,13 @@ const data: ServiceData = {
 
   relatedColumns: [
     {
+      href: '/column/shobo-setsubi-gimu-check/',
+      category: '法令・義務',
+      title: '消防点検の義務チェック｜建物の用途と面積で分かる点検・報告の頻度と資格の要否',
+      excerpt: '建物の用途・延べ面積・階段・収容人員を選ぶだけで、消防設備点検と防火対象物点検の要否、報告の頻度、資格者の要否が分かる無料チェック。',
+      date: '2026-09-25',
+    },
+    {
       href: '/column/bouka-tenken-horei-gimu/',
       category: '法令・義務',
       title: '防火対象物点検の法定義務ガイド｜対象施設・報告頻度・特例認定・資格者要件',
