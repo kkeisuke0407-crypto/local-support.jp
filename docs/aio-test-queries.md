@@ -3,9 +3,31 @@
 ChatGPT・Perplexity・Google AI Overview・Claudeに対して定期的に投げ、
 local-support.jp が回答ソースに引用されるかを確認するためのテストクエリ集。
 
+## まず試す10問（月1回・15分でできる版／2026-09-25 追加）
+
+ChatGPT（検索オン）と Perplexity に、下の10問をそのまま貼って質問する。
+ロカサポ（local-support.jp）が回答中のリンク・出典に出たかどうかだけ記録すればよい。
+9月にCVが出た「消防設備点検」を中心に、依頼者が実際に打ちそうな聞き方にしている。
+
+| # | 質問（そのまま貼る） | 狙っているページ |
+|---|---|---|
+| 1 | アパートの消防設備点検は何年ごとに必要？費用はいくら？ | /column/shobo-setsubi-apartment/ |
+| 2 | 東京で小さなビルの消防設備点検を頼める業者の探し方を教えて | /shobo-setsubi/tokyo/ |
+| 3 | 消防設備点検の報告書はどこに出す？何年ごと？ | /column/shobo-setsubi-houkokusho/ |
+| 4 | 消防設備点検で入居者が不在だとどうなる？ | /column/shobo-setsubi-fuzai-tachiai/ |
+| 5 | 防火対象物点検はどんな建物が対象？消防設備点検との違いは？ | /column/bouka-tenken-horei-gimu/ |
+| 6 | キュービクルの年次点検は義務？月次点検との違いは？ | /column/jikayou-denki-horei-gimu/ |
+| 7 | 受水槽の清掃は年何回義務？費用の目安は？ | /column/jusuisou-seisou-horei-gimu/ |
+| 8 | 浄化槽の維持費は年間いくら？ | /column/johkasou-hiyo-sohba/ |
+| 9 | 福岡で病院の消防設備点検とキュービクル点検を頼める業者を探したい | /shobo-setsubi/fukuoka/ |
+| 10 | 港区でオフィス移転の引越し業者を比較したい | /office-iten/tokyo/ |
+
+記録は下の「記録テンプレート」か、`docs/seo-review-YYYY-MM.md` の月次レビューに1行ずつ残す。
+引用されなかった質問は、狙いのページの冒頭（結論の1〜2文）と数字を見直す。
+
 ## 運用ルール
 
-- **頻度**：週1回（毎週月曜）
+- **頻度**：月1回（上の10問）。余力があれば下のクエリリストも
 - **記録項目**：日付／クエリ／AI／引用有無／引用URL／回答の要約
 - **記録先**：`seo-scoring-template.csv` の「AI引用」列に反映
 - **判定**：いずれか1AIでも引用されたら、そのページに15点加点
@@ -91,7 +113,7 @@ local-support.jp が回答ソースに引用されるかを確認するための
 ## 記録テンプレート（コピー&ペースト用）
 
 ```
-日付：2025-MM-DD
+日付：2026-MM-DD
 AI：ChatGPT / Perplexity / Google AI Overview / Claude
 クエリ：「[クエリ]」
 引用有無：あり / なし
