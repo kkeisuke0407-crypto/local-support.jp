@@ -3,6 +3,7 @@
 //   node scripts/indexnow.mjs --all                     … 公開中の sitemap の全URLを送る
 //   --dry-run を付けると送信せずに対象URLだけ表示する
 // main への push 後に .github/workflows/indexnow.yml から実行される。
+// 全URLを送り直したいときは、コミットメッセージに [indexnow-all] を含めて main に push する。
 import fs from 'node:fs';
 import { execSync } from 'node:child_process';
 
