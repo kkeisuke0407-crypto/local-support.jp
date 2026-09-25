@@ -95,5 +95,15 @@ AI経由は母数が小さいが転換率が突出して高い。
 
 ## 5. 未取得のデータ
 
-- Bing Webmaster Tools：**未登録**（2026-09-25 ユーザー確認）。登録後に検索パフォーマンスを取得する
+- Bing Webmaster Tools：2026-09-25 に登録済み（ユーザー作業）。データが数日たまったら検索パフォーマンスを取得する
 - GA4 の参照元/メディア別（Organic の Google/Bing 内訳）
+
+## 8. 実施ログ（2026-09-25）
+
+- 県別LP 7ページに匿名の相談事例を追加し、全国版と同じ本文を要約リンクに置換（shobo-setsubi tokyo/fukuoka、bouka-tenken tokyo、duct tokyo、signboard-inspection saitama、pest-control osaka、jusuisou-seisou kanagawa）。全国版との同一率 78%→46〜54%
+- CTR救出：第1弾8ページ、第2弾7ページ（サービスLP 4：pest-control・grease-trap・aircon-business・jusuisou-seisou／コラム3：bouka-tenken-horei-gimu・shobo-setsubi-houkokusho・jikayou-denki-horei-gimu）の title/description 改修
+- 受水槽の法令コラムの誤り（特定建築物に病院を含めていた）を修正
+- IndexNow 導入（GitHub Actions）、/column/ 抜けURLの301
+- コラム再開：/column/shobo-setsubi-apartment/
+- CLAUDE.md の横展開条件を「CVが出たサービス優先」に改定
+- 効果判定：次回GSC（2026-10下旬）で、上記7ページのインデックス登録と、CTR改修15ページのCTRを確認する
