@@ -71,6 +71,12 @@ export interface ServiceData {
 
   relatedServiceSlugs: string[];
 
+  /**
+   * 実案件でセット依頼が多いサービス。見積フォームに「あわせて依頼が多いサービス」として
+   * 最初から見える形で出し、1回の送信で複数サービスを依頼できるようにする。
+   */
+  bundleServiceSlugs?: string[];
+
   relatedColumns?: {
     href: string;
     category: string;

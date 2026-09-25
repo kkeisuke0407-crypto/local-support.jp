@@ -304,6 +304,7 @@ const data: ServiceData = {
   ],
 
   relatedServiceSlugs: ['jusuisou-seisou', 'duct', 'shutter'],
+  bundleServiceSlugs: ['bouka-tenken', 'jikayou-denki'],
 
   relatedColumns: [
     {
