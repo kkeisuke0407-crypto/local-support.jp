@@ -22,6 +22,7 @@ const FEATURED_COLUMNS = [
   { slug: 'asbestos-batsu', title: 'アスベスト法令違反の罰則2026｜大防法・石綿則' },
   { slug: 'asbestos-horei-gimu', title: 'アスベスト調査の法定義務ガイド' },
   { slug: 'shobo-setsubi-horei-gimu', title: '消防設備点検の法定義務ガイド｜機器点検・総合点検' },
+  { slug: 'shobo-setsubi-gimu-check', title: '消防点検の義務チェック｜用途と面積で分かる点検・報告の頻度と資格の要否（無料ツール）' },
   { slug: 'shobo-setsubi-gyosha-norikae', title: '消防設備点検の業者を変更する手順｜解約・引き継ぎ・切り替えの注意点' },
   { slug: 'shobo-setsubi-byoin-fukushi', title: '病院・介護施設の消防設備点検｜年1回の報告・点検時の注意と業者選び' },
   { slug: 'shobo-setsubi-apartment', title: 'アパートの消防設備点検｜費用・必要な点検・初めて頼むときの流れ' },

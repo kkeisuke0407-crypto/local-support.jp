@@ -1,0 +1,523 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { site } from '../../../data/site';
+
+const title = '消防点検の義務チェック｜建物の用途と面積で分かる点検・報告の頻度と資格の要否';
+const description = '建物の用途・延べ面積・階段・収容人員を選ぶだけで、消防設備点検と防火対象物点検が必要か、消防署への報告は1年ごとか3年ごとか、資格者に頼む必要があるかが分かる無料チェックです。消防法第17条の3の3・第8条の2の2と施行令にもとづいて判定します。';
+const canonical = `${site.domain}/column/shobo-setsubi-gimu-check/`;
+const published = '2026-09-25';
+const modified = '2026-09-25';
+
+const faqItems = [
+  {
+    q: '消防設備点検が必要な建物はどれですか？',
+    a: '消火器・自動火災報知設備・誘導灯・スプリンクラーなどの消防用設備等が設置されている建物は、用途や規模にかかわらず点検と報告の義務があります（消防法第17条の3の3）。戸建て住宅は対象外です。',
+  },
+  {
+    q: '消防署への報告は何年ごとですか？',
+    a: '飲食店・物販店・ホテル・病院・福祉施設などの特定防火対象物は1年に1回、共同住宅・事務所・学校・工場・倉庫などの非特定防火対象物は3年に1回です。点検そのものは、どちらも機器点検を6か月に1回、総合点検を1年に1回行います。',
+  },
+  {
+    q: '資格者に点検してもらわないといけないのはどんな建物ですか？',
+    a: '延べ面積1,000㎡以上の特定防火対象物、地下や3階以上に特定用途の部分があり屋内階段が1つしかない建物（特定一階段等防火対象物）、全域放出方式の二酸化炭素消火設備がある建物です。延べ面積1,000㎡以上の非特定防火対象物も、消防長または消防署長が指定した場合は資格者の点検が必要です（消防法施行令第36条）。',
+  },
+  {
+    q: '防火対象物点検と消防設備点検は何が違いますか？',
+    a: '消防設備点検は消火器や感知器などの設備が正しく動くかを確かめる点検です。防火対象物点検は、防火管理者の選任や避難経路の管理、防炎物品の使用など、建物の防火管理の状況を確かめる点検です。防火対象物点検は、収容人員300人以上の特定防火対象物などに限って義務になります（消防法第8条の2の2）。',
+  },
+  {
+    q: 'このチェックの結果だけで判断してよいですか？',
+    a: '目安として使ってください。建物の用途の判定や収容人員の数え方、消防長の指定の有無は建物ごとに異なります。最終的には、建物を管轄する消防署か点検業者に確認してください。',
+  },
+];
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '消防点検の義務チェック', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'Article',
+  headline: title, description, datePublished: published, dateModified: modified,
+  inLanguage: 'ja-JP', url: canonical, mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  articleSection: '消防設備点検',
+  keywords: '消防設備点検,義務,対象,防火対象物点検,報告,頻度,資格,特定防火対象物,特定一階段等防火対象物,チェック',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-shobo-setsubi.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '消防設備点検' },
+});
+
+const appLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'WebApplication',
+  name: '消防点検の義務チェック',
+  url: canonical,
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'All',
+  inLanguage: 'ja-JP',
+  isAccessibleForFree: true,
+  offers: { '@type': 'Offer', price: 0, priceCurrency: 'JPY' },
+  description: '建物の用途・延べ面積・階段・収容人員から、消防設備点検と防火対象物点検の要否、報告の頻度、資格者による点検の要否を判定する無料ツール。',
+  publisher: { '@id': `${site.domain}/#organization` },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: faqItems.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-shobo-setsubi.png` },
+});
+
+const uses = {
+  特定防火対象物: [
+    ['3', '飲食店・レストラン・カフェ'],
+    ['4', '物販店・スーパー・百貨店'],
+    ['5i', 'ホテル・旅館'],
+    ['6i', '病院・診療所'],
+    ['6ro', '特別養護老人ホーム・グループホームなど（入所型の介護施設）'],
+    ['6ha', 'デイサービス・保育所・障害者の通所施設など'],
+    ['6ni', '幼稚園・特別支援学校'],
+    ['1', '劇場・映画館・集会場・公会堂'],
+    ['2', 'カラオケ・遊技場・ナイトクラブ'],
+    ['9i', 'サウナ・蒸気浴場'],
+    ['16i', '複合ビル（店舗・飲食店・医院などが入っている）'],
+  ],
+  非特定防火対象物: [
+    ['5ro', 'マンション・アパート・寮'],
+    ['15', '事務所・オフィスビル'],
+    ['16ro', '複合ビル（事務所と住宅だけで、店舗などは入っていない）'],
+    ['7', '学校（小・中・高・大学・専門学校）'],
+    ['12', '工場・作業場'],
+    ['14', '倉庫'],
+  ],
+  そのほか: [
+    ['house', '戸建て住宅（自宅）'],
+  ],
+};
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified} title={title} description={description} canonical={canonical} siteName={site.name} logoSub="施設管理の一括見積比較" jsonLdBlocks={[breadcrumbLd, articleLd, appLd, faqLd, webPageLd]}>
+  <article class="cl-article">
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>消防点検の義務チェック</span>
+        </nav>
+        <span class="cl-cat">消防設備点検</span>
+        <h1 class="cl-title">消防点検の義務チェック｜建物の用途と面積で分かる点検・報告の頻度と資格の要否</h1>
+        <p class="cl-lead">
+          「うちの建物は消防点検が必要？」「報告は毎年？3年ごと？」「資格者に頼まないといけない？」。建物の用途と面積などを選ぶだけで、<strong>必要な点検・消防署への報告の頻度・資格者の要否</strong>が分かります。登録や個人情報の入力は不要です。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年9月25日</time>
+          <span>最終更新：2026年9月25日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 消防点検が必要な建物は？</p>
+        <p class="cl-qa-a">A. <strong>消火器などの消防用設備が1つでもあれば、消防設備点検と報告の義務があります。</strong>点検は6か月ごと（機器点検）と1年ごと（総合点検）、報告は飲食店・病院などの特定防火対象物が1年に1回、マンション・事務所などが3年に1回です。</p>
+        <p class="cl-qa-src">※消防法第17条の3の3・第8条の2の2、消防法施行令第4条の2の2・第36条、消防法施行規則第31条の6にもとづく整理（2026年9月時点）。</p>
+      </div>
+
+      <section id="check" class="gc-tool" aria-label="消防点検の義務チェック">
+        <h2 class="gc-tool-h">建物について選んでください</h2>
+        <form id="gc-form" class="gc-form" onsubmit="return false;">
+          <div class="gc-q">
+            <label class="gc-label" for="gc-use"><span class="gc-num">1</span>建物の用途</label>
+            <p class="gc-hint">いくつかの用途が入っているビルは「複合ビル」を選んでください。</p>
+            <select id="gc-use" name="use" class="gc-select">
+              <option value="">選んでください</option>
+              {Object.entries(uses).map(([group, items]) => (
+                <optgroup label={group}>
+                  {items.map(([v, l]) => <option value={v}>{l}</option>)}
+                </optgroup>
+              ))}
+            </select>
+          </div>
+
+          <fieldset class="gc-q" data-when="building">
+            <legend class="gc-label"><span class="gc-num">2</span>消防用設備はありますか</legend>
+            <p class="gc-hint">消火器・自動火災報知設備（感知器・非常ベル）・誘導灯・スプリンクラー・屋内消火栓など。1つでもあれば「ある」です。</p>
+            <div class="gc-opts">
+              <label><input type="radio" name="equip" value="yes" />ある</label>
+              <label><input type="radio" name="equip" value="no" />ない</label>
+              <label><input type="radio" name="equip" value="unknown" />分からない</label>
+            </div>
+          </fieldset>
+
+          <fieldset class="gc-q" data-when="building">
+            <legend class="gc-label"><span class="gc-num">3</span>延べ面積（全部の階の床面積の合計）</legend>
+            <div class="gc-opts">
+              <label><input type="radio" name="area" value="lt1000" />1,000㎡未満</label>
+              <label><input type="radio" name="area" value="ge1000" />1,000㎡以上</label>
+              <label><input type="radio" name="area" value="unknown" />分からない</label>
+            </div>
+          </fieldset>
+
+          <fieldset class="gc-q" data-when="tokutei">
+            <legend class="gc-label"><span class="gc-num">4</span>地下または3階以上の階に、上で選んだ用途（店舗・飲食店・医院など）の部分があり、その階から地上に通じる屋内階段が1つだけですか</legend>
+            <p class="gc-hint">屋外階段や2つ目の階段がある場合は「いいえ」です。</p>
+            <div class="gc-opts">
+              <label><input type="radio" name="stair" value="yes" />はい</label>
+              <label><input type="radio" name="stair" value="no" />いいえ</label>
+              <label><input type="radio" name="stair" value="unknown" />分からない</label>
+            </div>
+          </fieldset>
+
+          <fieldset class="gc-q" data-when="tokutei">
+            <legend class="gc-label"><span class="gc-num">5</span>収容人員（従業員と、客・患者・入所者などを合わせた最大の人数）</legend>
+            <div class="gc-opts">
+              <label><input type="radio" name="cap" value="lt10" />10人未満</label>
+              <label><input type="radio" name="cap" value="10to29" />10〜29人</label>
+              <label><input type="radio" name="cap" value="30to299" />30〜299人</label>
+              <label><input type="radio" name="cap" value="ge300" />300人以上</label>
+              <label><input type="radio" name="cap" value="unknown" />分からない</label>
+            </div>
+          </fieldset>
+
+          <fieldset class="gc-q" data-when="building">
+            <legend class="gc-label"><span class="gc-num" data-co2-num>6</span>駐車場・電気室などに、部屋全体にガスを放出する二酸化炭素消火設備がありますか</legend>
+            <div class="gc-opts">
+              <label><input type="radio" name="co2" value="no" />ない</label>
+              <label><input type="radio" name="co2" value="yes" />ある</label>
+              <label><input type="radio" name="co2" value="unknown" />分からない</label>
+            </div>
+          </fieldset>
+        </form>
+
+        <div id="gc-result" class="gc-result" aria-live="polite" hidden>
+          <h2 class="gc-result-h">チェック結果</h2>
+          <div id="gc-cards"></div>
+          <p class="gc-note">※目安です。用途の判定・収容人員の数え方・消防長の指定の有無は建物ごとに異なるため、最終的には管轄の消防署か点検業者に確認してください。</p>
+          <div class="gc-cta">
+            <p>点検を頼める業者を探すなら、ロカサポが条件に合う業者を<strong>最大5社ご紹介</strong>します（無料）。</p>
+            <div class="gc-cta-btns">
+              <a class="cta-btn-primary" href="/shobo-setsubi/" data-track="gimu_check_cta_shobo">消防設備点検の業者を探す</a>
+              <a class="gc-cta-sub" id="gc-cta-bouka" href="/bouka-tenken/" data-track="gimu_check_cta_bouka" hidden>防火対象物点検の業者を探す</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="rules" class="cl-section">
+        <h2>判定のもとになっている決まり</h2>
+        <h3>消防設備点検（消防法第17条の3の3）</h3>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <tbody>
+              <tr><th scope="row">対象</th><td>消防用設備等が設置されているすべての防火対象物（戸建て住宅は対象外）</td></tr>
+              <tr><th scope="row">点検の頻度</th><td>機器点検：6か月に1回／総合点検：1年に1回</td></tr>
+              <tr><th scope="row">報告の頻度</th><td>特定防火対象物：1年に1回／非特定防火対象物：3年に1回（消防法施行規則第31条の6）</td></tr>
+              <tr><th scope="row">報告先</th><td>建物を管轄する消防長または消防署長</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>資格者による点検が必要な建物（消防法施行令第36条第2項）</h3>
+        <ul>
+          <li>延べ面積1,000㎡以上の特定防火対象物</li>
+          <li>延べ面積1,000㎡以上の非特定防火対象物のうち、消防長または消防署長が指定したもの</li>
+          <li>特定一階段等防火対象物（地下または3階以上に特定用途の部分があり、そこから地上に通じる屋内階段が1つしかない建物）</li>
+          <li>全域放出方式の二酸化炭素消火設備が設置されている建物（2023年4月から）</li>
+        </ul>
+        <p>資格者とは、消防設備士または消防設備点検資格者です。上記に当たらない建物は、建物の関係者が自分で点検することもできますが、自動火災報知設備の試験器や報告書の様式が必要になるため、実際には点検業者に頼むのが一般的です。自分で点検する場合の範囲は<a href="/column/shobo-setsubi-jibun-de/">消防設備点検は自分でできる？</a>で解説しています。</p>
+        <h3>防火対象物点検（消防法第8条の2の2・施行令第4条の2の2）</h3>
+        <ul>
+          <li>特定防火対象物で、収容人員が300人以上のもの</li>
+          <li>特定一階段等防火対象物で、防火管理者を選任しなければならないもの（収容人員30人以上。入所型の介護施設などは10人以上）</li>
+        </ul>
+        <p>防火対象物点検資格者が1年に1回点検し、消防長または消防署長に報告します。一定の条件を満たして特例認定を受けると、3年間は点検と報告が免除されます。詳しくは<a href="/column/bouka-tenken-horei-gimu/">防火対象物点検とは</a>をご覧ください。</p>
+      </section>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          {faqItems.map((f) => (
+            <div class="cl-faq-item"><dt>{f.q}</dt><dd>{f.a}</dd></div>
+          ))}
+        </dl>
+      </section>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連コラム</h2>
+        <ul>
+          <li><a href="/column/shobo-setsubi-horei-gimu/">消防設備点検の義務とは｜年2回の点検と1年・3年ごとの報告、罰則</a></li>
+          <li><a href="/column/bouka-tenken-horei-gimu/">防火対象物点検とは｜対象になる建物・年1回の報告・資格者</a></li>
+          <li><a href="/column/shobo-setsubi-kiki-sougou/">機器点検と総合点検の違い</a></li>
+          <li><a href="/column/shobo-setsubi-houkokusho/">消防設備点検報告書｜様式・提出先・保存・電子申請</a></li>
+          <li><a href="/column/shobo-setsubi-apartment/">アパートの消防設備点検｜費用・必要な点検・初めて頼むときの流れ</a></li>
+          <li><a href="/column/shobo-setsubi-hiyo-sohba/">消防設備点検の費用相場｜建物規模・契約形態・是正工事の単価</a></li>
+        </ul>
+      </aside>
+    </div>
+  </article>
+</BaseLayout>
+
+<script>
+  const TOKUTEI = new Set(['1', '2', '3', '4', '5i', '6i', '6ro', '6ha', '6ni', '9i', '16i']);
+  const form = document.getElementById('gc-form') as HTMLFormElement;
+  const result = document.getElementById('gc-result') as HTMLElement;
+  const cards = document.getElementById('gc-cards') as HTMLElement;
+  const boukaCta = document.getElementById('gc-cta-bouka') as HTMLElement;
+
+  type Level = 'must' | 'check' | 'none';
+  interface Card { title: string; level: Level; badge: string; lines: string[] }
+
+  function val(name: string): string {
+    const el = form.querySelector<HTMLInputElement>(`input[name="${name}"]:checked`);
+    return el ? el.value : '';
+  }
+
+  function toggle(use: string) {
+    const isBuilding = use !== '' && use !== 'house';
+    const isTokutei = TOKUTEI.has(use);
+    form.querySelectorAll<HTMLElement>('[data-when="building"]').forEach((el) => { el.hidden = !isBuilding; });
+    form.querySelectorAll<HTMLElement>('[data-when="tokutei"]').forEach((el) => { el.hidden = !isTokutei; });
+    const co2Num = form.querySelector<HTMLElement>('[data-co2-num]');
+    if (co2Num) co2Num.textContent = isTokutei ? '6' : '4';
+  }
+
+  function judge(): Card[] | null {
+    const use = (document.getElementById('gc-use') as HTMLSelectElement).value;
+    if (!use) return null;
+    if (use === 'house') {
+      return [{
+        title: '消防設備点検・防火対象物点検', level: 'none', badge: '義務なし',
+        lines: [
+          '戸建て住宅は、消防署への点検報告の制度の対象外です。',
+          '各部屋の住宅用火災警報器は設置が義務です。電池切れや本体の寿命（10年が目安）がないか、ときどき作動を確かめてください。',
+        ],
+      }];
+    }
+    const equip = val('equip'), area = val('area'), co2 = val('co2');
+    const tokutei = TOKUTEI.has(use);
+    const stair = tokutei ? val('stair') : 'no';
+    const cap = tokutei ? val('cap') : '';
+    if (!equip || !area || !co2 || (tokutei && (!stair || !cap))) return null;
+
+    const out: Card[] = [];
+    const kind = tokutei ? '特定防火対象物' : '非特定防火対象物';
+    const report = tokutei ? '1年に1回' : '3年に1回';
+
+    // 消防設備点検
+    if (equip === 'no') {
+      out.push({
+        title: '消防設備点検', level: 'none', badge: '設備がなければ不要',
+        lines: [
+          '消防用設備等が1つもなければ、点検と報告の義務はありません。',
+          `ただし${kind}は、延べ面積や階数によって消火器などの設置が義務になります。設置が必要なのに置いていない可能性もあるため、管轄の消防署に確認してください。`,
+          ...(use === '3' ? ['飲食店は、コンロなど火を使う設備や器具があれば、面積にかかわらず消火器の設置が必要です（2019年10月から）。'] : []),
+        ],
+      });
+    } else {
+      const lines = [
+        `この建物は<strong>${kind}</strong>に当たります。`,
+        '点検：<strong>機器点検を6か月に1回、総合点検を1年に1回</strong>',
+        `消防署への報告：<strong>${report}</strong>（報告しない年も点検は必要）`,
+      ];
+      if (equip === 'unknown') lines.unshift('消火器が1本でもあれば対象です。まずは設備の有無を確かめてください。');
+      out.push({
+        title: '消防設備点検',
+        level: equip === 'yes' ? 'must' : 'check',
+        badge: equip === 'yes' ? '必要' : '設備があれば必要',
+        lines,
+      });
+
+      // 資格者の要否
+      const reasons: string[] = [];
+      const checks: string[] = [];
+      if (co2 === 'yes') reasons.push('全域放出方式の二酸化炭素消火設備がある');
+      if (tokutei && area === 'ge1000') reasons.push('延べ面積1,000㎡以上の特定防火対象物');
+      if (tokutei && stair === 'yes') reasons.push('特定一階段等防火対象物（地下・3階以上に特定用途の部分があり屋内階段が1つ）');
+      if (!tokutei && area === 'ge1000') checks.push('延べ面積1,000㎡以上の非特定防火対象物は、消防長または消防署長の指定があれば資格者の点検が必要です。指定の有無を管轄の消防署に確認してください。');
+      if (area === 'unknown') checks.push(tokutei ? '延べ面積が1,000㎡以上なら資格者の点検が必要です。' : '延べ面積が1,000㎡以上なら、消防長などの指定によって資格者の点検が必要になることがあります。');
+      if (tokutei && stair === 'unknown') checks.push('地下または3階以上に特定用途の部分があり、屋内階段が1つだけなら資格者の点検が必要です。');
+      if (co2 === 'unknown') checks.push('全域放出方式の二酸化炭素消火設備があれば、面積にかかわらず資格者の点検が必要です。');
+
+      if (reasons.length) {
+        out.push({
+          title: '点検できる人', level: 'must', badge: '資格者が必要',
+          lines: [
+            '<strong>消防設備士または消防設備点検資格者</strong>に点検させる必要があります。',
+            `理由：${reasons.join('／')}`,
+            ...checks,
+          ],
+        });
+      } else if (checks.length) {
+        out.push({ title: '点検できる人', level: 'check', badge: '要確認', lines: checks });
+      } else {
+        out.push({
+          title: '点検できる人', level: 'none', badge: '資格は必須ではない',
+          lines: [
+            '資格がなくても、建物の関係者が自分で点検できます。',
+            'ただし自動火災報知設備の試験には専用の器具が必要で、報告書も決まった様式で作ります。実際には点検業者に頼むのが一般的です。',
+          ],
+        });
+      }
+    }
+
+    // 防火対象物点検
+    if (!tokutei) {
+      out.push({
+        title: '防火対象物点検', level: 'none', badge: '対象外',
+        lines: ['防火対象物点検の義務があるのは特定防火対象物だけです。'],
+      });
+    } else {
+      const belowMgr = cap === 'lt10' || (cap === '10to29' && use !== '6ro' && use !== '16i');
+      if (cap === 'ge300') {
+        out.push({ title: '防火対象物点検', level: 'must', badge: '必要', lines: ['収容人員300人以上の特定防火対象物のため、<strong>防火対象物点検資格者による年1回の点検と報告</strong>が必要です。', '一定の条件を満たして特例認定を受けると、3年間は点検と報告が免除されます。'] });
+      } else if (cap === 'unknown') {
+        out.push({ title: '防火対象物点検', level: 'check', badge: '要確認', lines: ['収容人員が300人以上、または地下・3階以上に特定用途の部分があり屋内階段が1つの建物で収容人員30人以上（入所型の介護施設などは10人以上）なら必要です。収容人員の数え方は管轄の消防署に確認してください。'] });
+      } else if (belowMgr) {
+        out.push({ title: '防火対象物点検', level: 'none', badge: '不要', lines: ['収容人員が少なく、防火管理者の選任が必要な規模に当たらないため、防火対象物点検の義務はありません。'] });
+      } else if (cap === '10to29' && use === '16i') {
+        out.push({ title: '防火対象物点検', level: stair === 'no' ? 'none' : 'check', badge: stair === 'no' ? '不要' : '要確認', lines: stair === 'no'
+          ? ['収容人員300人未満で、特定一階段等防火対象物にも当たらないため、義務はありません。']
+          : ['入所型の介護施設（特別養護老人ホーム・グループホームなど）が入っている場合は、収容人員10人以上で防火管理者の選任が必要になり、防火対象物点検の対象になり得ます。管轄の消防署に確認してください。'] });
+      } else if (stair === 'yes') {
+        out.push({ title: '防火対象物点検', level: 'must', badge: '必要', lines: ['特定一階段等防火対象物で防火管理者の選任が必要な規模のため、<strong>防火対象物点検資格者による年1回の点検と報告</strong>が必要です。'] });
+      } else if (stair === 'unknown') {
+        out.push({ title: '防火対象物点検', level: 'check', badge: '要確認', lines: ['地下または3階以上に特定用途の部分があり、屋内階段が1つだけなら必要です。建物の階段の状況を確かめてください。'] });
+      } else {
+        out.push({ title: '防火対象物点検', level: 'none', badge: '不要', lines: ['収容人員300人未満で、特定一階段等防火対象物にも当たらないため、義務はありません。'] });
+      }
+    }
+    return out;
+  }
+
+  function render() {
+    const use = (document.getElementById('gc-use') as HTMLSelectElement).value;
+    toggle(use);
+    const res = judge();
+    if (!res) { result.hidden = true; return; }
+    cards.innerHTML = res.map((c) => `
+      <div class="gc-card gc-card--${c.level}">
+        <div class="gc-card-head"><span class="gc-card-title">${c.title}</span><span class="gc-badge">${c.badge}</span></div>
+        <ul>${c.lines.map((l) => `<li>${l}</li>`).join('')}</ul>
+      </div>`).join('');
+    boukaCta.hidden = !res.some((c) => c.title === '防火対象物点検' && c.level !== 'none');
+    result.hidden = false;
+  }
+
+  form.addEventListener('change', render);
+  toggle('');
+</script>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; flex-wrap: wrap; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-author-link { color: #fff; text-decoration: underline; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-section a { color: var(--blue); text-decoration: underline; }
+.cl-note { font-size: .82rem; color: var(--gray-500); }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-callout li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-quickanswer { background: #eef6ff; border: 1.5px solid #1a56db; border-radius: 10px; padding: 18px 22px; margin-bottom: 32px; }
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+.gc-tool { background: #fff; border: 2px solid var(--blue); border-radius: 14px; padding: 24px 26px; margin-bottom: 48px; }
+.gc-tool-h { font-size: 1.15rem; font-weight: 900; color: var(--gray-900); margin-bottom: 18px; }
+.gc-form { display: grid; gap: 18px; }
+.gc-q { border: 0; padding: 0 0 16px; margin: 0; border-bottom: 1px solid var(--gray-200); min-width: 0; }
+.gc-q[hidden] { display: none; }
+.gc-label { display: flex; gap: 8px; align-items: flex-start; font-size: .95rem; font-weight: 800; color: var(--gray-900); line-height: 1.6; margin-bottom: 6px; padding: 0; }
+.gc-num { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: var(--blue); color: #fff; font-size: .75rem; margin-top: 2px; }
+.gc-hint { font-size: .8rem; color: var(--gray-500); line-height: 1.7; margin: 0 0 8px; }
+.gc-select { width: 100%; max-width: 100%; font-size: .95rem; padding: 10px 12px; border: 1.5px solid var(--gray-300, #d1d5db); border-radius: 8px; background: #fff; }
+.gc-opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.gc-opts label { display: inline-flex; align-items: center; gap: 6px; border: 1.5px solid var(--gray-200); border-radius: 8px; padding: 9px 14px; font-size: .9rem; cursor: pointer; background: #fff; }
+.gc-opts label:has(input:checked) { border-color: var(--blue); background: var(--blue-light); font-weight: 700; }
+.gc-result { margin-top: 24px; }
+.gc-result-h { font-size: 1.1rem; font-weight: 900; color: var(--gray-900); margin-bottom: 14px; }
+:global(.gc-card) { border-radius: 10px; padding: 16px 18px; margin-bottom: 12px; border-left: 5px solid; }
+:global(.gc-card--must) { background: #fff7ed; border-left-color: #ea580c; }
+:global(.gc-card--check) { background: #fefce8; border-left-color: #ca8a04; }
+:global(.gc-card--none) { background: #f0fdf4; border-left-color: #16a34a; }
+:global(.gc-card-head) { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 8px; }
+:global(.gc-card-title) { font-weight: 900; font-size: 1rem; color: var(--gray-900); }
+:global(.gc-badge) { font-size: .8rem; font-weight: 800; padding: 3px 10px; border-radius: 99px; white-space: nowrap; color: #fff; }
+:global(.gc-card--must .gc-badge) { background: #ea580c; }
+:global(.gc-card--check .gc-badge) { background: #ca8a04; }
+:global(.gc-card--none .gc-badge) { background: #16a34a; }
+:global(.gc-card ul) { margin: 0; padding-left: 18px; }
+:global(.gc-card li) { font-size: .9rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.gc-note { font-size: .78rem; color: var(--gray-500); line-height: 1.7; margin: 8px 0 18px; }
+.gc-cta { background: var(--gray-100); border-radius: 10px; padding: 18px 20px; text-align: center; }
+.gc-cta p { font-size: .9rem; margin-bottom: 12px; color: var(--gray-800); }
+.gc-cta-btns { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; align-items: center; }
+.gc-cta-sub { font-size: .9rem; color: var(--blue); text-decoration: underline; font-weight: 700; }
+.gc-cta-sub[hidden] { display: none; }
+@media (max-width: 600px) { .gc-tool { padding: 18px 14px; } .gc-opts label { padding: 8px 11px; font-size: .86rem; } }
+@media (max-width: 600px) { .cl-header { padding: 32px 0 28px; } .cl-body { padding: 28px 16px 48px; } .cl-section h2 { font-size: 1.15rem; } .cl-cta { padding: 28px 18px; } }
+</style>

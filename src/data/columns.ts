@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/shobo-setsubi-gimu-check/',
+    category: '消防設備点検',
+    title: '消防点検の義務チェック｜建物の用途と面積で分かる点検・報告の頻度と資格の要否',
+    excerpt: '建物の用途・延べ面積・階段・収容人員を選ぶだけで、消防設備点検と防火対象物点検が必要か、報告は1年ごとか3年ごとか、資格者に頼む必要があるかが分かる無料チェック。消防法と施行令にもとづいて判定します。',
+    date: '2026-09-25',
+  },
+  {
     href: '/column/shobo-setsubi-gyosha-norikae/',
     category: '消防設備点検',
     title: '消防設備点検の業者を変更する手順｜解約・引き継ぎ・切り替えの注意点',
