@@ -1,9 +1,10 @@
 ---
 import type { ServiceData } from '../data/services/_types';
+import QuoteBundleServices from './QuoteBundleServices.astro';
 import { prefectures, serviceIndex } from '../data/site';
 interface Props { data: ServiceData; }
 const { data } = Astro.props;
-const otherServices = serviceIndex.filter((s) => s.slug !== data.slug);
+const otherServices = serviceIndex.filter((s) => s.slug !== data.slug && !(data.bundleServiceSlugs ?? []).includes(s.slug));
 ---
 <section class="sd-section form-section" id="contact">
   <div class="sd-container">
@@ -88,6 +89,7 @@ const otherServices = serviceIndex.filter((s) => s.slug !== data.slug);
             <textarea id="qf-message" name="message" rows="4" placeholder="ご相談内容、現在の状況、複数棟まとめての依頼、特殊な条件など、自由にご記入ください"></textarea>
           </div>
 
+          <QuoteBundleServices data={data} idPrefix="qf" />
           <div class="qf-row qf-other-services">
             <details class="qf-other">
               <summary>

@@ -1,0 +1,36 @@
+---
+/**
+ * 見積フォーム内の「よく一緒に依頼されるサービス」。
+ * 実案件でセット依頼が多い組み合わせ（ServiceData.bundleServiceSlugs）を、
+ * 折りたたみの中ではなく最初から見える位置に出す。1回の送信でセット依頼できるようにするため。
+ */
+import type { ServiceData } from '../data/services/_types';
+import { serviceIndex } from '../data/site';
+interface Props { data: ServiceData; idPrefix: string; }
+const { data, idPrefix } = Astro.props;
+const bundle = (data.bundleServiceSlugs ?? [])
+  .map((slug) => serviceIndex.find((s) => s.slug === slug))
+  .filter((s): s is (typeof serviceIndex)[number] => Boolean(s));
+---
+{bundle.length > 0 && (
+  <fieldset class="qb">
+    <legend class="qb-legend">あわせて依頼が多いサービス<span class="qb-sub">（チェックすると1回の依頼でまとめて相談できます）</span></legend>
+    <div class="qb-list">
+      {bundle.map((s) => (
+        <label class="qb-item" for={`${idPrefix}-bundle-${s.slug}`}>
+          <input id={`${idPrefix}-bundle-${s.slug}`} type="checkbox" name="additional_services" value={s.name} class="qf-other-check" />
+          <span>{s.name}</span>
+        </label>
+      ))}
+    </div>
+  </fieldset>
+)}
+
+<style>
+  .qb { border: 1px solid #bfdbfe; background: #eff6ff; border-radius: 10px; padding: 10px 12px 12px; margin: 6px 0 4px; }
+  .qb-legend { font-weight: 800; font-size: .88rem; color: #1e3a8a; padding: 0 4px; }
+  .qb-sub { display: block; font-weight: 400; font-size: .76rem; color: #475569; margin-top: 2px; }
+  .qb-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .qb-item { display: inline-flex; align-items: center; gap: 6px; background: #fff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 8px 12px; font-size: .88rem; cursor: pointer; line-height: 1.4; }
+  .qb-item input { width: 18px; height: 18px; flex: none; }
+</style>

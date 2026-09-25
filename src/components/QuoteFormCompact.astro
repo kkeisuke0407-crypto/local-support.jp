@@ -1,9 +1,10 @@
 ---
 import type { ServiceData } from '../data/services/_types';
+import QuoteBundleServices from './QuoteBundleServices.astro';
 import { prefectures, serviceIndex } from '../data/site';
 interface Props { data: ServiceData; }
 const { data } = Astro.props;
-const otherServices = serviceIndex.filter((s) => s.slug !== data.slug);
+const otherServices = serviceIndex.filter((s) => s.slug !== data.slug && !(data.bundleServiceSlugs ?? []).includes(s.slug));
 ---
 <aside class="qf-compact" aria-label="無料見積もり依頼フォーム（簡易）">
   <div class="qf-compact-head">
@@ -57,6 +58,7 @@ const otherServices = serviceIndex.filter((s) => s.slug !== data.slug);
       <input id="cf-tel" name="tel" type="tel" placeholder="例：03-0000-0000" autocomplete="tel" />
     </div>
 
+    <QuoteBundleServices data={data} idPrefix="cf" />
     <div class="qf-row qf-other-services">
       <details class="qf-other">
         <summary>

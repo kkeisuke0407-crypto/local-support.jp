@@ -304,6 +304,7 @@ const data: ServiceData = {
   ],
 
   relatedServiceSlugs: ['shobo-setsubi', 'tokushu-kenchiku', 'elevator-hoshu'],
+  bundleServiceSlugs: ['shobo-setsubi'],
 
   relatedColumns: [
     {
