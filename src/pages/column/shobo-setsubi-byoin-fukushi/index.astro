@@ -1,0 +1,329 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = "病院・介護施設の消防設備点検｜年1回の報告・点検時の注意と業者選び";
+const description = "病院や介護施設などの福祉施設は特定防火対象物にあたり、消防設備点検の結果を1年に1回、消防署へ報告する義務があります。延べ1,000㎡以上は有資格者の点検が必要です。24時間稼働の施設で点検を進めるときの注意、スプリンクラーなど設備の考え方、キュービクル点検との関係、業者選びのポイントを、実際に寄せられた相談の傾向とあわせて解説します。";
+const canonical = `${site.domain}/column/shobo-setsubi-byoin-fukushi/`;
+const published = '2026-09-25';
+const modified = '2026-09-25';
+
+const faqItems = [
+  {
+    q: "病院や介護施設の消防設備点検は何年ごとに報告が必要ですか？",
+    a: "病院や介護施設などの福祉施設は特定防火対象物にあたるため、消防署への報告は1年に1回です。点検は、機器点検を6か月に1回、総合点検を1年に1回行います。",
+  },
+  {
+    q: "総合点検だけを依頼してもよいですか？",
+    a: "総合点検（1年に1回）だけでは足りません。機器点検も6か月に1回必要です。年間契約で「機器点検2回（うち1回は総合点検とあわせて実施）」とする業者が多く、報告書の作成と提出まで含めて依頼するのが一般的です。",
+  },
+  {
+    q: "病院の消防設備点検は誰でもできますか？",
+    a: "延べ面積1,000㎡以上の特定防火対象物は、消防設備士または消防設備点検資格者による点検が必要です。病院や介護施設はこの規模を超えることが多く、有資格者のいる点検業者に依頼するのが前提になります。",
+  },
+  {
+    q: "点検のとき、入院患者や入所者への影響はありますか？",
+    a: "総合点検では非常ベルや放送設備を実際に鳴らして確認するため、事前の周知と時間帯の調整が欠かせません。病室や手術室、感染対策が必要な区域に立ち入る順番も、施設側と業者で事前にすり合わせます。",
+  },
+  {
+    q: "消防設備点検とキュービクル点検は同じ業者に頼めますか？",
+    a: "頼める会社もありますが、別々の会社になることが多いです。消防設備の点検は消防設備士などの、キュービクル（高圧受電設備）の保安管理は電気主任技術者の仕事で、担う会社の業態が違うためです。",
+  },
+  {
+    q: "点検業者を乗り換えるときの注意点は？",
+    a: "今の業者の協力会社（下請け）に当たると、乗り換え先として受けてもらえないことがあります。複数の会社に声をかけておくと、1社が抜けても比較を続けられます。今の点検報告書を用意しておくと、新しい業者が状況を把握しやすくなります。",
+  },
+];
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '病院・介護施設の消防設備点検', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'Article',
+  headline: title, description, datePublished: published, dateModified: modified,
+  inLanguage: 'ja-JP', url: canonical, mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 5000,
+  articleSection: '消防設備点検',
+  keywords: '病院,介護施設,福祉施設,消防設備点検,特定防火対象物,1年に1回,スプリンクラー,キュービクル,業者選び',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-shobo-setsubi.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '消防設備点検' },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: faqItems.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-shobo-setsubi.png` },
+});
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified} title={title} description={description} canonical={canonical} siteName={site.name} logoSub="施設管理の一括見積比較" jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}>
+  <article class="cl-article">
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>病院・介護施設の消防設備点検</span>
+        </nav>
+        <span class="cl-cat">消防設備点検</span>
+        <h1 class="cl-title">病院・介護施設の消防設備点検｜年1回の報告・点検時の注意と業者選び</h1>
+        <p class="cl-lead">
+          病院や介護施設は、火災のときに自力で避難しにくい人が多く過ごす建物です。そのため消防設備の基準も、点検と報告の頻度も、一般のビルより厳しく決められています。この記事では、<strong>報告の頻度、誰が点検できるか、24時間動いている施設で点検を進めるときの注意、業者選びのポイント</strong>を、ロカサポに実際に寄せられた相談で分かったこととあわせて整理しました。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年9月25日</time>
+          <span>最終更新：2026年9月25日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 病院や介護施設の消防設備点検は、何年ごとに報告が必要ですか？</p>
+        <p class="cl-qa-a">A. <strong>1年に1回です。</strong>病院や福祉施設は特定防火対象物にあたるためです。点検は機器点検を6か月に1回・総合点検を1年に1回行い、延べ面積1,000㎡以上なら有資格者による点検が必要です。</p>
+        <p class="cl-qa-src">※消防法第17条の3の3・消防法施行令にもとづく一般的な整理（2026年9月時点）。個別の建物の要件は所轄の消防署か点検業者に確認してください。</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="shobo-setsubi" serviceName="消防設備点検" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#duty">点検と報告の頻度・誰が点検できるか</a></li>
+          <li><a href="#equipment">病院・福祉施設に多い消防設備</a></li>
+          <li><a href="#operation">24時間動いている施設での点検の進め方</a></li>
+          <li><a href="#cubicle">キュービクル点検との関係</a></li>
+          <li><a href="#cost">費用の目安</a></li>
+          <li><a href="#vendor">業者選びのポイント</a></li>
+          <li><a href="#cases">実際の相談から分かったこと</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>頻度</strong>：病院・福祉施設は特定防火対象物。点検は6か月ごと・1年ごと、消防署への報告は1年に1回</li>
+            <li><strong>点検者</strong>：延べ1,000㎡以上は消防設備士・消防設備点検資格者による点検が必須</li>
+            <li><strong>進め方</strong>：非常ベルの鳴動や病室への立ち入りを事前に段取りする。大きな施設は、同規模の施設の点検実績がある業者を選ぶ</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="duty" class="cl-section">
+        <h2>点検と報告の頻度・誰が点検できるか</h2>
+        <p>病院・診療所は消防法施行令の「令別表第一（6）項イ」、介護施設や障害者施設などの福祉施設は「（6）項ロ・ハ」に分類され、どちらも<strong>特定防火対象物</strong>です。特定防火対象物は、不特定多数の人や避難に配慮が必要な人が利用する建物として、一般のオフィスや共同住宅より報告の頻度が高く決められています。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>病院・福祉施設の点検・報告の頻度</caption>
+            <thead><tr><th scope="col">区分</th><th scope="col">頻度</th><th scope="col">内容</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">機器点検</th><td>6か月に1回</td><td>外観や簡単な操作で、設備の配置・損傷・機能を確認</td></tr>
+              <tr><th scope="row">総合点検</th><td>1年に1回</td><td>設備を実際に作動させて、全体として機能するかを確認</td></tr>
+              <tr><th scope="row">消防署への報告</th><td>1年に1回</td><td>点検結果を報告書にまとめて所轄の消防署へ提出（非特定防火対象物は3年に1回）</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><strong>延べ面積1,000㎡以上</strong>の特定防火対象物は、消防設備士または消防設備点検資格者による点検が義務です。病院や入所型の介護施設はこの規模を超えることが多く、有資格者のいる点検業者に依頼するのが前提になります。小さな施設でも、設備の作動確認には専用の器具が要るため、業者に任せるのが一般的です。</p>
+        <p>また、収容人員が300人以上の特定防火対象物などは、消防設備点検とは別に<strong>防火対象物点検</strong>（避難経路や防火管理体制の点検）も1年に1回必要です。対象になるかどうかは<a href="/column/bouka-tenken-horei-gimu/">防火対象物点検とは</a>で確認できます。</p>
+      </section>
+
+      <section id="equipment" class="cl-section">
+        <h2>病院・福祉施設に多い消防設備</h2>
+        <p>病院や福祉施設は、避難に時間がかかる人が多いことから、一般の建物より小さな規模でも設備が義務になる場合があります。とくに、入院できる病院・診療所や、要介護の方が入所する施設では、<strong>スプリンクラー設備や自動火災報知設備が面積にかかわらず原則必要</strong>とされています（2015〜2016年の改正）。</p>
+        <ul>
+          <li>消火器</li>
+          <li>自動火災報知設備（火災を感知して建物全体に知らせる）</li>
+          <li>消防機関へ通報する火災報知設備（ボタン一つで119番へ通報）</li>
+          <li>スプリンクラー設備</li>
+          <li>屋内消火栓設備（一定の規模以上）</li>
+          <li>誘導灯・避難器具</li>
+          <li>排煙設備・非常用の照明など（建物の規模や構造による）</li>
+        </ul>
+        <p>設備の種類が多いほど点検に必要な資格の種類も増え、点検にかかる日数や費用も大きくなります。実際にどの設備があるかは、竣工時の書類や前回の点検報告書で確認できます。</p>
+      </section>
+
+      <section id="operation" class="cl-section">
+        <h2>24時間動いている施設での点検の進め方</h2>
+        <p>病院や入所型の施設は、点検のあいだも患者や入所者が過ごしています。次の点を事前に業者とすり合わせておくと、当日の混乱を防げます。</p>
+        <h3>非常ベル・放送の鳴動</h3>
+        <p>総合点検では、非常ベルや放送設備を実際に鳴らして確認します。鳴らす時間帯と範囲を決め、職員・患者・入所者・面会者へ事前に知らせます。区画ごとに鳴動を止めて進められるかも、業者に確認しておきます。</p>
+        <h3>病室・手術室・感染対策区域への立ち入り</h3>
+        <p>病室や居室の感知器も点検の対象です。手術や処置の予定、感染対策が必要な区域の入り方、立ち入りに職員の同行が要るかを、事前に決めておきます。</p>
+        <h3>点検中の火災監視</h3>
+        <p>設備を一時的に止めて点検する時間帯は、火災の検知が遅れるおそれがあります。止める範囲を小さく区切る、巡回を増やすなど、点検中の監視の方法を業者と確認します。</p>
+        <h3>点検の日程</h3>
+        <p>大きな施設では、点検が数日に分かれることがあります。年間の点検日程を早めに決め、繁忙期や行事と重ならないようにしておくと安心です。</p>
+      </section>
+
+      <section id="cubicle" class="cl-section">
+        <h2>キュービクル点検との関係</h2>
+        <p>病院や大きな介護施設は、高圧で受電するキュービクル（高圧受電設備）を持っていることが多く、こちらは電気事業法にもとづく保安管理（月次点検・年次点検）が別に必要です。</p>
+        <p>消防設備の点検は消防設備士などの、キュービクルの保安管理は電気主任技術者の仕事で、<strong>担う会社の業態が違います</strong>。両方をまとめて1社に頼みたいという相談は多いのですが、実際には別々の会社になることがほとんどです。年次点検で停電が必要な場合は、消防設備点検と日程を調整しておくと効率的です。詳しくは<a href="/column/jikayou-denki-horei-gimu/">キュービクルの保安点検は義務</a>で解説しています。</p>
+      </section>
+
+      <section id="cost" class="cl-section">
+        <h2>費用の目安</h2>
+        <p>病院やホテルなど特定防火対象物の消防設備点検は、年間契約（機器点検2回・うち1回は総合点検とあわせて実施、報告書の作成・提出）で<strong>年30万〜80万円ほどが目安</strong>です。東京都内は全国平均よりやや高い傾向があります。</p>
+        <p>費用は、延べ面積、設備の種類と数（スプリンクラーや排煙設備の有無）、点検にかかる日数、夜間や休日の作業の有無で大きく変わります。小規模な福祉施設は、設備の種類が少ない分これより低くなります。点検で見つかった不具合の修理は、点検とは別の見積もりです。規模別の相場は<a href="/column/shobo-setsubi-hiyo-sohba/">消防設備点検の費用相場</a>にまとめています。</p>
+        <p class="cl-note">※費用はロカサポの相場調査にもとづく目安です。正式な金額は、現地を確認したうえで業者から提示されます。</p>
+      </section>
+
+      <section id="vendor" class="cl-section">
+        <h2>業者選びのポイント</h2>
+        <ol>
+          <li><strong>同じくらいの規模・用途の施設を点検した実績があるか</strong>：病院・福祉施設の実績をうたっていても、規模によっては対応できない会社があります</li>
+          <li><strong>必要な資格がそろっているか</strong>：スプリンクラー、屋内消火栓、自動火災報知設備など、設備ごとに資格の種類が分かれます</li>
+          <li><strong>点検の進め方を具体的に提案してくれるか</strong>：鳴動の時間帯、立ち入りの順番、点検中の監視の方法まで相談できるか</li>
+          <li><strong>報告書の作成と消防署への提出まで任せられるか</strong>：毎年の報告なので、代行してもらうと管理の手間が大きく減ります</li>
+          <li><strong>不具合の修理まで対応できるか</strong>：点検と修理を同じ会社に頼めると、指摘から是正までが早くなります</li>
+        </ol>
+      </section>
+
+      <section id="cases" class="cl-section">
+        <h2>実際の相談から分かったこと</h2>
+        <p>ロカサポには、病院や福祉施設から消防設備点検の相談が寄せられています（2026年9月時点）。業者とのやり取りから、次のようなことが分かりました。</p>
+        <h3>大きな施設は、規模を理由に断られることがある</h3>
+        <p>延べ面積が数千㎡規模で、スプリンクラーや排煙設備を含む6種類の設備がある病院の相談では、「規模が大きく対応しかねる」という辞退がありました。病院・福祉施設の専用ページを持つ会社でも、規模によっては対応できません。大きな施設は、同じくらいの規模の点検実績を先に確認するのが近道です。</p>
+        <h3>消防設備とキュービクルは、別の会社になった</h3>
+        <p>同じ病院の相談では、消防設備の点検とキュービクルの点検をまとめて1社に任せたいという希望でしたが、両方を受けられる会社は見つかりませんでした。消防設備で2社、キュービクルで2社が対応できると回答し、別々に比べていただく形になりました。</p>
+        <h3>乗り換えでは、今の業者の協力会社に当たることがある</h3>
+        <p>今の業者からの乗り換えを検討していた相談で、選ばれた後に辞退した会社がありました。依頼者が今契約している業者の協力会社（下請け）だったためです。事前には分かりにくいので、乗り換えを考えるときは複数の会社に声をかけておくと、1社が抜けても比較を続けられます。</p>
+        <h3>「総合点検だけ」の相談でも、機器点検は必要</h3>
+        <p>2階建ての福祉施設から、消防署に指摘を受けたので総合点検（1年ごと）を頼みたい、という相談がありました。総合点検だけでは足りず、機器点検も6か月ごとに必要です。業者に相談すれば、年間の点検計画としてまとめて提案してもらえます。</p>
+      </section>
+
+      <div class="cl-cta">
+        <h2>病院・介護施設の消防設備点検の業者探しなら</h2>
+        <p>資格を確認した点検業者から、条件に合う会社を<br/>最大5社ご紹介します（完全無料）</p>
+        <a class="cta-btn-primary" href="/shobo-setsubi/">無料で業者を探す</a>
+      </div>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          {faqItems.map((f) => (
+            <div class="cl-faq-item"><dt>{f.q}</dt><dd>{f.a}</dd></div>
+          ))}
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別の消防設備点検業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/shobo-setsubi/tokyo/">東京都</a></li>
+          <li><a href="/shobo-setsubi/osaka/">大阪府</a></li>
+          <li><a href="/shobo-setsubi/kanagawa/">神奈川県</a></li>
+          <li><a href="/shobo-setsubi/aichi/">愛知県</a></li>
+          <li><a href="/shobo-setsubi/saitama/">埼玉県</a></li>
+          <li><a href="/shobo-setsubi/fukuoka/">福岡県</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/shobo-setsubi/">全国の対応業者を見る</a></p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="shobo-setsubi" serviceName="消防設備点検" variant="bottom" />
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連コラム</h2>
+        <ul>
+          <li><a href="/column/shobo-setsubi-horei-gimu/">消防設備点検の義務とは｜年2回の点検と1年・3年ごとの報告、罰則</a></li>
+          <li><a href="/column/shobo-setsubi-hiyo-sohba/">消防設備点検の費用相場｜建物規模・契約形態・是正工事の単価</a></li>
+          <li><a href="/column/bouka-tenken-horei-gimu/">防火対象物点検とは｜対象になる建物・年1回の報告・資格者</a></li>
+          <li><a href="/column/jikayou-denki-horei-gimu/">キュービクルの保安点検は義務｜月次・年次点検と主任技術者の外部委託</a></li>
+          <li><a href="/column/shobo-setsubi-houkokusho/">消防設備点検報告書の書き方と提出先</a></li>
+          <li><a href="/column/pest-control-byoin-clinic/">病院・クリニックの害虫駆除</a></li>
+        </ul>
+      </aside>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; flex-wrap: wrap; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-author-link { color: #fff; text-decoration: underline; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-section a { color: var(--blue); text-decoration: underline; }
+.cl-note { font-size: .82rem; color: var(--gray-500); }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-callout li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-quickanswer { background: #eef6ff; border: 1.5px solid #1a56db; border-radius: 10px; padding: 18px 22px; margin-bottom: 32px; }
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+@media (max-width: 600px) { .cl-header { padding: 32px 0 28px; } .cl-body { padding: 28px 16px 48px; } .cl-section h2 { font-size: 1.15rem; } .cl-cta { padding: 28px 18px; } }
+</style>

@@ -308,6 +308,13 @@ const data: ServiceData = {
 
   relatedColumns: [
     {
+      href: '/column/shobo-setsubi-byoin-fukushi/',
+      category: '病院・福祉施設',
+      title: '病院・介護施設の消防設備点検｜年1回の報告・点検時の注意と業者選び',
+      excerpt: '病院や介護施設は特定防火対象物で、消防設備点検の報告は1年に1回。延べ1,000㎡以上は有資格者の点検が必要です。24時間動いている施設での点検の進め方、スプリンクラーなど設備の考え方、キュービクル点検との関係、業者選びを、実際の相談の傾向とあわせて解説。',
+      date: '2026-09-25',
+    },
+    {
       href: '/column/shobo-setsubi-apartment/',
       category: '共同住宅',
       title: 'アパートの消防設備点検｜費用・必要な点検・初めて頼むときの流れ',
