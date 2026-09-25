@@ -307,6 +307,13 @@ const data: ServiceData = {
 
   relatedColumns: [
     {
+      href: '/column/shobo-setsubi-apartment/',
+      category: '共同住宅',
+      title: 'アパートの消防設備点検｜費用・必要な点検・初めて頼むときの流れ',
+      excerpt: '小さなアパートでも消火器などの消防用設備があれば点検と報告の義務があります。どの設備が義務になるか、点検は6か月・1年ごと・報告は3年に1回という頻度、費用の目安、誰が点検できるか、初めて頼むときの流れを、実際の相談で分かったこととあわせて解説。',
+      date: '2026-09-25',
+    },
+    {
       href: '/column/shobo-setsubi-hiyo-sohba/',
       category: '費用相場',
       title: '消防設備点検の費用相場｜建物規模・契約形態・是正工事の単価をまるごと解説',

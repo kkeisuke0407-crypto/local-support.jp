@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/shobo-setsubi-apartment/',
+    category: '消防設備点検',
+    title: 'アパートの消防設備点検｜費用・必要な点検・初めて頼むときの流れ',
+    excerpt: '小さなアパートでも消火器などの消防用設備があれば点検と報告の義務があります。どの設備が義務になるか、点検は6か月・1年ごと・報告は3年に1回という頻度、費用の目安、誰が点検できるか、初めて頼むときの流れを、実際の相談で分かったこととあわせて解説。',
+    date: '2026-09-25',
+  },
+  {
     href: '/column/jusuisou-seisou-gyosha-osaka/',
     category: '受水槽清掃',
     title: '大阪で受水槽清掃の業者を選ぶ完全ガイド｜市内・北摂・堺・泉州の相場・保健所事情・夜間作業の実情',
