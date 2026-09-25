@@ -25,7 +25,10 @@
   // ?reset=1 が付いている場合は localStorage を消してから通常表示へ
   if (new URLSearchParams(location.search).get('reset') === '1') {
     if (data && data.id) {
-      try { localStorage.removeItem('ls_quote_result_' + data.id); } catch(e) {}
+      try {
+        localStorage.removeItem(storageKey(data));
+        localStorage.removeItem('ls_quote_result_' + data.id);
+      } catch(e) {}
     }
     history.replaceState(null, '', location.pathname + location.hash);
   }
@@ -41,13 +44,19 @@
   renderView(data);
 })();
 
+// 同じ案件IDで比較ページを作り直すことがある（一部区分の業者が抜けた場合など）。
+// 案件IDだけをキーにすると前回の「選択済み」が残って新しいページが開けないため、作成日も含める
+function storageKey(data) {
+  return 'ls_quote_result_' + data.id + (data.createdAt ? '_' + data.createdAt : '');
+}
+
 function escapeHtml(s) {
   return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 function renderView(data) {
   const $ = (id) => document.getElementById(id);
-  const STORAGE_KEY = 'ls_quote_result_' + data.id;
+  const STORAGE_KEY = storageKey(data);
 
   $('qr-h1').textContent = (data.service || '見積もり') + 'の業者比較';
   $('qr-service').textContent = data.service || '見積もり依頼';
@@ -212,7 +221,7 @@ async function submitSelection(data) {
     const result = await resp.json().catch(() => ({ ok: resp.ok }));
     if (!result.ok) throw new Error(result.error || '送信に失敗しました');
 
-    try { localStorage.setItem('ls_quote_result_' + data.id, JSON.stringify({ submitted: true, ts: Date.now() })); } catch(e) {}
+    try { localStorage.setItem(storageKey(data), JSON.stringify({ submitted: true, ts: Date.now() })); } catch(e) {}
     document.getElementById('qr-form').hidden = true;
     document.getElementById('qr-vendor-list').hidden = true;
     document.getElementById('qr-selected-bar').hidden = true;
