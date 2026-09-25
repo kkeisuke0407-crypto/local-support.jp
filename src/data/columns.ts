@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/gyosha-henshin-data/',
+    category: '施設管理ガイド',
+    title: '業者に問い合わせても返事が来ない？施設管理の業者266社に問い合わせた実データ',
+    excerpt: '点検・清掃・工事の業者266社への問い合わせを集計。返信は4社に1社（26%）、返信の78%は当日か翌日。サービス別（害虫駆除47%〜看板点検10%）・連絡手段別の返信率と、返事をもらうための5つのコツ。',
+    date: '2026-09-25',
+  },
+  {
     href: '/column/shobo-setsubi-gyosha-norikae/',
     category: '消防設備点検',
     title: '消防設備点検の業者を変更する手順｜解約・引き継ぎ・切り替えの注意点',
