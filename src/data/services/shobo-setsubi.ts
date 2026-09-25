@@ -308,6 +308,13 @@ const data: ServiceData = {
 
   relatedColumns: [
     {
+      href: '/column/shobo-setsubi-gyosha-norikae/',
+      category: '業者選び',
+      title: '消防設備点検の業者を変更する手順｜解約・引き継ぎ・切り替えの注意点',
+      excerpt: '消防設備点検の業者を変える手順を解説。契約書の解約予告期間の確認、前回の点検報告書や図面の引き継ぎ、点検の空白を作らない日程、管理会社経由の場合の注意、新しい業者の比べ方まで、実際の乗り換え相談で分かったこととあわせて整理。',
+      date: '2026-09-25',
+    },
+    {
       href: '/column/shobo-setsubi-byoin-fukushi/',
       category: '病院・福祉施設',
       title: '病院・介護施設の消防設備点検｜年1回の報告・点検時の注意と業者選び',
