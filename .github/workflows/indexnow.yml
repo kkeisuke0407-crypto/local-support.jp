@@ -3,6 +3,12 @@
 name: IndexNow
 
 on:
+  workflow_dispatch:
+    inputs:
+      all:
+        description: '公開中の sitemap の全URLを通知する'
+        type: boolean
+        default: true
   push:
     branches: [main]
     paths:
@@ -20,8 +26,13 @@ jobs:
         with:
           node-version: 20
       - name: Cloudflare Pages のデプロイを待つ
+        if: github.event_name == 'push'
         run: sleep 240
       - name: 鍵ファイルが公開されているか確認
         run: curl -fsS --retry 5 --retry-delay 30 https://local-support.jp/77dded00e4d205efe7e77527fcd8359b.txt
       - name: 変わったURLを通知
+        if: github.event_name == 'push'
         run: node scripts/indexnow.mjs --from "${{ github.event.before }}" --to "${{ github.sha }}"
+      - name: 全URLを通知（手動実行）
+        if: github.event_name == 'workflow_dispatch'
+        run: node scripts/indexnow.mjs --all
