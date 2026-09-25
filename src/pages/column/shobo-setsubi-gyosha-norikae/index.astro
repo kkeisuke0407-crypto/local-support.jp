@@ -1,0 +1,322 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = "消防設備点検の業者を変更する手順｜解約・引き継ぎ・切り替えの注意点";
+const description = "消防設備点検の業者は、年間契約の更新時期に合わせて切り替えるのが基本です。解約の予告期間の確認、前回の点検報告書や図面の引き継ぎ、点検の空白を作らない日程、管理会社経由で契約している場合の注意、新しい業者の選び方まで、実際に寄せられた乗り換えの相談で分かったこととあわせて手順を整理しました。";
+const canonical = `${site.domain}/column/shobo-setsubi-gyosha-norikae/`;
+const published = '2026-09-25';
+const modified = '2026-09-25';
+
+const faqItems = [
+  {
+    q: "消防設備点検の業者は途中で変更できますか？",
+    a: "変更できます。ただし年間契約には解約の予告期間（1〜3か月前など）や自動更新の条項があることが多いため、まず今の契約書を確認し、更新時期に合わせて切り替えるのが基本です。",
+  },
+  {
+    q: "業者を変えるとき、何を引き継げばよいですか？",
+    a: "前回までの点検結果報告書（消防署へ提出した控え）、設備の図面や竣工時の書類、指摘された不良箇所とその修理の状況が基本です。これがあると、新しい業者が設備の状況をすぐに把握でき、見積もりも早く出ます。",
+  },
+  {
+    q: "乗り換えのタイミングはいつがよいですか？",
+    a: "次の機器点検の前に切り替えるのが基本です。点検は6か月ごと・1年ごとに必要なので、切り替えの間に点検が抜けないよう、新しい業者の初回点検日を先に決めてから今の業者へ解約を伝えると安全です。",
+  },
+  {
+    q: "管理会社経由で点検を頼んでいる場合も変更できますか？",
+    a: "できますが、点検が管理会社との委託契約に含まれているかを先に確認してください。点検業者が管理会社の協力会社であることも多く、直接契約に切り替える場合は管理会社との調整が必要です。",
+  },
+  {
+    q: "今の業者に乗り換えを伝えるとトラブルになりませんか？",
+    a: "解約は契約書の手順に沿って、書面やメールで伝えれば問題ありません。引き継ぎのために過去の報告書の控えを受け取っておきたい場合は、解約を伝えるときにあわせて依頼しておくとスムーズです。",
+  },
+  {
+    q: "新しい業者の見積もりは何を基準に比べればよいですか？",
+    a: "同じ条件で比べることが大切です。点検の回数、報告書の作成と消防署への提出を含むか、不具合の修理の見積もりの出し方、夜間や休日の作業の可否、現地調査の費用をそろえて比べてください。",
+  },
+];
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '消防設備点検の業者を変更する手順', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'Article',
+  headline: title, description, datePublished: published, dateModified: modified,
+  inLanguage: 'ja-JP', url: canonical, mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  wordCount: 4500,
+  articleSection: '消防設備点検',
+  keywords: '消防設備点検,業者変更,乗り換え,切り替え,解約,引き継ぎ,管理会社,年間契約',
+  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-shobo-setsubi.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '消防設備点検' },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: faqItems.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-shobo-setsubi.png` },
+});
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified} title={title} description={description} canonical={canonical} siteName={site.name} logoSub="施設管理の一括見積比較" jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}>
+  <article class="cl-article">
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>消防設備点検の業者を変更する手順</span>
+        </nav>
+        <span class="cl-cat">業者選び</span>
+        <h1 class="cl-title">消防設備点検の業者を変更する手順｜解約・引き継ぎ・切り替えの注意点</h1>
+        <p class="cl-lead">
+          「今の業者の対応に不満がある」「費用を見直したい」「今の業者が来年から担当できなくなった」。消防設備点検の業者を変えたいという相談は少なくありません。点検は毎年続く義務なので、切り替えの間に点検が抜けないことが何より大切です。この記事では、<strong>契約の確認から引き継ぎ、新しい業者の選び方まで</strong>の手順を、ロカサポに寄せられた乗り換えの相談で分かったこととあわせて整理しました。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年9月25日</time>
+          <span>最終更新：2026年9月25日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 消防設備点検の業者は途中で変えられますか？</p>
+        <p class="cl-qa-a">A. <strong>変えられます。</strong>今の契約の解約予告期間を確認し、新しい業者の初回点検日を決めてから、更新時期に合わせて切り替えるのが基本です。前回の点検報告書や図面を引き継ぐと、新しい業者がすぐに状況を把握できます。</p>
+        <p class="cl-qa-src">※一般的な進め方の整理です（2026年9月時点）。契約の条件は、今の業者との契約書で確認してください。</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="shobo-setsubi" serviceName="消防設備点検" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#reasons">乗り換えを考えるきっかけ</a></li>
+          <li><a href="#steps">業者を変更する手順（6ステップ）</a></li>
+          <li><a href="#handover">引き継ぐ書類のチェックリスト</a></li>
+          <li><a href="#kanri">管理会社経由で頼んでいる場合</a></li>
+          <li><a href="#compare">新しい業者を選ぶときの比べ方</a></li>
+          <li><a href="#cases">実際の相談から分かったこと</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>順番</strong>：契約書の確認 → 新しい業者探し → 初回点検日の確定 → 今の業者へ解約通知 の順で進める</li>
+            <li><strong>引き継ぎ</strong>：前回の点検報告書（消防署提出の控え）・図面・不良箇所の修理状況をそろえる</li>
+            <li><strong>注意</strong>：管理会社経由の契約や、今の業者の協力会社に当たるケースがある。複数の会社に声をかけておく</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="reasons" class="cl-section">
+        <h2>乗り換えを考えるきっかけ</h2>
+        <p>ロカサポに寄せられる相談では、次のようなきっかけが多く見られます。</p>
+        <ul>
+          <li><strong>費用の見直し</strong>：何年も同じ業者に任せていて、今の金額が妥当か確かめたい</li>
+          <li><strong>対応への不満</strong>：報告書の説明がない、不具合の修理の見積もりが高い、連絡が遅い</li>
+          <li><strong>今の業者が続けられなくなった</strong>：廃業や担当エリアの縮小で、翌年から担当できないと言われた</li>
+          <li><strong>窓口をまとめたい</strong>：消防設備点検と防火対象物点検、ほかの設備点検をまとめて頼みたい</li>
+        </ul>
+        <p>どのきっかけでも、点検と報告の義務は切り替えの間も止まりません。<strong>点検の空白を作らない段取り</strong>が乗り換えの要です。</p>
+      </section>
+
+      <section id="steps" class="cl-section">
+        <h2>業者を変更する手順（6ステップ）</h2>
+        <ol>
+          <li><strong>今の契約書を確認する</strong>：契約期間、自動更新の有無、解約の予告期間（1〜3か月前などが多い）、解約の伝え方（書面かどうか）を確認します</li>
+          <li><strong>次の点検日と報告の時期を確認する</strong>：前回の機器点検・総合点検の日付と、次に消防署へ報告する年を把握します。ここから逆算して切り替えの時期を決めます</li>
+          <li><strong>新しい業者を探し、同じ条件で見積もりを取る</strong>：引き継ぐ書類を見せると、現地調査と見積もりが早く進みます</li>
+          <li><strong>新しい業者の初回点検日を決める</strong>：今の契約が切れる前後で、次の機器点検が抜けない日程にします</li>
+          <li><strong>今の業者に解約を伝える</strong>：契約書の手順どおりに伝え、あわせて過去の報告書の控えなど必要な書類を受け取ります</li>
+          <li><strong>新しい業者で初回点検を受ける</strong>：前回までの指摘事項を引き継ぎ、報告の年にあたる場合は報告書の作成と提出まで依頼します</li>
+        </ol>
+        <p>ポイントは、<strong>新しい業者の目処が立ってから解約を伝える</strong>ことです。先に解約してしまうと、新しい業者がすぐに見つからず点検が抜けるおそれがあります。</p>
+      </section>
+
+      <section id="handover" class="cl-section">
+        <h2>引き継ぐ書類のチェックリスト</h2>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>新しい業者に渡すとよい書類</caption>
+            <thead><tr><th scope="col">書類</th><th scope="col">役立つ理由</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">前回までの点検結果報告書（消防署提出の控え）</th><td>設備の種類・数と、過去の指摘事項が一度に分かる</td></tr>
+              <tr><th scope="row">不良箇所の修理記録</th><td>指摘がどこまで直っているかを引き継げる</td></tr>
+              <tr><th scope="row">設備の図面・竣工図</th><td>感知器や消火栓の位置、系統が分かり、現地調査が早く終わる</td></tr>
+              <tr><th scope="row">消防用設備等の設置届・検査済証の控え</th><td>どの設備が義務として設置されているかの根拠になる</td></tr>
+              <tr><th scope="row">受信機や鍵の扱いのメモ</th><td>点検当日の立ち入りや操作の段取りに使う</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>書類がそろわなくても乗り換えはできます。新しい業者が現地で設備を確認すれば進められますが、そのぶん現地調査に時間がかかります。報告書の書き方と保存については<a href="/column/shobo-setsubi-houkokusho/">消防設備点検報告書の書き方と提出先</a>で解説しています。</p>
+      </section>
+
+      <section id="kanri" class="cl-section">
+        <h2>管理会社経由で頼んでいる場合</h2>
+        <p>ビルやマンションでは、管理会社に管理を任せ、その管理会社が点検業者に発注していることがよくあります。この場合は、次の点を先に確認してください。</p>
+        <ul>
+          <li><strong>点検が管理委託の範囲に含まれているか</strong>：含まれている場合、点検業者だけを変えるには管理会社との調整が必要です</li>
+          <li><strong>今の点検業者が管理会社の協力会社かどうか</strong>：協力会社の場合、その業者は管理会社を越えて直接契約することに慎重になります</li>
+          <li><strong>直接契約に切り替えたあとの窓口</strong>：日程調整や入居者への案内を、誰が担当するかを決めておきます</li>
+        </ul>
+      </section>
+
+      <section id="compare" class="cl-section">
+        <h2>新しい業者を選ぶときの比べ方</h2>
+        <p>乗り換えでは、今の業者と同じ条件で比べないと、安く見えても実は点検の範囲が狭い、ということが起こります。次の項目をそろえて比べてください。</p>
+        <ol>
+          <li><strong>点検の回数と範囲</strong>：機器点検2回と総合点検1回がすべて含まれているか</li>
+          <li><strong>報告書の作成と消防署への提出</strong>：代行まで含むか、別料金か</li>
+          <li><strong>不具合の修理の見積もりの出し方</strong>：写真や根拠つきで説明してくれるか</li>
+          <li><strong>現地調査の費用</strong>：初回の現地調査を無料にしている会社もある</li>
+          <li><strong>作業の時間帯</strong>：夜間・休日の作業や、稼働中の施設での進め方に対応できるか</li>
+          <li><strong>同じくらいの規模・用途の実績</strong>：大きな施設や病院・福祉施設では特に重要</li>
+        </ol>
+        <p>費用の相場は<a href="/column/shobo-setsubi-hiyo-sohba/">消防設備点検の費用相場</a>で確認できます。</p>
+      </section>
+
+      <section id="cases" class="cl-section">
+        <h2>実際の相談から分かったこと</h2>
+        <p>ロカサポには、消防設備点検をはじめ、受水槽清掃や害虫駆除などで「今の業者から乗り換えたい」という相談が寄せられています（2026年9月時点）。次のようなことが分かりました。</p>
+        <h3>今の業者の協力会社に当たり、辞退されることがある</h3>
+        <p>病院の消防設備点検とキュービクル点検を見直す相談で、選ばれた後に辞退した会社がありました。依頼者が今契約している業者の協力会社（下請け）だったためです。業者側は今の取引関係を優先するため、直接契約には慎重になります。事前には分かりにくいので、<strong>乗り換えでは複数の会社に声をかけておく</strong>と、1社が抜けても比較を続けられます。</p>
+        <h3>「来年から担当できない」と言われてからでは、時間が足りないことがある</h3>
+        <p>宿泊施設の受水槽清掃では、今の業者が翌年から担当できなくなったことがきっかけの相談がありました。複数の施設をまとめて頼みたい、営業を止めずに作業してほしいといった条件があると、対応できる会社が絞られます。<strong>条件が多い施設ほど、早めに次の業者を探し始める</strong>ほうが安心です。</p>
+        <h3>不満の中身を伝えると、候補が絞りやすい</h3>
+        <p>飲食店の害虫駆除では、「今の業者の作業では効果が出ない」という不満がきっかけでした。夜間にしか作業できないという条件を最初に伝えたことで、対応できない会社に時間を使わずに済みました。乗り換えの理由と譲れない条件をはっきりさせておくと、新しい業者との話も早く進みます。</p>
+      </section>
+
+      <div class="cl-cta">
+        <h2>消防設備点検の業者を見直すなら</h2>
+        <p>資格を確認した点検業者から、条件に合う会社を<br/>最大5社ご紹介します（完全無料）</p>
+        <a class="cta-btn-primary" href="/shobo-setsubi/">無料で業者を探す</a>
+      </div>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          {faqItems.map((f) => (
+            <div class="cl-faq-item"><dt>{f.q}</dt><dd>{f.a}</dd></div>
+          ))}
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別の消防設備点検業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/shobo-setsubi/tokyo/">東京都</a></li>
+          <li><a href="/shobo-setsubi/osaka/">大阪府</a></li>
+          <li><a href="/shobo-setsubi/kanagawa/">神奈川県</a></li>
+          <li><a href="/shobo-setsubi/aichi/">愛知県</a></li>
+          <li><a href="/shobo-setsubi/saitama/">埼玉県</a></li>
+          <li><a href="/shobo-setsubi/fukuoka/">福岡県</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/shobo-setsubi/">全国の対応業者を見る</a></p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="shobo-setsubi" serviceName="消防設備点検" variant="bottom" />
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連コラム</h2>
+        <ul>
+          <li><a href="/column/shobo-setsubi-hiyo-sohba/">消防設備点検の費用相場｜建物規模・契約形態・是正工事の単価</a></li>
+          <li><a href="/column/shobo-setsubi-houkokusho/">消防設備点検報告書の書き方と提出先</a></li>
+          <li><a href="/column/shobo-setsubi-byoin-fukushi/">病院・介護施設の消防設備点検</a></li>
+          <li><a href="/column/shobo-setsubi-apartment/">アパートの消防設備点検｜費用・必要な点検・初めて頼むときの流れ</a></li>
+          <li><a href="/column/shobo-setsubi-kiki-sougou/">機器点検と総合点検の違い</a></li>
+        </ul>
+      </aside>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; flex-wrap: wrap; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-author-link { color: #fff; text-decoration: underline; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-section a { color: var(--blue); text-decoration: underline; }
+.cl-note { font-size: .82rem; color: var(--gray-500); }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-callout li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-quickanswer { background: #eef6ff; border: 1.5px solid #1a56db; border-radius: 10px; padding: 18px 22px; margin-bottom: 32px; }
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+@media (max-width: 600px) { .cl-header { padding: 32px 0 28px; } .cl-body { padding: 28px 16px 48px; } .cl-section h2 { font-size: 1.15rem; } .cl-cta { padding: 28px 18px; } }
+</style>
