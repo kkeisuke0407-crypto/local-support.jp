@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "prebuild": "node scripts/gen-redirects.mjs",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
@@ -12,7 +13,8 @@
     "fetch-gsc:auth": "node scripts/fetch-gsc.js --manual --dry-run",
     "push-sheet": "node scripts/push-sheet.js",
     "push-sheet:dry": "node scripts/push-sheet.js --dry-run",
-    "push-sheet:auth": "node scripts/push-sheet.js --manual"
+    "push-sheet:auth": "node scripts/push-sheet.js --manual",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.0.0",

@@ -1,0 +1,27 @@
+# main に公開ページの変更が入ったら、Cloudflare Pages のデプロイ完了を待ってから
+# 変わったURLを IndexNow（Bing ほか）へ通知する。
+name: IndexNow
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/pages/**'
+      - 'src/data/services/**'
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Cloudflare Pages のデプロイを待つ
+        run: sleep 240
+      - name: 鍵ファイルが公開されているか確認
+        run: curl -fsS --retry 5 --retry-delay 30 https://local-support.jp/77dded00e4d205efe7e77527fcd8359b.txt
+      - name: 変わったURLを通知
+        run: node scripts/indexnow.mjs --from "${{ github.event.before }}" --to "${{ github.sha }}"
