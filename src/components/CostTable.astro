@@ -17,7 +17,8 @@ function regionalCostNote(pref: Prefecture): string | null {
   if (f > 0.96) return `${pref.name}の費用相場はおおむね全国平均水準です。`;
   return `${pref.name}の費用相場は全国平均よりやや低め（目安：約${pct}%減）の傾向があり、相見積もりでコストを抑えやすいエリアです。`;
 }
-const regionNote = prefecture ? regionalCostNote(prefecture) : null;
+// 出典つきの表では、出典のない地域補正（priceFactor）の注記は出さない
+const regionNote = prefecture && !costGuide.source ? regionalCostNote(prefecture) : null;
 ---
 <section class="sd-section section-white" id="cost">
   <div class="sd-container">
@@ -30,7 +31,7 @@ const regionNote = prefecture ? regionalCostNote(prefecture) : null;
       <p class="cost-region-note"><strong>地域の相場感：</strong>{regionNote}</p>
     )}
     <div class="cost-table-wrap">
-      <table class="cost-table" aria-describedby="cost-table-caption">
+      <table class:list={["cost-table", { "cost-table--compact": costGuide.source }]} aria-describedby="cost-table-caption">
         <caption id="cost-table-caption">
           {costGuide.table.caption}
           <small class="cost-table-updated"><time datetime={lastUpdated}>（{updatedJa} 時点）</time></small>
@@ -53,6 +54,11 @@ const regionNote = prefecture ? regionalCostNote(prefecture) : null;
         </tbody>
       </table>
     </div>
+    {costGuide.source && (
+      <p class="cost-source">
+        出典：<a href={costGuide.source.url} rel="noopener" target="_blank">{costGuide.source.name}</a>（{costGuide.source.checked}確認）。{costGuide.source.detail}
+      </p>
+    )}
     <div class="cost-aside">
       <h3>費用が変動する主な要因</h3>
       <ul class="cost-factor-list">
@@ -74,6 +80,21 @@ const regionNote = prefecture ? regionalCostNote(prefecture) : null;
 </section>
 
 <style>
+  .cost-source {
+    max-width: 760px;
+    margin: 0.6rem auto 1.5rem;
+    font-size: 0.8rem;
+    line-height: 1.7;
+    color: #4b5563;
+  }
+  .cost-source a { color: var(--blue, #1d4ed8); text-decoration: underline; }
+  /* 出典つきの金額表は短い金額セルだけなので、スマホでも「万」だけが改行されないようにする */
+  @media (max-width: 640px) {
+    .cost-table--compact tbody td { white-space: nowrap; }
+    .cost-table--compact thead th,
+    .cost-table--compact tbody th,
+    .cost-table--compact tbody td { padding: 10px 6px; }
+  }
   .cost-region-note {
     max-width: 760px;
     margin: 0 auto 1.5rem;
