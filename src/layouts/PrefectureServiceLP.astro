@@ -97,7 +97,7 @@ const serviceLd = JSON.stringify({
   },
   /* Organizationエンティティは BaseLayout で @id 付き定義済み。ここでは参照のみ */
   provider: { '@id': `${site.domain}/#organization` },
-  termsOfService: `${site.domain}/disclosure/`,
+  termsOfService: `${site.domain}/terms/`,
   category: data.serviceName,
   offers: {
     '@type': 'Offer',
@@ -142,12 +142,6 @@ const webPageLd = JSON.stringify({
   about: { '@id': `${canonical}#service` },
   ...(legalCitations.length ? { citation: legalCitations } : {}),
   spatialCoverage: { '@type': 'AdministrativeArea', name: prefecture.name },
-  reviewedBy: {
-    '@type': 'Person',
-    name: site.author.name,
-    jobTitle: site.author.role,
-    url: `${site.domain}/author/`,
-  },
   speakable: {
     '@type': 'SpeakableSpecification',
     cssSelector: ['.aio-summary', '.faq-q', '.faq-a'],
@@ -156,22 +150,7 @@ const webPageLd = JSON.stringify({
 
 // 地域の費用水準（priceFactor）を反映し、構造化データの価格レンジを都道府県ごとに変える
 const priceFactor = prefecture.priceFactor ?? 1;
-const priceLd = data.costGuide.priceRange ? JSON.stringify({
-  '@context': 'https://schema.org',
-  '@type': 'AggregateOffer',
-  name: `${prefecture.name}の${data.serviceName}費用相場`,
-  description: data.costGuide.intro,
-  priceCurrency: 'JPY',
-  lowPrice: String(Math.round(data.costGuide.priceRange.min * priceFactor)),
-  highPrice: String(Math.round(data.costGuide.priceRange.max * priceFactor)),
-  offerCount: costGuide.table.rows.length,
-  areaServed: { '@type': 'AdministrativeArea', name: prefecture.name },
-  itemOffered: {
-    '@type': 'Service',
-    name: data.serviceName,
-    serviceType: data.serviceName,
-  },
-}) : null;
+// AggregateOffer（業者の費用相場）は付けない。ロカサポは売り手ではないため（2026-09 監査）
 
 /* HowTo の代替として ItemList で「業者選びチェックリスト」を構造化。
    ItemList はHowToと違い汎用で AI Overview の引用にも使われる。 */
@@ -204,7 +183,7 @@ const quoteComparisonLd = JSON.stringify({
     description: `${item.check}。見落とすと${item.risk}。`,
   })),
 });
-const jsonLdBlocks = [breadcrumbLd, serviceLd, webPageLd, faqLd, checklistLd, condensed ? null : quoteComparisonLd, priceLd].filter(Boolean) as string[];
+const jsonLdBlocks = [breadcrumbLd, serviceLd, webPageLd, faqLd, checklistLd, condensed ? null : quoteComparisonLd].filter(Boolean) as string[];
 ---
 <BaseLayout
   title={title}

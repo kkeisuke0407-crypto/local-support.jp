@@ -8,23 +8,6 @@ const PAGE_DESC  = '消防設備点検・防火対象物点検・受水槽清掃
 const CANONICAL  = `${site.domain}/`;
 const heroImageVersion = '20260529-office-cleanup';
 
-const websiteLd = JSON.stringify({
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: site.name,
-  url: site.domain,
-  description: site.description,
-});
-
-const orgLd = JSON.stringify({
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: site.org.legalName,
-  url: site.domain,
-  areaServed: 'JP',
-  serviceType: '施設管理業者紹介',
-});
-
 const itemListLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'ItemList',
@@ -122,7 +105,7 @@ const featuredColumns = [
   siteName={site.name}
   logoSub="施設管理の業者紹介サイトを27分野で運営"
   preloadImage={`/images/brand/hero-local-support-top.webp?v=${heroImageVersion}`}
-  jsonLdBlocks={[websiteLd, orgLd, itemListLd, faqLd, webPageLd]}
+  jsonLdBlocks={[itemListLd, faqLd, webPageLd]}
 >
 
 <!-- ══ HERO ════════════════════════════════════════════════════ -->

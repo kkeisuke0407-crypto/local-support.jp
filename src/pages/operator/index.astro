@@ -33,10 +33,10 @@ const orgLd = JSON.stringify({
   },
   description: `施設管理・設備メンテナンスの一括見積比較サービスを運営。法定点検・衛生清掃・修繕工事・エネルギー設備・防犯設備など${serviceCount}分野で、施設管理担当者と登録・資格を有する専門業者をつなぐB2B紹介サービス。`,
   knowsAbout: allServices.map((s) => s.serviceName),
-  member: {
-    '@type': 'Person',
+  subOrganization: {
+    '@type': 'Organization',
     name: site.author.name,
-    jobTitle: site.author.role,
+    url: `${site.domain}/author/`,
   },
 });
 ---
@@ -56,7 +56,8 @@ const orgLd = JSON.stringify({
         <table class="info-table">
           <tbody>
             <tr><th>サービス名</th><td>{site.name}（ロカサポ / local-support.jp）</td></tr>
-            <tr><th>運営者</th><td>{site.author.name}</td></tr>
+            <tr><th>お問い合わせ</th><td>support@local-support.jp（ロカサポ運営事務局）</td></tr>
+            <tr><th>記事の作成</th><td><a href="/author/">{site.author.name}</a></td></tr>
             <tr><th>運営組織</th><td>{site.org.legalName}</td></tr>
             <tr><th>事業内容</th><td>施設管理・設備メンテナンス業者の紹介サービス（一括見積比較）</td></tr>
             <tr><th>対応エリア</th><td>全国47都道府県</td></tr>

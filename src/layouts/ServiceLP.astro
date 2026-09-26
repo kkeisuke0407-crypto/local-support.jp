@@ -57,7 +57,7 @@ const serviceLd = JSON.stringify({
   },
   /* Organizationエンティティは BaseLayout で @id 付き定義済み。ここでは参照のみ */
   provider: { '@id': `${site.domain}/#organization` },
-  termsOfService: `${site.domain}/disclosure/`,
+  termsOfService: `${site.domain}/terms/`,
   category: data.serviceName,
   offers: {
     '@type': 'Offer',
@@ -98,12 +98,6 @@ const webPageLd = JSON.stringify({
   mainEntity: { '@id': `${canonical}#service` },
   about: { '@id': `${canonical}#service` },
   ...(legalCitations.length ? { citation: legalCitations } : {}),
-  reviewedBy: {
-    '@type': 'Person',
-    name: site.author.name,
-    jobTitle: site.author.role,
-    url: `${site.domain}/author/`,
-  },
   speakable: {
     '@type': 'SpeakableSpecification',
     cssSelector: ['.aio-summary', '.faq-q', '.faq-a'],
@@ -121,21 +115,7 @@ const faqLd = JSON.stringify({
   })),
 });
 
-const priceLd = data.costGuide.priceRange ? JSON.stringify({
-  '@context': 'https://schema.org',
-  '@type': 'AggregateOffer',
-  name: `${data.serviceName}の費用相場`,
-  description: data.costGuide.intro,
-  priceCurrency: 'JPY',
-  lowPrice: String(data.costGuide.priceRange.min),
-  highPrice: String(data.costGuide.priceRange.max),
-  offerCount: data.costGuide.table.rows.length,
-  itemOffered: {
-    '@type': 'Service',
-    name: data.serviceName,
-    serviceType: data.serviceName,
-  },
-}) : null;
+// AggregateOffer（業者の費用相場）は付けない。ロカサポは売り手ではないため（2026-09 監査）
 
 /* HowTo schema は 2023年以降 Google が「料理・DIY・修理」など物理的な
    手順に限定したため、業務手順（見積依頼の流れ等）には不適格。
@@ -171,7 +151,7 @@ const quoteComparisonLd = JSON.stringify({
   })),
 });
 
-const jsonLdBlocks = [breadcrumbLd, serviceLd, webPageLd, faqLd, checklistLd, quoteComparisonLd, priceLd].filter(Boolean) as string[];
+const jsonLdBlocks = [breadcrumbLd, serviceLd, webPageLd, faqLd, checklistLd, quoteComparisonLd].filter(Boolean) as string[];
 ---
 <BaseLayout
   title={data.meta.title}

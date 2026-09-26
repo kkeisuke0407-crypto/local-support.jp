@@ -36,7 +36,7 @@ const {
 // Always include Organization + WebSite JSON-LD（@id でエンティティを相互連結）
 const orgId = `${site.domain}/#organization`;
 const siteId = `${site.domain}/#website`;
-const authorId = `${site.domain}/author/#person`;
+const authorId = `${site.domain}/author/#editorial`;
 const baseLdBlocks = [
   JSON.stringify({
     '@context': 'https://schema.org',
@@ -52,8 +52,6 @@ const baseLdBlocks = [
     description: site.description,
     areaServed: { '@type': 'Country', name: 'JP' },
     knowsAbout: serviceIndex.map((s) => s.name),
-    founder: { '@id': authorId },
-    employee: { '@id': authorId },
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'customer service',
@@ -64,13 +62,12 @@ const baseLdBlocks = [
   }),
   JSON.stringify({
     '@context': 'https://schema.org',
-    '@type': 'Person',
+    '@type': 'Organization',
     '@id': authorId,
     name: site.author.name,
-    jobTitle: site.author.role,
+    description: site.author.role,
     url: `${site.domain}/author/`,
-    worksFor: { '@id': orgId },
-    knowsAbout: serviceIndex.map((s) => s.name),
+    parentOrganization: { '@id': orgId },
   }),
   JSON.stringify({
     '@context': 'https://schema.org',
@@ -246,7 +243,7 @@ const allLdBlocks = [...baseLdBlocks, ...jsonLdBlocks];
           <ul>
             <li><a href="/about/">ロカサポとは</a></li>
             <li><a href="/case/">紹介事例</a></li>
-            <li><a href="/author/">運営者プロフィール</a></li>
+            <li><a href="/author/">編集部について</a></li>
             <li><a href="/operator/">運営会社情報</a></li>
             <li><a href="/editorial-policy/">編集方針</a></li>
             <li><a href="/research/methodology/">費用の目安について</a></li>
