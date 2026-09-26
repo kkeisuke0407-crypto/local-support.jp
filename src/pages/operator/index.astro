@@ -4,7 +4,7 @@ import { site } from '../../data/site';
 import { allServices } from '../../data/services';
 
 const title = `運営者情報｜${site.name}`;
-const description = `${site.name} の運営者情報・運営方針・お問い合わせ方法。施設管理の一括見積比較サービスの運営体制と、ご紹介業者の審査基準についてご案内します。`;
+const description = `${site.name} の運営者情報・運営方針・お問い合わせ方法。施設管理の一括見積比較サービスの運営体制と、ご紹介の前に確認していることについてご案内します。`;
 const canonical = `${site.domain}/operator/`;
 const serviceCount = allServices.length;
 
@@ -70,7 +70,7 @@ const orgLd = JSON.stringify({
                 </ul>
               </td>
             </tr>
-            <tr><th>利用料金</th><td>完全無料（見積依頼・業者紹介・契約後の手数料はすべて無料）</td></tr>
+            <tr><th>利用料金</th><td>ご依頼者様は無料（ご相談・業者のご紹介・連絡先の共有まで）</td></tr>
             <tr><th>お問い合わせ</th><td>各サービスページのお問い合わせフォームよりご連絡ください</td></tr>
           </tbody>
         </table>
@@ -86,14 +86,15 @@ const orgLd = JSON.stringify({
       </div>
 
       <div class="op-block">
-        <h2 class="op-h2">ご紹介業者の審査基準</h2>
-        <p class="op-lead">登録時に以下の項目を確認しています。</p>
+        <h2 class="op-h2">ご紹介の前に確認していること</h2>
+        <p class="op-lead">ご依頼ごとに、次の項目を確認してからご紹介します。</p>
         <ul class="op-list">
-          <li><strong>法令上の登録・資格</strong>：建築物飲料水貯水槽清掃業の都道府県知事登録、建築物石綿含有建材調査者、建築設備検査員などの有資格者在籍を確認</li>
-          <li><strong>事業実態の確認</strong>：法人登記・所在地・事業継続年数の確認</li>
-          <li><strong>営業姿勢に関する誓約</strong>：「しつこい営業の禁止」「見積書への作業内訳明記」「追加費用発生条件の事前提示」を利用規約で要求</li>
-          <li><strong>事故・トラブル時の対応体制</strong>：施工不備や水質基準未達時の再施工・賠償体制を確認</li>
+          <li><strong>対応エリアと対応の可否</strong>：物件の所在地と依頼内容に対応できるかを、業者に直接確認</li>
+          <li><strong>法令上の資格・登録</strong>：建築物飲料水貯水槽清掃業の都道府県知事登録、建築物石綿含有建材調査者、消防設備士など、必要な資格・登録を業者の公開情報と回答で確認</li>
+          <li><strong>会社の所在地・連絡先</strong>：業者のWebサイトなどの公開情報で確認</li>
+          <li><strong>対応条件</strong>：現地調査の要否と費用、対応時間帯、報告書の発行など、回答のあった条件を比較ページに掲載</li>
         </ul>
+        <p class="op-lead">確認は業者の公開情報と回答にもとづくもので、業者の品質や工事の結果を保証するものではありません。</p>
       </div>
 
       <div class="op-block">
