@@ -6,20 +6,8 @@ const { costGuide, serviceName, lastUpdated, relatedColumns, prefecture } = Astr
 const updatedJa = new Date(lastUpdated).toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
 const costColumn = relatedColumns?.find((c) => c.category === '費用相場');
 
-// 地域相場補正：priceFactor を持つ主要都道府県のページでのみ「全国平均との差」を注記する。
-// 下表の数値は全国の目安。地域の人件費・出張費・搬出条件で実際の相場は上下する。
-function regionalCostNote(pref: Prefecture): string | null {
-  const f = pref.priceFactor;
-  if (f == null) return null;
-  const pct = Math.round(Math.abs(f - 1) * 100);
-  if (f >= 1.15) return `${pref.name}は人件費・搬出条件などの影響で、費用相場が全国平均より高め（目安：約${pct}%増）になる傾向があります。下表は全国の目安額のため、${pref.name}では上振れを見込んでおくと安心です。`;
-  if (f >= 1.04) return `${pref.name}の費用相場は全国平均よりやや高め（目安：約${pct}%増）の傾向があります。`;
-  if (f > 0.96) return `${pref.name}の費用相場はおおむね全国平均水準です。`;
-  return `${pref.name}の費用相場は全国平均よりやや低め（目安：約${pct}%減）の傾向があり、相見積もりでコストを抑えやすいエリアです。`;
-}
-// 出典つきの表では、出典のない地域補正（priceFactor）の注記は出さない
+// 県ごとの「全国平均より○%増」の注記は出さない（priceFactor に出典の裏付けがないため。2026-09）
 const hasSources = (costGuide.sources?.length ?? 0) > 0;
-const regionNote = prefecture && !hasSources ? regionalCostNote(prefecture) : null;
 ---
 <section class="sd-section section-white" id="cost">
   <div class="sd-container">
@@ -28,9 +16,6 @@ const regionNote = prefecture && !hasSources ? regionalCostNote(prefecture) : nu
       <h2>{serviceName}の費用はどのくらいかかる？</h2>
       <p>{costGuide.intro}</p>
     </div>
-    {regionNote && (
-      <p class="cost-region-note"><strong>地域の相場感：</strong>{regionNote}</p>
-    )}
     <div class="cost-table-wrap">
       <table class:list={["cost-table", { "cost-table--compact": hasSources }]} aria-describedby="cost-table-caption">
         <caption id="cost-table-caption">
@@ -95,15 +80,5 @@ const regionNote = prefecture && !hasSources ? regionalCostNote(prefecture) : nu
     .cost-table--compact thead th,
     .cost-table--compact tbody th,
     .cost-table--compact tbody td { padding: 10px 6px; }
-  }
-  .cost-region-note {
-    max-width: 760px;
-    margin: 0 auto 1.5rem;
-    padding: 0.9rem 1.1rem;
-    background: #fff7ed;
-    border: 1px solid #fcd9b6;
-    border-radius: 10px;
-    font-size: 0.95rem;
-    line-height: 1.75;
   }
 </style>

@@ -115,7 +115,6 @@ export const prefecturesData: Prefecture[] = [
       { title: '高層・過密エリア特有の作業制約', body: '都心部の高層ビル・大型マンションは、資材搬入のエレベーター制限、夜間・休日の搬出指定、近隣への事前説明が求められます。その分の人員・養生コストが見積に上乗せされやすく、全国平均より割高になります。', services: ['jusuisou-seisou', 'haisuikan', 'duct', 'grease-trap', 'aircon-business', 'gaiheki-toso', 'yane-fukikae', 'kaitai', 'zanchibutsu', 'asbestos', 'office-iten', 'solar-cleaning', 'reito-reizou'] },
       { title: '特定建築物が全国最多', body: '建築物環境衛生管理基準の対象（延床3,000㎡以上）が全国で最も多く、保健所の立入検査・指導も比較的厳格です。法定点検の記録管理を確実に行える業者を選ぶと安心です。', services: ['jusuisou-seisou', 'johkasou', 'haisuikan', 'pest-control', 'aircon-business', 'duct', 'grease-trap'] },
       { title: '緊急・深夜対応の選択肢が豊富', body: '対応業者数が全国で最も多いため、当日対応・深夜作業・短納期にも応じやすいエリアです。一方で繁忙期は予約が埋まりやすく、早めの相見積もりが有利になります。' },
-      { title: '23区と多摩地区で価格・対応に差', body: '23区内（特に千代田・港・中央・新宿・渋谷）は人件費・駐車場確保コストが上乗せされ、多摩地区（八王子・町田・立川など）より見積もりが高くなる傾向があります。多摩地区は地元業者が多く、エリア内の年間契約で割安に対応可能なケースもあります。' },
       { title: '区によって申請ルール・補助制度が異なる', body: '東京都内でも、各区で受水槽更新・直結給水化などの補助制度や届出ルールが異なります。区の担当窓口（水道局・建築指導課・環境課）への事前確認が業者選定の前に必要です。', services: ['jusuisou-seisou', 'johkasou', 'haisuikan'] },
     ] },
   { slug: 'kanagawa', name: '神奈川県', kana: 'かながわけん', region: '関東',
