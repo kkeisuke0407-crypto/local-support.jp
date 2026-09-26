@@ -137,6 +137,21 @@ const faqLd = JSON.stringify({
         <p>{category.summary}</p>
       </div>
 
+      {'tools' in category && category.tools && category.tools.length > 0 && (
+        <section class="cat-section" id="tools">
+          <div class="cat-section-head">
+            <span>CHECK</span>
+            <h2>うちの建物は対象？義務チェック</h2>
+            <p>建物の用途や規模を選ぶだけで、点検・報告の義務があるか、何年ごとかを確認できます。</p>
+          </div>
+          <ul class="cat-tool-list">
+            {category.tools.map((t) => (
+              <li><a href={t.href} class="cat-tool-link"><strong>{t.title}</strong><span>{t.description}</span></a></li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       <section class="cat-section">
         <div class="cat-section-head">
           <span>{services.length} SERVICES</span>
@@ -415,4 +430,9 @@ const faqLd = JSON.stringify({
     .cat-answer { padding: 20px; }
     .cat-bottom-cta { padding: 26px 20px; }
   }
+.cat-tool-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.cat-tool-link { display: block; background: #fff; border: 1.5px solid var(--blue); border-radius: 10px; padding: 14px 16px; text-decoration: none; height: 100%; }
+.cat-tool-link strong { display: block; color: var(--blue); font-size: .98rem; margin-bottom: 4px; }
+.cat-tool-link span { display: block; color: var(--gray-700); font-size: .86rem; line-height: 1.7; }
+.cat-tool-link:hover { background: var(--blue-light); }
 </style>
