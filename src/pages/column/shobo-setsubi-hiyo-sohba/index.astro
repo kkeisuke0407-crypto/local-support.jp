@@ -3,11 +3,11 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
 import { site } from '../../../data/site';
 
-const title = '消防設備点検の費用相場｜建物規模・契約形態・是正工事の単価をまるごと解説';
-const description = '消防設備点検の費用相場を共同住宅・オフィス・商業施設・ホテル・工場の建物規模別に整理。機器点検・総合点検・所轄消防署への報告までの年間契約料金、是正工事の単価、複数物件契約での割引、安価業者に注意すべき理由まで施設管理担当者向けに解説します。';
+const title = '消防設備点検の費用相場｜公開料金表で見る建物の用途・面積別の目安';
+const description = '消防設備点検の費用を、点検会社が公開している料金表をもとに整理。延べ面積と用途（マンション・事務所・商業施設・倉庫）別の点検1回あたりの目安、年間契約と単発の違い、実際の建物の年間費用の例、見積りで追加になりやすい費用までまとめています。';
 const canonical = `${site.domain}/column/shobo-setsubi-hiyo-sohba/`;
 const published = '2026-05-26';
-const modified = '2026-05-26';
+const modified = '2026-09-26';
 
 const breadcrumbLd = JSON.stringify({
   '@context': 'https://schema.org', '@type': 'BreadcrumbList',
@@ -22,31 +22,27 @@ const articleLd = JSON.stringify({
   '@context': 'https://schema.org', '@type': 'Article',
   headline: title, description, datePublished: published, dateModified: modified,
   inLanguage: 'ja-JP', url: canonical, mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
-  wordCount: 4000,
   articleSection: '費用相場',
-  keywords: '消防設備点検,費用相場,機器点検,総合点検,建物規模別,是正工事,年間契約,2026',
+  keywords: '消防設備点検,費用,相場,料金表,機器点検,総合点検,年間契約,スポット点検,マンション,事務所',
   author: { '@type': 'Organization', name: site.author.name, url: site.domain + '/author/' },
   publisher: { '@id': `${site.domain}/#organization` },
   image: { '@type': 'ImageObject', url: `${site.domain}/og-shobo-setsubi.png`, width: 1200, height: 630 },
   about: { '@type': 'Service', name: '消防設備点検' },
 });
 
+const faqItems = [
+  { q: '消防設備点検の費用は年間でどのくらいですか？', a: '建物の面積・用途・設備で大きく変わります。大阪の点検会社（日消システムズ）が公開している例では、延べ300㎡・約10戸のマンションで年間5万円、1,600㎡の事務所ビルで年間11万円、1,200㎡の病院（診療所）で年間15万円でした（機器点検・総合点検・消防署への提出代行の合計）。' },
+  { q: '年間契約と単発（スポット）の依頼、どちらが得ですか？', a: '同じ点検会社の公開例では、単発の総合点検は、年間契約の総合点検より1回あたり2〜5割ほど高く設定されていました。また法令では機器点検を6か月ごと、総合点検を1年ごとに行う必要があるため、単発の総合点検1回だけでは点検の義務を満たせません。' },
+  { q: '見積りに含まれていないことが多い費用は？', a: '公開されている料金表では、消防署への報告書の提出代行（5,000〜10,000円の例）、交通費・諸経費、不在による再点検、休日・夜間の作業、消火器・避難器具以外の設備の点検などが別料金になっている例があります。見積りを比べるときは、含まれる範囲をそろえてください。' },
+  { q: '点検後の是正工事（修理・交換）は別料金ですか？', a: '点検と是正工事は、別の見積り・別の契約になるのが一般的です。点検をした業者に工事を頼む義務はないため、金額が大きい場合はほかの業者の見積りと比べてから決められます。' },
+  { q: '消防設備点検は自分でできますか？', a: '延べ面積1,000㎡以上の特定防火対象物、特定一階段等防火対象物などは、消防設備士または消防設備点検資格者による点検が必要です（消防法施行令第36条）。それ以外の建物は関係者が自ら点検することもできますが、試験器や報告書の様式が必要なため、業者に頼むのが一般的です。自分の建物がどちらに当たるかは「消防点検の義務チェック」で確認できます。' },
+  { q: '共同住宅の点検費用は誰が負担しますか？', a: '共用部の点検費用は、管理組合が管理費から支出するのが一般的です。住戸内の感知器などの扱いは管理規約によって異なるため、規約を確認してください。' },
+  { q: '年度の途中から契約できますか？', a: 'できます。前の業者の最後の点検から間が空きすぎないように日程を決め、前回の点検報告書を新しい業者に渡すと状況を把握してもらいやすくなります。' },
+];
+
 const faqLd = JSON.stringify({
   '@context': 'https://schema.org', '@type': 'FAQPage',
-  mainEntity: [
-    { '@type': 'Question', name: '消防設備点検の年間費用はどのくらい？', acceptedAnswer: { '@type': 'Answer', text: '建物規模で大きく異なります。共同住宅（〜30戸）で年額3〜8万円、小規模オフィスで4〜10万円、中規模商業ビルで10〜30万円、ホテル・病院などの特定防火対象物では30万円〜80万円程度が目安。年間契約・複数物件契約で割引されるケースが一般的です。' } },
-    { '@type': 'Question', name: '年間契約と単発依頼、どちらが得？', acceptedAnswer: { '@type': 'Answer', text: 'ほとんどの場合、年間契約のほうが割安です。機器点検2回・総合点検1回・所轄消防署への報告までセットで割引されることが多く、緊急対応の優先権がつくケースもあります。単発はスポット見積で割高になりがちです。' } },
-    { '@type': 'Question', name: '点検後の是正工事は別料金ですか？', acceptedAnswer: { '@type': 'Answer', text: 'はい、点検と是正工事は別契約・別料金が原則です。点検費用にはほとんどの場合「不良箇所の指摘」までが含まれ、その修繕は別途見積となります。点検業者と是正工事業者を分けることでコスト比較が可能になります。' } },
-    { '@type': 'Question', name: '安すぎる業者は何が問題？', acceptedAnswer: { '@type': 'Answer', text: '無資格者による形式的な点検、所轄消防署への報告書未提出、点検後の高額是正工事への誘導等のリスクがあります。1物件あたり数千円台の極端に安い見積は、必要な項目を省略している可能性が高いため避けるべきです。' } },
-    { '@type': 'Question', name: '複数物件まとめての契約割引は？', acceptedAnswer: { '@type': 'Answer', text: '多店舗チェーン・複数棟保有事業者向けに、本部一括契約で10〜30%程度の割引が一般的です。物件数・エリアの集中度・契約期間で割引率が変動します。見積依頼時に「他物件も検討中」と伝えると好条件が出やすい傾向があります。' } },
-    { '@type': 'Question', name: '点検費用は経費にできますか？', acceptedAnswer: { '@type': 'Answer', text: 'はい、法令義務に基づく費用なので全額損金算入可能です。マンション管理組合の場合も、共用部の管理費から支出する形で会計処理されます。領収書・点検記録は5年保管しておきましょう。' } },
-    { '@type': 'Question', name: "消防設備点検は自分でできますか？", acceptedAnswer: { '@type': 'Answer', text: "延べ面積1,000m²未満または特定用途に供されない部分が1,000m²未満の建物は防火管理者等が自ら点検できますが、それ以外は消防設備士・消防設備点検資格者による点検が必要です。" } },
-    { '@type': 'Question', name: "消防設備点検費用は経費にできますか？", acceptedAnswer: { '@type': 'Answer', text: "法令義務に基づく費用として全額損金算入可能です。管理費・保守費として計上します。" } },
-    { '@type': 'Question', name: "消防設備点検の年間契約と単発依頼、どちらが得ですか？", acceptedAnswer: { '@type': 'Answer', text: "ほとんどの場合、年間契約の方が割安です。機器点検2回・総合点検1回・消防署への報告書作成までセットで割引されるのが一般的です。" } },
-    { '@type': 'Question', name: "複数物件を一括契約できますか？", acceptedAnswer: { '@type': 'Answer', text: "はい。多店舗チェーン・複数棟保有事業者は本部一括契約で10〜30%の割引が一般的です。物件数・エリア集中度・契約期間で割引率が変わります。" } },
-    { '@type': 'Question', name: "点検後に是正工事が必要と言われたら、どうすべきですか？", acceptedAnswer: { '@type': 'Answer', text: "点検結果の報告書を確認し、不具合の種類（要是正・指摘）と緊急度を把握します。是正工事は点検業者と別の業者から相見積もりを取ることが可能です。放置すると行政報告で「未是正」記録が残ります。" } }
-  
-  ],
+  mainEntity: faqItems.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
 });
 const webPageLd = JSON.stringify({
   '@context': 'https://schema.org',
@@ -75,14 +71,14 @@ const webPageLd = JSON.stringify({
           <span>消防設備点検の費用相場ガイド</span>
         </nav>
         <span class="cl-cat">費用相場</span>
-        <h1 class="cl-title">消防設備点検の費用相場｜建物規模・契約形態・是正工事の単価をまるごと解説</h1>
+        <h1 class="cl-title">消防設備点検の費用相場｜公開料金表で見る建物の用途・面積別の目安</h1>
         <p class="cl-lead">
-          消防設備点検の費用は、<strong>建物規模・用途・設置設備の種類・契約形態</strong>で大きく変動します。「相場を知らずに見積を取ると判断できない」「安すぎる業者には何かある」「年間契約のほうがお得らしいが本当か」といった疑問に答えるべく、本記事では共同住宅・オフィス・商業施設・ホテル・工場の規模別費用、機器点検・総合点検・所轄消防署への報告までの内訳、点検後の是正工事の単価、複数物件契約の割引まで、実態に即して整理しました。
+          消防設備点検の費用は、<strong>建物の面積・用途・設置されている設備・契約の形</strong>で大きく変わります。この記事では、<strong>点検会社が公開している料金表</strong>をもとに、点検1回あたりの目安、実際の建物の年間費用の例、年間契約と単発の違い、見積りで追加になりやすい費用を整理しました。数字はすべて出典を示しています。
         </p>
         <div class="cl-meta">
           <time datetime={published}>公開：2026年5月26日</time>
-          <span>最終更新：2026年5月26日</span>
-          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
+          <span>最終更新：2026年9月26日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a></span>
         </div>
       </div>
     </header>
@@ -91,24 +87,23 @@ const webPageLd = JSON.stringify({
 
       <div class="cl-quickanswer">
         <p class="cl-qa-q">Q. 消防設備点検の費用はいくらですか？</p>
-        <p class="cl-qa-a">A. <strong>共同住宅（〜30戸）で年額3〜8万円、小規模オフィスで4〜10万円、中規模商業ビルで10〜30万円</strong>。年間契約・複数物件まとめで割引されるケースが多い。</p>
-        <p class="cl-qa-src">※一般的な目安で、個別に調査・検証した数値ではありません。建物の条件や地域で大きく変わるため、正式な金額は業者の見積りでご確認ください（<a href="/research/methodology/">目安の考え方</a>）。</p>
+        <p class="cl-qa-a">A. <strong>点検会社が公開している料金表の例では、点検1回あたり、マンション・非商業施設で、延べ300㎡以下なら1〜2万円、1,000〜2,000㎡なら5〜8万円です。</strong>商業施設は同じ面積でも高めです。法令どおり機器点検と総合点検を行う年間では、おおよそ1回分の2倍に、消防署への提出代行費（5,000〜10,000円の例）が加わります。</p>
+        <p class="cl-qa-src">※<a href="https://www.jafs.co.jp/tenken2.html" rel="noopener" target="_blank">日消システムズ（大阪府）の公開料金表</a>による（2026年9月確認）。地域・設備・業者で変わるため、正式な金額は業者の見積りでご確認ください。</p>
       </div>
 
       <ColumnCtaCard serviceSlug="shobo-setsubi" serviceName="消防設備点検" variant="top" />
-
 
       <aside class="cl-toc" aria-label="目次">
         <h2 class="cl-toc-h">この記事の目次</h2>
         <ol>
           <li><a href="#summary">3行サマリ</a></li>
-          <li><a href="#base-cost">建物規模別の年間費用相場</a></li>
-          <li><a href="#breakdown">費用の内訳（機器点検・総合点検・報告）</a></li>
-          <li><a href="#factors">費用を左右する要因</a></li>
-          <li><a href="#zesei">点検後の是正工事の単価</a></li>
-          <li><a href="#contract">年間契約 vs 単発の比較</a></li>
-          <li><a href="#multi">複数物件・チェーン店契約の割引</a></li>
-          <li><a href="#cheap">安すぎる業者の注意点</a></li>
+          <li><a href="#base-cost">延べ面積・用途別の目安（点検1回あたり）</a></li>
+          <li><a href="#examples">実際の建物の年間費用の例</a></li>
+          <li><a href="#others">ほかの点検会社の公開料金</a></li>
+          <li><a href="#extras">見積りで追加になりやすい費用</a></li>
+          <li><a href="#contract">年間契約と単発の違い</a></li>
+          <li><a href="#zesei">是正工事の費用</a></li>
+          <li><a href="#cheap">安すぎる見積りの注意点</a></li>
           <li><a href="#tips">見積比較のコツ</a></li>
           <li><a href="#faq">よくある質問</a></li>
         </ol>
@@ -118,159 +113,143 @@ const webPageLd = JSON.stringify({
         <div class="cl-callout">
           <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
           <ul>
-            <li><strong>年間費用目安</strong>：共同住宅3〜8万円、中規模商業ビル10〜30万円、ホテル・病院30〜80万円</li>
-            <li><strong>契約形態</strong>：年間契約（機器点検2回＋総合点検1回＋報告書提出）でまとめると単発より15〜30%割安</li>
-            <li><strong>注意点</strong>：極端に安い業者は無資格点検・報告漏れ・是正工事の高額提案のリスク。資格者在籍・報告書範囲を必ず確認</li>
+            <li><strong>1回あたり</strong>：延べ300㎡以下で1〜2万円、1,000〜2,000㎡で5〜8万円（マンション・非商業施設の例）。商業施設は高め</li>
+            <li><strong>年間</strong>：機器点検と総合点検でおおよそ1回分の2倍＋提出代行費。例：1,600㎡の事務所ビルで年間11万円</li>
+            <li><strong>比べ方</strong>：提出代行・交通費・再点検などが含まれるかで金額が変わる。範囲をそろえて見積りを比べる</li>
           </ul>
         </div>
       </section>
 
       <section id="base-cost" class="cl-section">
-        <h2>建物規模別の年間費用相場</h2>
-        <p>消防設備点検の年間費用は、建物の延べ面積と用途（特定／非特定）、設置設備の種類で決まります。以下は一般的な相場の目安です。</p>
+        <h2>延べ面積・用途別の目安（点検1回あたり）</h2>
+        <p>大阪府の点検会社・日消システムズが公開している目安価格です。<strong>総合点検1回の料金</strong>で、法令どおり機器点検と総合点検を行う年間契約では、おおよそこの2倍になると案内されています。</p>
         <div class="cl-table-wrap">
           <table class="cl-table">
-            <caption>建物規模・用途別の年間費用相場（税込目安）</caption>
-            <thead><tr><th scope="col">建物種別</th><th scope="col">想定規模</th><th scope="col">年間費用目安</th><th scope="col">主な点検対象</th></tr></thead>
+            <caption>点検1回あたりの目安価格（単位：円）</caption>
+            <thead><tr><th>延べ面積</th><th>マンション</th><th>非商業施設</th><th>商業施設</th><th>倉庫・作業所</th></tr></thead>
             <tbody>
-              <tr><th scope="row">共同住宅（小）</th><td>〜30戸</td><td>30,000〜80,000円</td><td>消火器・自火報・誘導灯</td></tr>
-              <tr><th scope="row">共同住宅（中）</th><td>30〜100戸</td><td>50,000〜150,000円</td><td>＋連結送水管・避難器具</td></tr>
-              <tr><th scope="row">共同住宅（大）</th><td>100戸〜</td><td>150,000〜400,000円</td><td>＋屋内消火栓・スプリンクラー</td></tr>
-              <tr><th scope="row">小規模オフィス</th><td>〜500㎡</td><td>40,000〜100,000円</td><td>誘導灯・消火器・自火報</td></tr>
-              <tr><th scope="row">中規模商業ビル</th><td>〜2,000㎡</td><td>100,000〜300,000円</td><td>＋屋内消火栓・スプリンクラー</td></tr>
-              <tr><th scope="row">飲食店（路面店）</th><td>〜200㎡</td><td>30,000〜80,000円</td><td>消火器・自火報（特定対象物）</td></tr>
-              <tr><th scope="row">ホテル・旅館</th><td>中規模</td><td>300,000〜800,000円</td><td>網羅的設備＋年1回報告</td></tr>
-              <tr><th scope="row">病院・福祉施設</th><td>中規模</td><td>300,000〜800,000円</td><td>SPなど設備が多い＋年1報告</td></tr>
-              <tr><th scope="row">工場・倉庫</th><td>〜5,000㎡</td><td>150,000〜500,000円</td><td>泡・粉末等特殊設備含む</td></tr>
+              <tr><th scope="row">〜300㎡</th><td>1万〜2万</td><td>1万〜2万</td><td>1万〜3万</td><td>1万〜3万</td></tr>
+              <tr><th scope="row">300〜500㎡</th><td>2万〜4万</td><td>2万〜4万</td><td>2万〜5万</td><td>2万〜4万</td></tr>
+              <tr><th scope="row">500〜1,000㎡</th><td>3万〜6万</td><td>3万〜6万</td><td>5万〜10万</td><td>4万〜8万</td></tr>
+              <tr><th scope="row">1,000〜2,000㎡</th><td>5万〜8万</td><td>5万〜8万</td><td>8万〜15万</td><td>8万〜15万</td></tr>
+              <tr><th scope="row">2,000〜3,000㎡</th><td>6万〜10万</td><td>6万〜10万</td><td>10万〜30万</td><td>10万〜20万</td></tr>
+              <tr><th scope="row">3,000〜5,000㎡</th><td>8万〜20万</td><td>8万〜20万</td><td>16万〜40万</td><td>12万〜30万</td></tr>
+              <tr><th scope="row">5,000〜10,000㎡</th><td>15万〜30万</td><td>15万〜30万</td><td>30万〜60万</td><td>20万〜45万</td></tr>
+              <tr><th scope="row">10,000〜25,000㎡</th><td>30万〜60万</td><td>30万〜60万</td><td>50万〜100万</td><td>40万〜80万</td></tr>
+              <tr><th scope="row">25,000㎡以上</th><td>50万〜</td><td>50万〜</td><td>100万〜</td><td>80万〜</td></tr>
             </tbody>
           </table>
         </div>
-        <p class="cl-note">上記は2026年時点の一般的な相場目安です。物件特性（築年・設備構成・テナント数）で大きく変動します。実際の金額は複数業者の見積で必ず確認してください。</p>
+        <p class="cl-note">出典：<a href="https://www.jafs.co.jp/tenken2.html" rel="noopener" target="_blank">日消システムズ「消防点検の参考費用」</a>（令和4年5月価格改訂、2026年9月確認）。料金の幅は、設置されている設備と数量の違いによるものとされています。交通費・諸経費と、消防署への提出費（5,000〜10,000円）は含まれていません。</p>
       </section>
 
-      <section id="breakdown" class="cl-section">
-        <h2>費用の内訳（機器点検・総合点検・報告）</h2>
-        <p>年間費用の内訳は、機器点検（半年に1回、年2回実施）と総合点検（年1回）、所轄消防署への報告書作成・提出で構成されます。</p>
+      <section id="examples" class="cl-section">
+        <h2>実際の建物の年間費用の例</h2>
+        <p>同じ点検会社が公開している、建物ごとの年間契約（法定点検）と単発（スポット）の価格例です。</p>
         <div class="cl-table-wrap">
           <table class="cl-table">
-            <caption>費用内訳の典型例（中規模商業ビルの場合）</caption>
-            <thead><tr><th scope="col">区分</th><th scope="col">頻度</th><th scope="col">費用比率</th><th scope="col">補足</th></tr></thead>
+            <caption>年間契約と単発の価格例（単位：円）</caption>
+            <thead><tr><th>建物</th><th>機器点検</th><th>総合点検</th><th>提出代行</th><th>年間合計</th><th>単発の総合点検</th></tr></thead>
             <tbody>
-              <tr><th scope="row">機器点検</th><td>半年に1回（年2回）</td><td>40%</td><td>外観・配置・機能の概要確認</td></tr>
-              <tr><th scope="row">総合点検</th><td>年1回</td><td>45%</td><td>放水・作動試験等の総合確認</td></tr>
-              <tr><th scope="row">報告書作成・提出</th><td>年1回（特定）／3年1回（非特定）</td><td>10%</td><td>所轄消防署への提出代行</td></tr>
-              <tr><th scope="row">交通費・諸経費</th><td>—</td><td>5%</td><td>遠隔地・夜間作業で増減</td></tr>
+              <tr><th scope="row">マンション 300㎡（約10戸・入室なし）</th><td>20,000</td><td>25,000</td><td>5,000</td><td>50,000</td><td>35,000</td></tr>
+              <tr><th scope="row">グループホーム 250㎡</th><td>25,000</td><td>30,000</td><td>5,000</td><td>60,000</td><td>45,000</td></tr>
+              <tr><th scope="row">カラオケビル 700㎡</th><td>50,000</td><td>65,000</td><td>5,000</td><td>120,000</td><td>80,000</td></tr>
+              <tr><th scope="row">作業所・工場・倉庫 800㎡</th><td>45,000</td><td>60,000</td><td>5,000</td><td>110,000</td><td>75,000</td></tr>
+              <tr><th scope="row">病院（診療所）1,200㎡</th><td>65,000</td><td>80,000</td><td>5,000</td><td>150,000</td><td>100,000</td></tr>
+              <tr><th scope="row">事務所ビル 1,600㎡</th><td>50,000</td><td>55,000</td><td>5,000</td><td>110,000</td><td>75,000</td></tr>
+              <tr><th scope="row">マンション 1,700㎡（20戸）</th><td>40,000</td><td>45,000</td><td>5,000</td><td>90,000</td><td>60,000</td></tr>
+              <tr><th scope="row">テナントビル 1,800㎡</th><td>75,000</td><td>90,000</td><td>5,000</td><td>160,000</td><td>110,000</td></tr>
+              <tr><th scope="row">マンション 5,200㎡（130戸）</th><td>100,000</td><td>120,000</td><td>5,000</td><td>225,000</td><td>150,000</td></tr>
             </tbody>
           </table>
         </div>
-        <p>「点検のみ」「点検＋報告書作成」「点検＋報告書提出代行」で価格が変わるため、見積比較時は範囲を揃えることが必須です。</p>
+        <p class="cl-note">出典：<a href="https://www.jafs.co.jp/tenken2.html" rel="noopener" target="_blank">日消システムズ「各種建物の費用について」</a>（2026年9月確認）。単発の欄は総合点検1回のみの価格で、機器点検と提出代行は含みません。</p>
       </section>
 
-      <section id="factors" class="cl-section">
-        <h2>費用を左右する要因</h2>
+      <section id="others" class="cl-section">
+        <h2>ほかの点検会社の公開料金</h2>
+        <p>ほかの点検会社も料金の目安を公開しています。<strong>1回分か年間かの記載がないもの</strong>もあるため、条件をそろえて比べるための参考にしてください。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>公開されている料金の例</caption>
+            <thead><tr><th>点検会社</th><th>建物</th><th>料金</th></tr></thead>
+            <tbody>
+              <tr><th scope="row" rowspan="4"><a href="https://shoubou-teq.com/equipment/periodic-inspection/" rel="noopener" target="_blank">消防テック</a>（東京都）</th><td>オフィスビル・雑居ビル（1,000㎡未満）</td><td>39,000円（1室3,900円〜）</td></tr>
+              <tr><td>マンション</td><td>45,000円〜71,500円（設備により）</td></tr>
+              <tr><td>老人ホーム</td><td>45,500円〜65,000円（設備により）</td></tr>
+              <tr><td>店舗</td><td>23,400円〜39,000円（設備により）</td></tr>
+              <tr><th scope="row" rowspan="4"><a href="https://www.buil-repo.com/fireserviceact/price/" rel="noopener" target="_blank">ビューローベリタス</a></th><td>共同住宅（延床3,000㎡の例）</td><td>220,000円（税込）</td></tr>
+              <tr><td>物販量販店・事務所ビル（同）</td><td>231,000円（税込）</td></tr>
+              <tr><td>複合用途（同）</td><td>250,800円（税込）</td></tr>
+              <tr><td>福祉施設（同）</td><td>275,000円（税込）</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="cl-note">※いずれも各社の公開ページの記載どおり（2026年9月確認）。1回分か年間かは各社のページに明記がありません。</p>
+      </section>
+
+      <section id="extras" class="cl-section">
+        <h2>見積りで追加になりやすい費用</h2>
+        <p>公開されている料金表の注記には、次のような費用が別になると書かれています。見積りを比べるときは、これらが含まれているかをそろえてください。</p>
         <ul>
-          <li><strong>延べ面積・階数</strong>：規模が大きいほど点検時間が長くなる</li>
-          <li><strong>設置設備の種類と数</strong>：スプリンクラー・屋内消火栓・特殊消火設備（泡・粉末・不活性ガス）等が多いほど高額</li>
-          <li><strong>特定／非特定の区分</strong>：特定防火対象物は報告が年1回必要で工数増</li>
-          <li><strong>テナント数・営業時間</strong>：営業時間外作業や立会が多いと費用増</li>
-          <li><strong>所在地</strong>：都市部は競合多く割安、地方・離島は出張費加算</li>
-          <li><strong>夜間・休日対応</strong>：通常時間外の点検は25〜50%増</li>
-          <li><strong>是正工事の有無</strong>：点検費用とは別、後述</li>
+          <li><strong>消防署への報告書の提出代行</strong>：5,000〜10,000円（日消システムズ）。提出代行を別料金とする会社もあります（東和総合サービス）</li>
+          <li><strong>交通費・諸経費</strong>：別途（日消システムズ）。東京23区・大阪市内以外は追加になる例もあります（東和総合サービス）</li>
+          <li><strong>不在による再点検</strong>：別途（日消システムズ）</li>
+          <li><strong>休日・夜間の作業日の指定</strong>：別途（日消システムズ）</li>
+          <li><strong>消火器・避難器具以外の設備の点検</strong>：追加になる料金体系の例があります（東和総合サービス）</li>
+          <li><strong>点検のお知らせの掲示・予備日の設定</strong>：追加になる例があります（東和総合サービス）</li>
         </ul>
-      </section>
-
-      <section id="zesei" class="cl-section">
-        <h2>点検後の是正工事の単価</h2>
-        <p>点検で「不良」と判定された設備は、別途見積で是正工事を依頼します。是正工事は点検費用とは別契約となるのが一般的です。</p>
-        <div class="cl-table-wrap">
-          <table class="cl-table">
-            <caption>是正工事の代表的な単価（税込目安）</caption>
-            <thead><tr><th scope="col">作業内容</th><th scope="col">費用目安</th><th scope="col">備考</th></tr></thead>
-            <tbody>
-              <tr><th scope="row">消火器交換（10型）</th><td>5,000〜15,000円／本</td><td>本体代＋取付・廃棄</td></tr>
-              <tr><th scope="row">感知器交換（差動式）</th><td>3,000〜8,000円／個</td><td>個別交換・配線工事別</td></tr>
-              <tr><th scope="row">受信機リチウム電池交換</th><td>10,000〜30,000円</td><td>機種で変動</td></tr>
-              <tr><th scope="row">誘導灯バッテリー交換</th><td>3,000〜10,000円／台</td><td>4〜5年に1回必要</td></tr>
-              <tr><th scope="row">スプリンクラー部品交換</th><td>10,000円〜</td><td>ヘッド・配管・継手等</td></tr>
-              <tr><th scope="row">屋内消火栓ホース更新</th><td>15,000〜30,000円／本</td><td>耐用年数あり</td></tr>
-              <tr><th scope="row">自動火災報知設備の改修</th><td>50,000円〜数十万円</td><td>規模・台数で大きく変動</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="cl-callout cl-callout--warn">
-          <h3 class="cl-callout-h">是正工事の見積比較</h3>
-          <p>是正工事は点検業者から提案されることが多いですが、その業者で発注する義務はありません。10万円超の是正工事は別業者の相見積を取ることでコストが半分近くになるケースもあります。「点検は安いが補修見積が高い」業者は特に注意が必要です。</p>
-        </div>
+        <p class="cl-note">出典：<a href="https://www.jafs.co.jp/tenken2.html" rel="noopener" target="_blank">日消システムズ</a>／<a href="https://www.to-wa.info/contents/3923/" rel="noopener" target="_blank">東和総合サービス「消防設備点検の費用とは？」</a>（2026年9月確認）</p>
       </section>
 
       <section id="contract" class="cl-section">
-        <h2>年間契約 vs 単発の比較</h2>
-        <div class="cl-table-wrap">
-          <table class="cl-table">
-            <caption>年間契約と単発依頼の比較</caption>
-            <thead><tr><th scope="col">項目</th><th scope="col">年間契約</th><th scope="col">単発依頼</th></tr></thead>
-            <tbody>
-              <tr><th scope="row">価格</th><td>15〜30%割安</td><td>定価</td></tr>
-              <tr><th scope="row">スケジュール</th><td>業者主導で自動的に管理</td><td>都度調整必要</td></tr>
-              <tr><th scope="row">報告書提出</th><td>提出代行が標準</td><td>別オプションで追加料金</td></tr>
-              <tr><th scope="row">緊急対応</th><td>優先対応が一般的</td><td>都度交渉</td></tr>
-              <tr><th scope="row">解約自由度</th><td>1年縛りが多い</td><td>都度終了</td></tr>
-              <tr><th scope="row">向いている事業者</th><td>継続的に管理したい</td><td>1回だけ試したい</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p>定期的に点検が必要な以上、年間契約のメリットが大きいケースが多いです。ただし業者品質が合わなかった場合の出口（解約条件）は契約時に必ず確認してください。</p>
+        <h2>年間契約と単発の違い</h2>
+        <p>上の例では、単発（スポット）の総合点検は、年間契約の総合点検より<strong>1回あたり2〜5割ほど高く</strong>設定されていました（例：1,600㎡の事務所ビルで55,000円→75,000円）。</p>
+        <p>また、法令では機器点検を6か月ごと、総合点検を1年ごとに行う必要があります。<strong>単発の総合点検1回だけでは点検の義務を満たせない</strong>ため、単発は消防署から点検を求められたときなどの臨時の対応と考え、継続する場合は年間契約で見積りを取るのが基本です。</p>
       </section>
 
-      <section id="multi" class="cl-section">
-        <h2>複数物件・チェーン店契約の割引</h2>
-        <p>多店舗チェーン・複数棟保有事業者向けに、本部一括契約での割引が一般的です。</p>
+      <section id="zesei" class="cl-section">
+        <h2>是正工事の費用</h2>
+        <p>点検で不良が見つかった設備の修理・交換（是正工事）は、点検とは別の見積り・別の契約になるのが一般的です。金額は機器の種類・メーカー・数量で大きく変わるため、ここでは目安を載せていません。</p>
         <ul>
-          <li><strong>2〜5物件</strong>：5〜15%程度の割引</li>
-          <li><strong>5〜20物件</strong>：15〜25%程度の割引</li>
-          <li><strong>20物件以上</strong>：25〜35%程度の割引</li>
+          <li>点検の見積りを取るときに、主な部品や作業の単価表を出してもらう</li>
+          <li>是正の提案には、写真・測定値・該当する基準を付けてもらう</li>
+          <li>点検した業者に工事を頼む義務はないので、金額が大きいときはほかの業者の見積りと比べる</li>
         </ul>
-        <p>エリア集中度（同一都道府県内に集まっているか）でも割引率が変わります。点検業者は移動コストを削減できるため、エリア集中度が高い場合の割引が出やすい構造です。</p>
       </section>
 
       <section id="cheap" class="cl-section">
-        <h2>安すぎる業者の注意点</h2>
-        <p>1物件あたり年間2〜3万円を大幅に下回る業者は、以下のリスクがあります。</p>
+        <h2>安すぎる見積りの注意点</h2>
+        <p>ほかより極端に安い見積りは、必要な項目が抜けていないか確認してください。</p>
         <ul>
-          <li><strong>無資格者点検</strong>：延べ1,000㎡超の特定防火対象物は有資格者が必須。違反すると報告書が無効に</li>
-          <li><strong>報告書未提出</strong>：所轄消防署への提出を「別料金」とし、結果的に点検義務違反となる</li>
-          <li><strong>形式的な点検</strong>：写真・測定値の記録なし、後日トラブル時の根拠が薄弱</li>
-          <li><strong>是正工事の押し売り</strong>：点検は安く、不良判定を多めに出して高額是正工事を提案</li>
-          <li><strong>消防設備士の登録要件未充足</strong>：そもそも点検実施者として法的要件を満たしていない</li>
+          <li><strong>資格者が点検するか</strong>：延べ面積1,000㎡以上の特定防火対象物などは、消防設備士または消防設備点検資格者の点検が必要です（消防法施行令第36条）</li>
+          <li><strong>報告書の提出まで含むか</strong>：提出代行が別料金になっていないか</li>
+          <li><strong>機器点検と総合点検の両方か</strong>：総合点検だけ、機器点検だけの見積りになっていないか</li>
+          <li><strong>記録の中身</strong>：点検票・写真・測定値が残るか</li>
         </ul>
       </section>
 
       <section id="tips" class="cl-section">
         <h2>見積比較のコツ</h2>
         <ol>
-          <li><strong>範囲を揃える</strong>：「機器2回＋総合1回＋所轄消防署への提出」をセットで見積依頼</li>
-          <li><strong>有資格者の在籍数・資格区分を確認</strong>：1〜7類のうち自社建物に必要な類をカバーしているか</li>
-          <li><strong>是正工事の単価表を事前取得</strong>：点検費用が同じでも是正単価で総コストが変わる</li>
-          <li><strong>緊急対応の有無</strong>：警報発報時の駆けつけ目安時間、夜間休日対応の費用</li>
-          <li><strong>解約条件・更新条項</strong>：合わなければ解約できるか、自動更新条項の有無</li>
+          <li><strong>範囲をそろえる</strong>：「機器点検（6か月ごと）＋総合点検（1年ごと）＋消防署への提出代行」をセットで見積りを依頼する</li>
+          <li><strong>別料金になる項目を確認する</strong>：交通費・再点検・休日夜間・設備の追加</li>
+          <li><strong>資格者の在籍と資格の種類を確認する</strong>：建物の設備に必要な類の消防設備士がいるか</li>
+          <li><strong>是正工事の単価表を先にもらう</strong>：点検費用が同じでも、是正の単価で総額が変わる</li>
+          <li><strong>解約・更新の条件を確認する</strong>：自動更新の有無、解約の予告期間</li>
         </ol>
       </section>
 
       <div class="cl-cta">
-        <h2>消防設備点検の見積比較なら</h2>
-        <p>有資格業者から最大5社の見積もりを<br/>完全無料・約1分で取得できます</p>
-        <a class="cta-btn-primary" href="/shobo-setsubi/">無料で一括見積もりを依頼する</a>
+        <h2>消防設備点検の業者探しなら</h2>
+        <p>ロカサポが条件に合う点検業者を探して<br/>最大5社ご紹介します（ご依頼者様は無料）。<br/>正式なお見積りは、選んだ業者から直接提示されます。</p>
+        <a class="cta-btn-primary" href="/shobo-setsubi/">無料で点検業者を探す</a>
       </div>
 
       <section id="faq" class="cl-section">
         <h2>よくある質問</h2>
         <dl class="cl-faq">
-          <div class="cl-faq-item"><dt>共同住宅の点検費用は誰が負担？</dt><dd>共用部の点検費用は管理組合が共益費（管理費）から支出するのが一般的です。専有部内の設備（住戸内の感知器等）の点検は管理組合または住戸所有者の負担が標準ですが、管理規約で異なるため要確認です。</dd></div>
-          <div class="cl-faq-item"><dt>テナントビルでテナントが点検費用を負担することはある？</dt><dd>賃貸借契約・管理規約により異なります。共用部はビル所有者・管理組合が、テナント専有部の追加設備はテナント負担となるのが一般的です。契約時に明確化することが推奨されます。</dd></div>
-          <div class="cl-faq-item"><dt>消費税は別ですか？</dt><dd>業者により表記が異なります。見積比較時は税込・税抜を統一して比較しましょう。本記事の金額はすべて税込目安です。</dd></div>
-          <div class="cl-faq-item"><dt>年度途中で契約開始することは可能？</dt><dd>はい、可能です。前任業者の最終点検から自社契約の初回点検までの間隔が空きすぎないようスケジュール調整するのが望ましいです。前任業者の点検結果・報告履歴を引き継ぐと、新業者が状況を把握しやすくなります。</dd></div>
-          <div class="cl-faq-item"><dt>緊急対応料金はどのくらい？</dt><dd>警報発報時の駆けつけは1回あたり10,000〜30,000円程度（夜間休日は割増）。年間契約に含まれているケース、別途従量制のケースがあります。</dd></div>
-          <div class="cl-faq-item"><dt>是正工事の見積根拠を写真付きで欲しいです</dt><dd>正当な要求です。業者により「写真・測定値・該当法令」付きの是正提案書を発行します。これを断る業者は避けるべきです。</dd></div>
+          {faqItems.map((f) => (<div class="cl-faq-item"><dt>{f.q}</dt><dd>{f.a}</dd></div>))}
         </dl>
       </section>
 
@@ -284,7 +263,7 @@ const webPageLd = JSON.stringify({
           <li><a href="/shobo-setsubi/saitama/">埼玉県</a></li>
           <li><a href="/shobo-setsubi/fukuoka/">福岡県</a></li>
         </ul>
-        <p class="cl-pref-more"><a href="/shobo-setsubi/">全国47都道府県の対応業者を見る</a></p>
+        <p class="cl-pref-more"><a href="/shobo-setsubi/">全国の対応業者を見る</a></p>
       </div>
 
       <aside class="cl-related">
@@ -292,6 +271,8 @@ const webPageLd = JSON.stringify({
         <ul>
           <li><a href="/shobo-setsubi/">消防設備点検の業者を一括見積比較</a></li>
           <li><a href="/column/shobo-setsubi-horei-gimu/">消防設備点検の法定義務ガイド</a></li>
+          <li><a href="/column/shobo-setsubi-gimu-check/">消防点検の義務チェック</a></li>
+          <li><a href="/column/shobo-setsubi-apartment/">アパートの消防設備点検</a></li>
           <li><a href="/shutter/">シャッター点検の業者を比較</a></li>
           <li><a href="/flow/">ご利用の流れ・3ステップで業者紹介</a></li>
         </ul>
@@ -383,4 +364,7 @@ const webPageLd = JSON.stringify({
 .cl-pref-more { font-size: .87rem; margin: 0; }
 .cl-pref-more a { color: var(--blue); text-decoration: underline; }
 
+.cl-table tbody th[scope="row"] { white-space: normal; min-width: 7.5em; }
+.cl-table td { white-space: nowrap; }
+@media (max-width: 600px) { .cl-table { font-size: .78rem; } .cl-table th, .cl-table td { padding: 7px 6px; } }
 </style>
