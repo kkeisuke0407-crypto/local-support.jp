@@ -7,7 +7,7 @@ const title = '受水槽の点検・法定検査｜簡易専用水道検査と�
 const description = '受水槽の点検と法定検査を施設管理担当者向けに整理。簡易専用水道の法定検査（年1回・登録検査機関）の内容、清掃との違い、管理者が行う日常点検のチェック項目、頻度・費用・違反リスクまでを2026年版で解説します。';
 const canonical = `${site.domain}/column/jusuisou-seisou-tenken/`;
 const published = '2026-06-16';
-const modified = '2026-06-16';
+const modified = '2026-09-26';
 const egov = (n: string) => `https://laws.e-gov.go.jp/search/elawsSearch/elaws_search/lsg0100/?keyword=${encodeURIComponent(n)}`;
 
 const breadcrumbLd = JSON.stringify({
@@ -48,10 +48,10 @@ const faqLd = JSON.stringify({
   '@type': 'FAQPage',
   mainEntity: [
     { '@type': 'Question', name: '受水槽の点検と清掃は何が違いますか？', acceptedAnswer: { '@type': 'Answer', text: '清掃は槽内を空にして洗浄・消毒する作業、点検は設備や水の状態を確認する行為です。簡易専用水道では、年1回以上の清掃に加えて、登録検査機関による法定検査（書類検査・施設検査・給水栓水の検査）が義務付けられています。さらに管理者自身が行う日常的な外観点検も推奨されます。' } },
-    { '@type': 'Question', name: '簡易専用水道の法定検査は誰が行いますか？', acceptedAnswer: { '@type': 'Answer', text: '厚生労働大臣等の登録を受けた登録検査機関が行います。清掃業者とは別の主体ですが、多くの清掃業者は提携機関を通じて手配を代行できます。' } },
+    { '@type': 'Question', name: '簡易専用水道の法定検査は誰が行いますか？', acceptedAnswer: { '@type': 'Answer', text: '地方公共団体の機関、または国土交通大臣及び環境大臣の登録を受けた検査機関が行います（水道法施行規則第56条）。清掃業者とは別の機関なので、検査の申込みを誰が行うかを確認しておきましょう。' } },
     { '@type': 'Question', name: '受水槽の点検頻度はどれくらいですか？', acceptedAnswer: { '@type': 'Answer', text: '簡易専用水道（10m³超）は法定検査・清掃ともに年1回以上が義務です。加えて、ふた・防虫網・ひび割れ・水漏れなどの外観点検は、管理者が日常的（毎月など）に行うことが望ましいとされています。' } },
-    { '@type': 'Question', name: '10m³以下の受水槽も点検は必要ですか？', acceptedAnswer: { '@type': 'Answer', text: '10m³以下の小規模貯水槽水道は水道法の対象外ですが、多くの自治体が条例で清掃・管理を求めています。管轄の水道局・保健所で取り扱いを確認してください。' } },
-    { '@type': 'Question', name: '法定検査を受けないとどうなりますか？', acceptedAnswer: { '@type': 'Answer', text: '簡易専用水道の管理義務違反は、改善指導・命令の対象となり、悪質な場合は罰金等の対象になることがあります。水質事故が起きた場合は管理者の損害賠償責任にもつながります。' } },
+    { '@type': 'Question', name: '10m³以下の受水槽も点検は必要ですか？', acceptedAnswer: { '@type': 'Answer', text: '10m³以下は水道法の簡易専用水道には当たりませんが、東京都の条例や大阪府・大阪市の指導要領・要綱のように、自治体によって清掃や点検の定めがあります。所在地の保健所で確認してください。' } },
+    { '@type': 'Question', name: '法定検査を受けないとどうなりますか？', acceptedAnswer: { '@type': 'Answer', text: '簡易専用水道の法定検査を受けないと、100万円以下の罰金の対象です（水道法第54条）。清掃などの管理を怠った場合は、清掃などの指示（第36条第3項）や給水停止命令（第37条）を受けることがあります。' } },
   ],
 });
 
@@ -94,7 +94,7 @@ const webPageLd = JSON.stringify({
         </p>
         <div class="cl-meta">
           <time datetime={published}>公開：2026年6月16日</time>
-          <span>最終更新：2026年6月16日</span>
+          <span>最終更新：2026年9月26日</span>
           <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
         </div>
       </div>
@@ -149,7 +149,7 @@ const webPageLd = JSON.stringify({
               </tr>
             </thead>
             <tbody>
-              <tr><th scope="row">清掃</th><td>槽内を空にして洗浄・消毒</td><td>登録清掃業者</td><td>年1回以上</td></tr>
+              <tr><th scope="row">清掃</th><td>槽内を空にして洗浄・消毒</td><td>清掃業者</td><td>年1回以上</td></tr>
               <tr><th scope="row">法定検査</th><td>書類・施設・給水栓水の確認</td><td>登録検査機関</td><td>年1回以上</td></tr>
               <tr><th scope="row">日常点検</th><td>ふた・防虫網・ひび・水漏れ等の外観確認</td><td>施設管理者</td><td>日常的（毎月など）</td></tr>
             </tbody>
@@ -160,13 +160,14 @@ const webPageLd = JSON.stringify({
 
       <section id="houtei" class="cl-section">
         <h2>簡易専用水道の法定検査とは</h2>
-        <p>有効容量10m³超の受水槽は「簡易専用水道」に該当し、<a href={egov('水道法')} target="_blank" rel="noopener nofollow">水道法↗</a>により設置者（管理者）に管理義務が課されます。その中核が、<strong>登録検査機関による年1回以上の定期検査（法定検査）</strong>です。検査は主に次の3つで構成されます。</p>
+        <p>有効容量10m³超の受水槽は「簡易専用水道」に該当し、<a href={egov('水道法')} target="_blank" rel="noopener nofollow">水道法↗</a>により設置者（管理者）に管理義務が課されます。その中核が、<strong>地方公共団体の機関、または国土交通大臣及び環境大臣の登録を受けた検査機関による年1回以上の検査（法定検査）</strong>です。検査員が訪問する施設検査では、主に次の点が確認されます。</p>
         <ul class="cl-list">
-          <li><strong>書類検査</strong>：清掃記録・水質検査結果などの管理状況を確認</li>
-          <li><strong>施設検査</strong>：受水槽・高架水槽・配管などの外観を点検（ふた・防虫網・劣化・汚染のおそれ）</li>
-          <li><strong>給水栓水の検査</strong>：実際の蛇口で色・濁り・臭い・残留塩素などを確認</li>
+          <li><strong>給水設備の管理状況</strong>：水槽などの給水設備とその周辺の管理状況</li>
+          <li><strong>給水栓の水質</strong>：蛇口の水の臭気・味・色・色度・濁度と残留塩素</li>
+          <li><strong>書類の整理保存状況</strong>：設備の図面、水槽の清掃記録などの管理記録</li>
         </ul>
-        <p>この法定検査は、清掃業者が行う作業とは別の「第三者による確認」です。詳細な手続きは<a href={egov('水道法施行規則')} target="_blank" rel="noopener nofollow">水道法施行規則↗</a>に定められています。清掃と検査を別々に手配する手間を避けたい場合は、両方を一括手配できる業者に依頼すると管理が楽になります。</p>
+        <p class="cl-note">出典：<a href="https://www.jahmec.or.jp/kensa/kansui.html" rel="noopener" target="_blank">日本建築衛生管理教育センター「簡易専用水道検査」</a>（2026年9月確認）。特定建築物内の施設は、書類を提出して受ける「書類検査」を選べる場合があります。</p>
+        <p>この法定検査は、清掃業者が行う作業とは別の「第三者による確認」です。詳細な手続きは<a href={egov('水道法施行規則')} target="_blank" rel="noopener nofollow">水道法施行規則↗</a>に定められています。清掃業者とは別の機関なので、検査の申込みを誰が行うかを確認しておきましょう。</p>
       </section>
 
       <section id="daily" class="cl-section">
@@ -188,10 +189,10 @@ const webPageLd = JSON.stringify({
 
       <section id="freq" class="cl-section">
         <h2>頻度・費用の目安</h2>
-        <p>義務の頻度と、費用のおおまかな目安は次のとおりです。費用は規模・地域・依頼内容で変動するため、必ず複数社で比較してください。</p>
+        <p>義務の頻度と、公開されている料金の例です。規模・地域・依頼内容で変わるため、正式な金額は見積りで確認してください。</p>
         <div class="cl-table-wrap">
           <table class="cl-table">
-            <caption>受水槽の管理：頻度と費用の目安（2026年・参考）</caption>
+            <caption>受水槽の管理：頻度と公開料金の例</caption>
             <thead>
               <tr>
                 <th scope="col">項目</th>
@@ -200,9 +201,9 @@ const webPageLd = JSON.stringify({
               </tr>
             </thead>
             <tbody>
-              <tr><th scope="row">清掃</th><td>年1回以上</td><td>3〜30万円超（規模による）</td></tr>
-              <tr><th scope="row">法定検査（簡易専用水道）</th><td>年1回以上</td><td>1〜2万円程度</td></tr>
-              <tr><th scope="row">日常点検</th><td>毎月など</td><td>管理者対応で原則無料</td></tr>
+              <tr><th scope="row">清掃</th><td>年1回以上</td><td>10m³で44,000〜62,370円（清掃会社3社の公開料金表）</td></tr>
+              <tr><th scope="row">法定検査（簡易専用水道）</th><td>年1回以上</td><td>1系統17,600〜22,000円（関西環境開発センター・三重県環境保全事業団の例、税込）</td></tr>
+              <tr><th scope="row">日常点検</th><td>毎月など</td><td>管理者が自ら行う場合は費用なし</td></tr>
             </tbody>
           </table>
         </div>
@@ -213,10 +214,9 @@ const webPageLd = JSON.stringify({
         <h2>受けなかった場合のリスク</h2>
         <p>清掃・法定検査を怠ると、衛生面だけでなく法的・経済的なリスクが生じます。</p>
         <ul class="cl-list">
-          <li>管理基準違反による<strong>改善指導・命令</strong></li>
-          <li>悪質な場合の<strong>罰金等</strong>の対象</li>
-          <li>水質事故発生時の<strong>損害賠償責任</strong>（入居者・利用者への賠償）</li>
-          <li>保健所の<strong>立入検査・公表</strong>による信頼失墜</li>
+          <li>法定検査を受けないと<strong>100万円以下の罰金</strong>（水道法第54条）</li>
+          <li>清掃などの管理を怠ると<strong>清掃などの指示</strong>（第36条第3項）、従わないと<strong>給水停止命令</strong>（第37条）。命令違反は1年以下の拘禁刑又は100万円以下の罰金（第53条）</li>
+          <li>水質に問題が起きた場合の<strong>民事上の責任</strong></li>
         </ul>
         <p>罰則の詳細は<a href="/column/jusuisou-seisou-batsu/">受水槽清掃の罰則ガイド</a>、義務の全体像は<a href="/column/jusuisou-seisou-horei-gimu/">法定義務ガイド</a>で確認できます。</p>
       </section>
@@ -226,16 +226,16 @@ const webPageLd = JSON.stringify({
         <h3>Q1. 点検と清掃は違いますか？</h3>
         <p>違います。<strong>清掃＝槽内の洗浄・消毒</strong>、<strong>法定検査＝登録検査機関による年1回の確認</strong>、<strong>日常点検＝管理者の外観チェック</strong>です。10m³超は清掃も法定検査も毎年義務です。</p>
         <h3>Q2. 法定検査は誰が行いますか？</h3>
-        <p>登録検査機関が行います。清掃業者とは別主体ですが、提携機関を通じて一括手配できる業者が多いです。</p>
+        <p>地方公共団体の機関、または国土交通大臣及び環境大臣の登録を受けた検査機関が行います。清掃業者とは別の機関なので、申込みを誰が行うかを確認しておきましょう。</p>
         <h3>Q3. 10m³以下も必要ですか？</h3>
-        <p>水道法の対象外ですが、多くの自治体が条例で清掃・管理を求めています。管轄の水道局・保健所で確認してください。</p>
+        <p>水道法の簡易専用水道には当たりませんが、自治体によって条例や指導で清掃・点検の定めがあります。所在地の保健所で確認してください。</p>
         <h3>Q4. 受けないとどうなりますか？</h3>
-        <p>改善指導・命令、悪質な場合は罰金等の対象です。水質事故時は管理者の損害賠償責任にもつながります。</p>
+        <p>法定検査を受けないと100万円以下の罰金の対象です（水道法第54条）。</p>
       </section>
 
       <section class="cl-cta">
-        <h2>清掃・法定検査をまとめて手配したいなら</h2>
-        <p>{site.name}では、建築物飲料水貯水槽清掃業の登録を確認済みの業者から、清掃・法定検査・報告書発行まで対応できる先を最大5社ご紹介します。<strong>お見積もり依頼は1分・完全無料</strong>です。</p>
+        <h2>受水槽清掃の業者探しなら</h2>
+        <p>{site.name}が条件に合う清掃業者を探して最大5社ご紹介します（ご依頼者様は無料）。正式なお見積りは、選んだ業者から直接提示されます。</p>
         <a href="/jusuisou-seisou/" class="cta-btn-primary">無料で一括見積もりを依頼する</a>
       </section>
 

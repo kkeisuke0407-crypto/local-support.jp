@@ -7,7 +7,7 @@ const title = '受水槽清掃の水質検査｜検査項目・5項目/11項目�
 const description = '受水槽・貯水槽清掃の水質検査を施設管理担当者向けに解説。清掃後の自主検査と簡易専用水道の法定検査（年1回）の違い、検査項目（残留塩素・色・濁り・臭い・味ほか）、レジオネラ検査、報告書の保存期間までを2026年版でまとめました。';
 const canonical = `${site.domain}/column/jusuisou-seisou-suishitsu-kensa/`;
 const published = '2026-06-16';
-const modified = '2026-06-16';
+const modified = '2026-09-26';
 const egov = (n: string) => `https://laws.e-gov.go.jp/search/elawsSearch/elaws_search/lsg0100/?keyword=${encodeURIComponent(n)}`;
 
 const breadcrumbLd = JSON.stringify({
@@ -55,8 +55,8 @@ const faqLd = JSON.stringify({
     { '@type': 'Question', name: '受水槽清掃の水質検査は義務ですか？', acceptedAnswer: { '@type': 'Answer', text: '有効容量10m³超の簡易専用水道は、水道法により毎年1回以上の清掃と、登録検査機関による定期検査（法定検査）が義務付けられています。これとは別に、清掃直後に水が安全に使えるかを確認する清掃後の水質検査も一般的に行われます。' } },
     { '@type': 'Question', name: '水質検査の項目には何がありますか？', acceptedAnswer: { '@type': 'Answer', text: '清掃後に確認する基本項目は残留塩素・色・濁り・臭い・味などです。施設用途やリスクに応じて一般細菌・大腸菌・pH・有機物などを加えた検査を行う場合があります。正確な項目は水道法施行規則や依頼する登録検査機関の検査メニューで確認してください。' } },
     { '@type': 'Question', name: 'レジオネラ検査は必要ですか？', acceptedAnswer: { '@type': 'Answer', text: '法定の必須項目ではありませんが、病院・介護施設・浴場・高齢者が利用する施設では、レジオネラ症の重篤化リスクが高いため、追加でレジオネラ属菌検査を行うことを強く推奨します。' } },
-    { '@type': 'Question', name: '水質検査の報告書はどれくらい保存しますか？', acceptedAnswer: { '@type': 'Answer', text: '清掃・検査の記録は行政の立入検査時に提示を求められるため、3年間以上の保存が必要です。清掃証明書・水質検査結果・写真付き作業報告書をセットで保管してください。' } },
-    { '@type': 'Question', name: '清掃と水質検査は同じ業者に頼めますか？', acceptedAnswer: { '@type': 'Answer', text: '清掃は建築物飲料水貯水槽清掃業の登録業者、簡易専用水道の法定検査は登録検査機関が行います。多くの清掃業者は提携機関を通じて検査までワンストップで手配できますが、見積もりで検査の範囲・費用・報告書発行が含まれるかを確認してください。' } },
+    { '@type': 'Question', name: '水質検査の報告書はどれくらい保存しますか？', acceptedAnswer: { '@type': 'Answer', text: '特定建築物では、維持管理の状況を記載した帳簿書類を5年間保存する必要があります（建築物衛生法施行規則第20条）。簡易専用水道の法定検査でも、水槽の清掃記録などの整理保存状況が確認されるため、清掃の報告書と水質検査の結果は継続して保管しておきましょう。' } },
+    { '@type': 'Question', name: '清掃と水質検査は同じ業者に頼めますか？', acceptedAnswer: { '@type': 'Answer', text: '清掃後の水質検査は、清掃会社が清掃料金に含めるか別料金で行うのが一般的です。簡易専用水道の法定検査は、地方公共団体の機関、または国土交通大臣及び環境大臣の登録を受けた検査機関が行う別のものなので、申込みを誰が行うかを確認してください。' } },
   ],
 });
 
@@ -99,7 +99,7 @@ const webPageLd = JSON.stringify({
         </p>
         <div class="cl-meta">
           <time datetime={published}>公開：2026年6月16日</time>
-          <span>最終更新：2026年6月16日</span>
+          <span>最終更新：2026年9月26日</span>
           <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a>（{site.author.role}）</span>
         </div>
       </div>
@@ -135,7 +135,7 @@ const webPageLd = JSON.stringify({
           <ul>
             <li><strong>2種類ある</strong>：①清掃後の水質確認 ②簡易専用水道の年1回の法定検査（登録検査機関）</li>
             <li><strong>基本項目</strong>：残留塩素・色・濁り・臭い・味。用途により一般細菌・大腸菌・レジオネラ等を追加</li>
-            <li><strong>結論</strong>：清掃見積もりに「水質検査の範囲・報告書発行」が含まれるか必ず確認し、記録は3年以上保存する</li>
+            <li><strong>結論</strong>：清掃見積もりに「水質検査の範囲・報告書発行」が含まれるか確認し、記録を保管する（特定建築物は5年間）</li>
           </ul>
         </div>
       </section>
@@ -156,14 +156,14 @@ const webPageLd = JSON.stringify({
             </thead>
             <tbody>
               <tr><th scope="row">目的</th><td>清掃直後に水が安全に使えるかの確認</td><td>水道の管理状態を第三者が点検</td></tr>
-              <tr><th scope="row">実施者</th><td>清掃業者（登録業者）</td><td>登録検査機関（厚生労働大臣等の登録）</td></tr>
+              <tr><th scope="row">実施者</th><td>清掃業者</td><td>地方公共団体の機関、または国土交通大臣及び環境大臣の登録を受けた検査機関</td></tr>
               <tr><th scope="row">タイミング</th><td>清掃の直後</td><td>毎年1回以上（定期）</td></tr>
               <tr><th scope="row">主な内容</th><td>残留塩素・色・濁り・臭い・味 など</td><td>書類検査・施設検査・給水栓水の検査</td></tr>
             </tbody>
           </table>
         </div>
 
-        <p>清掃を依頼すると①は通常セットで実施されますが、②の<strong>法定検査は別手配が必要</strong>なことがあります。多くの清掃業者は提携する登録検査機関を通じてワンストップで手配できるため、見積もり時に「法定検査まで含むか」を確認するとスムーズです。</p>
+        <p>清掃を依頼すると①は通常セットで実施されますが、②の<strong>法定検査は別手配が必要</strong>なことがあります。見積もりの段階で、法定検査の申込みを誰が行うかを確認しておくとスムーズです。</p>
       </section>
 
       <section id="items" class="cl-section">
@@ -213,13 +213,13 @@ const webPageLd = JSON.stringify({
 
       <section id="report" class="cl-section">
         <h2>報告書の発行と保存期間</h2>
-        <p>清掃と水質検査は「実施した記録が残っていること」までが管理義務です。行政の立入検査では記録の提示を求められます。</p>
+        <p>清掃と水質検査は、記録を残しておくことが大切です。簡易専用水道の法定検査では清掃記録などの整理保存状況が確認され、特定建築物では帳簿書類の保存が義務です。</p>
         <ul class="cl-list">
           <li><strong>清掃証明書・写真付き作業報告書</strong>：清掃業者が発行</li>
           <li><strong>水質検査結果</strong>：検査機関が発行</li>
-          <li><strong>保存期間</strong>：<strong>3年間以上</strong>の保管が必要</li>
+          <li><strong>保存期間</strong>：特定建築物は<strong>5年間</strong>（建築物衛生法施行規則第20条）。それ以外も継続して保管しておくと安心</li>
         </ul>
-        <p>報告書が発行されない・口頭報告のみ、という業者は法令遵守の観点でリスクがあります。見積もり段階で「報告書発行が費用に含まれるか」を必ず確認してください。書類管理の詳細は<a href="/column/jusuisou-seisou-horei-gimu/">法定義務ガイド</a>も参照してください。</p>
+        <p>報告書が発行されない・口頭報告のみでは、記録を残せません。見積もり段階で「報告書発行が費用に含まれるか」を必ず確認してください。書類管理の詳細は<a href="/column/jusuisou-seisou-horei-gimu/">法定義務ガイド</a>も参照してください。</p>
       </section>
 
       <section id="select" class="cl-section">
@@ -228,7 +228,7 @@ const webPageLd = JSON.stringify({
         <ul class="cl-list">
           <li>清掃後の水質検査が<strong>費用に含まれているか</strong>（別料金か）</li>
           <li>検査項目（基本のみか、微生物・レジオネラまで含むか）</li>
-          <li>簡易専用水道の<strong>法定検査（登録検査機関）まで手配できるか</strong></li>
+          <li>簡易専用水道の<strong>法定検査の申込みを誰が行うか</strong>（清掃とは別の検査機関が行います）</li>
           <li>結果報告書・清掃証明書が発行されるか</li>
           <li>水質基準を満たさなかった場合の<strong>再対応の取り扱い</strong></li>
         </ul>
@@ -244,12 +244,12 @@ const webPageLd = JSON.stringify({
         <h3>Q3. レジオネラ検査は必須ですか？</h3>
         <p>法定の必須項目ではありませんが、病院・介護・浴場系では重篤化リスクが高いため<strong>強く推奨</strong>します。</p>
         <h3>Q4. 報告書はどれくらい保存しますか？</h3>
-        <p>立入検査での提示に備え、清掃証明書・水質検査結果を<strong>3年間以上</strong>保管してください。</p>
+        <p>特定建築物は<strong>5年間</strong>の保存が義務です（建築物衛生法施行規則第20条）。それ以外の建物も、法定検査で清掃記録などが確認されるため、継続して保管しておきましょう。</p>
       </section>
 
       <section class="cl-cta">
-        <h2>受水槽清掃・水質検査をまとめて依頼したいなら</h2>
-        <p>{site.name}では、建築物飲料水貯水槽清掃業の登録を確認済みの業者から、清掃・水質検査・報告書発行まで対応できる先を最大5社ご紹介します。<strong>お見積もり依頼は1分・完全無料</strong>です。</p>
+        <h2>受水槽清掃の業者探しなら</h2>
+        <p>{site.name}が条件に合う清掃業者を探して最大5社ご紹介します（ご依頼者様は無料）。正式なお見積りは、選んだ業者から直接提示されます。</p>
         <a href="/jusuisou-seisou/" class="cta-btn-primary">無料で一括見積もりを依頼する</a>
       </section>
 
