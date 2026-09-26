@@ -1,0 +1,330 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ColumnCtaCard from '../../../components/ColumnCtaCard.astro';
+import { site } from '../../../data/site';
+
+const title = '消防署から点検報告の通知が来たら｜まずやること・提出方法・罰則';
+const description = '消防署から「消防用設備等の点検結果報告が確認できない」という通知や連絡が来たときに、まずやること、点検していなかった場合の進め方、報告書の提出方法（窓口・郵送・電子申請）、放置したときの罰則を、東京消防庁などの公式情報をもとに整理しました。';
+const canonical = `${site.domain}/column/shobo-setsubi-tsuchi-taiou/`;
+const published = '2026-09-26';
+const modified = '2026-09-26';
+
+const faqItems = [
+  {
+    q: '消防署からの通知を放置するとどうなりますか？',
+    a: '点検結果の報告をしない、または虚偽の報告をした場合は、30万円以下の罰金または拘留の対象になります（消防法第44条第11号）。法人の場合は法人も罰金の対象です（同法第45条）。実際には、まず消防署から報告や来署を求められたり、立入検査で指導を受けたりするのが一般的です。',
+  },
+  {
+    q: '何年分さかのぼって点検・報告すればよいですか？',
+    a: '東京消防庁は、報告を忘れていた場合は「直近1年間に実施した機器点検と総合点検の結果報告書を提出する」「直近1年以内に点検していない場合は、点検を実施したあとに報告書を提出する」と案内しています。過去の年の点検をさかのぼって行うことはできないため、まず今の状態で点検し、報告するのが基本です。',
+  },
+  {
+    q: '消防署で点検業者を紹介してもらえますか？',
+    a: '紹介してもらえません。東京消防庁は「消防署では特定の業者を教えることができない」「消防職員が消防設備点検を実施することはない」と案内しています。点検は、消防設備士や消防設備点検資格者のいる点検業者に依頼するのが一般的です。',
+  },
+  {
+    q: '点検で不備が見つかったら、報告はどうなりますか？',
+    a: '不備があっても報告は必要です。東京消防庁では、不備のある報告書を出す場合、改修の予定を書いた「消防用設備等点検報告改修計画書」をあわせて提出するよう案内しています。書類の名称や扱いは消防本部によって異なるため、管轄の消防署に確認してください。',
+  },
+  {
+    q: '報告書は郵送やインターネットで出せますか？',
+    a: '多くの消防本部で、窓口のほかに郵送や電子申請で提出できます。たとえば東京消防庁と名古屋市消防局は窓口・郵送・電子申請、さいたま市消防局は窓口と電子申請に対応しています。受付方法は消防本部ごとに違い、変わることもあるため、提出前に管轄の消防署の案内を確認してください。',
+  },
+];
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '消防署から点検報告の通知が来たら', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'Article',
+  headline: title, description, datePublished: published, dateModified: modified,
+  inLanguage: 'ja-JP', url: canonical, mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  articleSection: '消防設備点検',
+  keywords: '消防署,通知,点検結果報告,報告していない,報告忘れ,罰則,電子申請,郵送,改修計画書,消防設備点検',
+  author: { '@type': 'Organization', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-shobo-setsubi.png`, width: 1200, height: 630 },
+  about: { '@type': 'Service', name: '消防設備点検' },
+  citation: [
+    { '@type': 'Legislation', name: '消防法', url: 'https://laws.e-gov.go.jp/law/323AC1000000186' },
+    { '@type': 'CreativeWork', name: '東京消防庁 消防用設備等点検報告制度', url: 'https://www.tfd.metro.tokyo.lg.jp/lfe/office_adv/tenken_houkoku.html' },
+  ],
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: faqItems.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-callout', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${site.domain}/og-shobo-setsubi.png` },
+});
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified} title={title} description={description} canonical={canonical} siteName={site.name} logoSub="施設管理の一括見積比較" jsonLdBlocks={[breadcrumbLd, articleLd, faqLd, webPageLd]}>
+  <article class="cl-article">
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>消防署から点検報告の通知が来たら</span>
+        </nav>
+        <span class="cl-cat">消防設備点検</span>
+        <h1 class="cl-title">消防署から点検報告の通知が来たら｜まずやること・提出方法・罰則</h1>
+        <p class="cl-lead">
+          「消防用設備等の点検結果報告が確認できない」という通知が消防署から届いた。竣工してから一度も点検や報告をしていないことに、そこで初めて気づいた――。こうした相談は珍しくありません。この記事では、<strong>通知が来たときにまずやること、点検していなかった場合の進め方、報告書の出し方、放置したときの罰則</strong>を、東京消防庁などの公式情報をもとに整理します。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年9月26日</time>
+          <span>最終更新：2026年9月26日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a></span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 消防署から点検報告の通知が来たら、何をすればいいですか？</p>
+        <p class="cl-qa-a">A. <strong>直近1年以内に点検していれば、その結果を報告書にして消防署へ出します。点検していなければ、先に点検業者に点検してもらい、そのあと報告します。</strong>報告しないままにすると、30万円以下の罰金または拘留の対象になります（消防法第44条第11号）。</p>
+        <p class="cl-qa-src">※消防法、東京消防庁「消防用設備等点検報告制度」のよくある質問（Q20ほか）にもとづく整理（2026年9月時点）。</p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="shobo-setsubi" serviceName="消防設備点検" variant="top" />
+
+      <aside class="cl-toc" aria-label="目次">
+        <h2 class="cl-toc-h">この記事の目次</h2>
+        <ol>
+          <li><a href="#summary">3行サマリ</a></li>
+          <li><a href="#why">なぜ通知が来るのか</a></li>
+          <li><a href="#steps">通知が来たらやること（5ステップ）</a></li>
+          <li><a href="#not-inspected">点検していなかった場合</a></li>
+          <li><a href="#submit">報告書の出し方（窓口・郵送・電子申請）</a></li>
+          <li><a href="#defects">点検で不備が見つかったら</a></li>
+          <li><a href="#penalty">放置するとどうなるか</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ol>
+      </aside>
+
+      <section id="summary" class="cl-section">
+        <div class="cl-callout">
+          <h2 class="cl-callout-h">この記事の結論（3行サマリ）</h2>
+          <ul>
+            <li><strong>点検済みなら</strong>：直近1年の機器点検・総合点検の結果を報告書にまとめて提出する</li>
+            <li><strong>点検していなければ</strong>：過去分はさかのぼれない。まず点検業者に点検してもらい、そのあと報告する</li>
+            <li><strong>出し方</strong>：窓口のほか、郵送・電子申請に対応している消防本部が多い。管轄の消防署の案内を確認する</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="why" class="cl-section">
+        <h2>なぜ通知が来るのか</h2>
+        <p>消火器や自動火災報知設備などの消防用設備等がある建物の関係者（所有者・管理者・占有者）は、定期的に点検し、その結果を消防長または消防署長に報告しなければなりません（消防法第17条の3の3）。報告の頻度は、飲食店・物販店・ホテル・病院などの特定防火対象物が1年に1回、共同住宅・事務所・工場などの非特定防火対象物が3年に1回です（消防法施行規則第31条の6）。</p>
+        <p>消防署は報告の状況を把握しているため、報告が確認できない建物には、報告を求める文書を送ったり、電話で連絡したりすることがあります。横浜市消防局は、<strong>おおむね3年以上報告がない建物には、設備の状況について報告や来署を求めることがある</strong>と案内しています。東京消防庁は、法定点検の結果にもとづいて立入検査を行っているとしています。</p>
+        <p>通知の名称や書式は、消防本部によって異なります。まずは、どの報告を求められているのか（消防用設備等の点検報告か、防火対象物点検の報告か）と、期限・問い合わせ先が書かれているかを確認してください。</p>
+      </section>
+
+      <section id="steps" class="cl-section">
+        <h2>通知が来たらやること（5ステップ）</h2>
+        <ol>
+          <li><strong>通知の内容を確かめる</strong>：求められている報告の種類、期限の有無、問い合わせ先（管轄の消防署の予防課など）</li>
+          <li><strong>直近の点検記録を探す</strong>：点検業者との契約書、点検票、前回の報告書の控え。管理会社や前の所有者が持っていることもあります</li>
+          <li><strong>点検済みかどうかで分かれる</strong>：直近1年以内に機器点検・総合点検をしていれば、その結果で報告書を作ります。していなければ、次の「点検していなかった場合」へ</li>
+          <li><strong>見通しを消防署に伝える</strong>：期限までに点検が間に合わない場合は、点検業者を探していることや点検の予定時期を、管轄の消防署に伝えておくと話が進めやすくなります</li>
+          <li><strong>報告書を提出する</strong>：窓口・郵送・電子申請のうち、管轄の消防署が受け付けている方法で出します</li>
+        </ol>
+        <p>自分の建物がそもそも点検・報告の対象か、資格者に頼む必要があるかが分からない場合は、<a href="/column/shobo-setsubi-gimu-check/">消防点検の義務チェック</a>で建物の用途と面積から確認できます。</p>
+      </section>
+
+      <section id="not-inspected" class="cl-section">
+        <h2>点検していなかった場合</h2>
+        <p>東京消防庁は、報告を忘れていた場合について「直近1年間で実施した機器点検と総合点検の結果報告書を提出する」「直近1年以内に点検を実施していない場合は、点検を実施した後に点検結果報告書を提出する」と案内しています。<strong>過去の年の点検をさかのぼって行うことはできないので、まず今の状態で点検を受け、その結果を報告する</strong>のが基本です。</p>
+        <h3>点検業者に伝えると話が早いこと</h3>
+        <ul>
+          <li>消防署から通知が来ていること（期限があればその日付）</li>
+          <li>建物の用途・階数・延べ面積と、分かる範囲の設備（消火器、自動火災報知設備、誘導灯など）</li>
+          <li>過去の点検や報告の記録が無いこと</li>
+        </ul>
+        <p>設備の内訳が分からなくても、業者は現地で確認する前提で対応できることがほとんどです。竣工時の書類（消防用設備等の設置届や検査済証の控え）があれば、あわせて用意すると話が早くなります。</p>
+        <p>なお、消防署は特定の点検業者を紹介しておらず、消防職員が点検をすることもありません（東京消防庁の案内）。点検は業者に依頼します。</p>
+      </section>
+
+      <section id="submit" class="cl-section">
+        <h2>報告書の出し方（窓口・郵送・電子申請）</h2>
+        <p>報告書は、建物を管轄する消防署に出します。必要な書類は、主に次のとおりです（東京消防庁の案内による）。</p>
+        <ul>
+          <li>消防用設備等（特殊消防用設備等）点検結果報告書</li>
+          <li>点検結果総括表（点検票を添付する場合は省略できることがあります）</li>
+          <li>点検者一覧表</li>
+          <li>設置されている設備ごとの点検票</li>
+        </ul>
+        <p>点検業者に頼むと、報告書の作成と提出の代行まで含めて請け負うことが多いため、依頼の際に「報告書の提出まで含むか」を確認しておくと安心です。</p>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <caption>主な消防本部の受付方法（各消防本部の公式サイトで確認・2026年9月時点）</caption>
+            <thead><tr><th>消防本部</th><th>窓口</th><th>郵送</th><th>電子申請</th></tr></thead>
+            <tbody>
+              <tr><th scope="row"><a href="https://www.tfd.metro.tokyo.lg.jp/drs/ss_06/001.html" rel="noopener" target="_blank">東京消防庁</a></th><td>○</td><td>○</td><td>○</td></tr>
+              <tr><th scope="row"><a href="https://www.city.yokohama.lg.jp/business/bunyabetsu/shobo-kyukyu/kanri/tatemono/yusotenken.html" rel="noopener" target="_blank">横浜市消防局</a></th><td>○</td><td>○</td><td>要確認</td></tr>
+              <tr><th scope="row"><a href="https://www.city.nagoya.jp/bousai/shoubou/1013208/1034498/1013209/1013231/1013232.html" rel="noopener" target="_blank">名古屋市消防局</a></th><td>○</td><td>○</td><td>○</td></tr>
+              <tr><th scope="row"><a href="https://www.city.osaka.lg.jp/shobo/page/0000593360.html" rel="noopener" target="_blank">大阪市消防局</a></th><td>要確認</td><td>要確認</td><td>○</td></tr>
+              <tr><th scope="row"><a href="https://www.city.fukuoka.lg.jp/syobo/yobo/dennshi/onlinehakata.html" rel="noopener" target="_blank">福岡市消防局</a></th><td>要確認</td><td>要確認</td><td>○</td></tr>
+              <tr><th scope="row"><a href="https://www.city.saitama.lg.jp/005/006/001/p001324.html" rel="noopener" target="_blank">さいたま市消防局</a></th><td>○</td><td>要確認</td><td>○</td></tr>
+              <tr><th scope="row"><a href="https://www.kennanseibu119.jp/firedepartment/emergency/cat8/cat6/post_30.html" rel="noopener" target="_blank">埼玉県南西部消防局</a>（朝霞・志木・和光・新座ほか）</th><td>○</td><td>○</td><td>要確認</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="cl-note">※「要確認」は、各消防本部の公式サイトで受付の有無を確認できなかったものです。受付方法は変わることがあるため、提出前に管轄の消防署の案内を確認してください。</p>
+        <h3>郵送・電子申請の注意点</h3>
+        <ul>
+          <li><strong>控えが必要なとき</strong>：郵送では、控え用のコピーと返信用封筒を同封すると、受付印を押した控えを返送してもらえる消防本部があります。電子申請では控えが返らず、処理完了のメールが提出の記録になる場合があります（名古屋市など）</li>
+          <li><strong>郵送は記録が残る方法で</strong>：郵便事故について消防本部は責任を負わないとしているところが多く、簡易書留など配達記録の残る方法がすすめられています</li>
+          <li><strong>時間に余裕を</strong>：郵送は受付や返送に時間がかかることがあります</li>
+        </ul>
+      </section>
+
+      <section id="defects" class="cl-section">
+        <h2>点検で不備が見つかったら</h2>
+        <p>点検で不備（消火器の期限切れ、感知器の故障など）が見つかっても、報告は必要です。東京消防庁は、不備のある報告書を出すときは、改修の予定を書いた<strong>「消防用設備等点検報告改修計画書」</strong>をあわせて提出するよう案内しています。横浜市消防局も、不良があり改修の予定が書かれていない報告については、消防署から報告や来署を求める場合があるとしています。</p>
+        <p>改修（是正工事）は点検とは別の見積りになるのが一般的です。点検した業者に頼む義務はないので、金額が大きい場合はほかの業者の見積りと比べてから決めても構いません。</p>
+      </section>
+
+      <section id="penalty" class="cl-section">
+        <h2>放置するとどうなるか</h2>
+        <ul>
+          <li><strong>罰則</strong>：点検結果の報告をしない、または虚偽の報告をした者は、30万円以下の罰金または拘留（消防法第44条第11号）。法人の業務として行われた場合は、法人も罰金の対象になります（同法第45条）</li>
+          <li><strong>立入検査・命令</strong>：消防署は立入検査を行うことができ（同法第4条）、設備が基準どおりに維持されていないと認めるときは、必要な措置を命じることができます（同法第17条の4）。命令に従わず必要な措置をしなかった場合も、罰則の対象です（同法第44条第12号）</li>
+        </ul>
+        <p>いきなり罰則になるのではなく、まず通知や指導で報告を求められるのが一般的です。通知が来た段階で動けば十分に間に合うことが多いので、慌てずに、点検業者と消防署に状況を伝えるところから始めてください。</p>
+      </section>
+
+      <div class="cl-cta">
+        <h2>点検業者がすぐに見つからないときは</h2>
+        <p>ロカサポが、建物の近くで対応できる点検業者を探して<br/>最大5社ご紹介します（ご依頼者様は無料）。<br/>正式なお見積りは、選んだ業者から直接提示されます。</p>
+        <a class="cta-btn-primary" href="/shobo-setsubi/">無料で点検業者を探す</a>
+      </div>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          {faqItems.map((f) => (
+            <div class="cl-faq-item"><dt>{f.q}</dt><dd>{f.a}</dd></div>
+          ))}
+        </dl>
+      </section>
+
+      <div class="cl-pref-links">
+        <h2 class="cl-pref-h">エリア別の消防設備点検業者を探す</h2>
+        <ul class="cl-pref-list">
+          <li><a href="/shobo-setsubi/tokyo/">東京都</a></li>
+          <li><a href="/shobo-setsubi/osaka/">大阪府</a></li>
+          <li><a href="/shobo-setsubi/kanagawa/">神奈川県</a></li>
+          <li><a href="/shobo-setsubi/aichi/">愛知県</a></li>
+          <li><a href="/shobo-setsubi/saitama/">埼玉県</a></li>
+          <li><a href="/shobo-setsubi/fukuoka/">福岡県</a></li>
+        </ul>
+        <p class="cl-pref-more"><a href="/shobo-setsubi/">全国の対応業者を見る</a></p>
+      </div>
+
+      <ColumnCtaCard serviceSlug="shobo-setsubi" serviceName="消防設備点検" variant="bottom" />
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連コラム</h2>
+        <ul>
+          <li><a href="/column/shobo-setsubi-gimu-check/">消防点検の義務チェック｜建物の用途と面積で分かる点検・報告の頻度と資格の要否</a></li>
+          <li><a href="/column/shobo-setsubi-houkokusho/">消防設備点検報告書｜様式・提出先・保存・電子申請・届出者</a></li>
+          <li><a href="/column/shobo-setsubi-horei-gimu/">消防設備点検の義務とは｜年2回の点検と1年・3年ごとの報告、罰則</a></li>
+          <li><a href="/column/shobo-setsubi-apartment/">アパートの消防設備点検｜費用・必要な点検・初めて頼むときの流れ</a></li>
+          <li><a href="/column/shobo-setsubi-gyosha-norikae/">消防設備点検の業者を変更する手順｜解約・引き継ぎ・切り替えの注意点</a></li>
+        </ul>
+      </aside>
+
+      <p class="cl-note">出典：<a href="https://laws.e-gov.go.jp/law/323AC1000000186" rel="noopener" target="_blank">消防法（e-Gov法令検索）</a>／<a href="https://www.tfd.metro.tokyo.lg.jp/lfe/office_adv/tenken_houkoku.html" rel="noopener" target="_blank">東京消防庁「消防用設備等点検報告制度」</a>／<a href="https://www.tfd.metro.tokyo.lg.jp/drs/ss_06/001.html" rel="noopener" target="_blank">東京消防庁「消防用設備等点検結果報告書」</a>／<a href="https://www.city.yokohama.lg.jp/business/bunyabetsu/shobo-kyukyu/kanri/tatemono/yusotenken.html" rel="noopener" target="_blank">横浜市「郵送等による消防用設備等点検結果報告について」</a>／<a href="https://www.city.nagoya.jp/shobo/page/0000136623.html" rel="noopener" target="_blank">名古屋市「提出書類の郵送による受付」</a>（いずれも2026年9月確認）</p>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; flex-wrap: wrap; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-author-link { color: #fff; text-decoration: underline; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-section a { color: var(--blue); text-decoration: underline; }
+.cl-note { font-size: .82rem; color: var(--gray-500); }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-callout li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-quickanswer { background: #eef6ff; border: 1.5px solid #1a56db; border-radius: 10px; padding: 18px 22px; margin-bottom: 32px; }
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+.cl-table tbody th[scope="row"] { white-space: normal; }
+.cl-table td { white-space: nowrap; text-align: center; }
+.cl-table caption { white-space: normal; }
+@media (max-width: 600px) { .cl-table th, .cl-table td { padding: 8px 8px; } }
+@media (max-width: 600px) { .cl-header { padding: 32px 0 28px; } .cl-body { padding: 28px 16px 48px; } .cl-section h2 { font-size: 1.15rem; } .cl-cta { padding: 28px 18px; } }
+</style>
