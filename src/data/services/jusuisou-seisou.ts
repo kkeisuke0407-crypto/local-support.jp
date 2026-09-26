@@ -306,6 +306,13 @@ const data: ServiceData = {
 
   relatedColumns: [
     {
+      href: '/column/jusuisou-gimu-check/',
+      category: '法令・義務',
+      title: '受水槽の清掃・検査の義務チェック｜容量と建物の用途で分かる',
+      excerpt: '容量・水源・建物の用途と面積を選ぶだけで、水道法・建築物衛生法・東京都条例の清掃・検査の義務が分かる無料チェック。',
+      date: '2026-09-26',
+    },
+    {
       href: '/column/jusuisou-seisou-gyosha-osaka/',
       category: '業者選び（大阪）',
       title: '大阪で受水槽清掃の業者を選ぶ完全ガイド｜市内・北摂・堺・泉州の相場・保健所事情',

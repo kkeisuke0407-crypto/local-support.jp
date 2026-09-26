@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/jusuisou-gimu-check/',
+    category: '受水槽清掃',
+    title: '受水槽の清掃・検査の義務チェック｜容量と建物の用途で分かる',
+    excerpt: '受水槽の容量・水源・建物の用途と面積を選ぶだけで、水道法（簡易専用水道）・建築物衛生法（特定建築物）・東京都の条例のどれが当てはまり、清掃・検査を何年ごとに行う必要があるかが分かる無料チェック。',
+    date: '2026-09-26',
+  },
+  {
     href: '/column/tokushu-kenchiku-gimu-check/',
     category: '特殊建築物',
     title: '特殊建築物定期調査の対象チェック｜東京都の用途・規模・報告時期が分かる',

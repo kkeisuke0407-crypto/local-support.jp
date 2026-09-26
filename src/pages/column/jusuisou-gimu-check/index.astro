@@ -1,0 +1,405 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { site } from '../../../data/site';
+
+const title = '受水槽の清掃・検査の義務チェック｜容量と建物の用途で分かる';
+const description = '受水槽の容量・水源・建物の用途と面積を選ぶだけで、水道法（簡易専用水道）・建築物衛生法（特定建築物）・東京都の条例のどれが当てはまり、清掃・検査を何年ごとに行う必要があるかが分かる無料チェックです。';
+const canonical = `${site.domain}/column/jusuisou-gimu-check/`;
+const published = '2026-09-26';
+const modified = '2026-09-26';
+
+const faqItems = [
+  {
+    q: '受水槽の清掃は法律で義務ですか？',
+    a: '水道水だけを水源とし、受水槽の有効容量の合計が10立方メートルを超えるもの（簡易専用水道）は、水道法で毎年1回以上の清掃が義務です（水道法施行規則第55条）。延べ面積3,000㎡以上の事務所・店舗などの特定建築物では、建築物衛生法でも1年以内ごとに1回の清掃が求められます。',
+  },
+  {
+    q: '10立方メートル以下の小さな受水槽も清掃が必要ですか？',
+    a: '水道法の簡易専用水道には当たりませんが、自治体の条例で義務になっている場合があります。たとえば東京都の条例では、学校・病院・社会福祉施設などに給水するもの、または有効容量が5立方メートルを超えるものに、年1回以上の清掃と管理状況の検査を義務づけています。',
+  },
+  {
+    q: '清掃とは別に検査も必要ですか？',
+    a: '簡易専用水道は、清掃とは別に、地方公共団体の機関または国の登録を受けた検査機関の検査を毎年1回以上受ける必要があります（水道法第34条の2第2項・施行規則第56条）。受けない場合は100万円以下の罰金の対象です（同法第54条）。',
+  },
+  {
+    q: '清掃は誰に頼めばよいですか？',
+    a: '都道府県知事の登録を受けた「建築物飲料水貯水槽清掃業」の業者に頼むのが一般的です。簡易専用水道の法定検査は、清掃業者ではなく登録検査機関が行います。清掃と検査の手配をまとめて相談できる業者もあります。',
+  },
+];
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '受水槽の清掃・検査の義務チェック', item: canonical },
+  ],
+});
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'Article',
+  headline: title, description, datePublished: published, dateModified: modified,
+  inLanguage: 'ja-JP', url: canonical, mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  articleSection: '受水槽清掃',
+  keywords: '受水槽,貯水槽,清掃,義務,簡易専用水道,小規模貯水槽水道,特定建築物,建築物衛生法,水道法,チェック',
+  author: { '@type': 'Organization', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-jusuisou-seisou.png`, width: 1200, height: 630 },
+  citation: [
+    { '@type': 'Legislation', name: '水道法', url: 'https://laws.e-gov.go.jp/law/332AC0000000177' },
+    { '@type': 'Legislation', name: '建築物における衛生的環境の確保に関する法律施行規則', url: 'https://laws.e-gov.go.jp/law/346M50000100002' },
+  ],
+});
+const appLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'WebApplication',
+  name: '受水槽の清掃・検査の義務チェック', url: canonical,
+  applicationCategory: 'BusinessApplication', operatingSystem: 'All', inLanguage: 'ja-JP', isAccessibleForFree: true,
+  offers: { '@type': 'Offer', price: 0, priceCurrency: 'JPY' },
+  description: '受水槽の容量・水源・建物の用途と面積から、水道法・建築物衛生法・東京都条例の清掃・検査の義務を判定する無料ツール。',
+  publisher: { '@id': `${site.domain}/#organization` },
+});
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: faqItems.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+});
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified} title={title} description={description} canonical={canonical} siteName={site.name} logoSub="施設管理の一括見積比較" jsonLdBlocks={[breadcrumbLd, articleLd, appLd, faqLd]}>
+  <article class="cl-article">
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>受水槽の清掃・検査の義務チェック</span>
+        </nav>
+        <span class="cl-cat">受水槽清掃</span>
+        <h1 class="cl-title">受水槽の清掃・検査の義務チェック｜容量と建物の用途で分かる</h1>
+        <p class="cl-lead">
+          「うちの受水槽は清掃の義務がある？」「検査も必要？」。受水槽の容量と水源、建物の用途と面積を選ぶだけで、<strong>水道法・建築物衛生法・東京都の条例のどれが当てはまり、何を何年ごとにやる必要があるか</strong>が分かります。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年9月26日</time>
+          <span>最終更新：2026年9月26日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a></span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 受水槽の清掃は義務？</p>
+        <p class="cl-qa-a">A. <strong>水道水だけを水源とし、有効容量の合計が10立方メートルを超える受水槽は、毎年1回以上の清掃と、登録検査機関の検査（毎年1回以上）が水道法で義務です。</strong>10立方メートル以下でも、条例で義務になる地域や、建築物衛生法の特定建築物に当たる場合があります。</p>
+        <p class="cl-qa-src">※水道法・同施行令・同施行規則、建築物衛生法施行令・同施行規則、東京都保健医療局の案内にもとづく整理（2026年9月確認）。</p>
+      </div>
+
+      <section id="check" class="gc-tool" aria-label="受水槽の義務チェック">
+        <h2 class="gc-tool-h">受水槽と建物について選んでください</h2>
+        <form id="js-form" class="gc-form" onsubmit="return false;">
+          <fieldset class="gc-q">
+            <legend class="gc-label"><span class="gc-num">1</span>受水槽の水源</legend>
+            <div class="gc-opts">
+              <label><input type="radio" name="src" value="city" />水道水だけ</label>
+              <label><input type="radio" name="src" value="well" />井戸水なども使っている</label>
+            </div>
+          </fieldset>
+          <fieldset class="gc-q">
+            <legend class="gc-label"><span class="gc-num">2</span>受水槽の有効容量の合計</legend>
+            <p class="gc-hint">受水槽が複数あるときは合計です。高置水槽は含めません。銘板や竣工図に書かれています。</p>
+            <div class="gc-opts">
+              <label><input type="radio" name="vol" value="le5" />5㎥以下</label>
+              <label><input type="radio" name="vol" value="le10" />5㎥超〜10㎥以下</label>
+              <label><input type="radio" name="vol" value="gt10" />10㎥超</label>
+              <label><input type="radio" name="vol" value="unknown" />分からない</label>
+            </div>
+          </fieldset>
+          <div class="gc-q">
+            <label class="gc-label" for="js-use"><span class="gc-num">3</span>建物の主な用途</label>
+            <select id="js-use" class="gc-select">
+              <option value="">選んでください</option>
+              <option value="office">事務所・店舗・百貨店</option>
+              <option value="hotel">旅館・ホテル</option>
+              <option value="culture">興行場・集会場・図書館・博物館・美術館・遊技場</option>
+              <option value="school1">小中高校・大学などの学校、幼保連携型認定こども園</option>
+              <option value="school2">専修学校・各種学校・研修所など（上記以外の学校）</option>
+              <option value="care">病院・社会福祉施設</option>
+              <option value="apartment">マンション・アパート</option>
+              <option value="factory">工場・倉庫・そのほか</option>
+            </select>
+          </div>
+          <fieldset class="gc-q" data-when="bldg">
+            <legend class="gc-label"><span class="gc-num">4</span>その用途に使っている部分の延べ面積</legend>
+            <div class="gc-opts">
+              <label><input type="radio" name="area" value="lt3000" />3,000㎡未満</label>
+              <label><input type="radio" name="area" value="3000to8000" />3,000〜8,000㎡未満</label>
+              <label><input type="radio" name="area" value="ge8000" />8,000㎡以上</label>
+              <label><input type="radio" name="area" value="unknown" />分からない</label>
+            </div>
+          </fieldset>
+          <fieldset class="gc-q">
+            <legend class="gc-label"><span class="gc-num">5</span>建物の所在地</legend>
+            <div class="gc-opts">
+              <label><input type="radio" name="pref" value="tokyo" />東京都</label>
+              <label><input type="radio" name="pref" value="other" />東京都以外</label>
+            </div>
+          </fieldset>
+        </form>
+
+        <div id="js-result" class="gc-result" aria-live="polite" hidden>
+          <h2 class="gc-result-h">チェック結果</h2>
+          <div id="js-cards"></div>
+          <p class="gc-note">※目安です。最終的には、建物の所在地の保健所（水道の衛生・特定建築物の担当）に確認してください。</p>
+          <div class="gc-cta">
+            <p>受水槽の清掃業者を探すなら、ロカサポが条件に合う業者を<strong>最大5社ご紹介</strong>します（ご依頼者様は無料）。</p>
+            <div class="gc-cta-btns"><a class="cta-btn-primary" href="/jusuisou-seisou/" data-track="js_check_cta">受水槽清掃の業者を探す</a></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="rules" class="cl-section">
+        <h2>判定のもとになっている決まり</h2>
+        <div class="cl-table-wrap">
+          <table class="cl-table js-stack">
+            <thead><tr><th>区分</th><th>対象</th><th>主な義務</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">簡易専用水道（水道法）</th><td data-label="対象">水道水だけが水源で、受水槽の有効容量の合計が10㎥を超えるもの</td><td data-label="主な義務">清掃：毎年1回以上／登録検査機関等の検査：毎年1回以上／異常時の水質検査</td></tr>
+              <tr><th scope="row">特定建築物（建築物衛生法）</th><td data-label="対象">事務所・店舗・旅館などの用途部分の延べ面積が3,000㎡以上（小中高校などは8,000㎡以上）</td><td data-label="主な義務">貯水槽の清掃：1年以内ごと／遊離残留塩素の検査：7日以内ごと／水質検査：6か月以内ごと（一部項目は毎年）</td></tr>
+              <tr><th scope="row">特定小規模貯水槽水道等（東京都条例）</th><td data-label="対象">有効容量10㎥以下で、学校・病院・社会福祉施設等に給水するもの、または5㎥を超えるもの</td><td data-label="主な義務">清掃：1年に1回以上／管理状況の検査・点検：1年に1回以上／記録の保存・保健所への届出</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="cl-note">※東京都の条例は、都の保健所の管内を対象とするものです。特別区などは区の条例で定めている場合があるため、所在地の保健所に確認してください。</p>
+        <p>法令の詳しい解説は<a href="/column/jusuisou-seisou-horei-gimu/">受水槽清掃の法定義務ガイド</a>、法定検査の中身は<a href="/column/jusuisou-seisou-tenken/">受水槽の点検・法定検査ガイド</a>で紹介しています。</p>
+      </section>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          {faqItems.map((f) => (<div class="cl-faq-item"><dt>{f.q}</dt><dd>{f.a}</dd></div>))}
+        </dl>
+      </section>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連コラム・サービス</h2>
+        <ul>
+          <li><a href="/jusuisou-seisou/">受水槽清掃の業者を探す</a></li>
+          <li><a href="/column/jusuisou-seisou-horei-gimu/">受水槽清掃の法定義務ガイド</a></li>
+          <li><a href="/column/jusuisou-seisou-tenken/">受水槽の点検・法定検査ガイド｜簡易専用水道検査と清掃の違い</a></li>
+          <li><a href="/column/jusuisou-seisou-shikaku/">貯水槽清掃の資格で見る業者選び</a></li>
+          <li><a href="/column/jusuisou-seisou-mansion/">マンションの受水槽清掃</a></li>
+        </ul>
+      </aside>
+
+      <p class="cl-note">出典：<a href="https://laws.e-gov.go.jp/law/332AC0000000177" rel="noopener" target="_blank">水道法</a>／<a href="https://laws.e-gov.go.jp/law/332CO0000000336" rel="noopener" target="_blank">水道法施行令</a>／<a href="https://laws.e-gov.go.jp/law/332M50000100045" rel="noopener" target="_blank">水道法施行規則</a>／<a href="https://laws.e-gov.go.jp/law/345CO0000000304" rel="noopener" target="_blank">建築物衛生法施行令</a>／<a href="https://laws.e-gov.go.jp/law/346M50000100002" rel="noopener" target="_blank">建築物衛生法施行規則</a>／<a href="https://www.hokeniryo.metro.tokyo.lg.jp/shisetsu/jigyosyo/hokenjyo/tamafuchu/eisei/suidou/chosuisou/shoukibo" rel="noopener" target="_blank">東京都多摩府中保健所「小規模貯水槽水道等」</a>（いずれも2026年9月確認）</p>
+    </div>
+  </article>
+</BaseLayout>
+
+<script>
+  type Level = 'must' | 'check' | 'none';
+  interface Card { title: string; level: Level; badge: string; lines: string[] }
+  const form = document.getElementById('js-form') as HTMLFormElement;
+  const result = document.getElementById('js-result') as HTMLElement;
+  const cards = document.getElementById('js-cards') as HTMLElement;
+  const radio = (n: string) => form.querySelector<HTMLInputElement>(`input[name="${n}"]:checked`)?.value ?? '';
+  const BLDG = ['office', 'hotel', 'culture', 'school1', 'school2'];
+
+  function toggle(use: string) {
+    form.querySelectorAll<HTMLElement>('[data-when="bldg"]').forEach((el) => { el.hidden = !BLDG.includes(use); });
+    let n = 1;
+    form.querySelectorAll<HTMLElement>('.gc-q').forEach((el) => { if (el.hidden) return; const x = el.querySelector('.gc-num'); if (x) x.textContent = String(n++); });
+  }
+
+  function judge(): Card[] | null {
+    const src = radio('src'), vol = radio('vol'), pref = radio('pref');
+    const use = (document.getElementById('js-use') as HTMLSelectElement).value;
+    const area = radio('area');
+    if (!src || !vol || !use || !pref || (BLDG.includes(use) && !area)) return null;
+    const out: Card[] = [];
+
+    // 1. 水道法（簡易専用水道）
+    if (src === 'well') {
+      out.push({ title: '水道法（簡易専用水道）', level: 'check', badge: '要確認', lines: [
+        '井戸水などを水源に使っている場合は、簡易専用水道には当たりません。規模によっては専用水道や、自治体の条例の対象（飲用井戸など）になります。所在地の保健所に確認してください。',
+      ] });
+    } else if (vol === 'gt10') {
+      out.push({ title: '水道法（簡易専用水道）', level: 'must', badge: '義務あり', lines: [
+        '水道水だけが水源で有効容量の合計が10㎥を超えるため、<strong>簡易専用水道</strong>に当たります。',
+        '受水槽の清掃：<strong>毎年1回以上</strong>（水道法施行規則第55条）',
+        '地方公共団体の機関または登録検査機関の検査：<strong>毎年1回以上</strong>（同規則第56条）。受けないと100万円以下の罰金の対象（水道法第54条）',
+        'このほか、水槽の点検と、水の色・濁り・臭いなどに異常があるときの水質検査が必要です。',
+      ] });
+    } else if (vol === 'unknown') {
+      out.push({ title: '水道法（簡易専用水道）', level: 'check', badge: '容量を確認', lines: [
+        '有効容量の合計が10㎥を超えると、毎年1回以上の清掃と登録検査機関の検査が義務になります。受水槽の銘板や竣工図で容量を確認してください。',
+      ] });
+    } else {
+      out.push({ title: '水道法（簡易専用水道）', level: 'none', badge: '対象外', lines: [
+        '有効容量の合計が10㎥以下のため、簡易専用水道には当たりません（小規模貯水槽水道）。ただし、下の条例や建築物衛生法の対象になることがあります。',
+      ] });
+    }
+
+    // 2. 建築物衛生法（特定建築物）
+    if (BLDG.includes(use)) {
+      const need = use === 'school1' ? area === 'ge8000' : (area === '3000to8000' || area === 'ge8000');
+      if (area === 'unknown') {
+        out.push({ title: '建築物衛生法（特定建築物）', level: 'check', badge: '面積を確認', lines: [
+          use === 'school1' ? '学校（小中高校・大学など）は延べ面積8,000㎡以上で特定建築物になります。' : 'この用途は、用途部分の延べ面積が3,000㎡以上で特定建築物になります。',
+        ] });
+      } else if (need) {
+        out.push({ title: '建築物衛生法（特定建築物）', level: 'must', badge: '義務あり', lines: [
+          '<strong>特定建築物</strong>に当たります。飲料水について、次の管理が必要です（建築物衛生法施行規則第4条）。',
+          '貯水槽の清掃：<strong>1年以内ごとに1回</strong>',
+          '給水栓の遊離残留塩素の検査：<strong>7日以内ごとに1回</strong>',
+          '水質検査：<strong>6か月以内ごとに1回</strong>（一部の項目は毎年1回）',
+          '建築物環境衛生管理技術者の選任や、保健所への届出も必要です。',
+        ] });
+      } else {
+        out.push({ title: '建築物衛生法（特定建築物）', level: 'none', badge: '対象外', lines: [
+          use === 'school1' ? '延べ面積が8,000㎡未満のため、特定建築物には当たりません。' : '用途部分の延べ面積が3,000㎡未満のため、特定建築物には当たりません。',
+        ] });
+      }
+    } else {
+      out.push({ title: '建築物衛生法（特定建築物）', level: 'none', badge: '対象外', lines: [
+        '病院・社会福祉施設・共同住宅・工場などは、建築物衛生法の特定建築物の用途には含まれません。',
+      ] });
+    }
+
+    // 3. 条例（小規模）
+    const small = vol === 'le5' || vol === 'le10';
+    if (small || src === 'well') {
+      if (pref === 'tokyo') {
+        const special = vol === 'le10' || use === 'care' || use === 'school1' || use === 'school2';
+        out.push(special ? { title: '東京都の条例（小規模貯水槽水道等）', level: 'must', badge: '義務あり', lines: [
+          '<strong>特定小規模貯水槽水道等</strong>に当たる見込みです（有効容量が5㎥を超える、または学校・病院・社会福祉施設等に給水）。',
+          '貯水槽の清掃：<strong>1年に1回以上</strong>／管理状況の検査・点検：<strong>1年に1回以上</strong>／記録の保存、給水開始時などの保健所への届出',
+          '都の保健所の管内が対象です。特別区などは区の条例によるため、所在地の保健所に確認してください。',
+        ] } : { title: '東京都の条例（小規模貯水槽水道等）', level: 'check', badge: '努力義務', lines: [
+          '特定小規模貯水槽水道等には当たりませんが、条例では、清掃（1年に1回以上）などの衛生管理に努めるよう求めています。',
+        ] });
+      } else {
+        out.push({ title: '自治体の条例（小規模な受水槽）', level: 'check', badge: '要確認', lines: [
+          '10㎥以下の受水槽でも、自治体の条例で清掃や点検を義務づけている地域があります。所在地の保健所に確認してください。',
+          '義務がなくても、水質を保つため年1回の清掃がすすめられています。',
+        ] });
+      }
+    }
+    return out;
+  }
+
+  function render() {
+    toggle((document.getElementById('js-use') as HTMLSelectElement).value);
+    const res = judge();
+    if (!res) { result.hidden = true; return; }
+    cards.innerHTML = res.map((c) => `
+      <div class="gc-card gc-card--${c.level}">
+        <div class="gc-card-head"><span class="gc-card-title">${c.title}</span><span class="gc-badge">${c.badge}</span></div>
+        <ul>${c.lines.map((l) => `<li>${l}</li>`).join('')}</ul>
+      </div>`).join('');
+    result.hidden = false;
+  }
+  form.addEventListener('change', render);
+  toggle('');
+</script>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; flex-wrap: wrap; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-author-link { color: #fff; text-decoration: underline; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-section a { color: var(--blue); text-decoration: underline; }
+.cl-note { font-size: .82rem; color: var(--gray-500); }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-callout li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-quickanswer { background: #eef6ff; border: 1.5px solid #1a56db; border-radius: 10px; padding: 18px 22px; margin-bottom: 32px; }
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+.gc-tool { background: #fff; border: 2px solid var(--blue); border-radius: 14px; padding: 24px 26px; margin-bottom: 48px; }
+.gc-tool-h { font-size: 1.15rem; font-weight: 900; color: var(--gray-900); margin-bottom: 18px; }
+.gc-form { display: grid; gap: 18px; }
+.gc-q { border: 0; padding: 0 0 16px; margin: 0; border-bottom: 1px solid var(--gray-200); min-width: 0; }
+.gc-q[hidden] { display: none; }
+.gc-label { display: flex; gap: 8px; align-items: flex-start; font-size: .95rem; font-weight: 800; color: var(--gray-900); line-height: 1.6; margin-bottom: 6px; padding: 0; }
+.gc-num { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: var(--blue); color: #fff; font-size: .75rem; margin-top: 2px; }
+.gc-hint { font-size: .8rem; color: var(--gray-500); line-height: 1.7; margin: 0 0 8px; }
+.gc-select { width: 100%; max-width: 100%; font-size: .95rem; padding: 10px 12px; border: 1.5px solid var(--gray-300, #d1d5db); border-radius: 8px; background: #fff; }
+.gc-opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.gc-opts label { display: inline-flex; align-items: center; gap: 6px; border: 1.5px solid var(--gray-200); border-radius: 8px; padding: 9px 14px; font-size: .9rem; cursor: pointer; background: #fff; }
+.gc-opts label:has(input:checked) { border-color: var(--blue); background: var(--blue-light); font-weight: 700; }
+.gc-result { margin-top: 24px; }
+.gc-result-h { font-size: 1.1rem; font-weight: 900; color: var(--gray-900); margin-bottom: 14px; }
+:global(.gc-card) { border-radius: 10px; padding: 16px 18px; margin-bottom: 12px; border-left: 5px solid; }
+:global(.gc-card--must) { background: #fff7ed; border-left-color: #ea580c; }
+:global(.gc-card--check) { background: #fefce8; border-left-color: #ca8a04; }
+:global(.gc-card--none) { background: #f0fdf4; border-left-color: #16a34a; }
+:global(.gc-card-head) { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 8px; }
+:global(.gc-card-title) { font-weight: 900; font-size: 1rem; color: var(--gray-900); }
+:global(.gc-badge) { font-size: .8rem; font-weight: 800; padding: 3px 10px; border-radius: 99px; white-space: nowrap; color: #fff; }
+:global(.gc-card--must .gc-badge) { background: #ea580c; }
+:global(.gc-card--check .gc-badge) { background: #ca8a04; }
+:global(.gc-card--none .gc-badge) { background: #16a34a; }
+:global(.gc-card ul) { margin: 0; padding-left: 18px; }
+:global(.gc-card li) { font-size: .9rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.gc-note { font-size: .78rem; color: var(--gray-500); line-height: 1.7; margin: 8px 0 18px; }
+.gc-cta { background: var(--gray-100); border-radius: 10px; padding: 18px 20px; text-align: center; }
+.gc-cta p { font-size: .9rem; margin-bottom: 12px; color: var(--gray-800); }
+.gc-cta-btns { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; align-items: center; }
+.gc-cta-sub { font-size: .9rem; color: var(--blue); text-decoration: underline; font-weight: 700; }
+.gc-cta-sub[hidden] { display: none; }
+.js-stack tbody th[scope="row"] { white-space: normal; }
+@media (max-width: 600px) {
+  .js-stack thead { display: none; }
+  .js-stack, .js-stack tbody, .js-stack tr, .js-stack th, .js-stack td { display: block; width: auto; }
+  .js-stack tr { border: 1px solid var(--gray-200); border-radius: 8px; margin-bottom: 12px; overflow: hidden; }
+  .js-stack th, .js-stack td { border: none; }
+  .js-stack td::before { content: attr(data-label); display: block; font-size: .75rem; font-weight: 700; color: var(--gray-500); margin-bottom: 2px; }
+}
+@media (max-width: 600px) { .gc-tool { padding: 18px 14px; } .gc-opts label { padding: 8px 11px; font-size: .86rem; } }
+@media (max-width: 600px) { .cl-header { padding: 32px 0 28px; } .cl-body { padding: 28px 16px 48px; } .cl-section h2 { font-size: 1.15rem; } .cl-cta { padding: 28px 18px; } }
+</style>
