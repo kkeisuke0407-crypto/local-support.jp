@@ -5,21 +5,25 @@ import { site } from '../data/site';
 interface Props { prefecture: Prefecture; service: ServiceData; }
 const { prefecture, service } = Astro.props;
 const citiesText = prefecture.majorCities.join('・');
+// このサービスに関係する県事情だけを出す（services 省略時は全サービス共通）
+const factors = (prefecture.localFactors ?? []).filter((f) => !f.services || f.services.includes(service.slug));
+// 県事情がある主要県では、全サービス共通の県紹介文（context）は出さない
+const showContext = !prefecture.localFactors || prefecture.localFactors.length === 0;
 ---
 <section class="sd-section section-white pref-intro-section">
   <div class="sd-container">
     <div class="pref-intro">
-      <h2 class="pref-intro-h2">{prefecture.name}の{service.serviceName}に対応した業者をご紹介</h2>
+      <h2 class="pref-intro-h2">{prefecture.name}の{service.serviceName}のご依頼について</h2>
       <p class="pref-intro-region"><span class="pref-intro-region-tag">{prefecture.region}</span> 主要対応エリア：{citiesText}</p>
-      <p class="pref-intro-body">{prefecture.context}</p>
+      {showContext && <p class="pref-intro-body">{prefecture.context}</p>}
       <p class="pref-intro-body">
-        {site.name}では、{prefecture.name}内の<strong>{service.serviceName}</strong>に対応可能な業者の中から、ご依頼内容に応じて最大5社を厳選してご紹介します。お見積もり依頼は<strong>1分・完全無料</strong>。{prefecture.name}全域（{citiesText}など）に対応しています。
+        {site.name}では、{prefecture.name}内の<strong>{service.serviceName}</strong>のご依頼について、対応できる業者を運営が探し、最大5社をご紹介します。ご依頼は<strong>無料</strong>です。{prefecture.name}全域（{citiesText}など）からご相談いただけます。
       </p>
-      {prefecture.localFactors && prefecture.localFactors.length > 0 && (
+      {factors.length > 0 && (
         <div class="pref-local-factors">
           <h3 class="pref-local-factors-title">{prefecture.name}で{service.serviceName}を依頼するときに知っておきたいこと</h3>
           <ul class="pref-local-factors-list">
-            {prefecture.localFactors.map((f) => (
+            {factors.map((f) => (
               <li class="pref-local-factor">
                 <span class="pref-local-factor-title">{f.title}</span>
                 <span class="pref-local-factor-body">{f.body}</span>
