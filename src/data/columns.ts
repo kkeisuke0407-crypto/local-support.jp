@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/furon-tenken-check/',
+    category: 'フロン点検',
+    title: 'フロン点検の区分チェック｜簡易点検・定期点検の頻度が機器の出力で分かる',
+    excerpt: '業務用エアコン・冷凍冷蔵機器の種類と圧縮機の定格出力を選ぶだけで、簡易点検（3か月ごと）に加えて定期点検が必要か、1年ごとか3年ごとかが分かる無料チェック。記録の保存期間や罰則も整理。',
+    date: '2026-09-26',
+  },
+  {
     href: '/column/jusuisou-gimu-check/',
     category: '受水槽清掃',
     title: '受水槽の清掃・検査の義務チェック｜容量と建物の用途で分かる',

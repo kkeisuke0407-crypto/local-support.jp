@@ -307,6 +307,13 @@ const data: ServiceData = {
 
   relatedColumns: [
     {
+      href: '/column/furon-tenken-check/',
+      category: '法令・義務',
+      title: 'フロン点検の区分チェック｜簡易点検・定期点検の頻度が機器の出力で分かる',
+      excerpt: '機器の種類と定格出力を選ぶだけで、簡易点検・定期点検の頻度が分かる無料チェック。',
+      date: '2026-09-26',
+    },
+    {
       href: '/column/furon-tenken-horei-gimu/',
       category: '法令・義務',
       title: 'フロン排出抑制法の点検・記録・廃棄義務ガイド｜業務用エアコン・冷凍冷蔵設備',
