@@ -50,8 +50,8 @@ export interface ServiceData {
     note: string;
     /** Offer/PriceSpecification 用の価格レンジ（JPY） */
     priceRange?: { min: number; max: number };
-    /** 表の出典（公開料金表など）。ある場合は表の下に出典を表示し、県別の地域補正注記は出さない */
-    source?: { name: string; url: string; checked: string; detail?: string };
+    /** 表・本文の出典（公開料金表など）。ある場合は表の下に出典を表示し、県別の地域補正注記は出さない */
+    sources?: { name: string; url: string; checked: string; detail?: string }[];
   };
 
   industries: { title: string; body: string; tag: string }[];

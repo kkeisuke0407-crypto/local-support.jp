@@ -18,7 +18,8 @@ function regionalCostNote(pref: Prefecture): string | null {
   return `${pref.name}の費用相場は全国平均よりやや低め（目安：約${pct}%減）の傾向があり、相見積もりでコストを抑えやすいエリアです。`;
 }
 // 出典つきの表では、出典のない地域補正（priceFactor）の注記は出さない
-const regionNote = prefecture && !costGuide.source ? regionalCostNote(prefecture) : null;
+const hasSources = (costGuide.sources?.length ?? 0) > 0;
+const regionNote = prefecture && !hasSources ? regionalCostNote(prefecture) : null;
 ---
 <section class="sd-section section-white" id="cost">
   <div class="sd-container">
@@ -31,7 +32,7 @@ const regionNote = prefecture && !costGuide.source ? regionalCostNote(prefecture
       <p class="cost-region-note"><strong>地域の相場感：</strong>{regionNote}</p>
     )}
     <div class="cost-table-wrap">
-      <table class:list={["cost-table", { "cost-table--compact": costGuide.source }]} aria-describedby="cost-table-caption">
+      <table class:list={["cost-table", { "cost-table--compact": hasSources }]} aria-describedby="cost-table-caption">
         <caption id="cost-table-caption">
           {costGuide.table.caption}
           <small class="cost-table-updated"><time datetime={lastUpdated}>（{updatedJa} 時点）</time></small>
@@ -54,11 +55,11 @@ const regionNote = prefecture && !costGuide.source ? regionalCostNote(prefecture
         </tbody>
       </table>
     </div>
-    {costGuide.source && (
+    {costGuide.sources?.map((src) => (
       <p class="cost-source">
-        出典：<a href={costGuide.source.url} rel="noopener" target="_blank">{costGuide.source.name}</a>（{costGuide.source.checked}確認）。{costGuide.source.detail}
+        出典：<a href={src.url} rel="noopener" target="_blank">{src.name}</a>（{src.checked}確認）。{src.detail}
       </p>
-    )}
+    ))}
     <div class="cost-aside">
       <h3>費用が変動する主な要因</h3>
       <ul class="cost-factor-list">
