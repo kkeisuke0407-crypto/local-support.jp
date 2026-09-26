@@ -1,34 +1,28 @@
 ---
-import { prefecturesData } from '../data/prefectures';
+import { prefecturesData, PRIMARY_PREFECTURE_SLUGS } from '../data/prefectures';
+import { serviceBySlug } from '../data/services';
 interface Props { serviceSlug: string; serviceName: string; }
 const { serviceSlug, serviceName } = Astro.props;
 
-const regions = ['北海道', '東北', '関東', '中部', '近畿', '中国', '四国', '九州', '沖縄'];
-const byRegion = regions.map((region) => ({
-  region,
-  prefectures: prefecturesData.filter((p) => p.region === region),
-})).filter((g) => g.prefectures.length > 0);
+// インデックス対象の県だけリンクにする。noindex の県ページへ評価を流さないため（2026-09 監査 T2）
+const indexed = new Set<string>([
+  ...PRIMARY_PREFECTURE_SLUGS,
+  ...(serviceBySlug[serviceSlug]?.additionalIndexedPrefectures ?? []),
+]);
+
 ---
 <section class="sd-section section-gray pref-grid-section" id="prefectures">
   <div class="sd-container">
     <div class="section-head">
       <span class="kicker">AREA</span>
       <h2>都道府県から{serviceName}業者を探す</h2>
-      <p>各地域に対応可能な業者をご紹介します。お住まいの都道府県を選んでください。</p>
+      <p>主なエリアは、地域ごとのページで詳しくご案内しています。</p>
     </div>
-    <div class="pref-grid-regions">
-      {byRegion.map((g) => (
-        <div class="pref-grid-region">
-          <h3 class="pref-grid-region-title">{g.region}</h3>
-          <ul class="pref-grid-list">
-            {g.prefectures.map((p) => (
-              <li>
-                <a href={`/${serviceSlug}/${p.slug}/`} class="pref-grid-link">{p.name}</a>
-              </li>
-            ))}
-          </ul>
-        </div>
+    <ul class="pref-grid-chips">
+      {prefecturesData.filter((p) => indexed.has(p.slug)).map((p) => (
+        <li><a href={`/${serviceSlug}/${p.slug}/`} class="pref-grid-chip">{p.name}</a></li>
       ))}
-    </div>
+    </ul>
+    <p class="pref-grid-other">上記以外の都道府県（北海道から沖縄まで）も、<a href="#contact">ご依頼フォーム</a>から全国どこでもご相談いただけます。</p>
   </div>
 </section>

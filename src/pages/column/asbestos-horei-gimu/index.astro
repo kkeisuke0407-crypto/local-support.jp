@@ -33,7 +33,7 @@ const articleLd = JSON.stringify({
   wordCount: 4700,
   articleSection: '法令・義務',
   keywords: 'アスベスト,石綿,大気汚染防止法,石綿障害予防規則,建築物石綿含有建材調査者,事前調査,法定義務,2026',
-  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  author: { '@type': 'Organization', name: site.author.name, url: site.domain + '/author/' },
   publisher: { '@id': `${site.domain}/#organization` },
   image: { '@type': 'ImageObject', url: `${site.domain}/og-asbestos.png`, width: 1200, height: 630 },
   about: { '@type': 'Service', name: 'アスベスト調査・除去' },
@@ -474,11 +474,7 @@ const webPageLd = JSON.stringify({
           <li><a href="/asbestos/kanagawa/">神奈川県</a></li>
           <li><a href="/asbestos/aichi/">愛知県</a></li>
           <li><a href="/asbestos/saitama/">埼玉県</a></li>
-          <li><a href="/asbestos/chiba/">千葉県</a></li>
-          <li><a href="/asbestos/hyogo/">兵庫県</a></li>
           <li><a href="/asbestos/fukuoka/">福岡県</a></li>
-          <li><a href="/asbestos/hokkaido/">北海道</a></li>
-          <li><a href="/asbestos/kyoto/">京都府</a></li>
         </ul>
         <p class="cl-pref-more"><a href="/asbestos/">全国47都道府県の対応業者を見る</a></p>
       </div>

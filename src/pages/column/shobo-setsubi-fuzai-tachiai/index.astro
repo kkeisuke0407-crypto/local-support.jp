@@ -32,7 +32,7 @@ const articleLd = JSON.stringify({
   wordCount: 5800,
   articleSection: '消防設備点検',
   keywords: '消防設備点検,不在,立ち会い,立ち会えない,マンション,賃貸,アパート,室内,専有部,拒否,居留守,お知らせ,案内文,2026',
-  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  author: { '@type': 'Organization', name: site.author.name, url: site.domain + '/author/' },
   publisher: { '@id': `${site.domain}/#organization` },
   image: { '@type': 'ImageObject', url: `${site.domain}/og-shobo-setsubi.png`, width: 1200, height: 630 },
   about: { '@type': 'Service', name: '消防設備点検', serviceType: '消防用設備等の点検' },
@@ -361,11 +361,7 @@ const webPageLd = JSON.stringify({
           <li><a href="/shobo-setsubi/kanagawa/">神奈川県</a></li>
           <li><a href="/shobo-setsubi/aichi/">愛知県</a></li>
           <li><a href="/shobo-setsubi/saitama/">埼玉県</a></li>
-          <li><a href="/shobo-setsubi/chiba/">千葉県</a></li>
-          <li><a href="/shobo-setsubi/hyogo/">兵庫県</a></li>
           <li><a href="/shobo-setsubi/fukuoka/">福岡県</a></li>
-          <li><a href="/shobo-setsubi/hokkaido/">北海道</a></li>
-          <li><a href="/shobo-setsubi/kyoto/">京都府</a></li>
         </ul>
         <p class="cl-pref-more"><a href="/shobo-setsubi/">全国47都道府県の対応業者を見る</a></p>
       </div>

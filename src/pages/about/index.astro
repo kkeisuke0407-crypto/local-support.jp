@@ -31,14 +31,12 @@ const aboutLd = JSON.stringify({
     alternateName: site.name,
     url: site.domain,
     logo: { '@type': 'ImageObject', url: `${site.domain}/og-default.png`, width: 1200, height: 630 },
-    foundingDate: '2025',
     description: `施設管理・設備メンテナンスの一括見積比較サービス。法定点検・衛生清掃・修繕工事・エネルギー設備・防犯設備など${serviceCount}分野を47都道府県で展開。`,
     areaServed: { '@type': 'Country', name: 'JP' },
     knowsAbout: allServices.map((s) => s.serviceName),
-    member: {
-      '@type': 'Person',
+    subOrganization: {
+      '@type': 'Organization',
       name: site.author.name,
-      jobTitle: site.author.role,
       url: `${site.domain}/author/`,
     },
   },
@@ -51,7 +49,7 @@ const faqLd = JSON.stringify({
     { '@type': 'Question', name: 'ロカサポとは何ですか？', acceptedAnswer: { '@type': 'Answer', text: `ロカサポは、施設管理・設備メンテナンスに必要な${serviceCount}分野の実績・信頼のある専門業者を、47都道府県の管理担当者に紹介する一括見積比較サービスです。運営はローカル情報局。` } },
     { '@type': 'Question', name: 'ロカサポの利用は無料ですか？', acceptedAnswer: { '@type': 'Answer', text: 'はい。ご相談・業者のご紹介・比較・お選びいただいた業者への連絡先の共有まで、ご依頼者様から費用をいただくことはありません。' } },
     { '@type': 'Question', name: 'ロカサポが紹介する業者の基準は？', acceptedAnswer: { '@type': 'Answer', text: 'ご依頼ごとに、対応エリア・対応の可否・必要な資格や登録・対応条件を、業者のWebサイトなどの公開情報と業者からの回答で確認し、比較ページに載せています。業者の品質を保証するものではありません。' } },
-    { '@type': 'Question', name: 'ロカサポはどんな会社が運営していますか？', acceptedAnswer: { '@type': 'Answer', text: '「ローカル情報局」が運営しています。施設管理・設備メンテナンス領域に特化した情報メディア事業を行っており、運営者は施設管理情報担当の寺尾聡が務めています。詳細は運営会社情報ページに記載しています。' } },
+    { '@type': 'Question', name: 'ロカサポはどんな会社が運営していますか？', acceptedAnswer: { '@type': 'Answer', text: '「ローカル情報局」が運営しています。記事は「ロカサポ編集部」が作成しています。詳しくは運営者情報のページに記載しています。' } },
     { '@type': 'Question', name: '紹介後にしつこい営業電話は来ませんか？', acceptedAnswer: { '@type': 'Answer', text: '業者にご依頼者様の連絡先をお伝えするのは、比較ページでお選びいただいた業者だけです。それまで業者から連絡が行くことはありません。万一、不適切な営業を受けた場合はご連絡ください。事実を確認し、その業者を以後ご紹介しないなどの対応をとります。' } },
   ],
 });
@@ -174,7 +172,7 @@ const faqLd = JSON.stringify({
           <tbody>
             <tr><th>サービス名</th><td>{site.name}（ロカサポ / local-support.jp）</td></tr>
             <tr><th>運営組織</th><td>{site.org.legalName}</td></tr>
-            <tr><th>運営者</th><td><a href="/author/">{site.author.name}</a>（{site.author.role}）</td></tr>
+            <tr><th>記事の作成</th><td><a href="/author/">{site.author.name}</a></td></tr>
             <tr><th>事業内容</th><td>施設管理・設備メンテナンス業者の紹介サービス（一括見積比較）</td></tr>
             <tr>
               <th>取扱サービス</th>

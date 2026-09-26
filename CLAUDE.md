@@ -24,7 +24,8 @@ src/data/
 新サービス追加: `services/[slug].ts` 作成 → `services/index.ts` の `allServices` に追加。
 
 ## ブランディング
-- サイト名 `ロカサポ`（運営: ローカル情報局） / 著者 寺尾聡（運営者・施設管理情報担当）
+- サイト名 `ロカサポ`（運営: ローカル情報局） / 記事の著者は **ロカサポ編集部**（組織名義。2026-09-26 決定。個人名の著者にしない）
+- 業者・依頼者へのメールの差出人は従来どおり「ロカサポ運営事務局 寺尾」
 - `siteName`: `'ロカサポ｜[サービス名]'` 形式
 - 全設定は `src/data/site.ts`
 
@@ -38,7 +39,8 @@ src/data/
 
 ## JSON-LD
 - `ServiceLP` / `PrefectureServiceLP`: BreadcrumbList・Service・FAQPage・HowTo・AggregateOffer
-- コラム: Article・FAQPage・BreadcrumbList（`author` は Person 型固定: `{ '@type':'Person', name: site.author.name, url: site.domain + '/author/' }`）
+- コラム: Article・FAQPage・BreadcrumbList（`author` は Organization 型固定: `{ '@type':'Organization', name: site.author.name, url: site.domain + '/author/' }`）
+- Person 型・reviewedBy・AggregateOffer・AggregateRating は使わない（実態の裏付けがないため。2026-09 監査）
 
 ## SEO スコアリング
 月1回 `docs/seo-scoring-template.csv` に記録、100点満点。70点以上=勝ち筋。自動化は `scripts/fetch-gsc.js`（OAuth2）。`.env` に `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `GSC_SITE_URL=sc-domain:local-support.jp` 必須。クラウドは `npm run fetch-gsc:auth`。

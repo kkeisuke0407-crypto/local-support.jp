@@ -32,7 +32,7 @@ const articleLd = JSON.stringify({
   wordCount: 4400,
   articleSection: "会計・経費",
   keywords: "ダクト清掃,経費,損金算入,修繕費,衛生管理費,仕訳,2026",
-  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  author: { '@type': 'Organization', name: site.author.name, url: site.domain + '/author/' },
   publisher: { '@id': `${site.domain}/#organization` },
   image: { '@type': 'ImageObject', url: `${site.domain}/og-duct.png`, width: 1200, height: 630 },
   about: { '@type': 'Service', name: "ダクト清掃" },
@@ -281,11 +281,7 @@ const webPageLd = JSON.stringify({
           <li><a href="/duct/kanagawa/">神奈川県</a></li>
           <li><a href="/duct/aichi/">愛知県</a></li>
           <li><a href="/duct/saitama/">埼玉県</a></li>
-          <li><a href="/duct/chiba/">千葉県</a></li>
-          <li><a href="/duct/hyogo/">兵庫県</a></li>
           <li><a href="/duct/fukuoka/">福岡県</a></li>
-          <li><a href="/duct/hokkaido/">北海道</a></li>
-          <li><a href="/duct/kyoto/">京都府</a></li>
         </ul>
         <p class="cl-pref-more"><a href="/duct/">全国47都道府県の対応業者を見る</a></p>
       </div>

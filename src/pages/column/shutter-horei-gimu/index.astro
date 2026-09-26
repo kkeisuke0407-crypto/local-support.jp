@@ -91,7 +91,7 @@ const articleLd = JSON.stringify({
   wordCount: 4700,
   articleSection: '法令・義務',
   keywords: 'シャッター点検,建築基準法第12条,防火設備検査,定期報告,防火設備検査員,法定義務,2026',
-  author: { '@type': 'Person', name: site.author.name, url: site.domain + '/author/' },
+  author: { '@type': 'Organization', name: site.author.name, url: site.domain + '/author/' },
   publisher: { '@id': `${site.domain}/#organization` },
   image: { '@type': 'ImageObject', url: `${site.domain}/og-shutter.png`, width: 1200, height: 630 },
   about: { '@type': 'Service', name: 'シャッター点検・修理' },
@@ -448,11 +448,7 @@ const webPageLd = JSON.stringify({
           <li><a href="/shutter/kanagawa/">神奈川県</a></li>
           <li><a href="/shutter/aichi/">愛知県</a></li>
           <li><a href="/shutter/saitama/">埼玉県</a></li>
-          <li><a href="/shutter/chiba/">千葉県</a></li>
-          <li><a href="/shutter/hyogo/">兵庫県</a></li>
           <li><a href="/shutter/fukuoka/">福岡県</a></li>
-          <li><a href="/shutter/hokkaido/">北海道</a></li>
-          <li><a href="/shutter/kyoto/">京都府</a></li>
         </ul>
         <p class="cl-pref-more"><a href="/shutter/">全国47都道府県の対応業者を見る</a></p>
       </div>

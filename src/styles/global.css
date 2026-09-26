@@ -2027,12 +2027,18 @@ a { color: inherit; text-decoration: none; }
 .pref-grid-link {
   display: block;
   font-size: .85rem;
-  color: var(--gray-700);
+  font-weight: 700;
+  color: var(--blue);
   text-decoration: none;
   padding: 4px 0;
   transition: color .12s;
 }
 .pref-grid-link:hover { color: var(--blue); text-decoration: underline; }
+.pref-grid-chips { list-style: none; padding: 0; margin: 0 auto 16px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 760px; }
+.pref-grid-chip { display: inline-block; background: #fff; border: 1.5px solid var(--blue); color: var(--blue); font-weight: 700; font-size: .92rem; padding: 10px 18px; border-radius: 8px; text-decoration: none; }
+.pref-grid-chip:hover { background: var(--blue-light); }
+.pref-grid-other { text-align: center; font-size: .88rem; color: var(--gray-700); line-height: 1.8; max-width: 760px; margin: 0 auto; }
+.pref-grid-other a { color: var(--blue); text-decoration: underline; }
 @media (max-width: 480px) {
   .pref-grid-list { grid-template-columns: 1fr; }
 }
