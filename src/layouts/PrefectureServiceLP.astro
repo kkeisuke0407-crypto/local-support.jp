@@ -148,8 +148,6 @@ const webPageLd = JSON.stringify({
   },
 });
 
-// 地域の費用水準（priceFactor）を反映し、構造化データの価格レンジを都道府県ごとに変える
-const priceFactor = prefecture.priceFactor ?? 1;
 // AggregateOffer（業者の費用相場）は付けない。ロカサポは売り手ではないため（2026-09 監査）
 
 /* HowTo の代替として ItemList で「業者選びチェックリスト」を構造化。
