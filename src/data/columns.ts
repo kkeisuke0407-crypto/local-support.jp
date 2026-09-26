@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/shobo-setsubi-tsuchi-taiou/',
+    category: '消防設備点検',
+    title: '消防署から点検報告の通知が来たら｜まずやること・提出方法・罰則',
+    excerpt: '消防署から点検結果報告を求める通知が来たときにまずやること、点検していなかった場合の進め方、報告書の提出方法（窓口・郵送・電子申請）、放置したときの罰則を、東京消防庁などの公式情報をもとに整理。',
+    date: '2026-09-26',
+  },
+  {
     href: '/column/shobo-setsubi-gimu-check/',
     category: '消防設備点検',
     title: '消防点検の義務チェック｜建物の用途と面積で分かる点検・報告の頻度と資格の要否',
