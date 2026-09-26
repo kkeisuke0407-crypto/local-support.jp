@@ -9,6 +9,13 @@ export interface ColumnItem {
 
 export const columns: ColumnItem[] = [
   {
+    href: '/column/tokushu-kenchiku-gimu-check/',
+    category: '特殊建築物',
+    title: '特殊建築物定期調査の対象チェック｜東京都の用途・規模・報告時期が分かる',
+    excerpt: '建物の用途・床面積・階数を選ぶだけで、特殊建築物定期調査（12条点検）の対象か、報告は毎年か3年ごとか、次の報告時期はいつかが分かる無料チェック。東京都の一覧にもとづき判定、東京都以外は特定行政庁の公式ページを案内。',
+    date: '2026-09-26',
+  },
+  {
     href: '/column/shobo-setsubi-tsuchi-taiou/',
     category: '消防設備点検',
     title: '消防署から点検報告の通知が来たら｜まずやること・提出方法・罰則',

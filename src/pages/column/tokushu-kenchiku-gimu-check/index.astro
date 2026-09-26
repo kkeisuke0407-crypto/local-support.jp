@@ -1,0 +1,583 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { site } from '../../../data/site';
+
+const title = '特殊建築物定期調査の対象チェック｜東京都の用途・規模・報告時期が分かる';
+const description = '建物の用途・床面積・階数を選ぶだけで、特殊建築物定期調査（建築基準法第12条の定期報告）の対象か、報告は毎年か3年ごとか、次の報告時期はいつかが分かる無料チェックです。東京都都市整備局の一覧にもとづいて判定し、東京都以外は各特定行政庁の公式ページを案内します。';
+const canonical = `${site.domain}/column/tokushu-kenchiku-gimu-check/`;
+const published = '2026-09-26';
+const modified = '2026-09-26';
+
+const faqItems = [
+  {
+    q: '特殊建築物定期調査とは何ですか？',
+    a: '劇場・ホテル・病院・物販店・飲食店・共同住宅など、多くの人が利用する建物（特定建築物）の所有者または管理者が、定期に建築士または建築物調査員に建物の状況を調査させ、その結果を特定行政庁に報告する制度です（建築基準法第12条第1項）。',
+  },
+  {
+    q: '対象になる建物は全国共通ですか？',
+    a: '共通ではありません。国が政令で定めた建物に加えて、特定行政庁（都道府県や一部の市）が独自に対象を追加しています。報告の周期や時期も特定行政庁ごとに違います。たとえば東京都では5階以上で一定規模の事務所・共同住宅が対象ですが、横浜市では対象用途が入っていない事務所・共同住宅は対象外です。',
+  },
+  {
+    q: '誰が調査できますか？',
+    a: '一級建築士、二級建築士、または建築物調査員資格者証の交付を受けた人（特定建築物調査員）です（建築基準法第12条第1項）。建築設備・防火設備・昇降機の検査は、それぞれ建築士または建築設備等検査員の資格を持つ人が行います。',
+  },
+  {
+    q: '報告しないとどうなりますか？',
+    a: '定期報告をしない、または虚偽の報告をした場合は、100万円以下の罰金の対象になります（建築基準法第101条第1項第2号）。',
+  },
+  {
+    q: '新築の建物もすぐに報告が必要ですか？',
+    a: '東京都では、新築の建物は検査済証の交付を受けた直後の報告時期には報告する必要がないとしています（初回の免除）。初回の扱いは特定行政庁によって異なるため、所在地の案内を確認してください。',
+  },
+];
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: '特殊建築物定期調査の対象チェック', item: canonical },
+  ],
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'Article',
+  headline: title, description, datePublished: published, dateModified: modified,
+  inLanguage: 'ja-JP', url: canonical, mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  articleSection: '特殊建築物定期調査',
+  keywords: '特殊建築物定期調査,特定建築物,定期報告,12条点検,対象,報告時期,東京都,建築基準法第12条',
+  author: { '@type': 'Organization', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-default.png`, width: 1200, height: 630 },
+  citation: [
+    { '@type': 'Legislation', name: '建築基準法', url: 'https://laws.e-gov.go.jp/law/325AC0000000201' },
+    { '@type': 'CreativeWork', name: '東京都都市整備局 定期報告対象建築物・建築設備等及び報告時期一覧', url: 'https://www.toshiseibi.metro.tokyo.lg.jp/kenchiku_kaihatsu/kenchiku_kakunin/chousa-houkoku/3' },
+  ],
+});
+
+const appLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'WebApplication',
+  name: '特殊建築物定期調査の対象チェック',
+  url: canonical,
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'All',
+  inLanguage: 'ja-JP',
+  isAccessibleForFree: true,
+  offers: { '@type': 'Offer', price: 0, priceCurrency: 'JPY' },
+  description: '建物の用途・床面積・階数から、東京都における特殊建築物定期調査の対象と報告時期を判定する無料ツール。',
+  publisher: { '@id': `${site.domain}/#organization` },
+});
+
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: faqItems.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+});
+
+const webPageLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.domain },
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.cl-quickanswer', '.cl-lead', '.cl-faq-item dt', '.cl-faq-item dd'],
+  },
+});
+
+const regions: Record<string, { name: string; url: string }[]> = {
+  kanagawa: [
+    { name: '横浜市（報告対象建築物・昇降機等）', url: 'https://www.city.yokohama.lg.jp/business/bunyabetsu/kenchiku/tetsuduki/teikihoukoku/seido/03.html' },
+    { name: '神奈川県（定期報告制度について）', url: 'https://www.pref.kanagawa.jp/docs/f7t/cnt/f533346/' },
+  ],
+  saitama: [
+    { name: 'さいたま市（建築基準法に基づく定期報告制度について）', url: 'https://www.city.saitama.lg.jp/005/001/010/p001925.html' },
+    { name: '埼玉県（定期報告対象となる建築物等と報告の間隔）', url: 'https://www.pref.saitama.lg.jp/a1106/teikihoukoku/20211203.html' },
+  ],
+  aichi: [
+    { name: '名古屋市（建築基準法に基づく定期報告制度について）', url: 'https://www.city.nagoya.jp/jigyou/toshikeikaku/1018015/1018021/1018618/1018619/1034596.html' },
+    { name: '愛知県（定期報告制度）', url: 'https://www.pref.aichi.jp/soshiki/kenchikushido/teikihoukoku.html' },
+  ],
+  osaka: [
+    { name: '大阪市（定期報告制度）', url: 'https://www.city.osaka.lg.jp/toshikeikaku/page/0000361630.html' },
+    { name: '大阪府（定期報告制度について）', url: 'https://www.pref.osaka.lg.jp/o130190/kenshi_anzen/teiho/index.html' },
+  ],
+  fukuoka: [
+    { name: '福岡市（特定建築物等の定期報告制度について）', url: 'https://www.city.fukuoka.lg.jp/jutaku-toshi/kansatsu/life/008_2.html' },
+    { name: '福岡県（特定建築物等の定期報告制度について）', url: 'https://www.pref.fukuoka.lg.jp/contents/tokkenteikihoukoku.html' },
+  ],
+  other: [
+    { name: '国土交通省（建築基準法に基づく定期報告制度について）', url: 'https://www.mlit.go.jp/jutakukentiku/build/jutakukentiku_house_tk_000039.html' },
+  ],
+};
+const regionsJson = JSON.stringify(regions);
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified} title={title} description={description} canonical={canonical} siteName={site.name} logoSub="施設管理の一括見積比較" jsonLdBlocks={[breadcrumbLd, articleLd, appLd, faqLd, webPageLd]}>
+  <article class="cl-article">
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>特殊建築物定期調査の対象チェック</span>
+        </nav>
+        <span class="cl-cat">特殊建築物定期調査</span>
+        <h1 class="cl-title">特殊建築物定期調査の対象チェック｜東京都の用途・規模・報告時期が分かる</h1>
+        <p class="cl-lead">
+          「うちの建物は定期報告（12条点検）の対象？」「報告は毎年？3年ごと？次はいつ？」。建物の用途と床面積・階数を選ぶだけで、<strong>東京都の基準での対象かどうかと報告時期</strong>が分かります。東京都以外は、対象を決めている特定行政庁の公式ページをご案内します。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年9月26日</time>
+          <span>最終更新：2026年9月26日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a></span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. 特殊建築物定期調査の対象は？</p>
+        <p class="cl-qa-a">A. <strong>ホテル・病院・物販店・飲食店・福祉施設・学校など、多くの人が使う建物のうち、用途と規模が基準を超えるものです。</strong>対象と報告時期は特定行政庁（都道府県や一部の市）ごとに決まっていて、東京都では5階以上で一定規模の事務所・共同住宅も対象です。</p>
+        <p class="cl-qa-src">※建築基準法第12条、東京都都市整備局「定期報告が必要な特定建築物・防火設備・建築設備・昇降機等及び報告時期一覧」にもとづく整理（2026年9月確認）。</p>
+      </div>
+
+      <section id="check" class="gc-tool" aria-label="特殊建築物定期調査の対象チェック">
+        <h2 class="gc-tool-h">建物について入力してください</h2>
+        <form id="tk-form" class="gc-form" onsubmit="return false;">
+          <div class="gc-q">
+            <label class="gc-label" for="tk-pref"><span class="gc-num">1</span>建物の所在地</label>
+            <select id="tk-pref" class="gc-select">
+              <option value="">選んでください</option>
+              <option value="tokyo">東京都</option>
+              <option value="kanagawa">神奈川県</option>
+              <option value="saitama">埼玉県</option>
+              <option value="aichi">愛知県</option>
+              <option value="osaka">大阪府</option>
+              <option value="fukuoka">福岡県</option>
+              <option value="other">そのほかの道府県</option>
+            </select>
+          </div>
+
+          <div class="gc-q" data-when="tokyo">
+            <label class="gc-label" for="tk-use"><span class="gc-num">2</span>調べたい用途</label>
+            <p class="gc-hint">複合ビルは、入っている用途ごとに1つずつ確かめてください。</p>
+            <select id="tk-use" class="gc-select">
+              <option value="">選んでください</option>
+              <option value="hotel">旅館・ホテル</option>
+              <option value="shop">物販店・百貨店・マーケット</option>
+              <option value="food">飲食店・料理店・遊技場・公衆浴場・展示場など</option>
+              <option value="hospital">病院・有床診療所</option>
+              <option value="welfareIn">特別養護老人ホーム・有料老人ホーム・障害者支援施設など（入所型）</option>
+              <option value="welfareOut">保育所・デイサービスなど（上記以外の児童福祉施設等）</option>
+              <option value="elderlyApt">サービス付き高齢者向け住宅・グループホーム</option>
+              <option value="apartment">共同住宅・寄宿舎・下宿（上記以外）</option>
+              <option value="office">事務所</option>
+              <option value="school">学校・学校に附属する体育館</option>
+              <option value="gym">体育館・博物館・図書館・スポーツ施設など（学校附属以外）</option>
+              <option value="othersUse">劇場・集会場・地下街・そのほか</option>
+            </select>
+          </div>
+
+          <div class="gc-q" data-when="tokyoUse" data-field="area">
+            <label class="gc-label" for="tk-area"><span class="gc-num">3</span>その用途の部分の床面積の合計（㎡）</label>
+            <p class="gc-hint">建物全体ではなく、選んだ用途に使っている部分の合計です。おおよそで構いません。</p>
+            <input id="tk-area" type="number" inputmode="numeric" min="0" class="gc-select" placeholder="例：800" />
+          </div>
+
+          <div class="gc-q" data-when="tokyoUse" data-field="floors">
+            <label class="gc-label" for="tk-floors"><span class="gc-num">4</span>建物の地上階数</label>
+            <input id="tk-floors" type="number" inputmode="numeric" min="1" class="gc-select" placeholder="例：4" />
+          </div>
+
+          <fieldset class="gc-q" data-when="tokyoUse" data-field="base">
+            <legend class="gc-label"><span class="gc-num">5</span>その用途の部分が地階にあり、地階部分の床面積が100㎡を超えますか</legend>
+            <div class="gc-opts">
+              <label><input type="radio" name="base" value="yes" />はい</label>
+              <label><input type="radio" name="base" value="no" />いいえ</label>
+            </div>
+          </fieldset>
+
+          <fieldset class="gc-q" data-when="tokyoUse" data-field="f3">
+            <legend class="gc-label"><span class="gc-num">6</span>その用途の部分が3階以上の階にあり、3階以上の部分の床面積が100㎡を超えますか</legend>
+            <div class="gc-opts">
+              <label><input type="radio" name="f3" value="yes" />はい</label>
+              <label><input type="radio" name="f3" value="no" />いいえ</label>
+            </div>
+          </fieldset>
+
+          <fieldset class="gc-q" data-when="tokyoUse" data-field="f5">
+            <legend class="gc-label"><span class="gc-num">7</span>その用途の部分が5階以上の階にあり、5階以上の部分の床面積が100㎡を超えますか</legend>
+            <div class="gc-opts">
+              <label><input type="radio" name="f5" value="yes" />はい</label>
+              <label><input type="radio" name="f5" value="no" />いいえ</label>
+            </div>
+          </fieldset>
+
+          <div class="gc-q" data-when="tokyoUse" data-field="a2">
+            <label class="gc-label" for="tk-a2"><span class="gc-num">8</span>その用途の部分のうち、2階にある部分の床面積（㎡）</label>
+            <p class="gc-hint">2階に無ければ 0 を入れてください。</p>
+            <input id="tk-a2" type="number" inputmode="numeric" min="0" class="gc-select" placeholder="例：0" />
+          </div>
+
+          <div class="gc-q" data-when="tokyoUse" data-field="nobe">
+            <label class="gc-label" for="tk-nobe"><span class="gc-num">9</span>建物全体の延べ面積（㎡）</label>
+            <input id="tk-nobe" type="number" inputmode="numeric" min="0" class="gc-select" placeholder="例：3000" />
+          </div>
+
+          <fieldset class="gc-q" data-when="tokyoUse" data-field="ev">
+            <legend class="gc-label"><span class="gc-num">10</span>エレベーター・エスカレーターがありますか</legend>
+            <div class="gc-opts">
+              <label><input type="radio" name="ev" value="yes" />ある</label>
+              <label><input type="radio" name="ev" value="no" />ない</label>
+            </div>
+          </fieldset>
+        </form>
+
+        <div id="tk-result" class="gc-result" aria-live="polite" hidden>
+          <h2 class="gc-result-h">チェック結果</h2>
+          <div id="tk-cards"></div>
+          <p class="gc-note">※目安です。用途の区分や床面積の数え方、初回の免除などは建物ごとに異なります。最終的には、所在地の特定行政庁（区市や都）または調査業者に確認してください。</p>
+          <div class="gc-cta">
+            <p>定期調査を頼める業者を探すなら、ロカサポが条件に合う業者を<strong>最大5社ご紹介</strong>します（ご依頼者様は無料）。</p>
+            <div class="gc-cta-btns">
+              <a class="cta-btn-primary" href="/tokushu-kenchiku/" data-track="tk_check_cta">特殊建築物定期調査の業者を探す</a>
+            </div>
+          </div>
+        </div>
+        <script type="application/json" id="tk-regions" set:html={regionsJson} />
+      </section>
+
+      <section id="rules" class="cl-section">
+        <h2>判定のもとになっている決まり</h2>
+        <h3>制度のしくみ（建築基準法第12条）</h3>
+        <ul>
+          <li><strong>誰が報告するか</strong>：建物の所有者（所有者と管理者が別のときは管理者）</li>
+          <li><strong>誰が調査するか</strong>：一級建築士、二級建築士、または建築物調査員（特定建築物調査員）</li>
+          <li><strong>報告先</strong>：特定行政庁（東京都内では都または区市。報告の窓口は案内に従う）</li>
+          <li><strong>罰則</strong>：報告をしない、または虚偽の報告をした場合は100万円以下の罰金（第101条第1項第2号）</li>
+        </ul>
+        <p>対象の建物は、国が政令で定めたもの（建築基準法施行令第16条）に、特定行政庁が独自に指定したものを加えて決まります。そのため、<strong>同じ用途・規模でも、所在地によって対象かどうかや報告時期が変わります</strong>。</p>
+
+        <h3>東京都の報告時期（東京都都市整備局の一覧より）</h3>
+        <div class="cl-table-wrap">
+          <table class="cl-table">
+            <thead><tr><th>主な用途（用途コード）</th><th>報告時期</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">劇場・集会場・地下街、大規模なホテル・物販店（11〜15）</th><td>毎年 11月1日〜翌年1月31日</td></tr>
+              <tr><th scope="row">病院・ホテル・福祉施設・学校・体育館など（21〜24、28）</th><td>3年ごと 5月1日〜10月31日（令和元年・4年・7年…）</td></tr>
+              <tr><th scope="row">物販店・飲食店・複合用途・事務所（31〜34）</th><td>3年ごと 5月1日〜10月31日（令和2年・5年・8年…）</td></tr>
+              <tr><th scope="row">共同住宅・寄宿舎（40・41）</th><td>3年ごと 5月1日〜10月31日（令和3年・6年・9年…）</td></tr>
+              <tr><th scope="row">建築設備・昇降機</th><td>毎年</td></tr>
+              <tr><th scope="row">防火設備</th><td>毎年（おおむね6か月〜1年の間隔）</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="cl-note">※用途ごとの規模の条件は、<a href="https://www.toshiseibi.metro.tokyo.lg.jp/kenchiku_kaihatsu/kenchiku_kakunin/chousa-houkoku/3" rel="noopener" target="_blank">東京都都市整備局の一覧</a>で確認できます。</p>
+
+        <h3>東京都以外の地域</h3>
+        <p>神奈川・埼玉・愛知・大阪・福岡では、県と政令市などがそれぞれ特定行政庁として対象と時期を定めています。たとえば横浜市は、対象用途が入っていない事務所・共同住宅を報告の対象にしていません。所在地の特定行政庁の案内を確認してください（上のチェックで都道府県を選ぶと、公式ページのリンクが出ます）。</p>
+        <p>法令や調査の中身は<a href="/column/tokushu-kenchiku-horei-gimu/">特殊建築物定期調査の法令義務ガイド</a>でも解説しています。</p>
+      </section>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          {faqItems.map((f) => (
+            <div class="cl-faq-item"><dt>{f.q}</dt><dd>{f.a}</dd></div>
+          ))}
+        </dl>
+      </section>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連コラム・サービス</h2>
+        <ul>
+          <li><a href="/tokushu-kenchiku/">特殊建築物定期調査の業者を探す</a></li>
+          <li><a href="/column/tokushu-kenchiku-horei-gimu/">特殊建築物定期調査の法令義務ガイド</a></li>
+          <li><a href="/column/shobo-setsubi-gimu-check/">消防点検の義務チェック｜用途と面積で分かる点検・報告の頻度と資格の要否</a></li>
+          <li><a href="/shutter/">シャッター・防火設備の点検業者を探す</a></li>
+          <li><a href="/elevator-hoshu/">エレベーター保守点検の業者を探す</a></li>
+        </ul>
+      </aside>
+
+      <p class="cl-note">出典：<a href="https://laws.e-gov.go.jp/law/325AC0000000201" rel="noopener" target="_blank">建築基準法（e-Gov法令検索）</a>／<a href="https://laws.e-gov.go.jp/law/325CO0000000338" rel="noopener" target="_blank">建築基準法施行令</a>／<a href="https://www.toshiseibi.metro.tokyo.lg.jp/kenchiku_kaihatsu/kenchiku_kakunin/chousa-houkoku/3" rel="noopener" target="_blank">東京都都市整備局「定期報告対象建築物・建築設備等及び報告時期一覧」</a>／<a href="https://www.city.yokohama.lg.jp/business/bunyabetsu/kenchiku/tetsuduki/teikihoukoku/seido/03.html" rel="noopener" target="_blank">横浜市「報告対象建築物・昇降機等」</a>（いずれも2026年9月確認）</p>
+    </div>
+  </article>
+</BaseLayout>
+
+<script>
+  type Level = 'must' | 'check' | 'none';
+  interface Card { title: string; level: Level; badge: string; lines: string[] }
+  const form = document.getElementById('tk-form') as HTMLFormElement;
+  const result = document.getElementById('tk-result') as HTMLElement;
+  const cards = document.getElementById('tk-cards') as HTMLElement;
+  const regions = JSON.parse((document.getElementById('tk-regions') as HTMLElement).textContent || '{}') as Record<string, { name: string; url: string }[]>;
+  const $ = (id: string) => document.getElementById(id) as HTMLInputElement | HTMLSelectElement;
+  const radio = (n: string) => (form.querySelector<HTMLInputElement>(`input[name="${n}"]:checked`)?.value ?? '');
+  const num = (id: string) => { const v = ($(id) as HTMLInputElement).value; return v === '' ? null : Number(v); };
+
+  // 用途ごとに聞く項目
+  const FIELDS: Record<string, string[]> = {
+    hotel: ['area', 'floors', 'base', 'f3', 'a2', 'ev'],
+    shop: ['area', 'floors', 'base', 'f3', 'a2', 'ev'],
+    food: ['area', 'floors', 'base', 'f3', 'a2', 'ev'],
+    hospital: ['area', 'floors', 'base', 'f3', 'a2', 'ev'],
+    welfareIn: ['area', 'floors', 'base', 'f3', 'a2', 'ev'],
+    welfareOut: ['area', 'floors', 'f3', 'ev'],
+    elderlyApt: ['area', 'floors', 'base', 'f3', 'a2', 'ev'],
+    apartment: ['area', 'floors', 'f5', 'ev'],
+    office: ['area', 'floors', 'f3', 'nobe', 'ev'],
+    school: ['area', 'floors', 'f3', 'ev'],
+    gym: ['area', 'floors', 'f3', 'ev'],
+    othersUse: [],
+  };
+  // 3年ごとの報告グループ（東京都）：基準年
+  const GROUP_BASE: Record<string, number> = { A: 2019, B: 2020, C: 2021 };
+
+  function nextReport(group: string): string {
+    const now = new Date();
+    const y = now.getFullYear();
+    const base = GROUP_BASE[group];
+    let next = y;
+    while ((next - base) % 3 !== 0) next++;
+    const deadline = new Date(next, 9, 31, 23, 59);
+    if (next === y && now > deadline) next += 3;
+    const reiwa = next - 2018;
+    return `${next}年（令和${reiwa}年）5月1日〜10月31日`;
+  }
+
+  function toggle() {
+    const pref = $('tk-pref').value;
+    const use = $('tk-use').value;
+    form.querySelectorAll<HTMLElement>('[data-when="tokyo"]').forEach((el) => { el.hidden = pref !== 'tokyo'; });
+    const fields = pref === 'tokyo' && use ? FIELDS[use] ?? [] : [];
+    form.querySelectorAll<HTMLElement>('[data-when="tokyoUse"]').forEach((el) => { el.hidden = !fields.includes(el.dataset.field || ''); });
+    // 表示中の設問だけ番号を振り直す
+    let n = 1;
+    form.querySelectorAll<HTMLElement>('.gc-q').forEach((el) => {
+      if (el.hidden) return;
+      const num = el.querySelector('.gc-num'); if (num) num.textContent = String(n++);
+    });
+  }
+
+  function linksHtml(pref: string): string {
+    const list = regions[pref] ?? regions.other;
+    return list.map((l) => `<a href="${l.url}" target="_blank" rel="noopener">${l.name}</a>`).join('<br />');
+  }
+
+  function judge(): Card[] | null {
+    const pref = $('tk-pref').value;
+    if (!pref) return null;
+    if (pref !== 'tokyo') {
+      const lines = [
+        '東京都以外では、対象の建物と報告時期を所在地の特定行政庁（県・政令市など）が決めています。次の公式ページで確認してください。',
+        linksHtml(pref),
+      ];
+      if (pref === 'kanagawa') lines.push('横浜市では、報告対象の用途が入っていない事務所・共同住宅は、定期報告の対象になりません。');
+      lines.push('多くの特定行政庁で、建物は3年ごと（用途によっては毎年）、建築設備・防火設備・昇降機は毎年の報告です。');
+      return [{ title: '特殊建築物定期調査', level: 'check', badge: '所在地の案内で確認', lines }];
+    }
+    const use = $('tk-use').value;
+    if (!use) return null;
+    if (use === 'othersUse') {
+      return [{ title: '特殊建築物定期調査', level: 'check', badge: '一覧で確認', lines: [
+        '劇場・映画館・集会場・地下街・複合用途の建物は条件が細かいため、東京都都市整備局の一覧で確認してください。',
+        linksHtml('tokyo_list'),
+      ] }];
+    }
+    const fields = FIELDS[use];
+    const A = num('tk-area'); const n = num('tk-floors');
+    if (A === null || n === null) return null;
+    const need = (f: string) => fields.includes(f);
+    const base = radio('base') === 'yes', f3 = radio('f3') === 'yes', f5 = radio('f5') === 'yes';
+    if ((need('base') && !radio('base')) || (need('f3') && !radio('f3')) || (need('f5') && !radio('f5')) || !radio('ev')) return null;
+    const a2 = need('a2') ? num('tk-a2') : 0; if (a2 === null) return null;
+    const nobe = need('nobe') ? num('tk-nobe') : 0; if (nobe === null) return null;
+
+    // 階の条件は、用途の部分が200㎡以下なら階数3以上の建物に限る（東京都一覧 注意1）
+    const fl = (flag: boolean) => flag && (A > 200 || n >= 3);
+    const hiraExempt = n === 1 && A < 500; // 平家建てで500㎡未満は面積要件から除く
+    let hit: { code: string; annual: boolean; group?: string } | null = null;
+    switch (use) {
+      case 'hotel':
+        if (fl(f3) && A > 2000) hit = { code: '13', annual: true };
+        else if (fl(base) || fl(f3) || a2 >= 300 || (A > 300 && !hiraExempt)) hit = { code: '22', annual: false, group: 'A' };
+        break;
+      case 'shop':
+        if (fl(f3) && A > 3000) hit = { code: '14', annual: true };
+        else if (fl(base) || fl(f3) || a2 >= 500 || A > 500) hit = { code: '31', annual: false, group: 'B' };
+        break;
+      case 'food':
+        if (fl(base) || fl(f3) || a2 >= 500 || A > 500) hit = { code: '32', annual: false, group: 'B' };
+        break;
+      case 'hospital': case 'welfareIn':
+        if (fl(base) || fl(f3) || a2 >= 300 || (A > 300 && !hiraExempt)) hit = { code: '22', annual: false, group: 'A' };
+        break;
+      case 'welfareOut':
+        if (fl(f3) || (A > 300 && !hiraExempt)) hit = { code: '21', annual: false, group: 'A' };
+        break;
+      case 'elderlyApt':
+        if (fl(base) || fl(f3) || a2 >= 300) hit = { code: '41', annual: false, group: 'C' };
+        break;
+      case 'apartment':
+        if (fl(f5) && A > 1000) hit = { code: '40', annual: false, group: 'C' };
+        break;
+      case 'office':
+        if (n >= 5 && nobe > 2000 && fl(f3) && A > 1000) hit = { code: '34', annual: false, group: 'B' };
+        break;
+      case 'school':
+        if (fl(f3) || A > 2000) hit = { code: '23', annual: false, group: 'A' };
+        break;
+      case 'gym':
+        if (fl(f3) || A >= 2000) hit = { code: '24', annual: false, group: 'A' };
+        break;
+    }
+
+    const out: Card[] = [];
+    if (hit) {
+      out.push({ title: '特殊建築物定期調査', level: 'must', badge: '対象', lines: [
+        `東京都の一覧で<strong>用途コード${hit.code}</strong>に当たります。`,
+        hit.annual ? '報告：<strong>毎年</strong>（11月1日〜翌年1月31日）' : `報告：<strong>3年ごと</strong>。次の報告期間は<strong>${nextReport(hit.group!)}</strong>`,
+        '調査できるのは、一級建築士・二級建築士・特定建築物調査員です。',
+        '新築の建物は、検査済証の交付を受けた直後の報告時期は報告不要です（初回の免除）。',
+      ] });
+      out.push({ title: '建築設備・防火設備', level: 'must', badge: '毎年', lines: [
+        '特定建築物に当たる建物に設けた換気設備（機械換気）・排煙設備（排煙機等があるもの）・非常用の照明装置・給排水設備（給水タンク等があるもの）は、<strong>毎年</strong>の検査報告の対象です。',
+        '随時閉鎖・作動する防火設備（防火シャッター・防火扉など。防火ダンパーを除く）も、<strong>毎年</strong>の検査報告の対象です。',
+      ] });
+    } else {
+      out.push({ title: '特殊建築物定期調査', level: 'none', badge: '対象外の見込み', lines: [
+        '入力した用途・規模では、東京都の一覧の条件に当たりません。',
+        '複合ビルの場合は、ほかの用途や「複合用途建築物（コード28・33）」の条件も確認してください。',
+      ] });
+      if ((use === 'hospital' || use === 'welfareIn' || use === 'elderlyApt') && A > 200) {
+        out.push({ title: '防火設備', level: 'must', badge: '毎年', lines: [
+          '病院・有床診療所、または高齢者・障害者等の就寝用の用途で、その部分が200㎡を超える建物に設けた防火設備（防火シャッター・防火扉など）は、特定建築物に当たらなくても<strong>毎年</strong>の検査報告の対象です。',
+        ] });
+      }
+    }
+    if (radio('ev') === 'yes') {
+      out.push({ title: '昇降機', level: 'must', badge: '毎年', lines: [
+        'エレベーター・エスカレーターは、建物の用途にかかわらず<strong>毎年</strong>の検査報告の対象です（住戸内だけを昇降するものなどを除く）。',
+      ] });
+    }
+    return out;
+  }
+
+  // 東京都の一覧へのリンク（その他の用途用）
+  regions.tokyo_list = [{ name: '東京都都市整備局「定期報告対象建築物・建築設備等及び報告時期一覧」', url: 'https://www.toshiseibi.metro.tokyo.lg.jp/kenchiku_kaihatsu/kenchiku_kakunin/chousa-houkoku/3' }];
+
+  function render() {
+    toggle();
+    const res = judge();
+    if (!res) { result.hidden = true; return; }
+    cards.innerHTML = res.map((c) => `
+      <div class="gc-card gc-card--${c.level}">
+        <div class="gc-card-head"><span class="gc-card-title">${c.title}</span><span class="gc-badge">${c.badge}</span></div>
+        <ul>${c.lines.map((l) => `<li>${l}</li>`).join('')}</ul>
+      </div>`).join('');
+    result.hidden = false;
+  }
+  form.addEventListener('change', render);
+  form.addEventListener('input', render);
+  toggle();
+</script>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; flex-wrap: wrap; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-author-link { color: #fff; text-decoration: underline; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-section a { color: var(--blue); text-decoration: underline; }
+.cl-note { font-size: .82rem; color: var(--gray-500); }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-callout li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-quickanswer { background: #eef6ff; border: 1.5px solid #1a56db; border-radius: 10px; padding: 18px 22px; margin-bottom: 32px; }
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+.gc-tool { background: #fff; border: 2px solid var(--blue); border-radius: 14px; padding: 24px 26px; margin-bottom: 48px; }
+.gc-tool-h { font-size: 1.15rem; font-weight: 900; color: var(--gray-900); margin-bottom: 18px; }
+.gc-form { display: grid; gap: 18px; }
+.gc-q { border: 0; padding: 0 0 16px; margin: 0; border-bottom: 1px solid var(--gray-200); min-width: 0; }
+.gc-q[hidden] { display: none; }
+.gc-label { display: flex; gap: 8px; align-items: flex-start; font-size: .95rem; font-weight: 800; color: var(--gray-900); line-height: 1.6; margin-bottom: 6px; padding: 0; }
+.gc-num { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: var(--blue); color: #fff; font-size: .75rem; margin-top: 2px; }
+.gc-hint { font-size: .8rem; color: var(--gray-500); line-height: 1.7; margin: 0 0 8px; }
+.gc-select { width: 100%; max-width: 100%; font-size: .95rem; padding: 10px 12px; border: 1.5px solid var(--gray-300, #d1d5db); border-radius: 8px; background: #fff; }
+.gc-opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.gc-opts label { display: inline-flex; align-items: center; gap: 6px; border: 1.5px solid var(--gray-200); border-radius: 8px; padding: 9px 14px; font-size: .9rem; cursor: pointer; background: #fff; }
+.gc-opts label:has(input:checked) { border-color: var(--blue); background: var(--blue-light); font-weight: 700; }
+.gc-result { margin-top: 24px; }
+.gc-result-h { font-size: 1.1rem; font-weight: 900; color: var(--gray-900); margin-bottom: 14px; }
+:global(.gc-card) { border-radius: 10px; padding: 16px 18px; margin-bottom: 12px; border-left: 5px solid; }
+:global(.gc-card--must) { background: #fff7ed; border-left-color: #ea580c; }
+:global(.gc-card--check) { background: #fefce8; border-left-color: #ca8a04; }
+:global(.gc-card--none) { background: #f0fdf4; border-left-color: #16a34a; }
+:global(.gc-card-head) { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 8px; }
+:global(.gc-card-title) { font-weight: 900; font-size: 1rem; color: var(--gray-900); }
+:global(.gc-badge) { font-size: .8rem; font-weight: 800; padding: 3px 10px; border-radius: 99px; white-space: nowrap; color: #fff; }
+:global(.gc-card--must .gc-badge) { background: #ea580c; }
+:global(.gc-card--check .gc-badge) { background: #ca8a04; }
+:global(.gc-card--none .gc-badge) { background: #16a34a; }
+:global(.gc-card ul) { margin: 0; padding-left: 18px; }
+:global(.gc-card li) { font-size: .9rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.gc-note { font-size: .78rem; color: var(--gray-500); line-height: 1.7; margin: 8px 0 18px; }
+.gc-cta { background: var(--gray-100); border-radius: 10px; padding: 18px 20px; text-align: center; }
+.gc-cta p { font-size: .9rem; margin-bottom: 12px; color: var(--gray-800); }
+.gc-cta-btns { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; align-items: center; }
+.gc-cta-sub { font-size: .9rem; color: var(--blue); text-decoration: underline; font-weight: 700; }
+.gc-cta-sub[hidden] { display: none; }
+@media (max-width: 600px) { .gc-tool { padding: 18px 14px; } .gc-opts label { padding: 8px 11px; font-size: .86rem; } }
+@media (max-width: 600px) { .cl-header { padding: 32px 0 28px; } .cl-body { padding: 28px 16px 48px; } .cl-section h2 { font-size: 1.15rem; } .cl-cta { padding: 28px 18px; } }
+</style>

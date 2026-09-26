@@ -307,6 +307,13 @@ const data: ServiceData = {
 
   relatedColumns: [
     {
+      href: '/column/tokushu-kenchiku-gimu-check/',
+      category: '法令・義務',
+      title: '特殊建築物定期調査の対象チェック｜東京都の用途・規模・報告時期が分かる',
+      excerpt: '用途・床面積・階数を選ぶだけで、定期調査の対象か、報告は毎年か3年ごとか、次の報告時期が分かる無料チェック。',
+      date: '2026-09-26',
+    },
+    {
       href: '/column/tokushu-kenchiku-horei-gimu/',
       category: '法令・義務',
       title: '特定建築物（特殊建築物）定期調査報告ガイド｜建築基準法第12条と所有者責任',
