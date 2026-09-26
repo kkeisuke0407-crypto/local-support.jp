@@ -14,7 +14,7 @@ export const prerender = true;
 const FEATURED_COLUMNS = [
   { slug: 'shisetsu-kanri-nenkan-schedule', title: '施設管理の年間スケジュール2026｜主要な法定点検カレンダー' },
   { slug: 'jusuisou-seisou-horei-gimu', title: '受水槽清掃の法定義務ガイド｜水道法・建築物衛生法' },
-  { slug: 'jusuisou-seisou-hiyo-sohba', title: '受水槽清掃の費用相場2026｜規模別の完全ガイド' },
+  { slug: 'jusuisou-seisou-hiyo-sohba', title: '受水槽清掃の費用相場｜公開料金表で見る容量別の目安と追加費用' },
   { slug: 'jusuisou-seisou-gyosha-sentaku', title: '受水槽清掃の業者選びチェックリスト' },
   { slug: 'jusuisou-seisou-suishitsu-kensa', title: '受水槽清掃の水質検査ガイド｜検査項目・義務・清掃後検査' },
   { slug: 'jusuisou-seisou-tenken', title: '受水槽の点検・法定検査ガイド｜簡易専用水道検査と清掃の違い' },
