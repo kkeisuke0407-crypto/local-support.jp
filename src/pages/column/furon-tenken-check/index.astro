@@ -1,0 +1,340 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { site } from '../../../data/site';
+
+const title = 'フロン点検の区分チェック｜簡易点検・定期点検の頻度が機器の出力で分かる';
+const description = '業務用エアコン・冷凍冷蔵機器の種類と圧縮機の定格出力を選ぶだけで、フロン排出抑制法の簡易点検（3か月ごと）に加えて定期点検が必要か、1年ごとか3年ごとかが分かる無料チェックです。記録の保存期間や罰則もあわせて整理しています。';
+const canonical = `${site.domain}/column/furon-tenken-check/`;
+const published = '2026-09-26';
+const modified = '2026-09-26';
+
+const faqItems = [
+  {
+    q: 'フロン点検が必要な機器は？',
+    a: '業務用のエアコンと冷凍冷蔵機器（第一種特定製品）です。すべての機器で3か月に1回以上の簡易点検が必要で、圧縮機に用いる電動機の定格出力が7.5kW以上の機器は、定期点検も必要です。家庭用として製造・販売されたエアコンは対象外です。',
+  },
+  {
+    q: '定期点検の頻度は？',
+    a: '冷凍冷蔵機器は定格出力7.5kW以上で1年に1回以上、エアコンは50kW以上で1年に1回以上、7.5kW以上50kW未満で3年に1回以上です（環境省・経済産業省の説明資料による）。',
+  },
+  {
+    q: '簡易点検は誰がやってもいいのですか？',
+    a: '簡易点検は、実施する人の限定はありません。機器の外観の損傷・腐食・油にじみ、異音・異常振動などを目で見て確認し、実施日を記録します。定期点検は、フロン類や機器について十分な知見を持つ人（冷媒フロン類取扱技術者など）が行うか、立ち会う必要があります。',
+  },
+  {
+    q: '点検の記録はいつまで保存しますか？',
+    a: '機器を廃棄するためにフロン類を引き渡した日から3年間保存します。整備の際に、整備業者などから求められたら記録を見せる必要があります。',
+  },
+  {
+    q: '点検をしないと罰則はありますか？',
+    a: '管理の状況が判断の基準に照らして著しく不十分な場合、都道府県知事から指導・助言、勧告、公表を経て命令を受けることがあり、命令に違反すると50万円以下の罰金の対象になります（フロン排出抑制法第18条・第104条）。',
+  },
+];
+
+const breadcrumbLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${site.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'コラム', item: `${site.domain}/column/` },
+    { '@type': 'ListItem', position: 3, name: 'フロン点検の区分チェック', item: canonical },
+  ],
+});
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'Article',
+  headline: title, description, datePublished: published, dateModified: modified,
+  inLanguage: 'ja-JP', url: canonical, mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  articleSection: 'フロン点検',
+  keywords: 'フロン点検,簡易点検,定期点検,フロン排出抑制法,7.5kW,50kW,業務用エアコン,冷凍冷蔵機器,第一種特定製品,チェック',
+  author: { '@type': 'Organization', name: site.author.name, url: site.domain + '/author/' },
+  publisher: { '@id': `${site.domain}/#organization` },
+  image: { '@type': 'ImageObject', url: `${site.domain}/og-furon-tenken.png`, width: 1200, height: 630 },
+  citation: [
+    { '@type': 'Legislation', name: 'フロン類の使用の合理化及び管理の適正化に関する法律', url: 'https://laws.e-gov.go.jp/law/413AC1000000064' },
+    { '@type': 'CreativeWork', name: '環境省・経済産業省 改正フロン法の概要（第一種特定製品の管理者）令和4年度説明会資料', url: 'https://www.env.go.jp/earth/furon/files/r04_kanrisya_rev.pdf' },
+  ],
+});
+const appLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'WebApplication',
+  name: 'フロン点検の区分チェック', url: canonical,
+  applicationCategory: 'BusinessApplication', operatingSystem: 'All', inLanguage: 'ja-JP', isAccessibleForFree: true,
+  offers: { '@type': 'Offer', price: 0, priceCurrency: 'JPY' },
+  description: '業務用エアコン・冷凍冷蔵機器の種類と定格出力から、フロン排出抑制法の簡易点検・定期点検の頻度を判定する無料ツール。',
+  publisher: { '@id': `${site.domain}/#organization` },
+});
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: faqItems.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+});
+---
+<BaseLayout ogType="article" publishedTime={published} modifiedTime={modified} title={title} description={description} canonical={canonical} siteName={site.name} logoSub="施設管理の一括見積比較" jsonLdBlocks={[breadcrumbLd, articleLd, appLd, faqLd]}>
+  <article class="cl-article">
+    <header class="cl-header">
+      <div class="sd-container">
+        <nav class="cl-crumbs" aria-label="パンくず">
+          <a href="/">トップ</a><span aria-hidden="true">›</span>
+          <a href="/column/">コラム</a><span aria-hidden="true">›</span>
+          <span>フロン点検の区分チェック</span>
+        </nav>
+        <span class="cl-cat">フロン点検</span>
+        <h1 class="cl-title">フロン点検の区分チェック｜簡易点検・定期点検の頻度が機器の出力で分かる</h1>
+        <p class="cl-lead">
+          「このエアコンは定期点検が必要？」「1年ごと？3年ごと？」。機器の種類と圧縮機の定格出力を選ぶだけで、<strong>フロン排出抑制法の簡易点検・定期点検が何か月・何年ごとに必要か</strong>が分かります。
+        </p>
+        <div class="cl-meta">
+          <time datetime={published}>公開：2026年9月26日</time>
+          <span>最終更新：2026年9月26日</span>
+          <span>執筆：<a href="/author/" class="cl-author-link">{site.author.name}</a></span>
+        </div>
+      </div>
+    </header>
+
+    <div class="sd-container cl-body">
+      <div class="cl-quickanswer">
+        <p class="cl-qa-q">Q. フロン点検はどの機器に、どのくらいの頻度で必要？</p>
+        <p class="cl-qa-a">A. <strong>業務用のエアコン・冷凍冷蔵機器はすべて、3か月に1回以上の簡易点検が必要です。</strong>さらに圧縮機の定格出力が7.5kW以上なら定期点検も必要で、冷凍冷蔵機器とエアコン50kW以上は1年に1回以上、エアコン7.5kW以上50kW未満は3年に1回以上です。</p>
+        <p class="cl-qa-src">※フロン排出抑制法、環境省・経済産業省の説明資料にもとづく整理（2026年9月確認）。</p>
+      </div>
+
+      <section id="check" class="gc-tool" aria-label="フロン点検の区分チェック">
+        <h2 class="gc-tool-h">機器について選んでください</h2>
+        <form id="fr-form" class="gc-form" onsubmit="return false;">
+          <fieldset class="gc-q">
+            <legend class="gc-label"><span class="gc-num">1</span>機器の種類</legend>
+            <div class="gc-opts">
+              <label><input type="radio" name="kind" value="ac" />業務用エアコン（空調）</label>
+              <label><input type="radio" name="kind" value="ref" />冷凍冷蔵機器（ショーケース・冷凍庫・チラーなど）</label>
+              <label><input type="radio" name="kind" value="home" />家庭用エアコン</label>
+            </div>
+          </fieldset>
+          <fieldset class="gc-q" data-when="biz">
+            <legend class="gc-label"><span class="gc-num">2</span>圧縮機に用いる電動機の定格出力</legend>
+            <p class="gc-hint">室外機の銘板や機器の仕様書に書かれています。「冷房能力（kW）」とは別の数値です。</p>
+            <div class="gc-opts">
+              <label><input type="radio" name="kw" value="lt7.5" />7.5kW未満</label>
+              <label><input type="radio" name="kw" value="7.5to50" />7.5kW以上50kW未満</label>
+              <label><input type="radio" name="kw" value="ge50" />50kW以上</label>
+              <label><input type="radio" name="kw" value="unknown" />分からない</label>
+            </div>
+          </fieldset>
+        </form>
+
+        <div id="fr-result" class="gc-result" aria-live="polite" hidden>
+          <h2 class="gc-result-h">チェック結果</h2>
+          <div id="fr-cards"></div>
+          <p class="gc-note">※目安です。機器が第一種特定製品に当たるかや出力の確認方法は、機器のメーカーや点検業者、都道府県のフロン担当窓口に確認してください。</p>
+          <div class="gc-cta">
+            <p>定期点検を頼める業者を探すなら、ロカサポが条件に合う業者を<strong>最大5社ご紹介</strong>します（ご依頼者様は無料）。</p>
+            <div class="gc-cta-btns"><a class="cta-btn-primary" href="/furon-tenken/" data-track="fr_check_cta">フロン点検の業者を探す</a></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="rules" class="cl-section">
+        <h2>判定のもとになっている決まり</h2>
+        <div class="cl-table-wrap">
+          <table class="cl-table fr-table">
+            <thead><tr><th>点検の種類</th><th>対象の機器</th><th>頻度</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">簡易点検</th><td>すべての業務用エアコン・冷凍冷蔵機器</td><td>3か月に1回以上</td></tr>
+              <tr><th scope="row">定期点検</th><td>冷凍冷蔵機器：定格出力7.5kW以上</td><td>1年に1回以上</td></tr>
+              <tr><th scope="row">定期点検</th><td>エアコン：定格出力50kW以上</td><td>1年に1回以上</td></tr>
+              <tr><th scope="row">定期点検</th><td>エアコン：定格出力7.5kW以上50kW未満</td><td>3年に1回以上</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li><strong>簡易点検</strong>：実施者の限定なし。外観の損傷・腐食・油にじみ、異音・異常振動、冷凍冷蔵機器は庫内温度や霜付きなどを確認し、実施日を記録します。基準に合う常時監視システムを使う場合は、簡易点検に代えられます</li>
+          <li><strong>定期点検</strong>：十分な知見を持つ人（冷媒フロン類取扱技術者など）が自ら行うか立ち会い、直接法・間接法で漏えいの有無を検査します</li>
+          <li><strong>次の点検の時期</strong>：前回の点検日の属する月の翌月1日から数えて、それぞれの期間内に行います</li>
+          <li><strong>記録の保存</strong>：点検・修理・充塡・回収の記録を、機器を廃棄するためにフロン類を引き渡した日から3年間保存します</li>
+          <li><strong>漏えいが見つかったら</strong>：修理しないままのフロン類の充塡は原則禁止。できるだけ早く漏えい箇所を特定し、修理します</li>
+          <li><strong>漏えい量の報告</strong>：会社全体のフロン類の算定漏えい量が年間1,000t-CO2以上の場合は、国への報告が必要です</li>
+        </ul>
+        <p>制度の詳しい解説は<a href="/column/furon-tenken-horei-gimu/">フロン点検の法定義務ガイド</a>、業務用エアコンの点検の進め方は<a href="/column/aircon-business-furon-tenken/">業務用エアコンのフロン点検</a>で紹介しています。</p>
+      </section>
+
+      <section id="faq" class="cl-section">
+        <h2>よくある質問</h2>
+        <dl class="cl-faq">
+          {faqItems.map((f) => (<div class="cl-faq-item"><dt>{f.q}</dt><dd>{f.a}</dd></div>))}
+        </dl>
+      </section>
+
+      <aside class="cl-related">
+        <h2 class="cl-related-h">関連コラム・サービス</h2>
+        <ul>
+          <li><a href="/furon-tenken/">フロン点検の業者を探す</a></li>
+          <li><a href="/column/furon-tenken-horei-gimu/">フロン点検の法定義務ガイド</a></li>
+          <li><a href="/column/aircon-business-furon-tenken/">業務用エアコンのフロン点検</a></li>
+          <li><a href="/aircon-business/">業務用エアコン洗浄・修理の業者を探す</a></li>
+          <li><a href="/reito-reizou/">業務用冷凍冷蔵設備のメンテナンス業者を探す</a></li>
+        </ul>
+      </aside>
+
+      <p class="cl-note">出典：<a href="https://laws.e-gov.go.jp/law/413AC1000000064" rel="noopener" target="_blank">フロン類の使用の合理化及び管理の適正化に関する法律（e-Gov法令検索）</a>／<a href="https://www.env.go.jp/earth/furon/files/r04_kanrisya_rev.pdf" rel="noopener" target="_blank">環境省・経済産業省「改正フロン法の概要 ～第一種特定製品の管理者～」（令和4年度説明会資料）</a>（いずれも2026年9月確認）</p>
+    </div>
+  </article>
+</BaseLayout>
+
+<script>
+  type Level = 'must' | 'check' | 'none';
+  interface Card { title: string; level: Level; badge: string; lines: string[] }
+  const form = document.getElementById('fr-form') as HTMLFormElement;
+  const result = document.getElementById('fr-result') as HTMLElement;
+  const cards = document.getElementById('fr-cards') as HTMLElement;
+  const radio = (n: string) => form.querySelector<HTMLInputElement>(`input[name="${n}"]:checked`)?.value ?? '';
+
+  function toggle(kind: string) {
+    form.querySelectorAll<HTMLElement>('[data-when="biz"]').forEach((el) => { el.hidden = !(kind === 'ac' || kind === 'ref'); });
+  }
+
+  function judge(): Card[] | null {
+    const kind = radio('kind');
+    if (!kind) return null;
+    if (kind === 'home') {
+      return [{ title: 'フロン点検', level: 'none', badge: '対象外', lines: [
+        '家庭用として製造・販売されたエアコンは、事務所や店舗で使っていても、フロン排出抑制法の点検義務の対象（第一種特定製品）ではありません。',
+        '廃棄するときは、家電リサイクル法にもとづいて処理します。',
+      ] }];
+    }
+    const kw = radio('kw');
+    if (!kw) return null;
+    const out: Card[] = [{ title: '簡易点検', level: 'must', badge: '3か月に1回以上', lines: [
+      'すべての業務用エアコン・冷凍冷蔵機器が対象です。実施する人の限定はありません。',
+      '外観の損傷・腐食・油にじみ、異音・異常振動' + (kind === 'ref' ? '、庫内の温度、熱交換器の霜付き' : '') + 'などを確認し、実施日を記録します。',
+    ] }];
+    if (kw === 'unknown') {
+      out.push({ title: '定期点検', level: 'check', badge: '出力を確認', lines: [
+        kind === 'ref' ? '冷凍冷蔵機器は、圧縮機の定格出力が7.5kW以上なら1年に1回以上の定期点検が必要です。' : 'エアコンは、圧縮機の定格出力が50kW以上なら1年に1回以上、7.5kW以上50kW未満なら3年に1回以上の定期点検が必要です。',
+        '定格出力は、室外機の銘板や仕様書で確認できます。冷房能力とは別の数値なので注意してください。',
+      ] });
+    } else if (kw === 'lt7.5') {
+      out.push({ title: '定期点検', level: 'none', badge: '不要', lines: ['定格出力が7.5kW未満のため、定期点検の義務はありません（簡易点検は必要です）。'] });
+    } else {
+      const annual = kind === 'ref' || kw === 'ge50';
+      out.push({ title: '定期点検', level: 'must', badge: annual ? '1年に1回以上' : '3年に1回以上', lines: [
+        annual ? `${kind === 'ref' ? '冷凍冷蔵機器で定格出力7.5kW以上' : 'エアコンで定格出力50kW以上'}のため、<strong>1年に1回以上</strong>の定期点検が必要です。` : 'エアコンで定格出力7.5kW以上50kW未満のため、<strong>3年に1回以上</strong>の定期点検が必要です。',
+        '十分な知見を持つ人（冷媒フロン類取扱技術者など）が自ら行うか立ち会い、直接法・間接法で漏えいの有無を検査します。',
+      ] });
+    }
+    out.push({ title: '記録と保存', level: 'must', badge: '必要', lines: [
+      '点検・修理・充塡・回収の記録を作り、機器を廃棄するためにフロン類を引き渡した日から<strong>3年間</strong>保存します。',
+      '漏えいが見つかったら、修理しないままのフロン類の充塡は原則禁止です。',
+    ] });
+    return out;
+  }
+
+  function render() {
+    const kind = radio('kind'); toggle(kind);
+    const res = judge();
+    if (!res) { result.hidden = true; return; }
+    cards.innerHTML = res.map((c) => `
+      <div class="gc-card gc-card--${c.level}">
+        <div class="gc-card-head"><span class="gc-card-title">${c.title}</span><span class="gc-badge">${c.badge}</span></div>
+        <ul>${c.lines.map((l) => `<li>${l}</li>`).join('')}</ul>
+      </div>`).join('');
+    result.hidden = false;
+  }
+  form.addEventListener('change', render);
+  toggle('');
+</script>
+
+<style>
+.cl-header { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 48px 0 40px; }
+.cl-crumbs { display: flex; align-items: center; gap: 6px; font-size: .78rem; margin-bottom: 16px; opacity: .85; flex-wrap: wrap; }
+.cl-crumbs a { color: #fff; text-decoration: none; }
+.cl-crumbs a:hover { text-decoration: underline; }
+.cl-cat { display: inline-block; background: rgba(255,255,255,.2); color: #fff; font-size: .72rem; font-weight: 700; padding: 3px 12px; border-radius: 99px; letter-spacing: .06em; margin-bottom: 14px; }
+.cl-title { font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 900; line-height: 1.45; margin-bottom: 16px; }
+.cl-lead { font-size: .95rem; line-height: 1.85; opacity: .92; max-width: 720px; }
+.cl-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .76rem; opacity: .72; margin-top: 20px; }
+.cl-author-link { color: #fff; text-decoration: underline; }
+.cl-body { padding: 40px 20px 60px; max-width: 860px; }
+.cl-toc { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 40px; }
+.cl-toc-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-toc ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.cl-toc a { color: var(--blue); font-size: .87rem; }
+.cl-section { margin-bottom: 52px; }
+.cl-section h2 { font-size: 1.3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--blue-light); }
+.cl-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--gray-800); margin: 24px 0 12px; }
+.cl-section p { font-size: .93rem; line-height: 1.9; color: var(--gray-700); margin-bottom: 14px; }
+.cl-section ul, .cl-section ol { padding-left: 22px; margin-bottom: 16px; }
+.cl-section li { font-size: .93rem; line-height: 1.85; color: var(--gray-700); margin-bottom: 6px; }
+.cl-section a { color: var(--blue); text-decoration: underline; }
+.cl-note { font-size: .82rem; color: var(--gray-500); }
+.cl-table-wrap { overflow-x: auto; margin: 20px 0 24px; }
+.cl-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+.cl-table caption { caption-side: top; font-size: .78rem; color: var(--gray-500); text-align: left; margin-bottom: 8px; }
+.cl-table th, .cl-table td { padding: 10px 14px; border: 1px solid var(--gray-200); text-align: left; line-height: 1.6; }
+.cl-table thead th { background: var(--blue-light); color: var(--blue-dark); font-weight: 700; }
+.cl-table tbody tr:nth-child(even) { background: #f9fafb; }
+.cl-table tbody th[scope="row"] { background: #f3f4f6; font-weight: 700; white-space: nowrap; }
+.cl-callout { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 20px 0; }
+.cl-callout--warn { background: #fff7ed; border-left-color: #f97316; }
+.cl-callout-h { font-size: .95rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+.cl-callout--warn .cl-callout-h { color: #c2410c; }
+.cl-callout ul { padding-left: 18px; margin: 0; }
+.cl-callout li { font-size: .88rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.cl-faq { display: grid; gap: 20px; }
+.cl-faq-item { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.cl-faq-item dt { background: var(--gray-100); padding: 14px 18px; font-weight: 700; font-size: .93rem; color: var(--gray-900); }
+.cl-faq-item dd { padding: 14px 18px; font-size: .88rem; line-height: 1.85; color: var(--gray-700); margin: 0; }
+.cl-cta { background: linear-gradient(135deg, #1a3a5c 0%, #1a56db 100%); color: #fff; padding: 36px 32px; border-radius: 14px; text-align: center; margin: 48px 0 40px; }
+.cl-cta h2 { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+.cl-cta p { font-size: .9rem; opacity: .9; margin-bottom: 20px; }
+.cta-btn-primary { display: inline-block; background: #f59e0b; color: #1a1a1a; font-weight: 800; font-size: 1rem; padding: 14px 32px; border-radius: 8px; text-decoration: none; }
+.cta-btn-primary:hover { background: #d97706; }
+.cl-related { background: var(--gray-100); border-radius: 10px; padding: 22px 26px; margin-top: 40px; }
+.cl-related-h { font-size: .88rem; font-weight: 800; color: var(--gray-700); margin-bottom: 12px; letter-spacing: .04em; }
+.cl-related ul { padding-left: 18px; margin: 0; display: grid; gap: 8px; }
+.cl-related a { color: var(--blue); text-decoration: underline; font-size: .9rem; }
+.cl-quickanswer { background: #eef6ff; border: 1.5px solid #1a56db; border-radius: 10px; padding: 18px 22px; margin-bottom: 32px; }
+.cl-qa-q { font-size: .9rem; font-weight: 800; color: #1a3a5c; margin: 0 0 8px; }
+.cl-qa-a { font-size: .95rem; line-height: 1.75; color: var(--gray-900); margin: 0 0 8px; }
+.cl-qa-src { font-size: .76rem; color: var(--gray-500); margin: 0; }
+.cl-pref-links { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 22px 26px; margin-bottom: 32px; }
+.cl-pref-h { font-size: .95rem; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+.cl-pref-list { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; }
+.cl-pref-list a { display: block; background: #fff; border: 1px solid var(--gray-200); border-radius: 6px; padding: 7px 12px; font-size: .87rem; color: var(--blue); text-decoration: none; text-align: center; }
+.cl-pref-list a:hover { background: var(--blue-light); }
+.cl-pref-more { font-size: .87rem; margin: 0; }
+.cl-pref-more a { color: var(--blue); text-decoration: underline; }
+.gc-tool { background: #fff; border: 2px solid var(--blue); border-radius: 14px; padding: 24px 26px; margin-bottom: 48px; }
+.gc-tool-h { font-size: 1.15rem; font-weight: 900; color: var(--gray-900); margin-bottom: 18px; }
+.gc-form { display: grid; gap: 18px; }
+.gc-q { border: 0; padding: 0 0 16px; margin: 0; border-bottom: 1px solid var(--gray-200); min-width: 0; }
+.gc-q[hidden] { display: none; }
+.gc-label { display: flex; gap: 8px; align-items: flex-start; font-size: .95rem; font-weight: 800; color: var(--gray-900); line-height: 1.6; margin-bottom: 6px; padding: 0; }
+.gc-num { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: var(--blue); color: #fff; font-size: .75rem; margin-top: 2px; }
+.gc-hint { font-size: .8rem; color: var(--gray-500); line-height: 1.7; margin: 0 0 8px; }
+.gc-select { width: 100%; max-width: 100%; font-size: .95rem; padding: 10px 12px; border: 1.5px solid var(--gray-300, #d1d5db); border-radius: 8px; background: #fff; }
+.gc-opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.gc-opts label { display: inline-flex; align-items: center; gap: 6px; border: 1.5px solid var(--gray-200); border-radius: 8px; padding: 9px 14px; font-size: .9rem; cursor: pointer; background: #fff; }
+.gc-opts label:has(input:checked) { border-color: var(--blue); background: var(--blue-light); font-weight: 700; }
+.gc-result { margin-top: 24px; }
+.gc-result-h { font-size: 1.1rem; font-weight: 900; color: var(--gray-900); margin-bottom: 14px; }
+:global(.gc-card) { border-radius: 10px; padding: 16px 18px; margin-bottom: 12px; border-left: 5px solid; }
+:global(.gc-card--must) { background: #fff7ed; border-left-color: #ea580c; }
+:global(.gc-card--check) { background: #fefce8; border-left-color: #ca8a04; }
+:global(.gc-card--none) { background: #f0fdf4; border-left-color: #16a34a; }
+:global(.gc-card-head) { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 8px; }
+:global(.gc-card-title) { font-weight: 900; font-size: 1rem; color: var(--gray-900); }
+:global(.gc-badge) { font-size: .8rem; font-weight: 800; padding: 3px 10px; border-radius: 99px; white-space: nowrap; color: #fff; }
+:global(.gc-card--must .gc-badge) { background: #ea580c; }
+:global(.gc-card--check .gc-badge) { background: #ca8a04; }
+:global(.gc-card--none .gc-badge) { background: #16a34a; }
+:global(.gc-card ul) { margin: 0; padding-left: 18px; }
+:global(.gc-card li) { font-size: .9rem; line-height: 1.8; color: var(--gray-800); margin-bottom: 4px; }
+.gc-note { font-size: .78rem; color: var(--gray-500); line-height: 1.7; margin: 8px 0 18px; }
+.gc-cta { background: var(--gray-100); border-radius: 10px; padding: 18px 20px; text-align: center; }
+.gc-cta p { font-size: .9rem; margin-bottom: 12px; color: var(--gray-800); }
+.gc-cta-btns { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; align-items: center; }
+.gc-cta-sub { font-size: .9rem; color: var(--blue); text-decoration: underline; font-weight: 700; }
+.gc-cta-sub[hidden] { display: none; }
+.fr-table tbody th[scope="row"] { white-space: normal; }
+.fr-table td:last-child { white-space: nowrap; }
+@media (max-width: 600px) { .gc-tool { padding: 18px 14px; } .gc-opts label { padding: 8px 11px; font-size: .86rem; } }
+.fr-table tbody th[scope="row"] { white-space: normal; }
+.fr-table td:last-child { white-space: nowrap; }
+@media (max-width: 600px) { .cl-header { padding: 32px 0 28px; } .cl-body { padding: 28px 16px 48px; } .cl-section h2 { font-size: 1.15rem; } .cl-cta { padding: 28px 18px; } }
+</style>
