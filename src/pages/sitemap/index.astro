@@ -2,12 +2,16 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { site } from '../../data/site';
 import { allServices } from '../../data/services';
-import { prefecturesData } from '../../data/prefectures';
+import { prefecturesData, PRIMARY_PREFECTURE_SLUGS } from '../../data/prefectures';
 import { serviceCategories, getCategoryHref } from '../../data/serviceCategories';
 
 const title = `サイトマップ｜${site.name}`;
-const description = `${site.name}の全ページ一覧。${allServices.length}サービス×47都道府県のサービスページ、カテゴリページ、コラム記事、運営情報など、サイト内すべてのページを一覧で確認できます。`;
+const description = `${site.name}の全ページ一覧。${allServices.length}サービス、主要エリアの地域別ページ、カテゴリページ、コラム記事、運営情報を一覧で確認できます。`;
 const canonical = `${site.domain}/sitemap/`;
+
+// インデックス対象の県だけ載せる（noindex の県ページへはリンクしない）
+const isIndexed = (svc: { additionalIndexedPrefectures?: string[] }, slug: string) =>
+  (PRIMARY_PREFECTURE_SLUGS as readonly string[]).includes(slug) || (svc.additionalIndexedPrefectures ?? []).includes(slug);
 
 // 地方ブロックでグルーピング
 const regions = [
@@ -105,23 +109,20 @@ const breadcrumbLd = JSON.stringify({
 
       <div class="sm-block">
         <h2 class="sm-h2">都道府県別サービスページ</h2>
-        <p class="sm-note">{allServices.length}サービス×47都道府県のページがあります。各サービスから地域を選択してください。</p>
+        <p class="sm-note">主なエリアの地域別ページです。そのほかの地域も、各サービスのページから全国どこでもご相談いただけます。</p>
 
         {allServices.map((s) => (
           <div class="sm-svc">
             <h3 class="sm-h3"><a href={`/${s.slug}/`}>{s.serviceName}</a></h3>
-            {prefByRegion.map((r) => (
-              <div class="sm-region">
-                <span class="sm-region-label">{r.region}：</span>
-                <span class="sm-region-prefs">
-                  {r.list.map((p, i) => (
-                    <>
-                      <a href={`/${s.slug}/${p.slug}/`}>{p.name}</a>{i < r.list.length - 1 ? '・' : ''}
-                    </>
-                  ))}
-                </span>
-              </div>
-            ))}
+            <div class="sm-region">
+              <span class="sm-region-prefs">
+                {prefecturesData.filter((p) => isIndexed(s, p.slug)).map((p, i, arr) => (
+                  <>
+                    <a href={`/${s.slug}/${p.slug}/`}>{p.name}</a>{i < arr.length - 1 ? '・' : ''}
+                  </>
+                ))}
+              </span>
+            </div>
           </div>
         ))}
       </div>
