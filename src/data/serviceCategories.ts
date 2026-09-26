@@ -21,6 +21,13 @@ export const serviceCategories = [
       { q: '法定点検カテゴリで最初に確認すべきことは何ですか？', a: '自施設が法令上の点検対象か、点検頻度は年1回・月次・3年ごとか、報告書の提出先はどこかを確認します。対象判定が曖昧な場合は、資格者に現地確認を依頼するのが安全です。' },
       { q: '法定点検は一括で依頼できますか？', a: '消防設備点検、防火対象物点検、特殊建築物調査、エレベーター保守などは、対応できる会社が異なります。ただし窓口をまとめられる業者や管理会社向けの一括管理に対応する業者もあります。' },
     ],
+    tools: [
+      { href: '/column/shobo-setsubi-gimu-check/', title: '消防点検の義務チェック', description: '用途と面積で、消防設備点検・防火対象物点検の要否と報告頻度、資格者の要否が分かります。' },
+      { href: '/column/tokushu-kenchiku-gimu-check/', title: '特殊建築物定期調査の対象チェック', description: '用途・床面積・階数で、東京都の定期報告の対象と次の報告時期が分かります。' },
+      { href: '/column/jusuisou-gimu-check/', title: '受水槽の清掃・検査の義務チェック', description: '容量と建物の用途で、水道法・建築物衛生法・東京都条例の義務が分かります。' },
+      { href: '/column/furon-tenken-check/', title: 'フロン点検の区分チェック', description: '機器の種類と定格出力で、簡易点検・定期点検の頻度が分かります。' },
+      { href: '/column/shobo-setsubi-tsuchi-taiou/', title: '消防署から点検報告の通知が来たら', description: '通知が来たときにまずやること、報告書の出し方、罰則をまとめています。' },
+    ],
     serviceSlugs: [
       'jusuisou-seisou',
       'shobo-setsubi',
